@@ -1,6 +1,6 @@
 import {ProviderInterface} from "./provider.interface";
-import {GameProfileInterface} from "./game_profile.interface";
-import {GameInterface} from "./game.interface";
+import {GameProfileInterface} from "./gameProfile.interface";
+//import {GameInterface} from "./game.interface";
 
 export interface PostActuInterface {
 
@@ -11,8 +11,8 @@ export interface PostActuInterface {
   nbEdit:number,
   Provider: ProviderInterface[]|undefined,
   GameProfile: GameProfileInterface[]|undefined,
-  game: GameInterface[]|undefined,
-//   user_id: UserInterface[]|undefined,
+  //game: GameInterface[]|undefined,
+  //user_id: UserInterface[]|undefined,
 
 
 }

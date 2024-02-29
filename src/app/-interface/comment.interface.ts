@@ -1,6 +1,6 @@
 import {PostActuInterface} from "./post-actu.interface";
 
-export interface MyAccountExterneInterface {
+export interface CommentInterface {
 
   id:number,
   createdAt: string,    

@@ -1,14 +1,14 @@
 //import { UsereInterface } from "./user.interface";
-import { PostInterface} from "./post.interface";
-import { CommentInterface} from "./comment.interface",
+import { PostActuInterface} from "./post-actu.interface";
+import { CommentInterface} from "./comment.interface";
 
 export interface likeInterface {
 
     id:number,
     createdAt:string,
     //user:
-    post:PostInterface[] | undefined,
-    comment:CommentInferface[] | undefined,
+    post:PostActuInterface[] | undefined,
+    comment:CommentInterface[] | undefined,
     
 }
 
