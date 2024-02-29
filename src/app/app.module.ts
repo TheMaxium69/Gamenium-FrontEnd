@@ -11,6 +11,7 @@ import { PageAccountComponent } from './account/page-account/page-account.compon
 import { PageGameComponent } from './game/page-game/page-game.component';
 import { DetailGameComponent } from './game/detail-game/detail-game.component';
 import { NavbarComponent } from "./-global/navbar/navbar.component";
+import { NavbarActualityComponent } from './actuality/navbar-actuality/navbar-actuality.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NavbarComponent } from "./-global/navbar/navbar.component";
     PageGameComponent,
     DetailGameComponent,
     NavbarComponent,
+    NavbarActualityComponent,
   ],
   imports: [
     BrowserModule,
