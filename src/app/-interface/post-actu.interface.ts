@@ -1,5 +1,5 @@
 import {ProviderInterface} from "./provider.interface";
-import {GameProfileInterface} from "./gameProfile.interface";
+import {GameProfileInterface} from "./game-profile.interface";
 //import {GameInterface} from "./game.interface";
 
 export interface PostActuInterface {

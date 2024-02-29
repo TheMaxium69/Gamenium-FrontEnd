@@ -1,4 +1,4 @@
-import { BuyWhereInterface } from "./buywhere.interface";
+import { BuyWhereInterface } from "./buy-where.interface";
 import { UserRateInterface } from "./user-rate.interface";
 
 export interface HistoryMyGameInterface {

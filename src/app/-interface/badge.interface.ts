@@ -6,7 +6,6 @@ export interface BadgeInterface {
   name: string, 
   CreatedAt: string,
   picture: PictureInterface[]|undefined,
- 
 
 }
 

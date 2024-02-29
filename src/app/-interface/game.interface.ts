@@ -23,11 +23,6 @@ export interface GameInterface {
 
 }
 
-
-
-
-
-
 // {
 //     "id": 1,
 //     "idGiantBomb": 0,

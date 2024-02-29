@@ -1,4 +1,4 @@
-export interface ConsoleInferface {
+export interface PlateformInferface {
     
     id:number,
     name:string,

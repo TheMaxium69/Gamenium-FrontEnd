@@ -2,7 +2,7 @@ export interface PictureInterface {
 
   id:number,
   url:string,
-//   user_id: UserInterface[]|undefined,
+  //user_id: UserInterface[]|undefined,
   postedAt: string,
 
 }
