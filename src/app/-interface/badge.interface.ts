@@ -1,4 +1,4 @@
-import {PictureInterface} from "/picture.interface";
+import {PictureInterface} from "./picture.interface";
 
 export interface BadgeInterface {
 
