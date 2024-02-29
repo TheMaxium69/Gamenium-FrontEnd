@@ -2,7 +2,7 @@ import {ProviderInterface} from "./provider.interface";
 import {GameProfileInterface} from "./game_profile.interface";
 import {GameInterface} from "./game.interface";
 
-export interface ProviderInterface {
+export interface PostActuInterface {
 
   id:number,
   createdAt: string,    
