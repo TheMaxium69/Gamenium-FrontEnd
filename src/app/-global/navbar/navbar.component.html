@@ -2,23 +2,42 @@
   <div class="d-flex">
     <ul class="d-flex" style="width: 40%">
       <li>
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Accueil</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="ri-home-fill ico2"></i>
+          <i class="ri-home-line ico1"></i>
+          Accueil
+        </a>
       </li>
       <li>
-        <a routerLink="/actuality"><i class="ri-newspaper-line"></i> Actualité</a>
+        <a routerLink="/actuality" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="ri-newspaper-fill ico2"></i>
+          <i class="ri-newspaper-line ico1"></i>
+          Actualité
+        </a>
       </li>
     </ul>
     <ul class="d-flex" style="width: 20%">
       <li class="search">
-        <a routerLink="/game"><i class="ri-search-2-line"></i></a>
+        <a routerLink="/game" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="ri-search-2-line ico1"></i>
+          <i class="ri-close-line ico2"></i>
+        </a>
       </li>
     </ul>
     <ul class="d-flex" style="width: 40%">
       <li>
-        <a routerLink="/mygame"><i class="ri-gamepad-line"></i> Mes Jeux</a>
+        <a routerLink="/mygame" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="ri-gamepad-fill ico2"></i>
+          <i class="ri-gamepad-line ico1"></i>
+          Mes Jeux
+        </a>
       </li>
       <li>
-        <a routerLink="/account"><i class="ri-account-box-line"></i> Mon Profil</a>
+        <a routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="ri-account-box-fill ico2"></i>
+          <i class="ri-account-box-line ico1"></i>
+          Mon Profil
+        </a>
       </li>
     </ul>
   </div>
@@ -79,10 +98,16 @@
     font-size: 35px;
   }
 
-  a.active:before {
-    content: '<i class="ri-home-line"></i>';
+  a .ico2{
+    display: none;
   }
-  a:before {
-    content: '<i class="ri-home-fill"></i>';
+  a .ico1{
+    display: block;
+  }
+  a.active .ico2{
+    display: block;
+  }
+  a.active .ico1{
+    display: none;
   }
 </style>
