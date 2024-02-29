@@ -21,4 +21,4 @@ export interface BadgeInterface {
 //       "postedAt": "2024-02-23T11:49:39+00:00",
 //       "ip": "nrteynt"
 //   }
-// },
+// }
