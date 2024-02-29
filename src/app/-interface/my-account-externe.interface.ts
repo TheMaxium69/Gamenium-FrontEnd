@@ -1,11 +1,11 @@
-import {NetworkInterface} from "./network.interface";
+import {SocialNetworkInterface} from "./socialNetwork.interface";
 
 export interface MyAccountExterneInterface {
 
   id:number,
   createdAt: string,    
   apiKey: string,
-  Network: NetworkInterface[]|undefined,
+  Network: SocialNetworkInterface[]|undefined,
 //   user_id: UserInterface[]|undefined,
 
 
