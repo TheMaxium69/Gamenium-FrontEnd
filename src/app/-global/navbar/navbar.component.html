@@ -1,19 +1,27 @@
 <nav class="fixed-bottom">
-    <ul class="d-flex">
+  <div class="d-flex">
+    <ul class="d-flex" style="width: 40%">
       <li>
-        <a routerLink="">Home</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Accueil</a>
       </li>
       <li>
-        <a routerLink="">Home</a>
-      </li>
-      <li>
-        <a routerLink="">Home</a>
-      </li>
-      <li>
-        <a routerLink="">Home</a>
+        <a routerLink="/actuality"><i class="ri-newspaper-line"></i> Actualité</a>
       </li>
     </ul>
-
+    <ul class="d-flex" style="width: 20%">
+      <li class="search">
+        <a routerLink="/game"><i class="ri-search-2-line"></i></a>
+      </li>
+    </ul>
+    <ul class="d-flex" style="width: 40%">
+      <li>
+        <a routerLink="/mygame"><i class="ri-gamepad-line"></i> Mes Jeux</a>
+      </li>
+      <li>
+        <a routerLink="/account"><i class="ri-account-box-line"></i> Mon Profil</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 <style>
   nav{
@@ -26,6 +34,55 @@
     box-shadow: 0px -2px 5px lightgrey;
   }
   nav ul{
-    
+    width: 100%;
+    margin: unset;
+    padding: unset;
+  }
+  nav ul li{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    width: 100%;
+    text-align: center;
+    height: 58px;
+  }
+
+  nav ul li a{
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    margin: auto;
+  }
+  nav ul li a i{
+    font-size: 24px;
+    margin-right: 6px;
+  }
+  nav ul li.search{
+    display: block;
+    align-items: unset;
+    background-color: red;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px, rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    position: relative;
+    margin: -40px auto auto;
+    padding: 11px 11px 11px 15px;
+  }
+  nav ul li.search a{
+    display: block;
+    color: white;
+  }
+  nav ul li.search a i{
+    font-size: 35px;
+  }
+
+  a.active:before {
+    content: '<i class="ri-home-line"></i>';
+  }
+  a:before {
+    content: '<i class="ri-home-fill"></i>';
   }
 </style>
