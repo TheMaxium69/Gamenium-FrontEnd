@@ -1,7 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {PageHomeComponent} from "./home/page-home/page-home.component";
+import {PageGameComponent} from "./game/page-game/page-game.component";
+import {PageMygameComponent} from "./mygame/page-mygame/page-mygame.component";
+import {PageActualityComponent} from "./actuality/page-actuality/page-actuality.component";
+import {PageAccountComponent} from "./account/page-account/page-account.component";
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', component: PageHomeComponent},
+  {path: 'actuality', component: PageActualityComponent},
+  {path: 'game', component: PageGameComponent},
+  {path: 'mygame', component: PageMygameComponent},
+  {path: 'account', component: PageAccountComponent},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
