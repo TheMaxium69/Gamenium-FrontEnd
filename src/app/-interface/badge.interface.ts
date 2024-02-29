@@ -2,10 +2,11 @@ import {PictureInterface} from "./picture.interface";
 
 export interface BadgeInterface {
 
-  id:number,
-  picture_id: PictureInterface[]|undefined,
-  name:string,
-  creationDateTime: string,
+  id: number,
+  name: string, 
+  CreatedAt: string,
+  picture: PictureInterface[]|undefined,
+ 
 
 }
 

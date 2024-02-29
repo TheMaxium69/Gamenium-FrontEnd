@@ -3,7 +3,7 @@ export interface PictureInterface {
   id:number,
   url:string,
 //   user_id: UserInterface[]|undefined,
-  posted_at: string,
+  postedAt: string,
 
 }
 

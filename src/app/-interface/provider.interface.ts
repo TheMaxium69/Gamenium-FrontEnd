@@ -3,15 +3,15 @@ import {PictureInterface} from "./picture.interface";
 export interface ProviderInterface {
 
   id:number,
-  tag_name:string,
-  display_name:string,
+  tagName:string,
+  displayName:string,
   country:number,
-  joined_at: string,
-  creation_at: string,
-  parent_compagny:number,
+  joinedAt: string,
+  createdAt: string,
+  parentCompagny:number,
   content: string,
   banner:number,
-  picture_id: PictureInterface[]|undefined,
+  picture: PictureInterface[]|undefined,
 
 }
 
