@@ -1,4 +1,4 @@
-import {SocialNetworkInterface} from "./socialNetwork.interface";
+import {SocialNetworkInterface} from "./social-network.interface";
 
 export interface MyAccountExterneInterface {
 
