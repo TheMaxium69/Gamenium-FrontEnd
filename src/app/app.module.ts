@@ -14,20 +14,24 @@ import { PageGameComponent } from './game/page-game/page-game.component';
 import { DetailGameComponent } from './game/detail-game/detail-game.component';
 import { NavbarComponent } from "./-global/navbar/navbar.component";
 import { NavbarActualityComponent } from './actuality/navbar-actuality/navbar-actuality.component';
-import { BuyWhereInterfaceComponent } from './components/buy-where.interface/buy-where.interface.component';
+import { BuyWhereInterfaceComponent } from './-components/buy-where.interface/buy-where.interface.component';
 import { CardActualityComponent } from "./actuality/card-actuality/card-actuality.component";
 import { LoginComponent } from './account/login/login.component';
-import { BadgeInterfaceComponent } from './components/badge.interface/badge.interface.component';
-import {PostActuInterfaceComponent} from "./components/post-actu.interface/post-actu.interface.component";
-import {ProviderInterfaceComponent} from "./components/provider.interface/provider.interface.component";
-import {CommentInterfaceComponent} from "./components/comment.interface/comment.interface.component";
-import {UserRateInterfaceComponent} from "./components/user-rate.interface/user-rate.interface.component";
-import {SocialNetworkInterfaceComponent} from "./components/social-network.interface/social-network.interface.component";
-import {HistoryMyGameInterfaceComponent} from "./components/history-my-game.interface/history-my-game.interface.component";
-import {GameProfileInterfaceComponent} from "./components/game-profile.interface/game-profile.interface.component";
-import {PictureInterfaceComponent} from "./components/picture.interface/picture.interface.component";
-import {BadgeVersUserInterfaceComponent} from "./components/badge-vers-user.interface/badge-vers-user.interface.component";
-import {GameInterfaceComponent} from "./components/game.interface/game.interface.component";
+import { BadgeInterfaceComponent } from './-components/badge.interface/badge.interface.component';
+import {PostActuInterfaceComponent} from "./-components/post-actu.interface/post-actu.interface.component";
+import {ProviderInterfaceComponent} from "./-components/provider.interface/provider.interface.component";
+import {CommentInterfaceComponent} from "./-components/comment.interface/comment.interface.component";
+import {UserRateInterfaceComponent} from "./-components/user-rate.interface/user-rate.interface.component";
+import {SocialNetworkInterfaceComponent} from "./-components/social-network.interface/social-network.interface.component";
+import {HistoryMyGameInterfaceComponent} from "./-components/history-my-game.interface/history-my-game.interface.component";
+import {GameProfileInterfaceComponent} from "./-components/game-profile.interface/game-profile.interface.component";
+import {PictureInterfaceComponent} from "./-components/picture.interface/picture.interface.component";
+import {BadgeVersUserInterfaceComponent} from "./-components/badge-vers-user.interface/badge-vers-user.interface.component";
+import {GameInterfaceComponent} from "./-components/game.interface/game.interface.component";
+import { MyAccountExterneInterfaceComponent } from './-components/my-account-externe.interface/my-account-externe.interface.component';
+import { PlatformInterfaceComponent } from './-components/platform.interface/platform.interface.component';
+import { LikeInterfaceComponent } from './-components/like.interface/like.interface.component';
+
 
 
 @NgModule({
@@ -56,7 +60,11 @@ import {GameInterfaceComponent} from "./components/game.interface/game.interface
     HistoryMyGameInterfaceComponent,
     SocialNetworkInterfaceComponent,
     UserRateInterfaceComponent,
-    CommentInterfaceComponent
+    CommentInterfaceComponent,
+    MyAccountExterneInterfaceComponent,
+    PlatformInterfaceComponent,
+    LikeInterfaceComponent
+
   ],
   imports: [
     BrowserModule,
