@@ -2,7 +2,7 @@
 import { PostActuInterface} from "./post-actu.interface";
 import { CommentInterface} from "./comment.interface";
 
-export interface likeInterface {
+export interface LikeInterface {
 
     id:number,
     createdAt:string,
