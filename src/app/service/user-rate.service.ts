@@ -9,14 +9,14 @@ import { UserRateInterface } from '../-interface/user-rate.interface';
 export class UserRateService {
   private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getUserRate(id: number): Observable<UserRateInterface> {
-    return this.http.get<UserRateInterface>(`${this.apiUrl}/user-rate/${id}`);
+    return this.http.get<UserRateInterface>(`${this.apiUrl}/userRate/${id}`);
   }
 
   getAllUserRates(): Observable<UserRateInterface[]> {
-    return this.http.get<UserRateInterface[]>(`${this.apiUrl}/user-rates`);
+    return this.http.get<UserRateInterface[]>(`${this.apiUrl}/userRates`);
   }
 
 

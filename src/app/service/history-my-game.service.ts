@@ -9,14 +9,14 @@ import { HistoryMyGameInterface } from '../-interface/history-my-game.interface'
 export class HistoryMyGameService {
   private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getHistoryMyGame(id: number): Observable<HistoryMyGameInterface> {
-    return this.http.get<HistoryMyGameInterface>(`${this.apiUrl}/history-my-game/${id}`);
+    return this.http.get<HistoryMyGameInterface>(`${this.apiUrl}/historymygame/${id}`);
   }
 
   getAllHistoryMyGames(): Observable<HistoryMyGameInterface[]> {
-    return this.http.get<HistoryMyGameInterface[]>(`${this.apiUrl}/history-my-games`);
+    return this.http.get<HistoryMyGameInterface[]>(`${this.apiUrl}/historymygames`);
   }
 
 

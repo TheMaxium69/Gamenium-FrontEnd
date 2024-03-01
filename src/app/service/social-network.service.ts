@@ -12,11 +12,11 @@ export class SocialNetworkService {
   constructor(private http: HttpClient) {}
 
   getSocialNetwork(id: number): Observable<SocialNetworkInterface> {
-    return this.http.get<SocialNetworkInterface>(`${this.apiUrl}/social-network/${id}`);
+    return this.http.get<SocialNetworkInterface>(`${this.apiUrl}/socialnetwork/${id}`);
   }
 
   getAllSocialNetworks(): Observable<SocialNetworkInterface[]> {
-    return this.http.get<SocialNetworkInterface[]>(`${this.apiUrl}/social-networks`);
+    return this.http.get<SocialNetworkInterface[]>(`${this.apiUrl}/socialnetworks`);
   }
 
 

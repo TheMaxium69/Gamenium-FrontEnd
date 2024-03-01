@@ -12,11 +12,11 @@ export class GameProfileService {
   constructor(private http: HttpClient) {}
 
   getGameProfile(id: number): Observable<GameProfileInterface> {
-    return this.http.get<GameProfileInterface>(`${this.apiUrl}/game-profile/${id}`);
+    return this.http.get<GameProfileInterface>(`${this.apiUrl}/gameprofile/${id}`);
   }
 
   getAllGameProfiles(): Observable<GameProfileInterface[]> {
-    return this.http.get<GameProfileInterface[]>(`${this.apiUrl}/game-profiles`);
+    return this.http.get<GameProfileInterface[]>(`${this.apiUrl}/gameprofiles`);
   }
 
 
