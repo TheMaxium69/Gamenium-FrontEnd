@@ -16,6 +16,7 @@ import { NavbarActualityComponent } from './actuality/navbar-actuality/navbar-ac
 import { BuyWhereInterfaceComponent } from './components/buy-where.interface/buy-where.interface.component';
 import { CardActualityComponent } from "./actuality/card-actuality/card-actuality.component";
 import { LoginComponent } from './account/login/login.component';
+import { BadgeInterfaceComponent } from './components/badge.interface/badge.interface.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { LoginComponent } from './account/login/login.component';
     NavbarActualityComponent,
     BuyWhereInterfaceComponent,
     CardActualityComponent,
-    LoginComponent
+    LoginComponent,
+    BadgeInterfaceComponent
   ],
   imports: [
     BrowserModule,
