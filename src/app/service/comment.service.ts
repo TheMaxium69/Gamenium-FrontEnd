@@ -16,7 +16,7 @@ export class CommentService {
   }
 
   getAllComments(): Observable<CommentInterface[]> {
-    return this.http.get<CommentInterface[]>(`${this.apiUrl}/comment`);
+    return this.http.get<CommentInterface[]>(`${this.apiUrl}/comments`);
   }
 
 
