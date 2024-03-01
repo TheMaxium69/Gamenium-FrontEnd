@@ -18,6 +18,8 @@ import { BuyWhereInterfaceComponent } from './components/buy-where.interface/buy
 import { CardActualityComponent } from "./actuality/card-actuality/card-actuality.component";
 import { LoginComponent } from './account/login/login.component';
 import { BadgeInterfaceComponent } from './components/badge.interface/badge.interface.component';
+import {PostActuInterfaceComponent} from "./components/post-actu.interface/post-actu.interface.component";
+import {ProviderInterfaceComponent} from "./components/provider.interface/provider.interface.component";
 
 
 @NgModule({
@@ -35,7 +37,10 @@ import { BadgeInterfaceComponent } from './components/badge.interface/badge.inte
     BuyWhereInterfaceComponent,
     CardActualityComponent,
     LoginComponent,
-    BadgeInterfaceComponent
+    BadgeInterfaceComponent,
+    PostActuInterfaceComponent,
+    ProviderInterfaceComponent
+
   ],
   imports: [
     BrowserModule,
