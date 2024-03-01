@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
 
 @Component({
@@ -13,6 +13,12 @@ export class NavbarComponent implements OnInit {
   constructor( private app: AppComponent ) { }
 
   ngOnInit() {
+
+    this.isLoggedIn = this.app.isLoggedIn;
+
+  }
+
+  updateConnect() {
 
     this.isLoggedIn = this.app.isLoggedIn;
 

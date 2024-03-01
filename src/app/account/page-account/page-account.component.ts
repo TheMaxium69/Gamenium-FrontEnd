@@ -18,5 +18,4 @@ export class PageAccountComponent implements OnInit {
 
   }
 
-
 }
