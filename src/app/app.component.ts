@@ -40,7 +40,17 @@ export class AppComponent {
   //LOGIN
   login(email: string, password: string, saveme: boolean){
     console.log(email, password, saveme)
-    
+
+  }
+
+  // Ce connecter et recupere le token
+  getToken(){
+
+  }
+
+  // Recupere les information grace au token
+  getUserByToken(){
+
   }
 
   //Login Avec le Cookie
