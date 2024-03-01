@@ -20,6 +20,14 @@ import { LoginComponent } from './account/login/login.component';
 import { BadgeInterfaceComponent } from './components/badge.interface/badge.interface.component';
 import {PostActuInterfaceComponent} from "./components/post-actu.interface/post-actu.interface.component";
 import {ProviderInterfaceComponent} from "./components/provider.interface/provider.interface.component";
+import {CommentInterfaceComponent} from "./components/comment.interface/comment.interface.component";
+import {UserRateInterfaceComponent} from "./components/user-rate.interface/user-rate.interface.component";
+import {SocialNetworkInterfaceComponent} from "./components/social-network.interface/social-network.interface.component";
+import {HistoryMyGameInterfaceComponent} from "./components/history-my-game.interface/history-my-game.interface.component";
+import {GameProfileInterfaceComponent} from "./components/game-profile.interface/game-profile.interface.component";
+import {PictureInterfaceComponent} from "./components/picture.interface/picture.interface.component";
+import {BadgeVersUserInterfaceComponent} from "./components/badge-vers-user.interface/badge-vers-user.interface.component";
+import {GameInterfaceComponent} from "./components/game.interface/game.interface.component";
 
 
 @NgModule({
@@ -39,8 +47,16 @@ import {ProviderInterfaceComponent} from "./components/provider.interface/provid
     LoginComponent,
     BadgeInterfaceComponent,
     PostActuInterfaceComponent,
-    ProviderInterfaceComponent
-
+    ProviderInterfaceComponent,
+    BuyWhereInterfaceComponent,
+    GameInterfaceComponent,
+    BadgeVersUserInterfaceComponent,
+    PictureInterfaceComponent,
+    GameProfileInterfaceComponent,
+    HistoryMyGameInterfaceComponent,
+    SocialNetworkInterfaceComponent,
+    UserRateInterfaceComponent,
+    CommentInterfaceComponent
   ],
   imports: [
     BrowserModule,
