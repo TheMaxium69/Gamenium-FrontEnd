@@ -39,7 +39,8 @@ export class AppComponent {
 
   //LOGIN
   login(email: string, password: string, saveme: boolean){
-
+    console.log(email, password, saveme)
+    
   }
 
   //Login Avec le Cookie
