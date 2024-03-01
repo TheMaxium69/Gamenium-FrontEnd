@@ -14,6 +14,7 @@ import { NavbarComponent } from "./-global/navbar/navbar.component";
 import { NavbarActualityComponent } from './actuality/navbar-actuality/navbar-actuality.component';
 import { BuyWhereInterfaceComponent } from './components/buy-where.interface/buy-where.interface.component';
 import { CardActualityComponent } from "./actuality/card-actuality/card-actuality.component";
+import { LoginComponent } from './account/login/login.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CardActualityComponent } from "./actuality/card-actuality/card-actualit
     NavbarComponent,
     NavbarActualityComponent,
     BuyWhereInterfaceComponent,
-    CardActualityComponent
+    CardActualityComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

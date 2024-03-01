@@ -36,7 +36,12 @@
         <a routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <i class="ri-account-box-fill ico2"></i>
           <i class="ri-account-box-line ico1"></i>
-          Mon Profil
+          <ng-container *ngIf="isLoggedIn == true">
+            Mon Profil
+          </ng-container>
+          <ng-container *ngIf="isLoggedIn == false">
+            Se connecter
+          </ng-container>
         </a>
       </li>
     </ul>
