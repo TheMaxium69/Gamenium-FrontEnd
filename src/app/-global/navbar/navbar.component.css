@@ -6,6 +6,8 @@ nav{
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   box-shadow: 0px -2px 5px lightgrey;
+
+  max-width: 1468px;
 }
 nav ul{
   width: 100%;
