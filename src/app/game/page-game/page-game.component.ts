@@ -16,11 +16,9 @@ export class PageGameComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.gameId = this.route.snapshot.paramMap.get('id');
 
     console.log("Game Id", this.gameId)
-
 
   }
 

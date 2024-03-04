@@ -1,10 +1,12 @@
+import {GameImageInterface} from "./game-image.interface";
+
 export interface GameInterface {
 
   id:number,
   idGiantBomb:number,
   guid: string,
-  name: string,    
-  aliasses: string,
+  name: string,
+  aliases: string,
   apiDetailUrl: string,
   dateAdded: string,
   dateLastUpdated: string,
@@ -14,13 +16,13 @@ export interface GameInterface {
   expectedReleaseDay:number,
   expectedReleaseMonth:string,
   expectedReleaseYear:number,
-  image:JSON,
+  image:GameImageInterface,
   imageTags:JSON,
   numberOfUserReviews:number,
   originalGameRating: string,
   platforms:JSON,
   siteDetailUrl: string,
-  searchValue?: string; 
+  searchValue?: string;
 
 }
 

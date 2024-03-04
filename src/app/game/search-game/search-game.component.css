@@ -1,0 +1,57 @@
+
+
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.search {
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+}
+.search:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 75px;
+  height: 75px;
+  line-height: 67px;
+  font-size: 40px;
+  font-family: 'FontAwesome';
+  content: '\f002';
+  background: red;
+  text-align: center;
+  color: #fff;
+  border-radius: 63px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smooth: always;
+
+  box-shadow: 1px 2px 11px #a6a6a6;
+  margin: 10px;
+}
+
+.searchTerm {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  border: 3px solid red;
+  padding: 5px;
+  height: 95px;
+
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+
+  outline: none;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  font-size: 20px;
+}
+
+.searchButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 75px;
+  height: 75px;
+  opacity: 0;
+  cursor: pointer;
+}
