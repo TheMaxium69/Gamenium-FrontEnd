@@ -13,12 +13,12 @@ export class BadgeInterfaceComponent implements OnInit {
   constructor(private BadgeService: BadgeService) {}
 
   ngOnInit(): void {
-    this.getBadges();
+    // this.getBadges();
   }
 
-  getBadges(): void {
-    this.BadgeService.getAllBadges().subscribe((Badges) => {
-      this.Badges = Badges;
-    });
-  }
+  // getBadges(): void {
+  //   this.BadgeService.getAllBadges().subscribe((Badges) => {
+  //     this.Badges = Badges;
+  //   });
+  // }
 }

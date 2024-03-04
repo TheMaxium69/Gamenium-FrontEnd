@@ -10,5 +10,24 @@
 
 <h2>{{ userConnected?.joinAt | date:'medium' }}</h2>
 
+<ng-container *ngIf="badgeUserConnected">
+  <p>
+    Badge ->
+  </p>
+
+  <ng-container *ngFor="let badge of badgeUserConnected">
+
+    <div class="card">
+
+      <img width="40px" src="{{ badge.picture?.url }}"><h3> {{ badge.name }}</h3>
+
+    </div>
+
+
+  </ng-container>
+
+</ng-container>
+
+
 
 <button (click)="loggout()" class="btn btn-danger"> Loggout </button>

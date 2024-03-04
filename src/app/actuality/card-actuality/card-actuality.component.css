@@ -17,6 +17,8 @@
 
 #actu-all .card .card-img-top{
   border-radius: 14px;
+  transition: transform 0.4s ease-out;
+  will-change: transform;
 }
 #actu-all .card .card-img-top:hover{
   transform: scale(1.03);
