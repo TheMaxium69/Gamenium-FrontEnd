@@ -6,6 +6,7 @@ import {ApicallInterface} from "./-interface/apicall.interface";
 import {Router} from "@angular/router";
 import {NavbarComponent} from "./-global/navbar/navbar.component";
 import { CookieService } from 'ngx-cookie-service';
+import {PageAccountComponent} from "./account/page-account/page-account.component";
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AppComponent {
   @ViewChild(NavbarComponent) navbarComponent!: NavbarComponent;
+  @ViewChild(PageAccountComponent) pageAccountComponent!: PageAccountComponent;
 
   constructor(
     private router: Router,
@@ -56,7 +58,14 @@ export class AppComponent {
     this.isLoggedIn = false;
     this.token = undefined;
     this.userConnected = undefined;
+
     this.router.navigate(['/']);
+
+    if (this.navbarComponent) {
+      this.navbarComponent.updateConnect();
+    } else {
+      console.error('Le composant navbar n\'a pas été initialisé correctement.');
+    }
   }
 
   //LOGIN
@@ -116,7 +125,9 @@ export class AppComponent {
           console.error('Le composant navbar n\'a pas été initialisé correctement.');
         }
 
+
         this.router.navigate(['/']);
+
 
       } else {
 
@@ -130,7 +141,7 @@ export class AppComponent {
   }
 
   //Login Avec le Cookie
-  loginWithCookie(cookieToken: string){
+  loginWithCookie(cookieToken: string): void {
 
     this.getUserByToken(cookieToken, false);
 

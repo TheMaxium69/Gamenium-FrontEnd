@@ -33,16 +33,20 @@
         </a>
       </li>
       <li>
-        <a routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <i class="ri-account-box-fill ico2"></i>
-          <i class="ri-account-box-line ico1"></i>
-          <ng-container *ngIf="isLoggedIn == true">
-            Mon Profil
-          </ng-container>
-          <ng-container *ngIf="isLoggedIn == false">
-            Se connecter
-          </ng-container>
-        </a>
+        <ng-container *ngIf="isLoggedIn == true">
+          <a routerLink="/profil" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="ri-account-box-fill ico2"></i>
+            <i class="ri-account-box-line ico1"></i>
+              Mon Profil
+          </a>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn == false">
+          <a routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="ri-account-box-fill ico2"></i>
+            <i class="ri-account-box-line ico1"></i>
+              Se connecter
+          </a>
+        </ng-container>
       </li>
     </ul>
   </div>

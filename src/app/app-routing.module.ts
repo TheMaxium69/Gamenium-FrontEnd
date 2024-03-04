@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'game', component: PageGameComponent},
   {path: 'mygame', component: PageMygameComponent},
   {path: 'account', component: PageAccountComponent},
+  {path: 'profil', component: PageAccountComponent},
 ];
 
 @NgModule({
