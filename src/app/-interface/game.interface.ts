@@ -20,6 +20,7 @@ export interface GameInterface {
   originalGameRating: string,
   platforms:JSON,
   siteDetailUrl: string,
+  searchValue?: string; 
 
 }
 

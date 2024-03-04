@@ -1,1 +1,10 @@
-<p>game.interface works!</p>
+
+
+<form (ngSubmit)="onSearch()" #searchForm="ngForm">
+  <input type="text" name="searchValue" [(ngModel)]="searchValue" placeholder="Rechercher un jeu...">
+  <button type="submit">Rechercher</button>
+</form>
+
+<div *ngFor="let game of games">
+
+</div>

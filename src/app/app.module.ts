@@ -45,7 +45,6 @@ import { ProfileComponent } from './account/profile/profile.component';
     DetailGameComponent,
     NavbarComponent,
     NavbarActualityComponent,
-    BuyWhereInterfaceComponent,
     CardActualityComponent,
     LoginComponent,
     BadgeInterfaceComponent,

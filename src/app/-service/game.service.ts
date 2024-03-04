@@ -1,3 +1,4 @@
+// game.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { GameInterface } from '../-interface/game.interface';
   providedIn: 'root',
 })
 export class GameService {
-  private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
+  private apiUrl = 'http://localhost:8000/';
 
   constructor(private http: HttpClient) {}
 
@@ -19,4 +20,7 @@ export class GameService {
     return this.http.get<GameInterface[]>(`${this.apiUrl}/games`);
   }
 
+  searchGames(searchValue: string): Observable<GameInterface[]> {
+    return this.http.post<GameInterface[]>(`${this.apiUrl}/games/search`, { searchValue });
+  }
 }

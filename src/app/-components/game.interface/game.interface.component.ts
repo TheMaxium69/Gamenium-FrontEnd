@@ -9,6 +9,7 @@ import { GameInterface } from '../../-interface/game.interface';
 })
 export class GameInterfaceComponent implements OnInit {
   games: GameInterface[] = [];
+  searchValue: string = '';
 
   constructor(private gameService: GameService) {}
 
@@ -20,5 +21,15 @@ export class GameInterfaceComponent implements OnInit {
     this.gameService.getAllGames().subscribe((games) => {
       this.games = games;
     });
+  }
+
+  onSearch(): void {
+    if (this.searchValue.trim() !== '') {
+      this.gameService.searchGames(this.searchValue).subscribe((results) => {
+        this.games = results;
+      });
+    } else {
+
+    }
   }
 }
