@@ -23,9 +23,10 @@ export class AppComponent {
     private cookieService: CookieService
   ) {
     const cookieToken:string = this.cookieService.get('tokenGamenium');
+    const cookieUser:string = this.cookieService.get('userGamenium');
 
-    if (cookieToken){
-      this.loginWithCookie(cookieToken);
+    if (cookieToken && cookieUser){
+      this.loginWithCookie(cookieToken, cookieUser);
     }
   }
 
@@ -55,6 +56,7 @@ export class AppComponent {
   // DECONNEXION
   loggout(){
     this.cookieService.delete('tokenGamenium');
+    this.cookieService.delete('userGamenium');
     this.isLoggedIn = false;
     this.token = undefined;
     this.userConnected = undefined;
@@ -117,6 +119,8 @@ export class AppComponent {
         this.isLoggedIn = true;
         if (saveme){
           this.cookieService.set('tokenGamenium', this.token);
+          let userJson = JSON.stringify(this.userConnected);
+          this.cookieService.set('userGamenium', userJson);
         }
 
         if (this.navbarComponent) {
@@ -125,8 +129,11 @@ export class AppComponent {
           console.error('Le composant navbar n\'a pas été initialisé correctement.');
         }
 
+        if (this.router.url == "/account"){
+          this.router.navigate(['/']);
+        }
 
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
 
 
       } else {
@@ -141,7 +148,13 @@ export class AppComponent {
   }
 
   //Login Avec le Cookie
-  loginWithCookie(cookieToken: string): void {
+  loginWithCookie(cookieToken: string, userCookieJson: string): void {
+
+    this.token = cookieToken;
+    this.isLoggedIn = true;
+
+    const userCookie = JSON.parse(userCookieJson);
+    this.userConnected = userCookie;
 
     this.getUserByToken(cookieToken, false);
 
@@ -184,6 +197,24 @@ export class AppComponent {
     } else {
       return this.urlApiProd;
     }
+
+  }
+
+  updateComponent() {
+
+    if (!this.isLoggedIn){
+
+      if (this.token){
+        return true;
+      } else {
+        return false
+      }
+
+    } else {
+      return this.isLoggedIn;
+    }
+
+
 
   }
 

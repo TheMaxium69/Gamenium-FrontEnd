@@ -20,5 +20,9 @@ export class ProfileComponent implements OnInit{
 
   }
 
+  loggout(){
+    this.app.loggout();
+  }
+
 
 }

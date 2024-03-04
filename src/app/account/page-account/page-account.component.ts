@@ -20,9 +20,5 @@ export class PageAccountComponent implements OnInit {
 
   }
 
-  loggoutTest(){
-    this.app.loggout();
-  }
-
 
 }
