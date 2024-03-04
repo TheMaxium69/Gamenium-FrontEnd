@@ -31,8 +31,7 @@ import {GameInterfaceComponent} from "./-components/game.interface/game.interfac
 import { MyAccountExterneInterfaceComponent } from './-components/my-account-externe.interface/my-account-externe.interface.component';
 import { PlatformInterfaceComponent } from './-components/platform.interface/platform.interface.component';
 import { LikeInterfaceComponent } from './-components/like.interface/like.interface.component';
-
-
+import { ProfileComponent } from './account/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +62,8 @@ import { LikeInterfaceComponent } from './-components/like.interface/like.interf
     CommentInterfaceComponent,
     MyAccountExterneInterfaceComponent,
     PlatformInterfaceComponent,
-    LikeInterfaceComponent
+    LikeInterfaceComponent,
+    ProfileComponent
 
   ],
   imports: [

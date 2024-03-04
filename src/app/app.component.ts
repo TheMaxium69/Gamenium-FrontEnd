@@ -5,8 +5,7 @@ import {AuthService} from "./-service/auth.service";
 import {ApicallInterface} from "./-interface/apicall.interface";
 import {Router} from "@angular/router";
 import {NavbarComponent} from "./-global/navbar/navbar.component";
-import {LoginComponent} from "./account/login/login.component";
-import {PageAccountComponent} from "./account/page-account/page-account.component";
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +17,15 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private cookieService: CookieService
+  ) {
+    const cookieToken:string = this.cookieService.get('tokenGamenium');
+
+    if (cookieToken){
+      this.loginWithCookie(cookieToken);
+    }
+  }
 
 
   /******************************************************************************************************************
@@ -46,24 +52,23 @@ export class AppComponent {
 
   // DECONNEXION
   loggout(){
-
+    this.cookieService.delete('tokenGamenium');
     this.isLoggedIn = false;
     this.token = undefined;
     this.userConnected = undefined;
     this.router.navigate(['/']);
-
   }
 
   //LOGIN
   login(email: string, password: string, saveme: boolean) {
 
-    this.getToken(email, password);
+    this.getToken(email, password, saveme);
 
   }
 
 
   // Ce connecter et recupere le token
-  getToken(email: string, password: string){
+  getToken(email: string, password: string, saveme: boolean){
 
     let msgToken: ApicallInterface|undefined;
 
@@ -75,7 +80,7 @@ export class AppComponent {
 
         this.token = msgToken.token
 
-        this.getUserByToken(this.token);
+        this.getUserByToken(this.token, saveme);
 
       } else {
 
@@ -89,7 +94,7 @@ export class AppComponent {
   }
 
   // Recupere les information grace au token
-  getUserByToken(token: string){
+  getUserByToken(token: string , saveme: boolean){
 
     let msgUser:ApicallInterface|undefined
 
@@ -101,6 +106,9 @@ export class AppComponent {
 
         this.userConnected = msgUser.result;
         this.isLoggedIn = true;
+        if (saveme){
+          this.cookieService.set('tokenGamenium', this.token);
+        }
 
         if (this.navbarComponent) {
           this.navbarComponent.updateConnect();
@@ -123,6 +131,8 @@ export class AppComponent {
 
   //Login Avec le Cookie
   loginWithCookie(cookieToken: string){
+
+    this.getUserByToken(cookieToken, false);
 
   }
 
