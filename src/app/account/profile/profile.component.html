@@ -1,6 +1,14 @@
 <p>Votre Profile:</p>
 
 <h1> {{ userConnected?.username }} </h1>
+<h1> {{ userConnected?.email }} </h1>
+
+<h2>{{ userConnected?.displayname }}</h2>
+<ng-container *ngIf="userConnected?.displaynameUseritium">
+  <h2><img width="40px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{ userConnected?.displaynameUseritium }}</h2>
+</ng-container>
+
+<h2>{{ userConnected?.joinAt | date:'medium' }}</h2>
 
 
 <button (click)="loggout()" class="btn btn-danger"> Loggout </button>

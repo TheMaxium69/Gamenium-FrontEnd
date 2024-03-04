@@ -3,7 +3,7 @@ export interface UserInterface {
   email:string,
   displayname:string,
   displaynameUseritium:string,
-  jointAt:string,
+  joinAt:Date,
   userRole:string[]
 }
 

@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit{
 
     this.userConnected = this.app.userConnected;
 
+    console.log(this.userConnected?.joinAt)
+
   }
 
   loggout(){
