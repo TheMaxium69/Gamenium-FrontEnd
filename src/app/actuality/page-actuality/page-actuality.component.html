@@ -1,2 +1,7 @@
-<app-navbar-actuality></app-navbar-actuality>
-
+<ng-container *ngIf="!actualityId">
+  <app-navbar-actuality></app-navbar-actuality>
+  <app-card-actuality></app-card-actuality>
+</ng-container>
+<ng-container *ngIf="actualityId">
+  <app-detail-actuality></app-detail-actuality>
+</ng-container>

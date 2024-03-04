@@ -21,8 +21,6 @@ export class ProfileComponent implements OnInit{
 
     this.userConnected = this.app.userConnected;
 
-    console.log(this.userConnected?.id);
-
     this.getBadgeByUser(this.userConnected?.id)
   }
 
@@ -36,7 +34,6 @@ export class ProfileComponent implements OnInit{
 
       if (ReponseApi.message == "good"){
 
-        console.log(ReponseApi.result)
         this.badgeUserConnected = ReponseApi.result;
 
       }

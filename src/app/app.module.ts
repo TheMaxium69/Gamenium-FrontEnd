@@ -32,6 +32,8 @@ import { MyAccountExterneInterfaceComponent } from './-components/my-account-ext
 import { PlatformInterfaceComponent } from './-components/platform.interface/platform.interface.component';
 import { LikeInterfaceComponent } from './-components/like.interface/like.interface.component';
 import { ProfileComponent } from './account/profile/profile.component';
+import { PreviewGameComponent } from './game/preview-game/preview-game.component';
+import { SearchGameComponent } from './game/search-game/search-game.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { ProfileComponent } from './account/profile/profile.component';
     MyAccountExterneInterfaceComponent,
     PlatformInterfaceComponent,
     LikeInterfaceComponent,
-    ProfileComponent
+    ProfileComponent,
+    PreviewGameComponent,
+    SearchGameComponent
 
   ],
   imports: [

@@ -9,7 +9,9 @@ import {PageAccountComponent} from "./account/page-account/page-account.componen
 const routes: Routes = [
   {path: '', component: PageHomeComponent},
   {path: 'actuality', component: PageActualityComponent},
+  {path: 'actuality/:id', component: PageActualityComponent},
   {path: 'game', component: PageGameComponent},
+  {path: 'game/:id', component: PageGameComponent},
   {path: 'mygame', component: PageMygameComponent},
   {path: 'account', component: PageAccountComponent},
   {path: 'profil', component: PageAccountComponent},

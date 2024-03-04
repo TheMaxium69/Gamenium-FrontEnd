@@ -1,7 +1,7 @@
 <section id="actu-all" class="d-flex container">
 
   <ng-container *ngFor="let item of itemsArray; let i = index">
-    <div class="card">
+    <div class="card" routerLink="/actuality/{{ i }}">
       <img src="https://i.ytimg.com/vi/nyD5BjHXJ88/maxresdefault.jpg" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">Nintendo Direct Mini</h5>
