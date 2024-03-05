@@ -1,6 +1,15 @@
 export interface GameImageInterface {
 
   icon_url:string,
+  tiny_url: string|undefined,
+  small_url: string|undefined,
+  super_url: string|undefined,
+  thumb_url: string|undefined,
+  image_tags: string|undefined,
+  medium_url: string|undefined,
+  screen_url: string|undefined,
+  original_url: string|undefined,
+  screen_large_url: string|undefined
 
 
 

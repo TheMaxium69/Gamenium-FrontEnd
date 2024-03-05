@@ -3,7 +3,77 @@
   <input class="searchButton" type="submit" />
 </form>
 
-<div *ngFor="let game of games">
-  <h2>{{ game.name }}</h2>
+<div id="show-game" class="d-flex container">
+    <ng-container *ngFor="let game of games">
 
+      <div class="card-game container d-flex">
+        <div class="card-left">
+          <ng-container *ngIf="game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+            <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
+            <div class="blur"></div>
+            <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
+          </ng-container>
+          <ng-container *ngIf="game.image.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+            <div class="image" style="background-image: url('{{ game.image?.thumb_url }}')"></div>
+            <div class="blur"></div>
+            <img src="{{ game.image?.thumb_url }}" alt="...">
+          </ng-container>
+        </div>
+        <div class="card-right">
+          <h5>{{ game.name }}</h5>
+          <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+    </ng-container>
 </div>
+
+<style>
+
+    .card-game{
+      height: 160px;
+      /*border: 1px solid gray;*/
+      margin: unset!important;
+      padding: unset!important;
+      border-radius: 15px;
+      box-shadow: 1px 2px 11px #a6a6a6;
+    }
+
+    .card-left{
+      width: 326px;
+      height: 100%;
+      border-radius: 15px;
+    }
+
+    .card-left .image{
+      position: absolute;
+      width: 300px;
+      height: 160px;
+      z-index: 10;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .card-left .blur{
+      position: absolute;
+      width: 300px;
+      height: 160px;
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      z-index: 1;
+      background-color: #00000038;
+    }
+    .card-left img{
+      width: 300px;
+      height: 100%;
+      border-radius: 15px;
+    }
+
+    .card-right{
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+    }
+
+</style>

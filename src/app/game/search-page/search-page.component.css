@@ -56,15 +56,3 @@
   opacity: 0;
   cursor: pointer;
 }
-
-
-/* GAME */
-
-#show-game{
-  justify-content: center;
-  gap: 35px;
-  flex-wrap: wrap;
-
-  margin-bottom: 120px;
-}
-

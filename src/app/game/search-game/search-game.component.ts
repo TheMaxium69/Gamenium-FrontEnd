@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../-service/game.service';
 import { GameInterface } from '../../-interface/game.interface';
 import {AppComponent} from "../../app.component";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,19 +10,28 @@ import {AppComponent} from "../../app.component";
   templateUrl: './search-game.component.html',
   styleUrls: ['./search-game.component.css']
 })
-export class SearchGameComponent {
+export class SearchGameComponent implements OnInit{
+
   games: GameInterface[] = [];
   searchValue: string = '';
 
   constructor(private gameService: GameService,
-              private app: AppComponent) {}
+              private app: AppComponent,
+              private router: Router) {}
+
+  ngOnInit(): void {
+
+    this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+      this.games = results;
+    });
+
+  }
 
   onSearch(): void {
+
     if (this.searchValue.trim() !== '') {
-      this.gameService.searchGames(this.searchValue, this.app.setURL()).subscribe((results) => {
-        this.games = results;
-      });
-    } else {
+
+      this.router.navigate(['/search/game/' + this.searchValue.trim()]);
 
     }
   }
@@ -30,11 +40,9 @@ export class SearchGameComponent {
 
     this.searchValue == value;
 
-    console.log(this.searchValue)
-
-      this.gameService.searchGames(this.searchValue, this.app.setURL()).subscribe((results) => {
-        this.games = results;
-      });
+    this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+      this.games = results;
+    });
 
   }
 }
