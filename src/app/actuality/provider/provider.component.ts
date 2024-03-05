@@ -27,7 +27,7 @@ export class ProviderComponent implements OnInit{
     console.log("Provider Id", this.providerId)
 
     this.getProviders(this.providerId);
-    
+
   }
 
   getProviders(id:number): void {
