@@ -34,6 +34,8 @@ import { LikeInterfaceComponent } from './-components/like.interface/like.interf
 import { ProfileComponent } from './account/profile/profile.component';
 import { PreviewGameComponent } from './game/preview-game/preview-game.component';
 import { SearchGameComponent } from './game/search-game/search-game.component';
+import { ProviderComponent } from './provider/provider.component';
+import { GameProfileComponent } from './game-profile/game-profile.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { SearchGameComponent } from './game/search-game/search-game.component';
     LikeInterfaceComponent,
     ProfileComponent,
     PreviewGameComponent,
-    SearchGameComponent
+    SearchGameComponent,
+    ProviderComponent,
+    GameProfileComponent
 
   ],
   imports: [
