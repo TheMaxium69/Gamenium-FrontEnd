@@ -34,8 +34,9 @@ import { LikeInterfaceComponent } from './-components/like.interface/like.interf
 import { ProfileComponent } from './account/profile/profile.component';
 import { PreviewGameComponent } from './game/preview-game/preview-game.component';
 import { SearchGameComponent } from './game/search-game/search-game.component';
-import { ProviderComponent } from './provider/provider.component';
-import { GameProfileComponent } from './game-profile/game-profile.component';
+import { ProviderComponent } from './actuality/provider/provider.component';
+import { GameProfileComponent } from './actuality/game-profile/game-profile.component';
+import { ProfilePublicComponent } from './mygame/profile-public/profile-public.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { GameProfileComponent } from './game-profile/game-profile.component';
     PreviewGameComponent,
     SearchGameComponent,
     ProviderComponent,
-    GameProfileComponent
+    GameProfileComponent,
+    ProfilePublicComponent
 
   ],
   imports: [
