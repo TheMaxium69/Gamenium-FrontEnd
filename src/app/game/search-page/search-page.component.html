@@ -1,6 +1,6 @@
 
 <form class="search">
-  <input class="searchTerm" name="searchValue"  value="{{ searchValue }}" [(ngModel)]="searchValue" placeholder="Enter your search term ..." />
+  <input #input (keyup)="updateValue(input.value)" class="searchTerm" name="searchValue"  value="{{ searchValue }}" [(ngModel)]="searchValue" placeholder="Enter your search term ..." />
   <input class="searchButton" type="submit" />
 </form>
 

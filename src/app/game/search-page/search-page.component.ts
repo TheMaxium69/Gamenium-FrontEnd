@@ -31,6 +31,12 @@ export class SearchPageComponent implements OnInit{
     }
     this.searchType = this.route.snapshot.paramMap.get('type');
 
+    this.updateAll();
+
+  }
+
+  updateAll(){
+
     if (this.searchType == 'game'){
       this.searchGame()
     } else if (this.searchType == 'user'){
@@ -41,10 +47,14 @@ export class SearchPageComponent implements OnInit{
 
   }
 
-
   changeType(type:string) {
     this.searchType = type;
-    this.router.navigate(['/search/'+ type +'/' + this.searchValue]);
+    if (!this.searchValue){
+      this.router.navigate(['/search/'+ type +'/-']);
+    } else {
+      this.router.navigate(['/search/'+ type +'/' + this.searchValue]);
+    }
+    this.updateAll()
   }
 
   searchGame(): void {
@@ -63,4 +73,11 @@ export class SearchPageComponent implements OnInit{
     console.log("Faire le search Provider");
   }
 
+  updateValue(value: string) {
+    this.searchValue = value;
+
+    this.router.navigate(['/search/'+ this.searchType +'/-']);
+
+    this.updateAll();
+  }
 }
