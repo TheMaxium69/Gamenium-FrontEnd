@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {ProviderInterface} from "../../-interface/provider.interface";
+import {ProviderService} from "../../-service/provider.service";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-provider',
@@ -9,20 +12,40 @@ import {ActivatedRoute} from "@angular/router";
 export class ProviderComponent implements OnInit{
 
   providerId: number|any;
-  provider
+  providerSelected: ProviderInterface|undefined;
+  noneProvider:boolean|undefined = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private providerService: ProviderService,
+              private app: AppComponent) {
   }
 
   ngOnInit(): void {
 
     this.providerId = this.route.snapshot.paramMap.get('id');
 
-    console.log("Game Id", this.providerId)
+    console.log("Provider Id", this.providerId)
+
+    this.getProviders(this.providerId);
+
 
   }
 
+  getProviders(id:number): void {
+    this.providerService.getProviderById(id, this.app.setURL()).subscribe((reponseProviders) => {
 
+      console.log(reponseProviders)
 
+      if (reponseProviders.message !== "Provider not found"){
+        this.providerSelected = reponseProviders.result;
+      } else {
+        this.noneProvider = true;
+      }
+
+      console.log(this.providerSelected)
+      console.log(this.noneProvider)
+
+    });
+  }
 
 }
