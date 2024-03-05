@@ -11,6 +11,11 @@ export class PostActuService {
 
   constructor(private http: HttpClient) {}
 
+
+
+
+
+
   getPostActu(id: number): Observable<PostActuInterface> {
     return this.http.get<PostActuInterface>(`${this.apiUrl}/postactu/${id}`);
   }

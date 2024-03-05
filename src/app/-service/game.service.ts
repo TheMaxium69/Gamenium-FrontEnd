@@ -15,7 +15,11 @@ export class GameService {
 
 
   getGamesWithLimit(page:number, limit:number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url+'/games/'+page+"/"+limit);
+    return this.http.get<ApicallInterface>(url + '/games/' + page + "/" + limit);
+  }
+
+  getGameById(id: number, url:string): Observable<GameInterface> {
+    return this.http.get<GameInterface>(`/game/${id}`);
   }
 
 
@@ -26,10 +30,6 @@ export class GameService {
 
 
 
-
-  getGame(id: number): Observable<GameInterface> {
-    return this.http.get<GameInterface>(`${this.apiUrl}/game/${id}`);
-  }
 
   getAllGames(): Observable<GameInterface[]> {
     return this.http.get<GameInterface[]>(`${this.apiUrl}/games`);

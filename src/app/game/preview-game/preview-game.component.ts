@@ -17,16 +17,7 @@ export class PreviewGameComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.getGamesWithLimit(1, 1000);
-    this.getGamesWithLimit(2,1000);
-    this.getGamesWithLimit(3,1000);
-    this.getGamesWithLimit(4,1000);
-    this.getGamesWithLimit(5,1000);
-    this.getGamesWithLimit(6,1000);
-    this.getGamesWithLimit(7,1000);
-    this.getGamesWithLimit(8,1000);
-    this.getGamesWithLimit(9,1000);
-    this.getGamesWithLimit(10,1000);
+    this.getGamesWithLimit(1, 100);
 
   }
 
