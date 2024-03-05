@@ -14,22 +14,7 @@ export class GameInterfaceComponent implements OnInit {
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
-    this.getGames();
+
   }
 
-  getGames(): void {
-    this.gameService.getAllGames().subscribe((games) => {
-      this.games = games;
-    });
-  }
-
-  onSearch(): void {
-    if (this.searchValue.trim() !== '') {
-      this.gameService.searchGames(this.searchValue).subscribe((results) => {
-        this.games = results;
-      });
-    } else {
-
-    }
-  }
 }

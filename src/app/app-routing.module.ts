@@ -21,7 +21,6 @@ const routes: Routes = [
   {path: 'provider/:id', component: ProviderComponent},
   {path: 'gameprofile/:id', component: ProviderComponent},
   {path: 'profil/:id', component: ProfilePublicComponent},
-  {path: 'gametest', component: GameInterfaceComponent},
 ];
 
 @NgModule({

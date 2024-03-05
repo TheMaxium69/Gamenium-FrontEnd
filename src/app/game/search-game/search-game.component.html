@@ -1,5 +1,6 @@
 <form (ngSubmit)="onSearch()" #searchForm="ngForm" class="search">
-  <input class="searchTerm" name="searchValue"  [(ngModel)]="searchValue" placeholder="Enter your search term ..." /><input class="searchButton" type="submit" />
+  <input #input (keyup)="onSearchTap(input.value)" class="searchTerm" name="searchValue"  [(ngModel)]="searchValue" placeholder="Enter your search term ..." />
+  <input class="searchButton" type="submit" />
 </form>
 
 <div *ngFor="let game of games">

@@ -9,7 +9,6 @@ import {ApicallInterface} from "../-interface/apicall.interface";
   providedIn: 'root',
 })
 export class GameService {
-  private apiUrl = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {}
 
@@ -22,21 +21,8 @@ export class GameService {
     return this.http.get<ApicallInterface>(url +`/game/${id}`);
   }
 
-
-
-
-
-
-
-
-
-
-  getAllGames(): Observable<GameInterface[]> {
-    return this.http.get<GameInterface[]>(`${this.apiUrl}/games`);
+  searchGames(searchValue: string, url:string): Observable<GameInterface[]> {
+    return this.http.post<GameInterface[]>(url + `/games/search`, { searchValue });
   }
 
-
-  searchGames(searchValue: string): Observable<GameInterface[]> {
-    return this.http.post<GameInterface[]>(`${this.apiUrl}/games/search`, { searchValue });
-  }
 }
