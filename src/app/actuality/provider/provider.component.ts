@@ -27,23 +27,17 @@ export class ProviderComponent implements OnInit{
     console.log("Provider Id", this.providerId)
 
     this.getProviders(this.providerId);
-
-
+    
   }
 
   getProviders(id:number): void {
     this.providerService.getProviderById(id, this.app.setURL()).subscribe((reponseProviders) => {
-
-      console.log(reponseProviders)
 
       if (reponseProviders.message !== "Provider not found"){
         this.providerSelected = reponseProviders.result;
       } else {
         this.noneProvider = true;
       }
-
-      console.log(this.providerSelected)
-      console.log(this.noneProvider)
 
     });
   }
