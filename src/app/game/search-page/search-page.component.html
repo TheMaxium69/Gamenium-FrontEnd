@@ -53,9 +53,17 @@
             <img src="{{ game.image?.thumb_url }}" alt="...">
           </ng-container>
         </div>
-        <div class="card-right">
-          <h5>{{ game.name }}</h5>
-          <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div class="card-right d-flex">
+          <div class="core-left">
+            <h5>{{ game.name }}</h5>
+            <p style="color: red"> Editeur Sample </p>
+            <p> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</p>
+          </div>
+          <div class="core-right">
+            <div class="card-note">
+              <p><span>10</span>/20</p>
+            </div>
+          </div>
         </div>
       </div>
 

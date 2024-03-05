@@ -26,8 +26,10 @@ export class SearchPageComponent implements OnInit{
   ngOnInit(): void {
 
     let searchValueTemp = this.route.snapshot.paramMap.get('value');
-    if (searchValueTemp){
+    if (searchValueTemp && searchValueTemp !== '-'){
       this.searchValue = searchValueTemp;
+    } else if (searchValueTemp == '-'){
+      this.searchValue = '';
     }
     this.searchType = this.route.snapshot.paramMap.get('type');
 
