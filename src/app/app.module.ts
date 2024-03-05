@@ -37,6 +37,7 @@ import { SearchGameComponent } from './game/search-game/search-game.component';
 import { ProviderComponent } from './actuality/provider/provider.component';
 import { GameProfileComponent } from './actuality/game-profile/game-profile.component';
 import { ProfilePublicComponent } from './mygame/profile-public/profile-public.component';
+import { NoneComponent } from './-global/none/none.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ProfilePublicComponent } from './mygame/profile-public/profile-public.c
     SearchGameComponent,
     ProviderComponent,
     GameProfileComponent,
-    ProfilePublicComponent
+    ProfilePublicComponent,
+    NoneComponent
 
   ],
   imports: [

@@ -11,7 +11,8 @@ export interface ProviderInterface {
   parentCompagny:number,
   content: string,
   banner:number,
-  picture: PictureInterface[]|undefined,
+  picture: PictureInterface|undefined,
+  color:string,
 
 }
 

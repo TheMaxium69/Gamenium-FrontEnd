@@ -4,7 +4,7 @@ import {BadgeInterface} from "./badge.interface";
 export interface ApicallInterface {
 
   message: string,
-  result: UserInterface|any|undefined,
+  result: any|undefined,
   token: string|undefined,
 
 }

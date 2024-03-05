@@ -1,1 +1,22 @@
-<p>provider works!</p>
+<ng-container *ngIf="noneProvider">
+  <app-none></app-none>
+</ng-container>
+<ng-container *ngIf="!noneProvider">
+
+
+  <img width="60px" src="{{ providerSelected?.picture?.url }}">
+
+  <h1>{{ providerSelected?.displayName }}</h1>
+  <h2>{{ providerSelected?.tagName }}</h2>
+  <p>{{ providerSelected?.content }}</p>
+
+  <p>Color : <i style="color: {{ providerSelected?.color }}; font-size: 100px" class="ri-checkbox-blank-fill"></i></p>
+
+
+
+
+
+
+
+</ng-container>
+

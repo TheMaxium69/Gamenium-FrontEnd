@@ -16,6 +16,10 @@ export class ProviderService {
     return this.http.get<ApicallInterface>(url + '/provider/' + id);
   }
 
+
+
+
+
   getAllProviders(): Observable<ProviderInterface[]> {
     return this.http.get<ProviderInterface[]>(`${this.apiUrl}/providers`);
   }
