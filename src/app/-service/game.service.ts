@@ -9,7 +9,7 @@ import {ApicallInterface} from "../-interface/apicall.interface";
   providedIn: 'root',
 })
 export class GameService {
-  private apiUrl = 'http://localhost:8000/';
+  private apiUrl = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {}
 
