@@ -18,8 +18,8 @@ export class GameService {
     return this.http.get<ApicallInterface>(url + '/games/' + page + "/" + limit);
   }
 
-  getGameById(id: number, url:string): Observable<GameInterface> {
-    return this.http.get<GameInterface>(`/game/${id}`);
+  getGameById(id: number, url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url +`/game/${id}`);
   }
 
 
