@@ -1,1 +1,18 @@
-<p>detail-game works!</p>
+<ng-container *ngIf="noneGame">
+  <app-none></app-none>
+</ng-container>
+<ng-container *ngIf="!noneGame">
+
+  <ng-container *ngIf="gameSelected?.image?.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+    <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
+  </ng-container>
+
+  <ng-container *ngIf="gameSelected?.image?.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+    <img src="{{ gameSelected?.image?.thumb_url }}" alt="...">
+  </ng-container>
+
+
+  <h1>{{ gameSelected?.name }}</h1>
+
+
+</ng-container>

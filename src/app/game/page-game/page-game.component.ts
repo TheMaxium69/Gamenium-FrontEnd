@@ -18,8 +18,6 @@ export class PageGameComponent implements OnInit {
 
     this.gameId = this.route.snapshot.paramMap.get('id');
 
-    console.log("Game Id", this.gameId)
-
   }
 
 }

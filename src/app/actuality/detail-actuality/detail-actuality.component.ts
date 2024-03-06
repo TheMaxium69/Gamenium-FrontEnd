@@ -13,7 +13,7 @@ export class DetailActualityComponent implements OnInit{
 
   actualityId: string|any;
   actualitySelected: PostActuInterface|undefined;
-  noneActu: boolean|undefined = false;
+  noneActu: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,

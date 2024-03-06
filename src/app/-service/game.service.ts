@@ -18,7 +18,7 @@ export class GameService {
   }
 
   getGameById(id: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url +`/game/${id}`);
+    return this.http.get<ApicallInterface>(url +'/game/' + id);
   }
 
   searchGames(searchValue: string, limit:number, url:string): Observable<GameInterface[]> {
