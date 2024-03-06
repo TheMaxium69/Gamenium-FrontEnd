@@ -1,1 +1,20 @@
-<p>detail-actuality works!</p>
+<ng-container  *ngIf="noneActu">
+  <app-none></app-none>
+</ng-container>
+
+<ng-container *ngIf="!noneActu">
+
+
+  <div class="card" style="width: 18rem;">
+    <img src="{{ actualitySelected?.Provider?.picture?.url }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ actualitySelected?.Provider?.displayName }}</h5>
+      <a routerLink="/provider/{{ actualitySelected?.Provider?.id }}"  class="btn btn-primary">Voir le provider</a>
+    </div>
+  </div>
+
+  <h1>{{ actualitySelected?.content }}</h1>
+  <h1>{{ actualitySelected?.created_at }}</h1>
+
+
+</ng-container>

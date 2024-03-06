@@ -1,18 +1,19 @@
 import {ProviderInterface} from "./provider.interface";
 import {GameProfileInterface} from "./game-profile.interface";
+import {GameInterface} from "./game.interface";
+import {UserInterface} from "./user.interface";
 //import {GameInterface} from "./game.interface";
 
 export interface PostActuInterface {
 
   id:number,
-  createdAt: string,    
+  created_at: Date,
   content: string,
-  lastEdit: string,
-  nbEdit:number,
-  Provider: ProviderInterface[]|undefined,
-  GameProfile: GameProfileInterface[]|undefined,
-  //game: GameInterface[]|undefined,
-  //user_id: UserInterface[]|undefined,
+  last_edit: string,
+  Provider: ProviderInterface|undefined,
+  GameProfile: GameProfileInterface|undefined,
+  game: GameInterface|undefined,
+  user: UserInterface|undefined,
 
 
 }

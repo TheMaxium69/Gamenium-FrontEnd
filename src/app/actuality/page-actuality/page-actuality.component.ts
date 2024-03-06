@@ -19,8 +19,6 @@ export class PageActualityComponent implements OnInit{
 
     this.actualityId = this.route.snapshot.paramMap.get('id');
 
-    console.log("Actu id : ", this.actualityId)
-
 
   }
 

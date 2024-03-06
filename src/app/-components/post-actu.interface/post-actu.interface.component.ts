@@ -13,12 +13,12 @@ export class PostActuInterfaceComponent implements OnInit {
   constructor(private PostActuService: PostActuService) {}
 
   ngOnInit(): void {
-    this.getPostActus();
+    // this.getPostActus();
   }
 
-  getPostActus(): void {
-    this.PostActuService.getAllPostActus().subscribe((PostActus) => {
-      this.PostActus = PostActus;
-    });
-  }
+  // getPostActus(): void {
+  //   this.PostActuService.getAllPostActus().subscribe((PostActus) => {
+  //     this.PostActus = PostActus;
+  //   });
+  // }
 }
