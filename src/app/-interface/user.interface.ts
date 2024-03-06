@@ -6,6 +6,7 @@ export interface UserInterface {
   displaynameUseritium:string,
   joinAt:Date,
   userRole:string[]
+  pp_id ?: number;
 }
 
 /*

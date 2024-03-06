@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit{
 
   userConnected:UserInterface|undefined;
   badgeUserConnected:BadgeInterface[]|undefined;
+  profileImage: any;
 
   constructor(private app: AppComponent, private badgeService: BadgeService) { }
 
@@ -22,6 +23,8 @@ export class ProfileComponent implements OnInit{
     this.userConnected = this.app.userConnected;
 
     this.getBadgeByUser(this.userConnected?.id)
+
+    this.profileImage = this.userConnected?.pp_id;
   }
 
   loggout(){
@@ -41,5 +44,19 @@ export class ProfileComponent implements OnInit{
     });
 
   }
+ // Méthode appelée lorsqu'un fichier est sélectionné
+ onFileSelected(event: any) {
+  const file: File = event.target.files[0];
+  const reader = new FileReader();
 
+  reader.readAsDataURL(file);
+
+
+  reader.onload = () => {
+    
+    this.profileImage = reader.result;
+
+    this.userConnected!.pp_id = this.profileImage;
+  };
+}
 }

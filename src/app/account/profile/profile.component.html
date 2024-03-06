@@ -28,6 +28,8 @@
 
 </ng-container>
 
+<input type="file" (change)="onFileSelected($event)">
 
+<img *ngIf="profileImage" [src]="profileImage" width="100px" height="100px">
 
 <button (click)="loggout()" class="btn btn-danger"> Loggout </button>
