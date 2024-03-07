@@ -8,20 +8,14 @@ import {ApicallInterface} from "../-interface/apicall.interface";
   providedIn: 'root',
 })
 export class ProviderService {
-  private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
-
   constructor(private http: HttpClient) {}
 
   getProviderById(id: number, url:string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url + '/provider/' + id);
   }
 
-
-
-
-
-  getAllProviders(): Observable<ProviderInterface[]> {
-    return this.http.get<ProviderInterface[]>(`${this.apiUrl}/providers`);
+  getAllProviders(url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/providers');
   }
 
 }

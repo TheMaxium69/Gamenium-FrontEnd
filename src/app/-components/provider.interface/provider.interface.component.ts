@@ -17,8 +17,8 @@ export class ProviderInterfaceComponent implements OnInit {
   }
 
   getProviders(): void {
-    this.ProviderService.getAllProviders().subscribe((Providers) => {
-      this.Providers = Providers;
-    });
+    // this.ProviderService.getAllProviders().subscribe((Providers) => {
+    //   this.Providers = Providers;
+    // });
   }
 }

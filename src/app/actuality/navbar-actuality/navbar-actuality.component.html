@@ -3,41 +3,51 @@
     <div>
 
       <ul class="d-flex">
-        <li>
-          <div class="provider-img"></div>
-          <div class="notif-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-          <div class="notif-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
-        <li>
-          <div class="provider-img"></div>
-        </li>
+        <ng-container *ngIf="isLogIn">
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--            <div class="notif-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--            <div class="notif-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--            <div class="notif-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="provider-img"></div>-->
+<!--          </li>-->
+        </ng-container>
+        <ng-container *ngIf="!isLogIn">
+          <ng-container *ngFor="let provider of providerFollowOrAll">
+            <li routerLink="/provider/{{ provider.id }}" >
+              <div class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
+            </li>
+          </ng-container>
+        </ng-container>
       </ul>
 
     </div>
