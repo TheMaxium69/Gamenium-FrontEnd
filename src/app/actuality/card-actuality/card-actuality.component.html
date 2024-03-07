@@ -9,9 +9,9 @@
           <hr>
         </div>
         <div class="card-end d-flex">
-          <a routerLink="/provider/{{ actu.Provider?.id }}" class="btn" style="background-color: {{ actu.Provider?.color }}!important">
+          <a routerLink="/provider/{{ actu.Provider?.id }}" class="btn" style="background-color: {{ actu.Provider?.color }}97!important">
             <div class="d-flex">
-              <div class="provider-img"></div>
+              <div class="provider-img"  style="background-image: url('{{ actu.Provider?.picture?.url }}')"></div>
               {{ actu.Provider?.displayName }}
             </div>
           </a>
@@ -28,7 +28,7 @@
 
 <!--            <ng-container *ngIf="1 == 2">-->
               <div class="active">
-                <i class="ri-heart-fill"></i>
+                <i class="ri-heart-fill" style="color: {{ actu.Provider?.color }}!important"></i>
               </div>
 <!--            </ng-container>-->
           </div>
