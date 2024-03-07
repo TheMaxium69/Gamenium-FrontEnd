@@ -1,18 +1,18 @@
 <section id="actu-all" class="d-flex container">
 
-  <ng-container *ngFor="let item of itemsArray; let i = index">
-    <div class="card" routerLink="/actuality/{{ i }}">
+  <ng-container *ngFor="let actu of postActuFollowOrAll;">
+    <div class="card" routerLink="/actuality/{{ actu.id }}">
       <img src="https://i.ytimg.com/vi/nyD5BjHXJ88/maxresdefault.jpg" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Nintendo Direct Mini</h5>
+        <h5 class="card-title">{{ actu.content }}</h5>
         <div class="card-hr">
           <hr>
         </div>
         <div class="card-end d-flex">
-          <a routerLink="/provider/{{ i }}" class="btn">
+          <a routerLink="/provider/{{ actu.Provider?.id }}" class="btn" style="background-color: {{ actu.Provider?.color }}!important">
             <div class="d-flex">
               <div class="provider-img"></div>
-              Nintendo
+              {{ actu.Provider?.displayName }}
             </div>
           </a>
           <div class="card-i d-flex">
@@ -20,17 +20,17 @@
               <i class="ri-chat-3-line"></i>
             </div>
 
-            <ng-container *ngIf="i != 2">
-              <div>
-                <i class="ri-heart-line"></i>
-              </div>
-            </ng-container>
+<!--            <ng-container *ngIf="1 != 2">-->
+<!--              <div>-->
+<!--                <i class="ri-heart-line"></i>-->
+<!--              </div>-->
+<!--            </ng-container>-->
 
-            <ng-container *ngIf="i == 2">
+<!--            <ng-container *ngIf="1 == 2">-->
               <div class="active">
                 <i class="ri-heart-fill"></i>
               </div>
-            </ng-container>
+<!--            </ng-container>-->
           </div>
         </div>
       </div>

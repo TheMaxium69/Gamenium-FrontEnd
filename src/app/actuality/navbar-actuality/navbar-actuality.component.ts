@@ -26,7 +26,7 @@ export class NavbarActualityComponent implements OnInit {
       this.userConnected = this.app.userConnected;
 
       if (this.userConnected?.id){
-        this.followByUser(this.userConnected.id);
+        this.followProviderByUser(this.userConnected.id);
       }
 
     } else {
@@ -36,7 +36,7 @@ export class NavbarActualityComponent implements OnInit {
 
   }
 
-  followByUser(id: number){
+  followProviderByUser(id: number){
 
     console.log("recupere les follows")
 

@@ -9,6 +9,9 @@ import {ApicallInterface} from "../-interface/apicall.interface";
 export class PostActuService {
   constructor(private http: HttpClient) {}
 
+  getActuAll(url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/postactus/');
+  }
   getPostActuById(id: number, url:string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url + '/postactu/' + id);
   }
