@@ -1,23 +1,17 @@
-<p>login works!</p>
 
-<div id="auth">
-  <form #addForm="ngForm" (ngSubmit)="login(addForm)">
-    <div id="form-input">
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Votre Adresse Mail</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" name="email" ngModel>
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Votre Mots de passe</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" name="password" ngModel>
-        <div id="emailHelp" class="form-text">Il est dans un mail que vous avez reçu.</div>
-      </div>
+
+<div id="auth" class="login-page">
+  <div class="form">
+    <h1>Compte Useritium</h1><br>
+    <form class="login-form"  #addForm="ngForm" (ngSubmit)="login(addForm)">
+      <input class="champ" type="text" placeholder="email" name="email" ngModel/>
+      <input class="champ" type="password" placeholder="password" name="password" ngModel/>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="saveme" ngModel>
-        <label class="form-check-label" for="exampleCheck1">Ce souvenir de moi</label>
+        <input type="checkbox" class="form-check-input" id="checkBox" name="saveme" ngModel>
+        <label class="form-check-label" for="checkBox">Ce souvenir de moi</label>
       </div>
-      <div style="display: flex"><button type="submit" class="btn btn-primary">Ce connecter</button></div>
-
-    </div>
-  </form>
+      <button>login</button>
+      <p class="message">Not registered? <a target="_blank" href="https://useritium.fr">Create an account</a></p>
+    </form>
+  </div>
 </div>
