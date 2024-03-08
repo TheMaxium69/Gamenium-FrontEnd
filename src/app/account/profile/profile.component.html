@@ -30,9 +30,11 @@
 
 </ng-container>
 
-<input type="file" (change)="onFileSelected($event)">
+<form #uploadForm="ngForm" (ngSubmit)="onSubmit()">
+  <input type="file" name="profilePicture" #profilePictureInput required>
+  <button type="submit" [disabled]="uploadForm.invalid">Upload</button>
+</form>
 
-<img *ngIf="profileImage" [src]="profileImage" width="100px" height="100px">
 
 
 <div>
