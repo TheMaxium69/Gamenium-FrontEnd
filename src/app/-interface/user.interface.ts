@@ -7,6 +7,7 @@ export interface UserInterface {
   joinAt:Date,
   userRole:string[]
   pp_id ?: number;
+  themeColor: string;
 }
 
 /*

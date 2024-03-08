@@ -40,6 +40,7 @@ import { ProfilePublicComponent } from './mygame/profile-public/profile-public.c
 import { NoneComponent } from './-global/none/none.component';
 import { SearchPageComponent } from './game/search-page/search-page.component';
 import { ProfilePrivateComponent } from './mygame/profile-private/profile-private.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ProfilePrivateComponent } from './mygame/profile-private/profile-privat
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ColorPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
