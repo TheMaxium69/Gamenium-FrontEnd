@@ -30,10 +30,11 @@
 
 </ng-container>
 
-<form #uploadForm="ngForm" (ngSubmit)="onSubmit()">
-  <input type="file" name="profilePicture" #profilePictureInput required>
-  <button type="submit" [disabled]="uploadForm.invalid">Upload</button>
-</form>
+<div>
+  <input type="file" (change)="onFileChanged($event)">
+  <button (click)="onUpload()">Télécharger</button>
+</div>
+
 
 
 

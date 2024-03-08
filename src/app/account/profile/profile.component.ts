@@ -5,7 +5,7 @@ import { BadgeService } from '../../-service/badge.service';
 import { BadgeInterface } from '../../-interface/badge.interface';
 import { UserService } from '../../-service/user.service';
 import { ChangeDetectorRef } from '@angular/core';
-import { UploadService } from '../../-service/upload.service';
+import { UploadProfilePictureService } from '../../-service/upload.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,14 +20,15 @@ export class ProfileComponent implements OnInit {
   tempColor: string = '';
   profilePictureInput: any;
   errorMessage: string | undefined;
+  selectedFile: File | undefined;
 
   constructor(
     private app: AppComponent,
     private badgeService: BadgeService,
     private userService: UserService,
     private cdRef: ChangeDetectorRef,
-    @Inject(UploadService) private uploadService: UploadService
-  ) { }
+    private uploadService: UploadProfilePictureService
+  ) {}
 
   ngOnInit() {
     this.userConnected = this.app.userConnected;
@@ -62,27 +63,25 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    const file = this.profilePictureInput.nativeElement.files[0];
-    if (file) {
-      this.profileImage.uploadProfilePicture(this.userConnected?.id, file)
-        .subscribe((response: any) => {
-          console.log('Téléchargement réussi !', response);
-  
-          this.profileImage = response.imageUrl; 
-  
-        }, (error: any) => {
-          console.error('Échec du téléchargement :', error);
-  
-          
-          this.errorMessage = 'Une erreur est survenue lors du téléchargement'; 
-        });
-    } else {
-      console.error('Aucun fichier sélectionné');
-    }
+  onFileChanged(event: any) {
+    this.selectedFile = event.target.files[0];
   }
-  
-    
+
+  onUpload() {
+    if (!this.selectedFile) {
+      console.error('Aucun fichier sélectionné');
+      return;
+    }
+
+    this.uploadService.uploadProfilePicture(this.selectedFile).subscribe(
+      response => {
+        console.log(response.message);
+      },
+      error => {
+        console.error('Erreur lors du téléchargement de l\'image : ', error);
+      }
+    );
+  }
 
   saveColor(): void {
     if (this.tempColor && this.userConnected) {
