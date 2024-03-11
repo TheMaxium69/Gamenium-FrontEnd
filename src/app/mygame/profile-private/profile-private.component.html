@@ -1,5 +1,3 @@
-<p>profile-private works!</p>
-
 <div id="show-game" class="d-flex container">
   <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
 
@@ -21,9 +19,9 @@
             margin-top: -10px;
           }
           .isPinned p{
-                       text-align: center;
-                       margin: 1px;
-                       margin-left: 2px;
+            text-align: center;
+            margin: 1px;
+            margin-left: 2px;
           }
         </style>
 
@@ -54,7 +52,7 @@
           <p> Ajouter le : {{ myGameHistorique.added_at }}</p>
         </div>
         <div class="core-right">
-          <div class="card-note">
+          <div class="card-note" style="background-color: {{ userConnected?.themeColor }}">
             <p><span>
           <ng-container *ngIf="!userRatingAll">NA</ng-container>
 

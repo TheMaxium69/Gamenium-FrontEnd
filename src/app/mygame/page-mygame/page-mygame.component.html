@@ -1,1 +1,14 @@
-<app-profile-private></app-profile-private>
+<app-head-profile></app-head-profile>
+
+<ng-container *ngIf="!profileId">
+
+  <app-profile-private></app-profile-private>
+
+</ng-container>
+
+
+<ng-container *ngIf="profileId">
+
+  <app-profile-public></app-profile-public>
+
+</ng-container>

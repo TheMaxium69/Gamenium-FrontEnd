@@ -1,0 +1,76 @@
+<div id="profilPublic" style="background-color: {{ profilSelected?.themeColor }}">
+
+  <div id="profilInfo" >
+
+    <div class="d-flex">
+
+      <div class="profilPhoto" style="background-image: url('{{ profilSelected?.picture }}')">
+      </div>
+
+      <div class="wrapper">
+
+        <div>
+
+          <h1>{{ profilSelected?.displayname }}</h1>
+          <small><img src=""> : {{ profilSelected?.displaynameUseritium }}</small>
+
+        </div>
+
+        <div>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+</div>
+
+
+<style>
+  #profilPublic{
+
+    height: 183px;
+    width: 100%;
+    box-shadow: inset 0px 0px 20px #00000082;
+    margin-bottom: 183px;
+
+  }
+
+  #profilInfo{
+    position: absolute;
+    width: 100%;
+    padding: 0 42px;
+  }
+  #profilInfo .d-flex{
+    /*background-color: rgba(138, 43, 226, 0.66);*/
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+    margin-top: 100px;
+  }
+
+  #profilPublic .profilPhoto{
+    width: 250px;
+    height: 250px;
+    background-color: red;
+    border-radius: 100%;
+    margin-top: -50px;
+  }
+
+  #profilPublic .wrapper{
+    background-color: white;
+    width: 800px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 15px;
+  }
+
+
+
+</style>

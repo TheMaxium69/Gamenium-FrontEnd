@@ -5,10 +5,7 @@ import {PageGameComponent} from "./game/page-game/page-game.component";
 import {PageMygameComponent} from "./mygame/page-mygame/page-mygame.component";
 import {PageActualityComponent} from "./actuality/page-actuality/page-actuality.component";
 import {PageAccountComponent} from "./account/page-account/page-account.component";
-import {GameInterfaceComponent} from "./-components/game.interface/game.interface.component";
 import {ProviderComponent} from "./actuality/provider/provider.component";
-import {ProfilePublicComponent} from "./mygame/profile-public/profile-public.component";
-import {SearchGameComponent} from "./game/search-game/search-game.component";
 import {SearchPageComponent} from "./game/search-page/search-page.component";
 
 const routes: Routes = [
@@ -22,7 +19,7 @@ const routes: Routes = [
   {path: 'profil', component: PageAccountComponent},
   {path: 'provider/:id', component: ProviderComponent},
   {path: 'gameprofile/:id', component: ProviderComponent},
-  {path: 'profil/:id', component: ProfilePublicComponent},
+  {path: 'profil/:id', component: PageMygameComponent},
   {path: 'search/:type/:value', component: SearchPageComponent},
 ];
 

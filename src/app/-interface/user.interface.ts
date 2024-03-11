@@ -9,5 +9,5 @@ export interface UserInterface {
   joinAt:Date,
   userRole:string[]
   pp_id: PictureInterface[]|undefined,
-  themeColor: string;
+  themeColor: string|[];
 }
