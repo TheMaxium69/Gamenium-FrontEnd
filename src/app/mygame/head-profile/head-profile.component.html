@@ -9,14 +9,71 @@
 
       <div class="wrapper">
 
-        <div>
+        <div id="inWrapper">
 
-          <h1>{{ profilSelected?.displayname }}</h1>
-          <small><img src=""> : {{ profilSelected?.displaynameUseritium }}</small>
+          <div id="profilInfoLeft">
 
-        </div>
+            <ng-container *ngIf="profilSelected?.reseau">
+              <div class="articleInfoLeft" style="margin-top: 9px;">
 
-        <div>
+                <h2>{{ profilSelected?.displayname }}
+                  <ng-container *ngIf="badgeUserConnected">
+                    <ng-container *ngFor="let badge of badgeUserConnected">
+                      <img class="badgeIMG" src="{{ badge.picture?.url }}">
+                    </ng-container>
+                  </ng-container>
+                </h2>
+                <small><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
+
+                <div class="articleReseau">
+
+                  <ng-container *ngFor="let reseauOne of profilSelected?.reseau">
+
+                    <a target="_blank" href="{{ reseauOne['url'] }}" class="icone-reseau {{ reseauOne['serice']['icon_class'] }}"></a>
+
+                  </ng-container>
+
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="!profilSelected?.reseau">
+
+              <div class="articleInfoLeft"  style="margin-top: 27px;">
+                <h2>{{ profilSelected?.displayname }}
+                  <ng-container *ngIf="badgeUserConnected">
+                    <ng-container *ngFor="let badge of badgeUserConnected">
+                      <img class="badgeIMG" src="{{ badge.picture?.url }}">
+                    </ng-container>
+                  </ng-container>
+                </h2>
+                <small><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
+              </div>
+
+            </ng-container>
+
+          </div>
+
+          <div id="profilInfoRight">
+
+            <div class="nb">
+
+              <div>
+
+                <h1 style="color: {{ profilSelected?.themeColor }}"> {{ profilSelected?.nbGame }}</h1>
+                <h2> Jeux </h2>
+
+              </div>
+
+              <div>
+
+                <h1  style="color: {{ profilSelected?.themeColor }}">  {{ profilSelected?.nbNote }} </h1>
+                <h2> Note </h2>
+
+              </div>
+            </div>
+
+          </div>
 
         </div>
 
@@ -32,49 +89,3 @@
 
 </div>
 
-
-<style>
-  #profilPublic{
-
-    height: 183px;
-    width: 100%;
-    box-shadow: inset 0px 0px 20px #00000082;
-    margin-bottom: 183px;
-
-  }
-
-  #profilInfo{
-    position: absolute;
-    width: 100%;
-    padding: 0 42px;
-  }
-  #profilInfo .d-flex{
-    /*background-color: rgba(138, 43, 226, 0.66);*/
-    justify-content: center;
-    gap: 80px;
-    flex-wrap: wrap;
-    margin-top: 100px;
-  }
-
-  #profilPublic .profilPhoto{
-    width: 250px;
-    height: 250px;
-    background-color: rgba(255, 0, 0, 0.11);
-    border-radius: 100%;
-    margin-top: -50px;
-
-    background-position: center;
-    background-size: cover;
-    box-shadow: 2px 2px 9px #888;
-  }
-
-  #profilPublic .wrapper{
-    background-color: white;
-    width: 800px;
-    box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;
-  }
-
-
-
-</style>

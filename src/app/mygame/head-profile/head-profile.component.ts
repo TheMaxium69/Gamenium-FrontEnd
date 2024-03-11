@@ -4,6 +4,8 @@ import {UserInterface} from "../../-interface/user.interface";
 import {AppComponent} from "../../app.component";
 import {ProfilInterface} from "../../-interface/profil.interface";
 import {ProfilService} from "../../-service/profil.service";
+import {BadgeService} from "../../-service/badge.service";
+import {BadgeInterface} from "../../-interface/badge.interface";
 
 @Component({
   selector: 'app-head-profile',
@@ -15,10 +17,12 @@ export class HeadProfileComponent implements OnInit{
   profileId: number|any;
   userConnected: UserInterface | undefined;
   profilSelected: ProfilInterface | undefined;
+  badgeUserConnected: BadgeInterface[] | undefined;
 
   constructor(private route: ActivatedRoute,
               private app:AppComponent,
-              private profileService:ProfilService) { }
+              private profileService:ProfilService,
+              private badgeService: BadgeService) { }
 
   ngOnInit(): void {
 
@@ -30,6 +34,7 @@ export class HeadProfileComponent implements OnInit{
     }
 
     this.getInfoProfile(this.profileId);
+    this.getBadgeByUser(this.profileId);
 
   }
 
@@ -51,6 +56,14 @@ export class HeadProfileComponent implements OnInit{
 
       });
 
+  }
+
+  getBadgeByUser(id: number): void {
+    this.badgeService.getBadgeByUser(id, this.app.setURL()).subscribe((ReponseApi) => {
+      if (ReponseApi.message == 'good') {
+        this.badgeUserConnected = ReponseApi.result;
+      }
+    });
   }
 
 }
