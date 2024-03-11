@@ -2,22 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HistoryMyGameInterface } from '../-interface/history-my-game.interface';
+import {ApicallInterface} from "../-interface/apicall.interface";
 
 @Injectable({
   providedIn: 'root',
 })
 export class HistoryMyGameService {
-  private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
-
   constructor(private http: HttpClient) { }
 
-  getHistoryMyGame(id: number): Observable<HistoryMyGameInterface> {
-    return this.http.get<HistoryMyGameInterface>(`${this.apiUrl}/historymygame/${id}`);
+  getMyGameByUser(idUser: number, url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/MyGameByUser/' + idUser);
   }
-
-  getAllHistoryMyGames(): Observable<HistoryMyGameInterface[]> {
-    return this.http.get<HistoryMyGameInterface[]>(`${this.apiUrl}/historymygames`);
-  }
-
 
 }

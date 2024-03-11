@@ -1,14 +1,19 @@
 import { BuyWhereInterface } from "./buy-where.interface";
 import { UserRateInterface } from "./user-rate.interface";
+import {UserInterface} from "./user.interface";
+import {GameInterface} from "./game.interface";
 
 export interface HistoryMyGameInterface {
 
     id:string,
-    isFavorite:boolean,
+    is_pinned:boolean,
     content:string,
-    buyAt:string,
-    userrate:UserRateInterface[] | undefined,
-    buyware:BuyWhereInterface[] | undefined,
+    buy_at:Date|undefined,
+    added_at:Date,
+    buywhere: BuyWhereInterface|undefined,
+    user:UserInterface,
+    game:GameInterface,
+
 
 }
 

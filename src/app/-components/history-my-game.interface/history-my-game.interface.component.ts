@@ -13,12 +13,7 @@ export class HistoryMyGameInterfaceComponent implements OnInit {
   constructor(private HistoryMyGameService: HistoryMyGameService) {}
 
   ngOnInit(): void {
-    this.getAllHistoryMyGames();
+    // this.getAllHistoryMyGames();
   }
 
-  getAllHistoryMyGames(): void {
-    this.HistoryMyGameService.getAllHistoryMyGames().subscribe((historyMyGames) => {
-      this.historyMyGames = historyMyGames;
-    });
-  }
 }

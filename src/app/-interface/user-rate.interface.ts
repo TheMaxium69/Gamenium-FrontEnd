@@ -1,11 +1,12 @@
 import {GameInterface} from "./game.interface";
+import {UserInterface} from "./user.interface";
 
 export interface UserRateInterface {
 
   id:number,
   rating:number,
-  createdAt: string,
-  game: GameInterface[]|undefined,
+  user: UserInterface,
+  game: GameInterface,
 
 }
 

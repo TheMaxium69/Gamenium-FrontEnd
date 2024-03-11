@@ -13,12 +13,7 @@ export class UserRateInterfaceComponent implements OnInit {
   constructor(private UserRateService: UserRateService) {}
 
   ngOnInit(): void {
-    this.getAllUserRates();
+    // this.getAllUserRates();
   }
 
-  getAllUserRates(): void {
-    this.UserRateService.getAllUserRates().subscribe((userRates) => {
-      this.userRates = userRates;
-    });
-  }
 }
