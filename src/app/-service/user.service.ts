@@ -6,20 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8000'; 
-
   constructor(private http: HttpClient) {}
-
-
-  getThemeColor(userId: number): Observable<string> {
-    const url = `${this.apiUrl}/get-theme-color/${userId}`;
-    return this.http.get<string>(url);
+  
+  getThemeColor(userId: number, url:string): Observable<string> {
+    return this.http.get<string>(url + '/get-theme-color/'+ userId);
   }
 
-  updateThemeColor(userId: number, newColor: string): Observable<any> {
-    const url = `${this.apiUrl}/update-theme-color/${userId}`;
+  updateThemeColor(userId: number, newColor: string, url:string): Observable<any> {
+    const url_requete = url + '/update-theme-color/' + userId;
     const payload = { themeColor: newColor };
 
-    return this.http.post(url, payload);
+    return this.http.post(url_requete, payload);
   }
 }

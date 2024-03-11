@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
   loadThemeColor() {
     const userId = this.userConnected?.id;
     if (userId) {
-      this.userService.getThemeColor(userId).subscribe((themeColor) => {
+      this.userService.getThemeColor(userId, this.app.setURL()).subscribe((themeColor) => {
         if (this.userConnected) {
           this.userConnected.themeColor = themeColor;
           this.cdRef.detectChanges();
@@ -72,14 +72,14 @@ export class ProfileComponent implements OnInit {
       this.profileImage = this.userConnected.pp_id;
     }
   }
-  
+
 
   onUpload() {
     if (!this.selectedFile) {
       console.error('Aucun fichier sélectionné');
       return;
     }
-  
+
     this.uploadService.uploadProfilePicture(this.userConnected?.id || 0, this.selectedFile).subscribe(
       response => {
         console.log(response.message);
@@ -91,14 +91,14 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-  
+
 
   saveColor(): void {
     if (this.tempColor && this.userConnected) {
       this.selectedColor = this.tempColor;
       this.userConnected.themeColor = this.tempColor;
 
-      this.userService.updateThemeColor(this.userConnected.id, this.tempColor).subscribe((response) => {
+      this.userService.updateThemeColor(this.userConnected.id, this.tempColor, this.app.setURL()).subscribe((response) => {
         console.log('Couleur du thème mise à jour avec succès', response);
       });
     }
