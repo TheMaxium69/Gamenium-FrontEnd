@@ -6,7 +6,7 @@ export interface ProviderInterface {
   tagName:string,
   displayName:string,
   country:number,
-  joinedAt: string,
+  joindeAt: string|undefined,
   createdAt: string,
   parentCompagny:number,
   content: string,
