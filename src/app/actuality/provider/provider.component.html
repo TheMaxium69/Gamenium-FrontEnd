@@ -1,25 +1,76 @@
-<ng-container *ngIf="noneProvider">
-  <app-none></app-none>
-</ng-container>
 <ng-container *ngIf="!noneProvider">
 
 
   <img width="60px" src="{{ providerSelected?.picture?.url }}">
+<img width="60px" src="{{ providerSelected?.picture?.url }}">
 
   <h1>{{ providerSelected?.displayName }}</h1>
   <h2>{{ providerSelected?.tagName }}</h2>
-  <p>{{ providerSelected?.content }}</p>
-  <p>C : {{ providerSelected?.createdAt }}</p>
-  <p>J : {{ providerSelected?.joindeAt }}</p>
-
-  <p>Color : <i style="color: {{ providerSelected?.color }}; font-size: 100px" class="ri-checkbox-blank-fill"></i></p>
 
 
+  <!-- <p>Color : <i style="color: {{ providerSelected?.color }}; font-size: 100px" class="ri-checkbox-blank-fill"></i></p> -->
+
+<section id="provider_main"> <!-- Informations Principales du Provider -->
+  <div id="logo">
+    <img width="60px" src="{{ providerSelected?.picture?.url }}">
+  </div>
+  <div id="displayname">
+    <h1>{{ providerSelected?.displayName }}</h1>
+  </div>
+  <div id="tag_name">
+    <h2>{{ providerSelected?.tagName }}</h2>
+  </div>
+  <div id="followers">
+    <h3>10K</h3>
+    <h3>Abonnés</h3>
+  </div>
+  <div id="nb_actus">
+    <h3>8</h3>
+    <h3>Actus</h3>
+  </div>
+  <div id="button_follow">
+    <button type="button"> Suivre </button>
+  </div>
+</section>
+
+<section id="provider_infos"> <!-- Informations Secondaires et détaillées du Provider -->
+  <div id="Informations">
+    <h3>Informations</h3>
+    <ul>
+      <li>Création</li>
+      <li>Pays</li>
+      <li>Nombre de Jeux</li>
+      <li>Nombre d'Actualités</li>
+      <li>Nombre d'Abonnés</li>
+    </ul>
+    <ul>
+      <li>{{ providerSelected?.createdAt }}</li>
+      <li>{{ providerSelected?.country }}</li>
+      <li>2689 jeux</li>
+      <li>10 698 Abonnés</li>
+    </ul>
+    <div id="joinedAt">
+      <img src="logoGamenium.png" alt="">
+      <p> a Rejoint Gamenium le </p>
+      <p>{{ providerSelected?.joindeAt }}</p>
+    </div>
+  </div>
+
+<!-- <script>
+  let app = angular.module('joinedAt', []);
+  app.controller('Provider', function($scope) {
+    $scope.content = "à Rejoint Gamenium en ";
+    $scope.joinedAt = {{providerSelected?.joinedAt}};
+    $scope.total = function () {
+      return $scope.content + "" + $scope.joinedAt;
+    };
+});
+</script> -->
 
 
 
+</section>
+<section id="last_actus">
 
-
-
-</ng-container>
+</section>
 
