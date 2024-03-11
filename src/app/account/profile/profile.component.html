@@ -30,10 +30,12 @@
 
 </ng-container>
 
-<div>
-  <input type="file" (change)="onFileChanged($event)">
-  <button (click)="onUpload()">Télécharger</button>
-</div>
+<form enctype="multipart/form-data">
+  <div>
+    <input type="file" (change)="onFileChanged($event)">
+    <button type="button" (click)="onUpload()">Télécharger</button>
+  </div>
+</form>
 
 
 

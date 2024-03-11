@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
       this.getBadgeByUser(this.userConnected.id);
       this.profileImage = this.userConnected?.pp_id;
       this.loadThemeColor();
+      this.loadProfilePicture();
     }
   }
 
@@ -66,25 +67,31 @@ export class ProfileComponent implements OnInit {
   onFileChanged(event: any) {
     this.selectedFile = event.target.files[0];
   }
+  loadProfilePicture() {
+    if (this.userConnected) {
+      this.profileImage = this.userConnected.pp_id;
+    }
+  }
+  
 
   onUpload() {
     if (!this.selectedFile) {
       console.error('Aucun fichier sélectionné');
       return;
     }
-
-
-    if (this.userConnected) {
-      this.uploadService.uploadProfilePicture(this.userConnected.id, this.selectedFile).subscribe(
-        response => {
-          console.log(response.message);
-        },
-        error => {
-          console.error('Erreur lors du téléchargement de l\'image : ', error);
-        }
-      );
-    }    
+  
+    this.uploadService.uploadProfilePicture(this.userConnected?.id || 0, this.selectedFile).subscribe(
+      response => {
+        console.log(response.message);
+        // Rafraîchir l'image du profil après le téléchargement réussi
+        this.loadProfilePicture();
+      },
+      error => {
+        console.error('Erreur lors du téléchargement de l\'image : ', error);
+      }
+    );
   }
+  
 
   saveColor(): void {
     if (this.tempColor && this.userConnected) {
