@@ -8,10 +8,11 @@ export class UploadProfilePictureService {
 
   constructor(private http: HttpClient) { }
 
-  uploadProfilePicture(imageFile: File) {
+  uploadProfilePicture(userId: number, imageFile: File) {
     const formData = new FormData();
+    formData.append('userId', userId.toString());
     formData.append('image', imageFile);
 
-    return this.http.post<any>('http://localhost:8000/upload-profile-picture', formData);
+    return this.http.post<any>('http://localhost:8000/upload-profile-picture' + userId, formData);
   }
 }

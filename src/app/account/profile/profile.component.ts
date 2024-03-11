@@ -73,14 +73,17 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.uploadService.uploadProfilePicture(this.selectedFile).subscribe(
-      response => {
-        console.log(response.message);
-      },
-      error => {
-        console.error('Erreur lors du téléchargement de l\'image : ', error);
-      }
-    );
+
+    if (this.userConnected) {
+      this.uploadService.uploadProfilePicture(this.userConnected.id, this.selectedFile).subscribe(
+        response => {
+          console.log(response.message);
+        },
+        error => {
+          console.error('Erreur lors du téléchargement de l\'image : ', error);
+        }
+      );
+    }    
   }
 
   saveColor(): void {
