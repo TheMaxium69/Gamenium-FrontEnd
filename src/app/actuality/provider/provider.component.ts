@@ -15,6 +15,13 @@ export class ProviderComponent implements OnInit{
   providerSelected: ProviderInterface|undefined;
   noneProvider:boolean|undefined = false;
 
+  //fake variables
+  providerNbFollower: number|undefined=10000;
+  providerNbFollower1: number|undefined=10;
+  providerNbActu: number|undefined=8;
+  providerNbGame: number|undefined=2689;
+  //end
+
   constructor(private route: ActivatedRoute,
               private providerService: ProviderService,
               private app: AppComponent) {
