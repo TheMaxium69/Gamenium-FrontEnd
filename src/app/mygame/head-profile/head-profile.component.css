@@ -1,0 +1,95 @@
+
+.useritiumPP{
+  width: 27px;
+}
+
+.badgeIMG{
+  width: 30px;
+  margin-right: 6px;
+}
+
+#profilPublic{
+
+  height: 183px;
+  width: 100%;
+  box-shadow: inset 0px 0px 20px #00000082;
+  margin-bottom: 183px;
+
+}
+
+#profilInfo{
+  position: absolute;
+  width: 100%;
+  padding: 0 42px;
+}
+#profilInfo .d-flex{
+  /*background-color: rgba(138, 43, 226, 0.66);*/
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+  margin-top: 100px;
+}
+
+#profilPublic .profilPhoto{
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  margin-top: -50px;
+
+  background-color: white;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 2px 2px 9px #888;
+}
+
+#profilPublic .wrapper{
+  background-color: white;
+  width: 800px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 15px;
+}
+
+#inWrapper{
+  display: flex;
+  height: 100%;
+}
+
+#profilInfoLeft {
+  width: 62%;
+  padding: 33px;
+}
+
+#profilInfoLeft h2{
+  margin: 0px;
+}
+
+#profilInfoRight{
+  width: 38%;
+  margin-top: 38px;
+}
+
+#profilInfoRight .nb{
+
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  display: flex;
+
+  text-align: center;
+  border-left: solid 2px black;
+}
+
+#profilInfoLeft .articleInfoLeft{
+  margin-left: 22px;
+}
+#profilInfoLeft .articleReseau{
+  margin-top: 18px;
+}
+
+#profilInfoLeft .icone-reseau{
+  font-size: 26px;
+  color: black;
+  text-decoration: none;
+  margin-right: 4px;
+}
