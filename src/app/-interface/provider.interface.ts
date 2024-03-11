@@ -7,7 +7,6 @@ export interface ProviderInterface {
   displayName:string,
   country:number,
   joindeAt: string|undefined,
-  createdAt: string,
   parentCompagny:number,
   content: string,
   banner:number,
