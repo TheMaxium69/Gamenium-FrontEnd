@@ -1,59 +1,201 @@
-<div id="show-game" class="d-flex container">
-  <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
+<section id="profilWrapper" class="container">
 
-    <div class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
+  <article class="navigateBar">
 
-      <div *ngIf="myGameHistorique.is_pinned" class="isPinned">
+    <ul style="background-color: {{ userConnected?.themeColor }}">
 
-        <p><i class="ri-pushpin-fill"></i></p>
+<!-- HOME PAGE -->
+      <ng-container *ngIf="!task">
+        <li routerLink="/mygame/" class="active">
+          <p>HOME</p>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="task">
+        <li routerLink="/mygame/">
+          <p>HOME</p>
+        </li>
+      </ng-container>
 
-        <style>
-          .isPinned{
-            position: absolute;
-            background-color: yellow;
-            width: 30px;
-            height: 30px;
-            z-index: 1111;
-            border-radius: 100%;
-            margin-left: -10px;
-            margin-top: -10px;
-          }
-          .isPinned p{
-            text-align: center;
-            margin: 1px;
-            margin-left: 2px;
-          }
-        </style>
+<!-- RECENT PAGE -->
+      <ng-container *ngIf="task == 'recent'">
+        <li routerLink="/mygame/recent" class="active">
+          <p>RECENT</p>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="task != 'recent'">
+        <li routerLink="/mygame/recent">
+          <p>RECENT</p>
+        </li>
+      </ng-container>
 
-      </div>
+<!-- OTHER PAGE     -->
+      <li>
+        <p>SAMPLE</p>
+      </li>
+      <li>
+        <p>SAMPLE</p>
+      </li>
 
-      <div class="card-left">
-        <ng-container *ngIf="myGameHistorique.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
-          <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
-          <div class="blur"></div>
-          <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
-        </ng-container>
-        <ng-container *ngIf="myGameHistorique.game.image.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
-          <div class="image" style="background-image: url('{{ myGameHistorique.game.image?.thumb_url }}')"></div>
-          <div class="blur"></div>
-          <img src="{{ myGameHistorique.game.image?.thumb_url }}" alt="...">
-        </ng-container>
-      </div>
-      <div class="card-right d-flex">
-        <div class="core-left">
-          <h5>{{ myGameHistorique.game.name }}</h5>
-          <p style="color: red"> Editeur Sample </p>
-          <ng-container *ngIf="myGameHistorique.buy_at">
-              <p> [QUAND] Acheter le : {{ myGameHistorique.buy_at }}</p>
-          </ng-container>
-          <ng-container *ngIf="myGameHistorique.buywhere ">
-              <p> [LIEUX] Ou : {{ myGameHistorique.buywhere.name }}</p>
-          </ng-container>
-          <p> Ajouter le : {{ myGameHistorique.added_at }}</p>
+    </ul>
+
+
+  </article>
+
+<!-- PAGE HOME-->
+<ng-container *ngIf="!task">
+
+  <!--  GAME PINED -->
+  <h3 class="titleInWrapper" *ngIf="existingPinned()">Jeux épinglé : </h3>
+  <div id="show-game" class="d-flex container">
+    <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll" >
+
+      <div *ngIf="myGameHistorique.is_pinned" class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
+
+        <div *ngIf="myGameHistorique.is_pinned" class="isPinned" style="background-color: {{ userConnected?.themeColor }}">
+
+          <p><i class="ri-pushpin-fill"></i></p>
+
         </div>
-        <div class="core-right">
-          <div class="card-note" style="background-color: {{ userConnected?.themeColor }}">
-            <p><span>
+
+        <div class="card-left">
+          <ng-container *ngIf="myGameHistorique.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+            <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
+            <div class="blur"></div>
+            <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
+          </ng-container>
+          <ng-container *ngIf="myGameHistorique.game.image.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+            <div class="image" style="background-image: url('{{ myGameHistorique.game.image?.thumb_url }}')"></div>
+            <div class="blur"></div>
+            <img src="{{ myGameHistorique.game.image?.thumb_url }}" alt="...">
+          </ng-container>
+        </div>
+        <div class="card-right d-flex">
+          <div class="core-left">
+            <h5>{{ myGameHistorique.game.name }}</h5>
+            <p style="color: red"> Editeur Sample </p>
+            <ng-container *ngIf="myGameHistorique.buy_at">
+                <p> [QUAND] Acheter le : {{ myGameHistorique.buy_at }}</p>
+            </ng-container>
+            <ng-container *ngIf="myGameHistorique.buywhere ">
+                <p> [LIEUX] Ou : {{ myGameHistorique.buywhere.name }}</p>
+            </ng-container>
+            <p> Ajouter le : {{ myGameHistorique.added_at }}</p>
+          </div>
+          <div class="core-right">
+            <div class="card-note" style="background-color: {{ userConnected?.themeColor }}">
+              <p><span>
+            <ng-container *ngIf="!userRatingAll">NA</ng-container>
+
+            <ng-container *ngIf="userRatingAll">
+
+              <ng-container *ngIf="hasUserRatings(myGameHistorique.game.id)">
+
+                <ng-container *ngFor="let userRating of userRatingAll">
+                  <ng-container *ngIf="userRating.game.id == myGameHistorique.game.id">{{ userRating.rating }}</ng-container>
+                </ng-container>
+
+              </ng-container>
+
+              <ng-container *ngIf="!hasUserRatings(myGameHistorique.game.id)">Na</ng-container>
+
+            </ng-container>
+
+
+              </span>/20</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+
+  <article class="articleTuto">
+
+    <h2>Bonjour, <span class="pseudo" style="color: {{ userConnected?.themeColor }};">{{ userConnected?.displayname }}</span></h2>
+
+    <hr>
+
+    <article class="inUserTuto">
+
+
+      <div class="action">
+
+        <h3>Action Rapide : </h3>
+
+        <div class="d-flex">
+
+
+          <article class="card" data-bs-toggle="modal" data-bs-target="#ajouteGame">
+
+            <i class="ri-add-circle-line"></i>
+
+            <h6>Ajoutez un jeux</h6>
+
+          </article>
+
+          <article class="card" data-bs-toggle="modal" data-bs-target="#noteGame">
+
+            <i class="ri-star-half-line"></i>
+
+            <h6>Ajoutez une note</h6>
+
+          </article>
+
+        </div>
+
+      </div>
+
+      <hr>
+
+      <div class="task">
+
+        <h3>A fin de finir votre compte : </h3>
+        <br>
+        <h6><i class="ri-checkbox-blank-circle-line"></i> One Task</h6>
+        <h6><i class="ri-checkbox-circle-fill"></i> Two Task</h6>
+
+      </div>
+
+
+    </article>
+
+
+  </article>
+
+
+  <div id="show-game" class="d-flex container">
+    <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll" >
+
+      <div *ngIf="!myGameHistorique.is_pinned" class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
+
+        <div class="card-left">
+          <ng-container *ngIf="myGameHistorique.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+            <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
+            <div class="blur"></div>
+            <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
+          </ng-container>
+          <ng-container *ngIf="myGameHistorique.game.image.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+            <div class="image" style="background-image: url('{{ myGameHistorique.game.image?.thumb_url }}')"></div>
+            <div class="blur"></div>
+            <img src="{{ myGameHistorique.game.image?.thumb_url }}" alt="...">
+          </ng-container>
+        </div>
+        <div class="card-right d-flex">
+          <div class="core-left">
+            <h5>{{ myGameHistorique.game.name }}</h5>
+            <p style="color: red"> Editeur Sample </p>
+            <ng-container *ngIf="myGameHistorique.buy_at">
+              <p> [QUAND] Acheter le : {{ myGameHistorique.buy_at }}</p>
+            </ng-container>
+            <ng-container *ngIf="myGameHistorique.buywhere ">
+              <p> [LIEUX] Ou : {{ myGameHistorique.buywhere.name }}</p>
+            </ng-container>
+            <p> Ajouter le : {{ myGameHistorique.added_at }}</p>
+          </div>
+          <div class="core-right">
+            <div class="card-note" style="background-color: {{ userConnected?.themeColor }}">
+              <p><span>
           <ng-container *ngIf="!userRatingAll">NA</ng-container>
 
           <ng-container *ngIf="userRatingAll">
@@ -72,10 +214,81 @@
 
 
             </span>/20</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-  </ng-container>
+    </ng-container>
+  </div>
+</ng-container>
+
+  <!-- PAGE HOME-->
+<ng-container *ngIf="task == 'recent'">
+
+</ng-container>
+
+</section>
+
+<!--- MODAL --->
+<div class="modal fade text-center" id="ajouteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+<!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="padding-top: 40px;">
+<!--        <img src="..." style="width: 15em" alt="tt">-->
+
+        <h2>Ajoutez un jeux à votre liste</h2>
+
+        <br>
+        <h5><span style="color: red">*</span>Recherche ton jeux :</h5>
+        <input type="text" placeholder="Ton Jeux">
+        <br>
+        <br>
+        <h6>Quand à tu obtenu ton jeux :</h6>
+        <input type="date">
+        <br>
+        <br>
+        <h6>Ou à tu obtenu ton jeux :</h6>
+        <input type="text" placeholder="input de type select">
+
+        <div class="modal-footer" style="margin-top: 74px;">
+          <button (click)="addGame()" type="button" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade text-center" id="noteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="padding-top: 40px;">
+        <!--        <img src="..." style="width: 15em" alt="tt">-->
+
+        <h2>Ajoutez une note à votre jeux</h2>
+
+        <br>
+        <h5><span style="color: red">*</span>Recherche un de vos jeux :</h5>
+        <input type="text" placeholder="Ton Jeux">
+        <br>
+        <br>
+        <h6><span style="color: red">*</span>Note de ton jeux :</h6>
+        <input type="number" placeholder="10">/20
+
+        <div class="modal-footer" style="margin-top: 74px;">
+          <button (click)="addGame()" type="button" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

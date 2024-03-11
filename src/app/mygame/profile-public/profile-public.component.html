@@ -1,1 +1,83 @@
 <p>profile-public works!</p>
+
+<div id="show-game" class="d-flex container">
+  <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
+
+    <div class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
+
+      <div *ngIf="myGameHistorique.is_pinned" class="isPinned">
+
+        <p><i class="ri-pushpin-fill"></i></p>
+
+        <style>
+          .isPinned{
+            position: absolute;
+            background-color: yellow;
+            width: 30px;
+            height: 30px;
+            z-index: 1111;
+            border-radius: 100%;
+            margin-left: -10px;
+            margin-top: -10px;
+          }
+          .isPinned p{
+            text-align: center;
+            margin: 1px;
+            margin-left: 2px;
+          }
+        </style>
+
+      </div>
+
+      <div class="card-left">
+        <ng-container *ngIf="myGameHistorique.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+          <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
+          <div class="blur"></div>
+          <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
+        </ng-container>
+        <ng-container *ngIf="myGameHistorique.game.image.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+          <div class="image" style="background-image: url('{{ myGameHistorique.game.image?.thumb_url }}')"></div>
+          <div class="blur"></div>
+          <img src="{{ myGameHistorique.game.image?.thumb_url }}" alt="...">
+        </ng-container>
+      </div>
+      <div class="card-right d-flex">
+        <div class="core-left">
+          <h5>{{ myGameHistorique.game.name }}</h5>
+          <p style="color: red"> Editeur Sample </p>
+          <ng-container *ngIf="myGameHistorique.buy_at">
+            <p> [QUAND] Acheter le : {{ myGameHistorique.buy_at }}</p>
+          </ng-container>
+          <ng-container *ngIf="myGameHistorique.buywhere ">
+            <p> [LIEUX] Ou : {{ myGameHistorique.buywhere.name }}</p>
+          </ng-container>
+          <p> Ajouter le : {{ myGameHistorique.added_at }}</p>
+        </div>
+        <div class="core-right">
+          <div class="card-note" style="background-color: {{ profilSelected?.themeColor }}">
+            <p><span>
+          <ng-container *ngIf="!userRatingAll">NA</ng-container>
+
+          <ng-container *ngIf="userRatingAll">
+
+            <ng-container *ngIf="hasUserRatings(myGameHistorique.game.id)">
+
+              <ng-container *ngFor="let userRating of userRatingAll">
+                <ng-container *ngIf="userRating.game.id == myGameHistorique.game.id">{{ userRating.rating }}</ng-container>
+              </ng-container>
+
+            </ng-container>
+
+            <ng-container *ngIf="!hasUserRatings(myGameHistorique.game.id)">Na</ng-container>
+
+          </ng-container>
+
+
+            </span>/20</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+</div>

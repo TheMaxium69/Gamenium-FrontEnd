@@ -42,13 +42,9 @@ export class HeadProfileComponent implements OnInit{
 
       this.profileService.getProfilByUserId(id,this.app.setURL()).subscribe(responseProfil => {
 
-        console.log(responseProfil);
-
         if (responseProfil.message == "good"){
 
           this.profilSelected = responseProfil.result;
-
-          console.log(this.profilSelected)
 
         } else {
 

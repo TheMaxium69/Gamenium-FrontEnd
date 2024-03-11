@@ -16,8 +16,6 @@ export class PageMygameComponent implements OnInit{
 
     this.profileId = this.route.snapshot.paramMap.get('id');
 
-    console.log("Profil Public ID : ", this.profileId)
-
   }
 
 }

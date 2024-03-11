@@ -5,6 +5,7 @@ import {UserInterface} from "../../-interface/user.interface";
 import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
 import {UserRateService} from "../../-service/user-rate.service";
 import {UserRateInterface} from "../../-interface/user-rate.interface";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-profile-private',
@@ -16,14 +17,19 @@ export class ProfilePrivateComponent implements OnInit {
   userConnected: UserInterface | undefined;
   myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
   userRatingAll:UserRateInterface[]|undefined;
+  task:string|any
 
   constructor(private app:AppComponent,
               private myGameService:HistoryMyGameService,
-              private userRateService:UserRateService
+              private userRateService:UserRateService,
+              private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
+
+
+    this.task = this.route.snapshot.paramMap.get('task');
 
     this.userConnected = this.app.userConnected;
     if (this.userConnected){
@@ -65,6 +71,25 @@ export class ProfilePrivateComponent implements OnInit {
     } else {
       return false
     }
+  }
+
+  existingPinned():boolean{
+    if (this.myGameHistoriqueAll){
+      for (let myGame of this.myGameHistoriqueAll) {
+        if (myGame.is_pinned) {
+          return true;
+        }
+      }
+      return false;
+    } else {
+      return false
+    }
+
+
+  }
+
+  addGame(){
+    console.log("Un jeux doit être ajouter")
   }
 
 
