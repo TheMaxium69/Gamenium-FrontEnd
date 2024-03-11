@@ -13,7 +13,7 @@
 
           <div id="profilInfoLeft">
 
-            <ng-container *ngIf="profilSelected?.reseau">
+            <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length > 0">
               <div class="articleInfoLeft" style="margin-top: 9px;">
 
                 <h2>{{ profilSelected?.displayname }}
@@ -29,7 +29,7 @@
 
                   <ng-container *ngFor="let reseauOne of profilSelected?.reseau">
 
-                    <a target="_blank" href="{{ reseauOne['url'] }}" class="icone-reseau {{ reseauOne['serice']['icon_class'] }}"></a>
+                    <a target="_blank" href="{{ reseauOne.url }}" class="icone-reseau {{ reseauOne.socialnetwork.icon_class }}"></a>
 
                   </ng-container>
 
@@ -37,7 +37,7 @@
               </div>
             </ng-container>
 
-            <ng-container *ngIf="!profilSelected?.reseau">
+            <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length == 0">
 
               <div class="articleInfoLeft"  style="margin-top: 27px;">
                 <h2>{{ profilSelected?.displayname }}

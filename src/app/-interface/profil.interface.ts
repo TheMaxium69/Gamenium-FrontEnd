@@ -1,4 +1,5 @@
 import {PictureInterface} from "./picture.interface";
+import {ProfilSocialNetworkInterface} from "./profil-social-network.interface";
 
 export interface ProfilInterface {
 
@@ -11,6 +12,6 @@ export interface ProfilInterface {
   picture:PictureInterface|undefined,
   nbGame:number,
   nbNote:number,
-  reseau:[]
+  reseau:ProfilSocialNetworkInterface[];
 
 }

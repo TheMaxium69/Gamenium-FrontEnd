@@ -2,7 +2,8 @@ export interface SocialNetworkInterface {
 
     id:number,
     name:string,
-    urlApi:string,
+    icon_class:string,
+    urlApi:string|undefined,
 
 }
 
