@@ -13,6 +13,6 @@ export class UploadProfilePictureService {
     formData.append('userId', userId.toString());
     formData.append('image', imageFile);
 
-    return this.http.post<any>('http://localhost:8000/upload-profile-picture' + userId, formData);
+    return this.http.post<any>('https://localhost:8000/upload-profile-picture/' + userId, formData);
   }
 }
