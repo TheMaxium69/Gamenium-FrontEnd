@@ -45,7 +45,7 @@ export class NavbarActualityComponent implements OnInit {
   getProviderAll(){
 
     this.providerService.getAllProviders(this.app.setURL()).subscribe((responseProvider) => {
-      console.log(responseProvider);
+      // console.log(responseProvider);
 
       if (responseProvider.message == "good"){
           this.providerFollowOrAll = responseProvider.result;

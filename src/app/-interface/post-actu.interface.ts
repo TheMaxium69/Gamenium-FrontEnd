@@ -2,6 +2,7 @@ import {ProviderInterface} from "./provider.interface";
 import {GameProfileInterface} from "./game-profile.interface";
 import {GameInterface} from "./game.interface";
 import {UserInterface} from "./user.interface";
+import {PictureInterface} from "./picture.interface";
 //import {GameInterface} from "./game.interface";
 
 export interface PostActuInterface {
@@ -14,6 +15,8 @@ export interface PostActuInterface {
   GameProfile: GameProfileInterface|undefined,
   game: GameInterface|undefined,
   user: UserInterface|undefined,
+  title: string,
+  picture: PictureInterface,
 
 
 }

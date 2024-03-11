@@ -2,9 +2,9 @@
 
   <ng-container *ngFor="let actu of postActuFollowOrAll;">
     <div class="card" routerLink="/actuality/{{ actu.id }}">
-      <img src="https://i.ytimg.com/vi/nyD5BjHXJ88/maxresdefault.jpg" class="card-img-top" alt="...">
+      <img src="{{ actu.picture.url }}" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">{{ actu.content }}</h5>
+        <h5 class="card-title">{{ actu.title }}</h5>
         <div class="card-hr">
           <hr>
         </div>
