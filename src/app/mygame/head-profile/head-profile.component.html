@@ -1,3 +1,11 @@
+<ng-container *ngIf="isYourProfil">
+  <div class="isYourProfile sticky-top">
+
+    <p> Il s'agit d'une preview de votre profile <i class="ri-pencil-line"></i><a routerLink="/mygame"> Revenir en mode editions</a></p>
+
+  </div>
+</ng-container>
+
 <div id="profilPublic" style="background-color: {{ profilSelected?.themeColor }}">
 
   <div id="profilInfo" >

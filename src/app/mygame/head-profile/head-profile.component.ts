@@ -18,6 +18,7 @@ export class HeadProfileComponent implements OnInit{
   userConnected: UserInterface | undefined;
   profilSelected: ProfilInterface | undefined;
   badgeUserConnected: BadgeInterface[] | undefined;
+  isYourProfil:boolean = false;
 
   constructor(private route: ActivatedRoute,
               private app:AppComponent,
@@ -27,14 +28,19 @@ export class HeadProfileComponent implements OnInit{
   ngOnInit(): void {
 
     this.profileId = this.route.snapshot.paramMap.get('id');
+    this.userConnected = this.app.userConnected;
 
     if (!this.profileId){
-      this.userConnected = this.app.userConnected;
       this.profileId = this.userConnected?.id
+    } else if (this.profileId == this.userConnected?.id){
+      this.isYourProfil = true
     }
+
 
     this.getInfoProfile(this.profileId);
     this.getBadgeByUser(this.profileId);
+
+
 
   }
 

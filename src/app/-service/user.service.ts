@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-  
+
   getThemeColor(userId: number, url:string): Observable<string> {
     return this.http.get<string>(url + '/get-theme-color/'+ userId);
   }
