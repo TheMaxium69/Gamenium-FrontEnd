@@ -20,6 +20,7 @@ export class ProviderComponent implements OnInit{
   providerNbFollower1: number|undefined=10;
   providerNbActu: number|undefined=8;
   providerNbGame: number|undefined=2689;
+  providerBackgroundColor: string|undefined='green';
   //end
 
   constructor(private route: ActivatedRoute,
