@@ -1,6 +1,6 @@
 <ng-container *ngIf="!noneProvider">
 
-  <div id="provider" style="background-color: {{ providerBackgroundColor }}"> 
+  <div id="provider" style="background-color: {{ providerBackgroundColor }}54"> 
 
     <div id="providerInfo" ><!-- Informations Principales du Provider -->
   
@@ -16,19 +16,20 @@
               <h1>{{ providerSelected?.displayName }}</h1>
             </div>
             <div id="followers">
-              <h3>{{providerNbFollower1}}k</h3>
+              <h3 style="color: {{ providerBackgroundColor }}">{{providerNbFollower1}}k</h3>
               <h3>Abonnés</h3>
             </div>
             <div id="nb_actus">
-              <h3>{{providerNbActu}}</h3>
+              <h3 style="color: {{ providerBackgroundColor }}">{{providerNbActu}}</h3>
               <h3>Actus</h3>
             </div>
           </div>
+          <div id="button_follow">
+            <button type="button" style="background-color: {{ providerBackgroundColor }}"> Suivre </button>
+          </div>
   
         </div>
-        <div id="button_follow">
-          <button type="button"> Suivre </button>
-        </div>
+
   
   
       </div>
@@ -41,7 +42,7 @@
   
 <section id="main">
 
-  <section id="provider_main"> <!-- Informations Principales du Provider -->
+  <!-- <section id="provider_main"> Informations Principales du Provider 
     <div id="logo">
       <img width="60px" src="{{ providerSelected?.picture?.url }}">
     </div>
@@ -61,7 +62,7 @@
     <div id="button_follow">
       <button type="button"> Suivre </button>
     </div>
-  </section>
+  </section> -->
 
   
   
