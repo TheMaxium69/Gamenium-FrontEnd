@@ -84,10 +84,13 @@ ul {
     font-weight: bold;
     color: #FFFFFF !important;
     font-size: 14px;
-    text-shadow: 5px 1px 0px #888888;
     box-shadow: 2px 2px 9px #888888;
     padding: 10px 25px;
     border-radius: 10px;
     border: 0px solid #FFFFFF;
+    padding: 15px;
+    width: 400px;
+    font-size: 35px;
+    
     
 }
