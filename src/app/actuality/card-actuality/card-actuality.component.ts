@@ -11,8 +11,6 @@ import {PostActuInterface} from "../../-interface/post-actu.interface";
 })
 export class CardActualityComponent implements OnInit {
 
-  public itemsArray: any[] = new Array(50);
-
   isLogIn:boolean|undefined;
   userConnected:UserInterface|undefined;
   postActuFollowOrAll:PostActuInterface[] = [];

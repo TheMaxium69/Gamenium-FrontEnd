@@ -1,14 +1,24 @@
-<app-head-profile></app-head-profile>
+<ng-container *ngIf="!noAccount">
 
-<ng-container *ngIf="!profileId">
+  <app-head-profile></app-head-profile>
 
-  <app-profile-private></app-profile-private>
+  <ng-container *ngIf="!profileId">
+
+    <app-profile-private></app-profile-private>
+
+  </ng-container>
+
+
+  <ng-container *ngIf="profileId">
+
+    <app-profile-public></app-profile-public>
+
+  </ng-container>
 
 </ng-container>
 
+<ng-container *ngIf="noAccount">
 
-<ng-container *ngIf="profileId">
-
-  <app-profile-public></app-profile-public>
+  <app-no-account-profile></app-no-account-profile>
 
 </ng-container>

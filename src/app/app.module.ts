@@ -42,6 +42,7 @@ import { SearchPageComponent } from './game/search-page/search-page.component';
 import { ProfilePrivateComponent } from './mygame/profile-private/profile-private.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { HeadProfileComponent } from './mygame/head-profile/head-profile.component';
+import { NoAccountProfileComponent } from './mygame/no-account-profile/no-account-profile.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { HeadProfileComponent } from './mygame/head-profile/head-profile.compone
     NoneComponent,
     SearchPageComponent,
     ProfilePrivateComponent,
-    HeadProfileComponent
+    HeadProfileComponent,
+    NoAccountProfileComponent
 
   ],
   imports: [
