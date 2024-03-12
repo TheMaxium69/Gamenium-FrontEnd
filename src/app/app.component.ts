@@ -39,7 +39,7 @@ export class AppComponent {
 
 
   AppEnv: string = "DEV"; // DEV or PROD
-  urlApiDev: string = "https://127.0.0.1:8000";
+  urlApiDev: string = "http://localhost:8000";
   urlApiProd: string = "http://gamenium.fr:8000";
   isLoggedIn: boolean = false;
   token: string|any;

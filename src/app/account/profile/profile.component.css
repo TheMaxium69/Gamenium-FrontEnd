@@ -1,0 +1,168 @@
+body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin:0;
+    margin-bottom: 10px;
+  }
+  
+
+  .top{
+    background-color: blue;
+    height: 100px;
+  }
+
+  .name{
+    color: blue;
+  }
+  
+  .circle {
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 25px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .circle img {
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+  }
+  
+  .border{
+    border: solid 1px;
+  }
+
+  .composant{
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 10px;
+    box-shadow: 3px 2px 30px -5px rgba(0,0,0,0.51);
+  }
+
+  .container-fluid {
+  max-width: 100%;
+  width: 992px;
+  margin-left: auto; 
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 80px;
+  }
+
+.centre{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:30px;
+}
+
+hr{
+  width: 80%;
+  margin-right: 200px;
+  margin-bottom: 25px;
+  border:solid 1px;
+}
+
+.composant{
+  width: 700px;
+}
+
+.search-form-container{
+  position: relative;
+}
+
+.search-form{
+  margin-top: -50px;
+}
+
+.input-container{
+  border: solid 1px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  border:none;
+  outline: none;
+  box-shadow: 0px 4px px 1px rgba(0,0,0,0.5) inset;
+}
+
+.search-icon-container{
+  border-radius: 50%;
+  width:50px;
+  height:50px;
+  border:0px;
+  background-color: blue;
+  position:relative;
+  left: 630px;
+  top:57px;
+}
+
+.search-icon{
+    border-radius: 50%;
+}
+
+.searchbar{
+  margin-right: 260px;
+  width:98%;
+  height: 60px;
+  font-size: 24px;
+  border: none;
+  border-radius: 15px;
+  caret-color: transparent;
+  box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.5) inset;
+}
+
+.searchbar::placeholder{
+  position: absolute;
+  bottom:12px;
+  font-size: 24px;
+  padding-left: 50px;
+  padding-bottom: 5px;
+}
+
+
+.para{
+  width: 98%;
+  height: 50px;
+  border: none;
+  margin-bottom: 20px;
+  box-shadow: -2px -1px 400px -100px rgba(0,0,0,0.55) inset;
+}
+
+a{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+
+}
+
+.lock{
+  width: 40px;
+  height: 40px;
+  padding-top: 5px;
+}
+
+.right-chevron{
+  width: 24px;
+  height:24px;
+  padding-top: 10px;
+  padding-right: 20px;
+}
+a > div {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  gap: 20px;
+}
+
+.radius{
+  border-radius: 15px;
+  padding:5px;
+}
