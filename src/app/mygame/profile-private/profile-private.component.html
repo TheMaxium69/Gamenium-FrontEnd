@@ -49,7 +49,7 @@
   <div id="show-game" class="d-flex container">
     <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll" >
 
-      <div *ngIf="myGameHistorique.is_pinned" class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
+      <div *ngIf="myGameHistorique.is_pinned" class="card-game container d-flex" > <!--routerLink="/game/{{ myGameHistorique.game.id }}"-->
 
         <div *ngIf="myGameHistorique.is_pinned" class="isPinned" style="background-color: {{ userConnected?.themeColor }}">
 
@@ -83,8 +83,8 @@
           </div>
           <div class="core-right">
             <div class="card-note" style="background-color: {{ userConnected?.themeColor }}">
-              <p><span>
-            <ng-container *ngIf="!userRatingAll">NA</ng-container>
+              <p><span id="noteGame{{ myGameHistorique.game.id }}">
+            <ng-container *ngIf="!userRatingAll">na</ng-container>
 
             <ng-container *ngIf="userRatingAll">
 
@@ -96,12 +96,18 @@
 
               </ng-container>
 
-              <ng-container *ngIf="!hasUserRatings(myGameHistorique.game.id)">Na</ng-container>
+              <ng-container *ngIf="!hasUserRatings(myGameHistorique.game.id)">na</ng-container>
 
             </ng-container>
 
 
               </span>/20</p>
+            </div>
+            <div class="card-action">
+              <i *ngIf="myGameHistorique.is_pinned" (click)="pinnedGame(myGameHistorique.game);" class="ri-unpin-line"></i>
+              <i *ngIf="!myGameHistorique.is_pinned" (click)="unpinnedGame(myGameHistorique.game);" class="ri-pushpin-line"></i>
+              <i (click)="selectGame(myGameHistorique.game);" data-bs-toggle="modal" data-bs-target="#noteGamePage" class="ri-star-line"></i>
+              <i (click)="selectGame(myGameHistorique.game);" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>
             </div>
           </div>
         </div>
@@ -126,7 +132,7 @@
         <div class="d-flex">
 
 
-          <article class="card" data-bs-toggle="modal" data-bs-target="#ajouteGame">
+          <article (click)="unselectGame()" class="card" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
 
             <i class="ri-add-circle-line"></i>
 
@@ -134,7 +140,7 @@
 
           </article>
 
-          <article class="card" data-bs-toggle="modal" data-bs-target="#noteGame">
+          <article (click)="unselectGame()" class="card" data-bs-toggle="modal" data-bs-target="#noteGamePage">
 
             <i class="ri-star-half-line"></i>
 
@@ -175,7 +181,7 @@
   <div id="show-game" class="d-flex container">
     <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll" >
 
-      <div *ngIf="!myGameHistorique.is_pinned" class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
+      <div *ngIf="!myGameHistorique.is_pinned" class="card-game container d-flex" > <!--routerLink="/game/{{ myGameHistorique.game.id }}"-->
 
         <div class="card-left">
           <ng-container *ngIf="myGameHistorique.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
@@ -203,8 +209,8 @@
           </div>
           <div class="core-right">
             <div class="card-note" style="background-color: {{ userConnected?.themeColor }}">
-              <p><span>
-          <ng-container *ngIf="!userRatingAll">NA</ng-container>
+              <p><span id="noteGame{{ myGameHistorique.game.id }}">
+          <ng-container *ngIf="!userRatingAll">na</ng-container>
 
           <ng-container *ngIf="userRatingAll">
 
@@ -216,12 +222,18 @@
 
             </ng-container>
 
-            <ng-container *ngIf="!hasUserRatings(myGameHistorique.game.id)">Na</ng-container>
+            <ng-container *ngIf="!hasUserRatings(myGameHistorique.game.id)">na</ng-container>
 
           </ng-container>
 
 
             </span>/20</p>
+            </div>
+            <div class="card-action">
+              <i *ngIf="myGameHistorique.is_pinned" (click)="pinnedGame(myGameHistorique.game);" class="ri-unpin-line"></i>
+              <i *ngIf="!myGameHistorique.is_pinned" (click)="unpinnedGame(myGameHistorique.game);" class="ri-pushpin-line"></i>
+              <i (click)="selectGame(myGameHistorique.game);" data-bs-toggle="modal" data-bs-target="#noteGamePage" class="ri-star-line"></i>
+              <i (click)="selectGame(myGameHistorique.game);" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>
             </div>
           </div>
         </div>
@@ -239,64 +251,100 @@
 </section>
 
 <!--- MODAL --->
-<div class="modal fade text-center" id="ajouteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-center" id="ajouteGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-<!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" style="padding-top: 40px;">
-<!--        <img src="..." style="width: 15em" alt="tt">-->
+      <form id="addGameForm" #addForm="ngForm" (ngSubmit)="addGame(addForm)" class="modal-body" style="padding-top: 40px;">
 
         <h2>Ajoutez un jeux à votre liste</h2>
 
         <br>
         <h5><span style="color: red">*</span>Recherche ton jeux :</h5>
-        <input type="text" placeholder="Ton Jeux">
+        <input *ngIf="gameSelected" type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }}">
+        <input *ngIf="!gameSelected" type="text" placeholder="Ton Jeux">
         <br>
+        <br>
+        <h6>Epinglez vous ce jeux :</h6>
+        <input type="checkbox"  name="pinnedGame" ngModel><br>
         <br>
         <h6>Quand à tu obtenu ton jeux :</h6>
-        <input type="date">
+        <input type="date"  name="buyAt" ngModel>
         <br>
         <br>
         <h6>Ou à tu obtenu ton jeux :</h6>
-        <input type="text" placeholder="input de type select">
+        <input type="text" placeholder="input de type select"  name="buyWhere" ngModel>
 
         <div class="modal-footer" style="margin-top: 74px;">
-          <button (click)="addGame()" type="button" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
+          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
 
-<div class="modal fade text-center" id="noteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-center" id="editGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" style="padding-top: 40px;">
-        <!--        <img src="..." style="width: 15em" alt="tt">-->
+      <form id="editGameForm" #addForm3="ngForm" (ngSubmit)="addGame(addForm3)" class="modal-body" style="padding-top: 40px;">
+
+        <h2>Editer un jeux à votre liste</h2>
+
+        <br>
+        <h5><span style="color: red">*</span>Recherche ton jeux :</h5>
+        <input *ngIf="gameSelected" type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }}">
+        <input *ngIf="!gameSelected" type="text" placeholder="Ton Jeux">
+        <br>
+        <br>
+        <h6>Epinglez vous ce jeux :</h6>
+        <input type="checkbox"  name="pinnedGame" ngModel><br>
+        <br>
+        <h6>Quand à tu obtenu ton jeux :</h6>
+        <input type="date"  name="buyAt" ngModel>
+        <br>
+        <br>
+        <h6>Ou à tu obtenu ton jeux :</h6>
+        <input type="text" placeholder="input de type select"  name="buyWhere" ngModel>
+
+        <div class="modal-footer" style="margin-top: 74px;">
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Modifier</button>
+          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade text-center" id="noteGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="addNoteForm" #addForm2="ngForm" (ngSubmit)="addNote(addForm2)" class="modal-body" style="padding-top: 40px;">
 
         <h2>Ajoutez une note à votre jeux</h2>
 
         <br>
         <h5><span style="color: red">*</span>Recherche un de vos jeux :</h5>
-        <input type="text" placeholder="Ton Jeux">
+        <input *ngIf="gameSelected" type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }}">
+        <input *ngIf="!gameSelected" type="text" placeholder="Ton Jeux">
         <br>
         <br>
         <h6><span style="color: red">*</span>Note de ton jeux :</h6>
-        <input type="number" placeholder="10">/20
+        <input id="inputNote" type="number" placeholder="10" name="noteGame" ngModel>/20
 
         <div class="modal-footer" style="margin-top: 74px;">
-          <button (click)="addGame()" type="button" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
+          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {GameService} from "../../-service/game.service";
 import {AppComponent} from "../../app.component";
 import {GameInterface} from "../../-interface/game.interface";
+import {HistoryMyGameService} from "../../-service/history-my-game.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-detail-game',
@@ -18,7 +20,8 @@ export class DetailGameComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
-    private app: AppComponent) {
+    private app: AppComponent,
+    private histoireMyGameService: HistoryMyGameService) {
   }
 
   ngOnInit(): void {
@@ -46,5 +49,58 @@ export class DetailGameComponent implements OnInit{
 
 
     });
+  }
+
+  addGame(form:NgForm) {
+
+    let is_pinned = form.value['pinnedGame'];
+    if (is_pinned == ""){
+      is_pinned = false;
+    }
+
+    let bodyNoJsonMyGame: any = {
+          "id_game":this.gameSelected?.id,
+          "is_pinned":is_pinned,
+    };
+
+
+    const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
+
+    this.histoireMyGameService.postMyGame(bodyMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyGameAdd => {
+
+      if(reponseMyGameAdd.message == "add game is collection"){
+        console.log(this.gameSelected?.name, " à été ajouter");
+      } else {
+        console.log("erreur message");
+      }
+
+    })
+
+  }
+
+  addNote(form:NgForm) {
+
+    console.log(form.value);
+
+    if (form.value['noteGame'] >= 0 && form.value['noteGame'] <= 20){
+
+      let noteGame = form.value['noteGame'];
+
+      let bodyNoJsonMyGameNote: any = {
+        "id_game":this.gameSelected?.id,
+        "note":noteGame,
+      };
+
+      const bodyMyGameNote = JSON.stringify(bodyNoJsonMyGameNote);
+
+      this.histoireMyGameService.postNoteMyGame(bodyMyGameNote, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyGameNoteAdd => {
+
+        console.log(reponseMyGameNoteAdd);
+
+      });
+
+    } else {
+      console.log("note invalide");
+    }
   }
 }

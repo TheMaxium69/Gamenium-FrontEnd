@@ -15,4 +15,86 @@
   <h1>{{ gameSelected?.name }}</h1>
 
 
+
+  <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#ajouteGame">Add Game To Colletion</button><br>
+  <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#noteGame">Add Note Game</button>
+
+
+
+
+
+
+
+
+
+
+
+  <!--- MODAL --->
+  <div class="modal fade text-center" id="ajouteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="addGameForm" #addForm="ngForm" (ngSubmit)="addGame(addForm)" class="modal-body" style="padding-top: 40px;">
+          <!--        <img src="..." style="width: 15em" alt="tt">-->
+
+          <h2>Ajoutez un jeux à votre liste</h2>
+
+          <br>
+          <h5><span style="color: red">*</span>Recherche ton jeux :</h5>
+          <input type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }} ">
+          <br>
+          <br>
+          <h6>Epinglez vous ce jeux :</h6>
+          <input type="checkbox"  name="pinnedGame" ngModel><br>
+          <br>
+          <h6>Quand à tu obtenu ton jeux :</h6>
+          <input type="date"  name="buyAt" ngModel>
+          <br>
+          <br>
+          <h6>Ou à tu obtenu ton jeux :</h6>
+          <input type="text" placeholder="input de type select"  name="buyWhere" ngModel>
+
+          <div class="modal-footer" style="margin-top: 74px;">
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade text-center" id="noteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="addNoteForm" #addForm2="ngForm" (ngSubmit)="addNote(addForm2)" class="modal-body" style="padding-top: 40px;">
+          <!--        <img src="..." style="width: 15em" alt="tt">-->
+
+          <h2>Ajoutez une note à votre jeux</h2>
+
+          <br>
+          <h5><span style="color: red">*</span>Recherche un de vos jeux :</h5>
+          <input type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }}">
+          <br>
+          <br>
+          <h6><span style="color: red">*</span>Note de ton jeux :</h6>
+          <input type="number" placeholder="10" name="noteGame" ngModel>/20
+
+          <div class="modal-footer" style="margin-top: 74px;">
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </ng-container>
+
+

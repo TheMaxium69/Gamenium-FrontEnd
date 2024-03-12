@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { HistoryMyGameInterface } from '../-interface/history-my-game.interface';
 import {ApicallInterface} from "../-interface/apicall.interface";
 
 @Injectable({
@@ -12,6 +11,14 @@ export class HistoryMyGameService {
 
   getMyGameByUser(idUser: number, url:string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url + '/MyGameByUser/' + idUser);
+  }
+
+  postMyGame(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.post<ApicallInterface>(url + '/addMyGame/', body, option);
+  }
+
+  postNoteMyGame(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.post<ApicallInterface>(url + '/addNoteMyGame/', body, option);
   }
 
 }

@@ -209,3 +209,10 @@
   font-size: 30px;
 }
 
+.card-action{
+  margin-top: 22px;
+  text-align: end;
+  margin-right: 8px;
+  font-size: 26px;
+}
+
