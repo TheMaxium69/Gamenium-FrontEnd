@@ -143,13 +143,11 @@ a{
 
 }
 
-.ri-lock-password-fill{
-    font-size: 40px;
-  }
-  
+.ri-lock-password-fill,
 .ri-arrow-right-s-line{
-    font-size: 40px;
+  font-size: 40px;
 }
+  
 
 a > div {
   display: flex;
