@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {PostActuInterface} from "../../-interface/post-actu.interface";
 import {ActivatedRoute} from "@angular/router";
 import {PostActuService} from "../../-service/post-actu.service";
@@ -7,6 +7,7 @@ import {NgForm} from "@angular/forms";
 import {CommentService} from "../../-service/comment.service";
 import {CommentInterface} from "../../-interface/comment.interface";
 import {BadgeService} from "../../-service/badge.service";
+import {BadgeInterface} from "../../-interface/badge.interface";
 
 @Component({
   selector: 'app-comment-actuality',
@@ -21,12 +22,14 @@ export class CommentActualityComponent implements OnInit{
   actualitySelected: PostActuInterface|undefined;
   commentByActu: CommentInterface[]|undefined;
   badgeForAllUser: any[] = [];
+  newComment : CommentInterface|undefined;
 
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,
               private app: AppComponent,
               private commentService:CommentService,
-              private badgeService:BadgeService) {}
+              private badgeService:BadgeService,
+              private renderer: Renderer2) {}
 
   ngOnInit(): void {
 
@@ -95,7 +98,7 @@ export class CommentActualityComponent implements OnInit{
       let content = form.value['content'];
 
       let bodyNoJsonMyCommentActu: any = {
-        "id_actu": this.actualitySelected?.id,
+        "id_post": this.actualitySelected?.id,
         "content": content,
       };
 
@@ -105,16 +108,43 @@ export class CommentActualityComponent implements OnInit{
 
         if (reponseMyCommentActuCreate.message == "good") {
 
+          this.newComment = reponseMyCommentActuCreate.result;
+
           console.log("commentaire ajoutée")
-          // let noteSpanGame = document.getElementById("noteGame" + this.gameSelected?.id)
-          // if (noteSpanGame){
-          //   noteSpanGame.innerHTML = noteGame;
-          // }
-          //
-          // const inputNote: HTMLElement | null = document.getElementById('inputNote');
-          // if (inputNote) {
-          //   this.renderer.setProperty(inputNote, 'value', '');
-          // }
+
+          let noteSpanGame = document.getElementById("yourComment")
+          if (noteSpanGame && this.newComment){
+
+            const badges = this.badgeForAllUser[this.newComment.user.id];
+            let badgesHTML = '';
+            if (badges) {
+              badges.forEach((badge:BadgeInterface) => {
+
+                // Construire la représentation HTML pour chaque badge
+                badgesHTML += `
+                  <img style="width: 30px; margin-right: 6px;" src="${badge.picture?.url}" alt="${badge.name}">
+                `;
+
+              });
+            }
+
+            noteSpanGame.innerHTML = `
+            <div class="card">
+              <h4>(Vous) <span style="color:` + this.newComment?.user.color  + `">` + this.newComment?.user.displayname + `</span>`
+               + badgesHTML +
+              `</h4>
+              <p>`+ this.newComment?.content+`</p>
+            </div>
+
+            ` + noteSpanGame.innerHTML ;
+
+
+          }
+
+          const inputNote: HTMLElement | null = document.getElementById('BtnAddComment');
+          if (inputNote) {
+            this.renderer.setProperty(inputNote, 'value', '');
+          }
 
 
         } else {
