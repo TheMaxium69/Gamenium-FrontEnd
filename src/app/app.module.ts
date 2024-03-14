@@ -43,6 +43,7 @@ import { ProfilePrivateComponent } from './mygame/profile-private/profile-privat
 import { ColorPickerModule } from 'ngx-color-picker';
 import { HeadProfileComponent } from './mygame/head-profile/head-profile.component';
 import { NoAccountProfileComponent } from './mygame/no-account-profile/no-account-profile.component';
+import { CommentActualityComponent } from './actuality/comment-actuality/comment-actuality.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { NoAccountProfileComponent } from './mygame/no-account-profile/no-accoun
     SearchPageComponent,
     ProfilePrivateComponent,
     HeadProfileComponent,
-    NoAccountProfileComponent
+    NoAccountProfileComponent,
+    CommentActualityComponent
 
   ],
   imports: [
