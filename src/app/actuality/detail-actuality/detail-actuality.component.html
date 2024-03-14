@@ -5,22 +5,25 @@
 <ng-container *ngIf="!noneActu">
     <div class="wrapper_container">
       <div id="wrapper">
+<!--Section de gauche-->
           <div id="left_box">
               <div class="img"></div> 
-  
+<!--Bouton Like & Commentaires-->
               <div class="btn_container">
                   <button class="btn">
-                      <i class="ri-heart-3-line"></i><span class="btn_text">1 K</span>
+                      <i class="ri-heart-3-line"></i>
                   </button>
+                  <span class="btn_text">?????</span>
                   <button class="btn">
-                      <i class="ri-chat-3-line"></i><span class="btn_text">128</span>
+                      <i class="ri-chat-3-line"></i>
                   </button>
+                  <span class="btn_text">???</span>
               </div>
   
               <div class="txt_container">
-                  <h2 class="game_title">Ninja Gaiden - Master Collection</h2>
+                  <h2 class="game_title">{{actualitySelected?.title}}</h2>
   
-                  <p class="game_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  <p class="game_description">{{actualitySelected?.content}} Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
                       ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, 
                       varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie,
@@ -34,49 +37,56 @@
               <iframe class="iframe" src="https://www.youtube.com/embed/y8ByV0Z5oBk"></iframe>
              
           </div>
+<!--Section de droite-->
           <div id="right_box">
-              <div class="provider_card">
-                  <div class="provider_color"></div>
-                  <div class="provider_profile"></div>
-                  <p class="name">Koei Tecmo</p>
-                  <a href="">Suivre</a>
-              </div>
-              <div class="provider_card">
-                  <div class="provider_color"></div>
-                  <div class="provider_profile"></div>
-                  <p class="name">Koei Tecmo</p>
-                  <a href="">Suivre</a>
-              </div>
+<!--Carte Provider-->
+            <div class="provider_wrapper">
+                <div class="provider_card">
+                    <div class="provider_color"></div>
+                    <div class="provider_profile"></div>
+                    <p class="name">Koei Tecmo</p>
+                    <a href="#">Suivre</a>
+                </div>
+                <div class="provider_card">
+                    <div class="provider_color"></div>
+                    <div class="provider_profile"></div>
+                    <p class="name">Koei Tecmo</p>
+                    <a href="#">Suivre</a>
+                </div>
+            </div>  
+<!--Bouton commentaires-->
               <button class="btn_provider">
                   <i class="ri-chat-3-line"></i>
                   <span class="btn_text_comment"> Commentaires <i class="ri-arrow-right-line"></i></span>
               </button>
-              <div class="comment_card">
-                  <div class="user">
-                      <div class="user_pic"></div>
-                          <div class="user_name">TheMaximeSan</div>
-                              <div class="user_flw">
-                                  <button class="btn">
-                                      <i class="ri-heart-3-line"></i>
-                                  </button>
-                              </div>
-                  </div>
-                  <div class="user_cmmt">Lorem Ipsum sic dolor emet nun datebayo</div>
-              </div>
-              <div class="comment_card">
-                  <div class="user">
-                      <div class="user_pic"></div>
-                      <div class="user_name">Threonaum</div>
-                      <div class="user_flw">
-                          <button class="btn">
-                              <i class="ri-heart-3-line"></i>
-                          </button>
-                      </div>
-                  </div>
-                  <div class="user_cmmt">Lorem Ipsum sic dolor emet nun datebayo
-                      Lorem Ipsum sic dolor emet nun datebayoLorem Ipsum sic dolor emet nun datebayo
-                      Lorem Ipsum sic dolor emet nun datebayoLorem Ipsum sic dolor emet nun datebayo
-                  </div>
+<!--Carte Commentaire-->
+              <div class="comment_car_wrapper">
+                <div class="comment_card">
+                    <div class="user">
+                        <div class="user_pic"></div>
+                            <div class="user_name">TheMaximeSanTheMaximeSan</div>
+                                <div class="user_flw">
+                                    <button class="btn">
+                                        <i class="ri-heart-3-line"></i>
+                                    </button>
+                                </div>
+                    </div>
+                    <div class="user_cmmt">Lorem Ipsum sic dolor emet nun datebayo</div>
+                </div>
+                <div class="comment_card">
+                    <div class="user">
+                        <div class="user_pic"></div>
+                        <div class="user_name">Threonaum</div>
+                        <div class="user_flw">
+                            <button class="btn">
+                                <i class="ri-heart-3-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="user_cmmt">Lorem Ipsum sic dolor emet nun datebayo
+                        Lorem Ipsum sic dolor emet nun datebayoLorem Ipsum sic dolor emet nun datebayo
+                    </div>
+                </div>
               </div>
           </div>
       </div>
