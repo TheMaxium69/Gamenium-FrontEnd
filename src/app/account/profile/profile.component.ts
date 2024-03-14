@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
     this.userConnected = this.app.userConnected;
     if (this.userConnected) {
       this.getBadgeByUser(this.userConnected.id);
-      this.profileImage = this.userConnected?.pp_id;
+      this.profileImage = this.userConnected?.pp;
       this.loadThemeColor();
       this.loadProfilePicture();
     }
@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
   }
   loadProfilePicture() {
     if (this.userConnected) {
-      this.profileImage = this.userConnected.pp_id;
+      this.profileImage = this.userConnected.pp;
     }
   }
 

@@ -8,6 +8,6 @@ export interface UserInterface {
   displaynameUseritium:string,
   joinAt:Date,
   userRole:string[]
-  pp_id: PictureInterface[]|undefined,
+  pp: PictureInterface[]|undefined,
   themeColor: string|[];
 }

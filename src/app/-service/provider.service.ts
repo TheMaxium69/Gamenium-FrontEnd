@@ -8,6 +8,9 @@ import {ApicallInterface} from "../-interface/apicall.interface";
   providedIn: 'root',
 })
 export class ProviderService {
+
+  private apiUrl = 'http://localhost:8000';
+
   constructor(private http: HttpClient) {}
 
   getProviderById(id: number, url:string): Observable<ApicallInterface> {
@@ -16,6 +19,10 @@ export class ProviderService {
 
   getAllProviders(url:string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url + '/providers');
+  }
+
+  searchProviders(searchValue: string, limit:number, url:string): Observable<ProviderInterface[]> {
+    return this.http.post<ProviderInterface[]>(url + `/providers/search`, { searchValue, limit});
   }
 
 }
