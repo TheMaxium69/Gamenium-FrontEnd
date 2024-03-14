@@ -51,19 +51,21 @@
     width: 13rem;
     margin: 5% 0%;
     border-radius: 15px;
-    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.2);
+    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.3);
 }
 
 .game_description {
     font-size: 14px;
-    width: 780px;
+    width: 80%;
     margin-right: 30%;
+    overflow-wrap: anywhere;
   }
 
 .game_title {
     font-weight: normal;
     margin: 1.5% 0%;
     font-size: 24px;
+    overflow-wrap: anywhere;
 }
 
 .img {
@@ -91,7 +93,7 @@
     width: 13rem;
     margin-bottom: 5%;
     border-radius: 15px;
-    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.2);
+    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.3);
     background: white;
 }
 
@@ -192,6 +194,5 @@
 }
 
 #wrapper {
-    position: absolute;
     display: flex;
 }
