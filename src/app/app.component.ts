@@ -90,26 +90,45 @@ export class AppComponent {
 
     let msgToken: ApicallInterface|undefined;
 
+    let bodyNoJson:any;
+
     this.ipService.getMyIp(this.urlIp).subscribe(reponseTyroIp => {
 
-      let bodyNoJson:any;
 
-      if (reponseTyroIp){
+              bodyNoJson = {
+                "email_auth":email,
+                "mdp_auth":password,
+                "ip":reponseTyroIp.ip
+              };
 
-        bodyNoJson = {
-          "email_auth":email,
-          "mdp_auth":password,
-          "ip":reponseTyroIp.ip
-        };
+            this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
 
-      } else {
+              msgToken = reponseToken;
 
-        bodyNoJson = {
-          "email_auth":email,
-          "mdp_auth":password
-        };
+              if (msgToken?.message == "Connected"){
 
-      }
+                this.token = msgToken.token
+
+                this.getUserByToken(this.token, saveme);
+
+              } else {
+
+                console.log(msgToken?.message)
+                // GERE LE MSG ERR
+
+              }
+
+            })
+
+    },
+    (error) => {
+
+      console.error("TyroIp : ", error);
+
+      bodyNoJson = {
+        "email_auth":email,
+        "mdp_auth":password
+      };
 
       this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
 
@@ -129,6 +148,8 @@ export class AppComponent {
         }
 
       })
+
+
 
     });
 
