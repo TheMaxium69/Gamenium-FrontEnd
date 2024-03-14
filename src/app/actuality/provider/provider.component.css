@@ -34,14 +34,14 @@
     background-repeat: no-repeat;
     background-color: white;
     box-shadow: 2px 2px 9px #888;
-    
+
 }
 
 #provider .wrapper{
     background-color: white;
     width: 800px;
     box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;    
+    border-radius: 15px;
 }
 
 ul {
@@ -80,17 +80,43 @@ ul {
 }
 
 #button_follow button {
-    font-family: arial;
+  font-family: arial, serif;
     font-weight: bold;
     color: #FFFFFF !important;
     font-size: 14px;
     box-shadow: 2px 2px 9px #888888;
     padding: 10px 25px;
     border-radius: 10px;
-    border: 0px solid #FFFFFF;
-    padding: 15px;
+    border: 0 solid #FFFFFF;
     width: 400px;
-    font-size: 35px;
-    
-    
+    position: absolute;
+
+}
+
+
+/* Informations Détaillées du Provider */
+
+#provider_infos {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#informations {
+    background-color: white;
+    width: 800px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 15px;
+    margin-top: 50px;
+    display: flex;
+    /* align-items: center; */
+    /* text-align: center; */
+}
+
+#informations h3 {
+    text-align: left;
+}
+
+#joinedAt img {
+    height: 15px;
 }

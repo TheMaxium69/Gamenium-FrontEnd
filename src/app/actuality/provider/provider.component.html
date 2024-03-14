@@ -1,92 +1,81 @@
 <ng-container *ngIf="!noneProvider">
 
-  <div id="provider" style="background-color: {{ providerBackgroundColor }}54"> 
-
-    <div id="providerInfo" ><!-- Informations Principales du Provider -->
-  
-      <div class="d-flex">
-  
-        <div class="logoprovider" style="background-image: url('{{ providerSelected?.picture?.url }}');"> 
-  
-        </div>
-  
-        <div class="wrapper">
-          <div id="infos">
-            <div id="displayname">
-              <h1>{{ providerSelected?.displayName }}</h1>
-            </div>
-            <div id="followers">
-              <h3 style="color: {{ providerBackgroundColor }}">{{providerNbFollower1}}k</h3>
-              <h3>Abonnés</h3>
-            </div>
-            <div id="nb_actus">
-              <h3 style="color: {{ providerBackgroundColor }}">{{providerNbActu}}</h3>
-              <h3>Actus</h3>
-            </div>
+  <section id="provider_main"><!-- Informations Principales du Provider -->
+    <div id="provider" style="background-color: {{ providerBackgroundColor }}54"> 
+      
+      <div id="providerInfo" >
+    
+        <div class="d-flex">
+    
+          <div class="logoprovider" style="background-image: url('{{ providerSelected?.picture?.url }}');"> 
+    
           </div>
-          <div id="button_follow">
-            <button type="button" style="background-color: {{ providerBackgroundColor }}"> Suivre </button>
+    
+          <div class="wrapper">
+
+            <div id="infos">
+
+              <div id="displayname">
+
+                <h1>{{ providerSelected?.displayName }}</h1>
+
+              </div>
+
+              <div id="followers">
+
+                <h3 style="color: {{ providerBackgroundColor }}">{{providerNbFollower1}}k</h3>
+                <h3>Abonnés</h3>
+
+              </div>
+
+              <div id="nb_actus">
+
+                <h3 style="color: {{ providerBackgroundColor }}">{{providerNbActu}}</h3>
+                <h3>Actus</h3>
+
+              </div>
+
+            </div>
+
+            <div id="button_follow">
+
+              <button type="button" style="background-color: {{ providerBackgroundColor }}"> Suivre </button>
+            
+            </div>
+
           </div>
-  
+
         </div>
 
-  
-  
       </div>
-  
-  
-  
-    </div>
-  
-  </div>
-  
-<section id="main">
 
-  <!-- <section id="provider_main"> Informations Principales du Provider 
-    <div id="logo">
-      <img width="60px" src="{{ providerSelected?.picture?.url }}">
     </div>
-    <div id="infos">
-      <div id="displayname">
-        <h1>{{ providerSelected?.displayName }}</h1>
-      </div>
-      <div id="followers">
-        <h3>{{providerNbFollower1}}k</h3>
-        <h3>Abonnés</h3>
-      </div>
-      <div id="nb_actus">
-        <h3>{{providerNbActu}}</h3>
-        <h3>Actus</h3>
-      </div>
-    </div>
-    <div id="button_follow">
-      <button type="button"> Suivre </button>
-    </div>
-  </section> -->
+  </section>
 
-  
-  
-    <p>Color : <i style="color: {{ providerSelected?.color }}; font-size: 100px" class="ri-checkbox-blank-fill"></i></p>
-  
   <section id="provider_infos"> <!-- Informations Secondaires et détaillées du Provider -->
-    <div id="Informations">
-      <h3>Informations</h3>
-      <ul>
-        <li>Création</li>
-        <li>Pays</li>
-        <li>Nombre de Jeux</li>
-        <li>Nombre d'Actualités</li>
-        <li>Nombre d'Abonnés</li>
-      </ul>
-      <ul>
-        <li>un jour de pluie</li>
-        <li>{{ providerSelected?.country }}</li>
-        <li>{{ providerNbGame }} jeux</li>
-        <li>{{providerNbFollower}} Abonnés</li>
-      </ul>
+
+    <div id="informations">
+
+      <h3>INFORMATIONS</h3>
+
+      <div id="infos_details">
+
+        <p> <span class="firsttext">Création </span><span class="secondtext" style="color: {{ providerBackgroundColor }}">1889</span></p>
+
+        <p> <span class="firsttext">Pays </span><span class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerSelected?.country }}</span></p>
+
+        <p> <span class="firsttext">Nombre de Jeux </span><span class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerNbGame }} jeux</span></p>
+
+        <p> <span class="firsttext">Nombre d'Actualités </span><span class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerNbActu }} Actualités</span></p>
+
+        <p> <span class="firsttext">Nombre d'Abonnés </span><span class="secondtext" style="color: {{ providerBackgroundColor }}">{{providerNbFollower}} Abonnés</span></p>
+
+      </div>
+      
+
       <div id="joinedAt">
-        <img src="logoGamenium.png" alt="">
-        <p> a Rejoint Gamenium le </p>
+        <img src="../../../assets/logo.png" alt="logo_gamenium">
+        <p style="color: {{ providerBackgroundColor }}"> a Rejoint Gamenium le </p>
         <p>{{ providerSelected?.joindeAt }}</p>
       </div>
     </div>
@@ -99,6 +88,5 @@
   
   </section>
 
-</section>
-
+<!-- <p>Color : <i style="color: {{ providerSelected?.color }}; font-size: 100px" class="ri-checkbox-blank-fill"></i></p> -->
 
