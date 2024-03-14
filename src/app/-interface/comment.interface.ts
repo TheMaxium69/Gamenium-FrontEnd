@@ -1,16 +1,15 @@
 import {PostActuInterface} from "./post-actu.interface";
+import {UserInterface} from "./user.interface";
 
 export interface CommentInterface {
 
   id:number,
-  createdAt: string,    
+  createdAt: string,
   lastEdit: string,
-  nbEdit:number,
+  nbEdit: number,
   content: string,
-  Post: PostActuInterface[]|undefined,
-//   user_id: UserInterface[]|undefined,
-
-
+  Post: PostActuInterface,
+  user: UserInterface,
 }
 
 

@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CommentInterface } from '../-interface/comment.interface';
+import {ApicallInterface} from "../-interface/apicall.interface";
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentService {
-  private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
-
   constructor(private http: HttpClient) {}
 
-  getComment(id: number): Observable<CommentInterface> {
-    return this.http.get<CommentInterface>(`${this.apiUrl}/comment/${id}`);
+  getCommentWithActu(id_actu: number, url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/getCommentByActu/' + id_actu);
   }
 
-  getAllComments(): Observable<CommentInterface[]> {
-    return this.http.get<CommentInterface[]>(`${this.apiUrl}/comments`);
+  postCommentInActu(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.post<ApicallInterface>(url + '/commentInActu/', body, option);
   }
-
 
 }

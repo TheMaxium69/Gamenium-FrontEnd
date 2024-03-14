@@ -13,12 +13,12 @@ export class CommentInterfaceComponent implements OnInit {
   constructor(private CommentService: CommentService) {}
 
   ngOnInit(): void {
-    this.getAllComments();
+    // this.getAllComments();
   }
 
-  getAllComments(): void {
-    this.CommentService.getAllComments().subscribe((comments) => {
-      this.comments = comments;
-    });
-  }
+  // getAllComments(): void {
+  //   this.CommentService.getAllComments().subscribe((comments) => {
+  //     this.comments = comments;
+  //   });
+  // }
 }

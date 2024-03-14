@@ -3,13 +3,72 @@
 
 <h1> Commentaire : </h1>
 
+<ng-container *ngIf="isLoggedIn">
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
   <input type="text" placeholder="Votre Commentaire" name="content" ngModel>
   <button class="btn btn-success" type="submit">Envoyé</button>
 </form>
+</ng-container>
+<ng-container *ngIf="!isLoggedIn">
+  <form>
+    <input type="text" placeholder="Connectez pour commentez" name="content" disabled>
+    <button class="btn btn-success" type="submit">Disable</button>
+  </form>
+</ng-container>
 
 <hr>
 
+
+<ng-container *ngIf="!isLoggedIn">
+  <ng-container *ngFor="let comment of commentByActu">
+    <div class="card">
+      <h4 style="color: {{ comment.user.color }}">{{ comment.user.displayname }}
+        <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
+          <img class="badgeIMG" src="{{ badge.picture?.url }}">
+        </ng-container>
+
+      </h4>
+      <p>{{comment.content}}</p>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="isLoggedIn">
+  <div id="yourComment">
+    <ng-container *ngFor="let comment of commentByActu">
+      <ng-container *ngIf="comment.user.id == userConnectedId">
+        <div class="card">
+          <h4>(Vous) <span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
+            <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
+              <img class="badgeIMG" src="{{ badge.picture?.url }}">
+            </ng-container>
+
+          </h4>
+          <p>{{comment.content}}</p>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <ng-container *ngFor="let comment of commentByActu">
+    <ng-container *ngIf="comment.user.id != userConnectedId">
+      <div class="card">
+        <h4 style="color: {{ comment.user.color }}">{{ comment.user.displayname }}
+          <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
+            <img class="badgeIMG" src="{{ badge.picture?.url }}">
+          </ng-container>
+
+        </h4>
+        <p>{{comment.content}}</p>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+
+<ng-container *ngIf="!commentByActu">
+
+  <h2>Aucun Commentaire</h2>
+
+</ng-container>
 
 
 <div style="height: 120px"></div>

@@ -10,4 +10,5 @@ export interface UserInterface {
   userRole:string[]
   pp: PictureInterface[]|undefined,
   themeColor: string|[];
+  color: string;
 }
