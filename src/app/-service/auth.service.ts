@@ -15,11 +15,8 @@ export class AuthService {
   });
   options = { headers: this.headers };
 
-  postLoginUser(email: string, password: string, url: string): Observable<ApicallInterface> {
-    let bodyNoJson: any = {
-      "email_auth":email,
-      "mdp_auth":password
-    };
+  postLoginUser(bodyNoJson: any, url: string): Observable<ApicallInterface> {
+
     const body = JSON.stringify(bodyNoJson);
 
     return this.http.post<ApicallInterface>(url+"/login_user/", body, this.options);

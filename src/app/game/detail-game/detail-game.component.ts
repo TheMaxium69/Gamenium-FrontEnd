@@ -30,7 +30,6 @@ export class DetailGameComponent implements OnInit{
 
     this.getGameById(this.gameId)
 
-    this.app.getYourIp();
   }
 
   getGameById(id:number){

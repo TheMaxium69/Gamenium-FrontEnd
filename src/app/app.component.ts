@@ -40,7 +40,7 @@ export class AppComponent {
    * ******************************************************************************************************************/
 
 
-  AppEnv: string = "PRODMAX"; // DEV or PROD or PRODMAX
+  AppEnv: string = "DEV"; // DEV or PROD or PRODMAX
   urlApiDev: string = "https://127.0.0.1:8000";
   urlApiProd: string = "http://vps216.tyrolium.fr:8000";
   urlApiProdMax: string = "http://home.vps216.tyrolium.fr:8000";
@@ -90,24 +90,49 @@ export class AppComponent {
 
     let msgToken: ApicallInterface|undefined;
 
-    this.authService.postLoginUser(email, password, this.setURL()).subscribe(reponseToken => {
+    this.ipService.getMyIp(this.urlIp).subscribe(reponseTyroIp => {
 
-      msgToken = reponseToken;
+      let bodyNoJson:any;
 
-      if (msgToken?.message == "Connected"){
+      if (reponseTyroIp){
 
-        this.token = msgToken.token
-
-        this.getUserByToken(this.token, saveme);
+        bodyNoJson = {
+          "email_auth":email,
+          "mdp_auth":password,
+          "ip":reponseTyroIp.ip
+        };
 
       } else {
 
-        console.log(msgToken?.message)
-        // GERE LE MSG ERR
+        bodyNoJson = {
+          "email_auth":email,
+          "mdp_auth":password
+        };
 
       }
 
-    })
+      this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
+
+        msgToken = reponseToken;
+
+        if (msgToken?.message == "Connected"){
+
+          this.token = msgToken.token
+
+          this.getUserByToken(this.token, saveme);
+
+        } else {
+
+          console.log(msgToken?.message)
+          // GERE LE MSG ERR
+
+        }
+
+      })
+
+    });
+
+
 
   }
 
