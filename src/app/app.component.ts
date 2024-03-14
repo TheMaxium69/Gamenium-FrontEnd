@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {NavbarComponent} from "./-global/navbar/navbar.component";
 import { CookieService } from 'ngx-cookie-service';
 import {PageAccountComponent} from "./account/page-account/page-account.component";
+import {IpService} from "./-service/ip.service";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private ipService: IpService
   ) {
     const cookieToken:string = this.cookieService.get('tokenGamenium');
     const cookieUser:string = this.cookieService.get('userGamenium');
@@ -42,6 +44,7 @@ export class AppComponent {
   urlApiDev: string = "https://127.0.0.1:8000";
   urlApiProd: string = "http://vps216.tyrolium.fr:8000";
   urlApiProdMax: string = "http://home.vps216.tyrolium.fr:8000";
+  urlIp:string = "https://tyrolium.fr/Contenu/Php/ip.php?api=json"
   Debug:Boolean = true; // Active la view Serv and Local
   isLoggedIn: boolean = false;
   token: string|any;
@@ -220,7 +223,15 @@ export class AppComponent {
       return this.isLoggedIn;
     }
 
+  }
 
+  getYourIp(){
+
+    this.ipService.getMyIp(this.urlIp).subscribe(reponseTyroIp => {
+
+      return reponseTyroIp.ip;
+
+    });
 
   }
 
