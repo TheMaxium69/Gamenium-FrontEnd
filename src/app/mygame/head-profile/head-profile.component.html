@@ -6,13 +6,17 @@
   </div>
 </ng-container>
 
-<div id="profilPublic" style="background-color: {{ profilSelected?.themeColor }}">
+<div id="profilPublic" style="background-color: {{ isColor }}">
 
   <div id="profilInfo" >
 
     <div class="d-flex">
 
-      <div class="profilPhoto" style="background-image: url('{{ profilSelected?.picture }}')">
+      <div *ngIf="profilSelected?.picture" class="profilPhoto" style="background-image: url('{{ profilSelected?.picture }}')">
+      </div>
+
+      <div *ngIf="!profilSelected?.picture" class="profilPhoto" style="background-color: white!important">
+        <p class="lettrePP" style="color: {{isColor}}">{{ extractFirstLetter(profilSelected?.displayname) }}</p>
       </div>
 
       <div class="wrapper">
@@ -68,14 +72,14 @@
 
               <div>
 
-                <h1 style="color: {{ profilSelected?.themeColor }}"> {{ profilSelected?.nbGame }}</h1>
+                <h1 style="color: {{ isColor }}"> {{ profilSelected?.nbGame }}</h1>
                 <h2> Jeux </h2>
 
               </div>
 
               <div>
 
-                <h1  style="color: {{ profilSelected?.themeColor }}">  {{ profilSelected?.nbNote }} </h1>
+                <h1  style="color: {{ isColor }}">  {{ profilSelected?.nbNote }} </h1>
                 <h2> Note </h2>
 
               </div>

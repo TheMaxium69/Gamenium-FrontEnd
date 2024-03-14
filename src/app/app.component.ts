@@ -38,14 +38,18 @@ export class AppComponent {
    * ******************************************************************************************************************/
 
 
-  AppEnv: string = "DEV"; // DEV or PROD
+  AppEnv: string = "PRODMAX"; // DEV or PROD or PRODMAX
   urlApiDev: string = "https://127.0.0.1:8000";
-  urlApiProd: string = "https://gamenium.fr:8000";
+  urlApiProd: string = "http://vps216.tyrolium.fr:8000";
+  urlApiProdMax: string = "http://home.vps216.tyrolium.fr:8000";
+  Debug:Boolean = true; // Active la view Serv and Local
   isLoggedIn: boolean = false;
   token: string|any;
   userConnected: UserInterface|any;
   curentDate: Date = new Date();
 
+  // DEFAULT
+  colorDefault = "#FF0000";
 
   /******************************************************************************************************************
    *
@@ -194,8 +198,10 @@ export class AppComponent {
 
     if (this.AppEnv == "DEV"){
       return this.urlApiDev;
-    } else {
+    } else if (this.AppEnv == "PROD") {
       return this.urlApiProd;
+    } else {
+      return this.urlApiProdMax;
     }
 
   }

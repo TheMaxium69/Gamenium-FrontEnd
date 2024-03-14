@@ -20,6 +20,9 @@ export class HeadProfileComponent implements OnInit{
   badgeUserConnected: BadgeInterface[] | undefined;
   isYourProfil:boolean = false;
 
+  isColor:string = this.app.colorDefault;
+  // isPp:string|undefined;
+
   constructor(private route: ActivatedRoute,
               private app:AppComponent,
               private profileService:ProfilService,
@@ -52,6 +55,14 @@ export class HeadProfileComponent implements OnInit{
 
           this.profilSelected = responseProfil.result;
 
+          if (this.profilSelected?.themeColor){
+            this.isColor = this.profilSelected.themeColor;
+          }
+
+          // if (this.profilSelected?.picture){
+          //   this.isPp = this.profilSelected.picture.url;
+          // }
+
         } else {
 
           console.log("err user not existing");
@@ -68,6 +79,10 @@ export class HeadProfileComponent implements OnInit{
         this.badgeUserConnected = ReponseApi.result;
       }
     });
+  }
+
+  extractFirstLetter(str: string|any): string {
+    return str.charAt(0);
   }
 
 }

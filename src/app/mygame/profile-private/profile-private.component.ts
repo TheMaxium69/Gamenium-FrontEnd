@@ -8,6 +8,8 @@ import {UserRateInterface} from "../../-interface/user-rate.interface";
 import {ActivatedRoute} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {GameInterface} from "../../-interface/game.interface";
+import {ProfilInterface} from "../../-interface/profil.interface";
+import {ProfilService} from "../../-service/profil.service";
 
 @Component({
   selector: 'app-profile-private',
@@ -19,25 +21,28 @@ export class ProfilePrivateComponent implements OnInit {
   userConnected: UserInterface | undefined;
   myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
   userRatingAll:UserRateInterface[]|undefined;
-  task:string|any
+  task:string|any;
+
+  isColor:string = this.app.colorDefault;
+  isPp:string|undefined;
+  profilSelected: ProfilInterface|undefined;
 
   constructor(private app:AppComponent,
               private myGameService:HistoryMyGameService,
               private userRateService:UserRateService,
+              private profileService:ProfilService,
               private route: ActivatedRoute,
               private histoireMyGameService :HistoryMyGameService,
-              private renderer: Renderer2
-  ) {
-  }
+              private renderer: Renderer2) { }
 
   ngOnInit(): void {
-
 
     this.task = this.route.snapshot.paramMap.get('task');
 
     this.userConnected = this.app.userConnected;
     if (this.userConnected){
       this.myGameByUser(this.userConnected.id);
+      this.getInfoProfile(this.userConnected.id);
     }
 
   }
@@ -185,5 +190,32 @@ export class ProfilePrivateComponent implements OnInit {
 
   }
 
+  getInfoProfile(id:number){
+
+    this.profileService.getProfilByUserId(id,this.app.setURL()).subscribe(responseProfil => {
+
+      if (responseProfil.message == "good"){
+
+        this.profilSelected = responseProfil.result;
+
+
+        if (this.profilSelected?.themeColor){
+          this.isColor = this.profilSelected.themeColor;
+        }
+
+        if (this.profilSelected?.picture){
+          this.isPp = this.profilSelected.picture.url;
+        }
+
+
+      } else {
+
+        console.log("err user not existing");
+
+      }
+
+    });
+
+  }
 
 }

@@ -2,7 +2,7 @@
 
   <article class="navigateBar">
 
-    <ul style="background-color: {{ userConnected?.themeColor }}">
+    <ul style="background-color: {{ isColor }}">
 
 <!-- HOME PAGE -->
       <ng-container *ngIf="!task">
@@ -51,7 +51,7 @@
 
       <div *ngIf="myGameHistorique.is_pinned" class="card-game container d-flex" > <!--routerLink="/game/{{ myGameHistorique.game.id }}"-->
 
-        <div *ngIf="myGameHistorique.is_pinned" class="isPinned" style="background-color: {{ userConnected?.themeColor }}">
+        <div *ngIf="myGameHistorique.is_pinned" class="isPinned" style="background-color: {{ isColor }}">
 
           <p><i class="ri-pushpin-fill"></i></p>
 
@@ -82,7 +82,7 @@
             <p> Ajouter le : {{ myGameHistorique.added_at }}</p>
           </div>
           <div class="core-right">
-            <div class="card-note" style="background-color: {{ userConnected?.themeColor }}">
+            <div class="card-note" style="background-color: {{ isColor }}">
               <p><span id="noteGame{{ myGameHistorique.game.id }}">
             <ng-container *ngIf="!userRatingAll">na</ng-container>
 
@@ -118,7 +118,7 @@
 
   <article class="articleTuto">
 
-    <h2>Bonjour, <span class="pseudo" style="color: {{ userConnected?.themeColor }};">{{ userConnected?.displayname }}</span></h2>
+    <h2>Bonjour, <span class="pseudo" style="color: {{ isColor }};">{{ userConnected?.displayname }}</span></h2>
 
     <hr>
 
@@ -208,7 +208,7 @@
             <p> Ajouter le : {{ myGameHistorique.added_at }}</p>
           </div>
           <div class="core-right">
-            <div class="card-note" style="background-color: {{ userConnected?.themeColor }}">
+            <div class="card-note" style="background-color: {{ isColor }}">
               <p><span id="noteGame{{ myGameHistorique.game.id }}">
           <ng-container *ngIf="!userRatingAll">na</ng-container>
 
