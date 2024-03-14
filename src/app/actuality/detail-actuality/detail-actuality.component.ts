@@ -18,8 +18,8 @@ export class DetailActualityComponent implements OnInit{
 // fake variables
   actuTitle: string|undefined = 'Titre';
   actuContent: string|undefined = 'Contenu';
-  nbLike: number|undefined = 150;
-  nbCommentaire: number|undefined = 20;
+  nbLike: number|undefined = 1000;
+  nbCommentaire: number|undefined = 128;
 
 //End fake variables
 
