@@ -1,6 +1,6 @@
 /* ////////////// DEBUT DE ZONE BANNIERE ////////////////// */
 .banniere{
-    background-image: url('SI_N64_SuperMario64_image1600w.jpg');
+    /*background-image: url('');*/
     background-position: center;
     background-size: cover;
     filter: blur(5px);
@@ -12,10 +12,10 @@
 
 /* //////////////  DEBUT DE ZONE INFORMATIONS ///////////// */
 
-.pictureAndName{  
+.pictureAndName{
     max-width: 100%;
     width: 992px;
-    margin-left: 70px; 
+    margin-left: 70px;
     margin-right: auto;
     display:flex;
     flex-direction: row;
@@ -27,7 +27,7 @@
 }
 
 .picture{
-    background-image: url('SI_N64_SuperMario64_image1600w.jpg');
+    /*background-image: url('');*/
     background-position: center;
     background-size: cover;
     width: 250px;
@@ -91,7 +91,7 @@
 .section-info{
     max-width: 100%;
     width: 992px;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: auto;
     margin-top: 120px;
     margin-bottom: 50px;
@@ -189,7 +189,7 @@
 .actualities{
     width:992px;
     height: 300px;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: auto;
     border-top:solid;
     display:flex;
@@ -225,7 +225,7 @@
 }
 
 .picture-card{
-    background-image: url('SI_N64_SuperMario64_image1600w.jpg');
+    /*background-image: url('');*/
     background-position: center;
     background-size: cover;
     border-radius: 50%;
@@ -272,7 +272,7 @@
 .ratings{
     width: 992px;
     height: 580px;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
     /* border: solid; */
@@ -363,7 +363,7 @@
 }
 
 .provider-picture{
-    background-image: url('SI_N64_SuperMario64_image1600w.jpg');
+    /*background-image: url('');*/
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -435,7 +435,7 @@
 
 
 
-/* //////////////// FIN DE ZONE RATINGS ///////////////  */ 
+/* //////////////// FIN DE ZONE RATINGS ///////////////  */
 
 
 
