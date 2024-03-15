@@ -15,6 +15,9 @@ export class DetailActualityComponent implements OnInit{
   actualitySelected: PostActuInterface|undefined;
   noneActu: boolean = false;
 
+  nbLike:number = 10;
+  nbCommentaire:number = 10;
+
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,
               private app: AppComponent) {}

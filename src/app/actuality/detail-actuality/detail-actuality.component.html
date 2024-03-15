@@ -3,9 +3,92 @@
 </ng-container>
 
 <ng-container *ngIf="!noneActu">
+  <div class="wrapper_container">
+    <div id="wrapper">
+      <!--Section de gauche-->
+      <div id="left_box">
+        <div class="img" style="background-image: url({{ actualitySelected?.Provider?.picture?.url }})"></div>
+        <!--Bouton Like & Commentaires-->
+        <div class="btn_container">
+          <button class="btn">
+            <i class="ri-heart-3-line"></i>
+          </button>
+          <span class="btn_text">{{ nbLike }}</span>
+          <button class="btn">
+            <i class="ri-chat-3-line"></i>
+          </button>
+          <span class="btn_text">{{ nbCommentaire }}</span>
+        </div>
+
+        <div class="txt_container">
+          <h2 class="game_title">{{ actualitySelected?.title }}</h2>
+
+          <p class="game_description">{{ actualitySelected?.content }}</p>
+        </div>
+
+        <iframe class="iframe" src="https://www.youtube.com/embed/y8ByV0Z5oBk"></iframe>
+
+      </div>
+      <!--Section de droite-->
+      <div id="right_box">
+        <!--Carte Provider-->
+        <div class="provider_wrapper">
+          <div class="provider_card">
+            <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.color }}"></div>
+            <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.picture?.url }})"></div>
+            <p class="name" style="color: {{ actualitySelected?.Provider?.color }}">{{ actualitySelected?.Provider?.displayName }} </p>
+            <a href="#">Suivre</a>
+          </div>
+          <div class="provider_card">
+            <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.color }}"></div>
+            <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.picture?.url }})"></div>
+            <p class="name" style="color: {{ actualitySelected?.Provider?.color }}">{{ actualitySelected?.Provider?.displayName }} </p>
+            <a href="#">Suivre</a>
+          </div>
+        </div>
+        <!--Bouton commentaires-->
+        <button class="btn_provider">
+          <i class="ri-chat-3-line"></i>
+          <span class="btn_text_comment"> Commentaires <i class="ri-arrow-right-line"></i></span>
+        </button>
+        <!--Carte Commentaire-->
+        <div class="comment_car_wrapper">
+          <div class="comment_card">
+            <div class="user">
+              <div class="user_pic"></div>
+              <div class="user_name">TheMaximeSanTheMaximeSan</div>
+              <div class="user_flw">
+                <button class="btn">
+                  <i class="ri-heart-3-line"></i>
+                </button>
+              </div>
+            </div>
+            <div class="user_cmmt">Lorem Ipsum sic dolor emet nun datebayo</div>
+          </div>
+          <div class="comment_card">
+            <div class="user">
+              <div class="user_pic"></div>
+              <div class="user_name">Threonaum</div>
+              <div class="user_flw">
+                <button class="btn">
+                  <i class="ri-heart-3-line"></i>
+                </button>
+              </div>
+            </div>
+            <div class="user_cmmt">Lorem Ipsum sic dolor emet nun datebayo
+              Lorem Ipsum sic dolor emet nun datebayoLorem Ipsum sic dolor emet nun datebayo
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-  <div class="card" style="width: 18rem;">
+  <app-comment-actuality></app-comment-actuality>
+
+
+  <!-- <div class="card" style="width: 18rem;">
     <img src="{{ actualitySelected?.Provider?.picture?.url }}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{ actualitySelected?.Provider?.displayName }}</h5>
@@ -14,9 +97,7 @@
   </div>
 
   <h1>{{ actualitySelected?.content }}</h1>
-  <h1>{{ actualitySelected?.created_at }}</h1>
-
-  <app-comment-actuality></app-comment-actuality>
+  <h1>{{ actualitySelected?.created_at }}</h1> -->
 
 
 </ng-container>

@@ -1,0 +1,200 @@
+.wrapper_container {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: small;
+  margin-top: 26px;
+  margin-left: 26px;
+  margin-right: 26px;
+  /* margin-top: 52px;
+  margin-left: 39px; */
+}
+.btn_container {
+  width: fit-content;
+  margin-left: 1%;
+  justify-content: space-between;
+  display: flex;
+  border-bottom: 1px solid black;
+}
+
+.btn {
+  color: rgb(46, 58, 89);
+  background-color: white;
+  border: none;
+  font-size: 160%;
+}
+
+.btn_container i {
+  font-size: 135%;
+}
+
+.btn_text {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  color: rgb(87, 87, 87);
+}
+
+.btn_provider {
+  color: rgb(46, 58, 89);
+  background-color: white;
+  border: none;
+  font-size: 120%;
+  width: 11rem;
+}
+
+.btn_text_comment  {
+  color: black;
+  font-size: medium;
+}
+
+.comment_card {
+  height: auto;
+  width: 13rem;
+  margin: 5% 0%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.3);
+}
+
+.game_description {
+  font-size: 14px;
+  width: 80%;
+  margin-right: 30%;
+  overflow-wrap: anywhere;
+}
+
+.game_title {
+  font-weight: normal;
+  margin: 1.5% 0%;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.img {
+  /* background-image: url("https://cdn.discordapp.com/attachments/1072250723326242887/1217035264535433296/ninja_gaiden_cover.jpg?ex=66028f6a&is=65f01a6a&hm=17ce2e804045dd0ae88eb1ff5bf9ea9f9e59be82062a9f3f3b19b664ac683047&"); */
+  background-position: center;
+  background-size: cover;
+  border-radius: 15px;
+  /*Garder un ratio 16/9 !!!*/
+  width: 740px;
+  height:416px;
+  /* width: 65%;
+  height:60%; */
+}
+
+.iframe {
+  position: relative;
+  left: 15%;
+  border-radius: 15px;
+  width: 560px;
+  height: 315px;
+}
+
+.provider_card {
+  height: 10rem;
+  width: 13rem;
+  margin-bottom: 5%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.3);
+  background: white;
+}
+
+.provider_card a {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  color: black;
+  top: 5%;
+}
+
+.provider_card .name {
+  position: relative;
+  top: 10%;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  color: rgb(65, 124, 75);
+}
+
+.provider_color {
+  position: absolute;
+  height: 3rem;
+  width: 13rem;
+  /* background-color: rgb(129, 177, 129); */
+  filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.2));
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.provider_profile {
+  position: relative;
+  top: 5%;
+  left: 30%;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 100%;
+  box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
+  /* background-image: url("https://cdn.discordapp.com/attachments/1203971108471177288/1217033755840217168/KT_logo.png?ex=66028e02&is=65f01902&hm=3c7e8b5287eebd8a9caf12b6d6c59e83503208fd996282546e1292cbaec09814&"); */
+  background-position: center;
+  background-size: cover;
+}
+
+.txt_container {
+  margin-left: 1%;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0% 5% 0%;
+  border-bottom: 1px solid black;
+}
+
+.user_cmmt {
+  margin: 5% 5%;
+  padding-bottom: 5%;
+  position: relative;
+}
+
+.user_flw {
+  position: relative;
+  right: -15%;
+}
+
+.user_name {
+  position: relative;
+  left: 35px;
+  width: 65%;
+  height: fit-content;
+  overflow-wrap: anywhere;
+}
+
+.user_pic {
+  position: absolute;
+  top: 10%;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background-color: red;
+  box-shadow: 0px 4px 4px 2px rgba(89,88,88,0.4);
+}
+
+#left_box {
+  position: relative;
+  width: 80%;
+  margin-bottom: 100px;
+}
+
+#right_box {
+  position: relative;
+  /*width: 50%;*/
+  width: 310px;
+  max-height: 750px;
+  padding-left: 4%;
+  border-left: 1px solid black;
+}
+
+#wrapper {
+  display: flex;
+}
