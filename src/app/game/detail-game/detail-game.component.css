@@ -1,6 +1,6 @@
 /* ////////////// DEBUT DE ZONE BANNIERE ////////////////// */
 .banniere{
-    background-image: url('assets/SI_N64_SuperMario64_image1600w.jpg');
+    background-image: url('SI_N64_SuperMario64_image1600w.jpg');
     background-position: center;
     background-size: cover;
     filter: blur(5px);
@@ -27,7 +27,7 @@
 }
 
 .picture{
-    background-image: url('assets/SI_N64_SuperMario64_image1600w.jpg');
+    background-image: url('SI_N64_SuperMario64_image1600w.jpg');
     background-position: center;
     background-size: cover;
     width: 250px;
@@ -225,7 +225,7 @@
 }
 
 .picture-card{
-    background-image: url('assets/SI_N64_SuperMario64_image1600w.jpg');
+    background-image: url('SI_N64_SuperMario64_image1600w.jpg');
     background-position: center;
     background-size: cover;
     border-radius: 50%;
@@ -363,7 +363,7 @@
 }
 
 .provider-picture{
-    background-image: url('assets/SI_N64_SuperMario64_image1600w.jpg');
+    background-image: url('SI_N64_SuperMario64_image1600w.jpg');
     border-radius: 50%;
     width: 30px;
     height: 30px;
