@@ -40,6 +40,8 @@ export class CardActualityComponent implements OnInit {
 
     console.log("recupere les follows")
 
+    this.getActuAll();
+
   }
 
   getActuAll(){
