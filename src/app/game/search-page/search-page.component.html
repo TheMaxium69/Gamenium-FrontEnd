@@ -88,6 +88,13 @@
 
 <ng-container *ngIf="searchType == 'provider'">
 
-  <h1>Resultat de la recherche Provider</h1>
+  <ng-container *ngFor="let postactu of postactus">
+
+    <h2>{{ postactu.title }}</h2><br>
+    <h3>{{ postactu.Provider?.displayName }}</h3><br>
+    <p>{{ postactu.content }}</p><br>
+    
+
+  </ng-container>
 
 </ng-container>

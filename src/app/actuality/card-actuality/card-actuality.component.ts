@@ -45,7 +45,7 @@ export class CardActualityComponent implements OnInit {
   getActuAll(){
 
     this.postActuService.getActuAll(this.app.setURL()).subscribe((responseActu) => {
-      // console.log(responseActu);
+       console.log(responseActu);
 
       if (responseActu.message == "good"){
         this.postActuFollowOrAll = responseActu.result;
