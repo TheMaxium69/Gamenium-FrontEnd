@@ -7,7 +7,7 @@ export interface ProviderInterface {
   displayName:string,
   country:number,
   joindeAt: string|undefined,
-  parentCompagny:number,
+  parentCompany:ProviderInterface,
   content: string,
   banner:number,
   picture: PictureInterface|undefined,

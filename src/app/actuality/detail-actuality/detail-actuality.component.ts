@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {PostActuService} from "../../-service/post-actu.service";
 import {AppComponent} from "../../app.component";
 import {PostActuInterface} from "../../-interface/post-actu.interface";
+import {CommentService} from "../../-service/comment.service";
 
 @Component({
   selector: 'app-detail-actuality',
@@ -15,18 +16,23 @@ export class DetailActualityComponent implements OnInit{
   actualitySelected: PostActuInterface|undefined;
   noneActu: boolean = false;
 
-  nbLike:number = 10;
-  nbCommentaire:number = 10;
+  nbLike:number = 0;
+  nbCommentaire:number = 0;
 
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,
-              private app: AppComponent) {}
+              private app: AppComponent,
+              private commentService:CommentService) {}
 
   ngOnInit(): void {
 
     this.actualityId = this.route.snapshot.paramMap.get('id');
 
-    this.getActuById(this.actualityId)
+    this.getActuById(this.actualityId);
+
+
+    this.getCommentWithActu(this.actualityId);
+
 
   }
 
@@ -39,6 +45,9 @@ export class DetailActualityComponent implements OnInit{
 
         this.actualitySelected = reponsePostActu.result
 
+        console.log(this.actualitySelected)
+
+
       } else {
 
         this.noneActu = true;
@@ -49,5 +58,22 @@ export class DetailActualityComponent implements OnInit{
     });
   }
 
+  getCommentWithActu(id:number){
 
+    this.commentService.getCommentWithActu(id, this.app.setURL()).subscribe(reponseMyCommentActu => {
+      if (reponseMyCommentActu.message == "good") {
+
+        this.nbCommentaire = reponseMyCommentActu.result.length;
+
+      }
+
+    });
+
+  }
+
+  followUs(id: number | undefined) {
+
+    console.log("follow")
+
+  }
 }

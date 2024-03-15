@@ -67,7 +67,7 @@ export class CommentActualityComponent implements OnInit{
 
     this.commentService.getCommentWithActu(id, this.app.setURL()).subscribe(reponseMyCommentActu => {
 
-      console.log(reponseMyCommentActu)
+      // console.log(reponseMyCommentActu)
 
       if (reponseMyCommentActu.message == "good") {
 
@@ -91,7 +91,7 @@ export class CommentActualityComponent implements OnInit{
   addComment(form: NgForm) {
 
 
-    console.log(form.value);
+    // console.log(form.value);
 
     if (form.value) {
 
