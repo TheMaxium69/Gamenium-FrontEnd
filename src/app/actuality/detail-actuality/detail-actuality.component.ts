@@ -20,7 +20,6 @@ export class DetailActualityComponent implements OnInit{
   actuContent: string|undefined = 'Contenu';
   nbLike: number|undefined = 1000;
   nbCommentaire: number|undefined = 128;
-
 //End fake variables
 
 
