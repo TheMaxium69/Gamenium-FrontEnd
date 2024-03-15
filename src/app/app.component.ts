@@ -241,9 +241,13 @@ export class AppComponent {
       });
     } else {
       headers = new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer '+this.token,
       });
+
+
+      headers.append('Content-Type', 'multipart/form-data');
+
+
     }
     const options: {headers: HttpHeaders}  = { headers: headers };
 
