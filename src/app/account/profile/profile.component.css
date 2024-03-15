@@ -25,7 +25,10 @@
     justify-content: center;
   }
   
-  .circle img {
+  .circle-img {
+    /* background-image: url(); */
+    /* /////////REMPLACER BORDER PAR URL BG-IMAGE//////////   */
+    border: solid red;
     border-radius: 50%;
     width: 140px;
     height: 140px;
@@ -78,6 +81,7 @@ hr{
 
 .ri-search-line{
   color: white;
+  font-size: 24px;
 }
 
 .search-form{
@@ -101,8 +105,8 @@ hr{
   border:0px;
   background-color: blue;
   position:relative;
-  left: 630px;
-  top:57px;
+  left: 590px;
+  top:55px;
 }
 
 .search-icon{
@@ -131,7 +135,7 @@ hr{
 
 .para{
   width: 98%;
-  height: 50px;
+  height: 70px;
   border: none;
   margin-bottom: 20px;
   box-shadow: -2px -1px 400px -100px rgba(0,0,0,0.55) inset;
