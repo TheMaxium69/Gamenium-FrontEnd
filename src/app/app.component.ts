@@ -230,12 +230,21 @@ export class AppComponent {
    * ******************************************************************************************************************/
 
   //CORS With TOKEN
-  createCorsToken(): {headers: HttpHeaders} {
+  createCorsToken(isFormData: boolean = false): {headers: HttpHeaders} {
 
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer '+this.token,
-    });
+    let headers: HttpHeaders;
+
+    if (!isFormData){
+      headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+this.token,
+      });
+    } else {
+      headers = new HttpHeaders({
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer '+this.token,
+      });
+    }
     const options: {headers: HttpHeaders}  = { headers: headers };
 
     return options;

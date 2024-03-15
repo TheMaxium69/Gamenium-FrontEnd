@@ -6,6 +6,7 @@ import { BadgeInterface } from '../../-interface/badge.interface';
 import { UserService } from '../../-service/user.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { UploadProfilePictureService } from '../../-service/upload.service';
+import {PictureInterface} from "../../-interface/picture.interface";
 
 @Component({
   selector: 'app-profile',
@@ -13,13 +14,14 @@ import { UploadProfilePictureService } from '../../-service/upload.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
   userConnected: UserInterface | undefined;
   badgeUserConnected: BadgeInterface[] | undefined;
-  profileImage: any;
+  profileImage: String|undefined;
+
   selectedColor: string = '';
   tempColor: string = '';
-  profilePictureInput: any;
-  errorMessage: string | undefined;
+
   selectedFile: File | undefined;
 
   constructor(
@@ -34,9 +36,11 @@ export class ProfileComponent implements OnInit {
     this.userConnected = this.app.userConnected;
     if (this.userConnected) {
       this.getBadgeByUser(this.userConnected.id);
-      this.profileImage = this.userConnected?.pp;
+
+      this.profileImage = this.userConnected?.pp?.url;
+
+
       this.loadThemeColor();
-      this.loadProfilePicture();
     }
   }
 
@@ -64,35 +68,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onFileChanged(event: any) {
-    this.selectedFile = event.target.files[0];
-  }
-  loadProfilePicture() {
-    if (this.userConnected) {
-      this.profileImage = this.userConnected.pp;
-    }
-  }
-
-
-  onUpload() {
-    if (!this.selectedFile) {
-      console.error('Aucun fichier sélectionné');
-      return;
-    }
-
-    this.uploadService.uploadProfilePicture(this.userConnected?.id || 0, this.selectedFile).subscribe(
-      response => {
-        console.log(response.message);
-        // Rafraîchir l'image du profil après le téléchargement réussi
-        this.loadProfilePicture();
-      },
-      error => {
-        console.error('Erreur lors du téléchargement de l\'image : ', error);
-      }
-    );
-  }
-
-
   saveColor(): void {
     if (this.tempColor && this.userConnected) {
       this.selectedColor = this.tempColor;
@@ -103,4 +78,45 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
+
+  onFileChanged(event: any) {
+    this.selectedFile = event.target.files[0];
+
+    console.log(this.selectedFile)
+  }
+
+  onUpload() {
+
+    if (!this.selectedFile) {
+      console.log('Aucun fichier sélectionné');
+      return;
+    }
+
+    this.uploadService.uploadUserPhoto(this.selectedFile, this.app.setURL(), this.app.createCorsToken(true)).subscribe(responseUploadPhoto => {
+
+
+      console.log(responseUploadPhoto);
+
+
+    });
+  }
+
+  // onFileChanged(event: any) {
+  //   this.selectedFile = event.target.files[0];
+  // }
+  // loadProfilePicture() {
+  //   if (this.userConnected) {
+  //     this.profileImage = this.userConnected.pp;
+  //   }
+  // }
+  //
+  //
+
+
+
+
+
+
+
+
 }

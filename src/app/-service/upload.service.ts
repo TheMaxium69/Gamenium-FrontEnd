@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable} from "rxjs";
+import {ApicallInterface} from "../-interface/apicall.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UploadProfilePictureService {
-  private apiUrl = 'http://localhost:8000';
 
   constructor(private http: HttpClient) { }
 
-  uploadProfilePicture(userId: number, imageFile: File) {
+  uploadUserPhoto(photo: File, url:string, option: {headers: HttpHeaders}):Observable<ApicallInterface> {
     const formData = new FormData();
-    formData.append('image', imageFile);
+    formData.append('photo', photo);
 
-    return this.http.post<any>(`${this.apiUrl}/upload-profile-picture/${userId}`, formData);
+    return this.http.post<ApicallInterface>(url + '/upload/pp/', formData, option);
   }
+
+
+
+
 }
