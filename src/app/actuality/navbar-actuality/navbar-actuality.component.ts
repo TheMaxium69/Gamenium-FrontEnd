@@ -3,6 +3,8 @@ import {AppComponent} from "../../app.component";
 import {ProviderService} from "../../-service/provider.service";
 import {UserInterface} from "../../-interface/user.interface";
 import {ProviderInterface} from "../../-interface/provider.interface";
+import {FollowService} from "../../-service/follow.service";
+import {FollowInterface} from "../../-interface/follow.interface";
 
 @Component({
   selector: 'app-navbar-actuality',
@@ -16,7 +18,8 @@ export class NavbarActualityComponent implements OnInit {
   providerFollowOrAll:ProviderInterface[] = [];
 
   constructor(private app:AppComponent,
-              private providerService:ProviderService) {}
+              private providerService:ProviderService,
+              private followService:FollowService) {}
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
@@ -38,9 +41,26 @@ export class NavbarActualityComponent implements OnInit {
 
   followProviderByUser(id: number){
 
-    console.log("recupere les follows")
+    this.followService.getMyFollowByUser(id, this.app.setURL()).subscribe(reponseMyFollowProvider => {
+      if (reponseMyFollowProvider.message == "good") {
+
+        let followAll:FollowInterface[] = reponseMyFollowProvider.result;
+
+        followAll.forEach((followOne:FollowInterface) => {
+
+          if (followOne.provider) {
+            this.providerFollowOrAll.push(followOne.provider);
+          }
+
+        })
+
+      }
+
+    });
+
 
   }
+
 
   getProviderAll(){
 

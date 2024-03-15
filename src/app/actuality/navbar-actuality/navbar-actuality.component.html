@@ -4,43 +4,12 @@
 
       <ul class="d-flex">
         <ng-container *ngIf="isLogIn">
-          <h1>Abonne toi pour avoir des actualité</h1>
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--            <div class="notif-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--            <div class="notif-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--            <div class="notif-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <div class="provider-img"></div>-->
-<!--          </li>-->
+<!--          <h1>Abonne toi pour avoir des actualité</h1>-->
+          <ng-container *ngFor="let provider of providerFollowOrAll">
+            <li routerLink="/provider/{{ provider.id }}" >
+              <div class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
+            </li>
+          </ng-container>
         </ng-container>
         <ng-container *ngIf="!isLogIn">
           <ng-container *ngFor="let provider of providerFollowOrAll">
