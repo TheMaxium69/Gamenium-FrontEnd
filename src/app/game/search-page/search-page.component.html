@@ -23,12 +23,12 @@
       <li (click)="changeType('user')">Profile</li>
     </ng-container>
 
-    <!--  PROVIDER  -->
-    <ng-container *ngIf="searchType == 'provider'">
-      <li class="active" (click)="changeType('provider')">Actualité</li>
+    <!--  postactu  -->
+    <ng-container *ngIf="searchType == 'postactu'">
+      <li class="active" (click)="changeType('postactu')">Actualité</li>
     </ng-container>
-    <ng-container *ngIf="searchType !== 'provider'">
-      <li (click)="changeType('provider')">Actualité</li>
+    <ng-container *ngIf="searchType !== 'postactu'">
+      <li (click)="changeType('postactu')">Actualité</li>
     </ng-container>
 
   </ul>
@@ -86,8 +86,15 @@
 
 </ng-container>
 
-<ng-container *ngIf="searchType == 'provider'">
+<ng-container *ngIf="searchType == 'postactu'">
 
-  <h1>Resultat de la recherche Provider</h1>
+  <ng-container *ngFor="let postactu of postactus">
+
+    <h2>{{ postactu.title }}</h2><br>
+    <h3>{{ postactu.Provider?.displayName }}</h3><br>
+    <p>{{ postactu.content }}</p><br>
+    
+
+  </ng-container>
 
 </ng-container>
