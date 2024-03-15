@@ -6,6 +6,8 @@ import {UserInterface} from "../../-interface/user.interface";
 import {UserService} from "../../-service/user.service";
 import {PostActuInterface} from "../../-interface/post-actu.interface";
 import {PostActuService} from "../../-service/post-actu.service";
+import {ProviderInterface} from "../../-interface/provider.interface";
+import {ProviderService} from "../../-service/provider.service";
 import {AppComponent} from "../../app.component";
 
 @Component({
@@ -21,6 +23,7 @@ export class SearchPageComponent implements OnInit{
   games: GameInterface[] = [];
   users: UserInterface[] = [];
   postactus: PostActuInterface[] = [];
+  providers: ProviderInterface[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +31,7 @@ export class SearchPageComponent implements OnInit{
     private gameService: GameService,
     private userService: UserService,
     private postactuService: PostActuService,
+    private providerService: ProviderService,
     private app: AppComponent) {
   }
 
@@ -53,6 +57,8 @@ export class SearchPageComponent implements OnInit{
       this.searchUser()
     } else if (this.searchType == 'postactu'){
       this.searchPostActu()
+    } else if (this.searchType == 'provider'){
+      this.searchProvider()
     }
 
   }
@@ -89,6 +95,15 @@ export class SearchPageComponent implements OnInit{
     this.postactuService.searchPostActus(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.postactus = results;
       console.log(this.postactus)
+    });
+
+  }
+
+  searchProvider(): void {
+
+    this.providerService.searchProviders(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+      this.providers = results;
+      console.log(this.providers)
     });
 
   }

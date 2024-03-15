@@ -31,6 +31,14 @@
       <li (click)="changeType('postactu')">Actualité</li>
     </ng-container>
 
+    <!--  provider  -->
+    <ng-container *ngIf="searchType == 'provider'">
+      <li class="active" (click)="changeType('provider')">Provider</li> <!-- A CHANGER !! -->
+    </ng-container>
+    <ng-container *ngIf="searchType !== 'provider'">
+      <li (click)="changeType('provider')">Provider</li> <!-- A CHANGER !! -->
+    </ng-container>
+
   </ul>
 </div>
 
@@ -77,9 +85,14 @@
 
 <ng-container *ngIf="searchType == 'user'">
 
+
   <ng-container *ngFor="let user of users">
 
-    <h2>{{ user.username }}</h2><br>
+    <div class="container d-flex" routerLink="/user/{{ user.id }}">
+
+      <h2>{{ user.username }}</h2><br>
+
+    </div>
 
   </ng-container>
 
@@ -90,10 +103,28 @@
 
   <ng-container *ngFor="let postactu of postactus">
 
-    <h2>{{ postactu.title }}</h2><br>
-    <h3>{{ postactu.Provider?.displayName }}</h3><br>
-    <p>{{ postactu.content }}</p><br>
+    <div class="container" routerLink="/actuality/{{ postactu.id }}">
+
+      <h2>{{ postactu.title }}</h2><br>
+      <h3>{{ postactu.Provider?.displayName }}</h3><br>
+      <p>{{ postactu.content }}</p><br>
+
+    </div>
+
+
+  </ng-container>
+
+</ng-container>
+
+<ng-container *ngIf="searchType == 'provider'">
+
+  <ng-container *ngFor="let provider of providers">
     
+
+    <h2>{{ provider.displayName }}</h2><br>
+    <img src="{{ provider.picture?.url }}" alt="Image Test Recherche" height="100px" width="100px">
+    <p>{{ provider.content }}</p><br>
+
 
   </ng-container>
 
