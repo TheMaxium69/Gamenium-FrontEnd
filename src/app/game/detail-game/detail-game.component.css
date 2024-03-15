@@ -1,0 +1,449 @@
+/* ////////////// DEBUT DE ZONE BANNIERE ////////////////// */
+.banniere{
+    background-image: url('assets/SI_N64_SuperMario64_image1600w.jpg');
+    background-position: center;
+    background-size: cover;
+    filter: blur(5px);
+    box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.9) inset;
+    width: 100%;
+    height: 170px;
+}
+/* //////////////// FIN DE ZONE BANNIERE ////////////// */
+
+/* //////////////  DEBUT DE ZONE INFORMATIONS ///////////// */
+
+.pictureAndName{  
+    max-width: 100%;
+    width: 992px;
+    margin-left: 70px; 
+    margin-right: auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* justify-content: center; */
+    align-items: center;
+    position:absolute;
+    top:90px;
+}
+
+.picture{
+    background-image: url('assets/SI_N64_SuperMario64_image1600w.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 250px;
+    height: 154px;
+}
+
+.name{
+    background-color: white;
+    width: 550px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    margin-top: 30px;
+    box-shadow: 2px 20px 32px -10px rgba(0,0,0,0.62);
+}
+
+.game-name{
+    padding-left: 30px;
+    color: gray;
+    width: 350px;
+    height:90px;
+    display: flex;
+    align-items: center;
+}
+
+.game-name{
+    font-size: 2rem;
+}
+
+.global-game-rate{
+    width:70px;
+    height: 70px;
+    margin-right: 40px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    position: relative;
+}
+
+.global-rate{
+    font-size:27px;
+    position: absolute;
+    top: 18px;
+    left: 5px;
+}
+
+.global-slash{
+    position: absolute;
+    top:35px;
+    left: 35px;
+}
+
+.global-20{
+    position: absolute;
+    top: 35px;
+    left:40px
+}
+
+.section-info{
+    max-width: 100%;
+    width: 992px;
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 120px;
+    margin-bottom: 50px;
+}
+
+.information{
+    width:992px;
+    height:450px;
+    /* background-color: yellow; */
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+    box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.42);
+    position:relative;
+}
+
+.information .title{
+    position:absolute;
+    left:55px;
+}
+
+.information-container{
+    /* background-color: pink; */
+    width:900px;
+    height:335px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top:50px
+}
+
+.content{
+    /* background-color: green; */
+    width:450px;
+    height: 300px;
+    border-right: solid;
+    margin-top: 40px;
+    position: relative;
+}
+
+.context{
+    /* background-color: green; */
+    width:450px;
+    height: 300px;
+    margin-top: 40px;
+    margin-left: 30px;
+    position: relative;
+}
+
+.content p,
+.context p{
+    text-decoration: underline;
+    position:absolute;
+    top:-40px;
+    left:25px;
+}
+
+.information-line-container{
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 40px;
+    left: 25px;
+    display: flex;
+    justify-content: space-between;
+    width:350px;
+}
+
+.information-lines-fields,
+.information-lines-data{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+
+.information-lines-data{
+    color: red;
+}
+
+.information-lines{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+/* //////////////// FIN DE ZONE INFORMATIONS //////////////// */
+
+
+/*  ////////////////  DEBUT DE ZONE ACTUALITEES /////////////*/
+
+.actualities{
+    width:992px;
+    height: 300px;
+    margin-left: auto; 
+    margin-right: auto;
+    border-top:solid;
+    display:flex;
+    justify-content: center;
+    gap:40px;
+    padding-top: 30px;
+}
+
+.actu-separation{
+    height:100px;
+    margin-top: 140px;
+    border: solid 0.5px;
+}
+
+.game-card,
+.provider-card{
+    width: 200px;
+    height: 180px;
+    /* border:solid; */
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0px 0px 63px -21px rgba(0,0,0,0.62);
+}
+
+.top-card{
+    width:100%;
+    height: 35%;
+    background-color: red;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.picture-card{
+    background-image: url('assets/SI_N64_SuperMario64_image1600w.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    /* background-color: blue; */
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 3px;
+}
+
+.game-card-name,
+.provider-card-name{
+    font-weight: bold;
+    margin-top: 55px;
+}
+
+.provider-card{
+    margin-right: 25px;
+}
+
+.follow{
+    margin-top: 15px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.provider-card-container{
+    display:flex;
+}
+
+.actualities p{
+    margin-bottom: 50px;
+}
+
+/* .game-actu,
+.provider-actu{
+    width: 420px;
+} */
+
+/* ////////////// FIN DE ZONE ACTUALITEES ////////// */
+
+/* ////////////// DEBUT DE ZONE RATINGS ///////////// */
+
+.ratings{
+    width: 992px;
+    height: 580px;
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 40px;
+    /* border: solid; */
+    border-radius: 15px;
+    box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.42);
+}
+
+.press-ratings,
+.gamers-ratings{
+    /* border: solid; */
+    display: flex;
+    width:992px;
+    /* height: 300px; */
+}
+
+.press-ratings{
+    height: 300px;
+    padding-top: 30px;
+}
+
+.gamers-ratings{
+    height: 170px;
+    margin-top: 20px;
+}
+
+.press-ratings-details,
+.press-ratings-total,
+.gamers-ratings-details,
+.gamers-ratings-total{
+    width: 470px;
+    /* height: 300px; */
+    /* border: blue solid; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+    /* justify-content: flex-end; */
+}
+
+.press-ratings-total,
+.gamers-ratings-total{
+    margin-left:20px;
+}
+
+.title-ratings{
+    text-decoration: underline;
+}
+
+.press-ratings-details-container,
+.gamers-ratings-details-container{
+    display: flex;
+    flex-direction: column;
+    /* align-items: space-between; */
+    gap: 5px;
+    /* border: solid green; */
+    position: absolute;
+    top: 30px;
+    right:0px;
+    width: 290px;
+}
+
+.press-ratings-details-name,
+.press-ratings-details-rates,
+.gamers-ratings-details-name,
+.gamers-ratings-details-rates{
+    /* border: solid purple; */
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.press-ratings-total-rate,
+.gamers-ratings-total-rate{
+    /* border: solid purple; */
+}
+
+.title-ratings{
+    font-size: 20px;
+    position:absolute;
+    right:190px;
+}
+
+
+.one-press-rating{
+    display:flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+}
+
+.provider-picture{
+    background-image: url('assets/SI_N64_SuperMario64_image1600w.jpg');
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-position: center;
+    background-size: cover;
+    margin-right:-25px;
+}
+
+.big-rate{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.press-ratings-total-rate,
+.gamers-ratings-total-rate{
+    position:absolute;
+    top: 50px;
+    right: 70px;
+    box-shadow: -2px 21px 21px -14px rgba(0,0,0,0.62);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.press-ratings-total-rate{
+    width:170px;
+    height:170px;
+    border-radius: 50%;
+    background-color: red;
+    position:relative;
+}
+
+.gamers-ratings-total-rate{
+    width:130px;
+    height:130px;
+    border-radius: 50%;
+    background-color: rgb(141, 138, 138);
+    position:relative;
+}
+
+.total-rate-press{
+    font-size: 80px;
+    position: absolute;
+    bottom:50px;
+    right: 70px;
+}
+
+.on-twenty-press{
+    font-size:40px;
+    position: absolute;
+    bottom: 50px;
+    left: 100px;
+}
+
+.total-rate-gamers{
+    font-size: 60px;
+    position: absolute;
+    bottom: 35px;
+    right: 52px;
+}
+
+.on-twenty-gamers{
+    font-size: 30px;
+    position: absolute;
+    bottom: 30px;
+    right: 15px;
+}
+
+
+
+/* //////////////// FIN DE ZONE RATINGS ///////////////  */ 
+
+
+
+/* //////////////// DEBUT DE ZONE CARROUSSEL //////////////////// */
+
+
+
+
+
+
+/* //////////////// FIN DE ZONE CARROUSSEL /////////////// */
