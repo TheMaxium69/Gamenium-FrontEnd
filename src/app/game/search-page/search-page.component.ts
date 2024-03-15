@@ -51,8 +51,8 @@ export class SearchPageComponent implements OnInit{
       this.searchGame()
     } else if (this.searchType == 'user'){
       this.searchUser()
-    } else if (this.searchType == 'provider'){
-      this.searchProvider()
+    } else if (this.searchType == 'postactu'){
+      this.searchPostActu()
     }
 
   }
@@ -84,7 +84,7 @@ export class SearchPageComponent implements OnInit{
 
   }
 
-  searchProvider(): void {
+  searchPostActu(): void {
 
     this.postactuService.searchPostActus(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.postactus = results;
