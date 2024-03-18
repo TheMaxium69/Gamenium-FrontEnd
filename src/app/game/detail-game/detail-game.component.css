@@ -447,3 +447,106 @@
 
 
 /* //////////////// FIN DE ZONE CARROUSSEL /////////////// */
+
+
+/* Boulot Oscar */
+
+.title-add {
+    width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    border-top: 1px solid black;
+}
+
+.title-add p {
+    font-size: 20px;
+}
+
+.add-collection {
+    width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-add-to-collection {
+    display: flex;
+    width: 992px;
+    height: 104px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.42);
+    gap: 30px;
+}
+
+.cover {
+    z-index: 1;
+    position: relative;
+    left: 25px;
+    width: 210px;
+    height: 105px;
+    background-image: url(SI_N64_SuperMario64_image1600w.jpg);
+    background-size: cover;
+}
+
+.background {
+    position: relative;
+    top: -105px;
+    width: 260px;
+    height: 105px;
+    background-image: url(SI_N64_SuperMario64_image1600w.jpg);
+    background-size: cover;
+    border-radius: 15px;
+}
+
+.inner-shadow {
+    width: 260px;
+    height: 105px;
+    border-radius: 15px;
+    box-shadow: inset 0px 0px 20px 0px #000; 
+    backdrop-filter: blur(3px);
+}
+
+.game-add-button {
+    background-color: rgb(62, 185, 254);
+    color: white;
+    width: 21%;
+    border-radius: 15px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-add-button i {
+    display: flex;
+    width: 20px;
+    height: 20px;
+}
+
+.game-info {
+    width: 30%;
+    padding: 15px;
+}
+
+.show-collection {
+    margin-top: 30px;
+}
+
+.my-collection {
+    border: none;
+    background-color: rgb(254, 62, 62);
+    color: white;
+    font-size: 24px;
+    padding: 10px 50px;
+    margin-left: 40%;
+    border-radius: 15px;
+    box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
+}
+
+/* Fin boulot Oscar */ 
