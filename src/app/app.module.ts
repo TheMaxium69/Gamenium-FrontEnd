@@ -44,6 +44,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { HeadProfileComponent } from './mygame/head-profile/head-profile.component';
 import { NoAccountProfileComponent } from './mygame/no-account-profile/no-account-profile.component';
 import { CommentActualityComponent } from './actuality/comment-actuality/comment-actuality.component';
+import { HomeConnectedComponent } from './home/home-connected/home-connected.component';
+import { HomeInviteComponent } from './home/home-invite/home-invite.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { CommentActualityComponent } from './actuality/comment-actuality/comment
     ProfilePrivateComponent,
     HeadProfileComponent,
     NoAccountProfileComponent,
-    CommentActualityComponent
+    CommentActualityComponent,
+    HomeConnectedComponent,
+    HomeInviteComponent
 
   ],
   imports: [
