@@ -487,7 +487,7 @@
     left: 25px;
     width: 210px;
     height: 105px;
-    background-image: url(SI_N64_SuperMario64_image1600w.jpg);
+    /* background-image: url(SI_N64_SuperMario64_image1600w.jpg); */
     background-size: cover;
 }
 
@@ -496,7 +496,7 @@
     top: -105px;
     width: 260px;
     height: 105px;
-    background-image: url(SI_N64_SuperMario64_image1600w.jpg);
+    /* background-image: url(SI_N64_SuperMario64_image1600w.jpg); */
     background-size: cover;
     border-radius: 15px;
 }
@@ -512,7 +512,7 @@
 .game-add-button {
     background-color: rgb(62, 185, 254);
     color: white;
-    width: 21%;
+    border: none;
     border-radius: 15px;
     margin: auto;
     padding: 10px;
@@ -527,6 +527,11 @@
     display: flex;
     width: 20px;
     height: 20px;
+}
+
+.game-add-button:hover {
+    background-color: dodgerblue;
+    transition: 0.3s;
 }
 
 .game-info {
@@ -544,9 +549,16 @@
     color: white;
     font-size: 24px;
     padding: 10px 50px;
-    margin-left: 40%;
+    margin-left: 366px;
+    margin-bottom: 120px;
     border-radius: 15px;
     box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.my-collection:hover {
+    background-color: red;
+    transition: 0.3s;
 }
 
 /* Fin boulot Oscar */ 
