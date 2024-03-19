@@ -1,4 +1,124 @@
-<ng-container *ngIf="noneProvider">
+<ng-container *ngIf="!noneProvider">
+
+  <section id="provider_main"><!-- Informations Principales du Provider -->
+    <div id="provider" style="background-color: {{ providerBackgroundColor }}54"> 
+      
+      <div id="providerInfo" >
+    
+        <div class="d-flex">
+    
+          <div class="logoprovider" style="background-image: url('{{ providerSelected?.picture?.url }}');"> 
+    
+          </div>
+    
+          <div class="wrapper">
+
+            <div id="infos">
+
+              <div id="displayname">
+
+                <h1>{{ providerSelected?.displayName }}</h1>
+
+              </div>
+
+              <div id="followers">
+
+                <h3 style="color: {{ providerBackgroundColor }}">{{providerNbFollower1}}k</h3>
+                <h3>Abonnés</h3>
+
+              </div>
+
+              <div id="nb_actus">
+
+                <h3 style="color: {{ providerBackgroundColor }}">{{providerNbActu}}</h3>
+                <h3>Actus</h3>
+
+              </div>
+
+            </div>
+
+            <div id="button_follow">
+
+              <button type="button" style="background-color: {{ providerBackgroundColor }}"> Suivre </button>
+            
+            </div>
+
+          </div>
+
+
+          <section id="provider_infos"> <!-- Informations Secondaires et détaillées du Provider -->
+            
+            <div class="info-container">
+            <div id="informations">
+              
+              <h3>INFORMATIONS</h3>
+              
+            </div>
+            
+            <div id="info-details-container">
+                <div id="infos_details">
+          
+                  <p class="firsttext">Création</p>
+          
+                  <p class="firsttext">Pays</p>
+          
+                  <p class="firsttext">Nombre de Jeux</p>
+          
+                  <p class="firsttext">Nombre d'Actualités</p>
+          
+                  <p class="firsttext">Nombre d'Abonnés</p>
+          
+                </div>
+
+                <div id="infos_details_values">
+
+                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">1889</p>
+
+                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerSelected?.country }}</p>
+
+                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerNbGame }} jeux</p>
+
+                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerNbActu }} Actualités</p>
+
+                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">{{providerNbFollower}} Abonnés</p>
+
+                </div>
+            </div>
+        
+              <div id="joinedAt">
+                <img src="../../../assets/logo.png" alt="logo_gamenium">
+                <p style="color: {{ providerBackgroundColor }}"> à rejoint Gamenium le </p>
+                <p>{{ providerSelected?.joindeAt }}</p>
+              </div>
+            </div>
+          
+          
+          
+          </section>
+          
+          <section id="last_actus"><!-- Dernières Actualités liées au Provider -->
+              <div class="actu-titre">
+                <h3>DERNIERES ACTUALITES</h3>
+              </div>
+
+              <!-- /// Carte actu marche pas :^) appelez le composant /// -->
+              <app-card-actuality></app-card-actuality>
+
+          </section>
+          
+          
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+<!-- <p>Color : <i style="color: {{ providerSelected?.color }}; font-size: 100px" class="ri-checkbox-blank-fill"></i></p> -->
+
+
+
+<!-- <ng-container *ngIf="noneProvider">
   <app-none></app-none>
 </ng-container>
 <ng-container *ngIf="!noneProvider">
@@ -20,5 +140,5 @@
 
 
 
-</ng-container>
+</ng-container> -->
 
