@@ -7,6 +7,7 @@ import {PageActualityComponent} from "./actuality/page-actuality/page-actuality.
 import {PageAccountComponent} from "./account/page-account/page-account.component";
 import {ProviderComponent} from "./actuality/provider/provider.component";
 import {SearchPageComponent} from "./game/search-page/search-page.component";
+import { DetailGameComponent } from './game/detail-game/detail-game.component';
 
 const routes: Routes = [
   {path: '', component: PageHomeComponent},
@@ -19,7 +20,7 @@ const routes: Routes = [
   {path: 'account', component: PageAccountComponent},
   {path: 'profil', component: PageAccountComponent},
   {path: 'provider/:id', component: ProviderComponent},
-  {path: 'gameprofile/:id', component: ProviderComponent},
+  {path: 'gameprofile/:id', component: DetailGameComponent},
   {path: 'profil/:id', component: PageMygameComponent},
   {path: 'search/:type/:value', component: SearchPageComponent},
 ];

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GameService} from "../../-service/game.service";
 import {AppComponent} from "../../app.component";
@@ -11,7 +11,7 @@ import {NgForm} from "@angular/forms";
   templateUrl: './detail-game.component.html',
   styleUrls: ['./detail-game.component.css']
 })
-export class DetailGameComponent implements OnInit{
+export class DetailGameComponent implements OnInit, AfterViewInit{
 
   gameId: number|any;
   gameSelected: GameInterface|undefined;
@@ -103,4 +103,76 @@ export class DetailGameComponent implements OnInit{
       console.log("note invalide");
     }
   }
-}
+
+
+
+  ////////////////////////////// Initialisation après l'initialisation du DOM pour que le carroussel fonctionne  /////////////////////
+
+  ngAfterViewInit() {
+    const prev = document.querySelector<HTMLDivElement>("#prev");
+    const next = document.querySelector<HTMLDivElement>("#next");
+    const carouselVp = document.querySelector<HTMLDivElement>("#carousel-vp");
+    let cCarouselInner = document.querySelector<HTMLDivElement>("#cCarousel-inner");
+  
+    if (!carouselVp || !prev || !next) {
+      console.error("Un ou plusieurs éléments du carrousel sont null.");
+      return;
+    }
+  
+    let carouselInnerWidth = 0;
+    let leftValue = 0;
+  
+    const totalMovementSize = parseFloat(document.querySelector<HTMLDivElement>(".cCarousel-item")?.getBoundingClientRect().width?.toString() || "0") +
+      parseFloat(window.getComputedStyle(cCarouselInner!).getPropertyValue("gap"));
+  
+    const initializeCarousel = () => {
+      cCarouselInner = document.querySelector<HTMLDivElement>("#cCarousel-inner");
+  
+      if (!cCarouselInner) {
+        console.error("L'élément cCarouselInner est null.");
+        return;
+      }
+  
+      carouselInnerWidth = cCarouselInner.getBoundingClientRect().width;
+  
+      prev?.addEventListener("click", () => {
+        if (leftValue !== 0) {
+          leftValue -= -totalMovementSize;
+          cCarouselInner!.style.left = leftValue + "px";
+        }
+      });
+  
+      next?.addEventListener("click", () => {
+        const carouselVpWidth = carouselVp.getBoundingClientRect().width;
+        if (carouselInnerWidth - Math.abs(leftValue) > carouselVpWidth) {
+          leftValue -= totalMovementSize;
+          cCarouselInner!.style.left = leftValue + "px";
+        }
+      });
+    };
+  
+    setTimeout(initializeCarousel, 0);
+  
+    const mediaQuery510 = window.matchMedia("(max-width: 510px)");
+    const mediaQuery770 = window.matchMedia("(max-width: 770px)");
+  
+    mediaQuery510.addEventListener("change", mediaManagement);
+    mediaQuery770.addEventListener("change", mediaManagement);
+  
+    let oldViewportWidth = window.innerWidth;
+  
+    function mediaManagement() {
+      const newViewportWidth = window.innerWidth;
+  
+      if (leftValue <= -totalMovementSize && oldViewportWidth < newViewportWidth) {
+        leftValue += totalMovementSize;
+        cCarouselInner!.style.left = leftValue + "px";
+        oldViewportWidth = newViewportWidth;
+      } else if (leftValue <= -totalMovementSize && oldViewportWidth > newViewportWidth) {
+        leftValue -= totalMovementSize;
+        cCarouselInner!.style.left = leftValue + "px";
+        oldViewportWidth = newViewportWidth;
+      }
+    }
+  }
+}  
