@@ -24,6 +24,9 @@
     flex-wrap: wrap;
     margin-top: 100px;
     margin-bottom: 120px;
+    width: 992px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #provider .logoprovider{
@@ -40,7 +43,6 @@
 
 #provider .wrapper{
     background-color: white;
-    width: 800px;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
 }
@@ -57,10 +59,13 @@ ul {
 }
 
 #displayname {
-    display: inline-block;
-    text-align: center;
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-wrap: anywhere;
     margin: 20px;
+    max-width: 280px;
+    min-width: 280px;
 }
 
 #followers {
@@ -78,6 +83,10 @@ ul {
     margin: 20px;
 }
 
+#button_follow {
+    height: 35px;
+}
+
 #button_follow button {
     font-family: arial, serif;
     font-weight: bold;
@@ -89,8 +98,7 @@ ul {
     border: 0 solid #FFFFFF;
     width: 280px;
     position: relative;
-    top: 30px;
-    left: 250px;
+    left: 30%;
 }
 
 /* Informations Détaillées du Provider */
@@ -139,4 +147,12 @@ ul {
 
 #last_actus {
     width: 800px;
+}
+
+.provider-main {
+    display: flex;
+    width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 100px;
 }
