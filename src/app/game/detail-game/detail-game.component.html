@@ -100,12 +100,12 @@
 
 
 
-  <div class="banniere"></div>
+  <div class="banniere" style="background-image: url({{gameSelected?.image?.screen_large_url}});"></div>
 
   <div class="pictureAndName">
-    <div class="picture"></div>
+    <div class="picture" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
     <div class="name">
-        <div class="game-name"><p>{{ gameSelected?.name }}</p></div>gi
+        <div class="game-name"><p>{{ gameSelected?.name }}</p></div>
         <div class="global-game-rate">
             <div class="global-rate">10</div>
             <div class="global-slash">/</div>
@@ -411,14 +411,14 @@
 
       <div class="card-add-to-collection">
           <div class="game-picture">
-              <div class="cover"></div>
-              <div class="background">
+              <div class="cover" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
+              <div class="background" style="background-image: url({{gameSelected?.image?.small_url}});">
                   <div class="inner-shadow"></div>
               </div>
               
           </div>
           <div class="game-info">
-              <div class="info-name">Name</div>
+              <div class="info-name">{{gameSelected?.name}}</div>
               <div class="info-provider">Provider</div>
               <div class="info-release-date">15/03/2024</div>
           </div>

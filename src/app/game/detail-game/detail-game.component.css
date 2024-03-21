@@ -1,6 +1,6 @@
 /* ////////////// DEBUT DE ZONE BANNIERE ////////////////// */
 .banniere{
-    /*background-image: url('');*/
+    /* background-image: url('{{gameSelected?.image?.screen_large_url}}'); */
     background-position: center;
     background-size: cover;
     filter: blur(5px);

@@ -16,7 +16,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   gameId: number|any;
   gameSelected: GameInterface|undefined;
   noneGame: boolean = false;
-
+  
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
