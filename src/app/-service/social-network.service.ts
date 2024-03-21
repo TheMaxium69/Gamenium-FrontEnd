@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SocialNetworkInterface } from '../-interface/social-network.interface';
+import {ApicallInterface} from "../-interface/apicall.interface";
 
 @Injectable({
   providedIn: 'root',
 })
 export class SocialNetworkService {
-  private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
-
+  
   constructor(private http: HttpClient) {}
 
-  getSocialNetwork(id: number): Observable<SocialNetworkInterface> {
-    return this.http.get<SocialNetworkInterface>(`${this.apiUrl}/socialnetwork/${id}`);
+  getAllSocialNetwork(url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/social-networks');
   }
 
-  getAllSocialNetworks(): Observable<SocialNetworkInterface[]> {
-    return this.http.get<SocialNetworkInterface[]>(`${this.apiUrl}/socialnetworks`);
+  getSocialNetworkByUser(id:number, url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/socialnetworkbyuser/' + id);
   }
+
+  // post
 
 
 }

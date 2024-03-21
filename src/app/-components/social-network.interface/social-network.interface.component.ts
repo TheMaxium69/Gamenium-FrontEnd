@@ -13,12 +13,6 @@ export class SocialNetworkInterfaceComponent implements OnInit {
   constructor(private SocialNetworkService: SocialNetworkService) {}
 
   ngOnInit(): void {
-    this.getAllSocialNetworks();
-  }
-
-  getAllSocialNetworks(): void {
-    this.SocialNetworkService.getAllSocialNetworks().subscribe((socialNetworks) => {
-      this.socialNetworks = socialNetworks;
-    });
+    // this.getAllSocialNetworks();
   }
 }
