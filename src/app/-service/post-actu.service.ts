@@ -21,4 +21,8 @@ export class PostActuService {
     return this.http.post<PostActuInterface[]>(url + `/postactus/search`, { searchValue, limit});
   }
 
+  getLatestPostActus(id: number, url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + `/latestactubyprovider/` + id );
+  }
+
 }

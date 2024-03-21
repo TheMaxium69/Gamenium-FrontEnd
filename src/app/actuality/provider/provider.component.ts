@@ -4,6 +4,9 @@ import { ProviderInterface } from "../../-interface/provider.interface";
 import { ProviderService } from "../../-service/provider.service";
 import { AppComponent } from "../../app.component";
 import { FollowService } from "../../-service/follow.service"; // Importez le service FollowService
+import { PostActuService } from "../../-service/post-actu.service";
+import { PostActuInterface } from "../../-interface/post-actu.interface";
+
 
 @Component({
   selector: 'app-provider',
@@ -15,11 +18,16 @@ export class ProviderComponent implements OnInit{
   providerId: number|any;
   providerSelected: ProviderInterface|undefined;
   noneProvider:boolean|undefined = false;
+  nonePostActu:boolean|undefined = false;
   providerNbFollower: number|undefined; 
+  postactuSelected: PostActuInterface|undefined; 
+  actus: any[] = [];
+
 
   constructor(private route: ActivatedRoute,
               private providerService: ProviderService,
               private followService: FollowService, 
+              private postactuService: PostActuService, 
               private app: AppComponent) {
   }
 
@@ -59,6 +67,17 @@ export class ProviderComponent implements OnInit{
         console.error(`Error fetching followers for provider ${providerId}:`, error);
       }
     );
+  }
+
+  getLatestPostActus(id:number): void {
+    this.postactuService.getLatestPostActus(id, this.app.setURL()).subscribe((reponsePostActus) => {
+      if (reponsePostActus.message !== "PostActus not found"){
+        this.postactuSelected = reponsePostActus.result;
+        console.log(reponsePostActus.result)
+      } else {
+        this.nonePostActu = true;
+      }
+    });
   }
 
 }
