@@ -1,54 +1,9 @@
-// import {Component, OnInit} from '@angular/core';
-// import {ActivatedRoute} from "@angular/router";
-// import {ProviderInterface} from "../../-interface/provider.interface";
-// import {ProviderService} from "../../-service/provider.service";
-// import {AppComponent} from "../../app.component";
-
-// @Component({
-//   selector: 'app-provider',
-//   templateUrl: './provider.component.html',
-//   styleUrls: ['./provider.component.css']
-// })
-// export class ProviderComponent implements OnInit{
-
-//   providerId: number|any;
-//   providerSelected: ProviderInterface|undefined;
-//   noneProvider:boolean|undefined = false;
-
-//   constructor(private route: ActivatedRoute,
-//               private providerService: ProviderService,
-//               private app: AppComponent) {
-//   }
-
-//   ngOnInit(): void {
-
-//     this.providerId = this.route.snapshot.paramMap.get('id');
-
-//     console.log("Provider Id", this.providerId)
-
-//     this.getProviders(this.providerId);
-
-//   }
-
-//   getProviders(id:number): void {
-//     this.providerService.getProviderById(id, this.app.setURL()).subscribe((reponseProviders) => {
-
-//       if (reponseProviders.message !== "Provider not found"){
-//         this.providerSelected = reponseProviders.result;
-//       } else {
-//         this.noneProvider = true;
-//       }
-
-//     });
-//   }
-
-// }
-
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {ProviderInterface} from "../../-interface/provider.interface";
-import {ProviderService} from "../../-service/provider.service";
-import {AppComponent} from "../../app.component";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+import { ProviderInterface } from "../../-interface/provider.interface";
+import { ProviderService } from "../../-service/provider.service";
+import { AppComponent } from "../../app.component";
+import { FollowService } from "../../-service/follow.service"; // Importez le service FollowService
 
 @Component({
   selector: 'app-provider',
@@ -60,41 +15,50 @@ export class ProviderComponent implements OnInit{
   providerId: number|any;
   providerSelected: ProviderInterface|undefined;
   noneProvider:boolean|undefined = false;
-
-  //fake variables
-  providerNbFollower: number|undefined=10000;
-  providerNbFollower1: number|undefined=10;
-  providerNbActu: number|undefined=8;
-  providerNbGame: number|undefined=2689;
-  providerBackgroundColor: string|undefined='#107c0f';
-  actuTitle: string|undefined='test'
-  //end
+  providerNbFollower: number|undefined; 
 
   constructor(private route: ActivatedRoute,
               private providerService: ProviderService,
+              private followService: FollowService, 
               private app: AppComponent) {
   }
 
+    //fake variables
+    providerNbActu: number|undefined=8;
+    providerNbGame: number|undefined=2689;
+    actuTitle: string|undefined='test'
+    //end
+
   ngOnInit(): void {
-
     this.providerId = this.route.snapshot.paramMap.get('id');
-
     console.log("Provider Id", this.providerId)
-
     this.getProviders(this.providerId);
-
+    this.getNumberOfFollowers(this.providerId); 
   }
 
   getProviders(id:number): void {
     this.providerService.getProviderById(id, this.app.setURL()).subscribe((reponseProviders) => {
-
       if (reponseProviders.message !== "Provider not found"){
         this.providerSelected = reponseProviders.result;
       } else {
         this.noneProvider = true;
       }
-
     });
+  }
+
+  getNumberOfFollowers(providerId: number): void {
+    this.followService.getFollowByProvider(providerId, this.app.setURL()).subscribe(
+      (response) => {
+        if (response.result) {
+          this.providerNbFollower = response.result.length; 
+        } else {
+          this.providerNbFollower = 0;
+        }
+      },
+      (error) => {
+        console.error(`Error fetching followers for provider ${providerId}:`, error);
+      }
+    );
   }
 
 }

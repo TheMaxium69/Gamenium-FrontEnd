@@ -1,6 +1,6 @@
 <ng-container *ngIf="!noneProvider">
   
-  <div id="provider" style="background-color: {{ providerBackgroundColor }}54"> 
+  <div id="provider" style="background-color: {{ providerSelected?.color }}54"> 
     
     <div id="providerInfo" >
       
@@ -16,18 +16,18 @@
                 </div>
 
                <div id="followers">
-                 <h3 style="color: {{ providerBackgroundColor }}">{{providerNbFollower1}}k</h3>
+                 <h3 style="color: {{ providerSelected?.color }}">{{providerNbFollower}}</h3>
                   <h3>Abonnés</h3>
                </div>
 
               <div id="nb_actus">
-                <h3 style="color: {{ providerBackgroundColor }}">{{providerNbActu}}</h3>
+                <h3 style="color: {{ providerSelected?.color }}">{{providerNbActu}}</h3>
                 <h3>Actus</h3>
               </div>
             </div>
 
             <div id="button_follow">
-              <button type="button" style="background-color: {{ providerBackgroundColor }}"> Suivre </button>
+              <button type="button" style="background-color: {{ providerSelected?.color }}"> Suivre </button>
             </div>
           </div>
         </div>
@@ -50,17 +50,17 @@
                 </div>
 
                 <div id="infos_details_values">
-                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">1889</p>
-                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerSelected?.country }}</p>
-                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerNbGame }} jeux</p>
-                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">{{ providerNbActu }} Actualités</p>
-                  <p class="secondtext" style="color: {{ providerBackgroundColor }}">{{providerNbFollower}} Abonnés</p>
+                  <p class="secondtext" style="color: {{ providerSelected?.color }}">1889</p>
+                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerSelected?.country }}</p>
+                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbGame }} jeux</p>
+                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbActu }} Actualités</p>
+                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbFollower}} Abonnés</p>
                 </div>
             </div>
         
               <div id="joinedAt">
                 <img src="../../../assets/logo.png" alt="logo_gamenium">
-                <p style="color: {{ providerBackgroundColor }}"> à rejoint Gamenium le </p>
+                <p style="color: {{ providerSelected?.color }}"> à rejoint Gamenium le </p>
                 <p>{{ providerSelected?.joindeAt }}</p>
               </div>
             </div>
