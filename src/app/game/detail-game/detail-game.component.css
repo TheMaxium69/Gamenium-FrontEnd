@@ -72,19 +72,19 @@
 .global-rate{
     font-size:27px;
     position: absolute;
-    top: 18px;
+    top: 10px;
     left: 5px;
 }
 
 .global-slash{
     position: absolute;
-    top:35px;
-    left: 35px;
+    top:30px;
+    left: 33px;
 }
 
 .global-20{
     position: absolute;
-    top: 35px;
+    top: 30px;
     left:40px
 }
 
@@ -411,28 +411,28 @@
 .total-rate-press{
     font-size: 80px;
     position: absolute;
-    bottom:50px;
+    bottom:40px;
     right: 70px;
 }
 
 .on-twenty-press{
     font-size:40px;
     position: absolute;
-    bottom: 50px;
-    left: 100px;
+    bottom: 30px;
+    left: 90px;
 }
 
 .total-rate-gamers{
     font-size: 60px;
     position: absolute;
-    bottom: 35px;
+    bottom: 30px;
     right: 52px;
 }
 
 .on-twenty-gamers{
     font-size: 30px;
     position: absolute;
-    bottom: 30px;
+    bottom: 25px;
     right: 15px;
 }
 
