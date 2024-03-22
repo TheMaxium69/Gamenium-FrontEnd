@@ -1,0 +1,225 @@
+/*  Bandeau principal  */
+
+.home-invite {
+    width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 120px;
+}
+
+.gamenium-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+    padding: 40px;
+    background-color: darkred;
+    border-radius: 0px 0px 65px 65px;
+    margin-bottom: 50px;
+}
+
+.gamenium-logo {
+    background-color: gray;
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+}
+
+.gamenium-welcome {
+    color: white;
+    font-weight: bold;
+}
+
+.gamenium-welcome p {
+    font-size: 28px;
+    width: 250px;
+}
+/*  Connexion utilisateur  */
+
+.connect-user {
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 15px;
+    padding: 20px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.connect-title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.connect-btn {
+    border: none;
+    background-color: rgb(254, 62, 62);
+    color: white;
+    font-size: 24px;
+    padding: 10px 50px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+}
+
+/* Description Gamenium */ 
+
+.gamenium-description-container {
+    display: flex;
+    margin-top: 50px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 15px;
+    padding: 30px 15px;
+    justify-content: space-between;
+}
+
+.description-image {
+    background-color: darkred;
+    border-radius: 15px;
+    width: 200px;
+    height: 160px;
+}
+.description-list {
+    padding-top: 15px;
+}
+
+.description-list li {
+    display: flex;
+    gap: 5px;
+    list-style: none;
+}
+
+.description-text {
+    font-size: 18px;
+}
+
+.description-title {
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+/* Nos actualités */
+
+.actu-container {
+    margin-top: 50px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 15px;
+    padding: 30px 15px;
+}
+
+.actu-connect-button {
+    display: flex;
+    justify-content: center;
+}
+
+.connect-call {
+    font-size: 18px;
+    text-align: center;
+    margin: 15px 0px;
+}
+
+.actu-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.actu-icons {
+    border-bottom: 1px solid black;
+}
+
+/* Profil Gamer*/
+
+.profile-gamer {
+    margin-top: 50px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 15px;
+    padding: 30px 15px;
+    display: flex;
+}
+
+.profile-description {
+    text-align: center;
+    font-size: 18px;
+}
+
+.profile-title {
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+.profile-text {
+    padding-bottom: 15px;
+}
+
+.profile-card {
+    height: 10rem;
+    width: 13rem;
+    border-radius: 15px;
+    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.4);
+    background: white;
+}
+
+.profile-card a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    color: black;
+
+}
+
+.profile-card .name {
+    position: relative;
+    top: 10%;
+    display: flex;
+    justify-content: center;
+    color: rgb(254, 62, 62);
+}
+
+.profile-color {
+    position: absolute;
+    height: 3rem;
+    width: 13rem;
+    background-color: rgb(254, 62, 62);
+    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.2));
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.profile-picture {
+    position: relative;
+    top: 5%;
+    left: 30%;
+    width: 80px;
+    height: 80px; 
+    background-color: white;
+    border-radius: 100%;
+    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
+    background-image: url("https://static.printler.com/cache/7/a/8/0/b/5/7a80b57d1c07de5f165f70644bf8152afb7e2980.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+/* Tyrolium */
+
+.tyrolium-description-container {
+    margin-top: 50px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 15px;
+    padding: 30px 15px;
+    display: flex;
+
+}
+
+.tyrolium-image {
+    width: 100px;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    background-image: url(https://cdn.discordapp.com/attachments/1209863869695000666/1220736602121441342/ce41185114b4573c09eec4127e7c4612.png?ex=6610068e&is=65fd918e&hm=10178fda88a8aace62cefe9a41460d5fb73dd7e7ddb35d49a05696b0386611c1&);
+}
