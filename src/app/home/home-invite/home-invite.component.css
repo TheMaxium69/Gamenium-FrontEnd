@@ -139,13 +139,14 @@
     margin-top: 50px;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
-    padding: 30px 15px;
+    padding: 30px 60px;
     display: flex;
 }
 
 .profile-description {
     text-align: center;
     font-size: 18px;
+    padding-left: 60px;
 }
 
 .profile-title {
@@ -165,10 +166,11 @@
     background: white;
 }
 
-.profile-card a {
+.profile-card .follow {
     position: relative;
     display: flex;
     justify-content: center;
+    text-decoration: underline;
     color: black;
 
 }
@@ -213,13 +215,55 @@
     border-radius: 15px;
     padding: 30px 15px;
     display: flex;
+}
 
+.tyrolium-description {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    padding-left: 60px;
+}
+
+.tyrolium-title {
+    font-weight: bold;
+}
+
+.tyrolium-link a {
+    justify-content: center;
+    display: flex;
+    color: black;
 }
 
 .tyrolium-image {
-    width: 100px;
-    height: 100px;
+    width: 40%;
     background-position: center;
     background-size: cover;
     background-image: url(https://cdn.discordapp.com/attachments/1209863869695000666/1220736602121441342/ce41185114b4573c09eec4127e7c4612.png?ex=6610068e&is=65fd918e&hm=10178fda88a8aace62cefe9a41460d5fb73dd7e7ddb35d49a05696b0386611c1&);
+}
+
+/* Condition d'utilisation */ 
+
+.condition-utilisation {
+    margin-top: 50px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 15px;
+    padding: 20px 15px;
+}
+
+.condition-u-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 150px;
+}
+
+.condition-border {
+    border-left: 1px solid black;
+}
+
+.termes, .cgu {
+    font-size: 18px;
+    color: black;
+    width: 200px;
 }
