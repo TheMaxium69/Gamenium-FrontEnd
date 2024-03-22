@@ -20,5 +20,25 @@ export class SocialNetworkService {
 
   // post
 
+  SocialNetworkAlreadyExist(link: string): Observable<boolean> {
+    return this.http.get<boolean>('/socialnetworkbyuser/exists?link=' + encodeURIComponent(link));
+  }
+
+  getSocialNetworkUserLink(linkData: any): Observable<any> {
+
+    this.SocialNetworkAlreadyExist(linkData.link).subscribe(exists => {
+      if (exists) {
+        this.http.put<any>('/socialnetworkbyuser/' + linkData.id, linkData).subscribe(response => {
+          console.log('Updated link:', response);
+        });
+      } else {
+        this.http.post<any>('/socialnetworkbyuser/', linkData).subscribe(response => {
+          console.log('Created link:', response);
+        });
+      }
+    });
+
+    return new Observable<any>();
+  }
 
 }

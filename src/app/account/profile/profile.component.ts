@@ -139,10 +139,13 @@ export class ProfileComponent implements OnInit {
 
     console.log(form.value);
 
+      this.socialnetworkService.getSocialNetworkUserLink(form).subscribe(response => {
+        console.log('Response from server: ', response);
+      }, error => {
+        console.error('Error: ', error);
 
-
-    
-
+      });
+    }
   }
 
 
@@ -153,7 +156,7 @@ export class ProfileComponent implements OnInit {
 
   /*
 
-   <!-- Facebook -->
+    <!-- Facebook -->
 
     <i class="ri-facebook-circle-fill"></i>
     <label for="lien_compte">Votre lien Facebook : </label><br>
@@ -299,4 +302,3 @@ export class ProfileComponent implements OnInit {
     
   */
 
-}
