@@ -83,7 +83,7 @@
     background-color: darkred;
     border-radius: 15px;
     width: 200px;
-    height: 160px;
+    height: 210px;
 }
 .description-list {
     padding-top: 15px;
@@ -229,9 +229,13 @@
     font-weight: bold;
 }
 
-.tyrolium-link a {
+.tyrolium-link {
     justify-content: center;
     display: flex;
+}
+
+.tyrolium-link a {
+    width: fit-content;
     color: black;
 }
 
@@ -263,7 +267,12 @@
 }
 
 .termes, .cgu {
-    font-size: 18px;
-    color: black;
+    display: flex;
+    justify-content: center;
     width: 200px;
+    font-size: 18px;
+}
+
+.termes, .cgu,  a {
+    color: black;
 }
