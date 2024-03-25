@@ -46,6 +46,7 @@ import { NoAccountProfileComponent } from './mygame/no-account-profile/no-accoun
 import { CommentActualityComponent } from './actuality/comment-actuality/comment-actuality.component';
 import { HomeConnectedComponent } from './home/home-connected/home-connected.component';
 import { HomeInviteComponent } from './home/home-invite/home-invite.component';
+import { PlateformComponent } from './actuality/plateform/plateform.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { HomeInviteComponent } from './home/home-invite/home-invite.component';
     NoAccountProfileComponent,
     CommentActualityComponent,
     HomeConnectedComponent,
-    HomeInviteComponent
+    HomeInviteComponent,
+    PlateformComponent
 
   ],
   imports: [

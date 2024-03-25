@@ -8,6 +8,7 @@ import {PageAccountComponent} from "./account/page-account/page-account.componen
 import {ProviderComponent} from "./actuality/provider/provider.component";
 import {SearchPageComponent} from "./game/search-page/search-page.component";
 import { DetailGameComponent } from './game/detail-game/detail-game.component';
+import {PlateformComponent} from "./actuality/plateform/plateform.component";
 
 const routes: Routes = [
   {path: '', component: PageHomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'gameprofile/:id', component: DetailGameComponent},
   {path: 'profil/:id', component: PageMygameComponent},
   {path: 'search/:type/:value', component: SearchPageComponent},
+  {path: 'plateform/:id/', component: PlateformComponent},
 ];
 
 @NgModule({
