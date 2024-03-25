@@ -126,31 +126,43 @@ export class ProfileComponent implements OnInit {
       if(responseSocialNetworkAll.message == "good"){
 
         this.socialNetworkAll = responseSocialNetworkAll.result;
+        console.log(this.socialNetworkAll);
       }
 
     });
-
-
 
   }
 
   addUrlSocial(form: NgForm){
 
-    console.log(form.value);
+    let resultForm: any = form.value;
+    let bodyNoJson: any[] = [];
 
-      this.socialnetworkService.getSocialNetworkUserLink(form).subscribe(response => {
-        console.log('Response from server: ', response);
-      }, error => {
-        console.error('Error: ', error);
+    this.socialNetworkAll?.forEach(socialNetworkOne =>{
 
+      if(resultForm[socialNetworkOne.name]){
+
+        bodyNoJson.push({
+            "id_socialnetwork":socialNetworkOne.id,
+            "url":resultForm[socialNetworkOne.name],
+          });
+        
+      }
+
+    });
+
+    let bodyJson = JSON.stringify(bodyNoJson);
+
+    console.log(bodyJson);
+
+      this.socialnetworkService.postSocialNetworkByUser(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(response => {
+        console.log(response);
       });
-    }
+
   }
 
 
-
-
-
+}
 
 
   /*
