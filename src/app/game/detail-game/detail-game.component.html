@@ -183,7 +183,9 @@
             <div class="top-card"></div>
             <div class="picture-card" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
             <div class="game-card-name">{{gameSelected?.name}}</div>
-            <div class="follow">Suivre</div>
+            <div class="follow">
+              <a href="">Suivre</a>
+            </div>
         </div>
     </div>
 
@@ -198,13 +200,17 @@
                 <div class="top-card"></div>
                 <div class="picture-card"></div>
                 <div class="provider-card-name">Nintendo</div>
-                <div class="follow">Suivre</div>
+                <div class="follow">
+                  <a href="">Suivre</a>
+                </div>
             </div>
             <div class="provider-card">
                 <div class="top-card"></div>
                 <div class="picture-card"></div>
                 <div class="provider-card-name">Nintendo</div>
-                <div class="follow">Suivre</div>
+                <div class="follow">
+                  <a href="">Suivre</a>
+                </div>
             </div>
         </div>
     </div>
@@ -336,7 +342,7 @@
   <div class="carroussel-container">
       <div class="carroussel">
           <div class="pictures-title">
-              images du jeux :
+              Images du jeux :
           </div>
 
           <section>
@@ -411,7 +417,9 @@
 
       <div class="card-add-to-collection">
           <div class="game-picture">
-              <div class="cover" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
+              <div class="game-cover-center">
+                  <div class="cover" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
+              </div>
               <div class="background" style="background-image: url({{gameSelected?.image?.small_url}});">
                   <div class="inner-shadow"></div>
               </div>
@@ -420,7 +428,7 @@
           <div class="game-info">
               <div class="info-name">{{gameSelected?.name}}</div>
               <div class="info-provider">Provider</div>
-              <div class="info-release-date">15/03/2024</div>
+              <div class="info-release-date">Date de sortie:{{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
           </div>
           <button class="game-add-button">
               <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
