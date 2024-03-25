@@ -1,0 +1,257 @@
+.gamenium-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+    padding: 40px;
+    background:
+    radial-gradient(100% 100% at 100% 100%, #0000 46%,#450000 47% 53%,#0000 54%) 63px 63px,
+    radial-gradient(100% 100% at 0 0, #0000 46%,#450000 47% 53%,#0000 54%) 63px 63px,
+    radial-gradient(100% 100%, #0000 22%, #450000 23% 29%, #0000 30% 34%, #450000 35% 41%, #0000 42%)
+    #f70000;
+    background-size: 126px 126px;
+    border-radius: 0px 0px 65px 65px;
+    margin-bottom: 50px;
+}
+
+.gamenium-logo {
+    background-color: gray;
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+}
+
+.gamenium-welcome {
+    color: white;
+    font-weight: bold;
+    width: 380px;
+}
+
+
+.gamenium-welcome h1{
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.gamenium-welcome p{
+    font-size: 34px;
+}
+
+
+/* //////////////  SECTION HELLO  //////////////////   */
+
+
+
+.hello-container{
+    width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    padding:30px;
+    /* border: solid; */
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:55px;
+    box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.2);
+}
+
+
+.hello-left-side,
+.hello-wallpaper{
+    height: 350px;
+
+}
+
+
+.hello-wallpaper{
+    width: 350px;
+    border-radius: 15px;
+    /* border: solid; */
+    background:
+    radial-gradient(100% 100% at 100% 100%, #0000 46%,#450000 47% 53%,#0000 54%) 63px 63px,
+    radial-gradient(100% 100% at 0 0, #0000 46%,#450000 47% 53%,#0000 54%) 63px 63px,
+    radial-gradient(100% 100%, #0000 22%, #450000 23% 29%, #0000 30% 34%, #450000 35% 41%, #0000 42%)
+    #f70000;
+    background-size: 126px 126px;
+
+
+}
+
+.hello-left-side{
+    /* border: solid 1px; */
+    width:500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.hello{
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.hello-user h2{
+    font-size: 40px;
+}
+.hello-user h2 span{
+    color: blue;
+}
+
+.hello-user h2{
+    font-size:30px;
+} 
+
+.add-rate,
+.add-game,
+.public-profil{
+    border: solid 1px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding:5px; */
+    width:168px;
+    height: 100px
+}
+
+/* .hello-user{
+    position: relative;
+    right: 150px;
+}*/
+
+.hello-ask p{
+    font-size: 23px;
+} 
+
+.hello-ask p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.hello i{
+    font-size: 45px;
+}
+
+.hello a{
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+}
+
+/* //////////////  FIN SECTION HELLO  //////////////////   */
+
+/* ///////////// ACTUZLITEES ///////////////  */
+
+.actu-container{
+    width: 996px;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border: solid;
+    padding: 20px;
+    margin-top: 150px;
+    margin-bottom: 100px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.2);
+}
+
+.provider-logo{
+    width: 98%;
+    height: 115px;
+    border-bottom: solid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.actu-container h2{
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 40px;
+}
+
+.provider{
+    width: 70px;
+    height: 70px;
+    /* border: solid; */
+    border-radius: 50%;
+    box-shadow: 2px 5px 12px 0px rgba(0,0,0,0.75);
+}
+
+.actu-container .news{
+    width: 90%;
+    
+}
+
+
+/*///////////////  FIN PARTIE ACTUALITEES     //////////////////// */
+
+
+/* ////////////// PARTIE PROFIL //////////////////////////  */
+
+.profil{
+    width: 992px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.2);
+    margin-bottom: 100px;
+}
+
+.top-profil-container{
+    display: flex;
+    gap: 30px;
+}
+
+.profil-card{
+    width: 250px;
+    height: 250px;
+    border:solid;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.background-profil-card{
+    background-color: darkblue;
+    width:100%;
+    height:30%;
+}
+
+.pp-card{
+    width:100px;
+    height:100px;
+    border: solid;
+    border-radius: 50%;
+    position:absolute;
+    top: 20px;
+}
+
+.profil-text{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+}
+
+
+
+/* ///////////////// FIN DE LA PARTIE PROFIL /////////////  */
+
