@@ -327,24 +327,33 @@
       <div class="modal-header">
         <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form id="addNoteForm" #addForm2="ngForm" (ngSubmit)="addNote(addForm2)" class="modal-body" style="padding-top: 40px;">
+      <!-- profile-private.component.html -->
 
-        <h2>Ajoutez une note à votre jeux</h2>
+<!-- Ajoutez un champ de recherche de jeux -->
+<form id="searchGameForm" #searchForm="ngForm" (ngSubmit)="onSubmitSearch(searchForm)" class="modal-body" style="padding-top: 40px;">
 
-        <br>
-        <h5><span style="color: red">*</span>Recherche un de vos jeux :</h5>
-        <input *ngIf="gameSelected" type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }}">
-        <input *ngIf="!gameSelected" type="text" placeholder="Ton Jeux">
-        <br>
-        <br>
-        <h6><span style="color: red">*</span>Note de ton jeux :</h6>
-        <input id="inputNote" type="number" placeholder="10" name="noteGame" ngModel>/20
-
-        <div class="modal-footer" style="margin-top: 74px;">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
-          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </form>
-    </div>
+  <h2>Recherche de jeux</h2>
+  <br>
+  <h5><span style="color: red">*</span>Recherchez un jeu :</h5>
+  <input type="text" placeholder="Entrez le nom du jeu" name="searchValue" ngModel>
+  <br>
+  <br>
+  <div class="modal-footer" style="margin-top: 74px;">
+    <button type="submit" class="btn btn-success">Rechercher</button>
+    <button type="button" class="btn btn-secondary" (click)="unselectGame()" data-bs-dismiss="modal">Fermer</button>
   </div>
+</form>
+
+<!-- Afficher les résultats de la recherche -->
+<div *ngIf="searchResults && searchResults.length > 0">
+  <h3>Résultats de la recherche :</h3>
+  <ul>
+    <li *ngFor="let result of searchResults">
+      {{ result.name }} <!-- Afficher d'autres informations du jeu si nécessaire -->
+    </li>
+  </ul>
 </div>
+<div *ngIf="searchResults && searchResults.length === 0">
+  <p>Aucun résultat trouvé.</p>
+</div>
+

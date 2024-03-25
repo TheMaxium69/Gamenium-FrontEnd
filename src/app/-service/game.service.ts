@@ -1,9 +1,9 @@
-// game.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HistoryMyGameInterface } from '../-interface/history-my-game.interface';
+import { ApicallInterface } from '../-interface/apicall.interface';
 import { GameInterface } from '../-interface/game.interface';
-import {ApicallInterface} from "../-interface/apicall.interface";
 
 @Injectable({
   providedIn: 'root',
@@ -12,17 +12,19 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
+  getMyGameByUser(id_user: number, url: string): Observable<{ message: string; result: HistoryMyGameInterface[] | undefined }> {
+    return this.http.get<{ message: string; result: HistoryMyGameInterface[] | undefined }>(url + `/games/user/${id_user}`);
+  }
 
-  getGamesWithLimit(page:number, limit:number, url:string): Observable<ApicallInterface> {
+  getGamesWithLimit(page: number, limit: number, url: string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url + '/games/' + page + "/" + limit);
   }
 
-  getGameById(id: number, url:string): Observable<ApicallInterface> {
+  getGameById(id: number, url: string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url +'/game/' + id);
   }
 
-  searchGames(searchValue: string, limit:number, url:string): Observable<GameInterface[]> {
+  searchGames(searchValue: string, limit: number, url: string): Observable<GameInterface[]> {
     return this.http.post<GameInterface[]>(url + `/games/search`, { searchValue, limit});
-  }
-
+  } 
 }

@@ -7,6 +7,9 @@ import {ApicallInterface} from "../-interface/apicall.interface";
   providedIn: 'root',
 })
 export class HistoryMyGameService {
+  searchGames(searchValue: string, limit: number, url: string) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private http: HttpClient) { }
 
   getMyGameByUser(idUser: number, url:string): Observable<ApicallInterface> {
