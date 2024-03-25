@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PlatformService } from './platform.service';
+import { PlateformService } from './plateform.service';
 
 describe('PlatformService', () => {
-  let service: PlatformService;
+  let service: PlateformService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PlatformService);
+    service = TestBed.inject(PlateformService);
   });
 
   it('should be created', () => {

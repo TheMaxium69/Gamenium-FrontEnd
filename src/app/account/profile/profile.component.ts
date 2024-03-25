@@ -126,7 +126,6 @@ export class ProfileComponent implements OnInit {
       if(responseSocialNetworkAll.message == "good"){
 
         this.socialNetworkAll = responseSocialNetworkAll.result;
-
       }
 
     });
@@ -299,6 +298,6 @@ export class ProfileComponent implements OnInit {
     <i class="ri-discord-fill"></i>
     <label for="lien_compte">Votre lien Discord : </label><br>
     <input type="text" id="discord" name="discord"><br><br>
-    
+
   */
 

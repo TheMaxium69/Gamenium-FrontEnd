@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlatformService } from '../../-service/platform.service';
-import { PlatformInterface } from '../../-interface/platform.interface';
+import { PlateformInterface } from '../../-interface/plateform.interface';
 
 @Component({
   selector: 'app-platform',
@@ -8,17 +7,17 @@ import { PlatformInterface } from '../../-interface/platform.interface';
   styleUrls: ['./platform.interface.component.css'],
 })
 export class PlatformInterfaceComponent implements OnInit {
-  Platforms: PlatformInterface[] = [];
+  Platforms: PlateformInterface[] = [];
 
-  constructor(private PlatformService: PlatformService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.getAllPlatforms();
+    // this.getAllPlatforms();
   }
 
-  getAllPlatforms(): void {
-    this.PlatformService.getAllPlatforms().subscribe((Platforms) => {
-      this.Platforms = Platforms;
-    });
-  }
+  // getAllPlatforms(): void {
+  //   this.PlatformService.getAllPlatforms().subscribe((Platforms) => {
+  //     this.Platforms = Platforms;
+  //   });
+  // }
 }
