@@ -25,10 +25,11 @@ export class ProfilePrivateComponent implements OnInit {
   userRatingAll: UserRateInterface[] | undefined;
   task: string | any;
   searchResults: GameInterface[] | undefined; // Propriété pour stocker les résultats de la recherche de jeux
-
+  searchValue: string = '';
   isColor: string = this.app.colorDefault;
   isPp: string | undefined;
   profilSelected: ProfilInterface | undefined;
+
 
   constructor(private app: AppComponent,
               private myGameService: GameService,
@@ -181,6 +182,7 @@ export class ProfilePrivateComponent implements OnInit {
         console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
       }
     );
+    
   }
 
   // Méthode appelée lors de la soumission du formulaire de recherche

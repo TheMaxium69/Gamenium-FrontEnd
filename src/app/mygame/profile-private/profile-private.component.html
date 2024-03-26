@@ -259,32 +259,53 @@
       </div>
       <form id="addGameForm" #addForm="ngForm" (ngSubmit)="addGame(addForm)" class="modal-body" style="padding-top: 40px;">
 
-        <h2>Ajoutez un jeux à votre liste</h2>
+        <h2>Ajoutez un jeu à votre liste</h2>
 
         <br>
-        <h5><span style="color: red">*</span>Recherche ton jeux :</h5>
-        <input *ngIf="gameSelected" type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }}">
-        <input *ngIf="!gameSelected" type="text" placeholder="Ton Jeux">
+        <h5><span style="color: red">*</span>Recherchez un jeu :</h5>
+        <input *ngIf="gameSelected" type="text" placeholder="Votre jeu" disabled value="{{ gameSelected?.name }}">
+        <input *ngIf="!gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="onSubmitSearch(searchForm)">
         <br>
+        <div *ngIf="searchResults && searchResults.length > 0" class="row">
+          <div class="col-md-4" *ngFor="let result of searchResults">
+            <div class="card mb-4 shadow-sm">
+              <img [src]="result.image.icon_url" class="bd-placeholder-img card-img-top" alt="Image du jeu">
+              <div class="card-body">
+                <p class="card-text">{{ result.name }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div *ngIf="searchResults && searchResults.length === 0">
+          <p>Aucun résultat trouvé.</p>
+        </div>
         <br>
-        <h6>Epinglez vous ce jeux :</h6>
+        <h6>Épinglez ce jeu :</h6>
         <input type="checkbox"  name="pinnedGame" ngModel><br>
         <br>
-        <h6>Quand à tu obtenu ton jeux :</h6>
+        <h6>Quand as-tu obtenu ce jeu :</h6>
         <input type="date"  name="buyAt" ngModel>
         <br>
         <br>
-        <h6>Ou à tu obtenu ton jeux :</h6>
-        <input type="text" placeholder="input de type select"  name="buyWhere" ngModel>
+        <h6>Où as-tu obtenu ce jeu :</h6>
+        <input type="text" placeholder="Input de type select"  name="buyWhere" ngModel>
 
         <div class="modal-footer" style="margin-top: 74px;">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
-          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistrer</button>
+          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+
+
 
 <div class="modal fade text-center" id="editGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

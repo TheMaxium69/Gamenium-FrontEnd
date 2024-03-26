@@ -23,6 +23,7 @@ export interface GameInterface {
   platforms:JSON,
   siteDetailUrl: string,
   searchValue?: string;
+  
 
 }
 
