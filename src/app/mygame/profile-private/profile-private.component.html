@@ -327,7 +327,6 @@
       <div class="modal-header">
         <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <!-- profile-private.component.html -->
 
 <!-- Ajoutez un champ de recherche de jeux -->
 <form id="searchGameForm" #searchForm="ngForm" (ngSubmit)="onSubmitSearch(searchForm)" class="modal-body" style="padding-top: 40px;">
@@ -344,16 +343,23 @@
   </div>
 </form>
 
-<!-- Afficher les résultats de la recherche -->
 <div *ngIf="searchResults && searchResults.length > 0">
   <h3>Résultats de la recherche :</h3>
-  <ul>
-    <li *ngFor="let result of searchResults">
-      {{ result.name }} <!-- Afficher d'autres informations du jeu si nécessaire -->
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let result of searchResults">
+      <div class="card" style="margin-bottom: 20px;">
+        <img class="card-img-top" src="{{ result.image.icon_url }}" alt="Image du jeu">
+        <div class="card-body">
+          <h5 class="card-title">{{ result.name }}</h5>
+          <p class="card-text">Description du jeu</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 <div *ngIf="searchResults && searchResults.length === 0">
   <p>Aucun résultat trouvé.</p>
 </div>
+
 

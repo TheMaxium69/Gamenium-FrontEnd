@@ -187,7 +187,7 @@ export class ProfilePrivateComponent implements OnInit {
   onSubmitSearch(form: NgForm) {
     const searchValue = form.value['searchValue'];
     const limit = 5;
-    const url = 'http://127.0.0.1:8000'; // Remplacez par l'URL de votre API
+    const url = 'https://127.0.0.1:8000';
     this.searchGames(searchValue, limit, url);
   }
 }
