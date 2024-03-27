@@ -49,7 +49,7 @@ export class ProfilePrivateComponent implements OnInit {
   }
 
   myGameByUser(id_user: number): void {
-    this.myGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result;
       } else {
@@ -182,7 +182,7 @@ export class ProfilePrivateComponent implements OnInit {
         console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
       }
     );
-    
+
   }
 
   // Méthode appelée lors de la soumission du formulaire de recherche
