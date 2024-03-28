@@ -94,6 +94,7 @@ export class ProfilePrivateComponent implements OnInit {
 
   selectGame(game: GameInterface) {
     this.gameSelected = game;
+    console.log("Jeu sélectionné avec l'ID :", game.id);
   }
 
   unselectGame() {

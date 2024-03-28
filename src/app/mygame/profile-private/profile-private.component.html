@@ -268,7 +268,7 @@
         <br>
         <div *ngIf="searchResults && searchResults.length > 0" class="row">
           <div class="col-md-4" *ngFor="let result of searchResults">
-            <div class="card mb-4 shadow-sm">
+            <div class="card mb-4 shadow-sm" (click)="selectGame(result)">
               <img [src]="result.image.icon_url" class="bd-placeholder-img card-img-top" alt="Image du jeu">
               <div class="card-body">
                 <p class="card-text">{{ result.name }}</p>
@@ -280,6 +280,7 @@
             </div>
           </div>
         </div>
+        
         
         <div *ngIf="searchResults && searchResults.length === 0">
           <p>Aucun résultat trouvé.</p>
