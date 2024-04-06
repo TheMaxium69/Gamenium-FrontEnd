@@ -28,12 +28,18 @@
             <h2>Paramètres du compte</h2>
             <hr>
             <div class="para radius">
-                <a href="">
-                    <div><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
+                <a data-bs-toggle="collapse" href="#collapseMdp" role="button" aria-expanded="false" aria-controls="collapseMdp">
+                    <div ><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
                     <div><i class="ri-arrow-right-s-line"></i></div>
                 </a>
+                <div class="collapse" id="collapseMdp">
+                  <div class="card card-body">
+                    Changer le mots de passe
+                  </div>
+                </div>
             </div>
-            <div class="para radius">
+
+          <div class="para radius">
                 <a href="">
                     <div><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
                     <div><i class="ri-arrow-right-s-line"></i></div>
@@ -144,7 +150,7 @@
 
 
 <form style="margin-bottom: 200px;" #addUrlForm="ngForm" (ngSubmit)="addUrlSocial(addUrlForm)" method="post">
-    
+
     <ng-container *ngFor="let socialNetworkOne of socialNetworkAll">
 
         <i class="{{ socialNetworkOne.icon_class }}"></i>
@@ -154,5 +160,5 @@
     </ng-container>
 
     <input type="submit" value="Valider">
-    
+
 </form>

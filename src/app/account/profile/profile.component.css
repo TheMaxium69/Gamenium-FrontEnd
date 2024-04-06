@@ -5,7 +5,7 @@
     margin:0;
     margin-bottom: 10px;
   } */
-  
+
 
   .top{
     background-color: blue;
@@ -15,7 +15,7 @@
   .name{
     color: blue;
   }
-  
+
   .circle {
     position:absolute;
     left: 0;
@@ -24,7 +24,7 @@
     display: flex;
     justify-content: center;
   }
-  
+
   .circle-img {
     /* background-image: url(); */
     /* /////////REMPLACER BORDER PAR URL BG-IMAGE//////////   */
@@ -33,7 +33,7 @@
     width: 140px;
     height: 140px;
   }
-  
+
   .border{
     border: solid 1px;
   }
@@ -50,7 +50,7 @@
   .container-fluid {
   max-width: 100%;
   width: 992px;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
   padding-right: 15px;
@@ -135,7 +135,7 @@ hr{
 
 .para{
   width: 98%;
-  height: 70px;
+  /*height: 70px;*/
   border: none;
   margin-bottom: 20px;
   box-shadow: -2px -1px 400px -100px rgba(0,0,0,0.55) inset;
@@ -155,7 +155,7 @@ a{
 .ri-arrow-right-s-line{
   font-size: 40px;
 }
-  
+
 
 a > div {
   display: flex;
