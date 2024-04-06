@@ -1,22 +1,30 @@
-<div class="top"></div>
+<div class="top" style="background-color: {{ color }}!important;"></div>
 
 
 
 <div class="circle">
-    <!-- <img src="zdun-transformed.jpeg" alt="Votre image"> -->
-    <div class="circle-img"></div>
+    <div *ngIf="profilSelected?.picture" class="circle-img" style="background-image: url('{{ profilSelected?.picture }}')"></div>
+
+    <div *ngIf="!profilSelected?.picture" class="circle-img" style="background-image: url('https://tyrolium.fr/generate-pp/?l={{ extractFirstLetter(userConnected?.displayname) }}')"></div>
 </div>
 
 
 
-<div class="container-fluid first-div">
+<div class="container-fluid first-div" style="margin-bottom: 120px;">
     <div class="centre">
 
         <div class="border composant search-form-container">
-            <h2>Bonjour <span class="name">{{ userConnected?.username }}</span></h2>
+            <h2>Bonjour
+              <span class="name" style="color: {{ color }}!important">{{ userConnected?.username }}</span>
+              <ng-container *ngIf="badgeUserConnected">
+                <ng-container *ngFor="let badge of badgeUserConnected">
+                    <img style="margin-left: 6px" width="30px" src="{{ badge.picture?.url }}">
+                </ng-container>
+              </ng-container>
+            </h2>
             <hr>
             <form action="#" class="search-form">
-                <button type="submit" class="search-icon-container">
+                <button type="submit" class="search-icon-container" style="background-color: {{ color }}!important">
                     <i class="ri-search-line"></i>
                 </button>
                 <input type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
@@ -28,8 +36,103 @@
             <h2>Paramètres du compte</h2>
             <hr>
             <div class="para radius">
+                <a data-bs-toggle="collapse" href="#collapseProfil" role="button" aria-expanded="false" aria-controls="collapseProfil">
+                    <div ><i class="ri-account-circle-line"></i>Profiles (Photo, Banner, Coleur)</div>
+                    <div><i class="ri-arrow-right-s-line"></i></div>
+                </a>
+                <div class="collapse" id="collapseProfil">
+                  <div class="card card-body">
+
+
+            <h5>Ton profile</h5>
+
+                    <p> {{ userConnected?.username }} </p>
+                    <p> {{ userConnected?.email }} </p>
+                    <p>{{ userConnected?.displayname }}</p>
+
+                    <ng-container *ngIf="userConnected?.displaynameUseritium">
+                      <p><img width="20px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{
+                        userConnected?.displaynameUseritium }}</p>
+                    </ng-container>
+
+                    <h2>{{ userConnected?.joinAt | date:'medium' }}</h2>
+
+                    <ng-container *ngIf="badgeUserConnected">
+                      <p>
+                        Badge ->
+                      </p>
+                      <ng-container *ngFor="let badge of badgeUserConnected">
+
+                        <div class="card">
+
+                          <img width="40px" src="{{ badge.picture?.url }}">
+                          <h3> {{ badge.name }}</h3>
+
+                        </div>
+                      </ng-container>
+                    </ng-container>
+
+
+            <h5>Couleur</h5>
+
+                    <div>
+                      <label for="themeColor">Choisir la couleur du thème:</label>
+                      <input type="color" id="themeColor" [(ngModel)]="tempColor" />
+
+                      <button (click)="saveColor()">Enregistrer la couleur</button>
+                    </div>
+
+                    <div *ngIf="userConnected">
+                      <p>Thème du Profil de {{ userConnected.username }}</p>
+
+                      <div [ngStyle]="{ 'background-color': userConnected.themeColor }">
+                        TEST
+                      </div>
+                    </div>
+
+            <h5>Photo de profile</h5>
+
+                    <form enctype="multipart/form-data">
+                      <div>
+                        <input type="file" (change)="onFileChanged($event)">
+                        <button type="button" (click)="onUpload()">Télécharger</button>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+            </div>
+
+          <div class="para radius">
+                <a data-bs-toggle="collapse" href="#collapseReseau" role="button" aria-expanded="false" aria-controls="collapseReseau">
+                    <div ><i class="ri-at-line"></i>Connection (Réseau Sociaux et Service)</div >
+                    <div><i class="ri-arrow-right-s-line"></i></div>
+                </a>
+                <div class="collapse" id="collapseReseau">
+                  <div class="card card-body">
+
+
+                    <h5>Vos réseaux</h5>
+                    <form class="reseau" #addUrlForm="ngForm" (ngSubmit)="addUrlSocial(addUrlForm)" method="post">
+
+                      <ng-container *ngFor="let socialNetworkOne of socialNetworkAll">
+
+                        <i class="{{ socialNetworkOne.icon_class }}"></i>
+                        <label for="lien_compte">Votre lien {{ socialNetworkOne.name }} : </label><br>
+                        <input type="text" id="{{ socialNetworkOne.name }}" name="{{ socialNetworkOne.name }}" ngModel><br><br>
+
+                      </ng-container>
+
+                      <input type="submit" value="Valider">
+
+                    </form>
+
+                  </div>
+                </div>
+            </div>
+          <div class="para radius">
                 <a data-bs-toggle="collapse" href="#collapseMdp" role="button" aria-expanded="false" aria-controls="collapseMdp">
-                    <div ><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
+                    <div ><i class="ri-lock-password-fill"></i>Changer Mots de passe (Useritium)</div>
                     <div><i class="ri-arrow-right-s-line"></i></div>
                 </a>
                 <div class="collapse" id="collapseMdp">
@@ -39,39 +142,28 @@
                 </div>
             </div>
 
-          <div class="para radius">
-                <a href="">
-                    <div><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
+          <div class="para radius" style="background-color: #ffafaf">
+                <a (click)="loggout()">
+                    <div ><i class="ri-shut-down-line"></i>Déconnexion de votre compte</div>
                     <div><i class="ri-arrow-right-s-line"></i></div>
                 </a>
             </div>
-            <div class="para radius">
-                <a href="">
-                    <div><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
-                    <div><i class="ri-arrow-right-s-line"></i></div>
-                </a>
-            </div>
+
         </div>
 
 
         <div class="border composant">
-            <h2>Paramètres du compte</h2>
+            <h2>Informations</h2>
             <hr>
             <div class="para radius">
                 <a href="">
-                    <div><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
+                    <div><i class="ri-lock-password-fill"></i>Termes et conditions de comptes</div>
                     <div><i class="ri-arrow-right-s-line"></i></div>
                 </a>
             </div>
             <div class="para radius">
                 <a href="">
-                    <div><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
-                    <div><i class="ri-arrow-right-s-line"></i></div>
-                </a>
-            </div>
-            <div class="para radius">
-                <a href="">
-                    <div><i class="ri-lock-password-fill"></i>Changer Mot de passe</div>
+                    <div><i class="ri-lock-password-fill"></i>Tous nos badge disponible</div>
                     <div><i class="ri-arrow-right-s-line"></i></div>
                 </a>
             </div>
@@ -80,85 +172,3 @@
     </div>
 </div>
 
-<hr>
-
-<p>Votre Profile:</p>
-
-<h1> {{ userConnected?.username }} </h1>
-<h1> {{ userConnected?.email }} </h1>
-
-<h2>{{ userConnected?.displayname }}</h2>
-<ng-container *ngIf="userConnected?.displaynameUseritium">
-  <h2><img width="40px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{
-    userConnected?.displaynameUseritium }}</h2>
-</ng-container>
-
-<h2>{{ userConnected?.joinAt | date:'medium' }}</h2>
-
-<ng-container *ngIf="badgeUserConnected">
-  <p>
-    Badge ->
-  </p>
-
-  <ng-container *ngFor="let badge of badgeUserConnected">
-
-    <div class="card">
-
-      <img width="40px" src="{{ badge.picture?.url }}">
-      <h3> {{ badge.name }}</h3>
-
-    </div>
-
-
-  </ng-container>
-
-</ng-container>
-
-<form enctype="multipart/form-data">
-  <div>
-    <input type="file" (change)="onFileChanged($event)">
-    <button type="button" (click)="onUpload()">Télécharger</button>
-  </div>
-</form>
-
-
-
-
-<div>
-
-
-  <label for="themeColor">Choisir la couleur du thème:</label>
-  <input type="color" id="themeColor" [(ngModel)]="tempColor" />
-
-  <button (click)="saveColor()">Enregistrer la couleur</button>
-</div>
-
-<div *ngIf="userConnected">
-  <h1>Thème du Profil de {{ userConnected.username }}</h1>
-
-  <div [ngStyle]="{ 'background-color': userConnected.themeColor }">
-    TEST
-  </div>
-</div>
-
-
-<button (click)="loggout()" class="btn btn-danger"> Loggout </button>
-
-<div style="height: 120px"></div>
-
-
-
-
-<form style="margin-bottom: 200px;" #addUrlForm="ngForm" (ngSubmit)="addUrlSocial(addUrlForm)" method="post">
-
-    <ng-container *ngFor="let socialNetworkOne of socialNetworkAll">
-
-        <i class="{{ socialNetworkOne.icon_class }}"></i>
-        <label for="lien_compte">Votre lien {{ socialNetworkOne.name }} : </label><br>
-        <input type="text" id="{{ socialNetworkOne.name }}" name="{{ socialNetworkOne.name }}" ngModel><br><br>
-
-    </ng-container>
-
-    <input type="submit" value="Valider">
-
-</form>

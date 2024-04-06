@@ -10,6 +10,8 @@ import {PictureInterface} from "../../-interface/picture.interface";
 import { SocialNetworkService } from 'src/app/-service/social-network.service';
 import { SocialNetworkInterface } from 'src/app/-interface/social-network.interface';
 import { NgForm } from '@angular/forms';
+import {ProfilService} from "../../-service/profil.service";
+import {ProfilInterface} from "../../-interface/profil.interface";
 
 @Component({
   selector: 'app-profile',
@@ -21,9 +23,12 @@ export class ProfileComponent implements OnInit {
   userConnected: UserInterface | undefined;
   badgeUserConnected: BadgeInterface[] | undefined;
   profileImage: String|undefined;
+  profilSelected: ProfilInterface | undefined;
 
   selectedColor: string = '';
   tempColor: string = '';
+
+  color: string | [] = "red";
 
   selectedFile: File | undefined;
   socialNetworkAll: SocialNetworkInterface[] | undefined;
@@ -35,15 +40,18 @@ export class ProfileComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private uploadService: UploadProfilePictureService,
     private socialnetworkService: SocialNetworkService,
+    private profileService: ProfilService
   ) {}
 
   ngOnInit() {
     this.userConnected = this.app.userConnected;
+    console.log(this.userConnected)
     if (this.userConnected) {
       this.getBadgeByUser(this.userConnected.id);
 
-      this.profileImage = this.userConnected?.pp?.url;
+      // this.profileImage = this.userConnected?.pp?.url;
 
+      this.getInfoProfile(this.userConnected.id)
 
       this.loadThemeColor();
     }
@@ -57,10 +65,30 @@ export class ProfileComponent implements OnInit {
       this.userService.getThemeColor(userId, this.app.setURL()).subscribe((themeColor) => {
         if (this.userConnected) {
           this.userConnected.themeColor = themeColor;
+          this.color = this.userConnected.themeColor;
           this.cdRef.detectChanges();
         }
       });
     }
+  }
+
+  getInfoProfile(id:number){
+
+    this.profileService.getProfilByUserId(id,this.app.setURL()).subscribe(responseProfil => {
+
+      if (responseProfil.message == "good"){
+
+        this.profilSelected = responseProfil.result;
+        console.log(this.profilSelected)
+
+      } else {
+
+        console.log("err user not existing");
+
+      }
+
+    });
+
   }
 
   loggout() {
@@ -82,6 +110,9 @@ export class ProfileComponent implements OnInit {
 
       this.userService.updateThemeColor(this.userConnected.id, this.tempColor, this.app.setURL()).subscribe((response) => {
         console.log('Couleur du thème mise à jour avec succès', response);
+        if (this.userConnected){
+          this.color = this.userConnected.themeColor;
+        }
       });
     }
   }
@@ -133,6 +164,10 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  extractFirstLetter(str: string|any): string {
+    return str.charAt(0);
+  }
+
   addUrlSocial(form: NgForm){
 
     let resultForm: any = form.value;
@@ -146,7 +181,7 @@ export class ProfileComponent implements OnInit {
             "id_socialnetwork":socialNetworkOne.id,
             "url":resultForm[socialNetworkOne.name],
           });
-        
+
       }
 
     });
@@ -162,6 +197,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
+  protected readonly ProfilService = ProfilService;
 }
 
 

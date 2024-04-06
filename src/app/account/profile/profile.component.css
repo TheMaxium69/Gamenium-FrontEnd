@@ -8,12 +8,13 @@
 
 
   .top{
-    background-color: blue;
-    height: 100px;
+    background-color: red;
+    height: 160px;
+    box-shadow: 0px -37px 73px rgba(0, 0, 0, 0.51) inset;
   }
 
   .name{
-    color: blue;
+    color: red;
   }
 
   .circle {
@@ -28,10 +29,17 @@
   .circle-img {
     /* background-image: url(); */
     /* /////////REMPLACER BORDER PAR URL BG-IMAGE//////////   */
-    border: solid red;
+    /*border: solid red;*/
     border-radius: 50%;
-    width: 140px;
-    height: 140px;
+    width: 250px;
+    height: 250px;
+    margin-top: 21px;
+    background-color: white;box-shadow: 3px 2px 30px -5px rgba(0,0,0,0.51);
+
+    background-color: white;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   .border{
@@ -42,9 +50,11 @@
     background-color: white;
     border: none;
     border-radius: 15px;
-    padding: 15px;
     margin-top: 10px;
     box-shadow: 3px 2px 30px -5px rgba(0,0,0,0.51);
+
+    width: 845px;
+    padding: 33px 50px;
   }
 
   .container-fluid {
@@ -55,6 +65,7 @@
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 80px;
+    margin-top: 88px;
   }
 
 .centre{
@@ -69,10 +80,6 @@ hr{
   margin-right: 200px;
   margin-bottom: 25px;
   border:solid 1px;
-}
-
-.composant{
-  width: 700px;
 }
 
 .search-form-container{
@@ -98,14 +105,17 @@ hr{
   box-shadow: 0px 4px px 1px rgba(0,0,0,0.5) inset;
 }
 
+.search-icon-container i {
+  margin-left: 2px;
+}
 .search-icon-container{
   border-radius: 50%;
   width:50px;
   height:50px;
   border:0px;
-  background-color: blue;
+  background-color: red;
   position:relative;
-  left: 590px;
+  left: 667px;
   top:55px;
 }
 
@@ -115,20 +125,21 @@ hr{
 
 .searchbar{
   margin-right: 260px;
-  width:98%;
+  width: 98%;
   height: 60px;
   font-size: 24px;
   border: none;
   border-radius: 15px;
   caret-color: transparent;
-  box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.5) inset;
+  box-shadow: 0px 0px 11px -6px rgba(0,0,0,0.5) inset;
+  background-color: #F3F3F3;
 }
 
 .searchbar::placeholder{
   position: absolute;
   bottom:12px;
   font-size: 24px;
-  padding-left: 50px;
+  /*padding-left: 50px;*/
   padding-bottom: 5px;
 }
 
@@ -138,7 +149,10 @@ hr{
   /*height: 70px;*/
   border: none;
   margin-bottom: 20px;
-  box-shadow: -2px -1px 400px -100px rgba(0,0,0,0.55) inset;
+  /*box-shadow: -2px -1px 400px -100px rgba(0,0,0,0.55) inset;*/
+  background-color: #F3F3F3;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  /*border-radius: 10px*/
 }
 
 a{
@@ -152,8 +166,10 @@ a{
 }
 
 .ri-lock-password-fill,
-.ri-arrow-right-s-line{
+.ri-arrow-right-s-line,
+i{
   font-size: 40px;
+  margin-left: 10px;
 }
 
 
@@ -167,4 +183,29 @@ a > div {
 .radius{
   border-radius: 15px;
   padding:5px;
+}
+
+.card-body p{
+  margin: 0;
+}
+
+
+.card-body h5:first-child {
+margin-top: unset;
+}
+.card-body h5{
+  text-align: center;border-bottom: 1px solid black;
+  padding-bottom: 5px;
+  margin-bottom: 23px;
+  margin-top: 24px;
+}
+
+.card-body {
+  background: transparent;
+  border: unset;
+}
+
+.reseau i{
+  font-size: unset!important;
+  margin-right: 5px;
 }
