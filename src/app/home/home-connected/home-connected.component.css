@@ -1,356 +1,300 @@
+/*  Bandeau principal  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.home-invite {
+  width: 992px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 120px;
+}
+
 .gamenium-banner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 150px;
-    padding: 40px;
-    background:
-    radial-gradient(100% 100% at 100% 100%, #0000 46%,#450000 47% 53%,#0000 54%) 63px 63px,
-    radial-gradient(100% 100% at 0 0, #0000 46%,#450000 47% 53%,#0000 54%) 63px 63px,
-    radial-gradient(100% 100%, #0000 22%, #450000 23% 29%, #0000 30% 34%, #450000 35% 41%, #0000 42%)
-    #f70000;
-    background-size: 126px 126px;
-    border-radius: 0px 0px 65px 65px;
-    margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 150px;
+  padding: 40px;
+  border-radius: 0px 0px 65px 65px;
+  margin-bottom: 50px;
+  background-color: #C61010;
+  background-image: url('http://tyrolium.fr/Contenu/Image/Background8_black.png');
+  height: 315px;
 }
 
 .gamenium-logo {
-    background-color: gray;
-    border-radius: 100%;
-    width: 200px;
-    height: 200px;
+  /*background-color: gray;*/
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+  background-image: url('http://tyrolium.fr/Contenu/Image/Gamenium Site.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .gamenium-welcome {
-    color: white;
-    font-weight: bold;
-    width: 380px;
+  color: white;
+  font-weight: bold;
 }
-
 
 .gamenium-welcome h1{
-    font-size: 60px;
-    font-weight: bold;
+  color: white;
+  font-size: 36px;
+  font-family: Inter;
+  font-weight: 700;
+  word-wrap: break-word
 }
 
-.gamenium-welcome p{
-    font-size: 34px;
-}
-
-
-/* //////////////  SECTION HELLO  //////////////////   */
-
-
-
-.hello-container{
-    width: 992px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 80px;
-    padding:30px;
-    /* border: solid; */
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:55px;
-    box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.2);
-}
-
-
-.hello-left-side,
-.hello-wallpaper{
-    height: 350px;
+.gamenium-welcome p {
+  color: white;
+  font-size: 24px;
+  font-family: Inter;
+  font-weight: 700;
+  word-wrap: break-word;
+  width: 250px;
 
 }
+/*  Connexion utilisateur  */
 
+.connect-user {
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 15px;
+  padding: 20px;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-.hello-wallpaper{
-    width: 350px;
-    border-radius: 15px;
-    /* border: solid; */
-    background:
-    radial-gradient(100% 100% at 100% 100%, #0000 46%,#450000 47% 53%,#0000 54%) 63px 63px,
-    radial-gradient(100% 100% at 0 0, #0000 46%,#450000 47% 53%,#0000 54%) 63px 63px,
-    radial-gradient(100% 100%, #0000 22%, #450000 23% 29%, #0000 30% 34%, #450000 35% 41%, #0000 42%)
-    #f70000;
-    background-size: 126px 126px;
+.connect-title {
+  font-size: 32px;
+  font-weight: bold;
+}
 
+.button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.connect-btn {
+  border: none;
+  background-color: rgb(254, 62, 62);
+  color: white;
+  font-size: 24px;
+  padding: 10px 50px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+}
+
+/* Description Gamenium */
+
+.gamenium-description-container {
+  display: flex;
+  margin-top: 50px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 15px;
+  padding: 30px 15px;
+  justify-content: space-between;
+}
+
+.description-image {
+  border-radius: 15px;
+  width: 200px;
+  height: 210px;
+  background-color: #C61010;
+  background-image: url('http://tyrolium.fr/Contenu/Image/Background8_black.png');
+  background-size: 135px;
+}
+.description-list {
+  padding-top: 15px;
+}
+
+.description-list li {
+  display: flex;
+  gap: 5px;
+  list-style: none;
+}
+
+.description-text {
+  font-size: 18px;
+}
+
+.description-title {
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+/* Nos actualités */
+
+.actu-container {
+  margin-top: 50px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 15px;
+  padding: 30px 15px;
+}
+
+.actu-connect-button {
+  display: flex;
+  justify-content: center;
+}
+
+.connect-call {
+  font-size: 18px;
+  text-align: center;
+  margin: 15px 0px;
+}
+
+.actu-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.actu-icons {
+  border-bottom: 1px solid black;
+}
+
+/* Profil Gamer*/
+
+.profile-gamer {
+  margin-top: 50px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 15px;
+  padding: 30px 60px;
+  display: flex;
+}
+
+.profile-description {
+  text-align: center;
+  font-size: 18px;
+  padding-left: 60px;
+}
+
+.profile-title {
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.profile-text {
+  padding-bottom: 15px;
+}
+
+.profile-card {
+  height: 10rem;
+  width: 13rem;
+  border-radius: 15px;
+  box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.4);
+  background: white;
+}
+
+.profile-card .follow {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  color: black;
 
 }
 
-.hello-left-side{
-    /* border: solid 1px; */
-    width:500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 40px;
+.profile-card .name {
+  position: relative;
+  top: 10%;
+  display: flex;
+  justify-content: center;
+  color: rgb(254, 62, 62);
 }
 
-.hello{
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    gap: 10px;
-    margin-bottom: 20px;
+.profile-color {
+  position: absolute;
+  height: 3rem;
+  width: 13rem;
+  background-color: rgb(254, 62, 62);
+  filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.2));
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
-.hello-user h2{
-    font-size: 40px;
-}
-.hello-user h2 span{
-    color: blue;
-}
-
-.hello-user h2{
-    font-size:30px;
-} 
-
-.add-rate,
-.add-game,
-.public-profil{
-    border: solid 1px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* padding:5px; */
-    width:168px;
-    height: 100px
+.profile-picture {
+  position: relative;
+  top: 5%;
+  left: 30%;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 100%;
+  box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
+  background-image: url("https://static.printler.com/cache/7/a/8/0/b/5/7a80b57d1c07de5f165f70644bf8152afb7e2980.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
-/* .hello-user{
-    position: relative;
-    right: 150px;
-}*/
+/* Tyrolium */
 
-.hello-ask p{
-    font-size: 23px;
-} 
-
-.hello-ask p{
-    font-size: 20px;
-    font-weight: bold;
+.tyrolium-description-container {
+  margin-top: 50px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 15px;
+  padding: 30px 15px;
+  display: flex;
 }
 
-.hello i{
-    font-size: 45px;
+.tyrolium-description {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  padding-left: 60px;
 }
 
-.hello a{
-    text-decoration: none;
-    color: black;
-    font-size: 15px;
+.tyrolium-title {
+  font-weight: bold;
 }
 
-/* //////////////  FIN SECTION HELLO  //////////////////   */
-
-/* ///////////// ACTUZLITEES ///////////////  */
-
-.actu-container{
-    width: 996px;
-    height: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    /* border: solid; */
-    padding: 20px;
-    margin-top: 150px;
-    margin-bottom: 100px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.2);
+.tyrolium-link {
+  justify-content: center;
+  display: flex;
 }
 
-.provider-logo{
-    width: 98%;
-    height: 115px;
-    border-bottom: solid;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+.tyrolium-link a {
+  width: fit-content;
+  color: black;
 }
 
-.actu-container h2{
-    font-size: 30px;
-    font-weight: bold;
-    padding-left: 40px;
+.tyrolium-image {
+  width: 40%;
+  background-position: center;
+  background-size: cover;
+  background-image: url(https://cdn.discordapp.com/attachments/1209863869695000666/1220736602121441342/ce41185114b4573c09eec4127e7c4612.png?ex=6610068e&is=65fd918e&hm=10178fda88a8aace62cefe9a41460d5fb73dd7e7ddb35d49a05696b0386611c1&);
 }
 
-.provider{
-    width: 70px;
-    height: 70px;
-    /* border: solid; */
-    border-radius: 50%;
-    box-shadow: 2px 5px 12px 0px rgba(0,0,0,0.75);
-}
-
-.actu-container .news{
-    width: 90%;
-    
-}
-
-
-/*///////////////  FIN PARTIE ACTUALITEES     //////////////////// */
-
-
-/* ////////////// PARTIE PROFIL //////////////////////////  */
-
-.profil{
-    width: 992px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 80px;
-    padding: 50px;
-    padding-bottom: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.2);
-    margin-bottom: 100px;
-}
-
-.top-profil-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 70px;
-}
-
-.profil-text{
-    text-align: center;
-    gap: 10px;
-}
-
-.profil-text h1{
-    font-weight: bold;
-    margin-bottom: 40px;
-}
-
-.profil-text p{
-    font-size: 24px;
-    font-weight: 500;
-}
-
-
-.profil-card{
-    width: 250px;
-    height: 230px;
-    /* border:solid; */
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.2);
-}
-
-.background-profil-card{
-    background-color: darkblue;
-    border-radius: 15px 15px 0px 0px;
-    width:100%;
-    height:40%;
-}
-
-.pp-card{
-    width:130px;
-    height:130px;
-    /* border: solid; */
-    border-radius: 50%;
-    position:absolute;
-    top: 5px;
-    background-color: white;
-    box-shadow: 2px 5px 12px 0px rgba(0,0,0,0.75);
-}
-
-.name-card{
-    color: red;
-    font-size:22px;
-    font-weight: 500;
-    margin-top: 55px;
-    margin-bottom: 5px;
-}
-
-.follow{
-    text-decoration: underline;
-    font-size: 22px;
-    font-weight: 500;
-}
-
-.profil-text{
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
-    width: 500px;
-}
-
-.profil{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-.edit-button-container{
-    margin-top: 30px;
-}
-
-.edit-button-container a{
-    text-decoration: none;
-}
-
-.edit-button{
-    background-color: red;
-    border-radius: 15px;
-    padding: 15px 70px;
-    color: white;
-    font-size: 22px;
-    font-weight: 500;
-    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.35);
-}
-
-
-
-/* ///////////////// FIN DE LA PARTIE PROFIL /////////////  */
-
-/* //////////////// CGU  /////////////////////////// */ 
+/* Condition d'utilisation */
 
 .condition-utilisation {
-    width: 992px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    margin-bottom: 160px;
-    box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;
-    padding: 30px 15px;
+  margin-top: 50px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 15px;
+  padding: 20px 15px;
 }
 
 .condition-u-container {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    gap: 150px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 150px;
 }
 
 .condition-border {
-    border-left: 2px solid black;
+  border-left: 1px solid black;
 }
 
 .termes, .cgu {
-    display: flex;
-    justify-content: center;
-    width: 200px;
-    font-size: 22px;
-    font-weight: 400;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  font-size: 18px;
 }
 
 .termes, .cgu,  a {
-    color: black;
+  color: black;
 }
-
-/*  ///////////// FIN DE LA PARTIE CGU ////////// */

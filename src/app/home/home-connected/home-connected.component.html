@@ -1,101 +1,81 @@
+<!-- <p>home-invite works!</p> -->
+<!-- ///// START WORK /////-->
+
 <div class="gamenium-banner">
-    <div class="gamenium-logo"></div>
-    <div class="gamenium-welcome">
-        <h1>GAMENIUM</h1>
-        <p>L'application pour votre vie de gamer</p>
-    </div>
+  <div class="gamenium-logo"></div>
+  <div class="gamenium-welcome">
+    <h1>GAMENIUM</h1>
+    <p>L'application pour votre vie de gamer</p>
+  </div>
 </div>
 
+<div class="home-invite">
 
-<div class="hello-container">
-    <div class="hello-left-side">
-        <div class="hello-user"><h2>Hello <span>Maxime</span></h2></div>
-        <div class="hello-ask">
-            <p>Qu'allez vous faire sur Gamenium Aujourd'hui</p>
-        </div>
-        <div class="hello">
-            <a href="#">
-                <div class="add-game">
-                    <div><i class="ri-add-circle-line"></i></div>
-                    <div>Ajouter un jeux</div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="add-rate">
-                    <div><i class="ri-star-half-line"></i></div>
-                    <div>Ajouter une note</div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="public-profil">
-                    <div><i class="ri-news-line"></i></div>
-                    <div>Voir votre profile Public</div>
-                </div>
-            </a>
-        </div>
+  <div class="gamenium-description-container">
+    <div class="gamenium-description">
+      <div class="description-text">
+        <div class="description-title">Hello <span class="name" style="color: {{ isColor }}!important">{{ userConnected?.username }}</span></div>
+        <div >Qu’allez vous faire sur Gamenium
+          Aujourd’hui</div>
+      </div>
     </div>
-    <div class="hello-wallpaper">
+    <div class="description-image"></div>
+  </div>
 
+  <div class="actu-container">
+    <div class="actu-title">Nos actualités</div>
+    <div class="actu-icons">Icon provider</div>
+    <div class="actu-card">Carte actu</div>
+    <div class="actu-connect">
+      <div class="connect-call">Connectez vous afin de suivre uniquement les actualités et les jeux qui vous intéressent</div>
+      <div class="actu-connect-button">
+        <button class="connect-btn">Connectez vous</button>
+      </div>
     </div>
-</div>
+  </div>
 
-
-<div class="actu-container">
-    <div class="title">
-        <h2>Vos dernières actualités</h2>
+  <div class="profile-gamer">
+    <div class="profile-card-container">
+      <div class="profile-card">
+        <div class="profile-color"></div>
+        <div class="profile-picture"></div>
+        <p class="name">Mario</p>
+        <p class="follow">Suivre</p>
+      </div>
     </div>
-    <div class="provider-logo">
-        <div class="provider"></div>
-        <div class="provider"></div>
-        <div class="provider"></div>
-        <div class="provider"></div>
-        <div class="provider"></div>
-        <div class="provider"></div>
-        <div class="provider"></div>
-        <div class="provider"></div>
-        <div class="provider"></div>
+    <div class="profile-description">
+      <div class="profile-title">Profil de gamer</div>
+      <div class="profile-text">Créez votre profil de gamer afin de pouvoir partager et noter tout les jeux qui ont fait votre histoire de gamer</div>
+      <div class="profile-text">Vous êtes unique et votre collection permet de le partager avec vos amis</div>
     </div>
-    <div class="news">
-        <!-- mettre en place un ngFor de <app-card-actuality></app-card-actuality> -->
-        <!-- et regler la div news en tant que container -->
+  </div>
+
+  <div class="tyrolium-description-container">
+    <div class="tyrolium-image"></div>
+    <div class="tyrolium-description">
+      <div class="tyrolium-title">Tyrolium !</div>
+      <div class="tyrolium-text">Tyrolium est l'entreprise qui a crée et possède Gamenium.
+        Il s'agit d'une entreprise française qu a pour but de prouver que la France et
+        l'Europe peuvent battre les géants Américains et Chinois dans la technologie.
+      </div>
+      <div class="tyrolium-link">
+        <a href="https://tyrolium.fr/">Site de Tyrolium</a>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="profil">
-    <div class="top-profil-container">
-        <div class="profil-card">
-            <div class="background-profil-card"></div>
-            <div class="pp-card"></div>
-            <div class="name-card">Mario</div>
-            <div class="follow">Suivre</div>
-        </div>
-        <div class="profil-text">
-            <h1>Profil de Gameur</h1>
-            <p>Créer votre profile de gameur afin de pouvoir partager et noté tout les jeux qui font de vous votre gistoire de gameur</p>
-            <p>Vous êtes uniquement et votre collection permet de le partager à vos amis</p>
-        </div>
-    </div>
-    <div class="edit-button-container">
-        <a href="#">
-            <div class="edit-button">
-                Editez votre profil
-            </div>
-        </a>
-    </div>
-</div>
-
-
-
-<div class="condition-utilisation">
+  <div class="condition-utilisation">
     <div class="condition-u-container">
-        <div class="cgu" >
-           <a href="">CGU</a>
-        </div>
-        <div class="condition-border">
-            <div class="condition-border"></div>
-        </div>
-        <div class="termes">
-             <a href="">Termes et utilisation</a>
-        </div>
+      <div class="cgu" >
+        <a href="">CGU</a>
+      </div>
+      <div class="condition-border">
+        <div class="condition-border"></div>
+      </div>
+      <div class="termes">
+        <a href="">Termes et utilisation</a>
+      </div>
     </div>
+  </div>
+
 </div>
