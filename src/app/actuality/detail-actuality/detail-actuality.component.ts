@@ -10,6 +10,8 @@ import {FollowService} from "../../-service/follow.service";
 import {FollowInterface} from "../../-interface/follow.interface";
 import {BadgeInterface} from "../../-interface/badge.interface";
 import {IpService} from "../../-service/ip.service";
+import {LikeService} from "../../-service/like.service";
+import {LikeInterface} from "../../-interface/like.interface";
 
 @Component({
   selector: 'app-detail-actuality',
@@ -25,7 +27,8 @@ export class DetailActualityComponent implements OnInit{
   actualitySelected: PostActuInterface|undefined;
   noneActu: boolean = false;
 
-  nbLike:number = 0;
+  LikeAll: LikeInterface[]|undefined;
+  nbLike:number | undefined = 0;
   nbCommentaire:number = 0;
 
   constructor(private route: ActivatedRoute,
@@ -33,13 +36,16 @@ export class DetailActualityComponent implements OnInit{
               private app: AppComponent,
               private commentService:CommentService,
               private followService:FollowService,
-              private ipService: IpService) {}
+              private ipService: IpService,
+              private likeService: LikeService) {}
 
   ngOnInit(): void {
 
     this.actualityId = this.route.snapshot.paramMap.get('id');
 
     this.getActuById(this.actualityId);
+
+    this.getLikeByActu(this.actualityId);
 
     this.getCommentWithActu(this.actualityId);
 
@@ -85,6 +91,67 @@ export class DetailActualityComponent implements OnInit{
 
 
     });
+  }
+
+  getLikeByActu(idActu: number){
+
+    this.likeService.getPostActuLikes(idActu, this.app.setURL()).subscribe(reponseLikeByPostActu => {
+
+      if (reponseLikeByPostActu.message == "good"){
+
+        this.LikeAll = reponseLikeByPostActu.result;
+
+        this.nbLike = this.LikeAll?.length;
+
+      }
+
+    });
+
+
+  }
+
+
+  addLikeByActu(){
+
+    this.ipService.getMyIp(this.app.urlIp).subscribe(reponseTyroIp => {
+
+
+              let bodyNoJson: any = {
+                "id_postactu": this.actualityId,
+                "ip": reponseTyroIp.ip,
+                "del": true
+              }
+
+              let bodyJson = JSON.stringify(bodyNoJson);
+
+              this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddLikeByPostActu => {
+
+                console.log(reponseAddLikeByPostActu);
+
+              });
+
+      },
+      (error) => {
+
+              let bodyNoJson: any = {
+                "id_postactu": this.actualityId,
+                "del": true
+              }
+
+              let bodyJson = JSON.stringify(bodyNoJson);
+
+              this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddLikeByPostActu => {
+
+                console.log(reponseAddLikeByPostActu);
+
+              });
+
+
+      });
+
+
+
+
   }
 
   verifFollowProvider(Provider: ProviderInterface){

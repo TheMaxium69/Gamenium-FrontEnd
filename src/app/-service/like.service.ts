@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LikeInterface } from '../-interface/like.interface';
 import {ApicallInterface} from "../-interface/apicall.interface";
@@ -10,32 +10,23 @@ import {ApicallInterface} from "../-interface/apicall.interface";
 export class LikeService {
 
   constructor(private http: HttpClient) {}
-  createPostActuLike(url: string, postId: number, userId: number, ip: string): Observable<ApicallInterface> {
-    const body = { user_id: userId, ip, post_id: postId };
-    return this.http.post<ApicallInterface>(url + '/like', body);
+
+  getPostActuLikes(idPost: number, url: string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/like/post-actu/' + idPost);
   }
 
-  createCommentLike(url: string, idComment: number, userId: number, ip: string): Observable<ApicallInterface> {
-    const body = { user_id: userId, ip, comment_id: idComment };
-    return this.http.post<ApicallInterface>(url + '/like', body);
+  getCommentLikes(idComment: number, url: string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/like/comment/' + idComment);
   }
 
-  deletePostActuLike(url: string, postId: number, userId: number): Observable<ApicallInterface> {
-    const options = { body: { user_id: userId } };
-    return this.http.delete<ApicallInterface>(url + '/like/post-actu/${postId}', options);
+  addLikePostActu(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.post<ApicallInterface>(url + '/like/post-actu/', body, option);
   }
 
-  deleteCommentLike(url: string, idComment: number, userId: number): Observable<ApicallInterface> {
-    const options = { body: { user_id: userId } };
-    return this.http.delete<ApicallInterface>(url + '/like/comment/' + idComment, options);
+  addLikeComment(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.post<ApicallInterface>(url + '/like/comment/', body, option);
   }
 
-  getPostActuLikes(url: string, idPost: number): Observable<LikeInterface[]> {
-    return this.http.get<LikeInterface[]>(url + '/like/post-actu/' + idPost);
-  }
 
-  getCommentLikes(url: string, idComment: number): Observable<LikeInterface[]> {
-    return this.http.get<LikeInterface[]>(url + '/like/comment/' + idComment);
-  }
 
 }
