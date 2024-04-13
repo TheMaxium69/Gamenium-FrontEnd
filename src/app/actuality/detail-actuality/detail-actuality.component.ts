@@ -103,6 +103,15 @@ export class DetailActualityComponent implements OnInit{
 
         this.nbLike = this.LikeAll?.length;
 
+        const btnActuLike = document.getElementById("actulike");
+        this.LikeAll?.forEach((Like:LikeInterface) => {
+
+          if (Like.user.id == this.userConnectedId && btnActuLike){
+            this.liked(btnActuLike, "add")
+          }
+
+        })
+
       }
 
     });
@@ -112,6 +121,8 @@ export class DetailActualityComponent implements OnInit{
 
 
   addLikeByActu(){
+
+    const btnActuLike = document.getElementById("actulike");
 
     this.ipService.getMyIp(this.app.urlIp).subscribe(reponseTyroIp => {
 
@@ -128,6 +139,37 @@ export class DetailActualityComponent implements OnInit{
 
                 console.log(reponseAddLikeByPostActu);
 
+                if (reponseAddLikeByPostActu.message == "good"){
+
+                  if (reponseAddLikeByPostActu.result == "like is delete"){
+
+                    /*RETIRER LE LIKE*/
+                    if (this.nbLike){
+                      this.nbLike -= 1;
+                    }
+
+                    if (btnActuLike){
+                      this.liked(btnActuLike, "del")
+                    }
+
+                  } else {
+
+                    /*AJOTUER LE LIKE*/
+                    if (this.nbLike){
+                      this.nbLike += 1;
+                    } else {
+                      this.nbLike = 1;
+                    }
+
+                    if (btnActuLike){
+                      this.liked(btnActuLike, "add")
+                    }
+
+                  }
+
+
+                }
+
               });
 
       },
@@ -143,6 +185,11 @@ export class DetailActualityComponent implements OnInit{
               this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddLikeByPostActu => {
 
                 console.log(reponseAddLikeByPostActu);
+
+                if (reponseAddLikeByPostActu.message == "good"){
+
+
+                }
 
               });
 
@@ -278,5 +325,27 @@ export class DetailActualityComponent implements OnInit{
 
   }
 
+  liked(btnActuLike: HTMLElement, state: String) {
+
+    if (state == "add"){
+
+      if (this.actualitySelected?.Provider?.color){
+        btnActuLike.style.color = this.actualitySelected.Provider.color;
+      } else {
+        btnActuLike.style.color = "red";
+      }
+      btnActuLike.classList.remove("ri-heart-3-line");
+      btnActuLike.classList.add("ri-heart-3-fill");
+
+    } else {
+
+      btnActuLike.style.color = "rgb(46, 58, 89)";
+      btnActuLike.classList.add("ri-heart-3-line");
+      btnActuLike.classList.remove("ri-heart-3-fill");
+
+    }
+
+
+  }
 
 }

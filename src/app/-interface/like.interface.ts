@@ -1,15 +1,16 @@
 //import { UsereInterface } from "./user.interface";
 import { PostActuInterface} from "./post-actu.interface";
 import { CommentInterface} from "./comment.interface";
+import {UserInterface} from "./user.interface";
 
 export interface LikeInterface {
 
     id:number,
     createdAt:string,
-    //user:
+    user:UserInterface,
     post:PostActuInterface[] | undefined,
     comment:CommentInterface[] | undefined,
-    
+
 }
 
 
