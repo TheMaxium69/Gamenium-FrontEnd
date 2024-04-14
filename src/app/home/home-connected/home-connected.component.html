@@ -37,9 +37,10 @@
   <div class="profile-gamer">
     <div class="profile-card-container">
       <div class="profile-card">
-        <div class="profile-color"></div>
-        <div class="profile-picture"></div>
-        <p class="name">Mario</p>
+        <div class="profile-color" style="background-color: {{ isColor }}!important"></div>
+        <div *ngIf="profilSelected?.picture" class="profile-picture" style="background-image: url('{{ profilSelected?.picture }}')"></div>
+        <div *ngIf="!profilSelected?.picture" class="profile-picture" style="background-image: url('https://tyrolium.fr/generate-pp/?l={{ extractFirstLetter(userConnected?.displayname) }}')"></div>
+        <p class="name" style="color: {{ isColor }}!important">{{ userConnected?.username }}</p>
         <p class="follow">Suivre</p>
       </div>
     </div>
