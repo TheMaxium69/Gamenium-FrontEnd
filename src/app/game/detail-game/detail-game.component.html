@@ -16,9 +16,6 @@
 
 -->
 
-  <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#ajouteGame">Add Game To Colletion</button><br>
-  <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#noteGame">Add Note Game</button>
-
 
 
 
@@ -328,6 +325,8 @@
             </div>
         </div>
     </div>
+
+    <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#noteGame">Add Note Game</button>
   </div>
 
 
@@ -400,6 +399,91 @@
                         <p>Title 6 / 6</p>
                       </div>
                     </article>
+                    
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.icon_url">
+                      <img [src]="gameSelected?.image?.icon_url" alt="icon_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 1 / 8</p>
+                      </div>
+                    </article>
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.tiny_url">
+                      <img [src]="gameSelected?.image?.tiny_url" alt="tiny_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 2 / 8</p>
+                      </div>
+                    </article>
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.small_url">
+                      <img [src]="gameSelected?.image?.small_url" alt="small_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 3 / 8</p>
+                      </div>
+                    </article>
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.super_url">
+                      <img [src]="gameSelected?.image?.super_url" alt="super_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 3 / 8</p>
+                      </div>
+                    </article>
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.thumb_url">
+                      <img [src]="gameSelected?.image?.thumb_url" alt="thumb_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 4 / 8</p>
+                      </div>
+                    </article>
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.medium_url">
+                      <img [src]="gameSelected?.image?.medium_url" alt="medium_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 5 / 8</p>
+                      </div>
+                    </article>
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.screen_url">
+                      <img [src]="gameSelected?.image?.screen_url" alt="screen_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 6 / 8</p>
+                      </div>
+                    </article>
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.original_url">
+                      <img [src]="gameSelected?.image?.original_url" alt="original_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 7 / 8</p>
+                      </div>
+                    </article>
+
+                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.screen_large_url">
+                      <img [src]="gameSelected?.image?.screen_large_url" alt="screen_large_url">
+                      <div class="infos">
+                        <div class="carrousel-sep"></div>
+                        <p>Title 8 / 8</p>
+                      </div>
+                    </article>
+
+
+
+
+
+
+
+
+
+
+
+
                   </div>
                 </div>
               </div>
@@ -430,7 +514,7 @@
               <div class="info-provider">Provider</div>
               <div class="info-release-date">Date de sortie:{{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
           </div>
-          <button class="game-add-button">
+          <button class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame">
               <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
           </button>
       </div>
