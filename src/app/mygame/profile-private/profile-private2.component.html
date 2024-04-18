@@ -336,7 +336,7 @@
         <input *ngIf="!this.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="onSubmitSearch(addForm)">
         <br>
 
-        <div *ngIf="searchResults && searchResults.length > 0  && !this.gameSelected" class="row">
+        <div *ngIf="searchResults && searchResults.length > 0" class="row">
           <div class="col-md-4" *ngFor="let result of searchResults">
             <div class="card mb-4 shadow-sm" (click)="selectGame(result)">
               <img [src]="result.image.icon_url" class="bd-placeholder-img card-img-top" alt="Image du jeu">
@@ -391,23 +391,8 @@
 
         <br>
         <h5><span style="color: red">*</span>Recherchez un jeu :</h5>
-        <input *ngIf="this.gameSelected" type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }}">
-        <input *ngIf="!this.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="onSubmitSearch(noteGamePage2)">
+        <input type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="onSubmitSearch(addForm)">
         <br>
-        <div *ngIf="searchResults && searchResults.length > 0 && !this.gameSelected" class="row">
-          <div class="col-md-4" *ngFor="let result of searchResults">
-            <div class="card mb-4 shadow-sm" (click)="selectGame(result)">
-              <img [src]="result.image.icon_url" class="bd-placeholder-img card-img-top" alt="Image du jeu">
-              <div class="card-body">
-                <p class="card-text">{{ result.name }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <br>
         <h6><span style="color: red">*</span>Note de ton jeux :</h6>
         <input type="number" placeholder="10" name="noteGame" ngModel>/20
@@ -420,3 +405,12 @@
     </div>
   </div>
 </div>
+
+<!--<div class="modal fade text-center" id="noteGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+
+

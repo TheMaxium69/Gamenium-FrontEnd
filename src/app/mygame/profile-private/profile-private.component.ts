@@ -173,24 +173,30 @@ export class ProfilePrivateComponent implements OnInit {
     });
   }
 
+
+
+
+
+
+
   // Méthode pour effectuer la recherche de jeux
-  searchGames(searchValue: string, limit: number, url: string): void {
-    this.myGameService.searchGames(searchValue, limit, url).subscribe(
+  onSubmitSearch(form: NgForm): void {
+
+    const searchValue = form.value['searchValue'];
+
+    this.myGameService.searchGames(searchValue, 5, this.app.setURL()).subscribe(
+
       (results: GameInterface[]) => {
         this.searchResults = results;
       },
       (error: any) => {
         console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
       }
+
     );
 
   }
 
-  // Méthode appelée lors de la soumission du formulaire de recherche
-  onSubmitSearch(form: NgForm) {
-    const searchValue = form.value['searchValue'];
-    const limit = 5;
-    const url = 'https://127.0.0.1:8000';
-    this.searchGames(searchValue, limit, url);
-  }
+
+
 }
