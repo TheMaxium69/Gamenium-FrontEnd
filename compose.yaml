@@ -1,0 +1,9 @@
+services:
+  node:
+    image: node:20
+    ports:
+      - 4200:4200
+    volumes:
+      - ./:/node
+    command: 'sh -c "npm install --force; exec ./node_modules/.bin/ng serve --host 0.0.0.0"'
+    working_dir: /node
