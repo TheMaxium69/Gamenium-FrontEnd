@@ -5,6 +5,7 @@ import {PostActuService} from "../../-service/post-actu.service";
 import {PostActuInterface} from "../../-interface/post-actu.interface";
 import { IpService } from 'src/app/-service/ip.service';
 import { LikeService } from 'src/app/-service/like.service';
+import { LikeInterface } from 'src/app/-interface/like.interface';
 
 @Component({
   selector: 'app-card-actuality',
@@ -15,7 +16,9 @@ export class CardActualityComponent implements OnInit {
 
   isLogIn:boolean|undefined;
   userConnected:UserInterface|undefined;
+  userConnectedId:number|undefined;
   postActuFollowOrAll:PostActuInterface[] = [];
+  LikeAll: LikeInterface[]|undefined;
 
   constructor(private app:AppComponent,
     private ipService: IpService,
@@ -29,6 +32,7 @@ export class CardActualityComponent implements OnInit {
 
     if (this.isLogIn){
       // Faire une recherche sur ces follow
+      this.userConnectedId = this.app.userConnected.id;
       this.userConnected = this.app.userConnected;
 
       if (this.userConnected?.id){
@@ -57,11 +61,32 @@ export class CardActualityComponent implements OnInit {
       
       if (responseActu.message == "good"){
         this.postActuFollowOrAll = responseActu.result;
-        console.log(this.postActuFollowOrAll)
       }
 
+    });
+
+  }
+
+  getLikeByActu(idActu: number){
+
+    this.likeService.getPostActuLikes(idActu, this.app.setURL()).subscribe(reponseLikeByPostActu => {
+
+      if (reponseLikeByPostActu.message == "good"){ 
+
+        this.LikeAll = reponseLikeByPostActu.result;
+
+        this.LikeAll?.forEach((Like:LikeInterface) => {
+
+          if (Like.user.id == this.userConnectedId){
+            this.liked(idActu, "add")
+          }
+
+        })
+
+      }
 
     });
+
 
   }
 
@@ -89,12 +114,10 @@ export class CardActualityComponent implements OnInit {
           if (cardActuLike) {
 
             if (reponseAddLikeByPostActu.result == "like is delete"){
-                cardActuLike.classList.add("ri-heart-line");
-                cardActuLike.classList.remove("ri-heart-fill");
+                this.liked(id, "del");
                 
               } else {
-                cardActuLike.classList.remove("ri-heart-line");
-                cardActuLike.classList.add("ri-heart-fill");
+                this.liked(id, "add");
               }
           }
         }
@@ -126,28 +149,18 @@ export class CardActualityComponent implements OnInit {
 
   }
 
-//   liked(cardActuLike: HTMLElement, state: String) {
+  liked(id: number, state: String) {
+    const cardActuIcon = document.querySelector("#likeIcon"+id);
 
-//     if (state == "add"){
+    if (state == "add" && cardActuIcon){
+      cardActuIcon.classList.remove("ri-heart-line");
+      cardActuIcon.classList.add("ri-heart-fill");
 
-//       if (this.actualitySelected?.Provider?.color){
-//         cardActuLike.style.color = this.actualitySelected.Provider.color;
-//       } else {
-//         cardActuLike.style.color = "red";
-//       }
-//       cardActuLike.classList.remove("ri-heart-3-line");
-//       cardActuLike.classList.add("ri-heart-3-fill");
+    } else if (state == "del" && cardActuIcon) {
+      cardActuIcon.classList.add("ri-heart-line");
+      cardActuIcon.classList.remove("ri-heart-fill");
 
-//     } else {
-
-//       cardActuLike.style.color = "rgb(46, 58, 89)";
-//       cardActuLike.classList.add("ri-heart-3-line");
-//       cardActuLike.classList.remove("ri-heart-3-fill");
-
-//     }
-//   }
-
-// }
-
+    }
+  }
 
 }
