@@ -19,8 +19,10 @@ export class CardActualityComponent implements OnInit {
   userConnectedId:number|undefined;
   postActuFollowOrAll:PostActuInterface[] = [];
   LikeAll: LikeInterface[]|undefined;
+  isLiked: boolean | undefined;
 
-  constructor(private app:AppComponent,
+  constructor(
+    private app:AppComponent,
     private ipService: IpService,
     private likeService: LikeService,
     private postActuService:PostActuService
@@ -61,6 +63,10 @@ export class CardActualityComponent implements OnInit {
       
       if (responseActu.message == "good"){
         this.postActuFollowOrAll = responseActu.result;
+
+        this.postActuFollowOrAll.forEach((actu: any) => {
+          this.getLikeByActu(actu.id);
+        });
       }
 
     });
@@ -75,24 +81,24 @@ export class CardActualityComponent implements OnInit {
 
         this.LikeAll = reponseLikeByPostActu.result;
 
-        this.LikeAll?.forEach((Like:LikeInterface) => {
-
-          if (Like.user.id == this.userConnectedId){
-            this.liked(idActu, "add")
+        this.LikeAll?.forEach((like: LikeInterface) => {
+          if (like.user.id === this.userConnectedId) {
+            this.isLiked = true;
+            console.log(idActu, this.isLiked)
+          } else {
+            this.isLiked = false;
           }
-
-        })
+        });
 
       }
 
     });
 
-
   }
 
   onClickLike(id: number){
-    const cardActuLike = document.querySelector(".cardActuLike");
-    console.log(cardActuLike)
+    const cardActuIcon = document.querySelector(`#likeIcon${id}`);
+    console.log(this.isLiked)
 
     this.ipService.getMyIp(this.app.urlIp).subscribe(reponseTyroIp => {
 
@@ -111,7 +117,7 @@ export class CardActualityComponent implements OnInit {
 
         if (reponseAddLikeByPostActu.message == "good"){
 
-          if (cardActuLike) {
+          if (cardActuIcon) {
 
             if (reponseAddLikeByPostActu.result == "like is delete"){
                 this.liked(id, "del");
@@ -150,7 +156,7 @@ export class CardActualityComponent implements OnInit {
   }
 
   liked(id: number, state: String) {
-    const cardActuIcon = document.querySelector("#likeIcon"+id);
+    const cardActuIcon = document.querySelector(`#likeIcon${id}`);
 
     if (state == "add" && cardActuIcon){
       cardActuIcon.classList.remove("ri-heart-line");

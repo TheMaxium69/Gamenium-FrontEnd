@@ -28,7 +28,8 @@
 
 <!--            <ng-container *ngIf="1 == 2">-->
               <div class="active" (click)="onClickLike(actu.id)">
-                <i id="likeIcon{{actu.id}}" class="cardActuLike ri-heart-fill" style="color: {{ actu.Provider?.color }}"></i>
+                <i id="likeIcon{{actu.id}}" class="cardActuLike" style="color: {{ actu.Provider?.color }}"
+                [class.ri-heart-fill]="isLiked"></i>
               </div>
 <!--            </ng-container>-->
           </div>
