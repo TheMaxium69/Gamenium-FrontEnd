@@ -15,7 +15,7 @@
               {{ actu.Provider?.displayName }}
             </div>
           </a>
-          <div class="card-i d-flex">
+          <div class="card-i d-flex" onclick="event.stopPropagation();">
             <div>
               <i class="ri-chat-3-line"></i>
             </div>
@@ -27,7 +27,7 @@
 <!--            </ng-container>-->
 
 <!--            <ng-container *ngIf="1 == 2">-->
-              <div class="active">
+              <div class="active" (click)="onClickLike(actu.id)">
                 <i class="ri-heart-fill" style="color: {{ actu.Provider?.color }}!important"></i>
               </div>
 <!--            </ng-container>-->

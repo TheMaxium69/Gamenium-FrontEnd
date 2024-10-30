@@ -58,4 +58,8 @@ export class CardActualityComponent implements OnInit {
 
   }
 
+  onClickLike(id: number){
+    console.log(id);
+  }
+
 }
