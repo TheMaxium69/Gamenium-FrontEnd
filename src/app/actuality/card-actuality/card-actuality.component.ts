@@ -19,7 +19,8 @@ export class CardActualityComponent implements OnInit {
   userConnectedId:number|undefined;
   postActuFollowOrAll:PostActuInterface[] = [];
   LikeAll: LikeInterface[]|undefined;
-  isLiked: boolean | undefined;
+
+  likedStatus: { [key: number]: boolean } = {};
 
   constructor(
     private app:AppComponent,
@@ -63,7 +64,7 @@ export class CardActualityComponent implements OnInit {
       
       if (responseActu.message == "good"){
         this.postActuFollowOrAll = responseActu.result;
-
+        console.log(this.postActuFollowOrAll)
         this.postActuFollowOrAll.forEach((actu: any) => {
           this.getLikeByActu(actu.id);
         });
@@ -73,32 +74,26 @@ export class CardActualityComponent implements OnInit {
 
   }
 
-  getLikeByActu(idActu: number){
-
+  getLikeByActu(idActu: number) {
     this.likeService.getPostActuLikes(idActu, this.app.setURL()).subscribe(reponseLikeByPostActu => {
-
-      if (reponseLikeByPostActu.message == "good"){ 
-
+      if (reponseLikeByPostActu.message === "good") {
+        let isLiked = false;
+  
         this.LikeAll = reponseLikeByPostActu.result;
 
         this.LikeAll?.forEach((like: LikeInterface) => {
           if (like.user.id === this.userConnectedId) {
-            this.isLiked = true;
-            console.log(idActu, this.isLiked)
-          } else {
-            this.isLiked = false;
+            isLiked = true;
           }
         });
-
+  
+        this.likedStatus[idActu] = isLiked;
       }
-
     });
-
   }
-
+  
   onClickLike(id: number){
     const cardActuIcon = document.querySelector(`#likeIcon${id}`);
-    console.log(this.isLiked)
 
     this.ipService.getMyIp(this.app.urlIp).subscribe(reponseTyroIp => {
 

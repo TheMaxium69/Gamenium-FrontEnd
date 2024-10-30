@@ -28,8 +28,9 @@
 
 <!--            <ng-container *ngIf="1 == 2">-->
               <div class="active" (click)="onClickLike(actu.id)">
-                <i id="likeIcon{{actu.id}}" class="cardActuLike" style="color: {{ actu.Provider?.color }}"
-                [class.ri-heart-fill]="isLiked"></i>
+                <i id="likeIcon{{actu.id}}" class="cardActuLike " style="color: {{ actu.Provider?.color }}"
+                [class.ri-heart-fill]="likedStatus[actu.id]"
+                [class.ri-heart-line]="!likedStatus[actu.id]"></i>  
               </div>
 <!--            </ng-container>-->
           </div>
