@@ -40,6 +40,7 @@
           <h4>(Vous) <span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
             <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
               <img class="badgeIMG" src="{{ badge.picture?.url }}">
+              <i class="ri-delete-bin-line" (click)="onDeleteBtnClick(comment.id)" style="color: red;"></i>
             </ng-container>
 
           </h4>
@@ -54,8 +55,7 @@
         <h4 style="color: {{ comment.user.color }}">{{ comment.user.displayname }}
           <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
             <img class="badgeIMG" src="{{ badge.picture?.url }}">
-          </ng-container>
-
+          </ng-container>  
         </h4>
         <p>{{comment.content}}</p>
       </div>

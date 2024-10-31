@@ -177,5 +177,8 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
+  onDeleteBtnClick(commentId: number) {
+    console.log(commentId);
+  }
 
 }
