@@ -25,4 +25,8 @@ export class PostActuService {
     return this.http.get<ApicallInterface>(url + `/latestactubyprovider/` + id );
   }
 
+  getPostByProvider(id:number, url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/postByProvider/' + id)
+  }
+
 }

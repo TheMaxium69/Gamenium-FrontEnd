@@ -6,6 +6,7 @@ import {PostActuInterface} from "../../-interface/post-actu.interface";
 import { IpService } from 'src/app/-service/ip.service';
 import { LikeService } from 'src/app/-service/like.service';
 import { LikeInterface } from 'src/app/-interface/like.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-actuality',
@@ -18,7 +19,9 @@ export class CardActualityComponent implements OnInit {
   userConnected:UserInterface|undefined;
   userConnectedId:number|undefined;
   postActuFollowOrAll:PostActuInterface[] = [];
+  postByProvider:PostActuInterface[] = [];
   LikeAll: LikeInterface[]|undefined;
+  providerId: number | undefined;
 
   likedStatus: { [key: number]: boolean } = {};
 
@@ -26,7 +29,9 @@ export class CardActualityComponent implements OnInit {
     private app:AppComponent,
     private ipService: IpService,
     private likeService: LikeService,
-    private postActuService:PostActuService
+    private postActuService:PostActuService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -42,8 +47,17 @@ export class CardActualityComponent implements OnInit {
         this.followActuByUser(this.userConnected.id);
       }
 
-    } else {
+      if (this.router.url.includes('provider')) {
+        this.route.paramMap.subscribe(params => {
+          this.providerId = Number(params.get('id'))
+        })
 
+        if (typeof this.providerId == 'number') {
+          return this.getPostByProvider(this.providerId)
+        }
+      }
+    
+    } else if (this.postActuFollowOrAll.length == 0) {
       this.getActuAll()
     }
 
@@ -53,12 +67,14 @@ export class CardActualityComponent implements OnInit {
 
     console.log("recupere les follows")
 
-    this.getActuAll();
+    if (!this.router.url.includes('provider')) {
+      this.getActuAll();
+    }
     
   }
   
   getActuAll(){
-    
+    console.log('get actu all')
     this.postActuService.getActuAll(this.app.setURL()).subscribe((responseActu) => {
       console.log(responseActu);
       
@@ -72,6 +88,22 @@ export class CardActualityComponent implements OnInit {
 
     });
 
+  }
+
+  getPostByProvider(id: number) {
+    console.log('get post by provider')
+    this.postActuService.getPostByProvider(id, this.app.setURL()).subscribe((response) => {
+      console.log(response);
+
+      if (response.message === "good") {
+        this.postActuFollowOrAll = response.result;
+        console.log(this.postByProvider);
+        this.postActuFollowOrAll.forEach((actu: any )=> {
+          this.getLikeByActu(actu.id)
+        });
+      }
+
+    })
   }
 
   getLikeByActu(idActu: number) {
@@ -163,5 +195,7 @@ export class CardActualityComponent implements OnInit {
 
     }
   }
+
+
 
 }
