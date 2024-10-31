@@ -42,6 +42,7 @@ export class AppComponent {
 
   AppEnv: string = "DEV"; // DEV or PROD or PRODMAX
   urlApiDev: string = "http://127.0.0.1:8000";
+  urlApiDevMax: string = "https://127.0.0.1:8000";
   urlApiProd: string = "http://vps216.tyrolium.fr:8000";
   urlApiProdMax: string = "http://home.vps216.tyrolium.fr:8000";
   urlIp:string = "https://tyrolium.fr/Contenu/Php/ip.php?api=json"
@@ -262,8 +263,10 @@ export class AppComponent {
       return this.urlApiDev;
     } else if (this.AppEnv == "PROD") {
       return this.urlApiProd;
-    } else {
+    } else if (this.AppEnv == "PRODMAX") {
       return this.urlApiProdMax;
+    } else {
+      return this.urlApiDevMax;
     }
 
   }
