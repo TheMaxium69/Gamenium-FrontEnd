@@ -100,7 +100,7 @@
             <div class="blur"></div>
             <img src="{{ game.image?.thumb_url }}" alt="...">
           </ng-container> -->
-      <div id="card-user">
+      <div id="card-user" class="d-flex">
         <div class="circleImage" style="background-image: url('{{ user.pp?.url }}');"></div> 
         <h2 class="card-title">{{ user.username }}</h2><br>
       </div>
@@ -112,42 +112,23 @@
 
 </ng-container>
 
-<section id="actu-all">
 <ng-container *ngIf="searchType == 'postactu'">
 
-  <div class="d-flex justify-content-center gap-5 container">
   <ng-container *ngFor="let postactu of postactus">
 
-      <div class="card" routerLink="/actuality/{{ postactu.id }}">
-        <img src="{{ postactu.picture.url }}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ postactu.title }}</h5>
-          <div class="card-hr">
-            <hr>
-          </div>
-          <div class="card-end d-flex">
-            <a routerLink="/provider/{{ postactu.Provider?.id }}" class="btn" style="background-color: {{ postactu.Provider?.color }}97!important">
-              <div class="d-flex">
-                <div class="provider-img"
-                  style="background-image: url('{{ postactu.Provider?.picture?.url }}')"></div>
-                {{ postactu.Provider?.displayName }}
-                </div>
-            </a>
-            <div class="card-i d-flex">
-              <div>
-                <i class="ri-chat-3-line"></i>
-              </div>
+    <div class="container" routerLink="/actuality/{{ postactu.id }}">
 
-            </div>
-            </div>
-          </div>
-      </div>
-    </ng-container>
-  </div>      
-    
+      <h2>{{ postactu.title }}</h2><br>
+      <h3>{{ postactu.Provider?.displayName }}</h3><br>
+      <p>{{ postactu.content }}</p><br>
+
+    </div>
+
+
   </ng-container>
-</section>
-  
+
+</ng-container>
+
 <ng-container *ngIf="searchType == 'provider'">
 
   <ng-container *ngFor="let provider of providers">

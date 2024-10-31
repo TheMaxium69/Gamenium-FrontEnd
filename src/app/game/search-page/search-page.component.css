@@ -272,7 +272,7 @@
   width: 120px;
   height: 120px;
   border-radius: 100%;
-  margin-top: -50px;
+  margin:auto;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -280,8 +280,9 @@
 }
 
 #card-user {
-  width: 26rem;
+  width: 16rem;
   border: unset!important;
   box-shadow: 1px 2px 11px #a6a6a6;
   border-radius: 14px;
+  text-align: center;
 }
