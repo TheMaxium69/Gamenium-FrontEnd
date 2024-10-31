@@ -58,7 +58,7 @@
                 </div>
             </div>
         
-              <div id="joinedAt">
+              <div id="joinedAt" *ngIf="providerSelected?.joindeAt">
                 <img src="../../../assets/logo.png" alt="logo_gamenium">
                 <p style="color: {{ providerSelected?.color }}"> à rejoint Gamenium le </p>
                 <p>{{ providerSelected?.joindeAt }}</p>
