@@ -28,8 +28,22 @@
   margin-bottom: 40px;
   margin-left: auto;
 }
+
+#provider-nav-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  max-width: 100vw;
+  scrollbar-width: none;
+  cursor: pointer;
+}
+
+#provider-nav-container::-webkit-scrollbar {
+  display: none;
+}
+
 .navbar-actuality ul {
-  position: absolute;
+  position: relative;
 }
 .navbar-actuality ul li{
   list-style-type: none;

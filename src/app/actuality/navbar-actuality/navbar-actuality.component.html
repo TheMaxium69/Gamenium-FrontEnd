@@ -1,8 +1,11 @@
 <div class="fixed-top">
   <div class="navbar-actuality d-flex">
-    <div>
+    <div id="provider-nav-container">
 
-      <ul class="d-flex">
+      <ul class="d-flex"
+      (mousedown)="startDrag($event)"
+      (mousemove)="move($event)"
+      (mouseup)="stopDrag()">
         <ng-container *ngIf="isLogIn">
 <!--          <h1>Abonne toi pour avoir des actualité</h1>-->
           <ng-container *ngFor="let provider of providerFollowOrAll">

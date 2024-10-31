@@ -16,6 +16,9 @@ export class NavbarActualityComponent implements OnInit {
   isLogIn:boolean|undefined;
   userConnected:UserInterface|undefined;
   providerFollowOrAll:ProviderInterface[] = [];
+  mouseDown: boolean = false;
+  startX: number = 0;
+  scrollLeft: number = 0;
 
   constructor(private app:AppComponent,
               private providerService:ProviderService,
@@ -76,10 +79,38 @@ export class NavbarActualityComponent implements OnInit {
 
   }
 
+  // Provider navbar scroll effect
+  startDrag(mouse: MouseEvent): void {
+    const slider = document.querySelector('#provider-nav-container') as HTMLElement;
 
+    if (slider) {
+        this.mouseDown = true;
+        this.startX = mouse.pageX - slider.offsetLeft;
+        this.scrollLeft = slider.scrollLeft;
+    } 
+    
+  }
 
+  stopDrag(): void {
+    this.mouseDown = false;
+  }
 
+  move(mouse: MouseEvent): void {
 
+    if (!this.mouseDown) {
+      return;
+    }
 
+    const slider = document.querySelector('#provider-nav-container') as HTMLElement;
+    
+    mouse.stopPropagation();
 
+    if (slider) {
+      const x = mouse.pageX - slider.offsetLeft;
+      const scroll = x - this.startX;
+      slider.scrollLeft = this.scrollLeft - scroll;
+    }
+    
+  }
+  
 }
