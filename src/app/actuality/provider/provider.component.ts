@@ -80,4 +80,8 @@ export class ProviderComponent implements OnInit{
     });
   }
 
+  onFollowBtnClick(providerId: number) {
+    console.log(providerId);
+  }
+
 }
