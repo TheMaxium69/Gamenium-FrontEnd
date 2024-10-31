@@ -32,7 +32,8 @@ export class SearchPageComponent implements OnInit{
     private userService: UserService,
     private postactuService: PostActuService,
     private providerService: ProviderService,
-    private app: AppComponent) {
+    private app: AppComponent
+  ) {
   }
 
   ngOnInit(): void {
