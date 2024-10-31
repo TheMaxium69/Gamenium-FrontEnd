@@ -184,7 +184,6 @@
   justify-content: center;
   gap: 35px;
   flex-wrap: wrap;
-  max-width: 1355px;
   margin-bottom: 120px;
 }
 
@@ -261,7 +260,7 @@
 
 /* BASTIEN <3 */
 #show-user {
-  justify-content: center;
+  justify-content: start;
   gap: 35px;
   flex-wrap: wrap;
   max-width: 1355px;
@@ -282,6 +281,38 @@
 }
 
 #card-user {
+  width: 16rem;
+  height: 16rem;
+  border: unset!important;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#show-provider {
+  justify-content: start;
+  gap: 35px;
+  flex-wrap: wrap;
+  max-width: 1355px;
+  margin-bottom: 120px;
+}
+
+#show-provider .circleImage{
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 2px 2px 9px #888;
+}
+
+#card-provider {
   width: 16rem;
   height: 16rem;
   border: unset!important;
