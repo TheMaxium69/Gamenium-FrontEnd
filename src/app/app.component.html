@@ -3,7 +3,8 @@
 
 <ng-container *ngIf="Debug">
   <div *ngIf="AppEnv == 'DEV'" class="bubble" style="background-color: #ffef00;">API : LOCAL</div>
-  <div *ngIf="AppEnv !== 'DEV'" class="bubble" style="background-color: #32e108;">API : SERVER</div>
+  <div *ngIf="AppEnv == 'DEVMAX'" class="bubble" style="background-color: #ffef00;">API : LOCAL</div>
+  <div *ngIf="AppEnv !== 'DEV' && AppEnv !== 'DEVMAX'" class="bubble" style="background-color: #32e108;">API : SERVER</div>
 </ng-container>
 
 <style>
