@@ -17,6 +17,7 @@ export class SearchGameComponent implements OnInit{
   games: GameInterface[] = [];
   searchValue: string = '';
   userRatingAll: UserRateInterface[] | undefined;
+  fakeRates: number[] = [8, 14, 19, 13];
 
   constructor (
     private userRateService: UserRateService,
@@ -63,4 +64,14 @@ export class SearchGameComponent implements OnInit{
   //   })
   //   console.log(`Jeux: ${id_game}, Note: ${this.userRatingAll}`)
   // }
+
+  rateAverage(tab: number[]): number{
+    if(tab.length === 0){
+      return 0;
+    }
+    const sum = tab.reduce((acc, val) => acc + val, 0);
+    return sum / tab.length;
+  }
+
+  //Je pense qu'on peut faire une fonction avec comme param l'id du jeu. Dans cette fonction on récupère d'abord le tableau de note avec getRatesByGame() et ensuite on passe ce tableau de note dans rateAverage().
 }
