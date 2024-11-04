@@ -89,7 +89,7 @@
 
     <ng-container *ngFor="let user of users">
 
-      <div routerLink="/user/{{ user.id }}">
+      <div routerLink="/profil/{{ user.id }}">
         <!-- <ng-container *ngIf="user.pp.url">
               <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
               <div class="blur"></div>
@@ -156,7 +156,7 @@
   <div  id="show-provider" class="container d-flex">
 
     <ng-container *ngFor="let provider of providers">
-      <div routerLink="/user/{{ provider.id }}">
+      <div routerLink="/provider/{{ provider.id }}">
         <!-- <ng-container *ngIf="user.pp.url">
               <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
               <div class="blur"></div>
