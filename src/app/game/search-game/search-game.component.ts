@@ -15,9 +15,11 @@ export class SearchGameComponent implements OnInit{
   games: GameInterface[] = [];
   searchValue: string = '';
 
-  constructor(private gameService: GameService,
-              private app: AppComponent,
-              private router: Router) {}
+  constructor (
+    private gameService: GameService,
+    private app: AppComponent,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
 
@@ -45,4 +47,8 @@ export class SearchGameComponent implements OnInit{
     });
 
   }
+
+  // LIKE CARD ACTU SYSTEM
+
+
 }

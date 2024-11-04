@@ -120,33 +120,7 @@
   <ng-container *ngIf="searchType == 'postactu'">
 
     <div class="d-flex justify-content-center gap-5 container">
-      <ng-container *ngFor="let postactu of postactus">
-
-        <div class="card" routerLink="/actuality/{{ postactu.id }}">
-          <img src="{{ postactu.picture.url }}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{ postactu.title }}</h5>
-            <div class="card-hr">
-              <hr>
-            </div>
-            <div class="card-end d-flex">
-              <a routerLink="/provider/{{ postactu.Provider?.id }}" class="btn" style="background-color: {{ postactu.Provider?.color }}97!important">
-                <div class="d-flex">
-                  <div class="provider-img"
-                    style="background-image: url('{{ postactu.Provider?.picture?.url }}')"></div>
-                  {{ postactu.Provider?.displayName }}
-                  </div>
-              </a>
-              <div class="card-i d-flex">
-                <div>
-                  <i class="ri-chat-3-line"></i>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
+      <app-card-actuality></app-card-actuality>
     </div>      
 
   </ng-container>
@@ -170,7 +144,7 @@
             </ng-container> -->
         <div id="card-provider">
           <div class="circleImage" style="background-image: url('{{ provider.picture?.url }}');"></div> 
-          <h2 class="card-title mt-4">{{ provider.displayName }}</h2><br>
+          <h2 class="card-title">{{ provider.displayName }}</h2><br>
           <p>{{ provider.content }}</p><br>
         </div>
 
