@@ -3,19 +3,53 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #a2a2a2;
+  background-color: white;
 }
 
 .wrapperMSG {
-  position: absolute;
   text-align: center;
   border: 2px solid #333;
   padding: 20px;
 
   background-color: white;
   box-shadow: 1px 2px 11px #a6a6a6;
-  width: 60%;
-  height: 60%;
+  width: 30%;
+  height: 30%;
   border: unset !important;
   border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.connect-btn {
+  border: none;
+  background-color: red;
+  color: white;
+  font-size: large;
+  text-decoration: none;
+  padding: 10px 50px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  max-width: 50%;
+  margin-top: 25px;
+}
+
+.title {
+  font-size: x-large;
+}
+
+@media (max-width: 991px) {
+
+  .wrapperMSG {
+    width: 300px;
+    height: 300px;
+  }
+
+  .connect-btn {
+    max-width: 90%;
+  }
 }
