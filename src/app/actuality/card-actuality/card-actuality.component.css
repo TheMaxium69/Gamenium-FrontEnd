@@ -3,7 +3,7 @@
 #actu-all{
   justify-content: center;
   gap: 35px;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   max-width: 1355px;
   margin-bottom: 120px;
 }

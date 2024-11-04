@@ -37,6 +37,15 @@ export class CardActualityComponent implements OnInit {
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
 
+    if (this.router.url.includes('provider')) {
+      this.route.paramMap.subscribe(params => {
+        this.providerId = Number(params.get('id'))
+      })
+
+      if (typeof this.providerId == 'number') {
+        return this.getPostByProvider(this.providerId)
+      }
+    }
 
     if (this.isLogIn){
       // Faire une recherche sur ces follow
