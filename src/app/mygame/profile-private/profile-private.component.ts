@@ -12,7 +12,6 @@ import { ProfilInterface } from "../../-interface/profil.interface";
 import { ProfilService } from "../../-service/profil.service";
 import { GameService } from 'src/app/-service/game.service';
 
-
 @Component({
   selector: 'app-profile-private',
   templateUrl: './profile-private.component.html',
@@ -24,12 +23,11 @@ export class ProfilePrivateComponent implements OnInit {
   myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
   userRatingAll: UserRateInterface[] | undefined;
   task: string | any;
-  searchResults: GameInterface[] | undefined; // Propriété pour stocker les résultats de la recherche de jeux
+  searchResults: GameInterface[] | undefined;
   searchValue: string = '';
   isColor: string = this.app.colorDefault;
   isPp: string | undefined;
   profilSelected: ProfilInterface | undefined;
-
 
   constructor(private app: AppComponent,
               private myGameService: GameService,
@@ -77,6 +75,49 @@ export class ProfilePrivateComponent implements OnInit {
     }
   }
 
+  /* VERIF SI IL Y A DES JEUX EPINGLES */
+  hasPinnedGames(): boolean {
+    return this.myGameHistoriqueAll?.some(game => game.is_pinned) ?? false;
+  }
+
+  /* OBTENIR LES JEUX EPINGLES */
+  getPinnedGames(): HistoryMyGameInterface[] {
+    return this.myGameHistoriqueAll?.filter(game => game.is_pinned) ?? [];
+  }
+
+  /* OBTENIR LES JEUX NON EPINGLES */
+  getUnpinnedGames(): HistoryMyGameInterface[] {
+    return this.myGameHistoriqueAll?.filter(game => !game.is_pinned) ?? [];
+  }
+
+  /* METHOD DU TOGGLE SUR BUTTON EPINGLE */
+  togglePin(myGameHistorique: HistoryMyGameInterface) {
+    // maj du pin localement
+    myGameHistorique.is_pinned = !myGameHistorique.is_pinned;
+
+    // Préparer le corps de la requête
+    const body = JSON.stringify({
+      id_game: myGameHistorique.game.id,
+      is_pinned: myGameHistorique.is_pinned,
+    });
+
+    // Envoyer la requête au backend pour mettre à jour le statut is_pinned
+    this.histoireMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken())
+      .subscribe(response => {
+        if (response.message === 'Jeu mis à jour') {
+          console.log('Statut épinglé mis à jour dans la base de données');
+        } else {
+          console.error('Échec de la mise à jour du statut épinglé :', response.message);
+          // En cas d'erreur, on rétablit l'ancien statut
+          myGameHistorique.is_pinned = !myGameHistorique.is_pinned;
+        }
+      }, error => {
+        console.error('Erreur lors de la mise à jour du statut épinglé :', error);
+        // En cas d'erreur, on rétablit l'ancien statut
+        myGameHistorique.is_pinned = !myGameHistorique.is_pinned;
+      });
+  }
+
   existingPinned(): boolean {
     if (this.myGameHistoriqueAll) {
       for (let myGame of this.myGameHistoriqueAll) {
@@ -113,7 +154,11 @@ export class ProfilePrivateComponent implements OnInit {
     const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
     this.histoireMyGameService.postMyGame(bodyMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyGameAdd => {
       if (reponseMyGameAdd.message == "add game is collection") {
-        console.log(this.gameSelected?.name, " à été ajouter");
+        console.log(this.gameSelected?.name, " a été ajouté");
+        // Actualiser la liste des jeux après l'ajout
+        if (this.userConnected) {
+          this.myGameByUser(this.userConnected.id);
+        }
       } else {
         console.log(reponseMyGameAdd);
       }
@@ -140,6 +185,10 @@ export class ProfilePrivateComponent implements OnInit {
           if (inputNote) {
             this.renderer.setProperty(inputNote, 'value', '');
           }
+          // Actualiser la liste des notes après l'ajout
+          if (this.userConnected) {
+            this.myGameByUser(this.userConnected.id);
+          }
         } else {
           console.log(reponseMyGameNoteAdd);
         }
@@ -147,14 +196,6 @@ export class ProfilePrivateComponent implements OnInit {
     } else {
       console.log("note invalide");
     }
-  }
-
-  pinnedGame(game: GameInterface) {
-    // Logique pour épingler un jeu, si nécessaire
-  }
-
-  unpinnedGame(game: GameInterface) {
-    // Logique pour désépingler un jeu, si nécessaire
   }
 
   getInfoProfile(id: number) {
@@ -173,30 +214,16 @@ export class ProfilePrivateComponent implements OnInit {
     });
   }
 
-
-
-
-
-
-
   // Méthode pour effectuer la recherche de jeux
   onSubmitSearch(form: NgForm): void {
-
     const searchValue = form.value['searchValue'];
-
     this.myGameService.searchGames(searchValue, 5, this.app.setURL()).subscribe(
-
       (results: GameInterface[]) => {
         this.searchResults = results;
       },
       (error: any) => {
         console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
       }
-
     );
-
   }
-
-
-
 }

@@ -24,4 +24,8 @@ export class HistoryMyGameService {
     return this.http.post<ApicallInterface>(url + '/addNoteMyGame/', body, option);
   }
 
+  updateMyGame(body: string, url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.put<ApicallInterface>(url + '/updateMyGame/', body, options);
+  }
+
 }
