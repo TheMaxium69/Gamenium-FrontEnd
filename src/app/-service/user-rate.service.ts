@@ -14,6 +14,8 @@ export class UserRateService {
     return this.http.get<ApicallInterface>(url + '/RatingByUser/' + id_user);
   }
 
-
+  // getRateByGame(id_game: number, url:string): Observable<ApicallInterface> {
+  //   return this.http.get<ApicallInterface>(url + '/RatingByGame/' + id_game)
+  // }
 
 }
