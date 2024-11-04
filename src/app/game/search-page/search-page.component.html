@@ -85,7 +85,7 @@
 
 <ng-container *ngIf="searchType == 'user'">
 
-  <div  id="show-user" class="container d-flex">
+  <div  id="show-user" class="container d-flex justify-content-center">
 
     <ng-container *ngFor="let user of users">
 
@@ -127,7 +127,7 @@
   </ng-container>
 
 <ng-container *ngIf="searchType == 'provider'">
-  <div  id="show-provider" class="container d-flex">
+  <div  id="show-provider" class="container d-flex justify-content-center">
 
     <ng-container *ngFor="let provider of providers">
       <div routerLink="/provider/{{ provider.id }}">
