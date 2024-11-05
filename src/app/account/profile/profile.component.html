@@ -5,7 +5,9 @@
 <div class="circle">
   <div *ngIf="profilSelected?.picture" class="circle-img" style="background-image: url('{{ profilSelected?.picture }}')"></div>
   
-  <div *ngIf="!profilSelected?.picture" class="circle-img" style="background-image: url('https://tyrolium.fr/generate-pp/?l={{ extractFirstLetter(userConnected?.displayname) }}')"></div>
+  <div *ngIf="!profilSelected?.picture" class="profilPhoto" style="background-color: white!important">
+    <p class="lettrePP" style="color: {{color}}">{{ extractFirstLetter(profilSelected?.displayname) }}</p>
+  </div>
 </div>
 
 <div class="container-fluid first-div" style="margin-bottom: 120px;">
