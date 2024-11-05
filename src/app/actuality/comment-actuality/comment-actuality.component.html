@@ -7,14 +7,15 @@
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
   <div class="comment-input">
     <div>
-      <input id="BtnAddComment" class="comment-content" type="text" placeholder="Votre Commentaire" name="content" ngModel>
+      <textarea id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre Commentaire" name="content" ngModel></textarea>
     </div>
-    <div>
-      <button class="comment-send btn btn-success" type="submit">Envoyer</button>
+    <div class="comment-send mt-2">
+      <button class=" btn btn-success" type="submit">Envoyer</button>
     </div>
   </div>
 </form>
 </ng-container>
+
 <ng-container *ngIf="!isLoggedIn">
   <form>
     <input type="text" placeholder="Connectez pour commentez" name="content" disabled>
@@ -22,7 +23,7 @@
   </form>
 </ng-container>
 
-<hr>
+<!-- <hr> -->
 
 
 <ng-container *ngIf="!isLoggedIn">
@@ -37,33 +38,43 @@
       <p>{{comment.content}}</p>
     </div>
   </ng-container>
+
 </ng-container>
+
 <ng-container *ngIf="isLoggedIn">
   <div id="yourComment">
     <ng-container *ngFor="let comment of commentByActu">
       <ng-container *ngIf="comment.user.id == userConnectedId">
         <div class="card">
-          <h4>(Vous) <span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
-            <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
-              <img class="badgeIMG" src="{{ badge.picture?.url }}">
-              <i class="ri-delete-bin-line" (click)="onDeleteBtnClick(comment.id)" style="color: red;"></i>
-            </ng-container>
-
-          </h4>
-          <p>{{comment.content}}</p>
+          <div class="comment-user">
+            <div class="img"
+             style="background-image: url({{ comment?.user?.pp?.url }})"></div>
+              <h4 class="comment-user-name">(Vous) <span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
+              <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
+                <img class="badgeIMG" src="{{ badge.picture?.url }}">
+                <i class="ri-delete-bin-line" (click)="onDeleteBtnClick(comment.id)" style="color: red;"></i>
+              </ng-container>
+            </h4>            
+          </div>
+          <p class="comment-text">{{comment.content}}</p>
         </div>
       </ng-container>
     </ng-container>
   </div>
+
   <ng-container *ngFor="let comment of commentByActu">
     <ng-container *ngIf="comment.user.id != userConnectedId">
-      <div class="card">
-        <h4 style="color: {{ comment.user.color }}">{{ comment.user.displayname }}
-          <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
-            <img class="badgeIMG" src="{{ badge.picture?.url }}">
-          </ng-container>  
-        </h4>
-        <p>{{comment.content}}</p>
+      <div class="card mb-2">
+        <div class="comment-user">
+          <div class="img"
+          style="background-image: url({{ comment?.user?.pp?.url }})"></div>
+          <h4 class="comment-user-name"><span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
+            <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
+              <img class="badgeIMG" src="{{ badge.picture?.url }}">
+            </ng-container>
+          </h4>
+        </div>
+        <p class="comment-text">{{comment.content}}</p>
       </div>
     </ng-container>
   </ng-container>

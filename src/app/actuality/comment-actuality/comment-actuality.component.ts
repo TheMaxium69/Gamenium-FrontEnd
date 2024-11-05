@@ -8,6 +8,8 @@ import {CommentService} from "../../-service/comment.service";
 import {CommentInterface} from "../../-interface/comment.interface";
 import {BadgeService} from "../../-service/badge.service";
 import {BadgeInterface} from "../../-interface/badge.interface";
+import { ProfilInterface } from 'src/app/-interface/profil.interface';
+import { ProfilService } from 'src/app/-service/profil.service';
 
 @Component({
   selector: 'app-comment-actuality',
@@ -23,13 +25,15 @@ export class CommentActualityComponent implements OnInit{
   commentByActu: CommentInterface[]|undefined;
   badgeForAllUser: any[] = [];
   newComment : CommentInterface|undefined;
+  profileInterface: ProfilInterface | undefined;
 
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,
               private app: AppComponent,
               private commentService:CommentService,
               private badgeService:BadgeService,
-              private renderer: Renderer2) {}
+              private renderer: Renderer2,
+              private profileService: ProfilService) {}
 
   ngOnInit(): void {
 

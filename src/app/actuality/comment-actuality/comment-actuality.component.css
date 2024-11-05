@@ -1,4 +1,53 @@
 .badgeIMG{
   width: 30px;
-  margin-right: 6px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.comment-user {
+  display: flex;
+  gap: 10px;
+  text-align: center;
+}
+
+.comment-user-name {
+  margin-top: 0.5rem;
+}
+
+.comment-input {
+  width: 100%;
+}
+
+.comment-content {
+  outline: none;
+  resize: none;
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.comment-send {
+  display: flex;
+  justify-content: end;
+}
+
+.img {
+  background-position: center;
+  background-size: contain;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-bottom: auto;
+  margin-top: auto;
+  margin-left: 10px;
+}
+
+.comment-text {
+  margin-left: 50px;
+}
+
+.card {
+  border: none;
+  border-bottom: 1px solid lightgray;
 }
