@@ -9,6 +9,8 @@ import {PostActuService} from "../../-service/post-actu.service";
 import {ProviderInterface} from "../../-interface/provider.interface";
 import {ProviderService} from "../../-service/provider.service";
 import {AppComponent} from "../../app.component";
+import { ProfilService } from 'src/app/-service/profil.service';
+import { ProfilInterface } from 'src/app/-interface/profil.interface';
 
 @Component({
   selector: 'app-search-page',
@@ -17,6 +19,9 @@ import {AppComponent} from "../../app.component";
 })
 export class SearchPageComponent implements OnInit{
 
+  isLoggedIn:boolean|undefined;
+
+
   searchValue: string = '';
   searchType: string | null = '';
 
@@ -24,6 +29,9 @@ export class SearchPageComponent implements OnInit{
   users: UserInterface[] = [];
   postactus: PostActuInterface[] = [];
   providers: ProviderInterface[] = [];
+  profilSelected: ProfilInterface | undefined;
+  userColor: string | undefined;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -32,11 +40,18 @@ export class SearchPageComponent implements OnInit{
     private userService: UserService,
     private postactuService: PostActuService,
     private providerService: ProviderService,
+    private profileService: ProfilService,
     private app: AppComponent
   ) {
   }
 
   ngOnInit(): void {
+
+    this.isLoggedIn = this.app.isLoggedIn;
+
+    if (this.isLoggedIn) {
+      this.updateConnect()
+    }
 
     let searchValueTemp = this.route.snapshot.paramMap.get('value');
     if (searchValueTemp && searchValueTemp !== '-'){
@@ -48,6 +63,24 @@ export class SearchPageComponent implements OnInit{
 
     this.updateAll();
 
+    console.log()
+
+  }
+
+  updateConnect(): void {
+    const userId = this.app.userConnected?.id;
+    if (userId) {
+      this.profileService.getProfilByUserId(userId, this.app.setURL()).subscribe(responseProfil => {
+        if (responseProfil.message === "good") {
+          this.profilSelected = responseProfil.result;
+          if (this.profilSelected?.themeColor) {
+            this.userColor = this.profilSelected.themeColor; 
+          }
+        } else {
+          console.error("Error: User profile not found");
+        }
+      });
+    }
   }
 
   updateAll(){
