@@ -30,6 +30,7 @@ export class DetailActualityComponent implements OnInit{
   LikeAll: LikeInterface[]|undefined;
   nbLike:number | undefined = 0;
   nbCommentaire:number = 0;
+  screenWidth: number = window.innerWidth;
 
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,
@@ -57,9 +58,20 @@ export class DetailActualityComponent implements OnInit{
 
     }
 
+    this.updateScreenWidth();
+
+    window.addEventListener('resize', this.updateScreenWidth)
 
   }
 
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', this.updateScreenWidth);
+  }
+
+  updateScreenWidth = (): void => {
+    this.screenWidth = window.innerWidth;
+    console.log(this.screenWidth);
+  };
 
   getActuById(id:number){
 

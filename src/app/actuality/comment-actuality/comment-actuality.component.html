@@ -1,12 +1,18 @@
 
 <div style="height: 50px"></div>
 
-<h1 id="comment"> Commentaire : </h1>
+<!-- <h1 id="comment"> Commentaire : </h1> -->
 
 <ng-container *ngIf="isLoggedIn">
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
-  <input id="BtnAddComment" type="text" placeholder="Votre Commentaire" name="content" ngModel>
-  <button class="btn btn-success" type="submit">Envoyé</button>
+  <div class="comment-input">
+    <div>
+      <input id="BtnAddComment" class="comment-content" type="text" placeholder="Votre Commentaire" name="content" ngModel>
+    </div>
+    <div>
+      <button class="comment-send btn btn-success" type="submit">Envoyer</button>
+    </div>
+  </div>
 </form>
 </ng-container>
 <ng-container *ngIf="!isLoggedIn">

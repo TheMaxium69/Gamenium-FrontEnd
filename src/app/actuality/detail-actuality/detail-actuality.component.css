@@ -80,9 +80,15 @@
   height:60%; */
 }
 
+.border-actu {
+  width: fit-content;
+  padding-right: 60px;
+  border-right: 1px solid black;
+}
+
 .iframe {
   position: relative;
-  left: 15%;
+  /* left: 15%; */
   border-radius: 15px;
   width: 560px;
   height: 315px;
@@ -91,7 +97,7 @@
 .provider_card {
   height: 10rem;
   width: 13rem;
-  margin-bottom: 5%;
+  margin-bottom: 25px;
   border-radius: 15px;
   box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.3);
   background: white;
@@ -197,4 +203,13 @@
 
 #wrapper {
   display: flex;
+}
+
+@media  ( max-width: 1200px){ 
+  .border-actu {
+    width: 100%;
+    padding-right: 0;
+    border: none;
+  }
+  
 }
