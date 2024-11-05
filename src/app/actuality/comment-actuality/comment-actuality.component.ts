@@ -1,4 +1,4 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
+import {Component, Input, OnInit, Renderer2} from '@angular/core';
 import {PostActuInterface} from "../../-interface/post-actu.interface";
 import {ActivatedRoute} from "@angular/router";
 import {PostActuService} from "../../-service/post-actu.service";
@@ -27,13 +27,18 @@ export class CommentActualityComponent implements OnInit{
   newComment : CommentInterface|undefined;
   profileInterface: ProfilInterface | undefined;
 
-  constructor(private route: ActivatedRoute,
-              private postActu: PostActuService,
-              private app: AppComponent,
-              private commentService:CommentService,
-              private badgeService:BadgeService,
-              private renderer: Renderer2,
-              private profileService: ProfilService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private postActu: PostActuService,
+    private app: AppComponent,
+    private commentService:CommentService,
+    private badgeService:BadgeService,
+    private renderer: Renderer2,
+    private profileService: ProfilService
+  ) {}
+
+  @Input()
+  nbComment: number | undefined;
 
   ngOnInit(): void {
 
@@ -188,5 +193,5 @@ export class CommentActualityComponent implements OnInit{
   extractFirstLetter(str: string|any): string {
     return str.charAt(0);
   }
-  
+
 }
