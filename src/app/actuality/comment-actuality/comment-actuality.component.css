@@ -41,6 +41,7 @@
   margin-bottom: auto;
   margin-top: auto;
   margin-left: 10px;
+  border: 1px solid;
 }
 
 .comment-text {
@@ -59,6 +60,7 @@
   height: 30px;
   margin-top: auto;
   margin-bottom: auto;
+  margin-left: 10px;
 }
 
 .card {
