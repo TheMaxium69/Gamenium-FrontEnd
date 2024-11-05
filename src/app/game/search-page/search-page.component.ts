@@ -116,4 +116,8 @@ export class SearchPageComponent implements OnInit{
 
     this.updateAll();
   }
+
+  extractFirstLetter(str: string|any): string {
+    return str.charAt(0);
+  }
 }
