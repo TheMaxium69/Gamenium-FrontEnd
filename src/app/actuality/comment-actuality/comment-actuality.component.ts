@@ -185,4 +185,8 @@ export class CommentActualityComponent implements OnInit{
     console.log(commentId);
   }
 
+  extractFirstLetter(str: string|any): string {
+    return str.charAt(0);
+  }
+  
 }

@@ -47,6 +47,20 @@
   margin-left: 50px;
 }
 
+.lettrePP {
+  margin: 0;
+  font-size: 18px;
+}
+
+.lettrePP-border {
+  border: 1px solid;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .card {
   border: none;
   border-bottom: 1px solid lightgray;
