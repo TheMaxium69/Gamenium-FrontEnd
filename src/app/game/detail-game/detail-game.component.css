@@ -696,7 +696,8 @@
 .pictures-separation{
     border: solid 1px;
     margin-top: 40px;
-    width: 992px;
+    width: 100%;
+    max-width: 992px;
     margin-left: auto;
     margin-right: auto;
 }
