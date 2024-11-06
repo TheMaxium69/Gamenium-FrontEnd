@@ -40,6 +40,10 @@
   display: none;
 }
 
+.card:hover #delete-comment-icon {
+  display: block;
+}
+
 .img {
   background-position: center;
   background-size: contain;

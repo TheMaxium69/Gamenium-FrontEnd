@@ -197,20 +197,4 @@ export class CommentActualityComponent implements OnInit{
     return str.charAt(0);
   }
 
-  showBin() {
-    const deleteIcon = document.getElementById('delete-comment-icon')
-    if (deleteIcon) {
-      deleteIcon.style.display = 'block'
-    }
-    console.log('je suis là :)')
-  }
-
-  hideBin() {
-    const deleteIcon = document.getElementById('delete-comment-icon')
-    if (deleteIcon) {
-      deleteIcon.style.display = 'none'
-    }
-    console.log('je suis plus là :(')
-  }
-
 }

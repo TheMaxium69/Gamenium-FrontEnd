@@ -59,7 +59,7 @@
   <div id="yourComment">
     <ng-container *ngFor="let comment of commentByActu">
       <ng-container *ngIf="comment.user.id == userConnectedId">
-        <div class="card mb-2" (mouseenter)="showBin()" (mouseleave)="hideBin()">
+        <div class="card mb-2">
           <div class="comment-user ">
 
             <!-- <div class="img"
