@@ -6,7 +6,9 @@
   position: relative;
   width: 90%;
   margin: 20px auto;
+  --userColor: red;
 }
+
 .search:before {
   position: absolute;
   top: 0;
@@ -17,13 +19,12 @@
   font-size: 40px;
   font-family: 'FontAwesome';
   content: '\f002';
-  background: red;
+  background: var(--userColor);
   text-align: center;
   color: #fff;
   border-radius: 63px;
   -webkit-font-smoothing: subpixel-antialiased;
   font-smooth: always;
-
   box-shadow: 1px 2px 11px #a6a6a6;
   margin: 10px;
 }
