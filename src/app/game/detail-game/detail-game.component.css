@@ -229,8 +229,8 @@
 
 .game-card,
 .provider-card{
-    width: 200px;
-    height: 230px;
+    width: 250px;
+    height: 207px;
     /* border:solid; */
     border-radius: 15px;
     display: flex;
@@ -256,14 +256,14 @@
     width: 110px;
     height: 110px;
     position: absolute;
-    top: 3px;
+    top: 10px;
 }
 
 .game-card-name,
 .provider-card-name{
     text-align: center;
     font-weight: bold;
-    margin-top: 45px;
+    margin-top: 55px;
 }
 
 .provider-card{
@@ -274,8 +274,6 @@
     margin-top: 15px;
     text-decoration: underline;
     font-weight: bold;
-    position: absolute;
-    bottom: 10px;
 }
 
 .follow a {
@@ -547,11 +545,16 @@
     /* background: #00000072; */
     border: solid 5px;
     cursor: pointer;
-    display: flex;
     justify-content: center;
     align-items: center;
     font-size: 44px;
     font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  #cCarousel .arrow:hover {
+    color: white;
+    background-color: #0000008c;
   }
   
   #cCarousel #prev {
@@ -661,7 +664,8 @@
 
 .card-add-to-collection {
     display: flex;
-    width: 992px;
+    max-width: 992px;
+    width: 100%;
     height: 104px;
     margin-left: auto;
     margin-right: auto;
