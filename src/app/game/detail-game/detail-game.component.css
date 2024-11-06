@@ -115,7 +115,7 @@
 .information .title {
     color: #333; 
     margin-bottom: 0;
-    
+
 }
 
 
@@ -299,169 +299,213 @@
 
 /* ////////////// DEBUT DE ZONE RATINGS ///////////// */
 
-.ratings{
-    width: 992px;
-    height: 580px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 80px;
-    /* border: solid; */
+
+.ratings {
+    max-width: 992px;
+    width: 100%;
+    margin: 80px auto;
     border-radius: 15px;
-    box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.42);
-}
-
-.press-ratings,
-.gamers-ratings{
-    /* border: solid; */
-    display: flex;
-    width:992px;
-    /* height: 300px; */
-}
-
-.press-ratings{
-    height: 300px;
-    padding-top: 30px;
-}
-
-.gamers-ratings{
-    height: 170px;
-    margin-top: 20px;
-}
-
-.press-ratings-details,
-.press-ratings-total,
-.gamers-ratings-details,
-.gamers-ratings-total{
-    width: 470px;
-    /* height: 300px; */
-    /* border: blue solid; */
+    box-shadow: 0px 0px 70px 0px rgba(0, 0, 0, 0.42);
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    position: relative;
-    /* justify-content: flex-end; */
-}
+    gap: 20px;
+  }
+  
 
-.press-ratings-total,
-.gamers-ratings-total{
-    margin-left:20px;
-}
-
-.title-ratings{
-    text-decoration: underline;
-}
-
-.press-ratings-details-container,
-.gamers-ratings-details-container{
+  .press-ratings,
+  .gamers-ratings {
     display: flex;
-    flex-direction: column;
-    /* align-items: space-between; */
-    gap: 5px;
-    /* border: solid green; */
-    position: absolute;
-    top: 30px;
-    right:0px;
-    width: 290px;
-}
-
-.press-ratings-details-name,
-.press-ratings-details-rates,
-.gamers-ratings-details-name,
-.gamers-ratings-details-rates{
-    /* border: solid purple; */
-    /* display: flex;
-    flex-direction: column; */
-}
-
-.press-ratings-total-rate,
-.gamers-ratings-total-rate{
-    /* border: solid purple; */
-}
-
-.title-ratings{
-    font-size: 20px;
-    position:absolute;
-    right:190px;
-}
-
-
-.one-press-rating{
-    display:flex;
-    flex-direction: row;
-    gap: 40px;
     align-items: center;
-}
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+  
+  @media (max-width: 768px) {
+    .press-ratings,
+    .gamers-ratings {
+      flex-wrap: wrap;
+    }
+  }
+  
 
-.provider-picture{
-    /*background-image: url('');*/
+  .press-ratings-details,
+  .gamers-ratings-details {
+    min-width: 300px;
+    padding-left: 60px; 
+  }
+  
+  @media (max-width: 768px) {
+    .press-ratings-details,
+    .gamers-ratings-details {
+      order: 2;
+      padding-left: 20px;
+      margin-top: 20px;
+    }
+  }
+  
+
+  .title-ratings {
+    font-size: 24px; 
+    text-decoration: underline;
+    margin-bottom: 30px;
+    margin-left: -40px; 
+  }
+  
+  @media (max-width: 768px) {
+    .title-ratings {
+      margin-left: 0;
+      text-align: center;
+    }
+  }
+  
+
+  .press-ratings-details-container,
+  .gamers-ratings-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+
+  .one-press-rating,
+  .one-gamer-rating {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .one-gamer-rating {
+    margin-left: -20px;
+  }
+
+  @media (max-width: 768px) {
+    .one-gamer-rating {
+        margin-left: 0;
+      }
+  }
+  
+  .provider-picture img {
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    background-position: center;
-    background-size: cover;
-    margin-right:-25px;
-}
+  }
+  
 
-.big-rate{
-    font-size: 28px;
-    font-weight: 500;
-}
+  .press-rating-info,
+  .gamer-rating-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .press-ratings-details-name,
+  .gamers-ratings-details-name {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .press-ratings-details-rate,
+  .gamers-ratings-details-rate {
+    font-size: 18px;
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  .big-rate {
+    font-size: 24px;
+  }
+  
 
-.press-ratings-total-rate,
-.gamers-ratings-total-rate{
-    position:absolute;
-    top: 50px;
-    right: 70px;
-    box-shadow: -2px 21px 21px -14px rgba(0,0,0,0.62);
+  .press-ratings-total,
+  .gamers-ratings-total {
+    position: relative;
+    margin-left: 350px;
+
+  }
+  
+  @media (max-width: 768px) {
+    .press-ratings-total,
+    .gamers-ratings-total {
+      order: 1;
+      margin-left: 0;
+      align-self: center;
+    }
+  }
+  
+
+  .press-ratings-total-rate,
+  .gamers-ratings-total-rate {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background-color: red;
     color: white;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.press-ratings-total-rate{
-    width:170px;
-    height:170px;
-    border-radius: 50%;
-    background-color: red;
-    position:relative;
-}
-
-.gamers-ratings-total-rate{
-    width:130px;
-    height:130px;
-    border-radius: 50%;
+    box-shadow: -2px 21px 21px -14px rgba(0, 0, 0, 0.62);
+  }
+  
+  .gamers-ratings-total-rate {
+    width: 130px;
+    height: 130px;
     background-color: rgb(141, 138, 138);
-    position:relative;
-}
+  }
+  
+ 
 
-.total-rate-press{
+  .total-rate-press {
     font-size: 80px;
     position: absolute;
-    bottom:40px;
-    right: 70px;
-}
+    left: 23px;
+    top: 14px;
+  }
 
-.on-twenty-press{
-    font-size:40px;
-    position: absolute;
-    bottom: 30px;
-    left: 90px;
-}
-
-.total-rate-gamers{
+  .total-rate-gamers {
     font-size: 60px;
     position: absolute;
-    bottom: 30px;
-    right: 52px;
-}
-
-.on-twenty-gamers{
-    font-size: 30px;
+    left: 16px;
+    top: 16px;
+  }
+  
+  .on-twenty-press {
+    font-size: 35px;
     position: absolute;
-    bottom: 25px;
+    bottom: 37px;
     right: 15px;
-}
+  }
+  .on-twenty-gamers {
+    font-size: 25px;
+    position: absolute;
+    bottom: 30px;
+    right: 15px;
+  }
+  
+  .addnote {
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .ratings {
+      padding: 10px;
+    
+    }
+  
+    .provider-picture img {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .big-rate {
+      font-size: 20px;
+    }
+  
+  
+  }
+  
 
 
 
