@@ -32,6 +32,7 @@ export class SearchPageComponent implements OnInit{
   profilSelected: ProfilInterface | undefined;
   userColor: string | undefined;
 
+  fakeRates: number[] = [8, 14, 19, 13];
 
   constructor(
     private route: ActivatedRoute,
@@ -65,6 +66,14 @@ export class SearchPageComponent implements OnInit{
 
     console.log()
 
+  }
+
+  rateAverage(tab: number[]): number{
+    if(tab.length === 0){
+      return 0;
+    }
+    const sum = tab.reduce((acc, val) => acc + val, 0);
+    return sum / tab.length;
   }
 
   updateConnect(): void {
