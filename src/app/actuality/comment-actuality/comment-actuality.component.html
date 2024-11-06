@@ -22,7 +22,7 @@
       <textarea class="comment-content" cols="35" placeholder="Votre devez d'abord vous connecter pour laisser un commentaire" disabled></textarea>
     </div>
     <div class="comment-send mt-2">
-      <button class="btn btn-success disabled">Envoyer</button>
+      <button class="btn btn-success" disabled>Envoyer</button>
     </div>
   </form>
 </ng-container>
@@ -50,6 +50,7 @@
       <p class="comment-text">{{comment.content}}</p>
     </div>
     <div class="comment-border mb-4"></div>
+  </ng-container>
 </ng-container>
 
 <ng-container *ngIf="isLoggedIn">
