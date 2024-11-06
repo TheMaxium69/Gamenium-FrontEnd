@@ -157,12 +157,28 @@
           <div><i class="ri-arrow-right-s-line"></i></div>
         </a>
       </div>
-      <div class="para radius">
-        <a href="">
-          <div><i class="ri-emotion-happy-line"></i>Tous nos badges disponibles</div>
-          <div><i class="ri-arrow-right-s-line"></i></div>
-        </a>
+
+    <div class="para radius mb-4">
+      <a data-bs-toggle="collapse" href="#collapseBadges" role="button" aria-expanded="false" aria-controls="collapseBadges">
+        <div><i class="ri-emotion-happy-line"></i>Tous nos badges disponibles</div>
+        <div><i class="ri-arrow-right-s-line"></i></div>
+      </a>
+      <div class="collapse" id="collapseBadges">
+        <div class="card card-body modern-card">
+          <!-- Contenu de la section Tous nos badges -->
+          <div class="badges-card">
+            <h5>Vitrine de nos badges</h5>
+          </div>
+          <div class="d-flex">
+          <ng-container *ngFor="let badge of allBadges">
+              <div class="badge-list-item" style="background-image: url({{badge.picture?.url}});"
+              [ngClass]="{'gray-badge': !isBadgeInUserConnected(badge)}"></div>
+            </ng-container>
+          </div>
+        </div>
       </div>
+    </div>
+
     </div>
   </div>
 </div>

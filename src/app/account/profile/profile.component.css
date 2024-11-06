@@ -343,6 +343,18 @@ a > div {
   transform: scale(1.1);
 }
 
+.badge-list-item {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.gray-badge {
+  filter: grayscale(100%);
+}
+
 .password-card form {
   display: flex;
   flex-direction: column;

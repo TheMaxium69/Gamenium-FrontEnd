@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
 
   userConnected: UserInterface | undefined;
   badgeUserConnected: BadgeInterface[] | undefined;
+  allBadges: BadgeInterface[] | undefined;
   profileImage: String|undefined;
   profilSelected: ProfilInterface | undefined;
 
@@ -55,8 +56,10 @@ export class ProfileComponent implements OnInit {
 
       this.loadThemeColor();
     }
-
+    
     this.getAllSocialNetwork();
+    
+    this.getAllBadges();
   }
 
   loadThemeColor() {
@@ -101,6 +104,23 @@ export class ProfileComponent implements OnInit {
         this.badgeUserConnected = ReponseApi.result;
       }
     });
+  }
+
+  getAllBadges() {
+    this.badgeService.getAllBadges(this.app.setURL()).subscribe((ReponseApi) => {
+      if (ReponseApi.message == 'good') {
+        this.allBadges = ReponseApi.result;
+        console.log(this.allBadges);
+      }
+    });
+  }
+
+  isBadgeInUserConnected(badge: any): boolean {
+    if (this.badgeUserConnected) {
+      return this.badgeUserConnected.some(userBadge => userBadge.id === badge.id)
+    } else {
+      return false
+    }
   }
 
   saveColor(): void {

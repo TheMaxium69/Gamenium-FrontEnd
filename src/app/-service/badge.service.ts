@@ -14,5 +14,7 @@ export class BadgeService {
     return this.http.get<ApicallInterface>(url+"/badges/user/"+id);
   }
 
-
+  getAllBadges(url: string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url+"/badges");
+  }
 }
