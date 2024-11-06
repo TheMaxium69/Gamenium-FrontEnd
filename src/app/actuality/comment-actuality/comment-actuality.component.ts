@@ -188,6 +188,9 @@ export class CommentActualityComponent implements OnInit{
 
   onDeleteBtnClick(commentId: number) {
     console.log(commentId);
+    this.commentService.deleteCommentInActu(commentId, this.app.setURL()).subscribe((ReponseApi) => {
+      console.log('message supprimé')
+    });
   }
 
   extractFirstLetter(str: string|any): string {
