@@ -351,6 +351,10 @@ a > div {
   background-repeat: no-repeat;
 }
 
+.badge-list-name {
+  min-width: 60px;
+}
+
 .gray-badge {
   filter: grayscale(100%);
 }
