@@ -210,8 +210,8 @@
 /*  ////////////////  DEBUT DE ZONE ACTUALITEES /////////////*/
 
 .actualities{
-    width:992px;
-    height: 300px;
+    max-width: 992px;
+    width:100%;
     margin-left: auto;
     margin-right: auto;
     border-top:1px solid black;
@@ -222,9 +222,10 @@
 }
 
 .actu-separation{
-    height:100px;
-    margin-top: 140px;
     border: solid 1px black;
+    height: 170px;
+    margin-top: 69px;
+
 }
 
 .game-card,
@@ -266,9 +267,6 @@
     margin-top: 55px;
 }
 
-.provider-card{
-    margin-right: 25px;
-}
 
 .follow{
     margin-top: 15px;
@@ -280,13 +278,38 @@
     color: black;
 }
 
+.follow a:hover {
+    color: #e74c3c;
+    transition: 0.3s;
+}
+
 .provider-card-container{
     display:flex;
 }
 
 .actualities p{
+    font-size: 18px;
     margin-bottom: 20px;
 }
+
+@media (max-width: 768px) {
+    .actualities {
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+
+    }
+
+    .actu-separation {
+        display: none;
+    }
+
+    .provider-card-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+  }
 
 /* .game-actu,
 .provider-actu{
@@ -484,7 +507,16 @@
   .addnote {
     width: 200px;
     margin: 0 auto;
+    background-color: rgb(62, 185, 254);
+    box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
+    border: none;
+
   }
+
+  .addnote:hover {
+    background-color: dodgerblue;
+    transition: 0.3s;
+}
 
   @media (max-width: 768px) {
     .ratings {
@@ -642,8 +674,6 @@
 }
 
 
-/* Boulot Oscar */
-
 .title-add {
     width: 992px;
     margin-left: auto;
@@ -657,34 +687,46 @@
 }
 
 .add-collection {
-    width: 992px;
+    width: 100%;
+    max-width: 992px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .card-add-to-collection {
     display: flex;
+    flex-direction: row;
     max-width: 992px;
     width: 100%;
-    height: 104px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
     border-radius: 15px;
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
     gap: 30px;
+    align-items: center;
+
+}
+
+.game-picture {
+    display: flex;
+    position: relative;
+    width: 260px;
+    flex-shrink: 0;
 }
 
 .game-cover-center {
+    position: relative;
+    z-index: 1;
+    width: 210px;
+    height: 150px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .cover {
-    z-index: 1;
-    position: relative;
-    width: 210px;
-    height: 105px;
+    width: 100%;
+    height: 100%;
     /* background-image: url(SI_N64_SuperMario64_image1600w.jpg); */
     background-size: contain;
     background-repeat: no-repeat;
@@ -692,10 +734,11 @@
 }
 
 .background {
-    position: relative;
-    top: -105px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
     width: 260px;
-    height: 105px;
+    height: 150px;
     /* background-image: url(SI_N64_SuperMario64_image1600w.jpg); */
     background-size: cover;
     background-position: center;
@@ -703,11 +746,24 @@
 }
 
 .inner-shadow {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     width: 260px;
-    height: 105px;
+    height: 150px;
     border-radius: 15px;
     box-shadow: inset 0px 0px 20px 0px #000; 
     backdrop-filter: blur(3px);
+}
+
+.game-info {
+    flex: 1;
+    padding: 15px;
+}
+
+.info-name {
+    font-size: 20px;
+    margin-bottom: 5px;
 }
 
 .game-add-button {
@@ -716,18 +772,19 @@
     border: none;
     border-radius: 15px;
     margin: auto;
-    padding: 10px;
+    padding: 10px 20px;
     text-align: center;
     box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
     font-size: 18px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-right: 20px;
 }
 
 .game-add-button i {
-    display: flex;
-    width: 20px;
-    height: 20px;
+    font-size: 20px;
 }
 
 .game-add-button:hover {
@@ -735,17 +792,38 @@
     transition: 0.3s;
 }
 
-.game-info {
-    width: 40%;
-    padding: 15px;
+@media (max-width: 768px) {
+    .card-add-to-collection {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .game-picture {
+        width: 100%;
+    }
+
+    .background, 
+    .inner-shadow {
+        width: 100%;
+    }
+
+    .game-add-button {
+        width: 50%;
+        margin: 0 auto 10px auto;
+        justify-content: center;
+        text-align: center;
+    }
 }
 
-.info-name {
-    font-size: 20px;
-}
+
+
+
 
 .show-collection {
     margin-top: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .my-collection {
@@ -754,7 +832,6 @@
     color: white;
     font-size: 24px;
     padding: 10px 50px;
-    margin-left: 366px;
     margin-bottom: 120px;
     border-radius: 15px;
     box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
@@ -766,4 +843,3 @@
     transition: 0.3s;
 }
 
-/* Fin boulot Oscar */ 
