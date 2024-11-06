@@ -18,8 +18,12 @@
 
 <ng-container *ngIf="!isLoggedIn">
   <form>
-    <input type="text" placeholder="Connectez pour commentez" name="content" disabled>
-    <button class="btn btn-success" type="submit">Disable</button>
+    <div>
+      <textarea class="comment-content" cols="35" placeholder="Votre devez d'abord vous connecter pour laisser un commentaire" disabled></textarea>
+    </div>
+    <div class="comment-send mt-2">
+      <button class="btn btn-success disabled">Envoyer</button>
+    </div>
   </form>
 </ng-container>
 
@@ -29,16 +33,23 @@
 <ng-container *ngIf="!isLoggedIn">
   <ng-container *ngFor="let comment of commentByActu">
     <div class="card mb-2">
-      <h4 style="color: {{ comment.user.color }}">{{ comment.user.displayname }}
-        <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
-          <img class="badgeIMG" src="{{ badge.picture?.url }}">
-        </ng-container>
+      <div class="comment-user">
+        <!-- <div class="img"
+        style="background-image: url({{ comment?.user?.pp?.url }})"></div> -->
+        <div *ngIf="comment?.user?.pp?.url" class="img" style="background-image: url('{{ comment?.user?.pp?.url }}'); border-color: {{comment.user.color}};"></div>
 
-      </h4>
-      <p>{{comment.content}}</p>
+        <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
+          <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
+        </div>
+        <h4 class="comment-user-name"><span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
+          <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
+            <img class="badgeIMG" src="{{ badge.picture?.url }}">
+          </ng-container>
+        </h4>
+      </div>
+      <p class="comment-text">{{comment.content}}</p>
     </div>
-  </ng-container>
-
+    <div class="comment-border mb-4"></div>
 </ng-container>
 
 <ng-container *ngIf="isLoggedIn">
@@ -65,6 +76,7 @@
           </div>
           <p class="comment-text">{{comment.content}}</p>
         </div>
+        <div class="comment-border mb-4"></div>
       </ng-container>
     </ng-container>
   </div>
@@ -88,6 +100,7 @@
         </div>
         <p class="comment-text">{{comment.content}}</p>
       </div>
+      <div class="comment-border mb-4"></div>
     </ng-container>
   </ng-container>
 </ng-container>

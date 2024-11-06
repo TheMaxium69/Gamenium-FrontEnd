@@ -65,5 +65,13 @@
 
 .card {
   border: none;
-  border-bottom: 1px solid lightgray;
+}
+
+.comment-border {
+  background-color: lightgray;
+  height: 1px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+
 }
