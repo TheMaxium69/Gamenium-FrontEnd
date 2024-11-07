@@ -63,13 +63,13 @@ body {
   border-radius: 15px;
   margin-top: 10px;
   box-shadow: 3px 2px 30px -5px rgba(0, 0, 0, 0.51);
-  width: 845px;
+  width: 100%;
   padding: 33px 50px;
 }
 
 .container-fluid {
-  max-width: 100%;
-  width: 992px;
+  width: 100%;
+  max-width: 992px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
@@ -85,6 +85,7 @@ body {
   gap: 30px;
 }
 
+
 hr {
   width: 80%;
   margin-right: 200px;
@@ -94,61 +95,96 @@ hr {
 
 .search-form-container {
   position: relative;
-  
 }
 
-.ri-search-line {
-  color: white;
-  font-size: 24px;
-}
 
 .search-form {
-  margin-top: -50px;
+  margin-top: 20px;
 }
+
 
 .input-container {
-  border: none;
   position: relative;
-  display: flex;
-  justify-content: flex-end;
-  outline: none;
-  box-shadow: 0px 4px px 1px rgba(0, 0, 0, 0.5) inset;
+  width: 100%;
 }
 
-.search-icon-container i {
-  margin-left: 2px;
-}
-
-.search-icon-container {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  border: 0px;
-  background-color: red;
-  position: relative;
-  left: 667px;
-  top: 55px;
-}
 
 .searchbar {
-  padding-left: 15px;
-  margin-right: 260px;
-  width: 98%;
+  width: 100%;
+  padding: 15px;
+  padding-right: 60px; 
   height: 60px;
   font-size: 24px;
   border: none;
   border-radius: 15px;
-  caret-color: transparent;
-  box-shadow: 0px 0px 11px -6px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: inset 0px 0px 11px -6px rgba(0, 0, 0, 0.5);
   background-color: #F3F3F3;
+  box-sizing: border-box;
 }
 
+
 .searchbar::placeholder {
-  position: absolute;
-  bottom: 12px;
   font-size: 24px;
-  padding-bottom: 5px;
+  color: #aaa;
+  caret-color: auto;
 }
+
+.search-icon-container {
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+
+.search-icon-container i {
+  color: #ffffff;
+  font-size: 28px;
+  padding-right: 8px;
+}
+
+
+.search-icon-container:hover i  {
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+
+@media (max-width: 600px) {
+  .searchbar {
+    font-size: 18px;
+    height: 50px;
+    padding: 10px;
+    padding-right: 50px;
+  }
+
+  .searchbar::placeholder {
+    font-size: 18px;
+  }
+
+  .search-icon-container {
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .search-icon-container i {
+    font-size: 20px;
+  }
+}
+
+
+
+
+
 
 .para {
   width: 98%;
@@ -256,9 +292,14 @@ a > div {
 .password-input,
 .social-input {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 15px;
   margin-bottom: 15px;
+}
+
+.color-picker label {
+  font-weight: bold;
+  width: 40%;
 }
 
 .color-picker label,
@@ -278,10 +319,15 @@ a > div {
 }
 
 .color-picker input[type="color"] {
-  width: 50px;
+  width: 60%;
   height: 50px;
   border: none;
   cursor: pointer;
+}
+
+.colorpick {
+  display: flex;
+  align-items: center;
 }
 
 .btn-save,
@@ -293,6 +339,9 @@ a > div {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn-save:hover,
@@ -378,7 +427,13 @@ a > div {
   .password-input,
   .social-input {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+
+  .color-picker {
+    display: block;
+  
   }
 
   .btn-save,
@@ -387,6 +442,14 @@ a > div {
     width: 100%;
     margin-top: 10px;
   }
+
+  #themeColor {
+    margin-left: 30px;
+    width: 200px;
+    height: 40px;
+  }
+
+
 }
 
 

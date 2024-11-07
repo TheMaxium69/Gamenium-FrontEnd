@@ -24,12 +24,15 @@
       </h2>
       <hr>
       <form action="#" class="search-form">
-        <button type="submit" class="search-icon-container" style="background-color: {{ color }}!important">
-          <i class="ri-search-line"></i>
-        </button>
-        <input type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
+        <div class="input-container">
+          <input type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
+          <button type="submit" class="search-icon-container" aria-label="Search" style="background-color: {{ color }}!important">
+            <i class="ri-search-line"></i>
+          </button>
+        </div>
       </form>
     </div>
+    
 
     <!-- PARAMETRE DU COMPTE -->
     <div class="border composant para-container">
@@ -60,8 +63,12 @@
               <div class="settings-section">
                 <h5>Couleur du Thème</h5>
                 <div class="color-picker">
-                  <label for="themeColor">Choisir la couleur du thème:</label>
-                  <input type="color" id="themeColor" [(ngModel)]="tempColor" />
+                  <div class="colorpick">
+                    
+                    <label for="themeColor">Choisir la couleur du thème:</label>
+                    <input type="color" id="themeColor" [(ngModel)]="tempColor" />
+
+                  </div>
                   <button class="btn-save" (click)="saveColor()">Enregistrer la couleur</button>
                 </div>
               </div>
