@@ -98,7 +98,7 @@
 
       <div routerLink="/profil/{{ user.id }}">
         <div id="card-user">
-          <div *ngIf="user?.pp" class="circleImage" style="background-image: url('{{ user.pp }}')">
+          <div *ngIf="user?.pp" class="circleImage" style="background-image: url('{{ user.pp?.url }}')">
           </div>
     
           <div *ngIf="!user?.pp" class="circleImage" style="background-color: white!important">
