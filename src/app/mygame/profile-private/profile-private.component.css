@@ -221,3 +221,10 @@
   transform: translateY(-5px);
   transition: all 0.3s ease;
 }
+
+@media (max-width: 900px) {
+  #profilWrapper {
+    position: relative;
+    top: 280px;
+  }
+}
