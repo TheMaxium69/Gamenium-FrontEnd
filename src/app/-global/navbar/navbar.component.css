@@ -31,9 +31,9 @@ nav ul li a{
   margin: auto;
 }
 
-nav ul li:hover {
-  background-color: rgba(253, 0, 0, 0.196);
-  border-radius: 5px;
+nav ul li a:hover i {
+  animation: jiggle 0.5s forwards;
+  font-size: 28px;
   transition: 0.3s;
 }
 
@@ -55,6 +55,30 @@ nav ul li a p {
   nav ul li a i {
     font-size: 30px;
     margin-right: 0px;
+  }
+
+  nav ul li a:hover i {
+    font-size: 32px;
+    transition: 0.3s;
+  }
+}
+
+/* Animation ICON */ 
+@keyframes jiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 
