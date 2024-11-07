@@ -5,14 +5,14 @@
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <i class="ri-home-2-fill ico2"></i>
           <i class="ri-home-2-line ico1"></i>
-          Accueil
+          <p>Accueil</p>
         </a>
       </li>
       <li>
         <a routerLink="/actuality" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <i class="ri-newspaper-fill ico2"></i>
           <i class="ri-newspaper-line ico1"></i>
-          Actualité
+          <p>Actualité</p>
         </a>
       </li>
     </ul>
@@ -29,7 +29,7 @@
         <a routerLink="/mygame" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <i class="ri-gamepad-fill ico2"></i>
           <i class="ri-gamepad-line ico1"></i>
-          Mes Jeux
+          <p>Mes Jeux</p>
         </a>
       </li>
       <li>
@@ -37,14 +37,14 @@
           <a routerLink="/profil" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             <i class="ri-account-box-fill ico2"></i>
             <i class="ri-account-box-line ico1"></i>
-              Mon Profil
+              <p>Mon Profil</p>
           </a>
         </ng-container>
         <ng-container *ngIf="isLoggedIn == false">
           <a routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             <i class="ri-account-box-fill ico2"></i>
             <i class="ri-account-box-line ico1"></i>
-              Se connecter
+              <p>Se connecter</p>
           </a>
         </ng-container>
       </li>

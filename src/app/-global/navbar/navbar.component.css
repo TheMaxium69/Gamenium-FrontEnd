@@ -30,10 +30,35 @@ nav ul li a{
   text-decoration: none;
   margin: auto;
 }
+
+nav ul li:hover {
+  background-color: rgba(253, 0, 0, 0.196);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
 nav ul li a i{
   font-size: 24px;
   margin-right: 6px;
 }
+
+nav ul li a p {
+
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  nav ul li a p {
+    display: none;
+  }
+
+  nav ul li a i {
+    font-size: 30px;
+    margin-right: 0px;
+  }
+}
+
+
 nav ul li.search{
   display: block;
   align-items: unset;
