@@ -9,11 +9,11 @@
     [ngClass]="{'row': screenWidth >= 1200}"
      class="flex-nowrap">
       <section id="left-section"
-      [ngClass]="{'col-9': screenWidth >= 1200}">
+      [ngClass]="{'col-8': screenWidth >= 1200}">
+      <div 
+      [ngClass]="{'mx-auto': screenWidth <= 1200}"
+      class="img" style="background-image: url({{ actualitySelected?.picture?.url }})"></div>
       <div class="border-actu">
-        <div 
-        [ngClass]="{'mx-auto': screenWidth <= 1200}"
-        class="img" style="background-image: url({{ actualitySelected?.picture?.url }})"></div>
         <!--Bouton Like & Commentaires-->
         <div class="btn_container">
           <button class="btn">
@@ -39,9 +39,12 @@
         </div>
       </section>
 
+      <section id="border-middle" [ngClass]="{'col-1': screenWidth >= 1200}">
+        <div class="border-section"></div>
+      </section>
     
       <section id="right-section"
-      [ngClass]="{'col-4': screenWidth >= 1200, 'd-flex justify-content-center gap-5 mt-4': screenWidth < 1200}"
+      [ngClass]="{'col-3': screenWidth >= 1200, 'd-flex justify-content-center gap-5 mt-4': screenWidth < 1200}"
       class="d-flex justify-content-center">
         <!-- <div class="provider_wrapper"> -->
           <div class="provider_card" *ngIf="actualitySelected?.Provider?.parentCompany">
