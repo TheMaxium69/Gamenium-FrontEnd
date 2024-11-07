@@ -187,10 +187,27 @@ export class CommentActualityComponent implements OnInit{
   }
 
   onDeleteBtnClick(commentId: number) {
-    console.log(commentId);
+    // console.log(commentId);
     this.commentService.deleteCommentInActu(commentId, this.app.setURL()).subscribe((ReponseApi) => {
-      console.log('message supprimé')
+      if (ReponseApi.message == 'Comment deleted successfully') {
+        const borderToDelete = document.getElementById('b'+commentId)
+        const commentToDelete = document.getElementById('c'+commentId)
+    
+        if (commentToDelete) {
+          commentToDelete.style.display = 'none'
+        }
+    
+        if (borderToDelete) {
+          borderToDelete.style.display = 'none'
+        }
+
+        console.log('message supprimé')
+      } else {
+        console.log('erreur ou pas de commentaire') // TODO: Ajouter les gestions d'erreurs
+      }
     });
+
+
   }
 
   extractFirstLetter(str: string|any): string {

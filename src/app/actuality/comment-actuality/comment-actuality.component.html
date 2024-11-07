@@ -59,7 +59,7 @@
   <div id="yourComment">
     <ng-container *ngFor="let comment of commentByActu">
       <ng-container *ngIf="comment.user.id == userConnectedId">
-        <div class="card mb-2">
+        <div id="c{{comment.id}}" class="card mb-2">
           <div class="comment-user ">
 
             <!-- <div class="img"
@@ -79,7 +79,7 @@
           </div>
           <p class="comment-text">{{comment.content}}</p>
         </div>
-        <div class="comment-border mb-4"></div>
+        <div id="b{{comment.id}}" class="comment-border mb-4"></div>
       </ng-container>
     </ng-container>
   </div>
