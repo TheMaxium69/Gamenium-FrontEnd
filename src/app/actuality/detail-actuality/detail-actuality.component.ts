@@ -32,6 +32,8 @@ export class DetailActualityComponent implements OnInit{
   nbCommentaire:number = 0;
   screenWidth: number = window.innerWidth;
 
+  globalUrl:string = "";
+
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,
               private app: AppComponent,
@@ -42,7 +44,10 @@ export class DetailActualityComponent implements OnInit{
 
   ngOnInit(): void {
 
+
+
     this.actualityId = this.route.snapshot.paramMap.get('id');
+    this.globalUrl = this.route.snapshot.url.join('/');
 
     this.getActuById(this.actualityId);
 
@@ -358,6 +363,10 @@ export class DetailActualityComponent implements OnInit{
     }
 
 
+  }
+
+  redirectComment(){
+    window.location.href = this.globalUrl + '#commentSection';
   }
 
 }
