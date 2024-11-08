@@ -98,77 +98,125 @@ export class CommentActualityComponent implements OnInit{
 
 
   addComment(form: NgForm) {
-
-
-    // console.log(form.value);
-
     if (form.value) {
-
       let content = form.value['content'];
-
+  
       let bodyNoJsonMyCommentActu: any = {
         "id_post": this.actualitySelected?.id,
         "content": content,
       };
-
+  
       const bodyMyCommentActu = JSON.stringify(bodyNoJsonMyCommentActu);
-
+  
       this.commentService.postCommentInActu(bodyMyCommentActu, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyCommentActuCreate => {
-
-        if (reponseMyCommentActuCreate.message == "good") {
-
+        if (reponseMyCommentActuCreate.message === "good") {
           this.newComment = reponseMyCommentActuCreate.result;
+  
+          console.log("Commentaire ajouté");
 
-          console.log("commentaire ajoutée")
+          
+          let noteSpanGame = document.getElementById("yourComment");
+          if (noteSpanGame && this.newComment) {
+            // Create the comment card
+            const commentCard = this.renderer.createElement('div');
+            this.renderer.setAttribute(commentCard, 'id', `c${this.newComment.id}`);
+            this.renderer.addClass(commentCard, 'card');
+            this.renderer.addClass(commentCard, 'mb-2');
+            
+            // Create the user section
+            const commentUser = this.renderer.createElement('div');
+            this.renderer.addClass(commentUser, 'comment-user');
+  
+            // Profile picture or initials
+            if (this.newComment.user.pp?.url) {
+              const profilePicture = this.renderer.createElement('div');
+              this.renderer.addClass(profilePicture, 'img');
+              this.renderer.setStyle(profilePicture, 'background-image', `url('${this.newComment.user.pp.url}')`);
+              
+              this.renderer.appendChild(commentUser, profilePicture);
+            } else {
+              const initialContainer = this.renderer.createElement('div');
+              this.renderer.addClass(initialContainer, 'align-content-center');
+              this.renderer.addClass(initialContainer, 'lettrePP-border');
+              this.renderer.setStyle(initialContainer, 'border-color', this.newComment.user.color);
+  
+              const initialText = this.renderer.createElement('p');
+              this.renderer.addClass(initialText, 'lettrePP');
+              this.renderer.setStyle(initialText, 'color', this.newComment.user.color);
+              this.renderer.setProperty(initialText, 'textContent', this.newComment.user.displayname.charAt(0).toUpperCase());
+              
+              this.renderer.appendChild(initialContainer, initialText);
+              this.renderer.appendChild(commentUser, initialContainer);
+            }
+  
+            // Add username
+            const userName = this.renderer.createElement('h4');
+            this.renderer.addClass(userName, 'comment-user-name');
+            const nameHTML = `(Vous) <span style="color:${this.newComment.user.color}">${this.newComment.user.displayname}</span>`;
+            this.renderer.setProperty(userName, 'innerHTML', nameHTML);
 
-          let noteSpanGame = document.getElementById("yourComment")
-          if (noteSpanGame && this.newComment){
+            this.renderer.appendChild(commentUser, userName);
 
+            // Add user badges
             const badges = this.badgeForAllUser[this.newComment.user.id];
-            let badgesHTML = '';
             if (badges) {
-              badges.forEach((badge:BadgeInterface) => {
+              badges.forEach((badgeData: BadgeInterface) => {
+                const badgeImg = this.renderer.createElement('img');
+                this.renderer.addClass(badgeImg, 'badgeIMG');
 
-                // Construire la représentation HTML pour chaque badge
-                badgesHTML += `
-                  <img style="width: 30px; margin-right: 6px;" src="${badge.picture?.url}" alt="${badge.name}">
-                `;
+                if (badgeData.picture?.url) {
+                  this.renderer.setAttribute(badgeImg, 'src', badgeData.picture.url);
+                  this.renderer.setAttribute(badgeImg, 'alt', badgeData.name || 'Badge');
+                }
 
+                this.renderer.appendChild(userName, badgeImg);
               });
             }
+  
+            // Add delete button
+            const commentId = this.newComment.id;
+            const deleteButton = this.renderer.createElement('i');
+            this.renderer.setAttribute(deleteButton, 'id', 'delete-comment-icon');
+            this.renderer.addClass(deleteButton, 'ri-delete-bin-line');
+            this.renderer.setStyle(deleteButton, 'color', 'red');
+            this.renderer.listen(deleteButton, 'click', () => this.onDeleteBtnClick(commentId));
+            this.renderer.appendChild(commentUser, deleteButton);
+  
+            // Append user section to card
+            this.renderer.appendChild(commentCard, commentUser);
+  
+            // Create and append the comment text
+            const commentText = this.renderer.createElement('p');
+            this.renderer.addClass(commentText, 'comment-text');
+            this.renderer.setProperty(commentText, 'textContent', this.newComment.content);
+            this.renderer.appendChild(commentCard, commentText);
+  
+            // Create and append the comment border
+            const commentBorder = this.renderer.createElement('div');
+            this.renderer.setAttribute(commentBorder, 'id', `b${this.newComment.id}`);
+            this.renderer.addClass(commentBorder, 'comment-border');
+            this.renderer.addClass(commentBorder, 'mb-4');
+  
+            // Insert elements into the DOM
+            if (noteSpanGame.firstChild) {
+              // Insert the comment card before the first child
+              this.renderer.insertBefore(noteSpanGame, commentCard, noteSpanGame.firstChild);
 
-            noteSpanGame.innerHTML = `
-            <div class="card">
-              <h4>(Vous) <span style="color:` + this.newComment?.user.color  + `">` + this.newComment?.user.displayname + `</span>`
-               + badgesHTML +
-              `</h4>
-              <p>`+ this.newComment?.content+`</p>
-            </div>
-
-            ` + noteSpanGame.innerHTML ;
-
-
+              // Append the border after the card 
+              this.renderer.insertBefore(noteSpanGame, commentBorder, commentCard.nextSibling);
+            } else {
+              // If there is no child, append both elements in the correct order
+              this.renderer.appendChild(noteSpanGame, commentCard);
+              this.renderer.appendChild(noteSpanGame, commentBorder);
+            }
           }
-
-          const inputNote: HTMLElement | null = document.getElementById('BtnAddComment');
-          if (inputNote) {
-            this.renderer.setProperty(inputNote, 'value', '');
-          }
-
-
         } else {
-
           console.log(reponseMyCommentActuCreate);
-
         }
-
-
       });
-
     }
-
-
   }
+      
 
   getBadgesForAllUsers() {
     // Obtenez les badges pour chaque utilisateur et stockez-les dans badgeByUser
