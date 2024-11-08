@@ -182,7 +182,7 @@
               <div class="badge-list-item" style="background-image: url({{badge.picture?.url}});"
               [ngClass]="{'gray-badge': !isBadgeInUserConnected(badge)}"></div>
               <p class="align-content-center mx-2 badge-list-name"> {{badge.name}} </p>
-              <p class="align-content-center mx-2"> {{badge.unlockDescription}} </p>
+              <p class="align-content-center mx-2"> {{badge.unlockDescription ? badge.unlockDescription : 'Non renseigné'}} </p>
             </div>
             </ng-container>
           </div>

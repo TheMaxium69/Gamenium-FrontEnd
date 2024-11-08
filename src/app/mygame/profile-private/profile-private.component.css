@@ -67,11 +67,12 @@
   margin-bottom: 40px;
   box-shadow: 1px 2px 11px #a6a6a6;
   font-size: 27px;
+  justify-content: space-around;
+  padding: 15px;
 }
 
 #profilWrapper .navigateBar ul li{
-  width: 20%;
-  border-right: solid 2px white;
+
 }
 
 #profilWrapper h3.titleInWrapper{
@@ -86,15 +87,16 @@
 
 #profilWrapper .navigateBar ul li p{
   margin: unset!important;
-  width: 60%;
+  width: fit-content;
+  padding: 5px;
   transition: all 0.5s ease 0s;
+  cursor: pointer;
 }
 
 #profilWrapper .navigateBar ul li.active p{
   background-color: #ffffffc4;
   border-radius: 10px;
   color: black;
-  text-decoration: underline;
 }
 
 #profilWrapper .navigateBar ul li:hover p{

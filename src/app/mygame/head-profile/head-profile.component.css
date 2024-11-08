@@ -62,6 +62,7 @@
 #profilPublic .wrapper{
   background-color: white;
   width: 100%;
+  max-width: 1320px;
   box-shadow: 1px 2px 11px #a6a6a6;
   border-radius: 15px;
   padding: 10px;
@@ -142,6 +143,7 @@
 
   .wrapper {
     width: 100%;
+    
   }
 
   .nb {
