@@ -1,5 +1,4 @@
-/*  Bandeau principal  */
-
+/*  Globaux  */
 .home-invite {
     width: 992px;
     margin-left: auto;
@@ -7,23 +6,35 @@
     margin-bottom: 120px;
 }
 
+.rowamoi {
+    display: flex;
+    flex-direction: row;
+}
+
+/*  Bandeau principal  */
 .gamenium-banner {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 150px;
     padding: 40px;
-    background-color: darkred;
     border-radius: 0px 0px 65px 65px;
     margin-bottom: 50px;
-}
-
-.gamenium-logo {
-    background-color: gray;
+    background-color: #C61010;
+    background-image: url('http://tyrolium.fr/Contenu/Image/Background8_black.png');
+    height: 315px;
+  }
+  
+  .gamenium-logo {
+    /*background-color: gray;*/
     border-radius: 100%;
     width: 200px;
     height: 200px;
-}
+    background-image: url('http://tyrolium.fr/Contenu/Image/Gamenium Site.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
 .gamenium-welcome {
     color: white;
@@ -34,15 +45,63 @@
     font-size: 28px;
     width: 250px;
 }
+
+
+
+/* Description Gamenium */
+
+#gamenium-intro-invite {
+    margin-top: 75px;
+}
+
+#gamenium-intro-invite h2 {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.gamenium-description-panel {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 10px;
+    padding: 40px;
+    width: 611px;
+    margin-right: 75px;
+}
+
+.gamenium-description-img {
+    background-color: darkred;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+}
+.description-list {
+    padding-top: 15px;
+}
+
+.description-list li {
+    display: flex;
+    gap: 5px;
+    list-style: none;
+}
+
+.description-text {
+    font-size: 18px;
+}
+
+.description-title {
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+
 /*  Connexion utilisateur  */
 
-.connect-user {
+.gamenium-connect-panel {
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
-    padding: 20px;
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 40px;
+    width: 305px;
 }
 
 .connect-title {
@@ -68,45 +127,23 @@
     justify-content: center;
 }
 
-/* Description Gamenium */ 
 
-.gamenium-description-container {
-    display: flex;
-    margin-top: 50px;
-    box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;
-    padding: 30px 15px;
-    justify-content: space-between;
-}
 
-.description-image {
-    background-color: darkred;
-    border-radius: 15px;
-    width: 200px;
-    height: 210px;
-}
-.description-list {
-    padding-top: 15px;
-}
 
-.description-list li {
-    display: flex;
-    gap: 5px;
-    list-style: none;
-}
 
-.description-text {
-    font-size: 18px;
-}
 
-.description-title {
-    font-weight: bold;
-    padding-bottom: 15px;
-}
+
+
+
+
+
+
+
+
 
 /* Nos actualités */
 
-.actu-container {
+/* .actu-container {
     margin-top: 50px;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
@@ -131,11 +168,11 @@
 
 .actu-icons {
     border-bottom: 1px solid black;
-}
+} */
 
 /* Profil Gamer*/
 
-.profile-gamer {
+/* .profile-gamer {
     margin-top: 50px;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
@@ -205,11 +242,11 @@
     background-image: url("https://static.printler.com/cache/7/a/8/0/b/5/7a80b57d1c07de5f165f70644bf8152afb7e2980.jpg");
     background-position: center;
     background-size: cover;
-}
+} */
 
 /* Tyrolium */
 
-.tyrolium-description-container {
+/* .tyrolium-description-container {
     margin-top: 50px;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
@@ -244,11 +281,11 @@
     background-position: center;
     background-size: cover;
     background-image: url(https://cdn.discordapp.com/attachments/1209863869695000666/1220736602121441342/ce41185114b4573c09eec4127e7c4612.png?ex=6610068e&is=65fd918e&hm=10178fda88a8aace62cefe9a41460d5fb73dd7e7ddb35d49a05696b0386611c1&);
-}
+} */
 
 /* Condition d'utilisation */ 
 
-.condition-utilisation {
+/* .condition-utilisation {
     margin-top: 50px;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
@@ -275,4 +312,4 @@
 
 .termes, .cgu,  a {
     color: black;
-}
+} */
