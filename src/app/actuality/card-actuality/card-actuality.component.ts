@@ -161,7 +161,9 @@ export class CardActualityComponent implements OnInit {
               } else {
                 this.liked(id, "add");
               }
+
           }
+
         }
 
       });
@@ -192,13 +194,18 @@ export class CardActualityComponent implements OnInit {
   }
 
   liked(id: number, state: String) {
-    const cardActuIcon = document.querySelector(`#likeIcon${id}`);
+    const cardActuIcon = document.querySelector(`#likeIcon${id}`) as HTMLElement;
+    const actu = this.postActuFollowOrAll.find(actu => actu.id === id);
 
     if (state == "add" && cardActuIcon){
+      if (actu) {
+        cardActuIcon.style.color = actu.Provider?.color ? actu.Provider?.color : 'red';
+      }
       cardActuIcon.classList.remove("ri-heart-line");
       cardActuIcon.classList.add("ri-heart-fill");
 
     } else if (state == "del" && cardActuIcon) {
+      cardActuIcon.style.color = '#2e3a59';
       cardActuIcon.classList.add("ri-heart-line");
       cardActuIcon.classList.remove("ri-heart-fill");
 
