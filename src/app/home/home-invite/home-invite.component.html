@@ -1,3 +1,7 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+</style>
+
 <div class="gamenium-banner">
     <div class="gamenium-logo"></div>
     <div class="gamenium-welcome">
@@ -13,14 +17,12 @@
         <div class="gamenium-description-panel">
             <div class="gamenium-description-content">
                 <h2>Gamenium c'est quoi ?</h2>
-                <p>Gamenium est un site et une application permettant <br>de synchroniser toute sa vie de gameur.</p>
+                <p>Gamenium est un site et une application <br>permettant de synchroniser toute sa vie<br> de gameur.</p>
                 <div class="description-list">
-                    <ul>
-                        <li><i class="ri-arrow-right-line"></i>Voir les actualités</li>
-                        <li><i class="ri-arrow-right-line"></i>Consulter ses jeux</li>
-                        <li><i class="ri-arrow-right-line"></i>Gerer la collection de ses jeux vidéos</li>
-                        <li><i class="ri-arrow-right-line"></i>Partager avec ses amis son histoire</li>
-                    </ul>
+                    <p><i class="ri-arrow-right-line "></i>Voir les actualités</p>
+                    <p><i class="ri-arrow-right-line"></i>Consulter ses jeux</p>
+                    <p><i class="ri-arrow-right-line"></i>Gerer la collection de ses jeux vidéos</p>
+                    <p><i class="ri-arrow-right-line"></i>Partager avec ses amis son histoire</p>
                 </div>
             </div>
             <div class="gamenium-description-img">
@@ -31,7 +33,7 @@
         <div class="gamenium-connect-panel">
             <h2>Pour profiter pleinement de toutes les fonctionnalités offertes par Gamenium</h2>
             <div class="connect-button">
-                <a class="login-btn">Connectez-vous</a>
+                <a class="login-btn" routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Connectez-vous</a>
                 <a class="sign-in-btn">Inscrivez-vous</a>
             </div>
         </div>

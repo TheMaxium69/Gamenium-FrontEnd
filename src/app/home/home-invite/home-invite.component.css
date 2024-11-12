@@ -1,9 +1,11 @@
 /*  Globaux  */
 .home-invite {
-    width: 992px;
+    width: 1140px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 120px;
+    font-family: "Roboto", serif;
+    
 }
 
 .rowamoi {
@@ -65,8 +67,9 @@
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 10px;
     padding: 40px;
-    width: 611px;
+    width: 609px;
     margin-right: 75px;
+    align-items: center;
 }
 
 .gamenium-description-img {
@@ -74,26 +77,12 @@
     border-radius: 10px;
     width: 200px;
     height: 200px;
+    
 }
+
 .description-list {
-    padding-top: 15px;
+    line-height: 8px;
 }
-
-.description-list li {
-    display: flex;
-    gap: 5px;
-    list-style: none;
-}
-
-.description-text {
-    font-size: 18px;
-}
-
-.description-title {
-    font-weight: bold;
-    padding-bottom: 15px;
-}
-
 
 /*  Connexion utilisateur  */
 
@@ -101,33 +90,59 @@
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
     padding: 40px;
-    width: 305px;
-}
-
-.connect-title {
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.button {
+    width: 483px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.connect-button {
     margin-top: 20px;
 }
 
-.connect-btn {
-    border: none;
+
+.login-btn {
+    display: block;
     background-color: rgb(254, 62, 62);
+    box-shadow: 0px 5px 6px 0px #a6a6a6;
     color: white;
-    font-size: 24px;
-    padding: 10px 50px;
-    border-radius: 15px;
-    box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
+    text-decoration: none;
+    border-radius: 10px;
+    border: solid 1.5px;
+    border-color: rgb(254, 62, 62);
+    padding: 15px 100px;
+    text-align: center;
+    margin-bottom: 20px;
+
 }
 
+.sign-in-btn {
+    display: block;
+    background-color: white;
+    box-shadow: 0px 5px 6px 0px #a6a6a6;
+    color: rgb(254, 62, 62);
+    text-decoration: none;
+    border-radius: 10px;
+    border: solid 1.5px;
+    border-color: rgb(254, 62, 62);
+    padding: 15px 100px;
+    text-align: center;
+}
 
+.login-btn:hover {
+    background-color: white;
+    color: rgb(254, 62, 62);
+    border: solid 1.5px;
+    border-color: rgb(254, 62, 62);
+
+}
+
+.sign-in-btn:hover {
+    background-color: rgb(254, 62, 62);
+    color:white;
+    border: solid 1.5px;
+    border-color: rgb(254, 62, 62);
+}
 
 
 
