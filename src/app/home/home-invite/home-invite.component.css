@@ -13,6 +13,30 @@
     flex-direction: row;
 }
 
+.mb {
+    margin-bottom: 75px;
+}
+
+.gamenium-container-panel {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 10px;
+    padding: 40px;
+    width: 1140px;
+    margin-right: 75px;
+    align-items: center;
+}
+
+
+.gamenium-container-panel h2 {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+
+
+
 /*  Bandeau principal  */
 .gamenium-banner {
     display: flex;
@@ -88,7 +112,7 @@
 
 .gamenium-connect-panel {
     box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 40px;
     width: 483px;
     display: flex;
@@ -145,158 +169,23 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
+.gamenium-description-panel {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    border-radius: 10px;
+    padding: 40px;
+    width: 609px;
+    margin-right: 75px;
+    align-items: center;
+}
 
 /* Nos actualités */
 
-/* .actu-container {
-    margin-top: 50px;
-    box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;
-    padding: 30px 15px;
-}
 
-.actu-connect-button {
-    display: flex;
-    justify-content: center;
-}
 
-.connect-call {
-    font-size: 18px;
-    text-align: center;
-    margin: 15px 0px;
-}
+/*Dernière sorties*/
 
-.actu-title {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.actu-icons {
-    border-bottom: 1px solid black;
-} */
-
-/* Profil Gamer*/
-
-/* .profile-gamer {
-    margin-top: 50px;
-    box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;
-    padding: 30px 60px;
-    display: flex;
-}
-
-.profile-description {
-    text-align: center;
-    font-size: 18px;
-    padding-left: 60px;
-}
-
-.profile-title {
-    font-weight: bold;
-    padding-bottom: 15px;
-}
-
-.profile-text {
-    padding-bottom: 15px;
-}
-
-.profile-card {
-    height: 10rem;
-    width: 13rem;
-    border-radius: 15px;
-    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.4);
-    background: white;
-}
-
-.profile-card .follow {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    text-decoration: underline;
-    color: black;
-
-}
-
-.profile-card .name {
-    position: relative;
-    top: 10%;
-    display: flex;
-    justify-content: center;
-    color: rgb(254, 62, 62);
-}
-
-.profile-color {
-    position: absolute;
-    height: 3rem;
-    width: 13rem;
-    background-color: rgb(254, 62, 62);
-    filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.2));
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
-
-.profile-picture {
-    position: relative;
-    top: 5%;
-    left: 30%;
-    width: 80px;
-    height: 80px; 
-    background-color: white;
-    border-radius: 100%;
-    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
-    background-image: url("https://static.printler.com/cache/7/a/8/0/b/5/7a80b57d1c07de5f165f70644bf8152afb7e2980.jpg");
-    background-position: center;
-    background-size: cover;
-} */
-
-/* Tyrolium */
-
-/* .tyrolium-description-container {
-    margin-top: 50px;
-    box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;
-    padding: 30px 15px;
-    display: flex;
-}
-
-.tyrolium-description {
-    gap: 10px;
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
-    padding-left: 60px;
-}
-
-.tyrolium-title {
-    font-weight: bold;
-}
-
-.tyrolium-link {
-    justify-content: center;
-    display: flex;
-}
-
-.tyrolium-link a {
-    width: fit-content;
-    color: black;
-}
-
-.tyrolium-image {
-    width: 40%;
-    background-position: center;
-    background-size: cover;
-    background-image: url(https://cdn.discordapp.com/attachments/1209863869695000666/1220736602121441342/ce41185114b4573c09eec4127e7c4612.png?ex=6610068e&is=65fd918e&hm=10178fda88a8aace62cefe9a41460d5fb73dd7e7ddb35d49a05696b0386611c1&);
-} */
 
 /* Condition d'utilisation */ 
 
