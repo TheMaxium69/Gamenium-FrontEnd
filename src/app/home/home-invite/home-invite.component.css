@@ -239,3 +239,88 @@
 .termes, .cgu,  a {
     color: black;
 } */
+
+/* Draft */
+
+#draft {
+    margin-bottom: 300px;
+}
+/* Draft card actu */
+
+.card {
+    width: 350px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #eeeeee;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.card-content hr {
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    margin: 5px 0;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 14px;
+    color: #555555;
+    margin-top: 10px;
+}
+
+.provider {
+    color: white;
+    background-color: #fe3836;
+    padding: 5px 10px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.provider-img{
+    height: 24px;
+    width: 24px;
+    margin-top: 1px;
+    border-radius: 100%;
+    background-color: red;
+    background-image: url('https://i.pinimg.com/136x136/e2/cb/6a/e2cb6a3b2d418d4fca14f9ebd84a0c47.jpg');
+    background-position: center;
+    background-size: cover;
+    margin-right: 7px;
+  }
+
+.card-footer p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+}
+
+.card-footer i.ri-chat-3-line {
+    color: #2e3a59;
+}
+
+.card-footer i.ri-heart-fill {
+    color: red;
+}
