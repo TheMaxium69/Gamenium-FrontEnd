@@ -11,7 +11,7 @@
           <a
             routerLink="/provider/{{ actu.Provider?.id }}"
             class="btn"
-            [ngStyle]="{ 'background-color': actu.Provider?.color + '97!important' }"
+            style="background-color: {{ actu.Provider?.color }}97!important"
           >
             <div class="d-flex">
               <div
