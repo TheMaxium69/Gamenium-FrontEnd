@@ -38,7 +38,7 @@ export class CommentActualityComponent implements OnInit{
   ) {}
 
   @Input()
-  nbComment: number | undefined;
+  nbComment: number | undefined = 0;
 
   ngOnInit(): void {
 
@@ -117,17 +117,17 @@ export class CommentActualityComponent implements OnInit{
           
           let noteSpanGame = document.getElementById("yourComment");
           if (noteSpanGame && this.newComment) {
-            // Create the comment card
+
             const commentCard = this.renderer.createElement('div');
             this.renderer.setAttribute(commentCard, 'id', `c${this.newComment.id}`);
             this.renderer.addClass(commentCard, 'card');
             this.renderer.addClass(commentCard, 'mb-2');
             
-            // Create the user section
+
             const commentUser = this.renderer.createElement('div');
             this.renderer.addClass(commentUser, 'comment-user');
   
-            // Profile picture or initials
+            // Si pas de photo de profile 
             if (this.newComment.user.pp?.url) {
               const profilePicture = this.renderer.createElement('div');
               this.renderer.addClass(profilePicture, 'img');
@@ -149,7 +149,7 @@ export class CommentActualityComponent implements OnInit{
               this.renderer.appendChild(commentUser, initialContainer);
             }
   
-            // Add username
+            // Ajout de la div username
             const userName = this.renderer.createElement('h4');
             this.renderer.addClass(userName, 'comment-user-name');
             const nameHTML = `(Vous) <span style="color:${this.newComment.user.color}">${this.newComment.user.displayname}</span>`;
@@ -157,7 +157,7 @@ export class CommentActualityComponent implements OnInit{
 
             this.renderer.appendChild(commentUser, userName);
 
-            // Add user badges
+            // Badges de l'user
             const badges = this.badgeForAllUser[this.newComment.user.id];
             if (badges) {
               badges.forEach((badgeData: BadgeInterface) => {
@@ -173,7 +173,7 @@ export class CommentActualityComponent implements OnInit{
               });
             }
   
-            // Add delete button
+            // Ajout du bouton delete
             const commentId = this.newComment.id;
             const deleteButton = this.renderer.createElement('i');
             this.renderer.setAttribute(deleteButton, 'id', 'delete-comment-icon');
@@ -182,34 +182,49 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.listen(deleteButton, 'click', () => this.onDeleteBtnClick(commentId));
             this.renderer.appendChild(commentUser, deleteButton);
   
-            // Append user section to card
             this.renderer.appendChild(commentCard, commentUser);
   
-            // Create and append the comment text
+            // Comment text div
             const commentText = this.renderer.createElement('p');
             this.renderer.addClass(commentText, 'comment-text');
             this.renderer.setProperty(commentText, 'textContent', this.newComment.content);
             this.renderer.appendChild(commentCard, commentText);
   
-            // Create and append the comment border
+            // Comment border div
             const commentBorder = this.renderer.createElement('div');
             this.renderer.setAttribute(commentBorder, 'id', `b${this.newComment.id}`);
             this.renderer.addClass(commentBorder, 'comment-border');
             this.renderer.addClass(commentBorder, 'mb-4');
   
-            // Insert elements into the DOM
+            // Insertion des éléments dans le dom
             if (noteSpanGame.firstChild) {
-              // Insert the comment card before the first child
               this.renderer.insertBefore(noteSpanGame, commentCard, noteSpanGame.firstChild);
 
-              // Append the border after the card 
+              // Ajout de la border après la carte
               this.renderer.insertBefore(noteSpanGame, commentBorder, commentCard.nextSibling);
             } else {
-              // If there is no child, append both elements in the correct order
+
               this.renderer.appendChild(noteSpanGame, commentCard);
               this.renderer.appendChild(noteSpanGame, commentBorder);
             }
           }
+
+          // Incrémente le nombre de commentaires après en avoir ajouté un.
+          if (this.nbComment !== undefined) {
+            this.nbComment++
+
+            const commentHTML = document.querySelector('#comment-value')
+            if (commentHTML) {
+              commentHTML.textContent = this.nbComment.toString()
+            }
+            
+            const noComment = document.querySelector('#no-comment') as HTMLElement
+            if (this.nbComment > 0 && noComment) {
+              noComment.style.display = 'none'
+            }
+          }
+          
+
         } else {
           console.log(reponseMyCommentActuCreate);
         }
@@ -249,6 +264,21 @@ export class CommentActualityComponent implements OnInit{
           borderToDelete.style.display = 'none'
         }
 
+        if (typeof this.nbComment == 'number' && this.nbComment > 0 ) {
+          this.nbComment--
+          
+          const commentHTML = document.querySelector('#comment-value')
+          if (commentHTML) {
+            commentHTML.textContent =  this.nbComment.toString()
+          }
+          
+          const noComment = document.querySelector('#no-comment') as HTMLElement
+          if (typeof this.nbComment == 'number' && this.nbComment == 0 ) {
+            noComment.style.display = 'block'
+          }
+        }
+        
+        
         console.log('message supprimé')
       } else {
         console.log('erreur ou pas de commentaire') // TODO: Ajouter les gestions d'erreurs

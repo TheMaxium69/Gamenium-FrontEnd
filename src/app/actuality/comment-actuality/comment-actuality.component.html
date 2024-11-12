@@ -1,7 +1,7 @@
 
 <!-- <div style="height: 50px"></div> -->
 
-<h1 id="comment"> Commentaire {{nbComment}} </h1>
+<h1 id="comment"> Commentaire <span id="comment-value">{{nbComment}}</span></h1>
 
 <ng-container *ngIf="isLoggedIn">
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
@@ -111,7 +111,7 @@
 
 <ng-container *ngIf="!commentByActu">
 
-  <h2>Aucun Commentaire</h2>
+  <h2 id="no-comment">Aucun Commentaire</h2>
 
 </ng-container>
 
