@@ -48,7 +48,7 @@
     <div id="show-game" class="d-flex container">
       <ng-container *ngFor="let myGameHistorique of getPinnedGames()">
 
-        <div class="card-game container d-flex">
+        <div class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
 
           <div class="isPinned" style="background-color: {{ isColor }}">
             <p><i class="ri-pushpin-fill"></i></p>
@@ -158,7 +158,7 @@
     <div id="show-game" class="d-flex container">
       <ng-container *ngFor="let myGameHistorique of getUnpinnedGames()">
 
-        <div class="card-game container d-flex">
+        <div class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
 
           <div class="card-left">
             <ng-container *ngIf="myGameHistorique.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
