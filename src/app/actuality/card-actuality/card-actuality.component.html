@@ -1,7 +1,7 @@
 <section id="actu-all" class="d-flex container">
 
   <ng-container *ngFor="let actu of postActuFollowOrAll;">
-    <div class="card" routerLink="/actuality/{{ actu.id }}">
+    <div class="card col-4" routerLink="/actuality/{{ actu.id }}">
       <img src="{{ actu.picture.url }}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">{{ actu.title }}</h5>
