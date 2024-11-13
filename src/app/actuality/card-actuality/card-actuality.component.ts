@@ -38,6 +38,11 @@ export class CardActualityComponent implements OnInit {
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
 
+    if (this.isLogIn) {
+      this.userConnectedId = this.app.userConnected?.id;
+      // console.log('User ID', this.userConnectedId); 
+    }
+
     if (this.router.url.includes('provider')) {
       this.route.paramMap.subscribe(params => {
         this.providerId = Number(params.get('id'))
@@ -50,7 +55,7 @@ export class CardActualityComponent implements OnInit {
     }
 
     if (this.isLogIn) {
-        // Faire une recherche sur ces follow
+      // Faire une recherche sur ces follow
       this.userConnectedId = this.app.userConnected.id;
       this.userConnected = this.app.userConnected;
 
@@ -92,7 +97,10 @@ export class CardActualityComponent implements OnInit {
 
         
         this.postActuFollowOrAll.forEach((actu: any) => {
-          this.getLikeByActu(actu.id);
+          // console.log(this.userConnectedId)
+          if (this.userConnectedId) { 
+            this.getLikeByActu(actu.id);
+          }
         });
       }
     });
