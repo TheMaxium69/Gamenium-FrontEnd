@@ -147,3 +147,56 @@
   font-size: 30px;
 }
 
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-right .core-left h5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Number of lines to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+/* GAME SMALL SCREEN */
+@media (max-width: 770px) {
+  .card-right .core-left h5 {
+    font-size: clamp(16px, 4vw, 20px);
+  }
+
+  .card-right .core-right {
+    width: 0;
+    display: flex;
+    justify-content: end;
+  }
+
+  .card-right .core-right .card-note {
+    margin-left: 0;
+    position: absolute;
+    z-index: 999;
+    margin-top: -170px;
+    width: 47px;
+    height: 47px;
+  }
+
+  .card-right .core-right .card-note p span {
+    font-size: 16px;
+  }
+
+  .card-game {
+    max-width: 300px;
+    flex-direction: column;
+  }
+
+  .card-wrapper {
+    height: 300px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    width: fit-content;
+    border-radius: 15px;
+  }
+
+}
