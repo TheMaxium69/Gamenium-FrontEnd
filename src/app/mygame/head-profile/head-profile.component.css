@@ -35,8 +35,8 @@
 
 #profilInfo{
   position: absolute;
-  width: 100%;
-  padding: 0 42px;
+  width: 1320px;
+  margin-left: -12px;
 }
 #profilInfo .d-flex{
   /*background-color: rgba(138, 43, 226, 0.66);*/
@@ -71,6 +71,7 @@
 #inWrapper{
   display: flex;
   height: 100%; 
+  flex-wrap: wrap;
 }
 
 #profilInfoLeft {
@@ -116,87 +117,198 @@
   margin-top: -37px;
 }
 
-@media (max-width: 900px) {
-  #inWrapper {
-    display: unset;
-  }
-
+@media (max-width: 1400px) {
   #profilInfo {
-    margin-top: 50px;
+    width: 1140px;
   }
 
-  #profilInfoRight {
-    width: 100%;
-    margin-top: 15px;
+
+}
+
+@media (max-width: 1200px) {
+  #profilInfo {
+    width: 960px;
   }
 
-  #profilInfoLeft {
-    width: 100%;
-    padding: 0;
-    /* margin: 10px; */
+}
+
+@media (max-width: 992px) {
+  #profilInfo {
+    width: 720px;
   }
 
-  #profilInfoLeft .articleInfoLeft {
-    border: none !important;
-    text-align: center;
-  }
-
-  .wrapper {
-    width: 100%;
-    
-  }
-
-  .nb {
-    border-top: 1px solid black;
-    flex-wrap: nowrap;
-    padding: 15px 0px;
-    margin: 0px 15px;
-    gap: 15px !important;
+  #profilInfo .d-flex {
+    gap: 30px;
   }
 
   .d-flex {
-    display: inline !important;
+    flex-wrap: wrap;
   }
 
-  #profilPublic .profilPhoto {
-    width: 200px;
-    height: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50px;
-    margin-top: 50px;
+
+  #profilPublic {
+    margin-bottom: 356px;
   }
 
-  .lettrePP {
+
+  #profilInfoLeft .articleInfoLeft {
+    border: none;
     text-align: center;
-    align-content: center;
-    height: 100%;
-    margin: 0;
-    font-size: 90px;
+  }
+
+}
+
+
+@media (max-width: 900px) {
+  #profilPublic {
+    margin-bottom: 70px;
   }
 }
 
 @media (max-width: 768px) {
+  #profilInfo {
+    width: 100%;
+  }
+
   #profilPublic .profilPhoto {
     width: 200px;
     height: 200px;
+    margin-top: -30px;
   }
 
+  #profilPublic {
+    margin-bottom: 20px;
+  }
+
+
   .lettrePP {
-    text-align: center;
-    margin: 0;
     font-size: 130px;
+    margin-top: -20px;
+  }
+
+  #profilInfoLeft {
+    width: 50%;
+    padding: 10px;
+  }
+
+  #profilInfoRight {
+    width: 50%;
+  }
+
+
+  .wrapper {
+    flex-wrap: wrap;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 576px) {
+  #profilPublic {
+    margin-bottom: -40px;
+  }
+
   #profilInfo {
+    width: 540px;
+  }
+
+  #profilPublic .profilPhoto {
+    width: 150px;
+    height: 150px;
+    margin-top: -20px;
+  }
+
+  .lettrePP {
+    font-size: 90px;
+    margin-top: -10px;
+  }
+
+  #profilInfoLeft {
+    padding: 10px;
+  }
+
+  .wrapper {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 455px) {
+  #profilInfo {
+    width: 100%;
+    margin-left: -13px;
+    padding: 0 10px;
+  }
+
+
+
+  #profilInfo .d-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
     margin-top: 50px;
   }
 
-  .profilPhoto {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50px;
+  #profilPublic .profilPhoto {
+    width: 120px;
+    height: 120px;
+    margin-top: -10px;
   }
-} 
+
+  .lettrePP {
+    font-size: 80px;
+    margin-top: -5px;
+  }
+
+  #profilInfoLeft,
+  #profilInfoRight {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  #profilInfoLeft {
+    padding: 5px;
+  }
+
+  #profilInfoLeft .articleInfoLeft {
+    text-align: center;
+  }
+
+  #profilInfoRight .nb {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 15px;
+  }
+
+  #profilInfoRight .nb div {
+    width: 100%;
+  }
+
+  .wrapper {
+    padding: 5px;
+  }
+
+  #profilPublic {
+    margin-bottom: -40px;
+  }
+
+  .badgeIMG {
+    width: 20px;
+    margin-right: 3px;
+  }
+
+  .useritiumPP {
+    width: 20px;
+  }
+
+  #profilInfoRight .nb h1 {
+    font-size: 24px;
+  }
+
+  #profilInfoRight .nb h2 {
+    font-size: 16px;
+  }
+
+  #profilInfoLeft .icone-reseau {
+    font-size: 20px;
+    margin-right: 3px;
+  }
+
+}
