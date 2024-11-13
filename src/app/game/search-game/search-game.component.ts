@@ -5,6 +5,8 @@ import {AppComponent} from "../../app.component";
 import {Router} from "@angular/router";
 import { UserRateService } from 'src/app/-service/user-rate.service';
 import { UserRateInterface } from 'src/app/-interface/user-rate.interface';
+import { ProfilService } from 'src/app/-service/profil.service';
+import { ProfilInterface } from 'src/app/-interface/profil.interface';
 
 
 @Component({
@@ -14,24 +16,53 @@ import { UserRateInterface } from 'src/app/-interface/user-rate.interface';
 })
 export class SearchGameComponent implements OnInit{
 
+  isLoggedIn:boolean|undefined;
+
   games: GameInterface[] = [];
   searchValue: string = '';
   userRatingAll: UserRateInterface[] | undefined;
   fakeRates: number[] = [8, 14, 19, 13];
+  userColor: string | undefined;
+  profilSelected: ProfilInterface | undefined;
 
   constructor (
     private userRateService: UserRateService,
     private gameService: GameService,
     private app: AppComponent,
+    private profileService: ProfilService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
 
+    this.isLoggedIn = this.app.isLoggedIn;
+
+    if (this.isLoggedIn) {
+      this.updateConnect()
+    }
+    
     this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.games = results;
     });
   }
+
+  updateConnect(): void {
+    const userId = this.app.userConnected?.id;
+    if (userId) {
+      this.profileService.getProfilByUserId(userId, this.app.setURL()).subscribe(responseProfil => {
+        if (responseProfil.message === "good") {
+          this.profilSelected = responseProfil.result;
+          if (this.profilSelected?.themeColor) {
+            this.userColor = this.profilSelected.themeColor; 
+          }
+        } else {
+          console.error("Error: User profile not found");
+        }
+      });
+    }
+  }
+
+
 
   onSearch(): void {
 
