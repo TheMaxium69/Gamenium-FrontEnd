@@ -148,7 +148,8 @@
 
   <div class="container mt-4" style="width: 75%;" id="commentSection">
     <app-comment-actuality
-    [nbComment]="nbCommentaire"></app-comment-actuality>
+    [nbComment]="nbCommentaire"
+    (commentNbChanged)="updateNbComment($event)"></app-comment-actuality>
   </div>
 
 

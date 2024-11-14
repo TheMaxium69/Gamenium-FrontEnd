@@ -365,6 +365,17 @@ export class DetailActualityComponent implements OnInit{
 
   }
 
+  updateNbComment(event: string) {
+    if (event == 'add') {
+      this.nbCommentaire++
+    }
+
+    if (event == 'delete') {
+      this.nbCommentaire--
+    }
+
+  }
+
   redirectComment(){
     window.location.href = this.globalUrl + '#commentSection';
   }

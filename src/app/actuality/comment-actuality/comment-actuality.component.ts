@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Renderer2} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, Renderer2} from '@angular/core';
 import {PostActuInterface} from "../../-interface/post-actu.interface";
 import {ActivatedRoute} from "@angular/router";
 import {PostActuService} from "../../-service/post-actu.service";
@@ -40,6 +40,10 @@ export class CommentActualityComponent implements OnInit{
   @Input()
   nbComment: number | undefined = 0;
 
+  @Output()
+  commentNbChanged: EventEmitter<'add' | 'delete'> = new EventEmitter<'add' | 'delete'>()
+
+  
   ngOnInit(): void {
 
     this.isLoggedIn = this.app.isLoggedIn;
@@ -57,7 +61,6 @@ export class CommentActualityComponent implements OnInit{
     this.getCommentWithActu(this.actualityId);
 
   }
-
 
   getActuById(id:number){
 
@@ -224,6 +227,7 @@ export class CommentActualityComponent implements OnInit{
             }
           }
           
+          this.commentNbChanged.emit('add');
 
         } else {
           console.log(reponseMyCommentActuCreate);
@@ -290,7 +294,7 @@ export class CommentActualityComponent implements OnInit{
           }
         }
         
-        
+        this.commentNbChanged.emit('delete');
         console.log('message supprimé')
       } else {
         console.log('erreur ou pas de commentaire') // TODO: Ajouter les gestions d'erreurs

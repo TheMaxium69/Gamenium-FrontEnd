@@ -1,7 +1,9 @@
 
 <!-- <div style="height: 50px"></div> -->
-
-<h1 id="comment"> Commentaire <span id="comment-value">{{nbComment}}</span></h1>
+<div class="d-flex gap-2">
+  <h1 id="comment-value">{{nbComment}}</h1>
+  <h1 id="comment">{{nbComment && nbComment >= 2 ? 'commentaires' : 'commentaire' }}</h1>
+</div>
 
 <ng-container *ngIf="isLoggedIn">
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
@@ -75,7 +77,10 @@
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
             </h4>            
-            <i id="delete-comment-icon" class="ri-delete-bin-line" (click)="onDeleteBtnClick(comment.id)" style="color: red;"></i>
+            <i id="delete-comment-icon"
+              class="ri-delete-bin-line"
+              (click)="onDeleteBtnClick(comment.id)"
+              style="color: red;"></i>
           </div>
           <p class="comment-text">{{comment.content}}</p>
         </div>
