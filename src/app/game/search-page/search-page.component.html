@@ -97,12 +97,12 @@
     <ng-container *ngFor="let user of users">
 
       <div routerLink="/profil/{{ user.id }}">
-        <div id="card-user">
+        <div id="card-user" style="background: linear-gradient(180deg, {{user.color ?? 'red'}} 35%, white 35%)">
           <div *ngIf="user?.pp" class="circleImage" style="background-image: url('{{ user.pp?.url }}')">
           </div>
     
           <div *ngIf="!user?.pp" class="circleImage" style="background-color: white!important">
-            <p class="lettrePP" style="color: {{user.color}}">{{ extractFirstLetter(user.displayname) }}</p>
+            <p class="lettrePP" style="color: {{user.color ?? 'red'}}">{{ extractFirstLetter(user.displayname) }}</p>
           </div>
           <h2 class="card-title mt-4">{{ user.username }}</h2><br>
         </div>
@@ -143,7 +143,7 @@
               <div class="blur"></div>
               <img src="{{ game.image?.thumb_url }}" alt="...">
             </ng-container> -->
-        <div id="card-provider">
+        <div id="card-provider" style="background: linear-gradient(180deg, {{provider.color ?? 'red'}} 35%, white 35%)">
           <div class="circleImage" style="background-image: url('{{ provider.picture?.url }}');"></div> 
           <h2 class="card-title">{{ provider.displayName }}</h2><br>
           <p>{{ provider.content }}</p><br>
