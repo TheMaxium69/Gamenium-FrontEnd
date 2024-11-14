@@ -6,6 +6,7 @@ import { AppComponent } from "../../app.component";
 import { FollowService } from "../../-service/follow.service"; // Importez le service FollowService
 import { PostActuService } from "../../-service/post-actu.service";
 import { PostActuInterface } from "../../-interface/post-actu.interface";
+import { UserInterface } from 'src/app/-interface/user.interface';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { PostActuInterface } from "../../-interface/post-actu.interface";
 })
 export class ProviderComponent implements OnInit{
 
+  userConnected: UserInterface | undefined;
   providerId: number|any;
   providerSelected: ProviderInterface|undefined;
   noneProvider:boolean|undefined = false;
@@ -31,13 +33,24 @@ export class ProviderComponent implements OnInit{
               private app: AppComponent) {
   }
 
-    //fake variables
-    providerNbActu: number|undefined=8;
-    providerNbGame: number|undefined=2689;
-    actuTitle: string|undefined='test'
-    //end
+  idUser: number | undefined;
+  isProviderFollowedByUser: boolean | undefined;
+  //fake variables
+  providerNbActu: number|undefined=8;
+  providerNbGame: number|undefined=2689;
+  actuTitle: string|undefined='test'
+  //end
 
   ngOnInit(): void {
+
+    this.userConnected = this.app.userConnected;
+    this.idUser = this.userConnected?.id;
+
+    if (this.idUser) {
+      this.checkIfUserFollowProvider(this.idUser)
+      console.log(this.isProviderFollowedByUser)
+    }
+
     this.providerId = this.route.snapshot.paramMap.get('id');
     console.log("Provider Id", this.providerId)
     this.getProviders(this.providerId);
@@ -52,6 +65,18 @@ export class ProviderComponent implements OnInit{
         this.noneProvider = true;
       }
     });
+  }
+
+  checkIfUserFollowProvider(userId: number) {
+    this.providerId = this.route.snapshot.paramMap.get('id')
+
+    this.followService.getFollowByProvider(this.providerId, this.app.setURL()).subscribe((reponseApi) => {
+      if (reponseApi.message == 'good') {
+        this.isProviderFollowedByUser = reponseApi.result.some((result: any) => result.user.id == userId)
+      } else {
+        this.isProviderFollowedByUser = false
+      }
+    })
   }
 
   getNumberOfFollowers(providerId: number): void {
@@ -81,6 +106,17 @@ export class ProviderComponent implements OnInit{
   }
 
   onFollowBtnClick(providerId: number) {
+    let body: any = {
+      "id_provider": providerId,
+    };
+    const JSONbody = JSON.stringify(body);
+
+    this.followService.postFollowProvider(JSONbody, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseProvider) => {
+      if (reponseProvider.message == 'good') {
+        console.log('succès du follow')
+      }
+    })
+
     console.log(providerId);
   }
 

@@ -27,7 +27,7 @@
             </div>
 
             <div id="button_follow">
-              <button type="button" style="background-color: {{ providerSelected?.color }}" (click)="onFollowBtnClick(providerId)"> Suivre </button>
+              <button type="button" style="background-color: {{ providerSelected?.color }}" (click)="onFollowBtnClick(providerId)"> {{isProviderFollowedByUser ? 'Suivie' : 'Suivre'}} </button>
             </div>
           </div>
         </div>
