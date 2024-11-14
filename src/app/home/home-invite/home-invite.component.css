@@ -273,6 +273,7 @@
   
   #gamenium-actu-invite .card-end{
     justify-content: space-between;
+    background-color: rgba(33, 37, 41, 0.03);
   }
   #gamenium-actu-invite .card-end .card-i{
     font-size: 25px;
@@ -406,3 +407,20 @@
 .card-footer i.ri-heart-fill {
     color: red;
 }
+
+.circle {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .circle-img {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+  
+    background-color: white;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
