@@ -265,7 +265,9 @@ export class CommentActualityComponent implements OnInit{
         }
 
         if (typeof this.nbComment == 'number' && this.nbComment > 0 ) {
+          console.log(this.nbComment)
           this.nbComment--
+          console.log(this.nbComment)
           
           const commentHTML = document.querySelector('#comment-value')
           if (commentHTML) {
@@ -274,7 +276,17 @@ export class CommentActualityComponent implements OnInit{
           
           const noComment = document.querySelector('#no-comment') as HTMLElement
           if (typeof this.nbComment == 'number' && this.nbComment == 0 ) {
-            noComment.style.display = 'block'
+            if (noComment !== null) {
+              noComment.style.display = 'block'
+            } else {
+              const form = document.querySelector('#addCommentForm')
+              const commentSectionEmpty = this.renderer.createElement('h2');
+              this.renderer.setAttribute(commentSectionEmpty, 'id', 'no-comment');
+              commentSectionEmpty.textContent = 'Aucun commentaire';
+              
+              this.renderer.appendChild(form, commentSectionEmpty)
+            }
+            console.log(noComment)
           }
         }
         
