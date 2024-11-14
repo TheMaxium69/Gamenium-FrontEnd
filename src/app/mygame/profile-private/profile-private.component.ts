@@ -5,7 +5,7 @@ import { UserInterface } from "../../-interface/user.interface";
 import { HistoryMyGameInterface } from "../../-interface/history-my-game.interface";
 import { UserRateService } from "../../-service/user-rate.service";
 import { UserRateInterface } from "../../-interface/user-rate.interface";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { GameInterface } from "../../-interface/game.interface";
 import { ProfilInterface } from "../../-interface/profil.interface";
@@ -35,7 +35,9 @@ export class ProfilePrivateComponent implements OnInit {
               private profileService: ProfilService,
               private route: ActivatedRoute,
               private histoireMyGameService: HistoryMyGameService,
-              private renderer: Renderer2) { }
+              private renderer: Renderer2,
+              private router: Router) { }
+              
 
   ngOnInit(): void {
     this.task = this.route.snapshot.paramMap.get('task');
@@ -226,4 +228,9 @@ export class ProfilePrivateComponent implements OnInit {
       }
     );
   }
+
+  goToGame(gameId: number): void {
+    this.router.navigate(['/game', gameId]);
+  }
 }
+

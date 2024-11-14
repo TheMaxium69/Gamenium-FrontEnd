@@ -48,13 +48,13 @@
     <div id="show-game" class="d-flex container">
       <ng-container *ngFor="let myGameHistorique of getPinnedGames()">
 
-        <div class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
+        <div class="card-game container d-flex">
 
           <div class="isPinned" style="background-color: {{ isColor }}">
             <p><i class="ri-pushpin-fill"></i></p>
           </div>
 
-          <div class="card-left">
+          <div class="card-left" (click)="goToGame(myGameHistorique.game.id)">
             <ng-container *ngIf="myGameHistorique.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
               <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
               <div class="blur"></div>
@@ -68,7 +68,7 @@
           </div>
 
           <div class="card-right d-flex">
-            <div class="core-left">
+            <div class="core-left" (click)="goToGame(myGameHistorique.game.id)">
               <h5>{{ myGameHistorique.game.name }}</h5>
               <p style="color: red"> Éditeur Sample </p>
               <ng-container *ngIf="myGameHistorique.buy_at">
@@ -94,9 +94,9 @@
                 </span>/20</p>
               </div>
               <div class="card-action">
-                <i (click)="togglePin(myGameHistorique)" class="ri-unpin-line"></i>
-                <i (click)="selectGame(myGameHistorique.game)" data-bs-toggle="modal" data-bs-target="#noteGameSelected" class="ri-star-line"></i>
-                <i (click)="selectGame(myGameHistorique.game)" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>
+                <i (click)="togglePin(myGameHistorique); $event.stopPropagation()" class="ri-pushpin-line"></i>
+                <i (click)="selectGame(myGameHistorique.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#noteGameSelected" class="ri-star-line"></i>
+                <i (click)="selectGame(myGameHistorique.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>
               </div>
             </div>
           </div>
@@ -158,9 +158,9 @@
     <div id="show-game" class="d-flex container">
       <ng-container *ngFor="let myGameHistorique of getUnpinnedGames()">
 
-        <div class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
+        <div class="card-game container d-flex">
 
-          <div class="card-left">
+          <div class="card-left" (click)="goToGame(myGameHistorique.game.id)">
             <ng-container *ngIf="myGameHistorique.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
               <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
               <div class="blur"></div>
@@ -174,7 +174,7 @@
           </div>
 
           <div class="card-right d-flex">
-            <div class="core-left">
+            <div class="core-left" (click)="goToGame(myGameHistorique.game.id)">
               <h5>{{ myGameHistorique.game.name }}</h5>
               <p style="color: red"> Éditeur Sample </p>
               <ng-container *ngIf="myGameHistorique.buy_at">
@@ -200,9 +200,9 @@
                 </span>/20</p>
               </div>
               <div class="card-action">
-                <i (click)="togglePin(myGameHistorique)" class="ri-pushpin-line"></i>
-                <i (click)="selectGame(myGameHistorique.game)" data-bs-toggle="modal" data-bs-target="#noteGameSelected" class="ri-star-line"></i>
-                <i (click)="selectGame(myGameHistorique.game)" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>
+                <i (click)="togglePin(myGameHistorique); $event.stopPropagation()" class="ri-unpin-line"></i>
+                <i (click)="selectGame(myGameHistorique.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#noteGameSelected" class="ri-star-line"></i>
+                <i (click)="selectGame(myGameHistorique.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>
               </div>
             </div>
           </div>
