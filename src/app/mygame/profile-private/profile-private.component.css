@@ -210,9 +210,9 @@
 }
 
 .card-action{
+  display: flex;
   margin-top: 22px;
-  text-align: end;
-  margin-right: 8px;
+  text-align: end;  
   font-size: 26px;
 }
 
@@ -220,6 +220,18 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-5px);
   transition: all 0.3s ease;
+}
+
+#delete-comment-icon {
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 5%;
+  font-size: 28px;
+  display: none;
+}
+
+.card-right:hover #delete-comment-icon {
+  display: block;
 }
 
 @media (max-width: 900px) {

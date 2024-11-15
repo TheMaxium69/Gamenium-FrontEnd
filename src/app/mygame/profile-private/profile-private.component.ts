@@ -167,6 +167,10 @@ export class ProfilePrivateComponent implements OnInit {
     })
   }
 
+  deleteFromMyGame(gameId: number) {
+    console.log(gameId)
+  }
+
   addNote(form: NgForm) {
     console.log(form.value);
     if (form.value['noteGame'] >= 0 && form.value['noteGame'] <= 20) {
