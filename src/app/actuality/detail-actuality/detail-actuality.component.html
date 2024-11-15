@@ -17,7 +17,12 @@
         <!--Bouton Like & Commentaires-->
         <div class="btn_container">
           <button class="btn">
-            <i id="actulike" class="ri-heart-3-line" (click)="addLikeByActu()"></i>
+            <i id="actulike"
+            [attr.data-bs-toggle]="!isLoggedIn ? 'modal' : null"
+            [attr.data-bs-target]="!isLoggedIn ? '#exampleModal' : null"
+            class="ri-heart-3-line"
+            (click)="addLikeByActu()">
+            </i>
           </button>
           <span class="btn_text">{{ nbLike }}</span>
           <button class="btn" (click)="redirectComment()">
@@ -64,6 +69,30 @@
     </div>
   </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="box-shadow: 1px 2px 11px #a6a6a6;">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Vous devez être connecté avant de liker</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- <div class="modal-body">
+          ...
+        </div> -->
+        <div class="modal-footer">
+          <button 
+            routerLink="/account"
+            data-bs-dismiss="modal"
+            type="button" 
+            class="btn text-white"
+            style="background-color: red;">
+          Se connecter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!---->
 
   <!-- <div class="wrapper_container"> -->
     <!-- <div id="wrapper"> -->

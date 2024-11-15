@@ -127,6 +127,10 @@ export class CardActualityComponent implements OnInit {
   onClickLike(id: number) {
     const cardActuIcon = document.querySelector(`#likeIcon${id}`);
 
+    if (!this.isLogIn) {
+      return console.log('Impossible de liker: User pas connecté')
+    }
+
     this.ipService.getMyIp(this.app.urlIp).subscribe(
       responseTyroIp => {
         let bodyNoJson: any = {

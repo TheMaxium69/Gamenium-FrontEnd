@@ -139,6 +139,10 @@ export class DetailActualityComponent implements OnInit{
 
   addLikeByActu(){
 
+    if (!this.isLoggedIn) {
+      return console.log('Vous devez etre connecté pour liker')
+    }
+
     const btnActuLike = document.getElementById("actulike");
 
     this.ipService.getMyIp(this.app.urlIp).subscribe(reponseTyroIp => {

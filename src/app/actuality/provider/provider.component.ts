@@ -117,7 +117,7 @@ export class ProviderComponent implements OnInit{
   }
 
   followBtnMouseEnter() {
-    console.log('mouse enter')
+    // console.log('mouse enter')
     const btnTxt = document.querySelector('#button-follow-text') as HTMLElement
     if (btnTxt && this.isProviderFollowedByUser) {
       btnTxt.textContent = 'Ne plus suivre'
@@ -130,7 +130,7 @@ export class ProviderComponent implements OnInit{
   }
 
   followBtnMouseLeave() {
-    console.log('mouse leave')
+    // console.log('mouse leave')
     const btnTxt = document.querySelector('#button-follow-text') as HTMLElement
     if (btnTxt) {
       btnTxt.textContent = this.isProviderFollowedByUser ? 'Suivie' : 'Suivre'
@@ -153,7 +153,7 @@ export class ProviderComponent implements OnInit{
       }
     })
 
-    console.log(providerId);
+    // console.log(providerId);
   }
 
   deleteFollow(providerId: number) {
@@ -164,6 +164,6 @@ export class ProviderComponent implements OnInit{
       }
     })
 
-    console.log(providerId);
+    // console.log(providerId);
   }
 }
