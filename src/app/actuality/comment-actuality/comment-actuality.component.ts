@@ -112,6 +112,9 @@ export class CommentActualityComponent implements OnInit{
       };
   
       const bodyMyCommentActu = JSON.stringify(bodyNoJsonMyCommentActu);
+      
+      const resetForm = form.resetForm();
+
   
       this.commentService.postCommentInActu(bodyMyCommentActu, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyCommentActuCreate => {
         if (reponseMyCommentActuCreate.message === "good") {
