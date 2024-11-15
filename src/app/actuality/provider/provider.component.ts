@@ -119,7 +119,7 @@ export class ProviderComponent implements OnInit{
   followBtnMouseEnter() {
     console.log('mouse enter')
     const btnTxt = document.querySelector('#button-follow-text') as HTMLElement
-    if (btnTxt) {
+    if (btnTxt && this.isProviderFollowedByUser) {
       btnTxt.textContent = 'Ne plus suivre'
       btnTxt.style.backgroundColor = 'white'
       btnTxt.style.color = this.providerSelected?.color ?? 'red'
