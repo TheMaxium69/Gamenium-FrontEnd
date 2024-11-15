@@ -216,6 +216,10 @@
   font-size: 26px;
 }
 
+.card-action i:hover {
+  cursor: pointer;
+}
+
 .card:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-5px);
