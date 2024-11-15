@@ -90,7 +90,7 @@ ul {
 #button_follow button {
     font-family: arial, serif;
     font-weight: bold;
-    color: #FFFFFF !important;
+    color: #FFFFFF;
     font-size: 28px;
     box-shadow: 2px 2px 9px #888888;
     padding: 10px 25px;

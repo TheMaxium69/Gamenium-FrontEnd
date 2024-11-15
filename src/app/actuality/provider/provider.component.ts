@@ -50,7 +50,7 @@ export class ProviderComponent implements OnInit{
       this.checkIfUserFollowProvider(this.idUser)
       console.log(this.isProviderFollowedByUser)
     }
-
+  
     this.providerId = this.route.snapshot.paramMap.get('id');
     console.log("Provider Id", this.providerId)
     this.getProviders(this.providerId);
@@ -105,7 +105,43 @@ export class ProviderComponent implements OnInit{
     });
   }
 
-  onFollowBtnClick(providerId: number) {
+  followBtnClick(providerId: number) {
+    // Ajoute du follow
+    if (!this.isProviderFollowedByUser) {
+      this.addFollow(providerId)
+
+    // Reire le follow
+    } else if (this.isProviderFollowedByUser) {
+      this.deleteFollow(providerId)
+    }
+  }
+
+  followBtnMouseEnter() {
+    console.log('mouse enter')
+    const btnTxt = document.querySelector('#button-follow-text') as HTMLElement
+    if (btnTxt) {
+      btnTxt.textContent = 'Ne plus suivre'
+      btnTxt.style.backgroundColor = 'white'
+      btnTxt.style.color = this.providerSelected?.color ?? 'red'
+      btnTxt.style.border = '2px solid'
+      btnTxt.style.borderColor = this.providerSelected?.color ?? 'red'
+      btnTxt.style.transition = 'all 0.2s ease';
+    }
+  }
+
+  followBtnMouseLeave() {
+    console.log('mouse leave')
+    const btnTxt = document.querySelector('#button-follow-text') as HTMLElement
+    if (btnTxt) {
+      btnTxt.textContent = this.isProviderFollowedByUser ? 'Suivie' : 'Suivre'
+      btnTxt.style.backgroundColor = this.providerSelected?.color ?? 'red'
+      btnTxt.style.color = 'white'
+      btnTxt.style.border = 'none'
+      btnTxt.style.transition = 'all 0.2s ease';
+    }
+  }
+
+  addFollow(providerId: number) {
     let body: any = {
       "id_provider": providerId,
     };
@@ -120,4 +156,14 @@ export class ProviderComponent implements OnInit{
     console.log(providerId);
   }
 
+  deleteFollow(providerId: number) {
+    console.log('btn clicked')
+    this.followService.deleteFollowProvider(providerId, this.app.setURL()).subscribe((reponseApi) => {
+      if (reponseApi.message == 'follow deleted successfully') {
+        console.log('follow supprimé avec succès')
+      }
+    })
+
+    console.log(providerId);
+  }
 }
