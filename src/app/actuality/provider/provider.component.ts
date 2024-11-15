@@ -24,19 +24,20 @@ export class ProviderComponent implements OnInit{
   providerNbFollower: number|undefined; 
   postactuSelected: PostActuInterface|undefined; 
   actus: any[] = [];
-
-
-  constructor(private route: ActivatedRoute,
-              private providerService: ProviderService,
-              private followService: FollowService, 
-              private postactuService: PostActuService, 
-              private app: AppComponent) {
-  }
-
   idUser: number | undefined;
   isProviderFollowedByUser: boolean | undefined;
+  providerNbActu: number|undefined;
+
+  constructor(
+    private route: ActivatedRoute,
+    private providerService: ProviderService,
+    private followService: FollowService, 
+    private postactuService: PostActuService, 
+    private app: AppComponent
+  ) {}
+
+
   //fake variables
-  providerNbActu: number|undefined=8;
   providerNbGame: number|undefined=2689;
   actuTitle: string|undefined='test'
   //end
@@ -53,6 +54,7 @@ export class ProviderComponent implements OnInit{
   
     this.providerId = this.route.snapshot.paramMap.get('id');
     console.log("Provider Id", this.providerId)
+
     this.getProviders(this.providerId);
     this.getNumberOfFollowers(this.providerId); 
   }
@@ -65,6 +67,10 @@ export class ProviderComponent implements OnInit{
         this.noneProvider = true;
       }
     });
+  }
+
+  updateNbProviderActu(nbActu: number) {
+    this.providerNbActu = nbActu;
   }
 
   checkIfUserFollowProvider(userId: number) {

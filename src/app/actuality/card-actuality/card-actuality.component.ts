@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserInterface } from "../../-interface/user.interface";
 import { AppComponent } from "../../app.component";
 import { PostActuService } from "../../-service/post-actu.service";
@@ -34,6 +34,9 @@ export class CardActualityComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
+  @Output()
+  nbActuOfProvider: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
@@ -94,7 +97,8 @@ export class CardActualityComponent implements OnInit {
     this.postActuService.getPostByProvider(id, this.app.setURL()).subscribe(response => {
       if (response.message === 'good') {
         this.postActuFollowOrAll = response.result;
-
+        // envoie le nombre d'actu du provider au commposant provider
+        this.nbActuOfProvider.emit(this.postActuFollowOrAll.length);
         
         this.postActuFollowOrAll.forEach((actu: any) => {
           // console.log(this.userConnectedId)

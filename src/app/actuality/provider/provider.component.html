@@ -17,12 +17,12 @@
 
                <div id="followers">
                  <h3 style="color: {{ providerSelected?.color }}">{{providerNbFollower}}</h3>
-                  <h3>Abonnés</h3>
+                  <h3> {{providerNbFollower && providerNbFollower >= 2 ? 'Abonnés' : 'Abonné'}} </h3>
                </div>
 
               <div id="nb_actus">
                 <h3 style="color: {{ providerSelected?.color }}">{{providerNbActu}}</h3>
-                <h3>Actus</h3>
+                <h3> {{providerNbActu && providerNbActu >= 2 ? 'Actus' : 'Actu'}} </h3>
               </div>
             </div>
 
@@ -83,7 +83,8 @@
               </div>
 
               <!-- /// Carte actu /// appelle le composant /// -->
-              <app-card-actuality></app-card-actuality>
+              <app-card-actuality
+              (nbActuOfProvider)="updateNbProviderActu($event)"></app-card-actuality>
 
           </section>
           
