@@ -19,6 +19,8 @@ export class HeadProfileComponent implements OnInit{
   profilSelected: ProfilInterface | undefined;
   badgeUserConnected: BadgeInterface[] | undefined;
   isYourProfil:boolean = false;
+  nbGame: number = 0;
+  nbNote: number = 0;
 
   isColor:string = this.app.colorDefault;
   // isPp:string|undefined;
@@ -57,6 +59,10 @@ export class HeadProfileComponent implements OnInit{
 
           if (this.profilSelected?.themeColor){
             this.isColor = this.profilSelected.themeColor;
+            if (typeof this.profilSelected.nbGame == 'number' && typeof this.profilSelected.nbNote == 'number') {
+              this.nbGame = this.profilSelected.nbGame;
+              this.nbNote = this.profilSelected.nbNote;
+            }
           }
 
           // if (this.profilSelected?.picture){

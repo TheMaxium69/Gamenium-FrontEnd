@@ -75,14 +75,14 @@
               <div>
 
                 <h1 style="color: {{ isColor }}"> {{ profilSelected?.nbGame }}</h1>
-                <h2> Jeux </h2>
+                <h2>{{profilSelected && nbGame >= 2 ? 'Jeux' : 'Jeu'}}</h2>
 
               </div>
 
               <div>
 
-                <h1  style="color: {{ isColor }}">  {{ profilSelected?.nbNote }} </h1>
-                <h2> Note </h2>
+                <h1  style="color: {{ isColor }}">  {{ profilSelected?.nbNote }}</h1>
+                <h2>{{profilSelected && nbNote >= 2 ? 'Notes' : 'Note'}}</h2>
 
               </div>
             </div>
