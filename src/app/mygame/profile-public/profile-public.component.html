@@ -3,14 +3,13 @@
 
     <div class="card-game container d-flex" routerLink="/game/{{ myGameHistorique.game.id }}">
 
-      <div *ngIf="myGameHistorique.is_pinned" class="isPinned">
+      <div *ngIf="myGameHistorique.is_pinned" class="isPinned" style="background-color: {{profilSelected?.themeColor ?? 'red'}};">
 
         <p><i class="ri-pushpin-fill"></i></p>
 
         <style>
           .isPinned{
             position: absolute;
-            background-color: yellow;
             width: 30px;
             height: 30px;
             z-index: 1029;
@@ -22,6 +21,7 @@
             text-align: center;
             margin: 1px;
             margin-left: 2px;
+            color: white;
           }
         </style>
 
