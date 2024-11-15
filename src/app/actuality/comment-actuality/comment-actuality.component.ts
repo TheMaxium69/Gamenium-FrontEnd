@@ -20,6 +20,7 @@ export class CommentActualityComponent implements OnInit{
 
   isLoggedIn:boolean = false;
   userConnectedId:number|undefined;
+  userColor : string | undefined;
   actualityId: string|any;
   actualitySelected: PostActuInterface|undefined;
   commentByActu: CommentInterface[]|undefined;
@@ -51,6 +52,7 @@ export class CommentActualityComponent implements OnInit{
     if (this.isLoggedIn){
 
       this.userConnectedId = this.app.userConnected.id;
+      this.userConnectedId = this.app.userConnected.themeColor
 
     }
 
@@ -227,9 +229,7 @@ export class CommentActualityComponent implements OnInit{
             }
           }
           
-          this.commentNbChanged.emit('add');
-
-        } else {
+      this.userConnectedId = this.app.userConnected.id;
           console.log(reponseMyCommentActuCreate);
         }
       });
