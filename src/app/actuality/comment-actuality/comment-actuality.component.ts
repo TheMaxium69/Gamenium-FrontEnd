@@ -52,7 +52,7 @@ export class CommentActualityComponent implements OnInit{
     if (this.isLoggedIn){
 
       this.userConnectedId = this.app.userConnected.id;
-      this.userConnectedId = this.app.userConnected.themeColor
+      this.userColor = this.app.userConnected.themeColor
 
     }
 
