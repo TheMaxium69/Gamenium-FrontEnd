@@ -206,7 +206,7 @@
               <div class="card-action">
                 <i (click)="togglePin(myGameHistorique); $event.stopPropagation()" class="ri-pushpin-line"></i>
                 <i (click)="selectGame(myGameHistorique.myGame.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#noteGameSelected" class="ri-star-line"></i>
-                <i (click)="selectGame(myGameHistorique.myGame.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>
+                <i routerLink="edit/{{ myGameHistorique.id }}" class="ri-pencil-line"></i>
                 <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"
                 (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>
               </div>
