@@ -80,28 +80,28 @@ export class ProfilePrivateComponent implements OnInit {
 
   /* VERIF SI IL Y A DES JEUX EPINGLES */
   hasPinnedGames(): boolean {
-    return this.myGameHistoriqueAll?.some(game => game.is_pinned) ?? false;
+    return this.myGameHistoriqueAll?.some(game => game.myGame.is_pinned) ?? false;
   }
 
   /* OBTENIR LES JEUX EPINGLES */
   getPinnedGames(): HistoryMyGameInterface[] {
-    return this.myGameHistoriqueAll?.filter(game => game.is_pinned) ?? [];
+    return this.myGameHistoriqueAll?.filter(game => game.myGame.is_pinned) ?? [];
   }
 
   /* OBTENIR LES JEUX NON EPINGLES */
   getUnpinnedGames(): HistoryMyGameInterface[] {
-    return this.myGameHistoriqueAll?.filter(game => !game.is_pinned) ?? [];
+    return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
   }
 
   /* METHOD DU TOGGLE SUR BUTTON EPINGLE */
   togglePin(myGameHistorique: HistoryMyGameInterface) {
     // maj du pin localement
-    myGameHistorique.is_pinned = !myGameHistorique.is_pinned;
+    myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
 
     // Préparer le corps de la requête
     const body = JSON.stringify({
-      id_game: myGameHistorique.game.id,
-      is_pinned: myGameHistorique.is_pinned,
+      id_game: myGameHistorique.myGame.game.id,
+      is_pinned: myGameHistorique.myGame.is_pinned,
     });
 
     // Envoyer la requête au backend pour mettre à jour le statut is_pinned
@@ -112,19 +112,19 @@ export class ProfilePrivateComponent implements OnInit {
         } else {
           console.error('Échec de la mise à jour du statut épinglé :', response.message);
           // En cas d'erreur, on rétablit l'ancien statut
-          myGameHistorique.is_pinned = !myGameHistorique.is_pinned;
+          myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
         }
       }, error => {
         console.error('Erreur lors de la mise à jour du statut épinglé :', error);
         // En cas d'erreur, on rétablit l'ancien statut
-        myGameHistorique.is_pinned = !myGameHistorique.is_pinned;
+        myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
       });
   }
 
   existingPinned(): boolean {
     if (this.myGameHistoriqueAll) {
       for (let myGame of this.myGameHistoriqueAll) {
-        if (myGame.is_pinned) {
+        if (myGame.myGame.is_pinned) {
           return true;
         }
       }
@@ -133,6 +133,16 @@ export class ProfilePrivateComponent implements OnInit {
       return false
     }
   }
+
+  selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
+    this.app.viewMyGame = historyMyGameInterface;
+    console.log("MyGame sélectionné avec l'ID :", historyMyGameInterface.id);
+  }
+
+  unselectViewMyGame() {
+    this.app.viewMyGame = undefined;
+  }
+
 
   gameSelected: GameInterface | undefined;
 

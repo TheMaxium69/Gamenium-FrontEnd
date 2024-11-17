@@ -8,6 +8,7 @@ import {NavbarComponent} from "./-global/navbar/navbar.component";
 import { CookieService } from 'ngx-cookie-service';
 import {PageAccountComponent} from "./account/page-account/page-account.component";
 import {IpService} from "./-service/ip.service";
+import {HistoryMyGameInterface} from "./-interface/history-my-game.interface";
 
 @Component({
   selector: 'app-root',
@@ -51,6 +52,7 @@ export class AppComponent {
   token: string|any;
   userConnected: UserInterface|any;
   curentDate: Date = new Date();
+  viewMyGame:HistoryMyGameInterface|undefined;
 
   // DEFAULT
   colorDefault = "#FF0000";

@@ -1,18 +1,29 @@
 <ng-container *ngIf="!noAccount">
 
-  <app-head-profile></app-head-profile>
+  <ng-container *ngIf="task == 'edit'">
 
-  <ng-container *ngIf="!profileId">
-
-    <app-profile-private></app-profile-private>
+    <app-edited-mygame></app-edited-mygame>
 
   </ng-container>
 
+  <ng-container *ngIf="task !== 'edit'">
 
-  <ng-container *ngIf="profileId">
-    <app-profile-public></app-profile-public>
+    <app-head-profile></app-head-profile>
+
+    <ng-container *ngIf="!profileId">
+
+      <app-profile-private></app-profile-private>
+
+    </ng-container>
+
+
+    <ng-container *ngIf="profileId">
+      <app-profile-public></app-profile-public>
+
+    </ng-container>
 
   </ng-container>
+
 
 </ng-container>
 

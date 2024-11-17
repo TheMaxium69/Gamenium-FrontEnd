@@ -47,6 +47,8 @@ import { CommentActualityComponent } from './actuality/comment-actuality/comment
 import { HomeConnectedComponent } from './home/home-connected/home-connected.component';
 import { HomeInviteComponent } from './home/home-invite/home-invite.component';
 import { PlateformComponent } from './actuality/plateform/plateform.component';
+import { ViewMygameComponent } from './mygame/view-mygame/view-mygame.component';
+import { EditedMygameComponent } from './mygame/edited-mygame/edited-mygame.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +93,9 @@ import { PlateformComponent } from './actuality/plateform/plateform.component';
     CommentActualityComponent,
     HomeConnectedComponent,
     HomeInviteComponent,
-    PlateformComponent
+    PlateformComponent,
+    ViewMygameComponent,
+    EditedMygameComponent
 
   ],
   imports: [

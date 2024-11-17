@@ -11,6 +11,7 @@ export class PageMygameComponent implements OnInit{
 
   profileId: number|any;
   noAccount: boolean = false;
+  task:string | any;
 
   constructor(private route: ActivatedRoute,
               private app: AppComponent) { }
@@ -18,6 +19,7 @@ export class PageMygameComponent implements OnInit{
   ngOnInit(): void {
 
     this.profileId = this.route.snapshot.paramMap.get('id');
+    this.task = this.route.snapshot.paramMap.get('task');
 
     if (!this.profileId && !this.app.isLoggedIn){
       this.noAccount = true;

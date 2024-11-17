@@ -16,6 +16,10 @@ export class HistoryMyGameService {
     return this.http.get<ApicallInterface>(url + '/MyGameByUser/' + idUser);
   }
 
+  getOneMyGame(idMyGame: number, url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/OneMyGame/' + idMyGame);
+  }
+
   postMyGame(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
     return this.http.post<ApicallInterface>(url + '/addMyGame/', body, option);
   }

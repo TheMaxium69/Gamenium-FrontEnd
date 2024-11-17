@@ -1,0 +1,34 @@
+
+<h1>{{ this.selectedMyGame?.myGame?.game?.name }}</h1>
+
+<p>épinglé : {{ this.selectedMyGame?.myGame?.is_pinned || "Non épinglé" }}</p>
+<p>Date d'ajout : {{ this.selectedMyGame?.myGame?.added_at }}</p>
+<p>User : {{ this.selectedMyGame?.myGame?.user?.username }}</p>
+<p>Difficulty rating : {{ this.selectedMyGame?.myGame?.difficulty_rating || "Non noté" }}</p>
+<p>Lifetime rating : {{ this.selectedMyGame?.myGame?.lifetime_rating || "Non noté" }}</p>
+<p>Wish list : {{ this.selectedMyGame?.myGame?.wish_list || "Non" }}</p>
+
+
+<div>
+  <h1>Exemplaire : </h1>
+  <ng-container *ngFor="let copyGame of selectedMyGame?.copyGame">
+
+    <div style="border: 1px solid gray;border-radius: 10px">
+
+      <p>Editions : {{ copyGame.edition || "null" }}</p>
+      <p>Barcode : {{ copyGame.barcode || "null" }}</p>
+      <p>content : {{ copyGame.content || "null" }}</p>
+      <p>Etat : {{ copyGame.etat.name || "null" }}</p>
+      <p>format : {{ copyGame.format.name || "null" }}</p>
+      <p>region : {{ copyGame.region.name || "null" }}</p>
+      <h5>Purchase :</h5>
+      <p>price : {{ copyGame.purchase.price }}</p>
+      <p>devise : {{ copyGame.purchase.devise.symbole }}</p>
+      <p>buy date : {{ copyGame.purchase.buy_date }}</p>
+      <p>buy where : {{ copyGame.purchase.buy_where.name }}</p>
+      <p>content purchase : {{ copyGame.purchase.content }}</p>
+
+    </div>
+
+  </ng-container>
+</div>

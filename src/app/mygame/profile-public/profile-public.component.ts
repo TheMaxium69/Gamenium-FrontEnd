@@ -91,6 +91,15 @@ export class ProfilePublicComponent implements OnInit {
 
   }
 
+  selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
+    this.app.viewMyGame = historyMyGameInterface;
+    console.log("Jeu sélectionné avec l'ID :", historyMyGameInterface.id);
+  }
+
+  unselectViewMyGame() {
+    this.app.viewMyGame = undefined;
+  }
+
 
 }
 
