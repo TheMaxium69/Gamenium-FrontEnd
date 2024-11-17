@@ -37,7 +37,7 @@ export class ProfilePrivateComponent implements OnInit {
               private histoireMyGameService: HistoryMyGameService,
               private renderer: Renderer2,
               private router: Router) { }
-              
+
 
   ngOnInit(): void {
     this.task = this.route.snapshot.paramMap.get('task');
@@ -50,6 +50,7 @@ export class ProfilePrivateComponent implements OnInit {
 
   myGameByUser(id_user: number): void {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+      console.log(responseMyGame);
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result;
       } else {
