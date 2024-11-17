@@ -35,6 +35,7 @@ export class EditedMygameComponent implements OnInit {
 
       if (reponseMyGame.message == "good") {
         this.selectedMyGame = reponseMyGame.result;
+        console.log(this.selectedMyGame)
       } else {
         console.log("pas de mygame")
       }
