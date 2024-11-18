@@ -9,7 +9,7 @@ export interface ProfilInterface {
   displaynameUseritium:string,
   joinAt:Date,
   themeColor:string|undefined,
-  picture:PictureInterface|undefined,
+  picture:string|undefined,
   nbGame:number,
   nbNote:number,
   reseau:ProfilSocialNetworkInterface[];
