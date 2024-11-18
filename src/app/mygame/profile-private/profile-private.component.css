@@ -238,6 +238,20 @@
   display: block;
 }
 
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progress-bar {
+  height: 20px;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
 @media (max-width: 900px) {
   #profilWrapper {
     position: relative;

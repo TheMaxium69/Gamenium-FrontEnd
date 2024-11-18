@@ -146,12 +146,22 @@
         <hr>
 
         <div class="task">
-
+          <div class="progress-bar-container">
+            <div class="progress-bar" [style.width.%]="progress"></div>
+          </div>
+          
+          
           <h3>Pour finaliser votre compte :</h3>
           <br>
-          <h6><i class="ri-checkbox-blank-circle-line"></i> Une tâche</h6>
-          <h6><i class="ri-checkbox-circle-fill"></i> Deuxième tâche</h6>
-
+          <ng-container *ngFor="let task of tasks">
+            <!-- Tache -->
+            <h6>
+              <!-- Cercle remplis ou vide selon si completé -->
+              <i *ngIf="task.completed" class="ri-checkbox-circle-fill"></i>
+              <i *ngIf="!task.completed" class="ri-checkbox-blank-circle-line"></i>
+              {{ task.name }}            
+            </h6>
+          </ng-container>
         </div>
 
       </article>

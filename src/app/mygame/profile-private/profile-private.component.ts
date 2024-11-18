@@ -11,6 +11,10 @@ import { GameInterface } from "../../-interface/game.interface";
 import { ProfilInterface } from "../../-interface/profil.interface";
 import { ProfilService } from "../../-service/profil.service";
 import { GameService } from 'src/app/-service/game.service';
+import { TaskUserInterface } from 'src/app/-interface/task-user.interface';
+import { TaskService } from 'src/app/-service/task.service';
+import { HttpHeaders } from '@angular/common/http';
+import { TaskUserCompletedInterface } from 'src/app/-interface/task-user-completed.interface';
 
 @Component({
   selector: 'app-profile-private',
@@ -23,13 +27,23 @@ export class ProfilePrivateComponent implements OnInit {
   myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
   userRatingAll: UserRateInterface[] | undefined;
   task: string | any;
+  // tableau des taches avec leur statu de complétion
+  tasks: (TaskUserInterface & { completed: boolean})[] = [];
+  // progression de la barre de progression
+  progress: number = 0;
   searchResults: GameInterface[] | undefined;
   searchValue: string = '';
   isColor: string = this.app.colorDefault;
   isPp: string | undefined;
   profilSelected: ProfilInterface | undefined;
 
+  // Indicateur pour savoir quand les données sont bien chargées 
+  profileLoaded: boolean = false;
+  gamesLoaded: boolean = false;
+  tasksLoaded: boolean = false;
+
   constructor(private app: AppComponent,
+              private taskService: TaskService,
               private myGameService: GameService,
               private userRateService: UserRateService,
               private profileService: ProfilService,
@@ -48,14 +62,18 @@ export class ProfilePrivateComponent implements OnInit {
     }
   }
 
+  // récup des jeux par utilisateur
   myGameByUser(id_user: number): void {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       console.log(responseMyGame);
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result;
       } else {
-        console.log("pas de jeux")
+        console.log("pas de jeux trouvé pour l'utilisateur")
       }
+      // on pase le gamesloaded a true et on appelle la method qui vérifie les taches complétés
+      this.gamesLoaded = true;
+      this.tryCheckAndCompleteTasks();
     });
 
     this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
@@ -65,6 +83,7 @@ export class ProfilePrivateComponent implements OnInit {
     });
   }
 
+  // on vérifie si l'utilisateur à noté un jeux spécifique
   hasUserRatings(game_id: any): boolean {
     if (this.userRatingAll) {
       for (let userRating of this.userRatingAll) {
@@ -170,12 +189,24 @@ export class ProfilePrivateComponent implements OnInit {
         console.log(this.gameSelected?.name, " a été ajouté");
         // Actualiser la liste des jeux après l'ajout
         if (this.userConnected) {
-          this.myGameByUser(this.userConnected.id);
+          this.myGameByUserAfterAddGame(this.userConnected.id);
         }
       } else {
         console.log(reponseMyGameAdd);
       }
     })
+  }
+
+  myGameByUserAfterAddGame(id_user: number): void {
+    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame) => {
+      if (responseMyGame.message == "good") {
+        this.myGameHistoriqueAll = responseMyGame.result;
+      } else {
+        console.log("Pas de jeux trouvés pour l'utilisateur");
+      }
+      // Après avoir rechargé les jeux, réévaluer les tâches
+      this.checkAndCompleteTasks();
+    });
   }
 
   deleteFromMyGame(gameId: number) {
@@ -214,7 +245,7 @@ export class ProfilePrivateComponent implements OnInit {
       console.log("note invalide");
     }
   }
-
+  // récupere les info du profil de l'utilisateur
   getInfoProfile(id: number) {
     this.profileService.getProfilByUserId(id, this.app.setURL()).subscribe(responseProfil => {
       if (responseProfil.message == "good") {
@@ -226,8 +257,16 @@ export class ProfilePrivateComponent implements OnInit {
           this.isPp = this.profilSelected.picture;
         }
       } else {
-        console.log("err user not existing");
+        console.log("Erreur : utilisateur non existant");
       }
+      // On passe le profilLoaded à true et on appelle la méthode qui vérifie les tâches complétées
+      this.profileLoaded = true;
+      this.tryCheckAndCompleteTasks();
+    }, error => {
+      console.error('Erreur lors de la récupération du profil :', error);
+      // Même en cas d'erreur, on passe le profilLoaded à true pour éviter de bloquer
+      this.profileLoaded = true;
+      this.tryCheckAndCompleteTasks();
     });
   }
 
@@ -247,5 +286,153 @@ export class ProfilePrivateComponent implements OnInit {
   goToGame(gameId: number): void {
     this.router.navigate(['/game', gameId]);
   }
+
+  // ********* Gestion des tâches ********* //
+
+  //Récupère les tâches depuis le backend et met à jour leur statut de complétion.
+  fetchTasks(): void {
+    const options = { headers: new HttpHeaders({ Authorization: `Bearer ${this.app.token}` }) };
+  
+    // Récupère toutes les tâches
+    this.taskService.getAllTasks(this.app.setURL()).subscribe((allTasksResponse) => {
+      if (allTasksResponse.message === 'good') {
+        const allTasks: TaskUserInterface[] = allTasksResponse.result;
+  
+        // Récupère les tâches complétées
+        this.taskService.getCompletedTasks(this.app.setURL(), options).subscribe((completedResponse) => {
+          let completedTasks: TaskUserCompletedInterface[] = [];
+  
+          if (completedResponse.message === 'good') {
+            completedTasks = completedResponse.result;
+          } else if (completedResponse.message === 'Aucune tâche complétée trouvée') {
+            completedTasks = []; // Pas de tâches complétées
+            // Optionnel : Afficher un message indiquant qu'aucune tâche n'est complétée
+            console.log('Aucune tâche complétée trouvée');
+          } else {
+            console.error('Erreur lors de la récupération des tâches complétées:', completedResponse.message);
+            return; // Quitter si c'est une véritable erreur
+          }
+  
+          // Mappe les tâches et marque comme complétées si elles le sont
+          this.tasks = allTasks.map((task: TaskUserInterface) => {
+            const isCompleted = completedTasks.some(
+            (completed: TaskUserCompletedInterface) => completed.task_id === task.id
+          );
+  
+            return { ...task, completed: isCompleted };
+          });
+  
+          // Mise à jour de la barre de progression
+          this.updateProgressBar();
+
+
+          // on passe les tache chargé a true et on vérifie les tache complété
+          this.tasksLoaded = true;
+          this.tryCheckAndCompleteTasks();
+  
+          // Logs de débogage
+          console.log('Toutes les tâches:', allTasks);
+          console.log('Tâches complétées:', completedTasks);
+          console.log('Tâches avec statut de complétion:', this.tasks);
+  
+        }, (error) => {
+          console.error('Erreur lors de la récupération des tâches complétées:', error);
+        });
+      } else {
+        console.error('Échec de la récupération de toutes les tâches:', allTasksResponse.message);
+      }
+    }, (error) => {
+      console.error('Erreur lors de la récupération de toutes les tâches:', error);
+    });
+  }
+
+
+  //Vérifie si toutes les données sont chargées, puis vérifie les tâches.
+
+    tryCheckAndCompleteTasks(): void {
+      if (this.profileLoaded && this.gamesLoaded && this.tasksLoaded) {
+        this.checkAndCompleteTasks();
+      }
+    }
+  
+  //Vérifie les conditions pour chaque tâche incomplète et les marque comme complétées si nécessaire.
+
+    checkAndCompleteTasks(): void {
+      console.log('Appel de checkAndCompleteTasks');
+      this.tasks.forEach(task => {
+        if (!task.completed) {
+          if (task.name === 'Link Game') {
+            if (this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
+              console.log('Condition remplie pour la tâche "Link Game"');
+              // L'utilisateur a des jeux liés, on marque la tâche comme complétée
+              this.completeTask(task.id);
+            } else {
+              console.log('Condition NON remplie pour la tâche "Link Game"');
+            }
+          }
+          if (task.name === 'Profil Picture') {
+            if (this.isPp) {
+              console.log('Condition remplie pour la tâche "Profil Picture"');
+              // L'utilisateur a une photo de profil, on marque la tâche comme complétée
+              this.completeTask(task.id);
+            } else {
+              console.log('Condition NON remplie pour la tâche "Profil Picture"');
+              console.log('this is PP' + this.isPp);
+              console.log('this profil selected' + JSON.stringify(this.profilSelected));
+             
+            }
+          }
+          // Vous pouvez ajouter d'autres vérifications pour les autres tâches ici
+        } else {
+          console.log('Tâche déjà complétée :', task.name);
+        }
+      });
+    }
+    
+  
+
+  //Met à jour la barre de progression en fonction des tâches complétées.
+
+  updateProgressBar(): void {
+    const completedTasks = this.tasks.filter((task) => task.completed).length;
+    this.progress = (completedTasks / this.tasks.length) * 100;
+
+    // Log de débogage
+    console.log('Progression:', this.progress + '%');
+  }
+
+
+  //Marque une tâche comme complétée en l'envoyant au backend.
+
+  completeTask(taskId: number): void {
+    console.log('Appel de completeTask avec taskId:', taskId);
+    const body = JSON.stringify({ taskId });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.app.token}`
+    });
+    const options = { headers };
+    
+    this.taskService.postCompleteTask(body, this.app.setURL(), options).subscribe((response) => {
+      console.log('Réponse du backend pour completeTask:', response);
+      if (response.message === 'Tâche complétée') {
+        // Met à jour le statut de la tâche dans le tableau local
+        this.tasks = this.tasks.map((task) =>
+          task.id === taskId ? { ...task, completed: true } : task
+        );
+        this.updateProgressBar(); // Recalculer la progression
+    
+        // Log de débogage
+        console.log('Tâche avec ID', taskId, 'marquée comme complétée');
+      } else {
+        console.error('Erreur lors de la complétion de la tâche :', response.message);
+      }
+    }, (error) => {
+      console.error('Erreur lors de la requête completeTask :', error);
+    });
+  }
+  
+  
+  
 }
 
