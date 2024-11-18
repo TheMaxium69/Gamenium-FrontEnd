@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { UserInterface } from '../../-interface/user.interface';
 import { BadgeService } from '../../-service/badge.service';
@@ -16,7 +16,7 @@ import {ProfilInterface} from "../../-interface/profil.interface";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
 
@@ -41,7 +41,8 @@ export class ProfileComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private uploadService: UploadProfilePictureService,
     private socialnetworkService: SocialNetworkService,
-    private profileService: ProfilService
+    private profileService: ProfilService,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
@@ -62,6 +63,48 @@ export class ProfileComponent implements OnInit {
     this.getAllBadges();
   }
 
+  filterSettings(event: Event) {
+    const inputValue = (event.target as HTMLInputElement).value;
+    const search = inputValue?.toLowerCase()
+    const settings = document.querySelectorAll('.search-setting')
+    let settingsResultNumber = settings.length
+
+    settings.forEach((setting) => {
+      if (setting instanceof HTMLElement) {
+        const settingText = setting.innerText.toLocaleLowerCase()
+
+        if (search && !settingText.includes(search)) {
+          setting.style.display = 'none'
+          settingsResultNumber--
+        } else {
+          setting.style.display = 'block'
+        }
+      }
+    });
+    
+    console.log(settingsResultNumber)
+    const settingSection = document.querySelector('#settings-hr')
+    if (settingsResultNumber == 0) {
+      let noResult = document.querySelector('#no-results') as HTMLElement
+      
+      if (!noResult) {
+        noResult = this.renderer.createElement('div')
+        this.renderer.setAttribute(noResult, 'id', 'no-results')
+        this.renderer.addClass(noResult, 'no-result-message')
+        this.renderer.addClass(noResult, 'mb-4')
+        const noResultContent = 'Pas de résultat pour la recherche'
+        this.renderer.setProperty(noResult, 'innerText', noResultContent)
+        settingSection?.after(noResult)
+      }
+    } else {
+      const noResult = document.querySelector('#no-results')
+      if (noResult) {
+        noResult.remove()
+      }
+    }
+
+  }
+ 
   loadThemeColor() {
     const userId = this.userConnected?.id;
     if (userId) {

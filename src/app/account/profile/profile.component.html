@@ -25,7 +25,7 @@
       <hr>
       <form action="#" class="search-form">
         <div class="input-container">
-          <input type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
+          <input (input)="filterSettings($event)" type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
           <button type="submit" class="search-icon-container" aria-label="Search" style="background-color: {{ color }}!important">
             <i class="ri-search-line"></i>
           </button>
@@ -37,9 +37,10 @@
     <!-- PARAMETRE DU COMPTE -->
     <div class="border composant para-container">
       <h2>Paramètres du compte</h2>
-      <hr>
+      <hr id="settings-hr">
+
       <!-- Setion Profil -->
-      <div class="para radius mb-4">
+      <div class="para radius mb-4 search-setting">
         <a data-bs-toggle="collapse" href="#collapseProfil" role="button" aria-expanded="false" aria-controls="collapseProfil">
           <div><i class="ri-account-circle-line"></i>Profiles (Photo, Banner, Couleur)</div>
           <div><i class="ri-arrow-right-s-line"></i></div>
@@ -103,7 +104,7 @@
       </div>
 
       <!-- Section Connexion -->
-      <div class="para radius mb-4">
+      <div class="para radius mb-4 search-setting">
         <a data-bs-toggle="collapse" href="#collapseReseau" role="button" aria-expanded="false" aria-controls="collapseReseau">
           <div><i class="ri-at-line"></i>Connexion (Réseaux Sociaux et Services)</div>
           <div><i class="ri-arrow-right-s-line"></i></div>
@@ -129,7 +130,7 @@
       </div>
 
       <!-- Changement mot de passe section -->
-      <div class="para radius mb-4">
+      <div class="para radius mb-4 search-setting">
         <a data-bs-toggle="collapse" href="#collapseMdp" role="button" aria-expanded="false" aria-controls="collapseMdp">
           <div><i class="ri-lock-password-line"></i>Changer Mot de passe (Useritium)</div>
           <div><i class="ri-arrow-right-s-line"></i></div>
