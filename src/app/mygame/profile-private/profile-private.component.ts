@@ -37,7 +37,7 @@ export class ProfilePrivateComponent implements OnInit {
   isPp: string | undefined;
   profilSelected: ProfilInterface | undefined;
 
-  // Indicateur pour savoir quand les données sont bien chargées 
+  // Indicateur pour savoir quand les données sont bien chargées
   profileLoaded: boolean = false;
   gamesLoaded: boolean = false;
   tasksLoaded: boolean = false;
@@ -59,6 +59,7 @@ export class ProfilePrivateComponent implements OnInit {
     if (this.userConnected) {
       this.myGameByUser(this.userConnected.id);
       this.getInfoProfile(this.userConnected.id);
+      this.fetchTasks();
     }
   }
 
@@ -292,16 +293,16 @@ export class ProfilePrivateComponent implements OnInit {
   //Récupère les tâches depuis le backend et met à jour leur statut de complétion.
   fetchTasks(): void {
     const options = { headers: new HttpHeaders({ Authorization: `Bearer ${this.app.token}` }) };
-  
+
     // Récupère toutes les tâches
     this.taskService.getAllTasks(this.app.setURL()).subscribe((allTasksResponse) => {
       if (allTasksResponse.message === 'good') {
         const allTasks: TaskUserInterface[] = allTasksResponse.result;
-  
+
         // Récupère les tâches complétées
         this.taskService.getCompletedTasks(this.app.setURL(), options).subscribe((completedResponse) => {
           let completedTasks: TaskUserCompletedInterface[] = [];
-  
+
           if (completedResponse.message === 'good') {
             completedTasks = completedResponse.result;
           } else if (completedResponse.message === 'Aucune tâche complétée trouvée') {
@@ -312,16 +313,16 @@ export class ProfilePrivateComponent implements OnInit {
             console.error('Erreur lors de la récupération des tâches complétées:', completedResponse.message);
             return; // Quitter si c'est une véritable erreur
           }
-  
+
           // Mappe les tâches et marque comme complétées si elles le sont
           this.tasks = allTasks.map((task: TaskUserInterface) => {
             const isCompleted = completedTasks.some(
             (completed: TaskUserCompletedInterface) => completed.task_id === task.id
           );
-  
+
             return { ...task, completed: isCompleted };
           });
-  
+
           // Mise à jour de la barre de progression
           this.updateProgressBar();
 
@@ -329,12 +330,12 @@ export class ProfilePrivateComponent implements OnInit {
           // on passe les tache chargé a true et on vérifie les tache complété
           this.tasksLoaded = true;
           this.tryCheckAndCompleteTasks();
-  
+
           // Logs de débogage
           console.log('Toutes les tâches:', allTasks);
           console.log('Tâches complétées:', completedTasks);
           console.log('Tâches avec statut de complétion:', this.tasks);
-  
+
         }, (error) => {
           console.error('Erreur lors de la récupération des tâches complétées:', error);
         });
@@ -354,7 +355,7 @@ export class ProfilePrivateComponent implements OnInit {
         this.checkAndCompleteTasks();
       }
     }
-  
+
   //Vérifie les conditions pour chaque tâche incomplète et les marque comme complétées si nécessaire.
 
     checkAndCompleteTasks(): void {
@@ -379,7 +380,7 @@ export class ProfilePrivateComponent implements OnInit {
               console.log('Condition NON remplie pour la tâche "Profil Picture"');
               console.log('this is PP' + this.isPp);
               console.log('this profil selected' + JSON.stringify(this.profilSelected));
-             
+
             }
           }
           // Vous pouvez ajouter d'autres vérifications pour les autres tâches ici
@@ -388,8 +389,8 @@ export class ProfilePrivateComponent implements OnInit {
         }
       });
     }
-    
-  
+
+
 
   //Met à jour la barre de progression en fonction des tâches complétées.
 
@@ -412,7 +413,7 @@ export class ProfilePrivateComponent implements OnInit {
       'Authorization': `Bearer ${this.app.token}`
     });
     const options = { headers };
-    
+
     this.taskService.postCompleteTask(body, this.app.setURL(), options).subscribe((response) => {
       console.log('Réponse du backend pour completeTask:', response);
       if (response.message === 'Tâche complétée') {
@@ -421,7 +422,7 @@ export class ProfilePrivateComponent implements OnInit {
           task.id === taskId ? { ...task, completed: true } : task
         );
         this.updateProgressBar(); // Recalculer la progression
-    
+
         // Log de débogage
         console.log('Tâche avec ID', taskId, 'marquée comme complétée');
       } else {
@@ -431,8 +432,8 @@ export class ProfilePrivateComponent implements OnInit {
       console.error('Erreur lors de la requête completeTask :', error);
     });
   }
-  
-  
-  
+
+
+
 }
 
