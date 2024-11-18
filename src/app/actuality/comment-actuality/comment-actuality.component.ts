@@ -105,7 +105,10 @@ export class CommentActualityComponent implements OnInit{
   addComment(form: NgForm) {
     if (form.value) {
       let content = form.value['content'];
-  
+      //Verification que le message n'est pas vide ou plein d'espace
+      if (content.trim() == "") {
+        return console.log("Message invalide")
+      }
       let bodyNoJsonMyCommentActu: any = {
         "id_post": this.actualitySelected?.id,
         "content": content,
