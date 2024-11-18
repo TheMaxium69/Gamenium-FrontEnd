@@ -155,6 +155,7 @@ export class ProviderComponent implements OnInit{
 
     this.followService.postFollowProvider(JSONbody, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseProvider) => {
       if (reponseProvider.message == 'good') {
+        this.isProviderFollowedByUser = true
         console.log('succès du follow')
       }
     })
@@ -164,8 +165,9 @@ export class ProviderComponent implements OnInit{
 
   deleteFollow(providerId: number) {
     console.log('btn clicked')
-    this.followService.deleteFollowProvider(providerId, this.app.setURL()).subscribe((reponseApi) => {
+    this.followService.deleteFollowProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
       if (reponseApi.message == 'follow deleted successfully') {
+        this.isProviderFollowedByUser = false
         console.log('follow supprimé avec succès')
       }
     })

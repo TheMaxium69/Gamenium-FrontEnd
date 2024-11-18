@@ -30,8 +30,8 @@ export class FollowService {
     return this.http.post<ApicallInterface>(url + '/followGameProfil', body, option);
   }
 
-  deleteFollowProvider(id_provider: number, url: string): Observable<ApicallInterface> {
-    return this.http.delete<ApicallInterface>(url + '/unfollowProvider/' + id_provider);
+  deleteFollowProvider(id_provider: number, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.delete<ApicallInterface>(url + '/unfollowProvider/' + id_provider, option);
   }
 
 }
