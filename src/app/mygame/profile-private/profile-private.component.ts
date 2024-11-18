@@ -223,7 +223,7 @@ export class ProfilePrivateComponent implements OnInit {
           this.isColor = this.profilSelected.themeColor;
         }
         if (this.profilSelected?.picture) {
-          this.isPp = this.profilSelected.picture.url;
+          this.isPp = this.profilSelected.picture;
         }
       } else {
         console.log("err user not existing");
