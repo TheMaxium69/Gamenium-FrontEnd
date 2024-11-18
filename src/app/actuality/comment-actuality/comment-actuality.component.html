@@ -9,7 +9,7 @@
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
   <div class="comment-input mb-2">
     <div>
-      <textarea id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre Commentaire" name="content" ngModel (keydown.enter)="addComment(addForm)"></textarea>
+      <textarea id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre Commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
     </div>
     <div class="comment-send mt-2">
       <button class="btn" type="submit" style="background-color: {{ userColor ?? 'red' }}; color: white">Envoyer</button>

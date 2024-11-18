@@ -101,6 +101,10 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
+  //empeche les retour a la ligne du bouton entrer
+  preventTabulation(event: any) {
+    event.preventDefault()
+  }
 
   addComment(form: NgForm) {
     if (form.value) {
