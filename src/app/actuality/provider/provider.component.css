@@ -155,10 +155,17 @@ ul {
     width: 800px;
     display: flex;
     gap: 10px;
+    justify-content: center;
+}
+
+#joinedAt p {
+    margin: 0;
+    align-content: center;
 }
 
 #joinedAt img {
     height: 30px;
+    margin-right: 15px;
 }
 
 #last_actus {

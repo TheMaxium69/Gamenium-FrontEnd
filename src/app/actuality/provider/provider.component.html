@@ -62,16 +62,16 @@
                 <div id="infos_details_values">
                   <p class="secondtext" style="color: {{ providerSelected?.color }}">1889</p>
                   <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerSelected?.country }}</p>
-                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbGame }} jeux</p>
-                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbActu }} Actualités</p>
-                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbFollower}} Abonnés</p>
+                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbGame && providerNbGame >= 2 ? providerNbGame + ' jeux' : providerNbGame + ' jeu'}}</p>
+                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbActu && providerNbActu >= 2 ? providerNbActu + ' actualités' : providerNbActu + ' actualité'}}</p>
+                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbFollower && providerNbFollower >= 2 ? providerNbFollower + ' abonnés' : providerNbFollower + ' abonné'}}</p>
                 </div>
             </div>
         
               <div id="joinedAt" *ngIf="providerSelected?.joindeAt">
                 <img src="../../../assets/logo.png" alt="logo_gamenium">
                 <p style="color: {{ providerSelected?.color }}"> à rejoint Gamenium le </p>
-                <p>{{ providerSelected?.joindeAt }}</p>
+                <p>{{ providerSelected?.joindeAt | date:'dd/MM/yyyy'}}</p>
               </div>
             </div>
           
