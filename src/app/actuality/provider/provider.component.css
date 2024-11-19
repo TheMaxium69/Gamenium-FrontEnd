@@ -45,6 +45,7 @@
     background-color: white;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
+    height: fit-content;
 }
 
 ul {
@@ -56,6 +57,7 @@ ul {
 #infos {
     display: flex;
     justify-content: space-between;
+    padding: 25px;
 }
 
 #displayname {
@@ -68,23 +70,36 @@ ul {
     min-width: 280px;
 }
 
+#displayname h1 {
+    margin: 0;
+}
+
+.follower-container {
+    margin: 0 50px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 35px;
+}
+
 #followers {
     display: inline-block;
     text-align: center;
-    border-left: 2px solid;
-    padding: 20px;
-    margin: 20px;
+    align-content: center
+    /* border-left: 2px solid; */
+    /* padding: 20px;
+    margin: 20px; */
 }
 
 #nb_actus {
     display: inline-block;
     text-align: center;
-    padding: 20px;
-    margin: 20px;
+    align-content: center
+    /* padding: 20px;
+    margin: 20px; */
 }
 
 #button_follow {
-    height: 35px;
+    height: 0;
 }
 
 #button_follow button {
@@ -93,12 +108,13 @@ ul {
     color: #FFFFFF;
     font-size: 28px;
     box-shadow: 2px 2px 9px #888888;
-    padding: 10px 25px;
+    padding: 5px 0px;
     border-radius: 15px;
     border: 0 solid #FFFFFF;
     width: 280px;
     position: relative;
     left: 30%;
+    top: -25px;
 }
 
 /* Informations Détaillées du Provider */
@@ -155,4 +171,10 @@ ul {
     margin-left: auto;
     margin-right: auto;
     gap: 100px;
+}
+
+.border-provider-main {
+    width: 1px;
+    background-color: black;
+    margin: 3% 0;
 }

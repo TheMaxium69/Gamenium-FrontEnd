@@ -14,16 +14,18 @@
                 <div id="displayname">
                   <h1>{{ providerSelected?.displayName }}</h1>
                 </div>
-
-               <div id="followers">
-                 <h3 style="color: {{ providerSelected?.color }}">{{providerNbFollower}}</h3>
-                  <h3> {{providerNbFollower && providerNbFollower >= 2 ? 'Abonnés' : 'Abonné'}} </h3>
-               </div>
-
-              <div id="nb_actus">
-                <h3 style="color: {{ providerSelected?.color }}">{{providerNbActu}}</h3>
-                <h3> {{providerNbActu && providerNbActu >= 2 ? 'Actus' : 'Actu'}} </h3>
-              </div>
+                <div class="border-provider-main"></div>
+                <div class="follower-container">
+                  <div id="followers">
+                    <h3 style="color: {{ providerSelected?.color }}">{{providerNbFollower}}</h3>
+                     <h3> {{providerNbFollower && providerNbFollower >= 2 ? 'Abonnés' : 'Abonné'}} </h3>
+                  </div>
+   
+                 <div id="nb_actus">
+                   <h3 style="color: {{ providerSelected?.color }}">{{providerNbActu}}</h3>
+                   <h3> {{providerNbActu && providerNbActu >= 2 ? 'Actus' : 'Actu'}} </h3>
+                 </div>
+                </div>
             </div>
 
             <div id="button_follow">
