@@ -3,18 +3,18 @@
 </ng-container>
 
 <ng-container *ngIf="!noneActu">
-  <div class="container mt-4">
+  <div class="containeur mt-4 no-pading">
     <div
     [ngClass]="{'row': screenWidth >= 1200}"
-     class="flex-nowrap">
+     class="flex-nowrap containeur">
       <section id="left-section"
       [ngClass]="{'col-8': screenWidth >= 1200}">
       <div
       [ngClass]="{'mx-auto': screenWidth <= 1200}"
-      class="img" style="background-image: url({{ actualitySelected?.picture?.url }})"></div>
+      class="img mb4" style="background-image: url({{ actualitySelected?.picture?.url }})"></div>
       <div class="border-actu">
         <!--Bouton Like & Commentaires-->
-        <div class="btn_container">
+        <div class="btn_container mb4">
           <button class="btn">
             <i id="actulike"
             [attr.data-bs-toggle]="!isLoggedIn ? 'modal' : null"
@@ -31,9 +31,9 @@
         </div>
 
         <div class="txt_container">
-          <h2 class="game_title">{{ actualitySelected?.title }}</h2>
+          <h2 class="game_title mb4">{{ actualitySelected?.title }}</h2>
 
-          <p class="game_description">{{ actualitySelected?.content }}</p>
+          <p class="game_description mb4">{{ actualitySelected?.content }}</p>
         </div>
       </div>
         <div class="d-flex justify-content-center">
@@ -174,10 +174,10 @@
     <!-- </div> -->
   <!-- </div> -->
 
-  <div class="container mt-4" style="width: 75%;" id="commentSection">
+  <div class="containeur mt10 no-pading" id="commentSection">
     <app-comment-actuality
     [nbComment]="nbCommentaire"
-    (commentNbChanged)="updateNbComment($event)"></app-comment-actuality>
+    (commentNbChanged)="updateNbComment($event)" class="containeur"></app-comment-actuality>
   </div>
 
 

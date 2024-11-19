@@ -1,17 +1,17 @@
 
 <!-- <div style="height: 50px"></div> -->
-<div class="d-flex gap-2">
+<div class="d-flex gap-2 mb4">
   <h1 id="comment-value">{{nbComment}}</h1>
   <h1 id="comment">{{nbComment && nbComment >= 2 ? 'commentaires' : 'commentaire' }}</h1>
 </div>
 
 <ng-container *ngIf="isLoggedIn">
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
-  <div class="comment-input mb-2">
-    <div>
+  <div class="comment-input">
+    <div class="mb4">
       <textarea id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre Commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
     </div>
-    <div class="comment-send mt-2">
+    <div class="comment-send mb4">
       <button class="btn" type="submit" style="background-color: {{ userColor ?? 'red' }}; color: white">Envoyer</button>
     </div>
   </div>
@@ -20,11 +20,11 @@
 
 <ng-container *ngIf="!isLoggedIn">
   <form id="addCommentForm">
-    <div class="comment-input mb-2">
-      <div>
+    <div class="comment-input">
+      <div class="mb4">
         <textarea class="comment-content" cols="35" placeholder="Votre devez d'abord vous connecter pour laisser un commentaire" disabled></textarea>
       </div>
-      <div class="comment-send mt-2">
+      <div class="comment-send mb4">
         <button class="btn btn-success" disabled>Envoyer</button>
       </div>
     </div>

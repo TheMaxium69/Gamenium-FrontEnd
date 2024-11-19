@@ -15,20 +15,25 @@
 }
 
 .comment-input {
-  width: 70%;
+  width: 100%;
+  height: 200px;
+  background-color: lightgray;
+  margin-bottom: 40px;
 }
 
 .comment-content {
   outline: none;
   resize: none;
   width: 100%;
-  border: 1px solid lightgray;
-  border-radius: 15px;
-  padding: 15px;
+  padding-left: 40px;
+  padding-top: 40px;
+  border: none;
+  background-color: lightgray;
 }
 
 .comment-send {
   display: flex;
+  margin-right: 40px;
   justify-content: end;
 }
 
@@ -86,4 +91,19 @@
   margin-left: auto;
   margin-right: auto;
 
+}
+
+.mb4 {
+  margin-bottom: 40px;
+}
+
+.mt10 {
+  margin-top: 100px;
+}
+
+.mbminus4 {
+  margin-top: -40px;
+}
+.no-padding {
+  padding: 0px;
 }
