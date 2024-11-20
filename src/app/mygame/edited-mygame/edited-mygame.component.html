@@ -4,39 +4,104 @@
 
   <ng-container *ngIf="selectedMyGame">
 
-    <img src="{{ selectedMyGame.myGame.game.image.icon_url }}">
-    <h1>{{ this.selectedMyGame?.myGame?.game?.name }}</h1>
+    <div id="headeEditMyGame">
 
-    <ng-container *ngIf="selectedMyGame.myGame">
-    <div style="display: flex; flex-direction: column;">
-      <label for="is_pinned">Épinglé:</label>
-      <select id="is_pinned" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned">
-        <option [value]="true">Épinglé</option>
-        <option [value]="false">Non épinglé</option>
-      </select>
+      <img src="{{ selectedMyGame.myGame.game.image.icon_url }}">
+      <h1>{{ this.selectedMyGame?.myGame?.game?.name }}</h1>
+      <small>Ajouter le : {{selectedMyGame.myGame.added_at | date:'dd / MM / yyyy'  }}</small>
 
-      <label for="added_at">Date d'ajout:</label>
-      <input type="date" id="added_at" [(ngModel)]="selectedMyGame.myGame.added_at" name="added_at">
+    </div>
 
-      <label for="username">User:</label>
-      <input type="text" id="username" [(ngModel)]="selectedMyGame.myGame.user.username" name="username">
+  <ng-container *ngIf="selectedMyGame.myGame">
+    <div id="startFormEditedMyGame">
 
-      <label for="difficulty_rating">Difficulty rating:</label>
-      <input type="text" id="difficulty_rating" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-             name="difficulty_rating">
+      <!-- EPINGLER -->
+      <label>Épinglé:</label>
+      <label for="is_pinned_true">
+        <input type="radio" id="is_pinned_true" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned"
+               [value]="true">
+        Épinglé
+      </label>
+      <label for="is_pinned_false">
+        <input type="radio" id="is_pinned_false" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned"
+               [value]="false">
+        Non épinglé
+      </label>
 
-      <label for="lifetime_rating">Lifetime rating:</label>
-      <input type="text" id="lifetime_rating" [(ngModel)]="selectedMyGame.myGame.lifetime_rating" name="lifetime_rating">
-
-      <label for="wish_list">Wish list:</label>
-      <select id="wish_list" [(ngModel)]="selectedMyGame.myGame.wish_list" name="wish_list">
-        <option [value]="true">Oui</option>
-        <option [value]="false">Non</option>
-      </select>
-
+      <!-- NOTE GLOBAL -->
       <label for="rating">Note Game:</label>
       <input type="text" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating">
 
+      <!-- DIFICULTER -->
+      <label >Difficulty rating:</label>
+      <label for="difficulty_rating_1">
+        <input type="radio" id="difficulty_rating_1" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+               name="difficulty_rating" [value]="1">
+        1
+      </label>
+      <label for="difficulty_rating_2">
+        <input type="radio" id="difficulty_rating_2" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+               name="difficulty_rating" [value]="2">
+        2
+      </label>
+      <label for="difficulty_rating_3">
+        <input type="radio" id="difficulty_rating_3" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+               name="difficulty_rating" [value]="3">
+        3
+      </label>
+      <label for="difficulty_rating_4">
+        <input type="radio" id="difficulty_rating_4" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+               name="difficulty_rating" [value]="4">
+        4
+      </label>
+      <label for="difficulty_rating_5">
+        <input type="radio" id="difficulty_rating_5" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+               name="difficulty_rating" [value]="5">
+        5
+      </label>
+
+      <!-- TEMPS DE JEUX -->
+      <label>Lifetime rating:</label>
+      <label for="lifetime_rating_1">
+        <input type="radio" id="lifetime_rating_1" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+               name="lifetime_rating" [value]="1">
+        1
+      </label>
+      <label for="lifetime_rating_2">
+        <input type="radio" id="lifetime_rating_2" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+               name="lifetime_rating" [value]="2">
+        2
+      </label>
+      <label for="lifetime_rating_3">
+        <input type="radio" id="lifetime_rating_3" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+               name="lifetime_rating" [value]="3">
+        3
+      </label>
+      <label for="lifetime_rating_4">
+        <input type="radio" id="lifetime_rating_4" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+               name="lifetime_rating" [value]="4">
+        4
+      </label>
+      <label for="lifetime_rating_5">
+        <input type="radio" id="lifetime_rating_5" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+               name="lifetime_rating" [value]="5">
+        5
+      </label>
+
+      <!-- LISTE DE SOUHAIT-->
+      <label>Wish list:</label>
+      <label for="wish_list_yes">
+        <input type="radio" id="wish_list_yes" [(ngModel)]="selectedMyGame.myGame.wish_list" name="wish_list"
+               [value]="true">
+        Oui
+      </label>
+      <label for="wish_list_no">
+        <input type="radio" id="wish_list_no" [(ngModel)]="selectedMyGame.myGame.wish_list" name="wish_list"
+               [value]="false">
+        Non
+      </label>
+
+      <!-- EXEMPLAIRE -->
       <div>
         <h1>Exemplaire:</h1>
         <ng-container *ngFor="let copyGame of selectedMyGame.copyGame; let i = index">
@@ -85,3 +150,22 @@
   <button type="submit">Submit</button>
 </form>
 </section>
+
+<style>
+  #headeEditMyGame {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    h1 {
+      margin: unset;
+    }
+  }
+
+  #startFormEditedMyGame{
+    display: flex;
+    flex-direction: column;
+
+  }
+
+
+</style>
