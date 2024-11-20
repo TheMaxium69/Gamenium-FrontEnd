@@ -7,6 +7,9 @@ import { FollowService } from "../../-service/follow.service"; // Importez le se
 import { PostActuService } from "../../-service/post-actu.service";
 import { PostActuInterface } from "../../-interface/post-actu.interface";
 import { UserInterface } from 'src/app/-interface/user.interface';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
 
 
 @Component({

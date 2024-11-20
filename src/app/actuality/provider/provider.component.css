@@ -106,7 +106,7 @@ ul {
     font-family: arial, serif;
     font-weight: bold;
     color: #FFFFFF;
-    font-size: 28px;
+    font-size: 22px;
     box-shadow: 2px 2px 9px #888888;
     padding: 5px 0px;
     border-radius: 15px;
@@ -126,8 +126,9 @@ ul {
 
 #info-details-container {
     display: flex;
+    justify-content: space-evenly;
     position: relative;
-    padding-top: 70px;
+    /* padding-top: 70px; */
     gap: 30px;
 }
 
@@ -140,7 +141,7 @@ ul {
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 15px;
     padding: 25px;
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     gap: 30px;
     /* align-items: center; */
@@ -168,8 +169,13 @@ ul {
     margin-right: 15px;
 }
 
+.joined-text {
+    display: flex;
+    gap: 5px;
+}
+
 #last_actus {
-    width: 800px;
+    /* width: 800px; */
 }
 
 .provider-main {

@@ -46,11 +46,11 @@
             <div class="info-container">
             <div id="informations">
               
-              <h3>INFORMATIONS</h3>
+              <h3 class="mb-4">Informations</h3>
               
             </div>
             
-            <div id="info-details-container">
+            <div id="info-details-container" class="mb-4">
                 <div id="infos_details">
                   <p class="firsttext">Création</p>
                   <p class="firsttext">Pays</p>
@@ -70,8 +70,10 @@
         
               <div id="joinedAt" *ngIf="providerSelected?.joindeAt">
                 <img src="../../../assets/logo.png" alt="logo_gamenium">
-                <p style="color: {{ providerSelected?.color }}"> à rejoint Gamenium le </p>
-                <p>{{ providerSelected?.joindeAt | date:'dd/MM/yyyy'}}</p>
+                <div class="joined-text">
+                  <p style="color: {{ providerSelected?.color }}"> à rejoint Gamenium le </p>
+                  <p>{{ providerSelected?.joindeAt | date: 'd MMMM y': undefined : 'fr'}}</p>
+                </div>
               </div>
             </div>
           
@@ -81,7 +83,7 @@
           
           <section id="last_actus"><!-- Dernières Actualités liées au Provider -->
               <div class="actu-titre">
-                <h3 class="mb-4">DERNIERES ACTUALITES</h3>
+                <h3 class="mb-4">Dernières actualités</h3>
               </div>
 
               <!-- /// Carte actu /// appelle le composant /// -->
