@@ -1,6 +1,6 @@
 <section id="editedmygame" class="container">
 
-<form>
+<form  #editedMyGame="ngForm" (ngSubmit)="updateMyGame(editedMyGame)">
 
   <ng-container *ngIf="selectedMyGame">
 
@@ -12,8 +12,11 @@
 
     </div>
 
-  <ng-container *ngIf="selectedMyGame.myGame">
+    <ng-container *ngIf="selectedMyGame.myGame">
     <div id="startFormEditedMyGame">
+
+
+      <input type="hidden" [(ngModel)]="selectedMyGame.myGame.id" name="myGameId">
 
       <!-- EPINGLER -->
       <label>Épinglé:</label>
@@ -30,7 +33,13 @@
 
       <!-- NOTE GLOBAL -->
       <label for="rating">Note Game:</label>
-      <input type="text" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating">
+      <ng-container *ngIf="selectedMyGame.rate">
+        <input type="hidden" [(ngModel)]="selectedMyGame.rate.id" name="rateId">
+        <input type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating">
+      </ng-container>
+      <ng-container *ngIf="!selectedMyGame.rate">
+        <input type="number" id="rating" name="rating" ngModel>
+      </ng-container>
 
       <!-- DIFICULTER -->
       <label >Difficulty rating:</label>
@@ -105,41 +114,156 @@
       <div>
         <h1>Exemplaire <span>{{ selectedMyGame.copyGame.length }}</span> :</h1>
         <ng-container *ngFor="let copyGame of selectedMyGame.copyGame; let i = index">
+
           <div class="oneExemplaire">
+
+            <input type="hidden"  [(ngModel)]="copyGame.id" name="copy{{i}}">
+
+            <!-- EDITIONS-->
             <label for="edition{{i}}">Editions:</label>
             <input type="text" id="edition{{i}}" [(ngModel)]="copyGame.edition" name="edition{{i}}">
 
+            <!-- BARCODE -->
             <label for="barcode{{i}}">Barcode:</label>
             <input type="text" id="barcode{{i}}" [(ngModel)]="copyGame.barcode" name="barcode{{i}}">
 
+            <!-- CONTENT -->
             <label for="content{{i}}">Content:</label>
             <input type="text" id="content{{i}}" [(ngModel)]="copyGame.content" name="content{{i}}">
 
+            <!-- ETAT -->
             <label for="etat{{i}}">Etat:</label>
-            <input type="text" id="etat{{i}}" [(ngModel)]="copyGame.etat.name" name="etat{{i}}">
+            <ng-container *ngIf="hmgCopyEtatAll && copyGame.etat">
+              <select id="etat{{i}}" [(ngModel)]="copyGame.etat.id" name="etat{{i}}">
+                <option [value]="null">Choissir un etat</option>
+                  <ng-container *ngFor="let etat of hmgCopyEtatAll">
+                    <option [value]="etat.id">{{ etat.name }}</option>
+                  </ng-container>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="hmgCopyEtatAll && !copyGame.etat">
+              <select id="etat{{i}}" name="etat{{i}}" ngModel>
+                <option [value]="null">Choissir un etat</option>
+                  <ng-container *ngFor="let etat of hmgCopyEtatAll">
+                    <option [value]="etat.id">{{ etat.name }}</option>
+                  </ng-container>
+              </select>
+            </ng-container>
 
+            <!-- FORMAT -->
             <label for="format{{i}}">Format:</label>
-            <input type="text" id="format{{i}}" [(ngModel)]="copyGame.format.name" name="format{{i}}">
+            <ng-container *ngIf="hmgCopyFormatAll && copyGame.format">
+              <select id="format{{i}}" [(ngModel)]="copyGame.format.id" name="format{{i}}">
+                <option [value]="null">Choissir un format</option>
+                <ng-container *ngFor="let format of hmgCopyFormatAll">
+                  <option [value]="format.id">{{ format.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="hmgCopyFormatAll && !copyGame.format">
+              <select id="format{{i}}" name="format{{i}}" ngModel>
+                <option [value]="null">Choissir un format</option>
+                <ng-container *ngFor="let format of hmgCopyFormatAll">
+                  <option [value]="format.id">{{ format.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
 
+            <!-- REGION -->
             <label for="region{{i}}">Region:</label>
-            <input type="text" id="region{{i}}" [(ngModel)]="copyGame.region.name" name="region{{i}}">
+            <ng-container *ngIf="hmgCopyRegionAll && copyGame.region">
+              <select id="region{{i}}" [(ngModel)]="copyGame.region.id" name="region{{i}}">
+                <option [value]="null">Choissir une Region</option>
+                <ng-container *ngFor="let region of hmgCopyRegionAll">
+                  <option [value]="region.id">{{ region.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="hmgCopyRegionAll && !copyGame.region">
+              <select id="region{{i}}" name="region{{i}}" ngModel>
+                <option [value]="null">Choissir une Region</option>
+                <ng-container *ngFor="let region of hmgCopyRegionAll">
+                  <option [value]="region.id">{{ region.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+
+            <br><hr>
 
             <h5>Purchase:</h5>
-            <label for="price{{i}}">Price:</label>
-            <input type="text" id="price{{i}}" [(ngModel)]="copyGame.purchase.price" name="price{{i}}">
 
-            <label for="devise{{i}}">Devise:</label>
-            <input type="text" id="devise{{i}}" [(ngModel)]="copyGame.purchase.devise.symbole" name="devise{{i}}">
+            <!-- PURCHASE -->
+            <ng-container *ngIf="copyGame.purchase">
 
-            <label for="buy_date{{i}}">Buy date:</label>
-            <input type="date" id="buy_date{{i}}" [(ngModel)]="copyGame.purchase.buy_date" name="buy_date{{i}}">
+              <input type="hidden" [(ngModel)]="copyGame.purchase.id" name="purchase{{i}}">
 
-            <label for="buy_where{{i}}">Buy where:</label>
-            <input type="text" id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.name" name="buy_where{{i}}">
+              <!-- PRICE -->
+              <label for="price{{i}}">Price:</label>
+              <input type="number" id="price{{i}}" [(ngModel)]="copyGame.purchase.price" name="purchase_price{{i}}">
 
-            <label for="purchase_content{{i}}">Purchase content:</label>
-            <input type="text" id="purchase_content{{i}}" [(ngModel)]="copyGame.purchase.content"
-                   name="purchase_content{{i}}">
+              <!-- DEVISE -->
+              <label for="devise{{i}}">Devise:</label>
+              <ng-container *ngIf="deviseAll && copyGame.purchase.devise">
+                <select id="devise{{i}}" [(ngModel)]="copyGame.purchase.devise.id" name="purchase_devise{{i}}">
+                  <option [value]="null">Choissir une devise</option>
+                  <ng-container *ngFor="let devise of deviseAll">
+                    <option [value]="devise.id">{{ devise.symbole }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
+              <ng-container *ngIf="deviseAll && !copyGame.purchase.devise">
+                <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
+                  <option [value]="null">Choissir une devise</option>
+                  <ng-container *ngFor="let devise of deviseAll">
+                    <option [value]="devise.id">{{ devise.symbole }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
+
+              <!-- BUY DATE -->
+              <label for="buy_date{{i}}">Buy date:</label>
+              <input type="date" id="buy_date{{i}}" [(ngModel)]="copyGame.purchase.buy_date" name="purchase_buy_date{{i}}">
+
+              <!-- BUY WHERE -->
+              <label for="buy_where{{i}}">Buy where:</label>
+              <input type="text" id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.name" name="purchase_buy_where{{i}}">
+
+              <!-- PURCHASE CONTENT -->
+              <label for="purchase_content{{i}}">Purchase content:</label>
+              <input type="text" id="purchase_content{{i}}" [(ngModel)]="copyGame.purchase.content" name="purchase_content{{i}}">
+
+            </ng-container>
+            <ng-container *ngIf="!copyGame.purchase">
+
+              <!-- PRICE -->
+              <label for="price{{i}}">Price:</label>
+              <input type="number" id="price{{i}}" name="purchase_price{{i}}" ngModel>
+
+              <!-- DEVISE -->
+              <label for="devise{{i}}">Devise:</label>
+              <ng-container *ngIf="deviseAll">
+                <select id="devise{{i}}" name="purchase_devise{{i}}">
+                  <option [value]="null">Choissir une devise</option>
+                  <ng-container *ngFor="let devise of deviseAll">
+                    <option [value]="devise.id">{{ devise.symbole }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
+
+              <!-- BUY DATE -->
+              <label for="buy_date{{i}}">Buy date:</label>
+              <input type="date" id="buy_date{{i}}" name="purchase_buy_date{{i}}" ngModel>
+
+              <!-- BUY WHERE -->
+              <label for="buy_where{{i}}">Buy where:</label>
+              <input type="text" id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
+
+              <!-- PURCHASE CONTENT -->
+              <label for="purchase_content{{i}}">Purchase content:</label>
+              <input type="text" id="purchase_content{{i}}" name="purchase_content{{i}}" ngModel>
+
+            </ng-container>
+
           </div>
         </ng-container>
       </div>
