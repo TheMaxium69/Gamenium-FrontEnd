@@ -289,7 +289,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
 }
 
 .top-card{
@@ -297,6 +297,7 @@
     height: 35%;
     background-color: red;
     border-radius: 15px 15px 0px 0px;
+    box-shadow: 0px 1px 6px 0px rgba(89,88,88,0.7);
 }
 
 .picture-card{
@@ -305,10 +306,11 @@
     background-size: cover;
     border-radius: 50%;
     /* background-color: blue; */
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
     position: absolute;
-    top: 10px;
+    top: 20px;
 }
 
 .game-card-name,
@@ -316,6 +318,7 @@
     text-align: center;
     font-weight: bold;
     margin-top: 55px;
+    padding: 0 15px;
 }
 
 
@@ -378,7 +381,7 @@
     width: 100%;
     margin: 80px auto;
     border-radius: 15px;
-    box-shadow: 0px 0px 70px 0px rgba(0, 0, 0, 0.42);
+    box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
     padding: 20px;
     display: flex;
     flex-direction: column;
