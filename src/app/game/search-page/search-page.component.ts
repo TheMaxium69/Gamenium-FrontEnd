@@ -73,7 +73,13 @@ export class SearchPageComponent implements OnInit{
       return 0;
     }
     const sum = tab.reduce((acc, val) => acc + val, 0);
-    return sum / tab.length;
+    const result = sum / tab.length // -> average fake rates 13.5
+     
+    if (result - Math.round(result) >= 0.5) {
+      return Math.round(sum) + 1
+    } else {
+      return Math.round(result)
+    }
   }
 
   updateConnect(): void {
