@@ -23,9 +23,8 @@ export class CommentService {
   }
 
   getCommentsByUser(url: string, option: { headers: HttpHeaders }): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/comments/user', option);
+    return this.http.get<ApicallInterface>(url + '/comments/me', option);
   }
-
 
 
 }

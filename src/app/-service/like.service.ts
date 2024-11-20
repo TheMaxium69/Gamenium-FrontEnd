@@ -27,6 +27,10 @@ export class LikeService {
     return this.http.post<ApicallInterface>(url + '/like/comment/', body, option);
   }
 
+  getLikesByUser(url: string, option: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/likes/me', option);
+  }
+
 
 
 }
