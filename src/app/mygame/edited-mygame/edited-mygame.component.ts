@@ -178,17 +178,17 @@ export class EditedMygameComponent implements OnInit {
 
 
     /* MODIFIER LES SPEEDRUN */
-      /*A FAIRE*/
+      let newSpeedrun: any[] = []
     /* MODIFIER LES SCREENSHOT */
-      /*A FAIRE*/
+      let newScreenshot: any[] = []
 
     /* FINAL FORMATAGE */
     let updateHistoryMyGame = {
       myGame: newMyGame,
       copyGame: newCopyGame,
       rate: newRate,
-      // speedrun:newSpeedrun
-      // screenshort:newScreenshot
+      speedrun:newSpeedrun,
+      screenshot:newScreenshot
     }
 
     // console.log(updateHistoryMyGame);
@@ -199,6 +199,7 @@ export class EditedMygameComponent implements OnInit {
       console.log(reponseMyGameUpdate);
       if (reponseMyGameUpdate.message == "updated game") {
         this.selectedMyGame = reponseMyGameUpdate.result;
+        console.log(this.selectedMyGame);
       } else {
         console.log("Erreur de mise a jour");
       }
