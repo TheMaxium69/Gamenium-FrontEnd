@@ -120,7 +120,7 @@ export class EditedMygameComponent implements OnInit {
 
   updateMyGame(form: NgForm){
 
-    console.log(form.value);
+    // console.log(form.value);
 
     /* SAVOIR LE NOMBRE DE COPY*/
     let copyCount: number = 0;
@@ -129,7 +129,7 @@ export class EditedMygameComponent implements OnInit {
         copyCount++;
       }
     }
-    console.log(`Number of copies: ${copyCount}`);
+    // console.log(`Number of copies: ${copyCount}`);
 
     /* MODIFIER LE MYGAME */
     let newMyGame = {
@@ -147,23 +147,57 @@ export class EditedMygameComponent implements OnInit {
     }
 
     /* MODIFIER LES COPY */
+
+    let newCopyGame = []
     for (let i = 0; i < copyCount; i++) {
 
 
+      let tempPurchase = {
+        id: form.value['purchase' + i] || null,
+        price: form.value['purchase_price' + i],
+        content: form.value['purchase_content' + i],
+        devise_id: form.value['purchase_devise' + i],
+        buy_where_id: form.value['purchase_buy_where' + i],
+        buy_date: form.value['purchase_buy_date' + i],
+      }
 
+      let tempMyGame = {
+        id: form.value['copy' + i],
+        edition: form.value['edition' + i],
+        barcode: form.value['barcode' + i],
+        content: form.value['content' + i],
+        purchase: tempPurchase,
+        etat_id: form.value['etat' + i],
+        format_id: form.value['format' + i],
+        region_id: form.value['region' + i],
+      }
 
-
+      newCopyGame.push(tempMyGame);
 
     }
+
 
     /* MODIFIER LES SPEEDRUN */
       /*A FAIRE*/
     /* MODIFIER LES SCREENSHOT */
       /*A FAIRE*/
 
+    /* FINAL FORMATAGE */
+    let updateHistoryMyGame = {
+      myGame: newMyGame,
+      copyGame: newCopyGame,
+      rate: newRate,
+      // speedrun:newSpeedrun
+      // screenshort:newScreenshot
+    }
 
+    console.log(updateHistoryMyGame);
+
+    // this.historyMyGameService.updateMyGame()
 
   }
+
+
 
 
 

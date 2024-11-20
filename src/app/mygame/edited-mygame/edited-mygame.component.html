@@ -242,7 +242,7 @@
               <!-- DEVISE -->
               <label for="devise{{i}}">Devise:</label>
               <ng-container *ngIf="deviseAll">
-                <select id="devise{{i}}" name="purchase_devise{{i}}">
+                <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
                   <option [value]="null">Choissir une devise</option>
                   <ng-container *ngFor="let devise of deviseAll">
                     <option [value]="devise.id">{{ devise.symbole }}</option>
