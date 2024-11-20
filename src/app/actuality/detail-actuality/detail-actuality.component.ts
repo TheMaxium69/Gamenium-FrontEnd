@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {PostActuService} from "../../-service/post-actu.service";
 import {AppComponent} from "../../app.component";
@@ -33,6 +33,8 @@ export class DetailActualityComponent implements OnInit{
   screenWidth: number = window.innerWidth;
 
   globalUrl:string = "";
+
+  providerColor: string | undefined;
 
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,
@@ -85,6 +87,7 @@ export class DetailActualityComponent implements OnInit{
       if (reponsePostActu.message == "good"){
 
         this.actualitySelected = reponsePostActu.result
+        this.getProviderColor();
 
         console.log(this.actualitySelected)
 
@@ -382,6 +385,10 @@ export class DetailActualityComponent implements OnInit{
 
   redirectComment(){
     window.location.href = this.globalUrl + '#commentSection';
+  }
+
+  getProviderColor(){
+    this.providerColor = this.actualitySelected?.Provider?.color;
   }
 
 }

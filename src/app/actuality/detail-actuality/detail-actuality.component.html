@@ -31,7 +31,7 @@
         </div>
 
         <div class="txt_container">
-          <h2 class="game_title mb4">{{ actualitySelected?.title }}</h2>
+          <h1 class="game_title mb4">{{ actualitySelected?.title }}</h1>
 
           <p class="game_description mb4">{{ actualitySelected?.content }}</p>
         </div>
@@ -111,7 +111,7 @@
         <!-- </div> -->
 
         <!-- <div class="txt_container"> -->
-          <!-- <h2 class="game_title">{{ actualitySelected?.title }}</h2> -->
+          <!-- <h1 class="game_title">{{ actualitySelected?.title }}</h1> -->
 
           <!-- <p class="game_description">{{ actualitySelected?.content }}</p> -->
         <!-- </div> -->
@@ -177,6 +177,7 @@
   <div class="containeur mt10 no-pading" id="commentSection">
     <app-comment-actuality
     [nbComment]="nbCommentaire"
+    [providerColor]="providerColor"
     (commentNbChanged)="updateNbComment($event)" class="containeur"></app-comment-actuality>
   </div>
 

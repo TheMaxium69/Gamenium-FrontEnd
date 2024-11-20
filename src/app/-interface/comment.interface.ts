@@ -4,7 +4,7 @@ import {UserInterface} from "./user.interface";
 export interface CommentInterface {
 
   id:number,
-  createdAt: string,
+  created_at: Date,
   lastEdit: string,
   nbEdit: number,
   content: string,

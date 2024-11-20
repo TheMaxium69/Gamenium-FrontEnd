@@ -6,7 +6,7 @@
       <textarea id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre Commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
     </div>
     <div class="comment-send mb4">
-      <button class="btn" type="submit" style="background-color: {{ userColor ?? 'red' }}; color: white">Envoyer</button>
+      <button class="btn" type="submit" style="background-color: {{ providerColor ?? 'red' }}; color: white">Envoyer</button>
     </div>
   </div>
 </form>
@@ -32,7 +32,7 @@
 <div class="containeur" id="coment-header">
   <div class="d-flex gap-2 mb4">
     <h3 id="comment">{{nbComment && nbComment >= 2 ? 'commentaires' : 'commentaire' }}</h3>
-    <h3 id="comment-value" style="background-color: {{ userColor ?? 'red' }}">{{nbComment}}</h3>
+    <h3 id="comment-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbComment}}</h3>
   </div>
   <div class="d-flex" id="last-header">
     <i class="ri-arrow-up-down-line" id="sort"></i>
@@ -57,10 +57,15 @@
           <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
             <img class="badgeIMG" src="{{ badge.picture?.url }}">
           </ng-container>
-          <p>il y a "inserer temps"</p>
+          <span class="time-ago">Posté le : {{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
         </h4>
       </div>
       <p class="comment-text">{{comment.content}}</p>
+      <div class="reply-section">
+        <i class="ri-question-answer-line" id="reply-icon"></i>
+        <span>répondre</span>
+        <i class="ri-heart-line" id="like-icon"></i>
+      </div>
     </div>
     <div class="comment-border mb-4"></div>
   </ng-container>
@@ -85,7 +90,7 @@
               <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
-              <span id="time-ago">il y as 12 minutes</span> <!--C EST EN DUR :D-->
+              <span class="time-ago">Posté le : {{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
               </h4>
             <i id="delete-comment-icon"
               class="ri-delete-bin-line"
@@ -93,9 +98,10 @@
               style="color: red;"></i>
           </div>
           <p class="comment-text">{{comment.content}}</p>
-          <div id="reply-section">
+          <div class="reply-section">
             <i class="ri-question-answer-line" id="reply-icon"></i>
-            <div>répondre</div>
+            <span>répondre</span>
+            <i class="ri-heart-line" id="like-icon"></i>
           </div>
         </div>
         <div id="b{{comment.id}}" class="comment-border mb-4"></div>
@@ -118,12 +124,14 @@
             <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
               <img class="badgeIMG" src="{{ badge.picture?.url }}">
             </ng-container>
+            <span class="time-ago">Posté le : {{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
           </h4>
         </div>
         <p class="comment-text">{{comment.content}}</p>
-        <div id="reply-section">
+        <div class="reply-section">
           <i class="ri-question-answer-line" id="reply-icon"></i>
-          <div>répondre</div>
+          <span>répondre</span>
+          <i class="ri-heart-line" id="like-icon"></i>
         </div>
       </div>
       <div class="comment-border mb-4"></div>

@@ -141,19 +141,26 @@
   color: #575757;
 }
 
-#time-ago {
+.time-ago {
   font-size: small;
   margin-left: 20px;
+  color: #575757
 }
 
-#reply-section {
+.reply-section {
   display: flex;
   margin-left: 50px;
   margin-bottom: 20px;
   font-size: 12px;
   margin-top: -10px;
+  color: #575757
 }
 
 #reply-icon {
   margin-right: 10px;
+  color: #575757;
+}
+
+#like-icon {
+  margin-left: 10px;
 }

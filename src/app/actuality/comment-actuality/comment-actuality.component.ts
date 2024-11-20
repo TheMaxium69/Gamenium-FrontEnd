@@ -10,6 +10,9 @@ import {BadgeService} from "../../-service/badge.service";
 import {BadgeInterface} from "../../-interface/badge.interface";
 import { ProfilInterface } from 'src/app/-interface/profil.interface';
 import { ProfilService } from 'src/app/-service/profil.service';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
 
 @Component({
   selector: 'app-comment-actuality',
@@ -40,6 +43,8 @@ export class CommentActualityComponent implements OnInit{
 
   @Input()
   nbComment: number | undefined = 0;
+  @Input()
+  providerColor: string | undefined;
 
   @Output()
   commentNbChanged: EventEmitter<'add' | 'delete'> = new EventEmitter<'add' | 'delete'>()
@@ -167,7 +172,6 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.addClass(userName, 'comment-user-name');
             const nameHTML = `(Vous) <span style="color:${this.newComment.user.color}">${this.newComment.user.displayname}</span>`;
             this.renderer.setProperty(userName, 'innerHTML', nameHTML);
-
             this.renderer.appendChild(commentUser, userName);
 
             // Badges de l'user
@@ -185,6 +189,13 @@ export class CommentActualityComponent implements OnInit{
                 this.renderer.appendChild(userName, badgeImg);
               });
             }
+
+            // Depuis quand le commentaire est posté 
+            const timeAgo = this.renderer.createElement('span');
+            const commentDate = this.newComment.created_at ?? 'pas de date';
+            this.renderer.addClass(timeAgo, 'time-ago');
+            this.renderer.setProperty(timeAgo, 'textContent', commentDate);
+            this.renderer.appendChild(userName, timeAgo);
   
             // Ajout du bouton delete
             const commentId = this.newComment.id;
@@ -203,6 +214,30 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.setProperty(commentText, 'textContent', this.newComment.content);
             this.renderer.appendChild(commentCard, commentText);
   
+            // Ajout de la div reply
+            const replySection = this.renderer.createElement('div');
+            this.renderer.addClass(replySection, 'reply-section')
+
+            // Ajout du <i> reply
+            const replyIcon = this.renderer.createElement('i');
+            this.renderer.addClass(replyIcon, 'ri-question-answer-line');
+            this.renderer.setProperty(replyIcon, 'id', 'reply-icon');
+
+            // Ajout du texte "repondre"
+            const replyContent = this.renderer.createElement('span');
+            this.renderer.setProperty(replyContent, 'textContent', 'répondre');
+
+            // Ajout du <i> like
+            const likeIcon = this.renderer.createElement('i');
+            this.renderer.addClass(likeIcon, 'ri-heart-line');
+            this.renderer.setProperty(likeIcon, 'id', 'like-icon');
+
+            // Ajout des éléments a la div Reply
+            this.renderer.appendChild(replySection, replyIcon);
+            this.renderer.appendChild(replySection, replyContent);
+            this.renderer.appendChild(replySection, likeIcon);
+            this.renderer.appendChild(commentCard, replySection);
+
             // Comment border div
             const commentBorder = this.renderer.createElement('div');
             this.renderer.setAttribute(commentBorder, 'id', `b${this.newComment.id}`);
