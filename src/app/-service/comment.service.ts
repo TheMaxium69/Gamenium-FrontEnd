@@ -22,4 +22,10 @@ export class CommentService {
     return this.http.delete<ApicallInterface>(url+ '/comment/'+id);
   }
 
+  getCommentsByUser(url: string, option: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/comments/user', option);
+  }
+
+
+
 }
