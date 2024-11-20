@@ -19,6 +19,7 @@
   height: 200px;
   background-color: lightgray;
   margin-bottom: 40px;
+  border-radius: 10px;
 }
 
 .comment-content {
@@ -29,6 +30,7 @@
   padding-top: 40px;
   border: none;
   background-color: lightgray;
+  border-radius: 10px;
 }
 
 .comment-send {
@@ -90,7 +92,6 @@
   width: 75%;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .mb4 {
@@ -106,4 +107,54 @@
 }
 .no-padding {
   padding: 0px;
+}
+
+.containeur {
+  width: 1140px;
+}
+
+#division {
+  height: 1px;
+  background-color: #57575726;
+  margin-bottom: 40px;
+}
+
+#comment-value {
+  color: white;
+  background-color: #ff7575;
+  width: 40px;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 15px;
+}
+
+#coment-header {
+  display: flex;
+  flex-direction: row;
+}
+
+#last-header {
+  margin-left: auto;
+}
+
+#sort {
+  margin-right: 15px;
+  color: #575757;
+}
+
+#time-ago {
+  font-size: small;
+  margin-left: 20px;
+}
+
+#reply-section {
+  display: flex;
+  margin-left: 50px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  margin-top: -10px;
+}
+
+#reply-icon {
+  margin-right: 10px;
 }

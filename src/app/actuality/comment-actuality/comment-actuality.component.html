@@ -1,10 +1,4 @@
-
-<!-- <div style="height: 50px"></div> -->
-<div class="d-flex gap-2 mb4">
-  <h1 id="comment-value">{{nbComment}}</h1>
-  <h1 id="comment">{{nbComment && nbComment >= 2 ? 'commentaires' : 'commentaire' }}</h1>
-</div>
-
+<h1 class="mb4">Section Commentaires</h1>
 <ng-container *ngIf="isLoggedIn">
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
   <div class="comment-input">
@@ -32,6 +26,20 @@
 </ng-container>
 
 <!-- <hr> -->
+<div id="division"></div> 
+
+<!-- <div style="height: 50px"></div> -->
+<div class="containeur" id="coment-header">
+  <div class="d-flex gap-2 mb4">
+    <h3 id="comment">{{nbComment && nbComment >= 2 ? 'commentaires' : 'commentaire' }}</h3>
+    <h3 id="comment-value">{{nbComment}}</h3>
+  </div>
+  <div class="d-flex" id="last-header">
+    <i class="ri-arrow-up-down-line" id="sort"></i>
+    <h3>Les plus récents</h3>
+  </div>
+</div>
+
 
 
 <ng-container *ngIf="!isLoggedIn">
@@ -49,6 +57,7 @@
           <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
             <img class="badgeIMG" src="{{ badge.picture?.url }}">
           </ng-container>
+          <p>il y a "inserer temps"</p>
         </h4>
       </div>
       <p class="comment-text">{{comment.content}}</p>
@@ -76,13 +85,18 @@
               <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
-            </h4>            
+              <span id="time-ago">il y as 12 minutes</span> <!--C EST EN DUR :D-->
+              </h4>
             <i id="delete-comment-icon"
               class="ri-delete-bin-line"
               (click)="onDeleteBtnClick(comment.id)"
               style="color: red;"></i>
           </div>
           <p class="comment-text">{{comment.content}}</p>
+          <div id="reply-section">
+            <i class="ri-question-answer-line" id="reply-icon"></i>
+            <div>répondre</div>
+          </div>
         </div>
         <div id="b{{comment.id}}" class="comment-border mb-4"></div>
       </ng-container>
@@ -107,6 +121,9 @@
           </h4>
         </div>
         <p class="comment-text">{{comment.content}}</p>
+          <div>
+            test
+          </div>
       </div>
       <div class="comment-border mb-4"></div>
     </ng-container>
@@ -116,7 +133,7 @@
 
 <ng-container *ngIf="!commentByActu">
 
-  <h2 id="no-comment">Aucun commentaire</h2>
+  <h2 id="no-comment" class="mb10">Aucun commentaire</h2>
 
 </ng-container>
 
