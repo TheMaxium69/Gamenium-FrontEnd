@@ -1,11 +1,15 @@
-<h1>{{ this.selectedMyGame?.myGame?.game?.name }}</h1>
+<section id="editedmygame" class="container">
 
 <form>
-  <label for="is_pinned">Épinglé:</label>
 
   <ng-container *ngIf="selectedMyGame">
-    <ng-container *ngIf="selectedMyGame.myGame">
 
+    <img src="{{ selectedMyGame.myGame.game.image.icon_url }}">
+    <h1>{{ this.selectedMyGame?.myGame?.game?.name }}</h1>
+
+    <ng-container *ngIf="selectedMyGame.myGame">
+    <div style="display: flex; flex-direction: column;">
+      <label for="is_pinned">Épinglé:</label>
       <select id="is_pinned" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned">
         <option [value]="true">Épinglé</option>
         <option [value]="false">Non épinglé</option>
@@ -74,9 +78,10 @@
           </div>
         </ng-container>
       </div>
-
+    </div>
     </ng-container>
   </ng-container>
 
   <button type="submit">Submit</button>
 </form>
+</section>
