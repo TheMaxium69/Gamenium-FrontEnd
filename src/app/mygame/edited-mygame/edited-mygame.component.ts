@@ -191,9 +191,18 @@ export class EditedMygameComponent implements OnInit {
       // screenshort:newScreenshot
     }
 
-    console.log(updateHistoryMyGame);
+    // console.log(updateHistoryMyGame);
 
-    // this.historyMyGameService.updateMyGame()
+    let body = JSON.stringify(updateHistoryMyGame);
+
+    this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
+      console.log(reponseMyGameUpdate);
+      if (reponseMyGameUpdate.message == "updated game") {
+        this.selectedMyGame = reponseMyGameUpdate.result;
+      } else {
+        console.log("Erreur de mise a jour");
+      }
+    })
 
   }
 

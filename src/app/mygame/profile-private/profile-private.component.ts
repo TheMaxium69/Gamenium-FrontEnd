@@ -78,7 +78,7 @@ export class ProfilePrivateComponent implements OnInit {
       this.fetchTasks();
     }
 
-    
+
   }
 
   /*
@@ -89,9 +89,9 @@ export class ProfilePrivateComponent implements OnInit {
       this.likeService.getLikesByUser(this.app.setURL(), this.app.createCorsToken()).subscribe(
         (response: ApicallInterface) => {
           console.log('Réponse de getLikesByUser:', response);
-          if (response.result.length > 0) { 
+          if (response.result.length > 0) {
             console.log('Il y a bien un like');
-            
+
           }
           else {
             console.log("il n'y a pas de like")
@@ -180,9 +180,9 @@ export class ProfilePrivateComponent implements OnInit {
     });
 
     // Envoyer la requête au backend pour mettre à jour le statut is_pinned
-    this.histoireMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken())
+    this.histoireMyGameService.updatePinMyGame(body, this.app.setURL(), this.app.createCorsToken())
       .subscribe(response => {
-        if (response.message === 'Jeu mis à jour') {
+        if (response.message === 'game is pinned') {
           console.log('Statut épinglé mis à jour dans la base de données');
         } else {
           console.error('Échec de la mise à jour du statut épinglé :', response.message);
@@ -402,7 +402,7 @@ export class ProfilePrivateComponent implements OnInit {
     });
   }
 
-  // Charge les like et commentaire 
+  // Charge les like et commentaire
   loadUserLikesAndComments(): void{
     const options = this.app.createCorsToken();
 

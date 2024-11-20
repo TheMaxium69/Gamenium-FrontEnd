@@ -32,4 +32,8 @@ export class HistoryMyGameService {
     return this.http.put<ApicallInterface>(url + '/updateMyGame/', body, options);
   }
 
+  updatePinMyGame(body: string, url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.put<ApicallInterface>(url + '/updatePinMyGame/', body, options);
+  }
+
 }
