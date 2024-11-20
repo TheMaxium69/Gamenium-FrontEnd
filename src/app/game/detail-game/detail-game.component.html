@@ -95,14 +95,16 @@
 
 
 
-
-
-  <div class="banniere" style="background-image: url({{gameSelected?.image?.screen_large_url}});"></div>
+  <div class="banniere-container">
+    <div class="banniere" style="background-image: url({{gameSelected?.image?.screen_large_url}});"></div>
+  </div>
 
   <div class="pictureAndName">
     <div class="picture" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
     <div class="name">
-        <div class="game-name"><p class="mb-0">{{ gameSelected?.name }}</p></div>
+        <div class="game-name">
+          <h1 class="mb-0">{{ gameSelected?.name }}</h1>
+        </div>
         <div class="global-game-rate">
             <div class="global-rate">10</div>
             <div class="global-slash">/</div>
@@ -115,53 +117,166 @@
 <!-- INFORMATIONS  -->
   <div class="section-info">
     <div class="information">
-        <p class="title">INFORMATIONS</p>
+        <h1 class="title mb-4">INFORMATIONS</h1>
 
 
         <div class="information-container">
-            <div class="content">
-                <p>Contenu :</p>
-                <div class="information-line-container">
-                    <div class="information-lines-fields">
-                        <div>Genre</div>
-                        <div>Plate-Forme</div>
-                        <div>Classification</div>
-                        <div>Multijoueurs</div>
-                        <div>Nombre de joueurs</div>
-                    </div>
-                    <div class="information-lines-data">
-                        <div>Plate-Forme</div>
-                        <div>WII</div>
-                        <div>+3 ans</div>
-                        <div>Oui</div>
-                        <div>1 à 2</div>
-                    </div>
-                </div>
-            </div>
-            <div class="context">
-                <p>Context :</p>
-                <div class="information-line-container">
-                    <div class="information-lines-fields">
-                        <div>Développeur</div>
-                        <div>Editeur</div>
-                        <div>Franchises</div>
-                        <div>Date de sortie FR</div>
-                        <div>Date de sortie US</div>
-                        <div>Date de sortie JP</div>
-                        <div>Prix de lancement</div>
-                    </div>
-                    <div class="information-lines-data">
-                        <div>Nintendo EAD</div>
-                        <div>Nintendo</div>
-                        <div>Mario, Super Mario</div>
-                        <div>11 juin 2010</div>
-                        <div>23 mai 2010</div>
-                        <div>27 mai 2010</div>
-                        <div>50 €</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <div class="content">
+              <h3 class="mb-4">Contenu</h3>
+              <div class="information-line-container">
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Genre
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          Plate-Forme
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Plate-Forme
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          WII
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Classification
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          +3 ans
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Multijoueurs
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          Oui
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Nombre de joueurs
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          1 à 2
+                        </h2>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="context">
+              <h3 class="mb-4">Context</h3>
+              <div class="information-line-container">
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Développeur
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          Nintendo EAD
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Editeur
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          Nintendo
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Franchises
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          Mario, Super Mario
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Date de sortie FR
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          11 juin 2010
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Date de sortie US
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          23 mai 2010
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Date de sortie JP
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          27 mai 2010
+                        </h2>
+                      </div>
+                  </div>
+                  <div class="information-lines">
+                      <div class="field">
+                        <h3>
+                          Prix de lancement
+                        </h3>
+                      </div>
+                      <div class="data">
+                        <h2>
+                          50 €
+                        </h2>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
 
 
     </div>

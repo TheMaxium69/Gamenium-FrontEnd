@@ -1,12 +1,17 @@
 /* ////////////// DEBUT DE ZONE BANNIERE ////////////////// */
+.banniere-container {
+  overflow: hidden;
+  height: 145px;
+}
+
 .banniere{
     /* background-image: url('{{gameSelected?.image?.screen_large_url}}'); */
     background-position: center;
     background-size: cover;
     filter: blur(5px);
-    box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.9) inset;
-    width: 100%;
-    height: 170px;
+    /* width: 100%; */
+    height: 120px;
+    transform: scale(1.1);
 }
 /* //////////////// FIN DE ZONE BANNIERE ////////////// */
 
@@ -41,7 +46,7 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 15px;
-    box-shadow: 2px 10px 32px -10px rgba(0,0,0,0.62);
+    box-shadow: 1px 2px 10px #a6a6a6;
     flex-grow: 1;
     margin-left: 20px;
     margin-right: 50px;
@@ -125,7 +130,7 @@
     flex-direction: column;
     font-size: 25px;
     font-weight: bold;
-    box-shadow: 0px 0px 70px 0px rgba(0, 0, 0, 0.42);
+    box-shadow: 1px 2px 10px #a6a6a6;
     position: relative;
     padding: 30px 20px; 
     background-color: #fff; 
@@ -159,7 +164,6 @@
 
 .content p,
 .context p {
-    text-decoration: underline;
     margin-bottom: 20px;
     color: #555; 
 }
@@ -169,28 +173,43 @@
     display: flex;
     font-size: 18px;
     font-weight: normal; 
-}
-
-
-.information-lines-fields,
-.information-lines-data {
-    font-size: 18px;
-    font-weight: bold;
-    flex: 1;
-    display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
-.information-lines-fields {
-    text-align: left;
-    color: #666; 
+.information-line-container h3{
+  height: 25px;
 }
 
-.information-lines-data {
-    text-align: left;
-    color: #e74c3c; 
+.information-lines {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 10px;
+  align-items: start;
+  grid-auto-rows: minmax(40px, auto);
 }
+
+.field h3 {
+  text-align: left;
+  margin: 0;
+  line-height: 1.5;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.data h2 {
+  text-align: left;
+  margin: 0;
+  line-height: 1.5;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+
+
+.information-line-container {
+  margin: 10px 0;
+}
+
 
 /* Ligne pour diviser */
 .content {
