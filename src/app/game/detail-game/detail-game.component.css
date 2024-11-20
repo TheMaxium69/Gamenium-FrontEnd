@@ -139,7 +139,7 @@
 
 .information .title {
     color: #333; 
-    margin-bottom: 0;
+    margin-bottom: 40px;
 
 }
 
@@ -159,6 +159,11 @@
     flex: 1;
     min-width: 300px; 
     position: relative;
+}
+
+.content h3,
+.context h3 {
+  margin-bottom: 40px;
 }
 
 
@@ -214,11 +219,11 @@
 /* Ligne pour diviser */
 .content {
     border-right: 1px solid #ccc;
-    padding-right: 20px;
+    padding: 0 30px;
 }
 
 .context {
-    padding-left: 20px;
+  padding: 0 30px;
 }
 
 @media (max-width: 768px) {
@@ -230,11 +235,11 @@
     .content {
         border-right: none;
         border-bottom: 1px solid #ccc;
-        padding-bottom: 20px;
+        padding: 0;
     }
 
     .context {
-        padding-left: 0;
+        padding: 0;
     }
 
     .information-lines-data {

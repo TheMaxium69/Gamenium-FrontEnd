@@ -21,7 +21,8 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
     private route: ActivatedRoute,
     private gameService: GameService,
     private app: AppComponent,
-    private histoireMyGameService: HistoryMyGameService) {
+    private histoireMyGameService: HistoryMyGameService
+  ) {
   }
 
   ngOnInit(): void {
