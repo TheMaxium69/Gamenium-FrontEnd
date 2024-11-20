@@ -17,12 +17,12 @@
                 <div class="border-provider-main"></div>
                 <div class="follower-container">
                   <div id="followers">
-                    <h3 style="color: {{ providerSelected?.color }}">{{providerNbFollower}}</h3>
+                    <h2 style="color: {{ providerSelected?.color }}">{{providerNbFollower}}</h2>
                      <h3> {{providerNbFollower && providerNbFollower >= 2 ? 'Abonnés' : 'Abonné'}} </h3>
                   </div>
    
                  <div id="nb_actus">
-                   <h3 style="color: {{ providerSelected?.color }}">{{providerNbActu}}</h3>
+                   <h2 style="color: {{ providerSelected?.color }}">{{providerNbActu}}</h2>
                    <h3> {{providerNbActu && providerNbActu >= 2 ? 'Actus' : 'Actu'}} </h3>
                  </div>
                 </div>
@@ -50,7 +50,9 @@
               
             </div>
             
-            <div id="info-details-container" class="mb-4">
+            <div 
+            [class.mb-4]="providerSelected?.joindeAt"
+            id="info-details-container">
                 <div id="infos_details">
                   <p class="firsttext">Création</p>
                   <p class="firsttext">Pays</p>
@@ -71,8 +73,7 @@
               <div id="joinedAt" *ngIf="providerSelected?.joindeAt">
                 <img src="../../../assets/logo.png" alt="logo_gamenium">
                 <div class="joined-text">
-                  <p style="color: {{ providerSelected?.color }}"> à rejoint Gamenium le </p>
-                  <p>{{ providerSelected?.joindeAt | date: 'd MMMM y': undefined : 'fr'}}</p>
+                  <h2 style="color: {{ providerSelected?.color }}"> à rejoint Gamenium le <span style="color: #575757;">{{ providerSelected?.joindeAt | date: 'd MMMM y': undefined : 'fr'}}</span></h2>
                 </div>
               </div>
             </div>
