@@ -15,6 +15,9 @@ import { TaskUserInterface } from 'src/app/-interface/task-user.interface';
 import { TaskService } from 'src/app/-service/task.service';
 import { HttpHeaders } from '@angular/common/http';
 import { TaskUserCompletedInterface } from 'src/app/-interface/task-user-completed.interface';
+import { CommentService } from 'src/app/-service/comment.service';
+import { LikeService } from 'src/app/-service/like.service';
+import { ApicallInterface } from 'src/app/-interface/apicall.interface';
 
 @Component({
   selector: 'app-profile-private',
@@ -41,9 +44,17 @@ export class ProfilePrivateComponent implements OnInit {
   profileLoaded: boolean = false;
   gamesLoaded: boolean = false;
   tasksLoaded: boolean = false;
+  userLikesLoaded: boolean = false;
+  userCommentsLoaded: boolean = false;
+
+  // Stock les likes et commentaire ( surement a delete après )
+  userLikes:any[] = [];
+  userComments:any[]= [];
 
   constructor(private app: AppComponent,
               private taskService: TaskService,
+              private commentService: CommentService,
+              private likeService: LikeService,
               private myGameService: GameService,
               private userRateService: UserRateService,
               private profileService: ProfilService,
@@ -56,12 +67,56 @@ export class ProfilePrivateComponent implements OnInit {
   ngOnInit(): void {
     this.task = this.route.snapshot.paramMap.get('task');
     this.userConnected = this.app.userConnected;
+
+    // test nouveau service
+    this.testGetLikesByUser();
+    this.testGetCommentsByUser();
+
     if (this.userConnected) {
       this.myGameByUser(this.userConnected.id);
       this.getInfoProfile(this.userConnected.id);
       this.fetchTasks();
     }
+
+    
   }
+
+  /*
+    **** TEST A REIMPLEMENTER PLUS LOIN DANS LES TACHES
+  */
+
+    testGetLikesByUser():void{
+      this.likeService.getLikesByUser(this.app.setURL(), this.app.createCorsToken()).subscribe(
+        (response: ApicallInterface) => {
+          console.log('Réponse de getLikesByUser:', response);
+          if (response.result.length > 0) { 
+            console.log('Il y a bien un like');
+            
+          }
+          else {
+            console.log("il n'y a pas de like")
+          }
+        },
+        (error) => {
+          console.error("Erreur lors de l'appel à getLikesByUser:", error);
+        }
+      );
+    }
+    testGetCommentsByUser():void{
+      this.commentService.getCommentsByUser(this.app.setURL(), this.app.createCorsToken()).subscribe(
+        (response: ApicallInterface) => {
+          console.log('Rép de commentLikesByUser:  ', response);
+          if(response.result.length > 0) {
+            console.log("il y a au moins un commentaire")
+          } else {
+            console.log("il n'y as pas de comm")
+          }
+        },
+        (error) => {
+          console.error('erreur commentsbyuser', error)
+        }
+      )
+    }
 
   // récup des jeux par utilisateur
   myGameByUser(id_user: number): void {
@@ -292,7 +347,7 @@ export class ProfilePrivateComponent implements OnInit {
 
   //Récupère les tâches depuis le backend et met à jour leur statut de complétion.
   fetchTasks(): void {
-    const options = { headers: new HttpHeaders({ Authorization: `Bearer ${this.app.token}` }) };
+    const options = this.app.createCorsToken();
 
     // Récupère toutes les tâches
     this.taskService.getAllTasks(this.app.setURL()).subscribe((allTasksResponse) => {
@@ -307,14 +362,13 @@ export class ProfilePrivateComponent implements OnInit {
             completedTasks = completedResponse.result;
           } else if (completedResponse.message === 'Aucune tâche complétée trouvée') {
             completedTasks = []; // Pas de tâches complétées
-            // Optionnel : Afficher un message indiquant qu'aucune tâche n'est complétée
             console.log('Aucune tâche complétée trouvée');
           } else {
             console.error('Erreur lors de la récupération des tâches complétées:', completedResponse.message);
             return; // Quitter si c'est une véritable erreur
           }
 
-          // Mappe les tâches et marque comme complétées si elles le sont
+          // Map les tâches et marque comme complétées si elles le sont
           this.tasks = allTasks.map((task: TaskUserInterface) => {
             const isCompleted = completedTasks.some(
             (completed: TaskUserCompletedInterface) => completed.task_id === task.id
@@ -329,7 +383,8 @@ export class ProfilePrivateComponent implements OnInit {
 
           // on passe les tache chargé a true et on vérifie les tache complété
           this.tasksLoaded = true;
-          this.tryCheckAndCompleteTasks();
+          this.loadUserLikesAndComments();
+          // this.tryCheckAndCompleteTasks();
 
           // Logs de débogage
           console.log('Toutes les tâches:', allTasks);
@@ -345,6 +400,29 @@ export class ProfilePrivateComponent implements OnInit {
     }, (error) => {
       console.error('Erreur lors de la récupération de toutes les tâches:', error);
     });
+  }
+
+  // Charge les like et commentaire 
+  loadUserLikesAndComments(): void{
+    const options = this.app.createCorsToken();
+
+    this.likeService.getLikesByUser(this.app.setURL(), options).subscribe(
+      (response: ApicallInterface) => {
+        if (response.message === "good"){
+          this.userLikes = response.result;
+          console.log("Likes de l'utilisateur ", this.userLikes);
+        } else {
+          console.error ("Erreur lors de la récup des likes", response.message);
+        }
+        this.userLikesLoaded = true;
+        this.tryCheckAndCompleteTasks();
+      },
+      (error) => {
+        console.error("Erreur lors de l'appelle GetLikesByUser", error);
+        this.userLikesLoaded = true;
+        this.tryCheckAndCompleteTasks();
+      }
+    )
   }
 
 
@@ -383,6 +461,15 @@ export class ProfilePrivateComponent implements OnInit {
 
             }
           }
+          if (task.name === 'Liker votre premier article') {
+            if (this.userLikes && this.userLikes.length > 0) {
+              console.log ("Condition remplis pour la tache like");
+              this.completeTask(task.id);
+            } else {
+              console.log("Condition NON remplis pour la tache like")
+            }
+
+          }
           // Vous pouvez ajouter d'autres vérifications pour les autres tâches ici
         } else {
           console.log('Tâche déjà complétée :', task.name);
@@ -408,11 +495,7 @@ export class ProfilePrivateComponent implements OnInit {
   completeTask(taskId: number): void {
     console.log('Appel de completeTask avec taskId:', taskId);
     const body = JSON.stringify({ taskId });
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.app.token}`
-    });
-    const options = { headers };
+    const options = this.app.createCorsToken();
 
     this.taskService.postCompleteTask(body, this.app.setURL(), options).subscribe((response) => {
       console.log('Réponse du backend pour completeTask:', response);
