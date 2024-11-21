@@ -156,18 +156,24 @@
   display: flex;
   margin-left: 50px;
   margin-bottom: 20px;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: -10px;
   color: #575757
+}
+
+.comment-action {
+  cursor: pointer;
 }
 
 #reply-icon {
   margin-right: 10px;
   color: #575757;
+  cursor: pointer;
 }
 
-#like-icon {
-  margin-left: 10px;
+.like {
+  margin: 0 10px;
+  cursor: pointer;
 }
 
 .btn-shadow {

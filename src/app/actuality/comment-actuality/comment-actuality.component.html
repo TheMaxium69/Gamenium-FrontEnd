@@ -62,9 +62,21 @@
       </div>
       <p class="comment-text">{{comment.content}}</p>
       <div class="reply-section">
-        <i class="ri-question-answer-line" id="reply-icon"></i>
-        <span>répondre</span>
-        <i class="ri-heart-line" id="like-icon"></i>
+        <div
+        (click)="replyToComment(comment.id)">
+          <i class="ri-question-answer-line" id="reply-icon"></i>
+          <span class="comment-action">répondre</span>
+        </div>
+        <div
+        (click)="likeComment(comment.id)">
+          <i
+          id="like-icon{{comment.id}}"
+          class="comment-action like"
+          [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
+          [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
+          </i>
+          <span class="comment-action">j'aime</span>
+        </div>
       </div>
     </div>
     <div class="comment-border mb-4"></div>
@@ -99,9 +111,21 @@
           </div>
           <p class="comment-text">{{comment.content}}</p>
           <div class="reply-section">
-            <i class="ri-question-answer-line" id="reply-icon"></i>
-            <span>répondre</span>
-            <i class="ri-heart-line" id="like-icon"></i>
+            <div
+            (click)="replyToComment(comment.id)">
+              <i class="ri-question-answer-line" id="reply-icon"></i>
+              <span class="comment-action">répondre</span>
+            </div>
+            <div
+            (click)="likeComment(comment.id)">
+            <i
+            id="like-icon{{comment.id}}"
+            class="comment-action like"
+            [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
+            [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
+            </i>
+            <span class="comment-action">j'aime</span>
+            </div>
           </div>
         </div>
         <div id="b{{comment.id}}" class="comment-border mb-4"></div>
@@ -129,9 +153,21 @@
         </div>
         <p class="comment-text">{{comment.content}}</p>
         <div class="reply-section">
-          <i class="ri-question-answer-line" id="reply-icon"></i>
-          <span>répondre</span>
-          <i class="ri-heart-line" id="like-icon"></i>
+          <div
+          (click)="replyToComment(comment.id)">
+            <i class="ri-question-answer-line" id="reply-icon"></i>
+            <span class="comment-action">répondre</span>
+          </div>
+          <div
+          (click)="likeComment(comment.id)">
+          <i
+          id="like-icon{{comment.id}}"
+          class="comment-action like"
+          [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
+          [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
+          </i>
+          <span class="comment-action">j'aime</span>
+          </div>
         </div>
       </div>
       <div class="comment-border mb-4"></div>

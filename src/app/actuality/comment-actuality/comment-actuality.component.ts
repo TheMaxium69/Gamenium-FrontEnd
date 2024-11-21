@@ -12,6 +12,8 @@ import { ProfilInterface } from 'src/app/-interface/profil.interface';
 import { ProfilService } from 'src/app/-service/profil.service';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { LikeService } from 'src/app/-service/like.service';
+import { IpService } from 'src/app/-service/ip.service';
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -30,6 +32,7 @@ export class CommentActualityComponent implements OnInit{
   badgeForAllUser: any[] = [];
   newComment : CommentInterface|undefined;
   profileInterface: ProfilInterface | undefined;
+  commentLikedMap = new Map<number, boolean>();
 
   constructor(
     private route: ActivatedRoute,
@@ -38,11 +41,14 @@ export class CommentActualityComponent implements OnInit{
     private commentService:CommentService,
     private badgeService:BadgeService,
     private renderer: Renderer2,
+    private likeService: LikeService,
+    private ipService: IpService,
     private profileService: ProfilService
   ) {}
 
   @Input()
   nbComment: number | undefined = 0;
+
   @Input()
   providerColor: string | undefined;
 
@@ -67,6 +73,8 @@ export class CommentActualityComponent implements OnInit{
 
     this.getCommentWithActu(this.actualityId);
 
+    this.getLikesOfUser()
+
   }
 
   getActuById(id:number){
@@ -81,6 +89,24 @@ export class CommentActualityComponent implements OnInit{
 
     });
   }
+  
+  getLikesOfUser() {
+    this.likeService.getLikesByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
+
+      if (reponseApi.message === 'good') {
+        const likedComment = reponseApi.result.filter((like: any) => like.comment !== null);
+
+        likedComment.forEach((like: any) => {
+          if (like.comment?.id) {
+            this.commentLikedMap.set(like.comment.id, true);
+          }
+
+        });
+        
+      }
+    });
+
+  }
 
   getCommentWithActu(id:number){
 
@@ -91,7 +117,6 @@ export class CommentActualityComponent implements OnInit{
       if (reponseMyCommentActu.message == "good") {
 
         this.commentByActu = reponseMyCommentActu.result;
-
         this.getBadgesForAllUsers();
 
       } else {
@@ -129,9 +154,7 @@ export class CommentActualityComponent implements OnInit{
       this.commentService.postCommentInActu(bodyMyCommentActu, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyCommentActuCreate => {
         if (reponseMyCommentActuCreate.message === "good") {
           this.newComment = reponseMyCommentActuCreate.result;
-  
           console.log("Commentaire ajouté");
-
           
           let noteSpanGame = document.getElementById("yourComment");
           if (noteSpanGame && this.newComment) {
@@ -345,11 +368,34 @@ export class CommentActualityComponent implements OnInit{
     return str.charAt(0);
   }
 
-  reply(form: NgForm) {
-    //idée : clicker sur repondre renvoie au form déja present mais avec en entete réponse a x, 
-    //juste changer la manniere dont sa interagis avec le dom si c'est une reponse ou non, 
-    //semble impossible
+  replyToComment(commentId: number) {
+    console.log(commentId)
   }
 
-  
+  likeComment(commentId: number) {
+    console.log(commentId)
+    this.ipService.getMyIp(this.app.urlIp).subscribe((reponseTyroIp) => {
+
+      let bodyNoJson: any = {
+        "id_comment": commentId,
+        "ip": reponseTyroIp.ip,
+      }
+
+      let bodyJson = JSON.stringify(bodyNoJson);
+
+      this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(
+        (reponseApi) => { 
+          if (reponseApi.message == 'good') {
+            console.log('commentaire ' + commentId + ' liké par ' + this.userConnectedId)
+            const likeIcon = document.querySelector('#like-icon'+commentId)
+            this.renderer.removeClass(likeIcon, 'ri-heart-line')
+            this.renderer.addClass(likeIcon, 'ri-heart-fill')
+
+          } else {
+            console.log('erreur dans le like du commentaire ' + commentId)
+          }
+        })
+    })
+    
+  }
 }
