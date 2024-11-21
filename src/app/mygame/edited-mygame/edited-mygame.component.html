@@ -228,8 +228,23 @@
 
               <!-- BUY WHERE -->
               <label for="buy_where{{i}}">Buy where:</label>
-              <input type="text" id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.name"
-                     name="purchase_buy_where{{i}}">
+<!--              <input type="text" id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.name" name="purchase_buy_where{{i}}">-->
+              <ng-container *ngIf="buyWhereAll && copyGame.purchase.buy_where">
+                <select id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.id" name="purchase_buy_where{{i}}">
+                  <option [value]="null">Choissir une Buy Where</option>
+                  <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                    <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
+              <ng-container *ngIf="buyWhereAll && !copyGame.purchase.buy_where">
+                <select id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
+                  <option [value]="null">Choissir une Buy Where</option>
+                  <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                    <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
 
               <!-- PURCHASE CONTENT -->
               <label for="purchase_content{{i}}">Purchase content:</label>
@@ -260,7 +275,14 @@
 
               <!-- BUY WHERE -->
               <label for="buy_where{{i}}">Buy where:</label>
-              <input type="text" id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
+              <ng-container *ngIf="buyWhereAll">
+                <select id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
+                  <option [value]="null">Choissir une Buy Where</option>
+                  <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                    <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
 
               <!-- PURCHASE CONTENT -->
               <label for="purchase_content{{i}}">Purchase content:</label>

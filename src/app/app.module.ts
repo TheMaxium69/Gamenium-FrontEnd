@@ -14,7 +14,6 @@ import { PageGameComponent } from './game/page-game/page-game.component';
 import { DetailGameComponent } from './game/detail-game/detail-game.component';
 import { NavbarComponent } from "./-global/navbar/navbar.component";
 import { NavbarActualityComponent } from './actuality/navbar-actuality/navbar-actuality.component';
-import { BuyWhereInterfaceComponent } from './-components/buy-where.interface/buy-where.interface.component';
 import { CardActualityComponent } from "./actuality/card-actuality/card-actuality.component";
 import { LoginComponent } from './account/login/login.component';
 import { BadgeInterfaceComponent } from './-components/badge.interface/badge.interface.component';
@@ -67,7 +66,6 @@ import { EditedMygameComponent } from './mygame/edited-mygame/edited-mygame.comp
     BadgeInterfaceComponent,
     PostActuInterfaceComponent,
     ProviderInterfaceComponent,
-    BuyWhereInterfaceComponent,
     GameInterfaceComponent,
     BadgeVersUserInterfaceComponent,
     PictureInterfaceComponent,

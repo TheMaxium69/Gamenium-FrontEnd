@@ -1,22 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BuyWhereInterface } from '../-interface/buy-where.interface';
+import {ApicallInterface} from "../-interface/apicall.interface";
 
 @Injectable({
   providedIn: 'root',
 })
 export class BuyWhereService {
-  private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
 
   constructor(private http: HttpClient) {}
 
-  getBuyWhere(id: number): Observable<BuyWhereInterface> {
-    return this.http.get<BuyWhereInterface>(`${this.apiUrl}/buywhere/${id}`);
+  getAllBuyWheres(url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/buywheres');
   }
 
-  getAllBuyWheres(): Observable<BuyWhereInterface[]> {
-    return this.http.get<BuyWhereInterface[]>(`${this.apiUrl}/buywheres`);
+  getAllBuyWheresByUser(url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/buywherebyuser/', option);
+  }
+
+  getOneBuyWhere(url:string, id: number): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/buywhere/' + id);
   }
 
 }

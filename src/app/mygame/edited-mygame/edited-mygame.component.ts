@@ -13,6 +13,8 @@ import {HmgCopyFormatService} from "../../-service/hmg-copy-format.service";
 import {HmgCopyEtatService} from "../../-service/hmg-copy-etat.service";
 import {NgForm} from "@angular/forms";
 import {MyGameInterface} from "../../-interface/my-game.interface";
+import {BuyWhereInterface} from "../../-interface/buy-where.interface";
+import {BuyWhereService} from "../../-service/buy-where.service";
 
 @Component({
   selector: 'app-edited-mygame',
@@ -27,6 +29,7 @@ export class EditedMygameComponent implements OnInit {
 
     protected historyMyGameService:HistoryMyGameService,
     private deviseService:DeviseService,
+    private buyWhereService:BuyWhereService,
     private hmgCopyEtatService:HmgCopyEtatService,
     private hmgCopyFormatService:HmgCopyFormatService,
     private hmgCopyRegionService:HmgCopyRegionService,
@@ -35,6 +38,7 @@ export class EditedMygameComponent implements OnInit {
   idOneMyGame:number|any;
   selectedMyGame:HistoryMyGameInterface|undefined;
   deviseAll:DeviseInterface[]|undefined;
+  buyWhereAll:BuyWhereInterface[]|undefined;
   hmgCopyEtatAll:HmgCopyEtatInterface[]|undefined;
   hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
   hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
@@ -76,6 +80,16 @@ export class EditedMygameComponent implements OnInit {
         this.deviseAll = reponseDevise.result;
       } else {
         console.log("pas de devise");
+      }
+
+    })
+
+    this.buyWhereService.getAllBuyWheres(this.app.setURL()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[] | undefined; }) => {
+
+      if (reponseBuyWhere.message == "good") {
+        this.buyWhereAll = reponseBuyWhere.result;
+      } else {
+        console.log("pas de buy where");
       }
 
     })
