@@ -68,10 +68,6 @@ export class ProfilePrivateComponent implements OnInit {
     this.task = this.route.snapshot.paramMap.get('task');
     this.userConnected = this.app.userConnected;
 
-    // test nouveau service
-    this.testGetLikesByUser();
-    this.testGetCommentsByUser();
-
     if (this.userConnected) {
       this.myGameByUser(this.userConnected.id);
       this.getInfoProfile(this.userConnected.id);
@@ -81,47 +77,9 @@ export class ProfilePrivateComponent implements OnInit {
 
   }
 
-  /*
-    **** TEST A REIMPLEMENTER PLUS LOIN DANS LES TACHES
-  */
-
-    testGetLikesByUser():void{
-      this.likeService.getLikesByUser(this.app.setURL(), this.app.createCorsToken()).subscribe(
-        (response: ApicallInterface) => {
-          console.log('Réponse de getLikesByUser:', response);
-          if (response.result.length > 0) {
-            console.log('Il y a bien un like');
-
-          }
-          else {
-            console.log("il n'y a pas de like")
-          }
-        },
-        (error) => {
-          console.error("Erreur lors de l'appel à getLikesByUser:", error);
-        }
-      );
-    }
-    testGetCommentsByUser():void{
-      this.commentService.getCommentsByUser(this.app.setURL(), this.app.createCorsToken()).subscribe(
-        (response: ApicallInterface) => {
-          console.log('Rép de commentLikesByUser:  ', response);
-          if(response.result.length > 0) {
-            console.log("il y a au moins un commentaire")
-          } else {
-            console.log("il n'y as pas de comm")
-          }
-        },
-        (error) => {
-          console.error('erreur commentsbyuser', error)
-        }
-      )
-    }
-
   // récup des jeux par utilisateur
   myGameByUser(id_user: number): void {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
-      console.log(responseMyGame);
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result;
       } else {
@@ -362,7 +320,6 @@ export class ProfilePrivateComponent implements OnInit {
             completedTasks = completedResponse.result;
           } else if (completedResponse.message === 'Aucune tâche complétée trouvée') {
             completedTasks = []; // Pas de tâches complétées
-            console.log('Aucune tâche complétée trouvée');
           } else {
             console.error('Erreur lors de la récupération des tâches complétées:', completedResponse.message);
             return; // Quitter si c'est une véritable erreur
@@ -384,12 +341,6 @@ export class ProfilePrivateComponent implements OnInit {
           // on passe les tache chargé a true et on vérifie les tache complété
           this.tasksLoaded = true;
           this.loadUserLikesAndComments();
-          // this.tryCheckAndCompleteTasks();
-
-          // Logs de débogage
-          console.log('Toutes les tâches:', allTasks);
-          console.log('Tâches complétées:', completedTasks);
-          console.log('Tâches avec statut de complétion:', this.tasks);
 
         }, (error) => {
           console.error('Erreur lors de la récupération des tâches complétées:', error);
@@ -410,7 +361,6 @@ export class ProfilePrivateComponent implements OnInit {
       (response: ApicallInterface) => {
         if (response.message === "good"){
           this.userLikes = response.result;
-          console.log("Likes de l'utilisateur ", this.userLikes);
         } else {
           console.error ("Erreur lors de la récup des likes", response.message);
         }
@@ -428,7 +378,6 @@ export class ProfilePrivateComponent implements OnInit {
       (response: ApicallInterface) => {
         if (response.message === "good"){
           this.userComments = response.result;
-          console.log("commentaires de l'utilisateur ", this.userComments);
         } else {
           console.error ("Erreur lors de la récup des commentaires", response.message);
         }
@@ -454,51 +403,21 @@ export class ProfilePrivateComponent implements OnInit {
 
 // Vérifie les conditions pour chaque tâche incomplète et les marque comme complétées si nécessaire.
 checkAndCompleteTasks(): void {
-  console.log('Appel de checkAndCompleteTasks');
-  console.log('Liste des tâches:', this.tasks);
   this.tasks.forEach(task => {
     if (!task.completed) {
-      if (task.name === 'Link Game') {
-        if (this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
-          console.log('Condition remplie pour la tâche "Link Game"');
-          // L'utilisateur a des jeux liés, on marque la tâche comme complétée
-          this.completeTask(task.id);
-        } else {
-          console.log('Condition NON remplie pour la tâche "Link Game"');
-        }
+      if (task.name === 'Link Game' && this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
+        this.completeTask(task.id);
       }
-      if (task.name === 'Profil Picture') {
-        if (this.isPp) {
-          console.log('Condition remplie pour la tâche "Profil Picture"');
-          // L'utilisateur a une photo de profil, on marque la tâche comme complétée
-          this.completeTask(task.id);
-        } else {
-          console.log('Condition NON remplie pour la tâche "Profil Picture"');
-          console.log('this is PP' + this.isPp);
-          console.log('this profil selected' + JSON.stringify(this.profilSelected));
-        }
+      if (task.name === 'Profil Picture' && this.isPp) {
+        this.completeTask(task.id);
       }
-      if (task.name === 'Liker votre premier article') {
-        if (this.userLikes && this.userLikes.length > 0) {
-          console.log('Condition remplie pour la tâche "Liker votre premier article"');
-          // L'utilisateur a au moins un like, on marque la tâche comme complétée
-          this.completeTask(task.id);
-        } else {
-          console.log('Condition NON remplie pour la tâche "Liker votre premier article"');
-        }
+      if (task.name === 'Liker votre premier article' && this.userLikes && this.userLikes.length > 0) {
+        this.completeTask(task.id);
       }
-      if (task.name === 'Mettez votre premier commentaire ') {
-        if (this.userComments && this.userComments.length > 0) {
-          console.log('Condition remplie pour la tâche "Mettez votre premier commentaire"');
-          // L'utilisateur a au moins un commentaire, on marque la tâche comme complétée
-          this.completeTask(task.id);
-        } else {
-          console.log('Condition NON remplie pour la tâche "Mettez votre premier commentaire"');
-        }
+      if (task.name === 'Mettre votre premier commentaire' && this.userComments && this.userComments.length > 0) {
+        this.completeTask(task.id);
       }
-      // Vous pouvez ajouter d'autres vérifications pour les autres tâches ici
-    } else {
-      console.log('Tâche déjà complétée :', task.name);
+      // Si nouvelle task ajouter la verif ici
     }
   });
 }
@@ -511,20 +430,16 @@ checkAndCompleteTasks(): void {
     const completedTasks = this.tasks.filter((task) => task.completed).length;
     this.progress = (completedTasks / this.tasks.length) * 100;
 
-    // Log de débogage
-    console.log('Progression:', this.progress + '%');
   }
 
 
   //Marque une tâche comme complétée en l'envoyant au backend.
 
   completeTask(taskId: number): void {
-    console.log('Appel de completeTask avec taskId:', taskId);
     const body = JSON.stringify({ taskId });
     const options = this.app.createCorsToken();
 
     this.taskService.postCompleteTask(body, this.app.setURL(), options).subscribe((response) => {
-      console.log('Réponse du backend pour completeTask:', response);
       if (response.message === 'Tâche complétée') {
         // Met à jour le statut de la tâche dans le tableau local
         this.tasks = this.tasks.map((task) =>
@@ -532,8 +447,6 @@ checkAndCompleteTasks(): void {
         );
         this.updateProgressBar(); // Recalculer la progression
 
-        // Log de débogage
-        console.log('Tâche avec ID', taskId, 'marquée comme complétée');
       } else {
         console.error('Erreur lors de la complétion de la tâche :', response.message);
       }
