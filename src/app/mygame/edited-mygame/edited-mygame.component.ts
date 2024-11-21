@@ -210,7 +210,7 @@ export class EditedMygameComponent implements OnInit {
       screenshot:newScreenshot
     }
 
-    // console.log(updateHistoryMyGame);
+    console.log(updateHistoryMyGame);
 
     let body = JSON.stringify(updateHistoryMyGame);
 
@@ -218,7 +218,7 @@ export class EditedMygameComponent implements OnInit {
       console.log(reponseMyGameUpdate);
       if (reponseMyGameUpdate.message == "updated game") {
         this.selectedMyGame = reponseMyGameUpdate.result;
-        console.log(this.selectedMyGame);
+        // console.log(this.selectedMyGame);
       } else {
         console.log("Erreur de mise a jour");
       }
