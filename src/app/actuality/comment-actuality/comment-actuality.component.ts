@@ -222,6 +222,7 @@ export class CommentActualityComponent implements OnInit{
   
             // Ajout du bouton delete
             const commentId = this.newComment.id;
+
             const deleteButton = this.renderer.createElement('i');
             this.renderer.setAttribute(deleteButton, 'id', 'delete-comment-icon');
             this.renderer.addClass(deleteButton, 'ri-delete-bin-line');
@@ -241,18 +242,36 @@ export class CommentActualityComponent implements OnInit{
             const replySection = this.renderer.createElement('div');
             this.renderer.addClass(replySection, 'reply-section')
 
-              // Ajout du <i> reply
-              const replyIcon = this.renderer.createElement('i');
-              this.renderer.addClass(replyIcon, 'ri-question-answer-line');
-              this.renderer.setProperty(replyIcon, 'id', 'reply-icon');
+            // Ajout du <i> reply
+            const replyIcon = this.renderer.createElement('i');
+            this.renderer.addClass(replyIcon, 'ri-question-answer-line');
+            this.renderer.setProperty(replyIcon, 'id', 'reply-icon');
 
-              // Ajout du texte "repondre"
-              const replyContent = this.renderer.createElement('span');
-              this.renderer.setProperty(replyContent, 'textContent', 'répondre');
+            // Ajout du texte "repondre"
+            const replyContent = this.renderer.createElement('span');
+            this.renderer.setProperty(replyContent, 'textContent', 'répondre');
+
+            // Ajout de l'icon j'aime
+            const likeIcon = this.renderer.createElement('i')
+            this.renderer.addClass(likeIcon, 'ri-heart-line')
+            this.renderer.addClass(likeIcon, 'comment-action')
+            this.renderer.addClass(likeIcon, 'like')
+            this.renderer.setProperty(likeIcon, 'id', 'like-icon' + this.newComment.id)
+            this.renderer.listen(likeIcon, 'click', () => this.likeComment(commentId, !this.commentLikedMap.get(commentId) ? 'add' : 'delete'));
+
+            
+            // Ajout du texte j'aime
+            const likeContent = this.renderer.createElement('span')
+            this.renderer.addClass(likeContent, 'comment-action')
+            this.renderer.setProperty(likeContent, 'textContent', 'j\'aime')
+            this.renderer.listen(likeContent, 'click', () => this.likeComment(commentId, !this.commentLikedMap.get(commentId) ? 'add' : 'delete'));
+            
 
             // Ajout des éléments a la div Reply
             this.renderer.appendChild(replySection, replyIcon);
             this.renderer.appendChild(replySection, replyContent);
+            this.renderer.appendChild(replySection, likeIcon)
+            this.renderer.appendChild(replySection, likeContent)
             this.renderer.appendChild(commentCard, replySection);
 
             // Comment border div
@@ -372,7 +391,15 @@ export class CommentActualityComponent implements OnInit{
     console.log(commentId)
   }
 
-  likeComment(commentId: number) {
+  likeComment(commentId: number, action: string) {
+    if (action == 'add') {
+      this.addLikeComment(commentId)
+    } else if (action == 'delete') {
+      this.deleteLikeComment(commentId)
+    }
+  }
+
+  addLikeComment(commentId: number) {
     console.log(commentId)
     this.ipService.getMyIp(this.app.urlIp).subscribe((reponseTyroIp) => {
 
@@ -387,9 +414,13 @@ export class CommentActualityComponent implements OnInit{
         (reponseApi) => { 
           if (reponseApi.message == 'good') {
             console.log('commentaire ' + commentId + ' liké par ' + this.userConnectedId)
+
+            this.commentLikedMap.set(commentId, true);
+
             const likeIcon = document.querySelector('#like-icon'+commentId)
             this.renderer.removeClass(likeIcon, 'ri-heart-line')
             this.renderer.addClass(likeIcon, 'ri-heart-fill')
+            this.renderer.setStyle(likeIcon,'color', 'blue')
 
           } else {
             console.log('erreur dans le like du commentaire ' + commentId)
@@ -398,4 +429,37 @@ export class CommentActualityComponent implements OnInit{
     })
     
   }
+
+  deleteLikeComment(commentId: number) {
+    console.log(commentId)
+    this.ipService.getMyIp(this.app.urlIp).subscribe((reponseTyroIp) => {
+
+      let bodyNoJson: any = {
+        "id_comment": commentId,
+        "ip": reponseTyroIp.ip,
+        "del": true
+      }
+
+      let bodyJson = JSON.stringify(bodyNoJson);
+
+      this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(
+        (reponseApi) => { 
+          if (reponseApi.message == 'good') {
+            console.log('commentaire ' + commentId + ' plus liké par ' + this.userConnectedId)
+
+            this.commentLikedMap.set(commentId, false);
+
+            const likeIcon = document.querySelector('#like-icon'+commentId)
+            this.renderer.removeClass(likeIcon, 'ri-heart-fill')
+            this.renderer.addClass(likeIcon, 'ri-heart-line')
+            this.renderer.setStyle(likeIcon,'color', 'rgb(87, 87, 87)')
+
+          } else {
+            console.log('erreur dans la suppression du like du commentaire ' + commentId)
+          }
+        })
+    })
+    
+  }
+
 }

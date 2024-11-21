@@ -68,10 +68,11 @@
           <span class="comment-action">répondre</span>
         </div>
         <div
-        (click)="likeComment(comment.id)">
+        (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
+          style="color: {{commentLikedMap.get(comment.id) ? 'blue' : 'rgb(87,87,87)'}}"
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
@@ -117,10 +118,11 @@
               <span class="comment-action">répondre</span>
             </div>
             <div
-            (click)="likeComment(comment.id)">
+            (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
             <i
             id="like-icon{{comment.id}}"
             class="comment-action like"
+            style="color: {{commentLikedMap.get(comment.id) ? 'blue' : 'rgb(87,87,87)'}}"
             [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
             [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
             </i>
@@ -159,10 +161,11 @@
             <span class="comment-action">répondre</span>
           </div>
           <div
-          (click)="likeComment(comment.id)">
+          (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
+          style="color: {{commentLikedMap.get(comment.id) ? 'blue' : 'rgb(87,87,87)'}}"
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
