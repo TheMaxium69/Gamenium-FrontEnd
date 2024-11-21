@@ -17,6 +17,10 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   gameSelected: GameInterface|undefined;
   noneGame: boolean = false;
 
+  mouseDown: boolean = false;
+  startX: number = 0;
+  scrollLeft: number = 0;
+
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
@@ -117,6 +121,12 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
     const next = document.querySelector<HTMLDivElement>("#next");
     const carouselVp = document.querySelector<HTMLDivElement>("#carousel-vp");
     let cCarouselInner = document.querySelector<HTMLDivElement>("#cCarousel-inner");
+    const slider = document.querySelector('.provider-card-container') as HTMLElement;
+
+    if (slider) {
+      console.log('Container Width:', slider.offsetWidth);
+      console.log('Scroll Width:', slider.scrollWidth);
+    }
 
     if (!carouselVp || !prev || !next) {
       console.error("Un ou plusieurs éléments du carrousel sont null.");
@@ -179,4 +189,43 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
       }
     }
   }
+
+  // Drag carousel provider cards
+  startDrag(mouse: MouseEvent): void {
+    console.log('drag start') // A SUPPRIMER
+    const slider = document.querySelector('.provider-card-container') as HTMLElement;
+
+    if (slider) {
+        this.mouseDown = true;
+        this.startX = mouse.pageX - slider.offsetLeft;
+        this.scrollLeft = slider.scrollLeft;
+    } 
+    
+  }
+
+  stopDrag(): void {
+    console.log('drag stop') // A SUPPRIMER
+    this.mouseDown = false;
+  }
+
+  move(mouse: MouseEvent): void {
+
+    if (!this.mouseDown) {
+      return;
+    }
+
+    console.log('drag en cours') // A SUPPRIMER
+    const slider = document.querySelector('.provider-card-container') as HTMLElement;
+    
+    mouse.stopPropagation();
+
+    if (slider) {
+      const x = mouse.pageX - slider.offsetLeft;
+      const scroll = x - this.startX;
+      slider.scrollLeft = this.scrollLeft - scroll;
+    }
+    
+  }
+
+
 }

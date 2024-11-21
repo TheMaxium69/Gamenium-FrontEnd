@@ -291,13 +291,15 @@
         <div class="game-actu-title">
             <p>Suivre les actus du jeu:</p>
         </div>
-        <div class="game-card">
-            <div class="top-card"></div>
-            <div class="picture-card" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
-            <div class="game-card-name">{{gameSelected?.name}}</div>
-            <div class="follow">
-              <a href="">Suivre</a>
-            </div>
+        <div class="padding">
+          <div class="game-card">
+              <div class="top-card"></div>
+              <div class="picture-card" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
+              <div class="game-card-name">{{gameSelected?.name}}</div>
+              <div class="follow">
+                <a href="">Suivre</a>
+              </div>
+          </div>
         </div>
     </div>
 
@@ -307,11 +309,14 @@
         <div class="provider-actu-title">
             <p>Suivre les actus des créateurs:</p>
         </div>
-        <div class="provider-card-container">
+        <div class="provider-card-container"
+        (mousedown)="startDrag($event)"
+        (mousemove)="move($event)"
+        (mouseup)="stopDrag()">
             <div class="provider-card">
                 <div class="top-card"></div>
                 <div class="picture-card"></div>
-                <div class="provider-card-name">Nintendo</div>
+                <div class="provider-card-name">Nintendo 1</div>
                 <div class="follow">
                   <a href="">Suivre</a>
                 </div>
@@ -319,7 +324,23 @@
             <div class="provider-card">
                 <div class="top-card"></div>
                 <div class="picture-card"></div>
-                <div class="provider-card-name">Nintendo</div>
+                <div class="provider-card-name">Nintendo 2</div>
+                <div class="follow">
+                  <a href="">Suivre</a>
+                </div>
+            </div>
+            <div class="provider-card">
+                <div class="top-card"></div>
+                <div class="picture-card"></div>
+                <div class="provider-card-name">Nintendo 3</div>
+                <div class="follow">
+                  <a href="">Suivre</a>
+                </div>
+            </div>
+            <div class="provider-card">
+                <div class="top-card"></div>
+                <div class="picture-card"></div>
+                <div class="provider-card-name">Nintendo 4</div>
                 <div class="follow">
                   <a href="">Suivre</a>
                 </div>
