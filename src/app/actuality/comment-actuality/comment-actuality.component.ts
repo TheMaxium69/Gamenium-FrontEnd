@@ -218,24 +218,18 @@ export class CommentActualityComponent implements OnInit{
             const replySection = this.renderer.createElement('div');
             this.renderer.addClass(replySection, 'reply-section')
 
-            // Ajout du <i> reply
-            const replyIcon = this.renderer.createElement('i');
-            this.renderer.addClass(replyIcon, 'ri-question-answer-line');
-            this.renderer.setProperty(replyIcon, 'id', 'reply-icon');
+              // Ajout du <i> reply
+              const replyIcon = this.renderer.createElement('i');
+              this.renderer.addClass(replyIcon, 'ri-question-answer-line');
+              this.renderer.setProperty(replyIcon, 'id', 'reply-icon');
 
-            // Ajout du texte "repondre"
-            const replyContent = this.renderer.createElement('span');
-            this.renderer.setProperty(replyContent, 'textContent', 'répondre');
-
-            // Ajout du <i> like
-            const likeIcon = this.renderer.createElement('i');
-            this.renderer.addClass(likeIcon, 'ri-heart-line');
-            this.renderer.setProperty(likeIcon, 'id', 'like-icon');
+              // Ajout du texte "repondre"
+              const replyContent = this.renderer.createElement('span');
+              this.renderer.setProperty(replyContent, 'textContent', 'répondre');
 
             // Ajout des éléments a la div Reply
             this.renderer.appendChild(replySection, replyIcon);
             this.renderer.appendChild(replySection, replyContent);
-            this.renderer.appendChild(replySection, likeIcon);
             this.renderer.appendChild(commentCard, replySection);
 
             // Comment border div
@@ -351,4 +345,11 @@ export class CommentActualityComponent implements OnInit{
     return str.charAt(0);
   }
 
+  reply(form: NgForm) {
+    //idée : clicker sur repondre renvoie au form déja present mais avec en entete réponse a x, 
+    //juste changer la manniere dont sa interagis avec le dom si c'est une reponse ou non, 
+    //semble impossible
+  }
+
+  
 }

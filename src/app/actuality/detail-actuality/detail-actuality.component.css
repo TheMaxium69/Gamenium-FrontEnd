@@ -66,16 +66,13 @@
 }
 
 .game_description {
-  font-size: 14px;
-  width: 80%;
   margin-right: 30%;
   overflow-wrap: anywhere;
+  line-height: 21px;
 }
 
 .game_title {
-  font-weight: normal;
   margin: 1.5% 0%;
-  font-size: 24px;
   overflow-wrap: anywhere;
 }
 

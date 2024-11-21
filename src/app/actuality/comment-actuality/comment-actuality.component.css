@@ -121,10 +121,15 @@
 
 #comment-value {
   color: white;
-  width: 40px;
+  width: 27px;
+  height: 15px;
   text-align: center;
   border-radius: 10px;
   margin-left: 15px;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #coment-header {
@@ -163,4 +168,30 @@
 
 #like-icon {
   margin-left: 10px;
+}
+
+.btn-shadow {
+  -webkit-box-shadow: 0px 3px 10px 7px rgba(0,0,0,0.2); 
+  box-shadow: 0px 3px 10px 7px rgba(0,0,0,0.2);
+}
+
+#comment {
+  text-transform: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  margin-bottom: auto;
+  color: black;
+}
+
+#sort-name {
+  text-transform: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: black;
+}
+
+#sort {
+  color: black;
 }
