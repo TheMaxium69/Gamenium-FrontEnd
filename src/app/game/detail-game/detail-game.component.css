@@ -1,7 +1,7 @@
 /* ////////////// DEBUT DE ZONE BANNIERE ////////////////// */
 .banniere-container {
   overflow: hidden;
-  height: 145px;
+  height: 200px;
 }
 
 .banniere{
@@ -10,7 +10,7 @@
     background-size: cover;
     filter: blur(5px);
     /* width: 100%; */
-    height: 120px;
+    height: 340px;
     transform: scale(1.1);
 }
 /* //////////////// FIN DE ZONE BANNIERE ////////////// */
@@ -24,7 +24,7 @@
     flex-direction: row;
     align-items: center;
     position:absolute;
-    top:30px;
+    top:100px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -36,11 +36,12 @@
     background-repeat: no-repeat;
     width: 250px;
     height: 200px;
+    margin-top: -9  0px;
 }
 
 .name{
     background-color: white;
-    min-height: 100px;
+    min-height: 150px;
     height: fit-content;
     display: flex;
     justify-content: space-between;
@@ -50,6 +51,7 @@
     flex-grow: 1;
     margin-left: 20px;
     margin-right: 50px;
+    margin-bottom: 100px;
 }
 
 .game-name{
@@ -118,7 +120,7 @@
 .section-info {
     max-width: 992px;
     width: 100%;
-    margin: 180px auto 50px auto;
+    margin: 150px auto 100px auto;
     padding: 0 15px; 
 }
 
@@ -271,6 +273,8 @@
     justify-content: center;
     gap:40px;
     justify-content: start;
+    padding-top: 100px;
+    margin-bottom: 100px;
 }
 
 .actu-separation{
@@ -371,6 +375,10 @@
     margin-bottom: 20px;
 }
 
+#follow-provider {
+  margin-left: 15px;
+}
+
 @media (max-width: 992px) {
   .actualities {
       flex-direction: column;
@@ -423,16 +431,42 @@
 
 .ratings {
     max-width: 992px;
-    width: 100%;
-    margin: 80px auto;
+    width: fit-content;
+    margin: 0px auto;
     border-radius: 15px;
     box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
-    padding: 20px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
   
+  .media-img {
+    margin-right: 20px;
+  }
+
+  #press-h1 {
+    padding-top: 72px;
+  }
+
+  #player-h1 {
+    margin-left: -116px;
+  }
+
+  #gamer-h1 {
+    margin-left: 75px;
+  }
+
+  #press-circle {
+    padding-top: 0px;
+    margin-top: -100px;
+  }
+
+  #player-circle {
+    padding-top: 47px;
+    margin-left: -80px;
+    margin-top: -45px;
+  }
 
   .press-ratings,
   .gamers-ratings {
@@ -440,6 +474,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
+    padding: 0 40px;
   }
   
   @media (max-width: 768px) {
@@ -467,10 +502,12 @@
   
 
   .title-ratings {
-    font-size: 24px; 
-    text-decoration: underline;
+    font-size: 18px;
+    line-height: 27px;
     margin-bottom: 30px;
-    margin-left: -40px; 
+    margin-left: -40px;
+    color: #575757;
+    font-weight: 500;
   }
   
   @media (max-width: 768px) {
@@ -479,13 +516,18 @@
       text-align: center;
     }
   }
-  
 
-  .press-ratings-details-container,
+  .press-ratings-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
   .gamers-ratings-details-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-left: -59px;
   }
   
 
@@ -493,7 +535,7 @@
   .one-gamer-rating {
     display: flex;
     align-items: center;
-    gap: 15px;
+    margin-bottom: 20px;
   }
 
   .one-gamer-rating {
@@ -526,11 +568,18 @@
     color: #555;
   }
   
-  .press-ratings-details-rate,
+  .press-ratings-details-rate {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    margin-left: 150px;
+  }
+
   .gamers-ratings-details-rate {
     font-size: 18px;
-    color: #e74c3c;
+    color: black;
     font-weight: bold;
+    margin-left: 150px;
   }
   
   .big-rate {
@@ -538,13 +587,19 @@
   }
   
 
-  .press-ratings-total,
-  .gamers-ratings-total {
+  .press-ratings-total {
     position: relative;
-    margin-left: 350px;
-
+    margin-left: 215px;
   }
   
+  .gamers-ratings-total {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    position: relative;
+    margin-left: 255px;
+  }
+
   @media (max-width: 768px) {
     .press-ratings-total,
     .gamers-ratings-total {
@@ -578,30 +633,30 @@
  
 
   .total-rate-press {
-    font-size: 80px;
+    font-size: 50px;
     position: absolute;
-    left: 23px;
-    top: 14px;
+    left: 30px;
+    top: 32px;
   }
 
   .total-rate-gamers {
-    font-size: 60px;
+    font-size: 40px;
     position: absolute;
-    left: 16px;
-    top: 16px;
+    left: 29px;
+    top: 26px;
   }
   
   .on-twenty-press {
     font-size: 35px;
     position: absolute;
-    bottom: 37px;
-    right: 15px;
+    bottom: 48px;
+    right: 38px;
   }
   .on-twenty-gamers {
     font-size: 25px;
     position: absolute;
-    bottom: 30px;
-    right: 15px;
+    bottom: 36px;
+    right: 22px;
   }
   
   .addnote {
@@ -610,7 +665,7 @@
     background-color: rgb(62, 185, 254);
     box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
     border: none;
-
+    margin-bottom: 40px;
   }
 
   .addnote:hover {
@@ -648,6 +703,7 @@
 
 .carroussel{
     margin-top: 40px;
+    margin-bottom: 100px;
 }
 .pictures-title{
     width: 100%;
@@ -773,7 +829,7 @@
 
 .pictures-separation{
     border: solid 1px;
-    margin-top: 40px;
+    margin-bottom: 100px;
     width: 100%;
     max-width: 992px;
     margin-left: auto;
@@ -810,7 +866,7 @@
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
     gap: 30px;
     align-items: center;
-
+    margin-bottom: 40px;
 }
 
 .game-picture {
@@ -941,15 +997,13 @@
 }
 
 .my-collection {
-    border: none;
     background-color: rgb(254, 62, 62);
     color: white;
-    font-size: 24px;
+    font-size: 17px;
     padding: 10px 50px;
     margin-bottom: 120px;
     border-radius: 15px;
-    box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
-    transition: 0.3s;
+    border: solid 2px
 }
 
 .my-collection:hover {

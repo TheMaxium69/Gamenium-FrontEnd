@@ -1,4 +1,4 @@
-import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GameService} from "../../-service/game.service";
 import {AppComponent} from "../../app.component";
@@ -12,6 +12,10 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./detail-game.component.css']
 })
 export class DetailGameComponent implements OnInit, AfterViewInit{
+
+  isLoggedIn:boolean = false;
+  userConnectedId:number|undefined;
+  userColor : string | undefined;
 
   gameId: number|any;
   gameSelected: GameInterface|undefined;
@@ -34,6 +38,15 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
     this.gameId = this.route.snapshot.paramMap.get('id');
 
     this.getGameById(this.gameId)
+
+    this.isLoggedIn = this.app.isLoggedIn;
+
+    if (this.isLoggedIn){
+
+      this.userConnectedId = this.app.userConnected.id;
+      this.userColor = this.app.userConnected.themeColor
+
+    }
 
   }
 
