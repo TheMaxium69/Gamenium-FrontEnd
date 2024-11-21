@@ -422,60 +422,86 @@ export class ProfilePrivateComponent implements OnInit {
         this.userLikesLoaded = true;
         this.tryCheckAndCompleteTasks();
       }
-    )
+    );
+
+    this.commentService.getCommentsByUser(this.app.setURL(), options).subscribe(
+      (response: ApicallInterface) => {
+        if (response.message === "good"){
+          this.userComments = response.result;
+          console.log("commentaires de l'utilisateur ", this.userComments);
+        } else {
+          console.error ("Erreur lors de la récup des commentaires", response.message);
+        }
+        this.userCommentsLoaded = true;
+        this.tryCheckAndCompleteTasks();
+      },
+      (error) => {
+        console.error("Erreur lors de l'appelle GetLikesByUser", error);
+        this.userCommentsLoaded = true;
+        this.tryCheckAndCompleteTasks();
+      }
+    );
   }
 
 
   //Vérifie si toutes les données sont chargées, puis vérifie les tâches.
 
     tryCheckAndCompleteTasks(): void {
-      if (this.profileLoaded && this.gamesLoaded && this.tasksLoaded) {
+      if (this.profileLoaded && this.gamesLoaded && this.tasksLoaded && this.userLikesLoaded && this.userCommentsLoaded) {
         this.checkAndCompleteTasks();
       }
     }
 
-  //Vérifie les conditions pour chaque tâche incomplète et les marque comme complétées si nécessaire.
-
-    checkAndCompleteTasks(): void {
-      console.log('Appel de checkAndCompleteTasks');
-      this.tasks.forEach(task => {
-        if (!task.completed) {
-          if (task.name === 'Link Game') {
-            if (this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
-              console.log('Condition remplie pour la tâche "Link Game"');
-              // L'utilisateur a des jeux liés, on marque la tâche comme complétée
-              this.completeTask(task.id);
-            } else {
-              console.log('Condition NON remplie pour la tâche "Link Game"');
-            }
-          }
-          if (task.name === 'Profil Picture') {
-            if (this.isPp) {
-              console.log('Condition remplie pour la tâche "Profil Picture"');
-              // L'utilisateur a une photo de profil, on marque la tâche comme complétée
-              this.completeTask(task.id);
-            } else {
-              console.log('Condition NON remplie pour la tâche "Profil Picture"');
-              console.log('this is PP' + this.isPp);
-              console.log('this profil selected' + JSON.stringify(this.profilSelected));
-
-            }
-          }
-          if (task.name === 'Liker votre premier article') {
-            if (this.userLikes && this.userLikes.length > 0) {
-              console.log ("Condition remplis pour la tache like");
-              this.completeTask(task.id);
-            } else {
-              console.log("Condition NON remplis pour la tache like")
-            }
-
-          }
-          // Vous pouvez ajouter d'autres vérifications pour les autres tâches ici
+// Vérifie les conditions pour chaque tâche incomplète et les marque comme complétées si nécessaire.
+checkAndCompleteTasks(): void {
+  console.log('Appel de checkAndCompleteTasks');
+  console.log('Liste des tâches:', this.tasks);
+  this.tasks.forEach(task => {
+    if (!task.completed) {
+      if (task.name === 'Link Game') {
+        if (this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
+          console.log('Condition remplie pour la tâche "Link Game"');
+          // L'utilisateur a des jeux liés, on marque la tâche comme complétée
+          this.completeTask(task.id);
         } else {
-          console.log('Tâche déjà complétée :', task.name);
+          console.log('Condition NON remplie pour la tâche "Link Game"');
         }
-      });
+      }
+      if (task.name === 'Profil Picture') {
+        if (this.isPp) {
+          console.log('Condition remplie pour la tâche "Profil Picture"');
+          // L'utilisateur a une photo de profil, on marque la tâche comme complétée
+          this.completeTask(task.id);
+        } else {
+          console.log('Condition NON remplie pour la tâche "Profil Picture"');
+          console.log('this is PP' + this.isPp);
+          console.log('this profil selected' + JSON.stringify(this.profilSelected));
+        }
+      }
+      if (task.name === 'Liker votre premier article') {
+        if (this.userLikes && this.userLikes.length > 0) {
+          console.log('Condition remplie pour la tâche "Liker votre premier article"');
+          // L'utilisateur a au moins un like, on marque la tâche comme complétée
+          this.completeTask(task.id);
+        } else {
+          console.log('Condition NON remplie pour la tâche "Liker votre premier article"');
+        }
+      }
+      if (task.name === 'Mettez votre premier commentaire ') {
+        if (this.userComments && this.userComments.length > 0) {
+          console.log('Condition remplie pour la tâche "Mettez votre premier commentaire"');
+          // L'utilisateur a au moins un commentaire, on marque la tâche comme complétée
+          this.completeTask(task.id);
+        } else {
+          console.log('Condition NON remplie pour la tâche "Mettez votre premier commentaire"');
+        }
+      }
+      // Vous pouvez ajouter d'autres vérifications pour les autres tâches ici
+    } else {
+      console.log('Tâche déjà complétée :', task.name);
     }
+  });
+}
 
 
 
