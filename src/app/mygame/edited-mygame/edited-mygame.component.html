@@ -108,16 +108,16 @@
         <input type="radio" id="wish_list_no" [(ngModel)]="selectedMyGame.myGame.wish_list" name="wish_list"
                [value]="false">
         Non
-      </label>
-
-      <!-- EXEMPLAIRE -->
+      </label><!-- EXEMPLAIRE -->
       <div>
         <h1>Exemplaire <span>{{ selectedMyGame.copyGame.length }}</span> :</h1>
+        <button type="button" (click)="addCopyGame()">Ajouter un exemplaire</button>
         <ng-container *ngFor="let copyGame of selectedMyGame.copyGame; let i = index">
 
-          <div class="oneExemplaire">
+          <div class="oneExemplaire" id="copyCard{{i}}">
+            <button type="button" (click)="deleteCopyGame(i)">Del cette exemplaire</button>
 
-            <input type="hidden"  [(ngModel)]="copyGame.id" name="copy{{i}}">
+            <input type="hidden" [(ngModel)]="copyGame.id" name="copy{{i}}">
 
             <!-- EDITIONS-->
             <label for="edition{{i}}">Editions:</label>
@@ -136,17 +136,17 @@
             <ng-container *ngIf="hmgCopyEtatAll && copyGame.etat">
               <select id="etat{{i}}" [(ngModel)]="copyGame.etat.id" name="etat{{i}}">
                 <option [value]="null">Choissir un etat</option>
-                  <ng-container *ngFor="let etat of hmgCopyEtatAll">
-                    <option [value]="etat.id">{{ etat.name }}</option>
-                  </ng-container>
+                <ng-container *ngFor="let etat of hmgCopyEtatAll">
+                  <option [value]="etat.id">{{ etat.name }}</option>
+                </ng-container>
               </select>
             </ng-container>
             <ng-container *ngIf="hmgCopyEtatAll && !copyGame.etat">
               <select id="etat{{i}}" name="etat{{i}}" ngModel>
                 <option [value]="null">Choissir un etat</option>
-                  <ng-container *ngFor="let etat of hmgCopyEtatAll">
-                    <option [value]="etat.id">{{ etat.name }}</option>
-                  </ng-container>
+                <ng-container *ngFor="let etat of hmgCopyEtatAll">
+                  <option [value]="etat.id">{{ etat.name }}</option>
+                </ng-container>
               </select>
             </ng-container>
 
@@ -188,7 +188,8 @@
               </select>
             </ng-container>
 
-            <br><hr>
+            <br>
+            <hr>
 
             <h5>Purchase:</h5>
 
@@ -222,15 +223,18 @@
 
               <!-- BUY DATE -->
               <label for="buy_date{{i}}">Buy date:</label>
-              <input type="date" id="buy_date{{i}}" [(ngModel)]="copyGame.purchase.buy_date" name="purchase_buy_date{{i}}">
+              <input type="date" id="buy_date{{i}}" [(ngModel)]="copyGame.purchase.buy_date"
+                     name="purchase_buy_date{{i}}">
 
               <!-- BUY WHERE -->
               <label for="buy_where{{i}}">Buy where:</label>
-              <input type="text" id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.name" name="purchase_buy_where{{i}}">
+              <input type="text" id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.name"
+                     name="purchase_buy_where{{i}}">
 
               <!-- PURCHASE CONTENT -->
               <label for="purchase_content{{i}}">Purchase content:</label>
-              <input type="text" id="purchase_content{{i}}" [(ngModel)]="copyGame.purchase.content" name="purchase_content{{i}}">
+              <input type="text" id="purchase_content{{i}}" [(ngModel)]="copyGame.purchase.content"
+                     name="purchase_content{{i}}">
 
             </ng-container>
             <ng-container *ngIf="!copyGame.purchase">

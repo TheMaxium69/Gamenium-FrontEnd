@@ -39,6 +39,8 @@ export class EditedMygameComponent implements OnInit {
   hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
   hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
 
+  ignoreCopy: number[] = []
+
 
   ngOnInit() {
 
@@ -112,6 +114,22 @@ export class EditedMygameComponent implements OnInit {
   }
 
 
+  addCopyGame() {
+
+  }
+
+  deleteCopyGame(id:number) {
+
+    let copyCardSelected = document.getElementById('copyCard'+id)
+
+    if (copyCardSelected) {
+      copyCardSelected.style.display = 'none';
+    }
+
+    this.ignoreCopy.push(id);
+
+  }
+
   /*
   *
   * UPDATE MY GAME
@@ -151,36 +169,37 @@ export class EditedMygameComponent implements OnInit {
     let newCopyGame = []
     for (let i = 0; i < copyCount; i++) {
 
+      if (!this.ignoreCopy.includes(i)) {
+        let tempPurchase = {
+          id: form.value['purchase' + i] || null,
+          price: form.value['purchase_price' + i],
+          content: form.value['purchase_content' + i],
+          devise_id: form.value['purchase_devise' + i],
+          buy_where_id: form.value['purchase_buy_where' + i],
+          buy_date: form.value['purchase_buy_date' + i],
+        }
 
-      let tempPurchase = {
-        id: form.value['purchase' + i] || null,
-        price: form.value['purchase_price' + i],
-        content: form.value['purchase_content' + i],
-        devise_id: form.value['purchase_devise' + i],
-        buy_where_id: form.value['purchase_buy_where' + i],
-        buy_date: form.value['purchase_buy_date' + i],
+        let tempMyGame = {
+          id: form.value['copy' + i],
+          edition: form.value['edition' + i],
+          barcode: form.value['barcode' + i],
+          content: form.value['content' + i],
+          purchase: tempPurchase,
+          etat_id: form.value['etat' + i],
+          format_id: form.value['format' + i],
+          region_id: form.value['region' + i],
+        }
+
+        newCopyGame.push(tempMyGame);
       }
-
-      let tempMyGame = {
-        id: form.value['copy' + i],
-        edition: form.value['edition' + i],
-        barcode: form.value['barcode' + i],
-        content: form.value['content' + i],
-        purchase: tempPurchase,
-        etat_id: form.value['etat' + i],
-        format_id: form.value['format' + i],
-        region_id: form.value['region' + i],
-      }
-
-      newCopyGame.push(tempMyGame);
 
     }
 
 
     /* MODIFIER LES SPEEDRUN */
-      let newSpeedrun: any[] = []
+    let newSpeedrun: any[] = []
     /* MODIFIER LES SCREENSHOT */
-      let newScreenshot: any[] = []
+    let newScreenshot: any[] = []
 
     /* FINAL FORMATAGE */
     let updateHistoryMyGame = {
@@ -206,11 +225,4 @@ export class EditedMygameComponent implements OnInit {
     })
 
   }
-
-
-
-
-
-
-
 }
