@@ -6,7 +6,7 @@
       <textarea id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
     </div>
     <div class="comment-send mb4">
-      <button class="btn" type="submit" style="background-color: {{ providerColor ?? 'red' }}; color: white">Envoyer</button>
+      <button [ngStyle]="{ '--providerColor': providerColor ?? 'red' }" class="btn btn-shadow" type="submit" style="background-color: {{ providerColor ?? 'red' }};">Envoyer</button>
     </div>
   </div>
 </form>
@@ -19,7 +19,7 @@
         <textarea class="comment-content" cols="35" placeholder="Votre devez d'abord vous connecter pour laisser un commentaire" disabled></textarea>
       </div>
       <div class="comment-send mb4">
-        <button class="btn btn-success btn-shadow" disabled>Envoyer</button>
+        <button [ngStyle]="{ '--providerColor': providerColor ?? 'red' }" class="btn btn-shadow" style="background-color: {{ providerColor ?? 'red' }};" disabled>Envoyer</button>
       </div>
     </div>
   </form>
@@ -53,7 +53,7 @@
         <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
           <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
         </div>
-        <h4 class="comment-user-name"><span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
+        <h4 class="comment-user-name"><span style="color: {{ providerColor }}">{{ comment.user.displayname }}</span>
           <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
             <img class="badgeIMG" src="{{ badge.picture?.url }}">
           </ng-container>
@@ -72,7 +72,7 @@
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
-          style="color: {{commentLikedMap.get(comment.id) ? 'blue' : 'rgb(87,87,87)'}}"
+          style="color: {{commentLikedMap.get(comment.id) ? providerColor : 'rgb(87,87,87)'}}"
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
@@ -99,7 +99,7 @@
                <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
              </div>
 
-              <h4 class="comment-user-name">(Vous) <span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
+              <h4 class="comment-user-name">(Vous) <span style="color: {{ providerColor }}">{{ comment.user.displayname }}</span>
               <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
@@ -122,7 +122,7 @@
             <i
             id="like-icon{{comment.id}}"
             class="comment-action like"
-            style="color: {{commentLikedMap.get(comment.id) ? 'blue' : 'rgb(87,87,87)'}}"
+            style="color: {{commentLikedMap.get(comment.id) ? providerColor : 'rgb(87,87,87)'}}"
             [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
             [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
             </i>
@@ -146,7 +146,7 @@
           <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
             <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
           </div>
-          <h4 class="comment-user-name"><span style="color: {{ comment.user.color }}">{{ comment.user.displayname }}</span>
+          <h4 class="comment-user-name"><span style="color: {{ providerColor }}">{{ comment.user.displayname }}</span>
             <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
               <img class="badgeIMG" src="{{ badge.picture?.url }}">
             </ng-container>
@@ -165,7 +165,7 @@
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
-          style="color: {{commentLikedMap.get(comment.id) ? 'blue' : 'rgb(87,87,87)'}}"
+          style="color: {{commentLikedMap.get(comment.id) ? providerColor : 'rgb(87,87,87)'}}"
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>

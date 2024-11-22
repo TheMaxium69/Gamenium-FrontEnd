@@ -193,7 +193,7 @@ export class CommentActualityComponent implements OnInit{
             // Ajout de la div username
             const userName = this.renderer.createElement('h4');
             this.renderer.addClass(userName, 'comment-user-name');
-            const nameHTML = `(Vous) <span style="color:${this.newComment.user.color}">${this.newComment.user.displayname}</span>`;
+            const nameHTML = `(Vous) <span style="color:${this.providerColor}">${this.newComment.user.displayname}</span>`;
             this.renderer.setProperty(userName, 'innerHTML', nameHTML);
             this.renderer.appendChild(commentUser, userName);
 
@@ -420,7 +420,7 @@ export class CommentActualityComponent implements OnInit{
             const likeIcon = document.querySelector('#like-icon'+commentId)
             this.renderer.removeClass(likeIcon, 'ri-heart-line')
             this.renderer.addClass(likeIcon, 'ri-heart-fill')
-            this.renderer.setStyle(likeIcon,'color', 'blue')
+            this.renderer.setStyle(likeIcon,'color', this.providerColor)
 
           } else {
             console.log('erreur dans le like du commentaire ' + commentId)
