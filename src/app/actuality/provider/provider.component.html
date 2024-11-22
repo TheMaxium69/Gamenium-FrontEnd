@@ -1,9 +1,7 @@
 <ng-container *ngIf="!noneProvider">
   
   <div id="provider" style="background-color: {{ providerSelected?.color }}54"> 
-    
     <div id="providerInfo" >
-      
       <div class="d-flex">
         
         <div class="provider-main">
@@ -77,28 +75,21 @@
                 </div>
               </div>
             </div>
-          
-          
-          
           </section>
           
           <section id="last_actus"><!-- Dernières Actualités liées au Provider -->
               <div class="actu-titre">
-                <h3 class="mb-4">Dernières actualités</h3>
+                <h3>Dernières actualités</h3>
               </div>
 
               <!-- /// Carte actu /// appelle le composant /// -->
               <app-card-actuality
-              (nbActuOfProvider)="updateNbProviderActu($event)"></app-card-actuality>
-
+              (nbActuOfProvider)="updateNbProviderActu($event)">
+              </app-card-actuality>
           </section>
           
       </div>
-
     </div>
-
-      
-
   </div>
   
 
