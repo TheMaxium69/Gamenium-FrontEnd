@@ -78,14 +78,18 @@
           </section>
           
           <section id="last_actus"><!-- Dernières Actualités liées au Provider -->
+            <div>
               <div class="actu-titre">
-                <h3>Dernières actualités</h3>
+                <h1>Dernières actualités</h1>
               </div>
 
               <!-- /// Carte actu /// appelle le composant /// -->
-              <app-card-actuality
-              (nbActuOfProvider)="updateNbProviderActu($event)">
-              </app-card-actuality>
+               <div>
+                 <app-card-actuality
+                 (nbActuOfProvider)="updateNbProviderActu($event)">
+                 </app-card-actuality>
+               </div>
+            </div>
           </section>
           
       </div>

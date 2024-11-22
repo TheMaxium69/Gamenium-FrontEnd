@@ -44,6 +44,7 @@
 }
 
 #provider .wrapper{
+    margin-top: 20px;
     background-color: white;
     box-shadow: 1px 2px 10px #a6a6a6;
     border-radius: 15px;
@@ -189,8 +190,8 @@ ul {
 #last_actus {
     box-shadow: 1px 2px 10px #a6a6a6;
     border-radius: 15px;
-    max-width: 1440px;
-    margin: 0 auto;
+    /* max-width: 1440px; */
+    /* margin: 0 auto; */
     padding: 30px;
 }
 

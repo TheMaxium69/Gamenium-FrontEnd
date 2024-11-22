@@ -4,10 +4,8 @@
   justify-content: center;
   gap: 35px;
   flex-wrap: wrap;
-  max-width: 1355px;
-  margin-bottom: 120px;
-  margin-left: auto;
-  margin-right: auto;
+  /* max-width: 1355px; */
+  margin: 0 auto;
 }
 
 #actu-all .card{
@@ -25,6 +23,7 @@
   transition: transform 0.4s ease-out;
   will-change: transform;
 }
+
 #actu-all .card .card-img-top:hover{
   transform: scale(1.03);
 }
