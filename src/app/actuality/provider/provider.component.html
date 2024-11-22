@@ -44,29 +44,29 @@
           <section id="provider_infos"> <!-- Informations Secondaires et détaillées du Provider -->
             
             <div class="info-container">
-            <div id="informations">
+            <!-- <div id="informations">
               
               <h3 class="mb-4">Informations</h3>
               
-            </div>
+            </div> -->
             
             <div 
             [class.mb-4]="providerSelected?.joindeAt"
             id="info-details-container">
                 <div id="infos_details">
-                  <p class="firsttext">Création</p>
-                  <p class="firsttext">Pays</p>
-                  <p class="firsttext">Nombre de Jeux</p>
-                  <p class="firsttext">Nombre d'Actualités</p>
-                  <p class="firsttext">Nombre d'Abonnés</p>
+                  <h3 class="firsttext">Création</h3>
+                  <h3 class="firsttext">Pays</h3>
+                  <h3 class="firsttext">Nombre de jeux</h3>
+                  <h3 class="firsttext">Nombre d'actualités</h3>
+                  <h3 class="firsttext">Nombre d'abonnés</h3>
                 </div>
 
                 <div id="infos_details_values">
-                  <p class="secondtext" style="color: {{ providerSelected?.color }}">1889</p>
-                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerSelected?.country }}</p>
-                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbGame && providerNbGame >= 2 ? providerNbGame + ' jeux' : providerNbGame + ' jeu'}}</p>
-                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbActu && providerNbActu >= 2 ? providerNbActu + ' actualités' : providerNbActu + ' actualité'}}</p>
-                  <p class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbFollower && providerNbFollower >= 2 ? providerNbFollower + ' abonnés' : providerNbFollower + ' abonné'}}</p>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">1889</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerSelected?.country }}</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbGame && providerNbGame >= 2 ? providerNbGame + ' jeux' : providerNbGame + ' jeu'}}</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbActu && providerNbActu >= 2 ? providerNbActu + ' actualités' : providerNbActu + ' actualité'}}</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbFollower && providerNbFollower >= 2 ? providerNbFollower + ' abonnés' : providerNbFollower + ' abonné'}}</h2>
                 </div>
             </div>
         
