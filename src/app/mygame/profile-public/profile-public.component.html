@@ -1,29 +1,14 @@
 <div id="show-game" class="d-flex container">
     <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
+      <div class="card-wrapper">
+
+      
       <div *ngIf="myGameHistorique.myGame.is_pinned" class="d-flex justify-content-center" style="width: 100%;">
         <div class="card-game container d-flex" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
 
           <div *ngIf="myGameHistorique.myGame.is_pinned" class="isPinned" style="background-color: {{profilSelected?.themeColor ?? 'red'}};">
 
             <p><i class="ri-pushpin-fill"></i></p>
-
-            <style>
-              .isPinned{
-                position: absolute;
-                width: 30px;
-                height: 30px;
-                z-index: 1029;
-                border-radius: 100%;
-                margin-left: -10px;
-                margin-top: -10px;
-              }
-              .isPinned p{
-                text-align: center;
-                margin: 1px;
-                margin-left: 2px;
-                color: white;
-              }
-            </style>
 
           </div>
 
@@ -41,8 +26,12 @@
           </div>
           <div class="card-right d-flex">
             <div class="core-left">
-              <h5>{{ myGameHistorique.myGame.game.name }}</h5>
-              <p style="color: red"> Editeur Sample </p>
+              <h2>{{ myGameHistorique.myGame.game.name }}</h2>
+              <p style="color: {{ profilSelected?.themeColor }};" class="platform-names">
+                <ng-container *ngFor="let platform of myGameHistorique.myGame.game.platforms; let last = last">
+                  {{ platform.name }}<span *ngIf="!last">, </span>
+                </ng-container>
+              </p>
 <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
 <!--                <p> [QUAND] Acheter le : {{ myGameHistorique.buy_at }}</p>-->
 <!--              </ng-container>-->
@@ -77,8 +66,14 @@
           </div>
         </div>
       </div>
+    </div>
     </ng-container>
+  </div>
+<div class="d-flex container" id="show-game">
     <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
+      <div class="card-wrapper">
+
+      
       <div *ngIf="!myGameHistorique.myGame.is_pinned" class="d-flex justify-content-center" style="width: 100%;">
         <div class="card-game container d-flex" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
           <div class="card-left">
@@ -95,8 +90,12 @@
           </div>
           <div class="card-right d-flex">
             <div class="core-left">
-              <h5>{{ myGameHistorique.myGame.game.name }}</h5>
-              <p style="color: red"> Editeur Sample </p>
+              <h2>{{ myGameHistorique.myGame.game.name }}</h2>
+              <p style="color: {{ profilSelected?.themeColor }};" class="platform-names">
+                <ng-container *ngFor="let platform of myGameHistorique.myGame.game.platforms; let last = last">
+                  {{ platform.name }}<span *ngIf="!last">, </span>
+                </ng-container>
+              </p>
 <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
 <!--                <p> [QUAND] Acheter le : {{ myGameHistorique.buy_at }}</p>-->
 <!--              </ng-container>-->
@@ -131,6 +130,7 @@
           </div>
         </div>
       </div>
+    </div>
     </ng-container>
 </div>
 
