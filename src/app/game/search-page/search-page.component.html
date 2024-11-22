@@ -72,8 +72,12 @@
           </div>
           <div class="card-right d-flex">
             <div class="core-left">
-              <h5>{{ game.name }}</h5>
-              <p style="color: {{userColor}}"> Editeur Sample </p>
+              <h2>{{ game.name }}</h2>
+            <p style="color: {{ userColor ? userColor : 'red' }}" class="platform-names">
+              <ng-container *ngFor="let platform of game.platforms; let last = last">
+                {{ platform.name }}<span *ngIf="!last">, </span>
+              </ng-container>
+            </p>
               <p> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}
               </p>
             </div>
