@@ -27,15 +27,20 @@
             <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
           </ng-container>
           <ng-container *ngIf="game.image.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
-            <div class="image" style="background-image: url('{{ game.image?.thumb_url }}')"></div>
+            <div class="image" style="background-image: url('{{ game.image.thumb_url }}')"></div>
             <div class="blur"></div>
-            <img src="{{ game.image?.thumb_url }}" alt="...">
+            <img src="{{ game.image.thumb_url }}" alt="...">
           </ng-container>
         </div>
         <div class="card-right d-flex">
           <div class="core-left">
-            <h5>{{ game.name }}</h5>
-            <p style="color: {{userColor ? userColor : 'red'}}"> Editeur Sample </p>
+            <h2>{{ game.name }}</h2>
+            <p style="color: {{ userColor ? userColor : 'red' }}" class="platform-names">
+              <ng-container *ngFor="let platform of game.platforms; let last = last">
+                {{ platform.name }}<span *ngIf="!last">, </span>
+              </ng-container>
+            </p>
+            
             <p> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</p>
           </div>
           <div class="core-right">

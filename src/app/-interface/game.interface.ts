@@ -1,4 +1,5 @@
 import {GameImageInterface} from "./game-image.interface";
+import { PlatformsInterface } from "./platforms.interface";
 
 export interface GameInterface {
 
@@ -20,7 +21,7 @@ export interface GameInterface {
   imageTags:JSON,
   numberOfUserReviews:number,
   originalGameRating: string,
-  platforms:JSON,
+  platforms:PlatformsInterface[],
   siteDetailUrl: string,
   searchValue?: string;
   

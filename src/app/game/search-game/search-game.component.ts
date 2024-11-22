@@ -44,6 +44,8 @@ export class SearchGameComponent implements OnInit{
     this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.games = results;
     });
+
+    
   }
 
   updateConnect(): void {
