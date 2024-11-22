@@ -70,8 +70,12 @@
 
           <div class="card-right d-flex">
             <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
-              <h5>{{ myGameHistorique.myGame.game.name }}</h5>
-              <p style="color: red"> Éditeur Sample </p>
+              <h2>{{ myGameHistorique.myGame.game.name }}</h2>
+              <p style="color: {{ isColor }};" class="platform-names">
+                <ng-container *ngFor="let platform of myGameHistorique.myGame.game.platforms; let last = last">
+                  {{ platform.name }}<span *ngIf="!last">, </span>
+                </ng-container>
+              </p>
 <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
 <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->
 <!--              </ng-container>-->
