@@ -1,0 +1,18 @@
+<form id="addNoteForm" #addForm2="ngForm" (ngSubmit)="this.detailGame.addNote(addForm2)" class="modal-body" style="padding-top: 40px;">
+  <!--        <img src="..." style="width: 15em" alt="tt">-->
+
+  <h2>Ajoutez une note à votre jeux</h2>
+
+  <br>
+  <h5><span style="color: red">*</span>Recherche un de vos jeux :</h5>
+  <input type="text" placeholder="Ton Jeux" disabled value="{{ this.detailGame.gameSelected?.name }}">
+  <br>
+  <br>
+  <h6><span style="color: red">*</span>Note de ton jeux :</h6>
+  <input type="number" placeholder="10" name="noteGame" ngModel>/20
+
+  <div class="modal-footer" style="margin-top: 74px;">
+    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  </div>
+</form>

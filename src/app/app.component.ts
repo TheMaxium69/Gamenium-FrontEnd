@@ -299,6 +299,11 @@ export class AppComponent {
 
   }
 
+  /*
+  *
+  * FOR MODAL
+  *
+  * */
 
 
 

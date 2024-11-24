@@ -48,6 +48,7 @@ import { HomeInviteComponent } from './home/home-invite/home-invite.component';
 import { PlateformComponent } from './actuality/plateform/plateform.component';
 import { ViewMygameComponent } from './mygame/view-mygame/view-mygame.component';
 import { EditedMygameComponent } from './mygame/edited-mygame/edited-mygame.component';
+import { ModalNoteComponent } from './-global/modal-note/modal-note.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { EditedMygameComponent } from './mygame/edited-mygame/edited-mygame.comp
     HomeInviteComponent,
     PlateformComponent,
     ViewMygameComponent,
-    EditedMygameComponent
+    EditedMygameComponent,
+    ModalNoteComponent
 
   ],
   imports: [

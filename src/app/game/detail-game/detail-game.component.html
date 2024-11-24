@@ -70,24 +70,7 @@
           <!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="addNoteForm" #addForm2="ngForm" (ngSubmit)="addNote(addForm2)" class="modal-body" style="padding-top: 40px;">
-          <!--        <img src="..." style="width: 15em" alt="tt">-->
-
-          <h2>Ajoutez une note à votre jeux</h2>
-
-          <br>
-          <h5><span style="color: red">*</span>Recherche un de vos jeux :</h5>
-          <input type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }}">
-          <br>
-          <br>
-          <h6><span style="color: red">*</span>Note de ton jeux :</h6>
-          <input type="number" placeholder="10" name="noteGame" ngModel>/20
-
-          <div class="modal-footer" style="margin-top: 74px;">
-            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </form>
+        <app-modal-note></app-modal-note>
       </div>
     </div>
   </div>
@@ -276,7 +259,7 @@
               </div>
           </div>
       </div>
-      
+
 
 
     </div>
@@ -374,7 +357,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="one-press-rating">
           <div class="provider-picture">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Jeuxvideo.com_Logo.svg/1200px-Jeuxvideo.com_Logo.svg.png" alt="Jeuxvidéo.com Logo" class="media-img" width="30" height="30">
@@ -443,7 +426,7 @@
       <div class="title-ratings" id="player-h1">Notes des joueurs:</div>
       <div class="gamers-ratings-details-container">
         <!-- LIGNE NOTE JOUEUR -->
-         
+
         <div class="one-gamer-rating">
           <div class="provider-picture">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Jeuxvideo.com_Logo.svg/1200px-Jeuxvideo.com_Logo.svg.png"  class="media-img" alt="Metacritic Avis Logo" width="30" height="30">
@@ -548,9 +531,9 @@
                       </div>
                     </article>
 
-                    
-                    
-                    
+
+
+
                     <article class="cCarousel-item">
                       <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
                       <div class="infos">
@@ -558,7 +541,7 @@
                         <p>Title 6 / 6</p>
                       </div>
                     </article>
-                    
+
 
                     <article class="cCarousel-item" *ngIf="gameSelected?.image?.icon_url">
                       <img [src]="gameSelected?.image?.icon_url" alt="icon_url">
@@ -613,7 +596,7 @@
 
 
 
-  
+
 
 
 
