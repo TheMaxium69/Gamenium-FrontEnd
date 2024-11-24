@@ -63,18 +63,9 @@
     </div>
   </div>
 
-  <div class="modal fade text-center" id="noteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <app-modal-note></app-modal-note>
-      </div>
-    </div>
-  </div>
 
+
+  <app-modal-note></app-modal-note>
 
 
 
@@ -464,7 +455,7 @@
   </div>
 
   <!-- Add Note Button -->
-  <button class="btn btn-primary addnote" data-bs-toggle="modal" data-bs-target="#noteGame" style="background-color: {{userColor ? userColor : 'red'}}">Ajouter ma note</button>
+  <button (click)="setModal()" class="btn btn-primary addnote" data-bs-toggle="modal" data-bs-target="#noteGame" style="background-color: {{userColor ? userColor : 'red'}}">Ajouter ma note</button>
 </div>
 
 
@@ -580,13 +571,13 @@
               <div class="info-provider">Provider</div>
               <div class="info-release-date">Date de sortie:{{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
           </div>
-          <button class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame" style="background-color: {{userColor ? userColor : 'red'}}">
+          <button (click)="setModal()" class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame" style="background-color: {{userColor ? userColor : 'red'}}">
               <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
           </button>
       </div>
 
       <div class="show-collection">
-          <button class="my-collection" style="background-color: white" style="color: {{userColor ? userColor : 'red'}}">Votre collection</button>
+          <button routerLink="/mygame" class="my-collection" style="background-color: white" style="color: {{userColor ? userColor : 'red'}}">Votre collection</button>
       </div>
   </div>
 

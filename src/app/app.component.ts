@@ -9,6 +9,9 @@ import { CookieService } from 'ngx-cookie-service';
 import {PageAccountComponent} from "./account/page-account/page-account.component";
 import {IpService} from "./-service/ip.service";
 import {HistoryMyGameInterface} from "./-interface/history-my-game.interface";
+import {GameInterface} from "./-interface/game.interface";
+import {NgForm} from "@angular/forms";
+import {HistoryMyGameService} from "./-service/history-my-game.service";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +26,8 @@ export class AppComponent {
     private router: Router,
     private authService: AuthService,
     private cookieService: CookieService,
-    private ipService: IpService
+    private ipService: IpService,
+    private histoireMyGameService: HistoryMyGameService,
   ) {
     const cookieToken:string = this.cookieService.get('tokenGamenium');
     const cookieUser:string = this.cookieService.get('userGamenium');
@@ -305,6 +309,34 @@ export class AppComponent {
   *
   * */
 
+  gameSelected: GameInterface|undefined;
+
+
+  addNote(form:NgForm) {
+
+    console.log(form.value);
+
+    if (form.value['noteGame'] >= 0 && form.value['noteGame'] <= 20){
+
+      let noteGame = form.value['noteGame'];
+
+      let bodyNoJsonMyGameNote: any = {
+        "id_game":this.gameSelected?.id,
+        "note":noteGame,
+      };
+
+      const bodyMyGameNote = JSON.stringify(bodyNoJsonMyGameNote);
+
+      this.histoireMyGameService.postNoteMyGame(bodyMyGameNote, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameNoteAdd => {
+
+        console.log(reponseMyGameNoteAdd);
+
+      });
+
+    } else {
+      console.log("note invalide");
+    }
+  }
 
 
 

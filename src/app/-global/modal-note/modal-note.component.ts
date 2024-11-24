@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {DetailGameComponent} from "../../game/detail-game/detail-game.component";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-modal-note',
@@ -10,6 +11,7 @@ export class ModalNoteComponent {
 
   constructor(
     protected detailGame: DetailGameComponent,
+    protected app:AppComponent,
   ) {
   }
 

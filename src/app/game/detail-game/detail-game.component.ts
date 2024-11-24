@@ -99,33 +99,6 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
   }
 
-  addNote(form:NgForm) {
-
-    console.log(form.value);
-
-    if (form.value['noteGame'] >= 0 && form.value['noteGame'] <= 20){
-
-      let noteGame = form.value['noteGame'];
-
-      let bodyNoJsonMyGameNote: any = {
-        "id_game":this.gameSelected?.id,
-        "note":noteGame,
-      };
-
-      const bodyMyGameNote = JSON.stringify(bodyNoJsonMyGameNote);
-
-      this.histoireMyGameService.postNoteMyGame(bodyMyGameNote, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyGameNoteAdd => {
-
-        console.log(reponseMyGameNoteAdd);
-
-      });
-
-    } else {
-      console.log("note invalide");
-    }
-  }
-
-
 
   ////////////////////////////// Initialisation après l'initialisation du DOM pour que le carroussel fonctionne  /////////////////////
 
@@ -212,8 +185,8 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
         this.mouseDown = true;
         this.startX = mouse.pageX - slider.offsetLeft;
         this.scrollLeft = slider.scrollLeft;
-    } 
-    
+    }
+
   }
 
   stopDrag(): void {
@@ -229,7 +202,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
     console.log('drag en cours') // A SUPPRIMER
     const slider = document.querySelector('.provider-card-container') as HTMLElement;
-    
+
     mouse.stopPropagation();
 
     if (slider) {
@@ -237,7 +210,11 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
       const scroll = x - this.startX;
       slider.scrollLeft = this.scrollLeft - scroll;
     }
-    
+
+  }
+
+  setModal(){
+     this.app.gameSelected = this.gameSelected;
   }
 
 
