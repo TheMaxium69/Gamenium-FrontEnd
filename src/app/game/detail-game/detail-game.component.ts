@@ -5,6 +5,7 @@ import {AppComponent} from "../../app.component";
 import {GameInterface} from "../../-interface/game.interface";
 import {HistoryMyGameService} from "../../-service/history-my-game.service";
 import {NgForm} from "@angular/forms";
+import { HistoryMyGameInterface } from 'src/app/-interface/history-my-game.interface';
 
 @Component({
   selector: 'app-detail-game',
@@ -12,10 +13,14 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./detail-game.component.css']
 })
 export class DetailGameComponent implements OnInit, AfterViewInit{
+  
+  myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
+  hasGameInCollection : boolean = false;
 
   isLoggedIn:boolean = false;
-  userConnectedId:number|undefined;
-  userName: string|undefined;
+  userConnectedId: number = 0;
+  displayName: string|undefined;
+  userName: string = "";
   userColor : string | undefined;
   isHovered: boolean = false;
 
@@ -46,9 +51,10 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
     if (this.isLoggedIn){
 
       this.userConnectedId = this.app.userConnected.id;
-      this.userName = this.app.userConnected.username;
+      this.myGameByUser(this.userConnectedId);
+      this.displayName = this.app.userConnected.displayname;
+      this.userName = this.app.userConnected.userName;
       this.userColor = this.app.userConnected.themeColor;
-
     }
 
   }
@@ -103,14 +109,35 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   }
 
   get capitalizedUserName(): string {
-    if (!this.userName) return '';
-    return this.userName.charAt(0).toUpperCase() + this.userName.slice(1) + ", ";
-  }
-  
-  onHover(state:boolean) {
-    this.isHovered = state;
+    if (!this.displayName) return this.userName + ", ";
+    return this.displayName.charAt(0).toUpperCase() + this.displayName.slice(1) + ", ";
   }
 
+  myGameByUser(id_user: number): void {
+    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+      if (responseMyGame.message == "good") {
+        this.myGameHistoriqueAll = responseMyGame.result;
+        this.hasGameInCollection = this.checkHasGameInCollection(Number(this.gameId));
+      } else {
+        console.log("pas de jeux trouvé pour l'utilisateur")
+      }
+    });
+  }
+
+  checkHasGameInCollection(gameId: number): boolean {
+    if (!this.myGameHistoriqueAll || this.myGameHistoriqueAll.length === 0) {
+      return false;
+    }
+
+    for (let entry of this.myGameHistoriqueAll) {
+      if (entry.myGame?.game?.id === gameId) {
+        return true;
+      }
+    }
+
+    return false;
+
+  }
 
   ////////////////////////////// Initialisation après l'initialisation du DOM pour que le carroussel fonctionne  /////////////////////
 

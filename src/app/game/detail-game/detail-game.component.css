@@ -608,7 +608,6 @@
       align-self: center;
     }
   }
-  
 
   .press-ratings-total-rate,
   .gamers-ratings-total-rate {
@@ -629,8 +628,6 @@
     height: 130px;
     background-color: rgb(141, 138, 138);
   }
-  
- 
 
   .total-rate-press {
     font-size: 50px;
@@ -652,24 +649,40 @@
     bottom: 48px;
     right: 38px;
   }
+
   .on-twenty-gamers {
     font-size: 25px;
     position: absolute;
     bottom: 36px;
     right: 22px;
   }
-  
-  .addnote {
-    width: 200px;
-    margin: 0 auto;
-    background-color: rgb(62, 185, 254);
-    box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
-    border: none;
+
+  .add-note {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+  .btn-note {    
+    color: white;
+    border-radius: 15px;
+    padding: 10px 30px;
+    box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
+    font-size: 17px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-right: 20px;
     margin-bottom: 40px;
+    border: solid 2px;
+    border-color: var(--userColor);
   }
 
-  .addnote:hover {
-    background-color: dodgerblue;
+  .btn-note:hover {
+    background-color: white !important;
+    color: var(--userColor) !important;
+    border: solid 2px;
+    border-color: var(--userColor) !important;
     transition: 0.3s;
 }
 
@@ -692,11 +705,7 @@
   
   }
   
-
-
-
 /* //////////////// FIN DE ZONE RATINGS ///////////////  */
-
 
 
 /* //////////////// DEBUT DE ZONE CARROUSSEL //////////////////// */
@@ -705,6 +714,7 @@
     margin-top: 40px;
     margin-bottom: 100px;
 }
+
 .pictures-title{
     width: 100%;
     margin-left: auto;
@@ -945,13 +955,10 @@
 
 .game-add-button {
     color: white;
-    border: none;
     border-radius: 15px;
-    margin: auto;
     padding: 10px 20px;
-    text-align: center;
     box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
-    font-size: 18px;
+    font-size: 17px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -965,7 +972,7 @@
     font-size: 20px;
 }
 
-.btn-primary:hover {
+.game-add-button:hover {
   background-color: white !important;
   color: var(--userColor) !important;
   border: solid 2px;
@@ -1010,12 +1017,12 @@
 
 
 .show-collection {
-    margin-top: 30px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
 }
 
-.btn-secondary:hover {
+.my-collection:hover {
   background-color: var(--userColor) !important;
   color: white !important;
   border: solid 2px;
@@ -1026,7 +1033,7 @@
 .my-collection {
     font-size: 17px;
     padding: 10px 50px;
-    margin-bottom: 120px;
+    margin-bottom: 130px;
     border-radius: 15px;
     border: solid 2px;
     box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);

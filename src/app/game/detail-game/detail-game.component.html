@@ -395,7 +395,9 @@
   </div>
 
   <!-- Add Note Button -->
-  <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="btn primary-btn addnote" data-bs-toggle="modal" data-bs-target="#noteGame" style="background-color: {{userColor ? userColor : 'red'}}">Ajouter ma note</button>
+  <div *ngIf="isLoggedIn && hasGameInCollection" class="add-note">
+    <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="btn-note" data-bs-toggle="modal" data-bs-target="#noteGame" style="background-color: {{userColor ? userColor : 'red'}}">Ajouter une note</button>
+  </div>
 </div>
 
 
@@ -513,20 +515,13 @@
               </p>
               <div class="info-release-date">Date de sortie : {{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
           </div>
-          <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="game-add-button btn-primary"  data-bs-toggle="modal" data-bs-target="#ajouteGame" style="background-color: {{userColor ? userColor : 'red'}}">
+          <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame" style="background-color: {{userColor ? userColor : 'red'}}">
               <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
           </button>
       </div>
 
       <div class="show-collection">
-          <!-- <button routerLink="/mygame" class="my-collection" style="background-color: white; color: {{userColor ? userColor : 'red'}}">Votre collection</button> -->
-
-          <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" routerLink="/mygame" class="my-collection btn-secondary" style="background-color: white; color: {{ userColor ?? 'red' }};">Votre collection</button>
-
-          <!-- <button routerLink="/mygame" class="my-collection" [ngstyle]="{ 'background-color': isHovered ? (userColor || 'red') : 'white',
-          'color': isHovered ? 'white' : (userColor || 'red') }"
-          (mouseover)="onHover(true)"
-          (mouseleave)="onHover(false)">Votre collection</button> -->
+        <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" routerLink="/mygame" class="my-collection" style="background-color: white; color: {{ userColor ?? 'red' }};">Votre collection</button>
       </div>
   </div>
 
