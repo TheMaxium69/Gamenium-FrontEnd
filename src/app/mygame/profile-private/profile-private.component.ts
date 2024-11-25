@@ -91,7 +91,6 @@ export class ProfilePrivateComponent implements OnInit {
     this.plateformService.getPlateformWithUser(id, this.app.setURL()).subscribe((reponsePlateformUser: {message:string, result:PlateformInterface[]}) => {
       if (reponsePlateformUser.message == "good") {
         this.plateformsUser = reponsePlateformUser.result;
-        console.log(this.plateformsUser);
       }
     })
   }
@@ -198,7 +197,7 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
 
   selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
     this.app.viewMyGame = historyMyGameInterface;
-    console.log("MyGame sélectionné avec l'ID :", historyMyGameInterface.id);
+    // console.log("MyGame sélectionné avec l'ID :", historyMyGameInterface.id);
   }
 
   unselectViewMyGame() {

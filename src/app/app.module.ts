@@ -53,6 +53,7 @@ import { ModalAddGameComponent } from './-global/modal-add-game/modal-add-game.c
 import { ModalNoteUnselectComponent } from './-global/modal-note-unselect/modal-note-unselect.component';
 import { ModalAddGameUnselectComponent } from './-global/modal-add-game-unselect/modal-add-game-unselect.component';
 import { PlateformViewComponent } from './mygame/plateform-view/plateform-view.component';
+import { RecentViewComponent } from './mygame/recent-view/recent-view.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { PlateformViewComponent } from './mygame/plateform-view/plateform-view.c
     ModalAddGameComponent,
     ModalNoteUnselectComponent,
     ModalAddGameUnselectComponent,
-    PlateformViewComponent
+    PlateformViewComponent,
+    RecentViewComponent
 
   ],
   imports: [
