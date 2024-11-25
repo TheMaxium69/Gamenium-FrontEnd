@@ -126,46 +126,52 @@
 
 
 .login-btn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    font-weight: 500;
     display: block;
-    background-color: rgb(254, 62, 62);
-    box-shadow: 0px 5px 6px 0px #a6a6a6;
+    background-color: #FF0000;
+    box-shadow: 0px 3px 7px 0px #a6a6a6;
     color: white;
     text-decoration: none;
     border-radius: 10px;
     border: solid 1.5px;
-    border-color: rgb(254, 62, 62);
-    padding: 15px 100px;
+    border-color: #FF0000;
+    padding: 10px 30px;
     text-align: center;
     margin-bottom: 20px;
 
 }
 
 .sign-in-btn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    font-weight: 500;
     display: block;
     background-color: white;
-    box-shadow: 0px 5px 6px 0px #a6a6a6;
-    color: rgb(254, 62, 62);
+    box-shadow: 0px 3px 7px 0px #a6a6a6;
+    color: #FF0000;
     text-decoration: none;
     border-radius: 10px;
     border: solid 1.5px;
-    border-color: rgb(254, 62, 62);
-    padding: 15px 100px;
+    border-color: #FF0000;
+    padding: 10px 30px;
     text-align: center;
 }
 
 .login-btn:hover {
     background-color: white;
-    color: rgb(254, 62, 62);
+    color: #FF0000;
     border: solid 1.5px;
-    border-color: rgb(254, 62, 62);
+    border-color: #FF0000;
 
 }
 
 .sign-in-btn:hover {
-    background-color: rgb(254, 62, 62);
+    background-color: #FF0000;
     color:white;
     border: solid 1.5px;
-    border-color: rgb(254, 62, 62);
+    border-color: #FF0000;
 }
 
 
