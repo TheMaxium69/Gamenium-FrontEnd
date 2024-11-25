@@ -1,1 +1,40 @@
-<p>modal-note-unselect works!</p>
+<div class="modal fade text-center" id="noteGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="noteGamePage2" #noteGamePage2="ngForm" (ngSubmit)="this.app.addNote(noteGamePage2)" class="modal-body" style="padding-top: 40px;">
+
+        <h2>Ajoutez une note à votre jeu</h2>
+
+        <br>
+        <h5><span style="color: red">*</span>Recherchez un jeu :</h5>
+        <input *ngIf="this.app.gameSelected" type="text" placeholder="Votre jeu" disabled value="{{ this.app.gameSelected?.name }}">
+        <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.app.onSubmitSearch(noteGamePage2)">
+        <br>
+
+        <div *ngIf="this.app.searchResults && this.app.searchResults.length > 0 && !this.app.gameSelected" class="row">
+          <div class="col-md-4" *ngFor="let result of this.app.searchResults">
+            <div class="card mb-4 shadow-sm" (click)="this.app.selectGame(result)">
+              <img [src]="result.image.icon_url" class="bd-placeholder-img card-img-top" alt="Image du jeu">
+              <div class="card-body">
+                <p class="card-text">{{ result.name }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <h6><span style="color: red">*</span>Note de votre jeu :</h6>
+        <input type="number" placeholder="10" name="noteGame" ngModel>/20
+
+        <div class="modal-footer" style="margin-top: 74px;">
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistrer</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
