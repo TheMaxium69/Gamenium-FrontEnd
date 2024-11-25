@@ -18,9 +18,11 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@sweetalert2/ngx-sweetalert2": "^12.4.0",
     "ngx-color-picker": "^16.0.0",
     "ngx-cookie-service": "^17.1.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.14.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

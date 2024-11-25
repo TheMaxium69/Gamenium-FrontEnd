@@ -12,6 +12,7 @@ import { SocialNetworkInterface } from 'src/app/-interface/social-network.interf
 import { NgForm } from '@angular/forms';
 import {ProfilService} from "../../-service/profil.service";
 import {ProfilInterface} from "../../-interface/profil.interface";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-profile',
@@ -57,9 +58,9 @@ export class ProfileComponent implements OnInit {
 
       this.loadThemeColor();
     }
-    
+
     this.getAllSocialNetwork();
-    
+
     this.getAllBadges();
   }
 
@@ -81,12 +82,12 @@ export class ProfileComponent implements OnInit {
         }
       }
     });
-    
+
     console.log(settingsResultNumber)
     const settingSection = document.querySelector('#settings-hr')
     if (settingsResultNumber == 0) {
       let noResult = document.querySelector('#no-results') as HTMLElement
-      
+
       if (!noResult) {
         noResult = this.renderer.createElement('div')
         this.renderer.setAttribute(noResult, 'id', 'no-results')
@@ -104,7 +105,7 @@ export class ProfileComponent implements OnInit {
     }
 
   }
- 
+
   loadThemeColor() {
     const userId = this.userConnected?.id;
     if (userId) {
@@ -172,9 +173,16 @@ export class ProfileComponent implements OnInit {
       this.userConnected.themeColor = this.tempColor;
 
       this.userService.updateThemeColor(this.userConnected.id, this.tempColor, this.app.setURL()).subscribe((response) => {
-        console.log('Couleur du thème mise à jour avec succès', response);
+        // console.log('Couleur du thème mise à jour avec succès', response);
         if (this.userConnected){
           this.color = this.userConnected.themeColor;
+          Swal.fire({
+            title: 'Succès!',
+            text: 'Votre thème à bien été mise à jour.',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: this.userConnected.themeColor
+          })
         }
       });
     }
@@ -196,8 +204,23 @@ export class ProfileComponent implements OnInit {
     this.uploadService.uploadUserPhoto(this.selectedFile, this.app.setURL(), this.app.createCorsToken(true)).subscribe(responseUploadPhoto => {
 
 
-      console.log(responseUploadPhoto);
-
+      if (responseUploadPhoto.message == "good"){
+        Swal.fire({
+          title: 'Succès!',
+          text: 'Votre photo de profil à bien été mise à jour.',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
+      } else {
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Échec de la mise à jour de la photo de profil',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.colorDefault
+        })
+      }
 
     });
   }

@@ -9,6 +9,7 @@ export interface UserInterface {
   joinAt:Date,
   userRole:string[]
   pp: PictureInterface|undefined,
-  themeColor: string|[];
+  themeColor: string;
+  /* ATTENTION J'AI ENLEVER LE [] a theme j'espere que ça buggera pas */
   color: string;
 }
