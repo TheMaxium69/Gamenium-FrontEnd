@@ -52,7 +52,6 @@ import { ModalNoteComponent } from './-global/modal-note/modal-note.component';
 import { ModalAddGameComponent } from './-global/modal-add-game/modal-add-game.component';
 import { ModalNoteUnselectComponent } from './-global/modal-note-unselect/modal-note-unselect.component';
 import { ModalAddGameUnselectComponent } from './-global/modal-add-game-unselect/modal-add-game-unselect.component';
-import { OneCardActualityComponent } from './-global/one-card-actuality/one-card-actuality.component';
 
 @NgModule({
   declarations: [
@@ -102,8 +101,7 @@ import { OneCardActualityComponent } from './-global/one-card-actuality/one-card
     ModalNoteComponent,
     ModalAddGameComponent,
     ModalNoteUnselectComponent,
-    ModalAddGameUnselectComponent,
-    OneCardActualityComponent
+    ModalAddGameUnselectComponent
 
   ],
   imports: [
