@@ -198,11 +198,22 @@
     </article>
 
     <!-- SECTION BARRE DE RECHERCHE -->
-    <div class="row search-bar">
-      <div class="col-md-12 border">
-        <h2>ICI BARRE DE RECHERCHE</h2>
+    <div class="search-container">
+      <div class="icon-container" [ngStyle]="{ 'background-color': isColor }">
+        <i class="ri-search-2-line ico1"></i>
       </div>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Recherche dans vos jeux" 
+        [(ngModel)]="searchQuery"
+        (input)="filterGames()"  
+      />
+      <button class="filter-button">
+        <i class="ri-filter-line"></i>
+      </button>
     </div>
+    
 
 
 

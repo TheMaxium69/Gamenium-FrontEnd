@@ -51,6 +51,11 @@ export class ProfilePrivateComponent implements OnInit {
   userLikes:any[] = [];
   userComments:any[]= [];
 
+  // Pour la recherche
+  searchQuery: string = ''; 
+  filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
+
+
   constructor(private app: AppComponent,
               private taskService: TaskService,
               private commentService: CommentService,
@@ -82,6 +87,7 @@ export class ProfilePrivateComponent implements OnInit {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result;
+        console.log(this.myGameHistoriqueAll);
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
       }
@@ -116,15 +122,24 @@ export class ProfilePrivateComponent implements OnInit {
     return this.myGameHistoriqueAll?.some(game => game.myGame.is_pinned) ?? false;
   }
 
-  /* OBTENIR LES JEUX EPINGLES */
-  getPinnedGames(): HistoryMyGameInterface[] {
-    return this.myGameHistoriqueAll?.filter(game => game.myGame.is_pinned) ?? [];
-  }
+/* OBTENIR LES JEUX EPINGLES */
+getPinnedGames(): HistoryMyGameInterface[] {
+  return this.myGameHistoriqueAll?.filter(game => game.myGame.is_pinned) ?? [];
+}
 
-  /* OBTENIR LES JEUX NON EPINGLES */
-  getUnpinnedGames(): HistoryMyGameInterface[] {
+/* OBTENIR LES JEUX NON EPINGLES */
+getUnpinnedGames(): HistoryMyGameInterface[] {
+  // selon si une recherche existe ou non on renvoie une liste différente
+  if (this.searchQuery) {
+    // ici les jeux filtré selon la recherche
+    return this.filteredGames ?? [];
+    
+  } else {
+    // ici les jeux non épinglés
     return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
   }
+}
+
 
   /* METHOD DU TOGGLE SUR BUTTON EPINGLE */
   togglePin(myGameHistorique: HistoryMyGameInterface) {
@@ -175,6 +190,29 @@ export class ProfilePrivateComponent implements OnInit {
   unselectViewMyGame() {
     this.app.viewMyGame = undefined;
   }
+
+  // Recherche de jeux 
+  filterGames(): void {
+    if (!this.myGameHistoriqueAll) return;
+  
+    const query = this.searchQuery.toLowerCase();
+    this.filteredGames = this.myGameHistoriqueAll.filter((game) => {
+      // on fais une requete pour rechercher les jeux qui corresponde a la searchQuery
+      const gameName = game.myGame?.game?.name?.toLowerCase() || '';
+      const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+      const year = game.myGame?.game?.expectedReleaseYear?.toString() || ''; 
+  
+      
+      return (
+        // on return les resultat qui corresponde
+        gameName.includes(query) ||
+        platforms.includes(query) ||
+        year.includes(query)
+      );
+    });
+  }
+  
+  
 
 
   gameSelected: GameInterface | undefined;
