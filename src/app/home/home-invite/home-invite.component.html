@@ -43,13 +43,13 @@
     <div id="gamenium-actu-invite">
         <div class="gamenium-container-panel mb">
             <h2 class="">Les actus à la Une</h2>
-            <div id="content-actu-invite" class="d-flex p">
+            <div id="content-actu-invite" class="d-flex">
                 <!-- Boucle avec les card actus (en afficher 6) -->
-                <ng-container *ngFor="let actu of postActuFollowOrAll | slice: postActuFollowOrAll.length - 4"> <!--Le slice est la pour afficher les 4 dernières actu stocké dans le tableau donc les 4 + recente -->
+                <ng-container *ngFor="let actu of postActuFollowOrAll | slice: postActuFollowOrAll.length - 6"> <!--Le slice est la pour afficher les 4 dernières actu stocké dans le tableau donc les 4 + recente -->
                     <div class="card col-4" routerLink="/actuality/{{ actu.id }}">
                         <img src="{{ actu.picture.url }}" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">{{ actu.title }}</h5>
+                            <h3 class="card-title">{{ actu.title }}</h3>
                             <div class="card-hr">
                             <hr />
                             </div>
@@ -93,7 +93,7 @@
             <div class="rowamoi">
                 <!-- Boucle avec les cards jeux (en afficher 4)-->
             </div>
-            <div class="">
+            <div class="rowamoi justify-content-end">
                 <a href="" class="view-more-btn">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
         </div>
@@ -106,7 +106,7 @@
             <div>
                 <!--  Boucle avec les cards actus du mois ( en afficher 9 ?) -->
             </div>
-            <div class="">
+            <div class="rowamoi justify-content-end">
                 <a class="view-more-btn" href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
         </div>
