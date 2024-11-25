@@ -46,7 +46,7 @@ import { CommentActualityComponent } from './actuality/comment-actuality/comment
 import { HomeConnectedComponent } from './home/home-connected/home-connected.component';
 import { HomeInviteComponent } from './home/home-invite/home-invite.component';
 import { PlateformComponent } from './actuality/plateform/plateform.component';
-import { ViewMygameComponent } from './mygame/view-mygame/view-mygame.component';
+import { ViewMygameComponent } from './-global/view-mygame/view-mygame.component';
 import { EditedMygameComponent } from './mygame/edited-mygame/edited-mygame.component';
 import { ModalNoteComponent } from './-global/modal-note/modal-note.component';
 

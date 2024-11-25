@@ -455,7 +455,9 @@ checkAndCompleteTasks(): void {
     });
   }
 
-
+  setModal(game: GameInterface){
+    this.app.gameSelected = game;
+  }
 
 }
 

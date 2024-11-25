@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
-import {DetailGameComponent} from "../../game/detail-game/detail-game.component";
+import {Component, OnDestroy} from '@angular/core';
 import {AppComponent} from "../../app.component";
 
 @Component({
-  selector: 'app-modal-note',
+  selector: 'modal-note',
   templateUrl: './modal-note.component.html',
   styleUrls: ['./modal-note.component.css']
 })
-export class ModalNoteComponent {
+export class ModalNoteComponent implements OnDestroy {
 
   constructor(
-    protected detailGame: DetailGameComponent,
     protected app:AppComponent,
-  ) {
+  ) { }
+
+  ngOnDestroy() {
+    this.app.gameSelected = undefined;
   }
 
 }

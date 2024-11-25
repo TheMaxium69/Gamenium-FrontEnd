@@ -55,8 +55,7 @@ export class AppComponent {
   isLoggedIn: boolean = false;
   token: string|any;
   userConnected: UserInterface|any;
-  curentDate: Date = new Date();
-  viewMyGame:HistoryMyGameInterface|undefined;
+  currentDate: Date = new Date();
 
   // DEFAULT
   colorDefault = "#FF0000";
@@ -310,6 +309,7 @@ export class AppComponent {
   * */
 
   gameSelected: GameInterface|undefined;
+  viewMyGame:HistoryMyGameInterface|undefined;
 
 
   addNote(form:NgForm) {

@@ -1,8 +1,12 @@
+<!-- MODALE -->
+<modal-view-mygame></modal-view-mygame>
+
+<!-- CONTENT -->
 <div id="show-game" class="d-flex container">
     <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
       <div class="card-wrapper">
 
-      
+
       <div *ngIf="myGameHistorique.myGame.is_pinned" class="d-flex justify-content-center" style="width: 100%;">
         <div class="card-game container d-flex" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
 
@@ -73,7 +77,7 @@
     <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
       <div class="card-wrapper">
 
-      
+
       <div *ngIf="!myGameHistorique.myGame.is_pinned" class="d-flex justify-content-center" style="width: 100%;">
         <div class="card-game container d-flex" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
           <div class="card-left">
@@ -134,17 +138,4 @@
     </ng-container>
 </div>
 
-<!-- MODALE VIEW GAME -->
-<div class="modal fade text-center" id="viewGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button (click)="unselectViewMyGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
 
-      <app-view-mygame></app-view-mygame>
-
-
-    </div>
-  </div>
-</div>

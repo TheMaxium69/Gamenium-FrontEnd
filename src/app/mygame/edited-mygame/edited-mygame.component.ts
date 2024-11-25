@@ -15,6 +15,7 @@ import {NgForm} from "@angular/forms";
 import {MyGameInterface} from "../../-interface/my-game.interface";
 import {BuyWhereInterface} from "../../-interface/buy-where.interface";
 import {BuyWhereService} from "../../-service/buy-where.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-edited-mygame',
@@ -62,9 +63,14 @@ export class EditedMygameComponent implements OnInit {
 
       if (reponseMyGame.message == "good") {
         this.selectedMyGame = reponseMyGame.result;
-        console.log(this.selectedMyGame)
       } else {
-        console.log("pas de mygame")
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Échec de la BDD',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.colorDefault
+        })
       }
 
     })
@@ -79,7 +85,7 @@ export class EditedMygameComponent implements OnInit {
       if (reponseDevise.message == "good") {
         this.deviseAll = reponseDevise.result;
       } else {
-        console.log("pas de devise");
+        // console.log("pas de devise");
       }
 
     })
@@ -89,7 +95,7 @@ export class EditedMygameComponent implements OnInit {
       if (reponseBuyWhere.message == "good") {
         this.buyWhereAll = reponseBuyWhere.result;
       } else {
-        console.log("pas de buy where");
+        // console.log("pas de buy where");
       }
 
     })
@@ -99,7 +105,7 @@ export class EditedMygameComponent implements OnInit {
       if (reponseEtat.message == "good") {
         this.hmgCopyEtatAll = reponseEtat.result;
       } else {
-        console.log("pas de hmgCopyEtat");
+        // console.log("pas de hmgCopyEtat");
       }
 
     })
@@ -109,7 +115,7 @@ export class EditedMygameComponent implements OnInit {
       if (reponseFormat.message == "good") {
         this.hmgCopyFormatAll = reponseFormat.result;
       } else {
-        console.log("pas de hmgCopyFormat");
+        // console.log("pas de hmgCopyFormat");
       }
 
     })
@@ -119,7 +125,7 @@ export class EditedMygameComponent implements OnInit {
       if (reponseRegion.message == "good") {
         this.hmgCopyRegionAll = reponseRegion.result;
       } else {
-        console.log("pas de hmgCopyRegion");
+        // console.log("pas de hmgCopyRegion");
       }
 
 
@@ -224,17 +230,31 @@ export class EditedMygameComponent implements OnInit {
       screenshot:newScreenshot
     }
 
-    console.log(updateHistoryMyGame);
+    // console.log(updateHistoryMyGame);
 
     let body = JSON.stringify(updateHistoryMyGame);
 
     this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
-      console.log(reponseMyGameUpdate);
+      // console.log(reponseMyGameUpdate);
       if (reponseMyGameUpdate.message == "updated game") {
         this.selectedMyGame = reponseMyGameUpdate.result;
         // console.log(this.selectedMyGame);
+        Swal.fire({
+          title: 'Succès!',
+          text: 'Votre jeux à bien été mise à jour.',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.userConnected?.themeColor
+        })
       } else {
-        console.log("Erreur de mise a jour");
+        // console.log("Erreur de mise a jour");
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Échec de la mise à jour de votre jeux',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.userConnected?.themeColor
+        })
       }
     })
 

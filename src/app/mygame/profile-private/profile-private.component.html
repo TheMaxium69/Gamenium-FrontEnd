@@ -1,3 +1,8 @@
+<!-- MODAL -->
+<modal-note></modal-note>
+<modal-view-mygame></modal-view-mygame>
+
+<!-- CONTENT-->
 <section id="profilWrapper" class="container">
 
   <article class="navigateBar">
@@ -100,11 +105,11 @@
               </div>
               <div class="card-action">
                 <i (click)="togglePin(myGameHistorique); $event.stopPropagation()" class="ri-unpin-line"></i>
-                <i (click)="selectGame(myGameHistorique.myGame.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#noteGameSelected" class="ri-star-line"></i>
+                <i (click)="setModal(myGameHistorique.myGame.game); $event.stopPropagation(); " data-bs-toggle="modal" data-bs-target="#noteGame" class="ri-star-line"></i>
                 <i routerLink="edit/{{ myGameHistorique.id }}" class="ri-pencil-line"></i>
 <!--                <i (click)="selectGame(myGameHistorique.myGame.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>-->
-                <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"
-                (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>
+<!--                <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"-->
+<!--                (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>-->
               </div>
             </div>
           </div>
@@ -153,8 +158,8 @@
           <div class="progress-bar-container">
             <div class="progress-bar" [style.width.%]="progress"></div>
           </div>
-          
-          
+
+
           <h3>Pour finaliser votre compte :</h3>
           <br>
           <ng-container *ngFor="let task of tasks">
@@ -163,7 +168,7 @@
               <!-- Cercle remplis ou vide selon si completé -->
               <i *ngIf="task.completed" class="ri-checkbox-circle-fill"></i>
               <i *ngIf="!task.completed" class="ri-checkbox-blank-circle-line"></i>
-              {{ task.name }}            
+              {{ task.name }}
             </h6>
           </ng-container>
         </div>
@@ -223,10 +228,10 @@
               </div>
               <div class="card-action">
                 <i (click)="togglePin(myGameHistorique); $event.stopPropagation()" class="ri-pushpin-line"></i>
-                <i (click)="selectGame(myGameHistorique.myGame.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#noteGameSelected" class="ri-star-line"></i>
+                <i (click)="setModal(myGameHistorique.myGame.game); $event.stopPropagation(); " data-bs-toggle="modal" data-bs-target="#noteGame" class="ri-star-line"></i>
                 <i routerLink="edit/{{ myGameHistorique.id }}" class="ri-pencil-line"></i>
-                <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"
-                (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>
+<!--                <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"-->
+<!--                (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>-->
               </div>
             </div>
           </div>
@@ -245,7 +250,33 @@
 
 </section>
 
-<!-- MODALES -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- OLD MODALES -->
 
 <!-- MODALE POUR ÉDITER UN JEU SÉLECTIONNÉ -->
 <div class="modal fade text-center" id="editGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -276,35 +307,6 @@
 
         <div class="modal-footer" style="margin-top: 74px;">
           <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Modifier</button>
-          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        </div>
-
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- MODALE POUR AJOUTER UNE NOTE À UN JEU SÉLECTIONNÉ -->
-<div class="modal fade text-center" id="noteGameSelected" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form id="addNoteForm" #addForm2="ngForm" (ngSubmit)="addNote(addForm2)" class="modal-body" style="padding-top: 40px;">
-
-        <h2>Ajoutez une note à votre jeu</h2>
-
-        <br>
-        <h5><span style="color: red">*</span>Votre jeu sélectionné :</h5>
-        <input type="text" placeholder="Votre jeu" disabled value="{{ this.gameSelected?.name }}">
-        <br>
-        <br>
-        <h6><span style="color: red">*</span>Note de votre jeu :</h6>
-        <input type="number" placeholder="10" name="noteGame" ngModel>/20
-
-        <div class="modal-footer" style="margin-top: 74px;">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistrer</button>
           <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
         </div>
 
@@ -408,19 +410,5 @@
   </div>
 </div>
 
-<!-- MODALE VIEW GAME -->
-<div class="modal fade text-center" id="viewGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button (click)="unselectViewMyGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <app-view-mygame></app-view-mygame>
-
-
-    </div>
-  </div>
-</div>
 
 
