@@ -42,10 +42,10 @@
 
     <div id="gamenium-actu-invite">
         <div class="gamenium-container-panel mb">
-            <h2>Les actus à la Une</h2>
-            <div class="rowamoi">
+            <h2 class="">Les actus à la Une</h2>
+            <div id="content-actu-invite" class="d-flex p">
                 <!-- Boucle avec les card actus (en afficher 6) -->
-                <ng-container *ngFor="let actu of postActuFollowOrAll">
+                <ng-container *ngFor="let actu of postActuFollowOrAll | slice: postActuFollowOrAll.length - 4"> <!--Le slice est la pour afficher les 4 dernières actu stocké dans le tableau donc les 4 + recente -->
                     <div class="card col-4" routerLink="/actuality/{{ actu.id }}">
                         <img src="{{ actu.picture.url }}" class="card-img-top" alt="..." />
                         <div class="card-body">
@@ -81,8 +81,8 @@
                 </ng-container>
 
             </div>
-            <div class="">
-                <a class="view-more-btn" href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
+            <div class="rowamoi justify-content-end">
+                <a class="view-more-btn " href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
         </div>
     </div>

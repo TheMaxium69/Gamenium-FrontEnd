@@ -8,6 +8,10 @@
     
 }
 
+h2 {
+    color: black;
+}
+
 .rowamoi {
     display: flex;
     flex-direction: row;
@@ -17,15 +21,17 @@
     margin-bottom: 75px;
 }
 
+.p {
+    padding: 40px;
+}
+
 .gamenium-container-panel {
-    display: flex;
-    justify-content: space-between;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 10px;
     padding: 40px;
     width: 1140px;
     margin-right: 75px;
-    align-items: center;
+    
 }
 
 
@@ -43,7 +49,6 @@
     border-color: #FF0000;
     padding: 10px 20px;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .view-more-btn:hover {
@@ -207,21 +212,21 @@
 
 /* Nos actualités */
 
-#gamenium-actu-invite{
+#content-actu-invite {
     justify-content: center;
     gap: 35px;
     flex-wrap: wrap;
     max-width: 1140px;
   }
   
-  #gamenium-actu-invite .card{
+  #content-actu-invite .card{
     width: 26rem;
     border: unset!important;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 14px;
   }
   
-  #gamenium-actu-invite .card .card-img-top{
+  #content-actu-invite .card .card-img-top{
     object-fit: cover;
     max-width: 418px;
     max-height: 234px;
@@ -229,40 +234,40 @@
     transition: transform 0.4s ease-out;
     will-change: transform;
   }
-  #gamenium-actu-invite .card .card-img-top:hover{
+  #content-actu-invite .card .card-img-top:hover{
     transform: scale(1.03);
   }
   
-  #gamenium-actu-invite .card .card-body .card-hr{
+  #content-actu-invite .card .card-body .card-hr{
     padding-right: 8px;
     padding-left: 8px;
     padding-top: 2.5px;
     padding-bottom: 4px;
   }
   
-  #gamenium-actu-invite .card .card-body hr{
+  #content-actu-invite .card .card-body hr{
     margin: 7px 0;
     opacity: 0.45;
   }
   
-  #gamenium-actu-invite .card .card-body {
+  #content-actu-invite .card .card-body {
     padding-top: 8px;
     padding-right: 14px;
     padding-bottom: 14px;
     padding-left: 20px;
   }
   
-  #gamenium-actu-invite .card .card-body .btn{
+  #content-actu-invite .card .card-body .btn{
     color: white;
     background-color: rgba(255, 0, 0, 0.54);
     box-shadow: 1px 2px 11px #a6a6a6;
   }
   
-  #gamenium-actu-invite .card-title{
+  #content-actu-invite .card-title{
     margin-bottom: unset;
   }
   
-  #gamenium-actu-invite .provider-img{
+  #content-actu-invite .provider-img{
     height: 24px;
     width: 24px;
     margin-top: 1px;
@@ -274,20 +279,20 @@
     margin-right: 7px;
   }
   
-  #gamenium-actu-invite .card-end{
+  #content-actu-invite .card-end{
     justify-content: space-between;
     background-color: rgba(33, 37, 41, 0.03);
   }
-  #gamenium-actu-invite .card-end .card-i{
+  #content-actu-invite .card-end .card-i{
     font-size: 25px;
     gap: 2px;
   }
-  #gamenium-actu-invite .card-end .card-i .active i{
+  #content-actu-invite .card-end .card-i .active i{
     color: rgba(255, 0, 0);
   }
   
   @media (max-width: 920px) {
-    #gamenium-actu-invite {
+    #content-actu-invite {
       flex-wrap: wrap;
     }
   }
