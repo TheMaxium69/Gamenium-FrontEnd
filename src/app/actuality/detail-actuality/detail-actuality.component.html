@@ -54,14 +54,34 @@
           <div class="provider_card" *ngIf="actualitySelected?.Provider?.parentCompany">
             <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.parentCompany?.color }}" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}"></div>
             <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.parentCompany?.picture?.url }})" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}"></div>
-            <p class="name" style="color: {{ actualitySelected?.Provider?.parentCompany?.color }}" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}">{{ actualitySelected?.Provider?.parentCompany?.displayName }} </p>
-            <a id="followBtn{{ actualitySelected?.Provider?.parentCompany?.id }}" (click)="followProviderUs(actualitySelected?.Provider?.parentCompany?.id)">Suivre</a>
+            <p class="name" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}">{{ actualitySelected?.Provider?.parentCompany?.displayName }} </p>
+            <div id="button_follow">
+              <button
+                id="button-follow-text{{actualitySelected?.Provider?.parentCompany?.id}}"
+                type="button"
+                style="background-color: {{ providerSelected?.color }}"
+                (click)="followBtnClick(actualitySelected?.Provider?.parentCompany?.id ?? 0)"
+                (mouseleave)="followBtnMouseLeave(actualitySelected?.Provider?.parentCompany?.id ?? 0)"
+                (mouseenter)="followBtnMouseEnter(actualitySelected?.Provider?.parentCompany?.id ?? 0)">
+                {{isProviderFollowedByUser ? 'Suivie' : 'Suivre'}}
+              </button>
+            </div>
           </div>
           <div class="provider_card">
             <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.color }}"  routerLink="/provider/{{ actualitySelected?.Provider?.id }}"></div>
             <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.picture?.url }})"  routerLink="/provider/{{ actualitySelected?.Provider?.id }}"></div>
-            <p class="name" style="color: {{ actualitySelected?.Provider?.color }}"  routerLink="/provider/{{ actualitySelected?.Provider?.id }}">{{ actualitySelected?.Provider?.displayName }} </p>
-            <a id="followBtn{{ actualitySelected?.Provider?.id }}"  (click)="followProviderUs(actualitySelected?.Provider?.id)">Suivre</a>
+            <p class="name" routerLink="/provider/{{ actualitySelected?.Provider?.id }}">{{ actualitySelected?.Provider?.displayName }} </p>
+            <div id="button_follow">
+              <button
+                id="button-follow-text{{actualitySelected?.Provider?.id}}"
+                type="button"
+                style="background-color: {{ providerSelected?.color }}"
+                (click)="followBtnClick(actualitySelected?.Provider?.id ?? 0)"
+                (mouseleave)="followBtnMouseLeave(actualitySelected?.Provider?.id ?? 0)"
+                (mouseenter)="followBtnMouseEnter(actualitySelected?.Provider?.id ?? 0)">
+                {{isProviderFollowedByUser ? 'Suivie' : 'Suivre'}}
+              </button>
+            </div>
           </div>
         <!-- </div> -->
       </section>
@@ -126,7 +146,7 @@
           <!-- <div class="provider_card" *ngIf="actualitySelected?.Provider?.parentCompany"> -->
             <!-- <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.parentCompany?.color }}" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}"></div> -->
             <!-- <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.parentCompany?.picture?.url }})" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}"></div> -->
-            <!-- <p class="name" style="color: {{ actualitySelected?.Provider?.parentCompany?.color }}" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}">{{ actualitySelected?.Provider?.parentCompany?.displayName }} </p> -->
+            <!-- <p class="name"  routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}">{{ actualitySelected?.Provider?.parentCompany?.displayName }} </p> -->
             <!-- <a id="followBtn{{ actualitySelected?.Provider?.parentCompany?.id }}" (click)="followProviderUs(actualitySelected?.Provider?.parentCompany?.id)">Suivre</a> -->
           <!-- </div> -->
           <!-- <div class="provider_card"> -->

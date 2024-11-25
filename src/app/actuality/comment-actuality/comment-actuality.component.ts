@@ -10,7 +10,7 @@ import {BadgeService} from "../../-service/badge.service";
 import {BadgeInterface} from "../../-interface/badge.interface";
 import { ProfilInterface } from 'src/app/-interface/profil.interface';
 import { ProfilService } from 'src/app/-service/profil.service';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LikeService } from 'src/app/-service/like.service';
 import { IpService } from 'src/app/-service/ip.service';
@@ -19,7 +19,8 @@ registerLocaleData(localeFr, 'fr');
 @Component({
   selector: 'app-comment-actuality',
   templateUrl: './comment-actuality.component.html',
-  styleUrls: ['./comment-actuality.component.css']
+  styleUrls: ['./comment-actuality.component.css'],
+  providers: [DatePipe]
 })
 export class CommentActualityComponent implements OnInit{
 
@@ -193,7 +194,7 @@ export class CommentActualityComponent implements OnInit{
             // Ajout de la div username
             const userName = this.renderer.createElement('h4');
             this.renderer.addClass(userName, 'comment-user-name');
-            const nameHTML = `(Vous) <span style="color:${this.providerColor}">${this.newComment.user.displayname}</span>`;
+            const nameHTML = `<span>${this.newComment.user.displayname}</span>`;
             this.renderer.setProperty(userName, 'innerHTML', nameHTML);
             this.renderer.appendChild(commentUser, userName);
 

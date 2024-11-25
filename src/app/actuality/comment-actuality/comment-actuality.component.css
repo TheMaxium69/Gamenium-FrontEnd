@@ -149,7 +149,10 @@
 .time-ago {
   font-size: small;
   margin-left: 20px;
-  color: #575757
+  color: #575757;
+  font-family: var(--main-police), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .reply-section {
@@ -163,6 +166,10 @@
 
 .comment-action {
   cursor: pointer;
+  color: #575757;
+  font-family: var(--main-police), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 #reply-icon {
@@ -182,7 +189,8 @@
 }
 
 .btn {
-  border: none;
+  border: 1px solid;
+  border-color: var(--providerColor);
   color: white;
 }
 
