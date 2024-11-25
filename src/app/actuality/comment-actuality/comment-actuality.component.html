@@ -99,7 +99,7 @@
                <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
              </div>
 
-              <h4 class="comment-user-name">(Vous) <span style="color: {{ providerColor }}">{{ comment.user.displayname }}</span>
+              <h4 class="comment-user-name"><span>{{ comment.user.displayname }}</span>
               <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
@@ -146,7 +146,7 @@
           <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
             <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
           </div>
-          <h4 class="comment-user-name"><span style="color: {{ providerColor }}">{{ comment.user.displayname }}</span>
+          <h4 class="comment-user-name"><span>{{ comment.user.displayname }}</span>
             <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
               <img class="badgeIMG" src="{{ badge.picture?.url }}">
             </ng-container>

@@ -182,8 +182,9 @@
 }
 
 .btn {
-  border: none;
+  border: 1px solid;
   color: white;
+  border-color: var(--providerColor);
 }
 
 .btn:hover {
