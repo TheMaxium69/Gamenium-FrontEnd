@@ -128,6 +128,7 @@
   margin: 1px;
   margin-left: 2px;
   color:white;
+  font-size: 18px;
 }
 
 .card-wrapper {
@@ -245,6 +246,10 @@
 
 .card-action i:hover {
   cursor: pointer;
+  font-size: 32px;
+  animation: jiggle 0.5s forwards;
+  transition: 0.3s;
+  
 }
 
 .card:hover {
@@ -358,6 +363,22 @@
     align-items: flex-end;
   }
 
+}
 
-
+@keyframes jiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
