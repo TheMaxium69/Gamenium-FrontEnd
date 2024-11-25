@@ -79,9 +79,7 @@
               <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
                 <h2>{{ myGameHistorique.myGame.game.name }}</h2>
                 <p style="color: {{ isColor }};" class="platform-names">
-                  <ng-container *ngFor="let platform of myGameHistorique.myGame.game.platforms; let last = last">
-                    {{ platform.name }}<span *ngIf="!last">, </span>
-                  </ng-container>
+                  {{ myGameHistorique.myGame.plateform.name }}
                 </p>
                 <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
                 <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->
@@ -205,15 +203,15 @@
       <input
         type="text"
         class="search-input"
-        placeholder="Recherche dans vos jeux" 
+        placeholder="Recherche dans vos jeux"
         [(ngModel)]="searchQuery"
-        (input)="filterGames()"  
+        (input)="filterGames()"
       />
       <button class="filter-button">
         <i class="ri-filter-line"></i>
       </button>
     </div>
-    
+
 
 
 
@@ -240,9 +238,7 @@
               <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
                 <h2>{{ myGameHistorique.myGame.game.name }}</h2>
                 <p style="color: {{ isColor }};" class="platform-names">
-                  <ng-container *ngFor="let platform of myGameHistorique.myGame.game.platforms; let last = last">
-                    {{ platform.name }}<span *ngIf="!last">, </span>
-                  </ng-container>
+                  {{ myGameHistorique.myGame.plateform.name }}
                 </p>
                 <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
                 <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->

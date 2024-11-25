@@ -2,6 +2,7 @@ import { BuyWhereInterface } from "./buy-where.interface";
 import { UserRateInterface } from "./user-rate.interface";
 import {UserInterface} from "./user.interface";
 import {GameInterface} from "./game.interface";
+import {PlateformInterface} from "./plateform.interface";
 
 export interface MyGameInterface {
 
@@ -12,7 +13,8 @@ export interface MyGameInterface {
   game:GameInterface,
   difficulty_rating: number,
   lifetime_rating: number,
-  wish_list: boolean
+  wish_list: boolean,
+  plateform:PlateformInterface,
 
 }
 
