@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { AppComponent } from "../../app.component";
+import { AppComponent } from '../../app.component';
 import { HistoryMyGameService } from "../../-service/history-my-game.service";
 import { UserInterface } from "../../-interface/user.interface";
 import { HistoryMyGameInterface } from "../../-interface/history-my-game.interface";
