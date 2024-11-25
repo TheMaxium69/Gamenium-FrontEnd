@@ -41,6 +41,10 @@ export class DetailActualityComponent implements OnInit{
   providerId: number|any;
   providerSelected: ProviderInterface|undefined;
 
+  followAll:FollowInterface[] = [];
+  followAllParent:FollowInterface[] = [];
+
+
   constructor(private route: ActivatedRoute,
               private postActu: PostActuService,
               private app: AppComponent,
@@ -88,7 +92,7 @@ export class DetailActualityComponent implements OnInit{
 
   updateScreenWidth = (): void => {
     this.screenWidth = window.innerWidth;
-    console.log(this.screenWidth);
+    // console.log(this.screenWidth);
   };
 
   checkIfUserFollowProvider(userId: number) {
@@ -119,7 +123,7 @@ export class DetailActualityComponent implements OnInit{
             this.verifFollowProvider(this.actualitySelected?.Provider)
           }
           if (this.actualitySelected?.Provider?.parentCompany) {
-            this.verifFollowProvider(this.actualitySelected?.Provider?.parentCompany)
+            this.verifFollowParentProvider(this.actualitySelected?.Provider?.parentCompany)
           }
           if (this.actualitySelected?.GameProfile) {
             this.verifFollowGameProfil(this.actualitySelected?.GameProfile)
@@ -249,32 +253,58 @@ export class DetailActualityComponent implements OnInit{
   }
 
   verifFollowProvider(Provider: ProviderInterface){
-
-    let followAll:FollowInterface[] = [];
     let btnFollowProvider:HTMLElement|null;
 
     this.followService.getFollowByProvider(Provider.id, this.app.setURL()).subscribe(reponseFollowByProvider => {
 
       if (reponseFollowByProvider.message == "good") {
 
-        followAll = reponseFollowByProvider.result;
-
-        followAll.forEach((followOne:FollowInterface)=>{
-
+        this.followAll = reponseFollowByProvider.result;
+        this.followAll.forEach((followOne:FollowInterface)=>{
           if (followOne.user.id == this.userConnectedId){
-
+            
             btnFollowProvider = document.getElementById("followBtn"+Provider.id)
             if (btnFollowProvider){
-
+              
               btnFollowProvider.innerText = 'Suivie';
-
+              
             }
-
+            
           }
-
+          
         });
-
+        
       }
+      console.table(this.followAll)
+
+    });
+
+  }
+
+  verifFollowParentProvider(Provider: ProviderInterface){
+    let btnFollowProvider:HTMLElement|null;
+
+    this.followService.getFollowByProvider(Provider.id, this.app.setURL()).subscribe(reponseFollowByProvider => {
+
+      if (reponseFollowByProvider.message == "good") {
+
+        this.followAllParent = reponseFollowByProvider.result;
+        this.followAllParent.forEach((followOne:FollowInterface)=>{
+          if (followOne.user.id == this.userConnectedId){
+            
+            btnFollowProvider = document.getElementById("followBtn"+Provider.id)
+            if (btnFollowProvider){
+              
+              btnFollowProvider.innerText = 'Suivie';
+              
+            }
+            
+          }
+          
+        });
+        
+      }
+      console.table(this.followAll)
 
     });
 
@@ -297,15 +327,31 @@ export class DetailActualityComponent implements OnInit{
     });
 
   }
-  followBtnClick(providerId: number) {
-    // Ajoute du follow
-    if (!this.isProviderFollowedByUser) {
-      this.followProviderUs(providerId)
 
-    // Reire le follow
-    } else if (this.isProviderFollowedByUser) {
-      this.deleteFollow(providerId)
+  followBtnClickParent(providerId: number | undefined) {
+    if (providerId) {
+      const provider = this.followAllParent.find((follow: FollowInterface) => follow.provider?.id === providerId && follow.user.id === this.userConnectedId )
+      
+      if (provider) {
+        this.deleteFollow(providerId)
+      } else {
+        this.followProviderUs(providerId)
+      }
     }
+
+  }
+
+  followBtnClick(providerId: number | undefined) {
+    if (providerId) {
+      const provider = this.followAll.find((follow: FollowInterface) => follow.provider?.id === providerId && follow.user.id === this.userConnectedId )
+      
+      if (provider) {
+        this.deleteFollow(providerId)
+      } else {
+        this.followProviderUs(providerId)
+      }
+    }
+    
   }
 
   followProviderUs(id: number|undefined) {
@@ -324,14 +370,17 @@ export class DetailActualityComponent implements OnInit{
         const bodyAddFollow = JSON.stringify(bodyNoJsonAddFollow);
 
         this.followService.postFollowProvider(bodyAddFollow, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddFollow => {
-
-          if (reponseAddFollow.message == "good"){
+          
+          // if (reponseAddFollow.message == "good"){
+            
             btnFollowProvider = document.getElementById("button-follow-text"+id)
             if (btnFollowProvider){
-
+              
               btnFollowProvider.innerText = 'Suivie';
             }
-          }
+
+            console.log('follow ajouté avec succès pour le provider'+ id)
+          // }
         });
       },
       (error) => {
@@ -347,12 +396,11 @@ export class DetailActualityComponent implements OnInit{
         this.followService.postFollowProvider(bodyAddFollow, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddFollow => {
 
           if (reponseAddFollow.message == "good"){
-
             btnFollowProvider = document.getElementById("button-follow-text"+id)
             if (btnFollowProvider){
 
               btnFollowProvider.innerText = 'Suivie';
-
+              
             }
           }
         });
@@ -360,46 +408,46 @@ export class DetailActualityComponent implements OnInit{
   }
 
   deleteFollow(providerId: number) {
-    console.log('btn clicked')
+    console.log('delete clicked')
+
     this.followService.deleteFollowProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
-      if (reponseApi.message == 'follow deleted successfully') {
-        this.isProviderFollowedByUser = false
-        console.log('follow supprimé avec succès')
-      }
+      // if (reponseApi.message == 'follow deleted successfully') {
+        // this.isProviderFollowedByUser = false
+        console.log('follow supprimé avec succès pour le provider' + providerId)
+      // }
     })
 
-  console.log("delte");
   }
 
   followBtnMouseEnter(id: number|undefined) {
     // console.log('mouse enter')
-    const btnTxt = document.querySelector('#button-follow-text'+id) as HTMLElement
-    const plusI = this.renderer.createElement('i')
-    this.renderer.addClass(plusI, 'ri-add-circle-line')
-    this.renderer.appendChild(btnTxt, plusI)
-    if (btnTxt && this.isProviderFollowedByUser) {
-      btnTxt.textContent = 'Ne plus suivre'
-      btnTxt.style.backgroundColor = 'white'
-      btnTxt.style.color = this.providerSelected?.color ?? 'red'
-      btnTxt.style.border = '2px solid'
-      btnTxt.style.borderColor = this.providerSelected?.color ?? 'red'
-      btnTxt.style.transition = 'all 0.2s ease';
-    }
+    // const btnTxt = document.querySelector('#button-follow-text'+id) as HTMLElement
+    // const plusI = this.renderer.createElement('i')
+    // this.renderer.addClass(plusI, 'ri-add-circle-line')
+    // this.renderer.appendChild(btnTxt, plusI)
+    // if (btnTxt && this.isProviderFollowedByUser) {
+    //   btnTxt.textContent = 'Ne plus suivre'
+    //   btnTxt.style.backgroundColor = 'white'
+    //   btnTxt.style.color = this.providerSelected?.color ?? 'red'
+    //   btnTxt.style.border = '2px solid'
+    //   btnTxt.style.borderColor = this.providerSelected?.color ?? 'red'
+    //   btnTxt.style.transition = 'all 0.2s ease';
+    // }
   }
 
   followBtnMouseLeave(id: number|undefined) {
     // console.log('mouse leave')
-    const btnTxt = document.querySelector('#button-follow-text'+id) as HTMLElement
-    const plusI = this.renderer.createElement('i')
-    this.renderer.addClass(plusI, 'ri-add-circle-line')
-    this.renderer.appendChild(btnTxt, plusI)
-    if (btnTxt) {
-      btnTxt.textContent = this.isProviderFollowedByUser ? 'Suivie' : 'Suivre'
-      btnTxt.style.backgroundColor = this.providerSelected?.color ?? 'red'
-      btnTxt.style.color = 'white'
-      btnTxt.style.border = 'none'
-      btnTxt.style.transition = 'all 0.2s ease';
-    }
+    // const btnTxt = document.querySelector('#button-follow-text'+id) as HTMLElement
+    // const plusI = this.renderer.createElement('i')
+    // this.renderer.addClass(plusI, 'ri-add-circle-line')
+    // this.renderer.appendChild(btnTxt, plusI)
+    // if (btnTxt) {
+    //   btnTxt.textContent = this.isProviderFollowedByUser ? 'Suivie' : 'Suivre'
+    //   btnTxt.style.backgroundColor = this.providerSelected?.color ?? 'red'
+    //   btnTxt.style.color = 'white'
+    //   btnTxt.style.border = 'none'
+    //   btnTxt.style.transition = 'all 0.2s ease';
+    // }
   }
 
   liked(btnActuLike: HTMLElement, state: String) {
