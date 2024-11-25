@@ -121,62 +121,88 @@
     </div>
 
     <article class="articleTuto">
+      <div class="row ">
+        <div class="col-md-12 py-4 hello">
+          <h2 class="text-center">Bonjour, <span class="pseudo" style="color: {{ isColor }};">{{ userConnected?.displayname }}</span></h2>
+        </div>
+      </div>
 
-      <h2>Bonjour, <span class="pseudo" style="color: {{ isColor }};">{{ userConnected?.displayname }}</span></h2>
+      <div class="row">
 
-      <hr>
+        <div class="col-md-6 actionPossible">
+          <div class="action">
 
-      <article class="inUserTuto">
+            <h3 class="text-center py-4 mb-0">Que Souhaitez-vous faire ?</h3>
+  
+            <div class=" ">
 
-        <div class="action">
+              <div class="row">
+                <div class="col-lg-6 ">
+                  <article (click)="unselectGame()" class="card py-4 mb-3 mx-auto" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
+                    <i class="ri-add-circle-line"></i>
+                    <h6>Ajoutez un jeu</h6>
+                  </article>
+                </div>
+                <div class="col-lg-6">
+                  <article (click)="unselectGame()" class="card py-4 mx-auto" data-bs-toggle="modal" data-bs-target="#noteGamePage">
+                    <i class="ri-star-half-line"></i>
+                    <h6>Ajoutez une note</h6>
+                  </article>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6">
+                  <article class="card py-4 mb-3 mx-auto" routerLink="/profil/{{ userConnected?.id }}">
+                    <i class="ri-profile-line"></i>
+                    <h6>Votre profil public</h6>
+                  </article>
+                </div>
+                <div class="col-lg-6 ">
+                  <article class="card py-4 mx-auto" routerLink="/profil/{{ userConnected?.id }}">
+                    <i class="ri-settings-3-line"></i>
+                    <h6>Éditer votre profil</h6>
+                  </article>
+                </div>
+              </div> 
+            </div> 
+          </div>         
+        </div>
 
-          <h3>Action Rapide :</h3>
+        <div class="col-md-5 offset-md-1 taskPossible">
+          <div class="task">
+            <h3 class="text-center py-4 mb-0">Vos tâches</h3>
+            <p class="">Finaliser vos tâches :</p>
 
-          <div class="d-flex">
-
-            <article (click)="unselectGame()" class="card" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
-              <i class="ri-add-circle-line"></i>
-              <h6>Ajoutez un jeu</h6>
-            </article>
-
-            <article (click)="unselectGame()" class="card" data-bs-toggle="modal" data-bs-target="#noteGamePage">
-              <i class="ri-star-half-line"></i>
-              <h6>Ajoutez une note</h6>
-            </article>
-
-            <article class="card" routerLink="/profil/{{ userConnected?.id }}">
-              <i class="ri-profile-line"></i>
-              <h6>Votre profil public</h6>
-            </article>
-
+            <div class="progress-bar-container">
+              <div class="progress-bar" style="background-color: {{ isColor }}" [style.width.%]="progress"></div>
+            </div>
+  
+  
+            <h3>Pour finaliser votre compte :</h3>
+            <br>
+            <ng-container *ngFor="let task of tasks">
+              <!-- Tache -->
+              <h6>
+                <!-- Cercle remplis ou vide selon si completé -->
+                <i *ngIf="task.completed" class="ri-checkbox-circle-fill"></i>
+                <i *ngIf="!task.completed" class="ri-checkbox-blank-circle-line"></i>
+                {{ task.name }}
+              </h6>
+            </ng-container>
           </div>
 
         </div>
-
-        <hr>
-
-        <div class="task">
-          <div class="progress-bar-container">
-            <div class="progress-bar" [style.width.%]="progress"></div>
-          </div>
-
-
-          <h3>Pour finaliser votre compte :</h3>
-          <br>
-          <ng-container *ngFor="let task of tasks">
-            <!-- Tache -->
-            <h6>
-              <!-- Cercle remplis ou vide selon si completé -->
-              <i *ngIf="task.completed" class="ri-checkbox-circle-fill"></i>
-              <i *ngIf="!task.completed" class="ri-checkbox-blank-circle-line"></i>
-              {{ task.name }}
-            </h6>
-          </ng-container>
-        </div>
-
+      </div>
       </article>
 
-    </article>
+      <!-- SECTION BARRE DE RECHERCHE -->
+       <div class="row search-bar">
+        <div class="col-md-12 border">
+          <h2 class="text-center">ICI BARRE DE RECHERCHE</h2>
+        </div>
+       </div>
+
+ 
 
     <!-- UNPINNED GAME -->
     <div id="show-game" class="d-flex container">
