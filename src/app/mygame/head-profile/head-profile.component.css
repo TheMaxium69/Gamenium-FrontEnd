@@ -25,12 +25,13 @@
 }
 
 #profilPublic{
-
   height: 183px;
   width: 100%;
-  box-shadow: inset 0px 0px 20px #00000082;
+  box-shadow: 1px 2px 10px #a6a6a6;
   margin-bottom: 183px;
-
+  background-color: white;
+  border-bottom-left-radius: 65px;
+  border-bottom-right-radius: 65px;
 }
 
 #profilInfo{
@@ -56,27 +57,29 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  box-shadow: 2px 2px 9px #888;
+  box-shadow: 1px 3px 12px #a6a6a6;
 }
 
 #profilPublic .wrapper{
   background-color: white;
   width: 100%;
-  max-width: 1320px;
-  box-shadow: 1px 2px 11px #a6a6a6;
+  max-width: 637px;
+  height: fit-content;
+  margin-top: 20px;
   border-radius: 15px;
-  padding: 10px;
 }
 
 #inWrapper{
   display: flex;
   height: 100%; 
-  flex-wrap: wrap;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 1px 2px 10px #a6a6a6;
 }
 
 #profilInfoLeft {
   width: 62%;
-  padding: 33px;
+  align-content: center;
 }
 
 #profilInfoLeft h2{
@@ -85,7 +88,7 @@
 
 #profilInfoRight{
   width: 38%;
-  margin-top: 38px;
+  align-content: center;
 }
 
 #profilInfoRight .nb{
@@ -98,7 +101,6 @@
 
 #profilInfoLeft .articleInfoLeft{
   text-align: start;
-  border-right: solid 1px black;
 }
 #profilInfoLeft .articleReseau{
   /* margin-top: 18px; */
@@ -114,7 +116,13 @@
 .lettrePP {
   text-align: center;
   font-size: 200px;
-  margin-top: -37px;
+  margin-top: -30px;
+}
+
+.border-provider-main {
+  width: 1px;
+  background-color: black;
+  margin: 2% 0;
 }
 
 @media (max-width: 1400px) {
@@ -166,6 +174,10 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+
   #profilInfo {
     width: 100%;
   }
@@ -183,7 +195,7 @@
 
   .lettrePP {
     font-size: 130px;
-    margin-top: -20px;
+    margin-top: 0;
   }
 
   #profilInfoLeft {
@@ -199,6 +211,12 @@
   .wrapper {
     flex-wrap: wrap;
   }
+}
+
+@media (max-width: 670px) {
+    #inWrapper {
+      
+    }
 }
 
 @media (max-width: 576px) {
@@ -217,8 +235,8 @@
   }
 
   .lettrePP {
-    font-size: 90px;
-    margin-top: -10px;
+    font-size: 100px;
+    margin-top: 0;
   }
 
   #profilInfoLeft {
