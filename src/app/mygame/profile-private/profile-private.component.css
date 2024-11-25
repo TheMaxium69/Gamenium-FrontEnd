@@ -1,3 +1,7 @@
+h2 {
+  color: #575757;
+}
+
 #profilWrapper{
   background-color: white;
   border-radius: 15px;
@@ -392,6 +396,17 @@
     transform: rotate(0deg);
   }
 }
+
+@media (max-width: 768px) {
+
+  #profilWrapper .articleTuto .actionPossible {
+    margin-bottom: 20px;
+  }
+
+
+}
+
+
 
 /* Section Search Bar */
 .search-bar {
