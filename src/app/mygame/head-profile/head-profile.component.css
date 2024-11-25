@@ -201,6 +201,8 @@
   #profilInfoLeft {
     width: 50%;
     padding: 10px;
+    flex-wrap: wrap;
+    display: flex;
   }
 
   #profilInfoRight {
@@ -208,18 +210,22 @@
   }
 
 
-  .wrapper {
-    flex-wrap: wrap;
+  #inWrapper {
+    margin-top: 0;
+    padding: 15px;
+  }
+
+  #profilPublic .wrapper {
+    margin-top: 0;
   }
 }
 
+/* 
 @media (max-width: 670px) {
-    #inWrapper {
-      
-    }
-}
 
-@media (max-width: 576px) {
+} */
+
+/* @media (max-width: 576px) {
   #profilPublic {
     margin-bottom: -40px;
   }
@@ -329,4 +335,4 @@
     margin-right: 3px;
   }
 
-}
+} */

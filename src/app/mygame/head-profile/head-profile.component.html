@@ -7,7 +7,7 @@
 <div id="profilPublic" style="background-color: {{ isColor }}">
   <div class="container">
     <div id="profilInfo" >
-      <div class="d-flex">
+      <div class="d-flex container">
         <div *ngIf="profilSelected?.picture" class="profilPhoto" style="background-image: url('{{ profilSelected?.picture }}')"></div>
 
         <div *ngIf="!profilSelected?.picture" class="profilPhoto" style="background-color: white!important">
