@@ -193,7 +193,7 @@ export class CommentActualityComponent implements OnInit{
             // Ajout de la div username
             const userName = this.renderer.createElement('h4');
             this.renderer.addClass(userName, 'comment-user-name');
-            const nameHTML = `(Vous) <span style="color:${this.providerColor}">${this.newComment.user.displayname}</span>`;
+            const nameHTML = `<span>${this.newComment.user.displayname}</span>`;
             this.renderer.setProperty(userName, 'innerHTML', nameHTML);
             this.renderer.appendChild(commentUser, userName);
 
