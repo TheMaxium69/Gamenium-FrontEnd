@@ -826,6 +826,7 @@
 
 /* //////////////// FIN DE ZONE CARROUSSEL /////////////// */
 
+/* //////////////// DEBUT DE ZONE AJOUT COLLECTION /////////////// */
 
 .pictures-separation{
     border: solid 1px;
@@ -925,35 +926,51 @@
 }
 
 .info-name {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 5px;
+  color: #575757;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-spacing: -5px;
+}
+
+.platform-names {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .game-add-button {
-    background-color: rgb(62, 185, 254);
     color: white;
     border: none;
     border-radius: 15px;
     margin: auto;
     padding: 10px 20px;
     text-align: center;
-    box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
     font-size: 18px;
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
     margin-right: 20px;
+    border: solid 2px;
+    border-color: var(--userColor);
 }
 
 .game-add-button i {
     font-size: 20px;
 }
 
-.game-add-button:hover {
-    background-color: dodgerblue;
-    transition: 0.3s;
+.btn-primary:hover {
+  background-color: white !important;
+  color: var(--userColor) !important;
+  border: solid 2px;
+  border-color: var(--userColor) !important;
+  transition: 0.3s;
 }
 
 @media (max-width: 768px) {
@@ -987,7 +1004,9 @@
 }
 
 
+/* //////////////// FIN DE ZONE AJOUT COLLECTION /////////////// */
 
+/* //////////////// DEBUT DE ZONE SHOW COLLECTION /////////////// */
 
 
 .show-collection {
@@ -996,23 +1015,24 @@
     justify-content: center;
 }
 
+.btn-secondary:hover {
+  background-color: var(--userColor) !important;
+  color: white !important;
+  border: solid 2px;
+  border-color: var(--userColor) !important;
+  transition: 0.3s;
+}
+
 .my-collection {
-    background-color: rgb(254, 62, 62);
-    color: white;
     font-size: 17px;
     padding: 10px 50px;
     margin-bottom: 120px;
     border-radius: 15px;
-    border: solid 2px
+    border: solid 2px;
+    box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
 }
 
-.my-collection:hover {
-    background-color: red;
-    transition: 0.3s;
-}
-
-
-
+/* //////////////// FIN DE ZONE SHOW COLLECTION /////////////// */
 
 
 

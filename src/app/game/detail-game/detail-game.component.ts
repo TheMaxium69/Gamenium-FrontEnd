@@ -15,7 +15,9 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
   isLoggedIn:boolean = false;
   userConnectedId:number|undefined;
+  userName: string|undefined;
   userColor : string | undefined;
+  isHovered: boolean = false;
 
   gameId: number|any;
   gameSelected: GameInterface|undefined;
@@ -44,7 +46,8 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
     if (this.isLoggedIn){
 
       this.userConnectedId = this.app.userConnected.id;
-      this.userColor = this.app.userConnected.themeColor
+      this.userName = this.app.userConnected.username;
+      this.userColor = this.app.userConnected.themeColor;
 
     }
 
@@ -97,6 +100,15 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
     })
 
+  }
+
+  get capitalizedUserName(): string {
+    if (!this.userName) return '';
+    return this.userName.charAt(0).toUpperCase() + this.userName.slice(1) + ", ";
+  }
+  
+  onHover(state:boolean) {
+    this.isHovered = state;
   }
 
 
