@@ -36,12 +36,13 @@
       </ng-container>
 
       <!-- OTHER PAGE -->
-      <li>
-        <p>SAMPLE</p>
-      </li>
-      <li>
-        <p>SAMPLE</p>
-      </li>
+      <ng-container *ngIf="plateformsUser">
+        <ng-container *ngFor="let plateform of plateformsUser">
+          <li routerLink="/mygame/{{ plateform.id_giant_bomb }}">
+            <p>{{ plateform.name }}</p>
+          </li>
+        </ng-container>
+      </ng-container>
 
     </ul>
 

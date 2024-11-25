@@ -18,6 +18,8 @@ import { TaskUserCompletedInterface } from 'src/app/-interface/task-user-complet
 import { CommentService } from 'src/app/-service/comment.service';
 import { LikeService } from 'src/app/-service/like.service';
 import { ApicallInterface } from 'src/app/-interface/apicall.interface';
+import {PlateformService} from "../../-service/plateform.service";
+import {PlateformInterface} from "../../-interface/plateform.interface";
 
 @Component({
   selector: 'app-profile-private',
@@ -39,6 +41,7 @@ export class ProfilePrivateComponent implements OnInit {
   isColor: string = this.app.colorDefault;
   isPp: string | undefined;
   profilSelected: ProfilInterface | undefined;
+  plateformsUser: PlateformInterface[] | undefined;
 
   // Indicateur pour savoir quand les données sont bien chargées
   profileLoaded: boolean = false;
@@ -65,6 +68,7 @@ export class ProfilePrivateComponent implements OnInit {
               private profileService: ProfilService,
               private route: ActivatedRoute,
               private histoireMyGameService: HistoryMyGameService,
+              private plateformService:PlateformService,
               private renderer: Renderer2,
               private router: Router) { }
 
@@ -84,7 +88,11 @@ export class ProfilePrivateComponent implements OnInit {
   }
 
   myPlateforme(id:number){
-    /*Recupere les plateforme de l'utilisateur*/
+    this.plateformService.getPlateformWithUser(id, this.app.setURL()).subscribe((reponsePlateformUser: {message:string, result:PlateformInterface[]}) => {
+      if (reponsePlateformUser.message == "good") {
+        this.plateformsUser = reponsePlateformUser.result;
+      }
+    })
   }
 
 
