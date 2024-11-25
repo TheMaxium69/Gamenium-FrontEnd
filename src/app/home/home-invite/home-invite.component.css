@@ -297,35 +297,3 @@ h2 {
   }
 
 /*Dernière sorties*/
-
-
-/* Condition d'utilisation */ 
-
-/* .condition-utilisation {
-    margin-top: 50px;
-    box-shadow: 1px 2px 11px #a6a6a6;
-    border-radius: 15px;
-    padding: 20px 15px;
-}
-
-.condition-u-container {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    gap: 150px;
-}
-
-.condition-border {
-    border-left: 1px solid black;
-}
-
-.termes, .cgu {
-    display: flex;
-    justify-content: center;
-    width: 200px;
-    font-size: 18px;
-}
-
-.termes, .cgu,  a {
-    color: black;
-} */
