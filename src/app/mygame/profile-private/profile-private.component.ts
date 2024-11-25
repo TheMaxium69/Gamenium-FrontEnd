@@ -391,7 +391,7 @@ checkAndCompleteTasks(): void {
       if (task.name === 'Liker votre premier article' && this.userLikes && this.userLikes.length > 0) {
         this.completeTask(task.id);
       }
-      if (task.name === 'Mettre votre premier commentaire' && this.userComments && this.userComments.length > 0) {
+      if (task.name === 'Mettez votre premier commentaire ' && this.userComments && this.userComments.length > 0) {
         this.completeTask(task.id);
       }
       // Si nouvelle task ajouter la verif ici
