@@ -52,7 +52,7 @@ export class ProfilePrivateComponent implements OnInit {
   userComments:any[]= [];
 
   // Pour la recherche
-  searchQuery: string = ''; 
+  searchQuery: string = '';
   filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
 
 
@@ -74,6 +74,7 @@ export class ProfilePrivateComponent implements OnInit {
     this.userConnected = this.app.userConnected;
 
     if (this.userConnected) {
+      this.myPlateforme(this.userConnected.id)
       this.myGameByUser(this.userConnected.id);
       this.getInfoProfile(this.userConnected.id);
       this.fetchTasks();
@@ -81,6 +82,11 @@ export class ProfilePrivateComponent implements OnInit {
 
 
   }
+
+  myPlateforme(id:number){
+    /*Recupere les plateforme de l'utilisateur*/
+  }
+
 
   // récup des jeux par utilisateur
   myGameByUser(id_user: number): void {
@@ -132,7 +138,7 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
   if (this.searchQuery) {
     // ici les jeux filtré selon la recherche
     return this.filteredGames ?? [];
-    
+
   } else {
     // ici les jeux non épinglés
     return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
@@ -190,18 +196,18 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
     this.app.viewMyGame = undefined;
   }
 
-  // Recherche de jeux 
+  // Recherche de jeux
   filterGames(): void {
     if (!this.myGameHistoriqueAll) return;
-  
+
     const query = this.searchQuery.toLowerCase();
     this.filteredGames = this.myGameHistoriqueAll.filter((game) => {
       // on fais une requete pour rechercher les jeux qui corresponde a la searchQuery
       const gameName = game.myGame?.game?.name?.toLowerCase() || '';
       const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
-      const year = game.myGame?.game?.expectedReleaseYear?.toString() || ''; 
-  
-      
+      const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
+
+
       return (
         // on return les resultat qui corresponde
         gameName.includes(query) ||
@@ -210,8 +216,8 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
       );
     });
   }
-  
-  
+
+
 
 
   gameSelected: GameInterface | undefined;
