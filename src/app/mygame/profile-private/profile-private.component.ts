@@ -188,29 +188,6 @@ export class ProfilePrivateComponent implements OnInit {
     this.gameSelected = undefined;
   }
 
-  addGame(form: NgForm) {
-    let is_pinned = form.value['pinnedGame'];
-    if (is_pinned == "") {
-      is_pinned = false;
-    }
-    let bodyNoJsonMyGame: any = {
-      "id_game": this.gameSelected?.id,
-      "is_pinned": is_pinned,
-    };
-    const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
-    this.histoireMyGameService.postMyGame(bodyMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyGameAdd => {
-      if (reponseMyGameAdd.message == "add game is collection") {
-        console.log(this.gameSelected?.name, " a été ajouté");
-        // Actualiser la liste des jeux après l'ajout
-        if (this.userConnected) {
-          this.myGameByUserAfterAddGame(this.userConnected.id);
-        }
-      } else {
-        console.log(reponseMyGameAdd);
-      }
-    })
-  }
-
   myGameByUserAfterAddGame(id_user: number): void {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame) => {
       if (responseMyGame.message == "good") {
@@ -457,6 +434,10 @@ checkAndCompleteTasks(): void {
 
   setModal(game: GameInterface){
     this.app.gameSelected = game;
+  }
+
+  unsetModal(){
+    this.app.gameSelected = undefined;
   }
 
 }

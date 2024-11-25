@@ -49,6 +49,9 @@ import { PlateformComponent } from './actuality/plateform/plateform.component';
 import { ViewMygameComponent } from './-global/view-mygame/view-mygame.component';
 import { EditedMygameComponent } from './mygame/edited-mygame/edited-mygame.component';
 import { ModalNoteComponent } from './-global/modal-note/modal-note.component';
+import { ModalAddGameComponent } from './-global/modal-add-game/modal-add-game.component';
+import { ModalNoteUnselectComponent } from './-global/modal-note-unselect/modal-note-unselect.component';
+import { ModalAddGameUnselectComponent } from './-global/modal-add-game-unselect/modal-add-game-unselect.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +98,10 @@ import { ModalNoteComponent } from './-global/modal-note/modal-note.component';
     PlateformComponent,
     ViewMygameComponent,
     EditedMygameComponent,
-    ModalNoteComponent
+    ModalNoteComponent,
+    ModalAddGameComponent,
+    ModalNoteUnselectComponent,
+    ModalAddGameUnselectComponent
 
   ],
   imports: [

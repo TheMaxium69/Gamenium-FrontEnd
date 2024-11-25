@@ -12,6 +12,8 @@ import {HistoryMyGameInterface} from "./-interface/history-my-game.interface";
 import {GameInterface} from "./-interface/game.interface";
 import {NgForm} from "@angular/forms";
 import {HistoryMyGameService} from "./-service/history-my-game.service";
+import {ProfilePrivateComponent} from "./mygame/profile-private/profile-private.component";
+import {GameService} from "./-service/game.service";
 
 @Component({
   selector: 'app-root',
@@ -28,6 +30,7 @@ export class AppComponent {
     private cookieService: CookieService,
     private ipService: IpService,
     private histoireMyGameService: HistoryMyGameService,
+    private gameService: GameService
   ) {
     const cookieToken:string = this.cookieService.get('tokenGamenium');
     const cookieUser:string = this.cookieService.get('userGamenium');
@@ -310,6 +313,7 @@ export class AppComponent {
 
   gameSelected: GameInterface|undefined;
   viewMyGame:HistoryMyGameInterface|undefined;
+  searchResults: GameInterface[] | undefined;
 
 
   addNote(form:NgForm) {
@@ -336,6 +340,46 @@ export class AppComponent {
     } else {
       console.log("note invalide");
     }
+  }
+
+  addGame(form: NgForm) {
+    let is_pinned = form.value['pinnedGame'];
+    if (is_pinned == "") {
+      is_pinned = false;
+    }
+    let bodyNoJsonMyGame: any = {
+      "id_game": this.gameSelected?.id,
+      "is_pinned": is_pinned,
+    };
+    const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
+    this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
+      if (reponseMyGameAdd.message == "add game is collection") {
+        console.log(this.gameSelected?.name, " a été ajouté");
+        // Actualiser la liste des jeux après l'ajout
+        if (this.userConnected) {
+          // this.profilePrivateComponet.myGameByUserAfterAddGame(this.userConnected.id);
+        }
+      } else {
+        console.log(reponseMyGameAdd);
+      }
+    })
+  }
+
+  onSubmitSearch(form: NgForm): void {
+    const searchValue = form.value['searchValue'];
+    this.gameService.searchGames(searchValue, 5, this.setURL()).subscribe(
+      (results: GameInterface[]) => {
+        this.searchResults = results;
+      },
+      (error: any) => {
+        console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+      }
+    );
+  }
+
+  selectGame(game: GameInterface) {
+    this.gameSelected = game;
+    console.log("Jeu sélectionné avec l'ID :", game.id);
   }
 
 

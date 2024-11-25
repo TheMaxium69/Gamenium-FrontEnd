@@ -1,6 +1,7 @@
 <!-- MODAL -->
 <modal-note></modal-note>
 <modal-view-mygame></modal-view-mygame>
+<modal-add-game-unselect></modal-add-game-unselect>
 
 <!-- CONTENT-->
 <section id="profilWrapper" class="container">
@@ -59,7 +60,7 @@
               <p><i class="ri-pushpin-fill"></i></p>
             </div>
 
-  <!--          <div class="card-left" (click)="goToGame(myGameHistorique.myGame.game.id)" >-->
+            <!--          <div class="card-left" (click)="goToGame(myGameHistorique.myGame.game.id)" >-->
             <div class="card-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame" >
               <ng-container *ngIf="myGameHistorique.myGame.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
                 <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
@@ -81,12 +82,12 @@
                     {{ platform.name }}<span *ngIf="!last">, </span>
                   </ng-container>
                 </p>
-  <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
-  <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->
-  <!--              </ng-container>-->
-  <!--              <ng-container *ngIf="myGameHistorique.buywhere">-->
-  <!--                <p> [LIEU] Où : {{ myGameHistorique.buywhere.name }}</p>-->
-  <!--              </ng-container>-->
+                <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
+                <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->
+                <!--              </ng-container>-->
+                <!--              <ng-container *ngIf="myGameHistorique.buywhere">-->
+                <!--                <p> [LIEU] Où : {{ myGameHistorique.buywhere.name }}</p>-->
+                <!--              </ng-container>-->
                 <p> Ajouté le : {{ myGameHistorique.myGame.added_at | date:'dd / MM / yyyy' }}</p>
               </div>
               <div class="core-right">
@@ -107,9 +108,9 @@
                   <i (click)="togglePin(myGameHistorique); $event.stopPropagation()" class="ri-unpin-line"></i>
                   <i (click)="setModal(myGameHistorique.myGame.game); $event.stopPropagation(); " data-bs-toggle="modal" data-bs-target="#noteGame" class="ri-star-line"></i>
                   <i routerLink="edit/{{ myGameHistorique.id }}" class="ri-pencil-line"></i>
-  <!--                <i (click)="selectGame(myGameHistorique.myGame.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>-->
-  <!--                <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"-->
-  <!--                (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>-->
+                  <!--                <i (click)="selectGame(myGameHistorique.myGame.game); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#editGamePage" class="ri-pencil-line"></i>-->
+                  <!--                <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"-->
+                  <!--                (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>-->
                 </div>
               </div>
             </div>
@@ -133,18 +134,18 @@
           <div class="action">
 
             <h3 class="text-center py-4 mb-0">Que Souhaitez-vous faire ?</h3>
-  
+
             <div class=" ">
 
               <div class="row">
                 <div class="col-lg-6 ">
-                  <article (click)="unselectGame()" class="card py-4 mb-3 mx-auto" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
+                  <article (click)="unsetModal()" class="card py-4 mb-3 mx-auto" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
                     <i class="ri-add-circle-line"></i>
                     <h6>Ajoutez un jeu</h6>
                   </article>
                 </div>
                 <div class="col-lg-6">
-                  <article (click)="unselectGame()" class="card py-4 mx-auto" data-bs-toggle="modal" data-bs-target="#noteGamePage">
+                  <article (click)="unsetModal()" class="card py-4 mx-auto" data-bs-toggle="modal" data-bs-target="#noteGamePage">
                     <i class="ri-star-half-line"></i>
                     <h6>Ajoutez une note</h6>
                   </article>
@@ -163,9 +164,9 @@
                     <h6>Éditer votre profil</h6>
                   </article>
                 </div>
-              </div> 
-            </div> 
-          </div>         
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="col-md-5 offset-md-1 taskPossible">
@@ -176,8 +177,8 @@
             <div class="progress-bar-container">
               <div class="progress-bar" style="background-color: {{ isColor }}" [style.width.%]="progress"></div>
             </div>
-  
-  
+
+
             <h3>Pour finaliser votre compte :</h3>
             <br>
             <ng-container *ngFor="let task of tasks">
@@ -193,16 +194,16 @@
 
         </div>
       </div>
-      </article>
+    </article>
 
-      <!-- SECTION BARRE DE RECHERCHE -->
-       <div class="row search-bar">
-        <div class="col-md-12 border">
-          <h2 class="text-center">ICI BARRE DE RECHERCHE</h2>
-        </div>
-       </div>
+    <!-- SECTION BARRE DE RECHERCHE -->
+    <div class="row search-bar">
+      <div class="col-md-12 border">
+        <h2 class="text-center">ICI BARRE DE RECHERCHE</h2>
+      </div>
+    </div>
 
- 
+
 
     <!-- UNPINNED GAME -->
     <div id="show-game" class="d-flex container">
@@ -231,12 +232,12 @@
                     {{ platform.name }}<span *ngIf="!last">, </span>
                   </ng-container>
                 </p>
-  <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
-  <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->
-  <!--              </ng-container>-->
-  <!--              <ng-container *ngIf="myGameHistorique.buywhere">-->
-  <!--                <p> [LIEU] Où : {{ myGameHistorique.buywhere.name }}</p>-->
-  <!--              </ng-container>-->
+                <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
+                <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->
+                <!--              </ng-container>-->
+                <!--              <ng-container *ngIf="myGameHistorique.buywhere">-->
+                <!--                <p> [LIEU] Où : {{ myGameHistorique.buywhere.name }}</p>-->
+                <!--              </ng-container>-->
                 <p> Ajouté le : {{ myGameHistorique.myGame.added_at | date:'dd / MM / yyyy' }}</p>
               </div>
               <div class="core-right">
@@ -257,14 +258,14 @@
                   <i (click)="togglePin(myGameHistorique); $event.stopPropagation()" class="ri-pushpin-line"></i>
                   <i (click)="setModal(myGameHistorique.myGame.game); $event.stopPropagation(); " data-bs-toggle="modal" data-bs-target="#noteGame" class="ri-star-line"></i>
                   <i routerLink="edit/{{ myGameHistorique.id }}" class="ri-pencil-line"></i>
-  <!--                <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"-->
-  <!--                (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>-->
+                  <!--                <i id="delete-comment-icon" class="ri-delete-bin-line" style="color: red;"-->
+                  <!--                (click)="deleteFromMyGame(myGameHistorique.myGame.game.id)"></i>-->
                 </div>
               </div>
             </div>
 
           </div>
-      </div>
+        </div>
 
       </ng-container>
     </div>
@@ -305,96 +306,6 @@
 
 
 <!-- OLD MODALES -->
-
-<!-- MODALE POUR ÉDITER UN JEU SÉLECTIONNÉ -->
-<div class="modal fade text-center" id="editGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form id="editGameForm" #addForm3="ngForm" (ngSubmit)="addGame(addForm3)" class="modal-body" style="padding-top: 40px;">
-
-        <h2>Éditer un jeu dans votre liste</h2>
-
-        <br>
-        <h5><span style="color: red">*</span>Recherchez votre jeu :</h5>
-        <input *ngIf="gameSelected" type="text" placeholder="Votre jeu" disabled value="{{ this.gameSelected?.name }}">
-        <input *ngIf="!gameSelected" type="text" placeholder="Votre jeu">
-        <br>
-        <br>
-        <h6>Épinglez-vous ce jeu :</h6>
-        <input type="checkbox" name="pinnedGame" ngModel><br>
-        <br>
-        <h6>Quand avez-vous obtenu ce jeu :</h6>
-        <input type="date" name="buyAt" ngModel>
-        <br>
-        <br>
-        <h6>Où avez-vous obtenu ce jeu :</h6>
-        <input type="text" placeholder="Sélectionnez un lieu" name="buyWhere" ngModel>
-
-        <div class="modal-footer" style="margin-top: 74px;">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Modifier</button>
-          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        </div>
-
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- MODALE POUR AJOUTER UN JEU -->
-<div class="modal fade text-center" id="ajouteGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button (click)="unselectGame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form id="addGameForm" #addForm="ngForm" (ngSubmit)="addGame(addForm)" class="modal-body" style="padding-top: 40px;">
-
-        <h2>Ajoutez un jeu à votre liste</h2>
-
-        <br>
-        <h5><span style="color: red">*</span>Recherchez un jeu :</h5>
-        <input *ngIf="this.gameSelected" type="text" placeholder="Votre jeu" disabled value="{{ this.gameSelected?.name }}">
-        <input *ngIf="!this.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="onSubmitSearch(addForm)">
-        <br>
-
-        <div *ngIf="searchResults && searchResults.length > 0 && !this.gameSelected" class="row">
-          <div class="col-md-4" *ngFor="let result of searchResults">
-            <div class="card mb-4 shadow-sm" (click)="selectGame(result)">
-              <img [src]="result.image.icon_url" class="bd-placeholder-img card-img-top" alt="Image du jeu">
-              <div class="card-body">
-                <p class="card-text">{{ result.name }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div *ngIf="searchResults && searchResults.length === 0">
-          <p>Aucun résultat trouvé.</p>
-        </div>
-
-        <br>
-        <h6>Épinglez ce jeu :</h6>
-        <input type="checkbox" name="pinnedGame" ngModel><br>
-        <br>
-        <h6>Quand avez-vous obtenu ce jeu :</h6>
-        <input type="date" name="buyAt" ngModel>
-        <br>
-        <br>
-        <h6>Où avez-vous obtenu ce jeu :</h6>
-        <input type="text" placeholder="Sélectionnez un lieu" name="buyWhere" ngModel>
-
-        <div class="modal-footer" style="margin-top: 74px;">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistrer</button>
-          <button (click)="unselectGame()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        </div>
-
-      </form>
-    </div>
-  </div>
-</div>
 
 <!-- MODALE POUR AJOUTER UNE NOTE À UN NOUVEAU JEU -->
 <div class="modal fade text-center" id="noteGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
