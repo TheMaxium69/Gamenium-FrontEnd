@@ -5,41 +5,7 @@
 
   <!--- MODAL --->
   <modal-note></modal-note>
-  <div class="modal fade text-center" id="ajouteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form id="addGameForm" #addForm="ngForm" (ngSubmit)="addGame(addForm)" class="modal-body" style="padding-top: 40px;">
-          <!--        <img src="..." style="width: 15em" alt="tt">-->
-
-          <h2>Ajoutez un jeux à votre liste</h2>
-
-          <br>
-          <h5><span style="color: red">*</span>Recherche ton jeux :</h5>
-          <input type="text" placeholder="Ton Jeux" disabled value="{{ this.gameSelected?.name }} ">
-          <br>
-          <br>
-          <h6>Epinglez vous ce jeux :</h6>
-          <input type="checkbox"  name="pinnedGame" ngModel><br>
-          <br>
-          <h6>Quand à tu obtenu ton jeux :</h6>
-          <input type="date"  name="buyAt" ngModel>
-          <br>
-          <br>
-          <h6>Ou à tu obtenu ton jeux :</h6>
-          <input type="text" placeholder="input de type select"  name="buyWhere" ngModel>
-
-          <div class="modal-footer" style="margin-top: 74px;">
-            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <modal-add-game></modal-add-game>
 
 
 
@@ -520,8 +486,8 @@
 
 
 
-  
-<!-- SECTION AJOUT COLLECTION -->  
+
+<!-- SECTION AJOUT COLLECTION -->
   <div class="add-collection">
 
       <div class="title-add">
@@ -557,12 +523,12 @@
 
           <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" routerLink="/mygame" class="my-collection btn-secondary" style="background-color: white; color: {{ userColor ?? 'red' }};">Votre collection</button>
 
-          <!-- <button routerLink="/mygame" class="my-collection" [ngstyle]="{ 'background-color': isHovered ? (userColor || 'red') : 'white', 
-          'color': isHovered ? 'white' : (userColor || 'red') }" 
-          (mouseover)="onHover(true)" 
+          <!-- <button routerLink="/mygame" class="my-collection" [ngstyle]="{ 'background-color': isHovered ? (userColor || 'red') : 'white',
+          'color': isHovered ? 'white' : (userColor || 'red') }"
+          (mouseover)="onHover(true)"
           (mouseleave)="onHover(false)">Votre collection</button> -->
       </div>
-  </div> 
+  </div>
 
 
 
