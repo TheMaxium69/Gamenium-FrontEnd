@@ -407,9 +407,14 @@ export class AppComponent {
     if (is_pinned == "") {
       is_pinned = false;
     }
+    let is_wishlist = form.value['whishListGame']
+    if (is_wishlist == "") {
+      is_wishlist = false;
+    }
     let bodyNoJsonMyGame: any = {
       "id_game": this.gameSelected?.id,
       "is_pinned": is_pinned,
+      "is_wishlist": is_wishlist,
     };
     const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
     this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
