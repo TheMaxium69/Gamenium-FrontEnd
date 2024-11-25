@@ -184,10 +184,10 @@
             <br>
             <ng-container *ngFor="let task of tasks">
               <!-- Tache -->
-              <h6>
+              <h6 class="py-2">
                 <!-- Cercle remplis ou vide selon si completé -->
-                <i *ngIf="task.completed" class="ri-checkbox-circle-fill"></i>
-                <i *ngIf="!task.completed" class="ri-checkbox-blank-circle-line"></i>
+                <i *ngIf="task.completed" class="ri-checkbox-blank-fill" style="color: {{ isColor }}"></i>
+                <i *ngIf="!task.completed" class="ri-checkbox-blank-line" style="color: {{ isColor }}"></i>
                 {{ task.name }}
               </h6>
             </ng-container>
@@ -200,7 +200,7 @@
     <!-- SECTION BARRE DE RECHERCHE -->
     <div class="row search-bar">
       <div class="col-md-12 border">
-        <h2 class="text-center">ICI BARRE DE RECHERCHE</h2>
+        <h2>ICI BARRE DE RECHERCHE</h2>
       </div>
     </div>
 
