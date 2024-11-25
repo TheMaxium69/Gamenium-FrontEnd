@@ -91,6 +91,7 @@ export class ProfilePrivateComponent implements OnInit {
     this.plateformService.getPlateformWithUser(id, this.app.setURL()).subscribe((reponsePlateformUser: {message:string, result:PlateformInterface[]}) => {
       if (reponsePlateformUser.message == "good") {
         this.plateformsUser = reponsePlateformUser.result;
+        console.log(this.plateformsUser);
       }
     })
   }
