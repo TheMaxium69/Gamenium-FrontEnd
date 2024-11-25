@@ -1,0 +1,35 @@
+<div class="modal fade text-center" id="ajouteGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--        <h5 class="modal-title" id="exampleModalLabel">Ajoutez un jeux</h5>-->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="addGameForm" #addForm="ngForm" (ngSubmit)="this.app.addGame(addForm)" class="modal-body" style="padding-top: 40px;">
+        <!--        <img src="..." style="width: 15em" alt="tt">-->
+
+        <h2>Ajoutez un jeux à votre liste</h2>
+
+        <br>
+        <h5><span style="color: red">*</span>Recherche ton jeux :</h5>
+        <input type="text" placeholder="Ton Jeux" disabled value="{{ this.app.gameSelected?.name }} ">
+        <br>
+        <br>
+        <h6>Epinglez vous ce jeux :</h6>
+        <input type="checkbox"  name="pinnedGame" ngModel><br>
+        <br>
+        <h6>Quand à tu obtenu ton jeux :</h6>
+        <input type="date"  name="buyAt" ngModel>
+        <br>
+        <br>
+        <h6>Ou à tu obtenu ton jeux :</h6>
+        <input type="text" placeholder="input de type select"  name="buyWhere" ngModel>
+
+        <div class="modal-footer" style="margin-top: 74px;">
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

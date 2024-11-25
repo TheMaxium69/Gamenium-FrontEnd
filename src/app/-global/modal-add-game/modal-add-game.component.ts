@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'modal-add-game',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./modal-add-game.component.css']
 })
 export class ModalAddGameComponent {
+
+  constructor(protected app:AppComponent) {
+  }
 
 }

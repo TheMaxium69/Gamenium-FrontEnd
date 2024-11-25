@@ -14,6 +14,7 @@ import {NgForm} from "@angular/forms";
 import {HistoryMyGameService} from "./-service/history-my-game.service";
 import {ProfilePrivateComponent} from "./mygame/profile-private/profile-private.component";
 import {GameService} from "./-service/game.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-root',
@@ -104,63 +105,63 @@ export class AppComponent {
     this.ipService.getMyIp(this.urlIp).subscribe(reponseTyroIp => {
 
 
-              bodyNoJson = {
-                "email_auth":email,
-                "mdp_auth":password,
-                "ip":reponseTyroIp.ip
-              };
+        bodyNoJson = {
+          "email_auth":email,
+          "mdp_auth":password,
+          "ip":reponseTyroIp.ip
+        };
 
-            this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
+        this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
 
-              msgToken = reponseToken;
+          msgToken = reponseToken;
 
-              if (msgToken?.message == "Connected"){
+          if (msgToken?.message == "Connected"){
 
-                this.token = msgToken.token
+            this.token = msgToken.token
 
-                this.getUserByToken(this.token, saveme);
+            this.getUserByToken(this.token, saveme);
 
-              } else {
+          } else {
 
-                console.log(msgToken?.message)
-                // GERE LE MSG ERR
+            console.log(msgToken?.message)
+            // GERE LE MSG ERR
 
-              }
+          }
 
-            })
+        })
 
-    },
-    (error) => {
+      },
+      (error) => {
 
-      console.error("TyroIp : ", error);
+        console.error("TyroIp : ", error);
 
-      bodyNoJson = {
-        "email_auth":email,
-        "mdp_auth":password
-      };
+        bodyNoJson = {
+          "email_auth":email,
+          "mdp_auth":password
+        };
 
-      this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
+        this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
 
-        msgToken = reponseToken;
+          msgToken = reponseToken;
 
-        if (msgToken?.message == "Connected"){
+          if (msgToken?.message == "Connected"){
 
-          this.token = msgToken.token
+            this.token = msgToken.token
 
-          this.getUserByToken(this.token, saveme);
+            this.getUserByToken(this.token, saveme);
 
-        } else {
+          } else {
 
-          console.log(msgToken?.message)
-          // GERE LE MSG ERR
+            console.log(msgToken?.message)
+            // GERE LE MSG ERR
 
-        }
+          }
 
-      })
+        })
 
 
 
-    });
+      });
 
 
 
@@ -305,6 +306,26 @@ export class AppComponent {
 
   }
 
+  erreurSubcribe(){
+    if ( this.userConnected?.themeColor){
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur de notre serveur',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: this.userConnected.themeColor
+      })
+    } else {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur de notre serveur',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: this.colorDefault
+      })
+    }
+  }
+
   /*
   *
   * FOR MODAL
@@ -318,7 +339,7 @@ export class AppComponent {
 
   addNote(form:NgForm) {
 
-    console.log(form.value);
+    // console.log(form.value);
 
     if (form.value['noteGame'] >= 0 && form.value['noteGame'] <= 20){
 
@@ -333,12 +354,51 @@ export class AppComponent {
 
       this.histoireMyGameService.postNoteMyGame(bodyMyGameNote, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameNoteAdd => {
 
-        console.log(reponseMyGameNoteAdd);
+        // console.log(reponseMyGameNoteAdd);
+        if (reponseMyGameNoteAdd.message == "add note is game"){
+          Swal.fire({
+            title: 'Succès!',
+            text: 'La note de ' + this.gameSelected?.name + ' a bien été ajoutée',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        } else if (reponseMyGameNoteAdd.message == "game not in collection"){
+          Swal.fire({
+            title: 'Attention!',
+            text: 'Mettez le jeux dans votre collection pour le noté',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        } else if (reponseMyGameNoteAdd.message == "note no valide"){
+          Swal.fire({
+            title: 'Attention!',
+            text: 'La note est invalide',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        } else {
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Échec de l\'ajoute de la note',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        }
 
-      });
+      }, (error) => { this.erreurSubcribe() });
 
     } else {
-      console.log("note invalide");
+      Swal.fire({
+        title: 'Attention!',
+        text: 'La note est invalide',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+        confirmButtonColor: this.userConnected?.themeColor
+      })
     }
   }
 
@@ -354,15 +414,38 @@ export class AppComponent {
     const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
     this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
       if (reponseMyGameAdd.message == "add game is collection") {
-        console.log(this.gameSelected?.name, " a été ajouté");
+
+        Swal.fire({
+          title: 'Succès!',
+          text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
+
         // Actualiser la liste des jeux après l'ajout
         if (this.userConnected) {
           // this.profilePrivateComponet.myGameByUserAfterAddGame(this.userConnected.id);
         }
+      } else if (reponseMyGameAdd.message == "has already been added") {
+        Swal.fire({
+          title: 'Attention!',
+          text: 'Le jeux est déjà dans votre collection',
+          icon: 'warning',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
       } else {
-        console.log(reponseMyGameAdd);
+        console.error(reponseMyGameAdd);
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Échec de la mise à jour de la photo de profil',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
       }
-    })
+    }, (error) => { this.erreurSubcribe() })
   }
 
   onSubmitSearch(form: NgForm): void {
@@ -373,13 +456,20 @@ export class AppComponent {
       },
       (error: any) => {
         console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Une erreur s\'est produite lors de la recherche',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
+
       }
     );
   }
 
   selectGame(game: GameInterface) {
     this.gameSelected = game;
-    console.log("Jeu sélectionné avec l'ID :", game.id);
   }
 
 
