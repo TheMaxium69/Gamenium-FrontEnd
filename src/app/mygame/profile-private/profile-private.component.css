@@ -130,6 +130,12 @@
   color:white;
 }
 
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 
 .card-game{
   height: 160px;
@@ -162,7 +168,7 @@
   width: 300px;
   height: 160px;
   backdrop-filter: blur(10px);
-  border-radius: 15px;
+  border-radius: 10px;
   z-index: 1;
   background-color: #00000038;
 }
@@ -296,6 +302,11 @@
 
 /* GAME SMALL SCREEN */
 @media (max-width: 770px) {
+  #show-game {
+    width: 400px;
+
+  }
+
   .card-right {
     overflow: visible;
   }
@@ -308,7 +319,6 @@
     width: 0;
     display: flex;
     justify-content: end;
-    margin-left: -10px;
   }
 
   .card-right .core-right .card-note {
@@ -343,4 +353,11 @@
     width: fit-content;
     border-radius: 15px;
   }
+
+  .card-action {
+    align-items: flex-end;
+  }
+
+
+
 }
