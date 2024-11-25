@@ -434,42 +434,42 @@ export class AppComponent {
       "buy_at": buy_at
     };
     const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
-    console.log(bodyMyGame);
+    // console.log(bodyMyGame);
 
-    // this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
-    //   if (reponseMyGameAdd.message == "add game is collection") {
-    //
-    //     Swal.fire({
-    //       title: 'Succès!',
-    //       text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
-    //       icon: 'success',
-    //       confirmButtonText: 'OK',
-    //       confirmButtonColor: this.userConnected?.themeColor
-    //     })
-    //
-    //     // Actualiser la liste des jeux après l'ajout
-    //     if (this.userConnected) {
-    //       // this.profilePrivateComponet.myGameByUserAfterAddGame(this.userConnected.id);
-    //     }
-    //   } else if (reponseMyGameAdd.message == "has already been added") {
-    //     Swal.fire({
-    //       title: 'Attention!',
-    //       text: 'Le jeux est déjà dans votre collection',
-    //       icon: 'warning',
-    //       confirmButtonText: 'OK',
-    //       confirmButtonColor: this.userConnected?.themeColor
-    //     })
-    //   } else {
-    //     console.error(reponseMyGameAdd);
-    //     Swal.fire({
-    //       title: 'Erreur!',
-    //       text: 'Échec de la mise à jour de la photo de profil',
-    //       icon: 'error',
-    //       confirmButtonText: 'OK',
-    //       confirmButtonColor: this.userConnected?.themeColor
-    //     })
-    //   }
-    // }, (error) => { this.erreurSubcribe() })
+    this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
+      if (reponseMyGameAdd.message == "add game is collection") {
+
+        Swal.fire({
+          title: 'Succès!',
+          text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
+
+        // Actualiser la liste des jeux après l'ajout
+        if (this.userConnected) {
+          // this.profilePrivateComponet.myGameByUserAfterAddGame(this.userConnected.id);
+        }
+      } else if (reponseMyGameAdd.message == "has already been added") {
+        Swal.fire({
+          title: 'Attention!',
+          text: 'Le jeux est déjà dans votre collection',
+          icon: 'warning',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
+      } else {
+        console.error(reponseMyGameAdd);
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Échec de la mise à jour de la photo de profil',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
+      }
+    }, (error) => { this.erreurSubcribe() })
   }
 
   onSubmitSearch(form: NgForm): void {
