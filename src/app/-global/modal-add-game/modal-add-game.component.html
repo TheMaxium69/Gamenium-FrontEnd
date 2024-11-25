@@ -22,11 +22,18 @@
         <input type="checkbox" name="whishListGame" ngModel><br>
         <br>
         <h6>Quand à tu obtenu ton jeux :</h6>
-        <input type="date"  name="buyAt" ngModel>
+        <input type="date" name="buyAt" ngModel>
         <br>
         <br>
         <h6>Ou à tu obtenu ton jeux :</h6>
-        <input type="text" placeholder="input de type select"  name="buyWhere" ngModel>
+        <ng-container *ngIf="buyWhereAll">
+          <select id="buy_where" name="buyWhere" ngModel>
+            <option value="">Choissir une Buy Where</option>
+            <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+              <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+            </ng-container>
+          </select>
+        </ng-container>
 
         <div class="modal-footer" style="margin-top: 74px;">
           <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistez</button>

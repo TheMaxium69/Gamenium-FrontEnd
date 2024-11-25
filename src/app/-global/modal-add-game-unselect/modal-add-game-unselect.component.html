@@ -40,8 +40,15 @@
         <input type="date" name="buyAt" ngModel>
         <br>
         <br>
-        <h6>Où avez-vous obtenu ce jeu :</h6>
-        <input type="text" placeholder="Sélectionnez un lieu" name="buyWhere" ngModel>
+        <h6>Ou à tu obtenu ton jeux :</h6>
+        <ng-container *ngIf="buyWhereAll">
+          <select id="buy_where" name="buyWhere" ngModel>
+            <option value="">Choissir une Buy Where</option>
+            <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+              <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+            </ng-container>
+          </select>
+        </ng-container>
 
         <div class="modal-footer" style="margin-top: 74px;">
           <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistrer</button>
