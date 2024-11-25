@@ -65,7 +65,7 @@
 <!-- INFORMATIONS  -->
   <div class="section-info">
     <div class="information">
-        <h1 class="title">Informations</h1>
+        <h2 class="title">Informations</h2>
 
 
         <div class="information-container">
@@ -429,20 +429,13 @@
   </div>
 
   <!-- Add Note Button -->
-  <button (click)="setModal()" class="btn btn-primary addnote" data-bs-toggle="modal" data-bs-target="#noteGame" style="background-color: {{userColor ? userColor : 'red'}}">Ajouter ma note</button>
+  <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="btn primary-btn addnote" data-bs-toggle="modal" data-bs-target="#noteGame" style="background-color: {{userColor ? userColor : 'red'}}">Ajouter ma note</button>
 </div>
 
 
 
 
-
-
-
-
-
-
-
-
+<!-- SECTION CARROUSEL -->
   <div class="carroussel-container">
       <div class="carroussel">
           <div class="pictures-title">
@@ -524,10 +517,15 @@
 
   <div class="pictures-separation"></div>
 
+
+
+
+  
+<!-- SECTION AJOUT COLLECTION -->  
   <div class="add-collection">
 
       <div class="title-add">
-          <p>Vous possedez le jeu ? Ajoutez le à votre collection :</p>
+          <p><span style="color: {{ userColor ? userColor : 'red' }}">{{ capitalizedUserName }}</span>Vous possedez le jeu ? Ajoutez le à votre collection :</p>
       </div>
 
       <div class="card-add-to-collection">
@@ -541,23 +539,32 @@
 
           </div>
           <div class="game-info">
-              <div class="info-name">{{gameSelected?.name}}</div>
-              <div class="info-provider">Provider</div>
-              <div class="info-release-date">Date de sortie:{{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
+              <h2 class="info-name">{{gameSelected?.name}}</h2>
+              <p style="color: {{ userColor ? userColor : 'red' }}" class="platform-names">
+                <ng-container *ngFor="let platform of gameSelected?.platforms; let last = last">
+                  {{ platform.name }}<span *ngIf="!last">, </span>
+                </ng-container>
+              </p>
+              <div class="info-release-date">Date de sortie : {{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
           </div>
-          <button (click)="setModal()" class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame" style="background-color: {{userColor ? userColor : 'red'}}">
+          <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="game-add-button btn-primary"  data-bs-toggle="modal" data-bs-target="#ajouteGame" style="background-color: {{userColor ? userColor : 'red'}}">
               <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
           </button>
       </div>
 
       <div class="show-collection">
-          <button routerLink="/mygame" class="my-collection" style="background-color: white" style="color: {{userColor ? userColor : 'red'}}">Votre collection</button>
+          <!-- <button routerLink="/mygame" class="my-collection" style="background-color: white; color: {{userColor ? userColor : 'red'}}">Votre collection</button> -->
+
+          <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" routerLink="/mygame" class="my-collection btn-secondary" style="background-color: white; color: {{ userColor ?? 'red' }};">Votre collection</button>
+
+          <!-- <button routerLink="/mygame" class="my-collection" [ngstyle]="{ 'background-color': isHovered ? (userColor || 'red') : 'white', 
+          'color': isHovered ? 'white' : (userColor || 'red') }" 
+          (mouseover)="onHover(true)" 
+          (mouseleave)="onHover(false)">Votre collection</button> -->
       </div>
-  </div>
+  </div> 
 
-  <div class="section-actu">
 
-  </div>
 
 
 
