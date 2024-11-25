@@ -404,7 +404,7 @@ export class AppComponent {
 
   addGame(form: NgForm) {
 
-    console.log(form.value)
+    // console.log(form.value)
 
     let is_pinned = form.value['pinnedGame'];
     if (is_pinned == "") {
@@ -426,50 +426,78 @@ export class AppComponent {
       buy_at = undefined;
     }
 
-    let bodyNoJsonMyGame: any = {
-      "id_game": this.gameSelected?.id,
-      "is_pinned": is_pinned,
-      "is_wishlist": is_wishlist,
-      "buywhere_id": buywhere_id,
-      "buy_at": buy_at
-    };
-    const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
-    // console.log(bodyMyGame);
-
-    this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
-      if (reponseMyGameAdd.message == "add game is collection") {
-
-        Swal.fire({
-          title: 'Succès!',
-          text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
-          icon: 'success',
-          confirmButtonText: 'OK',
-          confirmButtonColor: this.userConnected?.themeColor
-        })
-
-        // Actualiser la liste des jeux après l'ajout
-        if (this.userConnected) {
-          // this.profilePrivateComponet.myGameByUserAfterAddGame(this.userConnected.id);
+    let plateform_id = form.value['plateform_id'];
+    let noplate:boolean = true;
+    if (plateform_id == ""){
+      if (this.gameSelected){
+        if (this.gameSelected.platforms.length == 1){
+          noplate = false;
+          plateform_id = this.gameSelected.platforms[0].id;
         }
-      } else if (reponseMyGameAdd.message == "has already been added") {
-        Swal.fire({
-          title: 'Attention!',
-          text: 'Le jeux est déjà dans votre collection',
-          icon: 'warning',
-          confirmButtonText: 'OK',
-          confirmButtonColor: this.userConnected?.themeColor
-        })
-      } else {
-        console.error(reponseMyGameAdd);
-        Swal.fire({
-          title: 'Erreur!',
-          text: 'Échec de la mise à jour de la photo de profil',
-          icon: 'error',
-          confirmButtonText: 'OK',
-          confirmButtonColor: this.userConnected?.themeColor
-        })
       }
-    }, (error) => { this.erreurSubcribe() })
+    } else {
+      noplate = false;
+    }
+
+    if (noplate){
+
+      Swal.fire({
+        title: 'Attention!',
+        text: 'Veuillez choisir une plateforme',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+        confirmButtonColor: this.userConnected?.themeColor
+      })
+
+    } else {
+
+      let bodyNoJsonMyGame: any = {
+        "id_game": this.gameSelected?.id,
+        "is_pinned": is_pinned,
+        "is_wishlist": is_wishlist,
+        "buywhere_id": buywhere_id,
+        "buy_at": buy_at,
+        "id_plateform":plateform_id
+      };
+      const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
+      // console.log(bodyMyGame);
+
+      this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
+        if (reponseMyGameAdd.message == "add game is collection") {
+
+          Swal.fire({
+            title: 'Succès!',
+            text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+
+          // Actualiser la liste des jeux après l'ajout
+          if (this.userConnected) {
+            // this.profilePrivateComponet.myGameByUserAfterAddGame(this.userConnected.id);
+          }
+        } else if (reponseMyGameAdd.message == "has already been added") {
+          Swal.fire({
+            title: 'Attention!',
+            text: 'Le jeux est déjà dans votre collection',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        } else {
+          console.error(reponseMyGameAdd);
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Échec de l\'ajout d\'un jeux',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        }
+      }, (error) => { this.erreurSubcribe() })
+
+    }
   }
 
   onSubmitSearch(form: NgForm): void {

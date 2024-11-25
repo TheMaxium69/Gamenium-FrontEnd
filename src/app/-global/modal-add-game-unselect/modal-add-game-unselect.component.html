@@ -29,25 +29,49 @@
           <p>Aucun résultat trouvé.</p>
         </div>
 
-        <br>
-        <h6>Épinglez ce jeu :</h6>
-        <input type="checkbox" name="pinnedGame" ngModel><br>
-        <br>
-        <h6>Ajoutez le jeux dans la liste de vos souhaite :</h6>
-        <input type="checkbox" name="whishListGame" ngModel><br>
-        <br>
-        <h6>Quand avez-vous obtenu ce jeu :</h6>
-        <input type="date" name="buyAt" ngModel>
-        <br>
-        <br>
-        <h6>Ou à tu obtenu ton jeux :</h6>
-        <ng-container *ngIf="buyWhereAll">
-          <select id="buy_where" name="buyWhere" ngModel>
-            <option value="">Choissir une Buy Where</option>
-            <ng-container *ngFor="let buyWhereOne of buyWhereAll">
-              <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+        <ng-container *ngIf="this.app.gameSelected">
+
+          <br>
+          <h6><span style="color: red">*</span>Plateforme :</h6>
+          <ng-container *ngIf="this.app.gameSelected.platforms">
+            <ng-container *ngIf="this.app.gameSelected.platforms.length == 1">
+              <ng-container *ngFor="let plateformOne of this.app.gameSelected?.platforms">
+                <input type="hidden" [value]="plateformOne.id" name="plateform_id" ngModel>
+                {{ plateformOne.name }}
+              </ng-container>
             </ng-container>
-          </select>
+            <ng-container *ngIf="this.app.gameSelected.platforms.length > 1">
+              <select id="plateform" name="plateform_id" ngModel>
+                <option value="">Choissir une plateforme</option>
+                <ng-container *ngFor="let plateformOne of this.app.gameSelected?.platforms">
+                  <option [value]="plateformOne.id">{{ plateformOne.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+          </ng-container>
+          <br>
+          <br>
+          <h6>Épinglez ce jeu :</h6>
+          <input type="checkbox" name="pinnedGame" ngModel><br>
+          <br>
+          <h6>Ajoutez le jeux dans la liste de vos souhaite :</h6>
+          <input type="checkbox" name="whishListGame" ngModel><br>
+          <br>
+          <h6>Quand avez-vous obtenu ce jeu :</h6>
+          <input type="date" name="buyAt" ngModel>
+          <br>
+          <br>
+          <h6>Ou à tu obtenu ton jeux :</h6>
+          <ng-container *ngIf="buyWhereAll">
+            <select id="buy_where" name="buyWhere" ngModel>
+              <option value="">Choissir une Buy Where</option>
+              <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+              </ng-container>
+            </select>
+          </ng-container>
+
+
         </ng-container>
 
         <div class="modal-footer" style="margin-top: 74px;">
