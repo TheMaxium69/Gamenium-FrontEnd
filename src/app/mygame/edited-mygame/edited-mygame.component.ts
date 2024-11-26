@@ -44,13 +44,14 @@ export class EditedMygameComponent implements OnInit {
   hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
   hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
 
-  ignoreCopy: number[] = []
+  idFormValide: number[] = [];
   nbCopyView:number = 0;
   nbCopy:number = 0;
   nbCopyExisting:number = 0;
   nbCopyGenerate:number = 10;
   isNewCopy:string ="new";
 
+  debug(){console.log(this.idFormValide);console.log('nbCopyView : ' + this.nbCopyView)}
 
   ngOnInit() {
 
@@ -71,12 +72,13 @@ export class EditedMygameComponent implements OnInit {
         if (this.selectedMyGame?.copyGame){
           this.nbCopyExisting = this.selectedMyGame.copyGame.length
           this.nbCopyView = this.nbCopyExisting
-
           while (this.nbCopyExisting >= this.nbCopyGenerate) {
             this.nbCopyGenerate = this.nbCopyGenerate * 2;
           }
-
           this.nbCopy = this.nbCopyGenerate - this.nbCopyExisting;
+          for (let i = 0; i < this.nbCopyExisting; i++) {
+            this.idFormValide.push(i)
+          }
 
         }
       } else {
@@ -150,20 +152,39 @@ export class EditedMygameComponent implements OnInit {
   }
 
   deleteCopyGame(id:number) {
-
     let copyCardSelected = document.getElementById('copyCard'+id)
 
     if (copyCardSelected) {
+      this.idFormValide = this.idFormValide.filter(formId => formId !== id);
+      this.nbCopyView--;
       copyCardSelected.style.display = 'none';
+    } else {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur inatendu',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor
+      })
     }
 
-    this.ignoreCopy.push(id);
 
   }
 
   addCopyGame() {
 
-    let cardCopy = document.getElementById('copyCard' + this.nbCopyView);
+    let formId = 0;
+    // console.log('Question ? =' + formId)
+    if (this.idFormValide.includes(formId)){
+      while (this.idFormValide.includes(formId)) {
+        formId++;
+        // console.log('Question ? =' + formId)
+      }
+    }
+
+    // console.log('DISPO = ' + formId)
+
+    let cardCopy = document.getElementById('copyCard' + formId);
     if (!cardCopy) {
       Swal.fire({
         title: 'Erreur!',
@@ -174,12 +195,9 @@ export class EditedMygameComponent implements OnInit {
       })
     } else {
       this.nbCopyView++;
+      this.idFormValide.push(formId);
       cardCopy.style.display = 'flex';
     }
-
-
-
-
 
   }
 
@@ -222,7 +240,7 @@ export class EditedMygameComponent implements OnInit {
     let newCopyGame = []
     for (let i = 0; i < copyCount; i++) {
 
-      if (!this.ignoreCopy.includes(i)) {
+      if (this.idFormValide.includes(i)) {
         let tempPurchase = {
           id: form.value['purchase' + i] || null,
           price: form.value['purchase_price' + i],
@@ -263,7 +281,7 @@ export class EditedMygameComponent implements OnInit {
       screenshot:newScreenshot
     }
 
-    // console.log(updateHistoryMyGame);
+    console.log(updateHistoryMyGame);
 
     let body = JSON.stringify(updateHistoryMyGame);
 

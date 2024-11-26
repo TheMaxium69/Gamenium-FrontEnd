@@ -112,6 +112,7 @@
       <div>
         <h1>Exemplaire <span>{{ nbCopyView }}</span> :</h1>
         <button type="button" (click)="addCopyGame()">Ajouter un exemplaire</button>
+        <button type="button" (click)="debug()">debug</button>
         <ng-container *ngFor="let copyGame of selectedMyGame.copyGame; let i = index">
 
           <div class="oneExemplaire" id="copyCard{{i}}">
@@ -296,7 +297,11 @@
         <ng-container *ngFor="let n of [].constructor(nbCopy); let i = index">
           <div class="oneExemplaire" id="copyCard{{i+nbCopyExisting}}" style="display: none">
             <h1>Form ID {{i + nbCopyExisting}}</h1>
+            <button type="button" (click)="deleteCopyGame(i+nbCopyExisting)">Del cette exemplaire</button>
+
             <input type="hidden" [(ngModel)]="isNewCopy" name="copy{{i+nbCopyExisting}}">
+
+            <!-- RESTE DU CODE -->
           </div>
         </ng-container>
       </div>
