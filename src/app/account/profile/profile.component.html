@@ -53,7 +53,7 @@
                 <div class="profile-header" [ngStyle]="{ 'background-color': color }"></div>
                   <div class="profile-avatar" [style.backgroundImage]="'url(' + (profilSelected?.picture || 'https://tyrolium.fr/generate-pp/?l=' + extractFirstLetter(userConnected?.displayname)) + ')'"></div>
                   <h3>{{ userConnected?.displayname || userConnected?.username }}</h3>
-                  <p> {{ userConnected?.username }} </p>
+                  <!-- <p> {{ userConnected?.username }} </p> -->
                   <p> {{ userConnected?.email }} </p>
 
                   <ng-container *ngIf="userConnected?.displaynameUseritium">
@@ -71,7 +71,7 @@
                     <input type="color" id="themeColor" value="{{color ?? 'red'}}" [(ngModel)]="tempColor" />
 
                   </div>
-                  <button class="btn-save" (click)="saveColor()">Enregistrer la couleur</button>
+                  <button [ngStyle]="{ '--color': color ?? 'red' }" class="btn-save" (click)="saveColor()">Enregistrer la couleur</button>
                 </div>
               </div>
               <!-- Update la photo de profil -->
@@ -83,7 +83,7 @@
                     <label for="profilePictureInput" class="file-label">
                       <i class="ri-upload-cloud-line"></i> Sélectionner une image
                     </label>
-                    <button type="button" class="btn-upload" (click)="onUpload()">Télécharger</button>
+                    <button [ngStyle]="{ '--color': color ?? 'red' }" type="button" class="btn-upload" (click)="onUpload()">Télécharger</button>
                   </div>
                 </form>
               </div>
@@ -117,13 +117,13 @@
               <h5>Vos réseaux</h5>
               <form class="reseau" #addUrlForm="ngForm" (ngSubmit)="addUrlSocial(addUrlForm)" method="post">
                 <ng-container *ngFor="let socialNetworkOne of socialNetworkAll">
-                  <div class="social-input">
+                  <div class="social-item">
                     <i class="{{ socialNetworkOne.icon_class }}"></i>
                     <label for="{{ socialNetworkOne.name }}">Votre lien {{ socialNetworkOne.name }} :</label>
-                    <input type="text" id="{{ socialNetworkOne.name }}" name="{{ socialNetworkOne.name }}" ngModel>
+                    <input  [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" ngModel>
                   </div>
                 </ng-container>
-                <input type="submit" class="btn-submit" value="Valider">
+                <input [ngStyle]="{ '--color': color ?? 'red' }" type="submit" class="btn-submit" value="Valider">
               </form>
             </div>
           </div>
