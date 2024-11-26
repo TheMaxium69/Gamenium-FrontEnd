@@ -69,6 +69,7 @@
         </div>
         <div
         (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
+        <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
@@ -76,7 +77,6 @@
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
-          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
           <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
         </div>
       </div>
@@ -120,6 +120,7 @@
             </div>
             <div
             (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
+            <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
             <i
             id="like-icon{{comment.id}}"
             class="comment-action like"
@@ -127,7 +128,6 @@
             [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
             [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
             </i>
-            <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
             <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
             </div>
           </div>
@@ -164,6 +164,7 @@
           </div>
           <div
           (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
+          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
@@ -171,7 +172,6 @@
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
-          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
           <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
           </div>
         </div>

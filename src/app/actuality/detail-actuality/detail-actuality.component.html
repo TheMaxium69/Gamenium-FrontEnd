@@ -54,13 +54,13 @@
           <div class="provider_card" *ngIf="actualitySelected?.Provider?.parentCompany">
             <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.parentCompany?.color }}" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}"></div>
             <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.parentCompany?.picture?.url }})" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}"></div>
-            <p class="name" style="color: {{ actualitySelected?.Provider?.parentCompany?.color }}" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}">{{ actualitySelected?.Provider?.parentCompany?.displayName }} </p>
+            <p class="name" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}">{{ actualitySelected?.Provider?.parentCompany?.displayName }} </p>
             <a id="followBtn{{ actualitySelected?.Provider?.parentCompany?.id }}" style="background-color: {{ actualitySelected?.Provider?.parentCompany?.color }}; border-color: {{ actualitySelected?.Provider?.parentCompany?.color }}" (click)="followBtnClickParent(actualitySelected?.Provider?.parentCompany?.id)">Suivre</a>
           </div>
           <div class="provider_card">
             <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.color }}"  routerLink="/provider/{{ actualitySelected?.Provider?.id }}"></div>
             <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.picture?.url }})"  routerLink="/provider/{{ actualitySelected?.Provider?.id }}"></div>
-            <p class="name" style="color: {{ actualitySelected?.Provider?.color }}"  routerLink="/provider/{{ actualitySelected?.Provider?.id }}">{{ actualitySelected?.Provider?.displayName }} </p>
+            <p class="name" routerLink="/provider/{{ actualitySelected?.Provider?.id }}">{{ actualitySelected?.Provider?.displayName }} </p>
             <a id="followBtn{{ actualitySelected?.Provider?.id }}" style="background-color: {{ actualitySelected?.Provider?.color }}; border-color: {{ actualitySelected?.Provider?.color }}" (click)="followBtnClick(actualitySelected?.Provider?.id)">Suivre</a>
           </div>
         <!-- </div> -->
@@ -76,7 +76,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Vous devez être connecté avant de liker</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <!-- <div class="modal-body">
+        <!-- <div class="modal-body">     
           ...
         </div> -->
         <div class="modal-footer">
