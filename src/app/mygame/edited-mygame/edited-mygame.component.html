@@ -295,7 +295,7 @@
           </div>
         </ng-container>
         <ng-container *ngFor="let n of [].constructor(nbCopy); let i = index">
-          <div class="oneExemplaire" id="copyCard{{i+nbCopyExisting}}" style="display: none">
+          <div class="oneExemplaire" id="copyCard{{i+nbCopyExisting}}" style="display: {{ displayDefault(i+nbCopyExisting) }}">
             <h1>Form ID {{i + nbCopyExisting}}</h1>
             <button type="button" (click)="deleteCopyGame(i+nbCopyExisting)">Del cette exemplaire</button>
 

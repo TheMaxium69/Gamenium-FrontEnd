@@ -20,10 +20,28 @@
         <p>Lifetime rating : {{ this.app.viewMyGame?.myGame?.lifetime_rating || "Non noté" }}</p>
         <p>Wish list : {{ this.app.viewMyGame?.myGame?.wish_list || "Non" }}</p>
         <p>Note Game : {{ this.app.viewMyGame?.rate?.rating || "Non noté" }}</p>
-        <p>Nombre d'exemplaire  : {{ this.app.viewMyGame?.copyGame?.length }}</p>
+        <p>Nombre d'exemplaire  : {{ this.app.viewMyGame?.copyGame?.length || '1*' }}</p>
 
         <div>
           <h1>Exemplaire : </h1>
+          <ng-container *ngIf="this.app.viewMyGame?.copyGame?.length === 0">
+            <div style="border: 1px solid gray;border-radius: 10px">
+
+              <p>Editions : null</p>
+              <p>Barcode : null</p>
+              <p>content : null</p>
+              <p>Etat : null</p>
+              <p>format : null</p>
+              <p>region : null</p>
+              <h5>Purchase :</h5>
+              <p>price : null</p>
+              <p>devise : null</p>
+              <p>buy date : null</p>
+              <p>buy where : null</p>
+              <p>content purchase : null</p>
+
+            </div>
+          </ng-container>
           <ng-container *ngFor="let copyGame of app.viewMyGame?.copyGame">
 
             <div style="border: 1px solid gray;border-radius: 10px">
@@ -35,11 +53,30 @@
               <p>format : {{ copyGame.format.name || "null" }}</p>
               <p>region : {{ copyGame.region.name || "null" }}</p>
               <h5>Purchase :</h5>
-              <p>price : {{ copyGame.purchase.price }}</p>
-              <p>devise : {{ copyGame.purchase.devise.symbole }}</p>
-              <p>buy date : {{ copyGame.purchase.buy_date }}</p>
-              <p>buy where : {{ copyGame.purchase.buy_where.name }}</p>
-              <p>content purchase : {{ copyGame.purchase.content }}</p>
+              <ng-container *ngIf="copyGame.purchase">
+                <p>price : {{ copyGame.purchase.price || "null" }}</p>
+                <ng-container *ngIf="copyGame.purchase.devise">
+                  <p>devise : {{ copyGame.purchase.devise.symbole }}</p>
+                </ng-container>
+                <ng-container *ngIf="!copyGame.purchase.devise">
+                  <p>devise : null</p>
+                </ng-container>
+                <p>buy date : {{ copyGame.purchase.buy_date || "null" }}</p>
+                <ng-container *ngIf="copyGame.purchase.buy_where">
+                  <p>buy where : {{ copyGame.purchase.buy_where.name }}</p>
+                </ng-container>
+                <ng-container *ngIf="!copyGame.purchase.buy_where">
+                  <p>buy where : null</p>
+                </ng-container>
+                <p>content purchase : {{ copyGame.purchase.content || "null" }}</p>
+              </ng-container>
+              <ng-container *ngIf="!copyGame.purchase">
+                <p>price : null</p>
+                <p>devise : null</p>
+                <p>buy date : null</p>
+                <p>buy where : null</p>
+                <p>content purchase : null</p>
+              </ng-container>
 
             </div>
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {HistoryMyGameService} from "../../-service/history-my-game.service";
 import {ActivatedRoute} from "@angular/router";
@@ -78,6 +78,11 @@ export class EditedMygameComponent implements OnInit {
           this.nbCopy = this.nbCopyGenerate - this.nbCopyExisting;
           for (let i = 0; i < this.nbCopyExisting; i++) {
             this.idFormValide.push(i)
+          }
+
+          if (this.nbCopyExisting == 0){
+            this.nbCopyView++;
+            this.idFormValide.push(0);
           }
 
         }
@@ -171,6 +176,13 @@ export class EditedMygameComponent implements OnInit {
 
   }
 
+  displayDefault(id:number):string {
+    if (id==0){
+      return "flex";
+    } else {
+      return 'none';
+    }
+  }
   addCopyGame() {
 
     let formId = 0;
@@ -209,7 +221,7 @@ export class EditedMygameComponent implements OnInit {
 
   updateMyGame(form: NgForm){
 
-    console.log(form.value);
+    // console.log(form.value);
 
     /* SAVOIR LE NOMBRE DE COPY*/
     let copyCount: number = 0;
@@ -281,33 +293,32 @@ export class EditedMygameComponent implements OnInit {
       screenshot:newScreenshot
     }
 
-    console.log(updateHistoryMyGame);
-
     let body = JSON.stringify(updateHistoryMyGame);
+    console.log(body);
 
-    // this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
-    //   // console.log(reponseMyGameUpdate);
-    //   if (reponseMyGameUpdate.message == "updated game") {
-    //     this.selectedMyGame = reponseMyGameUpdate.result;
-    //     // console.log(this.selectedMyGame);
-    //     Swal.fire({
-    //       title: 'Succès!',
-    //       text: 'Votre jeux à bien été mise à jour.',
-    //       icon: 'success',
-    //       confirmButtonText: 'Ok',
-    //       confirmButtonColor: this.app.userConnected?.themeColor
-    //     })
-    //   } else {
-    //     // console.log("Erreur de mise a jour");
-    //     Swal.fire({
-    //       title: 'Erreur!',
-    //       text: 'Échec de la mise à jour de votre jeux',
-    //       icon: 'error',
-    //       confirmButtonText: 'Ok',
-    //       confirmButtonColor: this.app.userConnected?.themeColor
-    //     })
-    //   }
-    // })
+    this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
+      // console.log(reponseMyGameUpdate);
+      if (reponseMyGameUpdate.message == "updated game") {
+        this.selectedMyGame = reponseMyGameUpdate.result;
+        // console.log(this.selectedMyGame);
+        Swal.fire({
+          title: 'Succès!',
+          text: 'Votre jeux à bien été mise à jour.',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.userConnected?.themeColor
+        })
+      } else {
+        // console.log("Erreur de mise a jour");
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Échec de la mise à jour de votre jeux',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.userConnected?.themeColor
+        })
+      }
+    })
 
   }
 
