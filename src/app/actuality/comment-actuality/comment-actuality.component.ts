@@ -33,6 +33,7 @@ export class CommentActualityComponent implements OnInit{
   newComment : CommentInterface|undefined;
   profileInterface: ProfilInterface | undefined;
   commentLikedMap = new Map<number, boolean>();
+  nbLike: number | undefined = 0;
 
   constructor(
     private route: ActivatedRoute,

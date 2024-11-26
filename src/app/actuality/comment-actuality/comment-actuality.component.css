@@ -214,3 +214,15 @@
 #sort {
   color: black;
 }
+
+#like-value {
+  display: inline-block;
+  color: white;
+  width: 27px;
+  height: 15px;
+  text-align: center;
+  border-radius: 10px;
+  margin-right: 10px;
+  font-size: 12px;
+  line-height: 15px;
+}
