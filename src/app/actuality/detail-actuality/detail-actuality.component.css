@@ -227,6 +227,23 @@
   display: flex;
 }
 
+.provider_card a {
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  width: 75px;
+  height: 31px;
+  padding-top: 3px;
+  color: white;
+  cursor: pointer;
+  border: 1px solid;
+}
+
+.provider_card a:hover {
+  background: none;
+}
+
 @media  ( max-width: 1200px){ 
   .border-actu {
     width: 100%;
