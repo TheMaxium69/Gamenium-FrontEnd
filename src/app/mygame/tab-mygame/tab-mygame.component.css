@@ -12,6 +12,8 @@
   font-size: 27px;
   justify-content: space-around;
   padding: 15px;
+  overflow-y: hidden !important;
+  position: relative;
 }
 
 
@@ -23,6 +25,7 @@ h3.titleInWrapper{
 .navigateBar ul li{
   display: flex;
   justify-content: center;
+  min-width: 25% !important;
 }
 
 .navigateBar ul li p{
