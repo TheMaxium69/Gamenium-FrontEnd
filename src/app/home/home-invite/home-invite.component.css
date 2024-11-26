@@ -4,7 +4,6 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 120px;
-    font-family: "Roboto", serif;
     
 }
 
@@ -107,6 +106,7 @@ h2 {
 #gamenium-intro-invite h2 {
     font-size: 21px;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .gamenium-description-panel {
@@ -129,7 +129,7 @@ h2 {
 }
 
 .description-list {
-    line-height: 8px;
+  margin-top: 15px;
 }
 
 /*  Connexion utilisateur  */
@@ -212,20 +212,20 @@ h2 {
 
 /* Nos actualités */
 
-#content-actu-invite {
+  #content-actu-invite {
     padding: 40px 0px;
     gap: 26px;
     flex-wrap: wrap;
   }
   
-  #content-actu-invite .card{
+  .actu-card{
     width: 336px;
     border: unset!important;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 14px;
   }
   
-  #content-actu-invite .card .card-img-top{
+  .actu-card .actu-card-img-top{
     object-fit: cover;
     max-width: 336px;
     max-height: 234px;
@@ -233,40 +233,37 @@ h2 {
     transition: transform 0.4s ease-out;
     will-change: transform;
   }
-  #content-actu-invite .card .card-img-top:hover{
+  .actu-card .actu-card-img-top:hover{
     transform: scale(1.03);
   }
   
-  #content-actu-invite .card .card-body .card-hr{
+  .actu-card .actu-card-body .actu-card-hr{
     padding-right: 8px;
     padding-left: 8px;
     padding-top: 2.5px;
     padding-bottom: 4px;
   }
   
-  #content-actu-invite .card .card-body hr{
+  .actu-card .actu-card-body hr{
     margin: 7px 0;
     opacity: 0.45;
   }
   
-  #content-actu-invite .card .card-body {
+  .actu-card .actu-card-body {
     padding-top: 8px;
     padding-right: 14px;
     padding-bottom: 14px;
     padding-left: 20px;
   }
   
-  #content-actu-invite .card .card-body .btn{
+  .actu-card .actu-card-body .btn{
     color: white;
     background-color: rgba(255, 0, 0, 0.54);
     box-shadow: 1px 2px 11px #a6a6a6;
   }
   
-  #content-actu-invite .card-title{
-    margin-bottom: unset;
-  }
   
-  #content-actu-invite .provider-img{
+  .provider-img{
     height: 24px;
     width: 24px;
     margin-top: 1px;
@@ -278,15 +275,15 @@ h2 {
     margin-right: 7px;
   }
   
-  #content-actu-invite .card-end{
+  .actu-card-end{
     justify-content: space-between;
     background-color: rgba(33, 37, 41, 0.03);
   }
-  #content-actu-invite .card-end .card-i{
+  .actu-card-end .actu-card-i{
     font-size: 25px;
     gap: 2px;
   }
-  #content-actu-invite .card-end .card-i .active i{
+  .card-end .actu-card-i .active i{
     color: rgba(255, 0, 0);
   }
   
@@ -297,3 +294,71 @@ h2 {
   }
 
 /*Dernière sorties*/
+
+#content-latest-release {
+  padding: 40px 0px;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+#gamenium-latest-release h2 {
+  margin: 0;
+}
+
+#content-latest-release .card-game {
+  position: relative;
+  border-radius: 15px;
+  transition: height 0.2s ease-out;
+  width: 320px;
+  height: 180px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+
+}
+
+#content-latest-release .card-thumb{
+  width: 320px;
+  height: 180px;
+  border-radius: 15px;
+}
+
+#content-latest-release .card-thumb .image{
+  position: absolute;
+  width: 320px;
+  height: 180px;
+  z-index: 10;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#content-latest-release .card-thumb .blur{
+  position: absolute;
+  width: 320px;
+  height: 180px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  z-index: 1;
+  background-color: #00000038;
+}
+#content-latest-release .card-thumb img{
+  width: 320px;
+  height: 100%;
+  border-radius: 15px;
+}
+
+#content-latest-release .card-hover {
+  padding: 20px 25px;
+  opacity: 0;
+  visibility: hidden; /* Assure que l'élément reste invisible avant l'animation */
+  transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+}
+
+#content-latest-release .card-game:hover .card-hover {
+  opacity: 1;
+  visibility: visible; /* Montre l'élément après la transition */
+  transition-delay: 0.3s; /* Synchronise avec la durée de l'animation de la hauteur */
+}
+
+#content-latest-release .card-game:hover {
+  height: 280px;
+}
