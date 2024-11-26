@@ -57,6 +57,8 @@ export class ProfilePrivateComponent implements OnInit {
   // Pour la recherche
   searchQuery: string = '';
   filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
+  sortOption: string = 'name-asc'; // Tri par défaut
+  isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown 
 
 
   constructor(private app: AppComponent,
@@ -101,6 +103,7 @@ export class ProfilePrivateComponent implements OnInit {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result;
+        console.log(this.myGameHistoriqueAll);
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
       }
@@ -223,6 +226,8 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
         year.includes(query)
       );
     });
+
+    this.applySorting();
   }
 
 
@@ -323,6 +328,66 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
         console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
       }
     );
+  }
+
+  // methode pour filtrer les jeux 
+
+  // Toogle le dropdown 
+  toggleFilterDropdown(): void {
+    this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
+  }
+
+  setSortOption(option: string): void {
+    this.sortOption = option;
+    this.applySorting();
+    this.isFilterDropdownOpen = false; // Close dropdown after selection
+  }
+
+  applySorting(): void {
+    if (!this.filteredGames) return;
+
+    switch (this.sortOption) {
+      case 'name-asc':
+        this.filteredGames.sort((a, b) =>
+          a.myGame?.game?.name?.localeCompare(b.myGame?.game?.name || '') || 0
+        );
+        break;
+
+      case 'name-desc':
+        this.filteredGames.sort((a, b) =>
+          b.myGame?.game?.name?.localeCompare(a.myGame?.game?.name || '') || 0
+        );
+        break;
+
+      case 'year-asc':
+        this.filteredGames.sort((a, b) => {
+          const dateA = a.myGame?.game?.originalReleaseDate
+            ? new Date(a.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+          const dateB = b.myGame?.game?.originalReleaseDate
+            ? new Date(b.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+      
+          return dateA - dateB; 
+        });
+        break;
+      
+      case 'year-desc':
+        this.filteredGames.sort((a, b) => {
+          const dateA = a.myGame?.game?.originalReleaseDate
+            ? new Date(a.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+          const dateB = b.myGame?.game?.originalReleaseDate
+            ? new Date(b.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+      
+          return dateB - dateA; 
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 
   goToGame(gameId: number): void {

@@ -17,6 +17,7 @@ export interface GameInterface {
   expectedReleaseDay:number,
   expectedReleaseMonth:string,
   expectedReleaseYear:number,
+  originalReleaseDate:string,
   image:GameImageInterface,
   imageTags:JSON,
   numberOfUserReviews:number,

@@ -218,6 +218,7 @@
     </article>
 
     <!-- SECTION BARRE DE RECHERCHE -->
+
     <div class="search-container">
       <div class="icon-container" [ngStyle]="{ 'background-color': isColor }">
         <i class="ri-search-2-line ico1"></i>
@@ -227,12 +228,22 @@
         class="search-input"
         placeholder="Recherche dans vos jeux"
         [(ngModel)]="searchQuery"
-        (input)="filterGames()"
+        (input)="filterGames()"  
       />
-      <button class="filter-button">
-        <i class="ri-filter-line"></i>
-      </button>
+
+      <div class="filter-dropdown">
+        <button class="filter-button" (click)="toggleFilterDropdown()">
+          <i class="ri-filter-line"></i>
+        </button>
+        <div class="dropdown-menu" *ngIf="isFilterDropdownOpen">
+          <button (click)="setSortOption('name-asc')">Nom (A-Z)</button>
+          <button (click)="setSortOption('name-desc')">Nom (Z-A)</button>
+          <button (click)="setSortOption('year-asc')">Année (Croissant)</button>
+          <button (click)="setSortOption('year-desc')">Année (Décroissant)</button>
+        </div>
+      </div>
     </div>
+
 
 
 
