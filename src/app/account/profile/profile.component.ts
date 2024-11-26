@@ -189,9 +189,23 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileChanged(event: any) {
-    this.selectedFile = event.target.files[0];
-
-    console.log(this.selectedFile)
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.selectedFile = input.files[0]
+      
+      // crée une preview de limage quand avant de l'upload
+      const previewImage = URL.createObjectURL(this.selectedFile)
+  
+      const preview = document.querySelector('.profile-avatar') as HTMLElement
+      if (preview) {
+        preview.style.backgroundImage = `url(${previewImage})`
+        preview.style.backgroundSize = 'cover'
+        preview.style.backgroundPosition = 'center'
+      }
+  
+      console.log(this.selectedFile);
+      console.log(previewImage)
+    }
   }
 
   onUpload() {
@@ -201,10 +215,16 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
+    const uploadButton = document.querySelector('#upload-button') as HTMLButtonElement
+    uploadButton.disabled = true
+    uploadButton.textContent = "Envoie du fichier en cours..."
+
     this.uploadService.uploadUserPhoto(this.selectedFile, this.app.setURL(), this.app.createCorsToken(true)).subscribe(responseUploadPhoto => {
 
-
       if (responseUploadPhoto.message == "good"){
+        uploadButton.disabled = false
+        uploadButton.textContent = "Télécharger"
+
         Swal.fire({
           title: 'Succès!',
           text: 'Votre photo de profil à bien été mise à jour.',
@@ -213,6 +233,9 @@ export class ProfileComponent implements OnInit {
           confirmButtonColor: this.userConnected?.themeColor
         })
       } else {
+        uploadButton.disabled = false
+        uploadButton.textContent = "Télécharger"
+
         Swal.fire({
           title: 'Erreur!',
           text: 'Échec de la mise à jour de la photo de profil',

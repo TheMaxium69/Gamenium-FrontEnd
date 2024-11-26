@@ -42,7 +42,10 @@
       <!-- Setion Profil -->
       <div class="para radius mb-4 search-setting">
         <a data-bs-toggle="collapse" href="#collapseProfil" role="button" aria-expanded="false" aria-controls="collapseProfil">
-          <div><i class="ri-account-circle-line"></i>Profiles (Photo, Banner, Couleur)</div>
+          <div><i class="ri-account-circle-line"></i>
+            <h3>Profil</h3>
+            <p>Photo, bannière, couleur</p>
+          </div>
           <div><i class="ri-arrow-right-s-line"></i></div>
         </a>
         <div class="collapse" id="collapseProfil">
@@ -83,7 +86,7 @@
                     <label for="profilePictureInput" class="file-label">
                       <i class="ri-upload-cloud-line"></i> Sélectionner une image
                     </label>
-                    <button [ngStyle]="{ '--color': color ?? 'red' }" type="button" class="btn-upload" (click)="onUpload()">Télécharger</button>
+                    <button [ngStyle]="{ '--color': color ?? 'red' }" type="button" id="upload-button" class="btn-upload" (click)="onUpload()">Télécharger</button>
                   </div>
                 </form>
               </div>
@@ -107,7 +110,11 @@
       <!-- Section Connexion -->
       <div class="para radius mb-4 search-setting">
         <a data-bs-toggle="collapse" href="#collapseReseau" role="button" aria-expanded="false" aria-controls="collapseReseau">
-          <div><i class="ri-at-line"></i>Connexion (Réseaux Sociaux et Services)</div>
+          <div>
+            <i class="ri-at-line"></i>
+            <h3>Connexion</h3>
+            <p>Réseaux sociaux et services</p>
+          </div>
           <div><i class="ri-arrow-right-s-line"></i></div>
         </a>
         <div class="collapse" id="collapseReseau">
@@ -133,7 +140,10 @@
       <!-- Changement mot de passe section -->
       <div class="para radius mb-4 search-setting">
         <a data-bs-toggle="collapse" href="#collapseMdp" role="button" aria-expanded="false" aria-controls="collapseMdp">
-          <div><i class="ri-lock-password-line"></i>Changer Mot de passe (Useritium)</div>
+          <div><i class="ri-lock-password-line"></i>
+            <h3>Changer de mot de passe</h3>
+            <p>Useritium</p>
+          </div>
           <div><i class="ri-arrow-right-s-line"></i></div>
         </a>
         <div class="collapse" id="collapseMdp">
