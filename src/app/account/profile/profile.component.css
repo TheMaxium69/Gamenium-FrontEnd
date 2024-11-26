@@ -47,6 +47,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 1px 3px 12px #a6a6a6;
+  margin-top: 25px;
 }
 
 .lettrePP {
@@ -155,6 +156,11 @@ hr {
   transition: 0.3s;
 }
 
+.unlog {
+  background-color: #ffafaf !important;
+  cursor: pointer;
+}
+
 
 @media (max-width: 600px) {
   .searchbar {
@@ -259,18 +265,23 @@ a > div {
 
 .profile-header {
   padding: 20px;
-  border-radius: 15px 15px 0 0;
+  height: 100px;
+  border-bottom-left-radius: 65px;
+  border-bottom-right-radius: 65px;
   position: relative;
+  box-shadow: 1px 2px 10px #a6a6a6;
 }
 
 .profile-avatar {
+  position: relative;
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  margin: -50px auto 5px;
+  margin: -60px auto 5px;
   background-size: cover;
   background-position: center;
   border: 5px solid #fff;
+  box-shadow: 1px 3px 12px #a6a6a6;
 }
 
 .settings-section {
@@ -296,18 +307,16 @@ a > div {
 }
 
 .color-picker label {
-  font-weight: bold;
-  width: 40%;
+  color: var(--color);
+  width: fit-content;
 }
 
-.color-picker label,
 .file-upload label,
 .password-input label,
 .social-input label {
   flex: 1;
 }
 
-.color-picker input[type="color"],
 .password-input input,
 .social-input input {
   flex: 2;
@@ -317,10 +326,25 @@ a > div {
 }
 
 .color-picker input[type="color"] {
-  width: 60%;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border: none;
   cursor: pointer;
+  background-color: transparent;
+}
+
+#themeColor {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+#themeColor::-moz-color-swatch {
+  border-radius: 50%;
+  border: 3px solid black;
 }
 
 .colorpick {
@@ -440,13 +464,6 @@ a > div {
     width: 100%;
     margin-top: 10px;
   }
-
-  #themeColor {
-    margin-left: 30px;
-    width: 200px;
-    height: 40px;
-  }
-
 
 }
 

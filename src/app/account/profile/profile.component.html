@@ -49,16 +49,17 @@
           <div class="card card-body modern-card">
             <!-- Content de la card profil -->
             <div class="profile-card">
-              <div class="profile-header" [ngStyle]="{ 'background-color': color }">
-                <div class="profile-avatar" [style.backgroundImage]="'url(' + (profilSelected?.picture || 'https://tyrolium.fr/generate-pp/?l=' + extractFirstLetter(userConnected?.displayname)) + ')'"></div>
-                <h3>{{ userConnected?.displayname || userConnected?.username }}</h3>
-                <p> {{ userConnected?.username }} </p>
-                <p> {{ userConnected?.email }} </p>
+              <div>
+                <div class="profile-header" [ngStyle]="{ 'background-color': color }"></div>
+                  <div class="profile-avatar" [style.backgroundImage]="'url(' + (profilSelected?.picture || 'https://tyrolium.fr/generate-pp/?l=' + extractFirstLetter(userConnected?.displayname)) + ')'"></div>
+                  <h3>{{ userConnected?.displayname || userConnected?.username }}</h3>
+                  <p> {{ userConnected?.username }} </p>
+                  <p> {{ userConnected?.email }} </p>
 
-                <ng-container *ngIf="userConnected?.displaynameUseritium">
-                  <p><img width="20px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{
-                    userConnected?.displaynameUseritium }}</p>
-                </ng-container>
+                  <ng-container *ngIf="userConnected?.displaynameUseritium">
+                    <p><img width="20px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{
+                      userConnected?.displaynameUseritium }}</p>
+                  </ng-container>
               </div>
               <!-- Color Picker -->
               <div class="settings-section">
@@ -66,8 +67,8 @@
                 <div class="color-picker">
                   <div class="colorpick">
                     
-                    <label for="themeColor">Choisir la couleur du thème:</label>
-                    <input type="color" id="themeColor" [(ngModel)]="tempColor" />
+                    <label  for="themeColor">Choisir la couleur du thème:</label>
+                    <input type="color" id="themeColor" value="{{color ?? 'red'}}" [(ngModel)]="tempColor" />
 
                   </div>
                   <button class="btn-save" (click)="saveColor()">Enregistrer la couleur</button>
@@ -147,7 +148,7 @@
       </div>
 
       <!-- Se Deconnecter -->
-      <div class="para radius" style="background-color: #ffafaf">
+      <div class="para radius unlog">
         <a (click)="loggout()">
           <div><i class="ri-shut-down-line"></i>Déconnexion de votre compte</div>
           <div><i class="ri-arrow-right-s-line"></i></div>
