@@ -110,11 +110,12 @@
         Non
       </label><!-- EXEMPLAIRE -->
       <div>
-        <h1>Exemplaire <span>{{ selectedMyGame.copyGame.length }}</span> :</h1>
+        <h1>Exemplaire <span>{{ nbCopyView }}</span> :</h1>
         <button type="button" (click)="addCopyGame()">Ajouter un exemplaire</button>
         <ng-container *ngFor="let copyGame of selectedMyGame.copyGame; let i = index">
 
           <div class="oneExemplaire" id="copyCard{{i}}">
+            <h1>Form ID {{i}}</h1>
             <button type="button" (click)="deleteCopyGame(i)">Del cette exemplaire</button>
 
             <input type="hidden" [(ngModel)]="copyGame.id" name="copy{{i}}">
@@ -292,6 +293,12 @@
 
           </div>
         </ng-container>
+        <ng-container *ngFor="let n of [].constructor(nbCopy); let i = index">
+          <div class="oneExemplaire" id="copyCard{{i+nbCopyExisting}}" style="display: none">
+            <h1>Form ID {{i + nbCopyExisting}}</h1>
+            <input type="hidden" [(ngModel)]="isNewCopy" name="copy{{i+nbCopyExisting}}">
+          </div>
+        </ng-container>
       </div>
     </div>
     </ng-container>
@@ -299,6 +306,7 @@
 
   <button type="submit">Submit</button>
 </form>
+  <button (click)="deleteMyGame()">Supprimer le jeux de votre collection</button>
 </section>
 
 <style>

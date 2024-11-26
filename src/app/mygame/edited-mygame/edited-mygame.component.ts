@@ -45,6 +45,11 @@ export class EditedMygameComponent implements OnInit {
   hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
 
   ignoreCopy: number[] = []
+  nbCopyView:number = 0;
+  nbCopy:number = 0;
+  nbCopyExisting:number = 0;
+  nbCopyGenerate:number = 10;
+  isNewCopy:string ="new";
 
 
   ngOnInit() {
@@ -63,6 +68,17 @@ export class EditedMygameComponent implements OnInit {
 
       if (reponseMyGame.message == "good") {
         this.selectedMyGame = reponseMyGame.result;
+        if (this.selectedMyGame?.copyGame){
+          this.nbCopyExisting = this.selectedMyGame.copyGame.length
+          this.nbCopyView = this.nbCopyExisting
+
+          while (this.nbCopyExisting >= this.nbCopyGenerate) {
+            this.nbCopyGenerate = this.nbCopyGenerate * 2;
+          }
+
+          this.nbCopy = this.nbCopyGenerate - this.nbCopyExisting;
+
+        }
       } else {
         Swal.fire({
           title: 'Erreur!',
@@ -133,11 +149,6 @@ export class EditedMygameComponent implements OnInit {
 
   }
 
-
-  addCopyGame() {
-
-  }
-
   deleteCopyGame(id:number) {
 
     let copyCardSelected = document.getElementById('copyCard'+id)
@@ -150,6 +161,28 @@ export class EditedMygameComponent implements OnInit {
 
   }
 
+  addCopyGame() {
+
+    let cardCopy = document.getElementById('copyCard' + this.nbCopyView);
+    if (!cardCopy) {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Veuillez sauvegardez et recommancez',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor
+      })
+    } else {
+      this.nbCopyView++;
+      cardCopy.style.display = 'flex';
+    }
+
+
+
+
+
+  }
+
   /*
   *
   * UPDATE MY GAME
@@ -158,7 +191,7 @@ export class EditedMygameComponent implements OnInit {
 
   updateMyGame(form: NgForm){
 
-    // console.log(form.value);
+    console.log(form.value);
 
     /* SAVOIR LE NOMBRE DE COPY*/
     let copyCount: number = 0;
@@ -234,29 +267,48 @@ export class EditedMygameComponent implements OnInit {
 
     let body = JSON.stringify(updateHistoryMyGame);
 
-    this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
-      // console.log(reponseMyGameUpdate);
-      if (reponseMyGameUpdate.message == "updated game") {
-        this.selectedMyGame = reponseMyGameUpdate.result;
-        // console.log(this.selectedMyGame);
-        Swal.fire({
-          title: 'Succès!',
-          text: 'Votre jeux à bien été mise à jour.',
-          icon: 'success',
-          confirmButtonText: 'Ok',
-          confirmButtonColor: this.app.userConnected?.themeColor
-        })
-      } else {
-        // console.log("Erreur de mise a jour");
-        Swal.fire({
-          title: 'Erreur!',
-          text: 'Échec de la mise à jour de votre jeux',
-          icon: 'error',
-          confirmButtonText: 'Ok',
-          confirmButtonColor: this.app.userConnected?.themeColor
-        })
-      }
-    })
+    // this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
+    //   // console.log(reponseMyGameUpdate);
+    //   if (reponseMyGameUpdate.message == "updated game") {
+    //     this.selectedMyGame = reponseMyGameUpdate.result;
+    //     // console.log(this.selectedMyGame);
+    //     Swal.fire({
+    //       title: 'Succès!',
+    //       text: 'Votre jeux à bien été mise à jour.',
+    //       icon: 'success',
+    //       confirmButtonText: 'Ok',
+    //       confirmButtonColor: this.app.userConnected?.themeColor
+    //     })
+    //   } else {
+    //     // console.log("Erreur de mise a jour");
+    //     Swal.fire({
+    //       title: 'Erreur!',
+    //       text: 'Échec de la mise à jour de votre jeux',
+    //       icon: 'error',
+    //       confirmButtonText: 'Ok',
+    //       confirmButtonColor: this.app.userConnected?.themeColor
+    //     })
+    //   }
+    // })
 
   }
+
+
+  /*
+   *
+   * DELETE MY GAME
+   *
+   * */
+  deleteMyGame() {
+
+
+
+
+  }
+
+
+
+
+
+
 }
