@@ -20,14 +20,14 @@
           <ng-container *ngIf="this.app.gameSelected.platforms.length == 1">
             <ng-container *ngFor="let plateformOne of this.app.gameSelected?.platforms">
               <input type="hidden" [value]="plateformOne.id" name="plateform_id" ngModel>
-              {{ plateformOne.name }}
+              {{ this.app.plateformeNameFormatage(plateformOne.name) }}
             </ng-container>
           </ng-container>
           <ng-container *ngIf="this.app.gameSelected.platforms.length > 1">
             <select id="plateform" name="plateform_id" ngModel>
               <option value="">Choissir une plateforme</option>
               <ng-container *ngFor="let plateformOne of this.app.gameSelected?.platforms">
-                <option [value]="plateformOne.id">{{ plateformOne.name }}</option>
+                <option [value]="plateformOne.id">{{ this.app.plateformeNameFormatage(plateformOne.name) }}</option>
               </ng-container>
             </select>
           </ng-container>

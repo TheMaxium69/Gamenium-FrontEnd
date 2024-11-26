@@ -336,6 +336,10 @@ export class AppComponent {
       return 'NES'
     }
 
+    if (plateform == 'Genesis'){
+      return 'Mega Drive'
+    }
+
     return plateform;
 
   }
