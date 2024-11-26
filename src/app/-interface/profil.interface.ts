@@ -3,7 +3,7 @@ import {ProfilSocialNetworkInterface} from "./profil-social-network.interface";
 
 export interface ProfilInterface {
 
-  id:string,
+  id:number,
   username:string,
   displayname:string|undefined,
   displaynameUseritium:string,

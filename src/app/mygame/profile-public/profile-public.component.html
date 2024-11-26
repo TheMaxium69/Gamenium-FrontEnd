@@ -2,21 +2,21 @@
 <modal-view-mygame></modal-view-mygame>
 
 <!-- CONTENT -->
-<div id="show-game" class="d-flex container">
-    <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
+<section id="profilWrapper" class="container">
+
+  <app-tab-public></app-tab-public>
+
+  <!--  GAME PINED -->
+  <div id="show-game" class="d-flex container pinned" *ngIf="getPinnedGames().length > 0">
+    <ng-container *ngFor="let myGameHistorique of getPinnedGames()">
       <div class="card-wrapper">
+        <div class="card-game container d-flex">
 
-
-      <div *ngIf="myGameHistorique.myGame.is_pinned" class="d-flex justify-content-center" style="width: 100%;">
-        <div class="card-game container d-flex" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
-
-          <div *ngIf="myGameHistorique.myGame.is_pinned" class="isPinned" style="background-color: {{profilSelected?.themeColor ?? 'red'}};">
-
+          <div class="isPinned" style="background-color: {{ isColor }}">
             <p><i class="ri-pushpin-fill"></i></p>
-
           </div>
 
-          <div class="card-left">
+          <div class="card-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame" >
             <ng-container *ngIf="myGameHistorique.myGame.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
               <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
               <div class="blur"></div>
@@ -28,60 +28,47 @@
               <img src="{{ myGameHistorique.myGame.game.image?.thumb_url }}" alt="...">
             </ng-container>
           </div>
+
           <div class="card-right d-flex">
-            <div class="core-left">
+            <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
               <h2>{{ myGameHistorique.myGame.game.name }}</h2>
-              <p style="color: {{ profilSelected?.themeColor }};" class="platform-names">
-                <ng-container *ngFor="let platform of myGameHistorique.myGame.game.platforms; let last = last">
-                  {{ platform.name }}<span *ngIf="!last">, </span>
-                </ng-container>
+              <p style="color: {{ isColor }};" class="platform-names">
+                {{ myGameHistorique.myGame.plateform.name }}
               </p>
-<!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
-<!--                <p> [QUAND] Acheter le : {{ myGameHistorique.buy_at }}</p>-->
-<!--              </ng-container>-->
-<!--              <ng-container *ngIf="myGameHistorique.buywhere ">-->
-<!--                <p> [LIEUX] Ou : {{ myGameHistorique.buywhere.name }}</p>-->
-<!--              </ng-container>-->
-              <p> Ajouter le : {{ myGameHistorique.myGame.added_at }}</p>
+              <p> Ajouté le : {{ myGameHistorique.myGame.added_at | date:'dd / MM / yyyy' }}</p>
             </div>
             <div class="core-right">
-              <div class="card-note" style="background-color: {{ profilSelected?.themeColor }}">
-                <p><span>
-              <ng-container *ngIf="!userRatingAll">NA</ng-container>
-
-              <ng-container *ngIf="userRatingAll">
-
-                <ng-container *ngIf="hasUserRatings(myGameHistorique.myGame.game.id)">
-
-                  <ng-container *ngFor="let userRating of userRatingAll">
-                    <ng-container *ngIf="userRating.game.id == myGameHistorique.myGame.game.id">{{ userRating.rating }}</ng-container>
-                  </ng-container>
-
-                </ng-container>
-
-                <ng-container *ngIf="!hasUserRatings(myGameHistorique.myGame.game.id)">Na</ng-container>
-
-              </ng-container>
-
-
-                </span>/20</p>
+              <div class="card-note" style="background-color: {{ isColor }}">
+                <p><span id="noteGame{{ myGameHistorique.myGame.game.id }}">
+                    <ng-container *ngIf="!userRatingAll">na</ng-container>
+                    <ng-container *ngIf="userRatingAll">
+                      <ng-container *ngIf="hasUserRatings(myGameHistorique.myGame.game.id)">
+                        <ng-container *ngFor="let userRating of userRatingAll">
+                          <ng-container *ngIf="userRating.game.id == myGameHistorique.myGame.game.id">{{ userRating.rating }}</ng-container>
+                        </ng-container>
+                      </ng-container>
+                      <ng-container *ngIf="!hasUserRatings(myGameHistorique.myGame.game.id)">na</ng-container>
+                    </ng-container>
+                  </span>/20</p>
+              </div>
+              <div class="card-action">
               </div>
             </div>
           </div>
+
         </div>
       </div>
-    </div>
+
     </ng-container>
   </div>
-  
-<div class="d-flex container" id="show-game">
-    <ng-container *ngFor="let myGameHistorique of myGameHistoriqueAll">
+
+  <!-- UNPINNED GAME -->
+  <div id="show-game" class="d-flex container">
+    <ng-container *ngFor="let myGameHistorique of getUnpinnedGames()">
       <div class="card-wrapper">
+        <div class="card-game container d-flex">
 
-
-      <div *ngIf="!myGameHistorique.myGame.is_pinned" class="d-flex justify-content-center" style="width: 100%;">
-        <div class="card-game container d-flex" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
-          <div class="card-left">
+          <div class="card-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
             <ng-container *ngIf="myGameHistorique.myGame.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
               <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
               <div class="blur"></div>
@@ -93,50 +80,38 @@
               <img src="{{ myGameHistorique.myGame.game.image?.thumb_url }}" alt="...">
             </ng-container>
           </div>
+
           <div class="card-right d-flex">
-            <div class="core-left">
+            <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
               <h2>{{ myGameHistorique.myGame.game.name }}</h2>
-              <p style="color: {{ profilSelected?.themeColor }};" class="platform-names">
-                <ng-container *ngFor="let platform of myGameHistorique.myGame.game.platforms; let last = last">
-                  {{ platform.name }}<span *ngIf="!last">, </span>
-                </ng-container>
+              <p style="color: {{ isColor }};" class="platform-names">
+                {{ myGameHistorique.myGame.plateform.name }}
               </p>
-<!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
-<!--                <p> [QUAND] Acheter le : {{ myGameHistorique.buy_at }}</p>-->
-<!--              </ng-container>-->
-<!--              <ng-container *ngIf="myGameHistorique.buywhere ">-->
-<!--                <p> [LIEUX] Ou : {{ myGameHistorique.buywhere.name }}</p>-->
-<!--              </ng-container>-->
-              <p> Ajouter le : {{ myGameHistorique.myGame.added_at }}</p>
+              <p> Ajouté le : {{ myGameHistorique.myGame.added_at | date:'dd / MM / yyyy' }}</p>
             </div>
             <div class="core-right">
-              <div class="card-note" style="background-color: {{ profilSelected?.themeColor }}">
-                <p><span>
-              <ng-container *ngIf="!userRatingAll">NA</ng-container>
-
-              <ng-container *ngIf="userRatingAll">
-
-                <ng-container *ngIf="hasUserRatings(myGameHistorique.myGame.game.id)">
-
-                  <ng-container *ngFor="let userRating of userRatingAll">
-                    <ng-container *ngIf="userRating.game.id == myGameHistorique.myGame.game.id">{{ userRating.rating }}</ng-container>
-                  </ng-container>
-
-                </ng-container>
-
-                <ng-container *ngIf="!hasUserRatings(myGameHistorique.myGame.game.id)">Na</ng-container>
-
-              </ng-container>
-
-
-                </span>/20</p>
+              <div class="card-note" style="background-color: {{ isColor }}">
+                <p><span id="noteGame{{ myGameHistorique.myGame.game.id }}">
+                    <ng-container *ngIf="!userRatingAll">na</ng-container>
+                    <ng-container *ngIf="userRatingAll">
+                      <ng-container *ngIf="hasUserRatings(myGameHistorique.myGame.game.id)">
+                        <ng-container *ngFor="let userRating of userRatingAll">
+                          <ng-container *ngIf="userRating.game.id == myGameHistorique.myGame.game.id">{{ userRating.rating }}</ng-container>
+                        </ng-container>
+                      </ng-container>
+                      <ng-container *ngIf="!hasUserRatings(myGameHistorique.myGame.game.id)">na</ng-container>
+                    </ng-container>
+                  </span>/20</p>
+              </div>
+              <div class="card-action">
               </div>
             </div>
           </div>
+
         </div>
       </div>
-    </div>
+
     </ng-container>
-</div>
+  </div>
 
-
+</section>

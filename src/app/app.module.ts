@@ -54,6 +54,7 @@ import { ModalNoteUnselectComponent } from './-global/modal-note-unselect/modal-
 import { ModalAddGameUnselectComponent } from './-global/modal-add-game-unselect/modal-add-game-unselect.component';
 import { PlateformViewComponent } from './mygame/plateform-view/plateform-view.component';
 import { TabMygameComponent } from './mygame/tab-mygame/tab-mygame.component';
+import { TabPublicComponent } from './mygame/tab-public/tab-public.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { TabMygameComponent } from './mygame/tab-mygame/tab-mygame.component';
     ModalNoteUnselectComponent,
     ModalAddGameUnselectComponent,
     PlateformViewComponent,
-    TabMygameComponent
+    TabMygameComponent,
+    TabPublicComponent
 
   ],
   imports: [

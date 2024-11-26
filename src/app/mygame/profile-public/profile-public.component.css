@@ -1,9 +1,100 @@
+h2 {
+  color: #575757;
+}
+
+#profilWrapper{
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  margin: auto auto 120px;
+  padding: 30px;
+}
+
+#profilWrapper .articleTuto{
+  background-color: white;
+
+  /*height: 400px;*/
+  width: 100%;
+  max-width: 1222px;
+  margin: 0px auto;
+  border-radius: 16px;
+  padding: 27px 44px;
+}
+
+#profilWrapper .articleTuto .hello {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px 0px #A6A6A6;
+}
+
+#profilWrapper .articleTuto h2 span.pseudo{
+  font-weight: 700;
+}
+
+#profilWrapper .articleTuto {
+  padding: 0px 35px;
+}
+
+#profilWrapper .articleTuto .actionPossible {
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px 0px #A6A6A6;
+  padding: 10px 40px;
+}
+
+#profilWrapper .articleTuto .action{
+  margin-bottom: 45px;
+}
+
+
+#profilWrapper .articleTuto .card{
+  text-align: center;
+  height: fit-content;
+  transition: all 0.1s ease 0s;
+  border: 1px solid #C5C5C5
+}
+
+#profilWrapper .articleTuto .card:hover{
+  transform: scale(1.01);
+  background-color: #b3b3b359;
+}
+
+#profilWrapper .articleTuto .card i{
+  font-size: 50px;
+}
+
+#profilWrapper .articleTuto .taskPossible {
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px 0px #A6A6A6;
+  padding: 10px 40px;
+}
+
+#profilWrapper .articleTuto .task{
+  margin-bottom: 16px;
+}
+
+
+
+/* GAME */
+
+#show-game.pinned{
+  margin-bottom: 35px;
+}
+
+#show-game{
+  justify-content: center;
+  gap: 35px;
+  flex-wrap: wrap;
+
+  max-width: 1287px;
+}
+
 
 .isPinned{
   position: absolute;
   width: 30px;
   height: 30px;
-  z-index: 1029;
+  z-index: 800;
   border-radius: 100%;
   margin-left: -10px;
   margin-top: -10px;
@@ -12,23 +103,15 @@
   text-align: center;
   margin: 1px;
   margin-left: 2px;
-  color: white;
+  color:white;
+  font-size: 18px;
 }
 
-/* GAME */
-
-#show-game {
+.card-wrapper {
+  display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  /* column-gap: 35px; */
-  margin-bottom: 120px;
-  max-width: 1287px;
-  row-gap: 35px;
-  column-gap: 0px;
-
+  width: 100%;
 }
-
 
 
 .card-game{
@@ -38,7 +121,7 @@
   padding: unset!important;
   border-radius: 10px;
   box-shadow: 1px 2px 10px 0px #a6a6a6;
-  
+
 }
 
 .card-left{
@@ -76,14 +159,33 @@
   width: 100%;
   height: 100%;
   padding: 20px;
-  justify-content: space-between;
-  overflow: hidden;
 }
 
 .card-right .core-left{
-  max-width: clamp(200px, 50%, 500px);
-  min-width: 280px;
+  width: 100%;
+
 }
+
+.card-right .core-left h2 {
+  color: #575757;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-spacing: -5px;
+
+}
+
+.platform-names {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 
 .card-right .core-right{
   width: 100px;
@@ -111,31 +213,72 @@
   font-size: 30px;
 }
 
-.card-wrapper {
+.card-action{
   display: flex;
-  justify-content: center;
-  width: 100%;
+  margin-top: 22px;
+  text-align: end;
+  font-size: 26px;
 }
 
-.card-right .core-left h2 {
-  color: #575757;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+.card-action i:hover {
+  cursor: pointer;
+  font-size: 32px;
+  animation: jiggle 0.5s forwards;
+  transition: 0.3s;
+
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+#delete-comment-icon {
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 5%;
+  font-size: 28px;
+  display: none;
+}
+
+.card-right:hover #delete-comment-icon {
+  display: block;
+}
+
+.progress-bar-container {
+  max-width: 410px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  word-spacing: -5px;
-
+  margin-bottom: 16px;
 }
 
-.platform-names {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.progress-bar {
+  height: 10px;
+  transition: width 0.3s ease;
 }
 
+@media (max-width: 900px) {
+  #profilWrapper {
+    position: relative;
+    top: 280px;
+  }
+
+  #profilWrapper .articleTuto .inUserTuto .d-flex{
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  #profilWrapper .articleTuto .inUserTuto .d-flex .card{
+    width: 65%;
+  }
+
+  #profilWrapper .articleTuto .inUserTuto .d-flex h6{
+    word-wrap: normal;
+    justify-content: space-between;
+  }
+}
 
 /* GAME SMALL SCREEN */
 @media (max-width: 770px) {
@@ -156,7 +299,6 @@
     width: 0;
     display: flex;
     justify-content: end;
-    margin-left: -10px;
   }
 
   .card-right .core-right .card-note {
@@ -192,6 +334,93 @@
     border-radius: 15px;
   }
 
+  .card-action {
+    align-items: flex-end;
+  }
+
+}
+
+@keyframes jiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 768px) {
+
+  #profilWrapper .articleTuto .actionPossible {
+    margin-bottom: 20px;
+  }
 
 
+}
+
+
+
+/* Section Search Bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px 0px #00000040 inset;
+  padding: 10px 10px;
+  gap: 10px;
+  margin: 40px auto;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.ico1 {
+  color: #fff;
+  font-size: 30px;
+}
+
+.search-input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+.filter-button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.filter-button i {
+  font-size: 30px;
+  color: #333;
+}
+
+.filter-button:focus,
+.icon-container:focus {
+  outline: 2px solid #29aefc;
 }
