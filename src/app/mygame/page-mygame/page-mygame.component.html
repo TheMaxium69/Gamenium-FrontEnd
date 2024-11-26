@@ -12,7 +12,22 @@
 
     <ng-container *ngIf="!profileId">
 
-      <app-profile-private></app-profile-private>
+      <ng-container *ngIf="currentUrl == '/mygame-all' && currentUrl != '/mygame'">
+
+        <app-recent-view></app-recent-view>
+
+      </ng-container>
+      <ng-container *ngIf="currentUrl != '/mygame-all' && currentUrl == '/mygame'">
+
+        <app-profile-private></app-profile-private>
+
+      </ng-container>
+      <ng-container *ngIf="currentUrl != '/mygame-all' && currentUrl != '/mygame'">
+
+        <app-profile-private></app-profile-private>
+
+      </ng-container>
+
 
     </ng-container>
 

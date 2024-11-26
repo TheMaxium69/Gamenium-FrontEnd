@@ -1,4 +1,12 @@
-<div id="profilWrapper">
+<!-- MODAL -->
+<modal-note></modal-note>
+<modal-view-mygame></modal-view-mygame>
+<modal-add-game-unselect></modal-add-game-unselect>
+<modal-note-unselect></modal-note-unselect>
+
+<!-- CONTENT -->
+<section id="profilWrapper" class="container">
+
 <article class="navigateBar">
 
   <ul style="background-color: {{ isColor }}">
@@ -17,12 +25,12 @@
 
     <!-- RECENT PAGE -->
     <ng-container *ngIf="task == 'recent'">
-      <li routerLink="/mygame/recent" class="active">
+      <li routerLink="/mygame-all" class="active">
         <p>Tous</p>
       </li>
     </ng-container>
     <ng-container *ngIf="task != 'recent'">
-      <li routerLink="/mygame/recent">
+      <li routerLink="/mygame-all">
         <p>Tous</p>
       </li>
     </ng-container>
@@ -174,4 +182,5 @@
 
   </ng-container>
 </div>
-</div>
+
+</section>

@@ -2,6 +2,14 @@ h2 {
   color: #575757;
 }
 
+#profilWrapper{
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  margin: auto auto 120px;
+  padding: 30px;
+}
+
 #profilWrapper .articleTuto{
   background-color: white;
 

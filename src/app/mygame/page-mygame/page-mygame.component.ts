@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AppComponent} from "../../app.component";
 
 @Component({
@@ -12,14 +12,18 @@ export class PageMygameComponent implements OnInit{
   profileId: number|any;
   noAccount: boolean = false;
   task:string | any;
+  currentUrl: string | any;
 
   constructor(private route: ActivatedRoute,
-              private app: AppComponent) { }
+              private app: AppComponent,
+              private router: Router) { }
 
   ngOnInit(): void {
 
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.task = this.route.snapshot.paramMap.get('task');
+    this.currentUrl = this.router.url;
+
 
     if (!this.profileId && !this.app.isLoggedIn){
       this.noAccount = true;
