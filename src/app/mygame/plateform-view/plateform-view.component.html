@@ -1,3 +1,32 @@
+    <!-- SECTION BARRE DE RECHERCHE -->
+
+    <div class="search-container">
+      <div class="icon-container" [ngStyle]="{ 'background-color': isColor }">
+        <i class="ri-search-2-line ico1"></i>
+      </div>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Recherche dans vos jeux"
+        [(ngModel)]="searchQuery"
+        (input)="filterGames()"
+      />
+
+      <div class="filter-dropdown">
+        <button class="filter-button" (click)="toggleFilterDropdown()">
+          <i class="ri-filter-line"></i>
+        </button>
+        <div class="dropdown-menu" *ngIf="isFilterDropdownOpen">
+          <button (click)="setSortOption('name-asc')">Nom (A-Z)</button>
+          <button (click)="setSortOption('name-desc')">Nom (Z-A)</button>
+          <button (click)="setSortOption('year-asc')">Année (Croissant)</button>
+          <button (click)="setSortOption('year-desc')">Année (Décroissant)</button>
+          <button (click)="setSortOption('added-asc')">Date d'ajout (Croissant)</button>
+          <button (click)="setSortOption('added-desc')">Date d'ajout (Décroissant)</button>
+        </div>
+      </div>
+    </div>
+
 <!--  GAME PINED -->
 <div id="show-game" class="d-flex container pinned" *ngIf="getPinnedGames().length > 0">
   <ng-container *ngFor="let myGameHistorique of getPinnedGames()">

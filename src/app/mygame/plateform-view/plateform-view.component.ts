@@ -9,6 +9,8 @@ import {PlateformService} from "../../-service/plateform.service";
 import {UserRateInterface} from "../../-interface/user-rate.interface";
 import {UserRateService} from "../../-service/user-rate.service";
 import {GameInterface} from "../../-interface/game.interface";
+import { NgForm } from '@angular/forms';
+import { GameService } from 'src/app/-service/game.service';
 
 @Component({
   selector: 'app-plateform-view',
@@ -20,15 +22,25 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   userConnected: UserInterface | undefined;
   plateformeId: number | any;
   task:any;
-  HistoireMyGameByUserByPlateform: HistoryMyGameInterface[] | undefined;
+  HistoireMyGameByUserByPlateform: HistoryMyGameInterface[] = [];
   userRatingAll: UserRateInterface[] | undefined;
   isColor: string = this.app.colorDefault;
   plateformsUser: PlateformInterface[] | undefined;
+
+  // Pour la recherche
+  searchResults: GameInterface[] | undefined;
+  searchValue: string = '';
+  searchQuery: string = '';
+  filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
+  sortOption: string = 'added-desc'; // Tri par défaut
+  isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown 
+  
 
   constructor(private app:AppComponent,
               private route: ActivatedRoute,
               private histoireMyGameService: HistoryMyGameService,
               private plateformService: PlateformService,
+              private myGameService: GameService,
               private userRateService: UserRateService) {}
 
   ngOnInit(): void {
@@ -67,6 +79,93 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     }
   }
 
+    // Méthode pour effectuer la recherche de jeux
+    onSubmitSearch(form: NgForm): void {
+      const searchValue = form.value['searchValue'];
+      this.myGameService.searchGames(searchValue, 5, this.app.setURL()).subscribe(
+        (results: GameInterface[]) => {
+          this.searchResults = results;
+        },
+        (error: any) => {
+          console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+        }
+      );
+    }
+
+  // methode pour filtrer les jeux 
+
+  // Toogle le dropdown 
+  toggleFilterDropdown(): void {
+    this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
+  }
+
+  setSortOption(option: string): void {
+    this.sortOption = option;
+    this.filterGames();
+    this.applySorting();
+    this.isFilterDropdownOpen = false;
+  }
+
+  filterGames(): void {
+    //  
+    this.filteredGames = this.HistoireMyGameByUserByPlateform.filter(game => {
+      if (!this.searchQuery) {
+        // on renvoie true pour laisser la possibilité de filtrer sans recherche
+        return true;
+      }
+  
+      // ici on filtre si il existe une recherche 
+      const query = this.searchQuery.toLowerCase();
+      const gameName = game.myGame?.game?.name?.toLowerCase() || '';
+      const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+      const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
+  
+      return gameName.includes(query) || platforms.includes(query) || year.includes(query);
+    });
+    console.log("Filtered Games:", this.filteredGames);
+    this.applySorting();
+  }
+  
+
+  applySorting(): void {
+    switch (this.sortOption) {
+      case 'name-asc':
+        this.filteredGames.sort((a, b) => a.myGame?.game?.name?.localeCompare(b.myGame?.game?.name || '') || 0);
+        break;
+      case 'name-desc':
+        this.filteredGames.sort((a, b) => b.myGame?.game?.name?.localeCompare(a.myGame?.game?.name || '') || 0);
+        break;
+      case 'year-asc':
+        this.filteredGames.sort((a, b) => {
+          const dateA = a.myGame?.game?.originalReleaseDate
+            ? new Date(a.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+          const dateB = b.myGame?.game?.originalReleaseDate
+            ? new Date(b.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+          return dateA - dateB;
+        });
+        break;
+      case 'year-desc':
+        this.filteredGames.sort((a, b) => {
+          const dateA = a.myGame?.game?.originalReleaseDate
+            ? new Date(a.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+          const dateB = b.myGame?.game?.originalReleaseDate
+            ? new Date(b.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+          return dateB - dateA;
+        });
+        break;
+        case 'added-asc':
+          this.filteredGames.sort((a, b) => new Date(a.myGame?.added_at).getTime() - new Date(b.myGame?.added_at).getTime());
+          break;
+        case 'added-desc':
+          this.filteredGames.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
+          break;
+    }
+  }
+
   /* OBTENIR TOUTE LES CONSOLE */
   myPlateforme(id:number){
     this.plateformService.getPlateformWithUser(id, this.app.setURL()).subscribe((reponsePlateformUser: {message:string, result:PlateformInterface[]}) => {
@@ -78,9 +177,12 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
   /* OBTENIR LES JEUX PAR PLATEFORME */
   myGameByUserWithPlateform(id_user: number, id_plateform:number) {
-    this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
-      if (responseMyGame.message == "good") {
-        this.HistoireMyGameByUserByPlateform = responseMyGame.result;
+    this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe(response => {
+      if (response.message === "good") {
+        this.HistoireMyGameByUserByPlateform = response.result || [];
+        this.filteredGames = [...this.HistoireMyGameByUserByPlateform];
+        this.applySorting();
+
       }
     });
   }
@@ -88,8 +190,9 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   myGameByUser(id_user: number): void {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
-        this.HistoireMyGameByUserByPlateform = responseMyGame.result;
-        console.log(this.HistoireMyGameByUserByPlateform);
+        this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
+        this.filteredGames = [...this.HistoireMyGameByUserByPlateform];
+        this.applySorting();
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
       }
@@ -148,12 +251,13 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
   /* OBTENIR LES JEUX EPINGLES */
   getPinnedGames(): HistoryMyGameInterface[] {
-    return this.HistoireMyGameByUserByPlateform?.filter(game => game.myGame.is_pinned) ?? [];
+    return this.filteredGames?.filter(game => game.myGame.is_pinned) ?? [];
   }
 
   /* OBTENIR LES JEUX NON EPINGLES */
+
   getUnpinnedGames(): HistoryMyGameInterface[] {
-    return this.HistoireMyGameByUserByPlateform?.filter(game => !game.myGame.is_pinned) ?? [];
+    return this.searchQuery ? this.filteredGames : this.HistoireMyGameByUserByPlateform?.filter(game => !game.myGame.is_pinned) ?? [];
   }
 
   /* FOR MODAL */
