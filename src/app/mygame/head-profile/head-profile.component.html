@@ -4,77 +4,79 @@
   </div>
 </ng-container>
 
-<div id="profilPublic" style="background-color: {{ isColor }}">
-  <div class="container">
-    <div id="profilInfo" >
-      <div class="d-flex container">
-        <div *ngIf="profilSelected?.picture" class="profilPhoto" style="background-image: url('{{ profilSelected?.picture }}')"></div>
 
-        <div *ngIf="!profilSelected?.picture" class="profilPhoto" style="background-color: white!important">
-          <p class="lettrePP" style="color: {{isColor}}">{{ extractFirstLetter(profilSelected?.displayname) }}</p>
-        </div>
+  <div id="profilPublic" style="background-color: {{ isColor }}"></div>
 
-        <div class="wrapper">
-          <div id="inWrapper">
-            <div id="profilInfoLeft">
-              <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length > 0">
-                <div class="articleInfoLeft">
-                  <h1>{{ profilSelected?.displayname }}
-                    <ng-container *ngIf="badgeUserConnected">
-                      <ng-container *ngFor="let badge of badgeUserConnected">
-                        <img class="badgeIMG" src="{{ badge.picture?.url }}">
+    <div class="container">
+      <div id="profilInfo" >
+        <div class="d-flex container">
+          <div *ngIf="profilSelected?.picture" class="profilPhoto" style="background-image: url('{{ profilSelected?.picture }}')"></div>
+
+          <div *ngIf="!profilSelected?.picture" class="profilPhoto" style="background-color: white">
+            <p class="lettrePP" style="color: {{isColor}}">{{ extractFirstLetter(profilSelected?.displayname) }}</p>
+          </div>
+
+          <div class="wrapper">
+            <div id="inWrapper">
+              <div id="profilInfoLeft">
+                <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length > 0">
+                  <div class="articleInfoLeft">
+                    <h1>{{ profilSelected?.displayname }}
+                      <ng-container *ngIf="badgeUserConnected">
+                        <ng-container *ngFor="let badge of badgeUserConnected">
+                          <img class="badgeIMG" src="{{ badge.picture?.url }}">
+                        </ng-container>
                       </ng-container>
-                    </ng-container>
-                  </h1>
-                  <small><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
+                    </h1>
+                    <small><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
 
-                  <div class="articleReseau">
-                    <ng-container *ngFor="let reseauOne of profilSelected?.reseau">
-                      <a target="_blank" href="{{ reseauOne.url }}" class="icone-reseau {{ reseauOne.socialnetwork.icon_class }}"></a>
-                    </ng-container>
+                    <div class="articleReseau">
+                      <ng-container *ngFor="let reseauOne of profilSelected?.reseau">
+                        <a target="_blank" href="{{ reseauOne.url }}" class="icone-reseau {{ reseauOne.socialnetwork.icon_class }}"></a>
+                      </ng-container>
+                    </div>
                   </div>
-                </div>
-              </ng-container>
+                </ng-container>
 
-              <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length == 0">
-                <div class="articleInfoLeft">
-                  <h1>{{ profilSelected?.displayname }}
-                    <ng-container *ngIf="badgeUserConnected">
-                      <ng-container *ngFor="let badge of badgeUserConnected">
-                        <img class="badgeIMG" src="{{ badge.picture?.url }}">
+                <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length == 0">
+                  <div class="articleInfoLeft">
+                    <h1>{{ profilSelected?.displayname }}
+                      <ng-container *ngIf="badgeUserConnected">
+                        <ng-container *ngFor="let badge of badgeUserConnected">
+                          <img class="badgeIMG" src="{{ badge.picture?.url }}">
+                        </ng-container>
                       </ng-container>
-                    </ng-container>
-                  </h1>
-                  <small><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
-                </div>
-              </ng-container>
-            </div>
+                    </h1>
+                    <small><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
+                  </div>
+                </ng-container>
+              </div>
 
-            <div class="border-provider-main"></div>
+              <div class="border-provider-main"></div>
 
-            <div id="profilInfoRight">
-              <div class="nb">
-                <div>
-                  <h2 style="color: {{ isColor }}"> {{ profilSelected?.nbGame }}</h2>
-                  <h3>{{profilSelected && nbGame >= 2 ? 'Jeux' : 'Jeu'}}</h3>
-                </div>
+              <div id="profilInfoRight">
+                <div class="nb">
+                  <div>
+                    <h2 style="color: {{ isColor }}"> {{ profilSelected?.nbGame }}</h2>
+                    <h3>{{profilSelected && nbGame >= 2 ? 'Jeux' : 'Jeu'}}</h3>
+                  </div>
 
-                <div>
-                  <h2  style="color: {{ isColor }}">  {{ profilSelected?.nbNote }}</h2>
-                  <h3>{{profilSelected && nbNote >= 2 ? 'Notes' : 'Note'}}</h3>
+                  <div>
+                    <h2  style="color: {{ isColor }}">  {{ profilSelected?.nbNote }}</h2>
+                    <h3>{{profilSelected && nbNote >= 2 ? 'Notes' : 'Note'}}</h3>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+
         </div>
+
 
 
       </div>
 
-
-
     </div>
 
-  </div>
-</div>
 

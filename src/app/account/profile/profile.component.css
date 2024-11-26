@@ -4,9 +4,13 @@ body {
 }
 
 .top {
-  background-color: red;
-  height: 160px;
-  box-shadow: 0px -37px 73px rgba(0, 0, 0, 0.51) inset;
+  height: 183px;
+  width: 100%;
+  box-shadow: 1px 2px 10px #a6a6a6;
+  margin-bottom: 55px;
+  background-color: white;
+  border-bottom-left-radius: 65px;
+  border-bottom-right-radius: 65px;
 }
 
 .name {
@@ -38,23 +42,17 @@ body {
   width: 250px;
   height: 250px;
   border-radius: 100%;
-
-
   background-color: white;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  box-shadow: 2px 2px 9px #888;
+  box-shadow: 1px 3px 12px #a6a6a6;
 }
 
 .lettrePP {
   text-align: center;
   font-size: 200px;
-  margin-top: -37px;
-}
-
-.border {
-  border: solid 1px;
+  margin-top: -25px;
 }
 
 .composant {
@@ -62,7 +60,7 @@ body {
   border: none;
   border-radius: 15px;
   margin-top: 10px;
-  box-shadow: 3px 2px 30px -5px rgba(0, 0, 0, 0.51);
+  box-shadow: 1px 2px 10px #a6a6a6;
   width: 100%;
   padding: 33px 50px;
 }

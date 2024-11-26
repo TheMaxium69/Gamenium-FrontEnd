@@ -301,7 +301,7 @@ h2 {
 @media (max-width: 900px) {
   #profilWrapper {
     position: relative;
-    top: 280px;
+    /* top: 280px; */
   }
 
   #profilWrapper .articleTuto .inUserTuto .d-flex{
