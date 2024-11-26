@@ -302,6 +302,94 @@
             <input type="hidden" [(ngModel)]="isNewCopy" name="copy{{i+nbCopyExisting}}">
 
             <!-- RESTE DU CODE -->
+            <!-- EDITIONS-->
+            <label for="edition{{i+nbCopyExisting}}">Editions:</label>
+            <input type="text" id="edition{{i+nbCopyExisting}}" name="edition{{i+nbCopyExisting}}" ngModel>
+
+            <!-- BARCODE -->
+            <label for="barcode{{i+nbCopyExisting}}">Barcode:</label>
+            <input type="text" id="barcode{{i+nbCopyExisting}}" name="barcode{{i+nbCopyExisting}}" ngModel>
+
+            <!-- CONTENT -->
+            <label for="content{{i+nbCopyExisting}}">Content:</label>
+            <input type="text" id="content{{i+nbCopyExisting}}" name="content{{i+nbCopyExisting}}" ngModel>
+
+            <!-- ETAT -->
+            <label for="etat{{i+nbCopyExisting}}">Etat:</label>
+            <ng-container *ngIf="hmgCopyEtatAll">
+              <select id="etat{{i+nbCopyExisting}}" name="etat{{i+nbCopyExisting}}" ngModel>
+                <option [value]="null">Choissir un etat</option>
+                <ng-container *ngFor="let etat of hmgCopyEtatAll">
+                  <option [value]="etat.id">{{ etat.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+
+            <!-- FORMAT -->
+            <label for="format{{i+nbCopyExisting}}">Format:</label>
+            <ng-container *ngIf="hmgCopyFormatAll">
+              <select id="format{{i+nbCopyExisting}}" name="format{{i+nbCopyExisting}}" ngModel>
+                <option [value]="null">Choissir un format</option>
+                <ng-container *ngFor="let format of hmgCopyFormatAll">
+                  <option [value]="format.id">{{ format.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+
+            <!-- REGION -->
+            <label for="region{{i+nbCopyExisting}}">Region:</label>
+            <ng-container *ngIf="hmgCopyRegionAll">
+              <select id="region{{i+nbCopyExisting}}" name="region{{i+nbCopyExisting}}" ngModel>
+                <option [value]="null">Choissir une Region</option>
+                <ng-container *ngFor="let region of hmgCopyRegionAll">
+                  <option [value]="region.id">{{ region.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+
+            <br>
+            <hr>
+
+            <h5>Purchase:</h5>
+
+            <!-- PURCHASE -->
+            <input type="hidden" name="purchase{{i+nbCopyExisting}}" ngModel>
+
+            <!-- PRICE -->
+            <label for="price{{i+nbCopyExisting}}">Price:</label>
+            <input type="number" id="price{{i+nbCopyExisting}}" ngModel name="purchase_price{{i+nbCopyExisting}}">
+
+            <!-- DEVISE -->
+            <label for="devise{{i+nbCopyExisting}}">Devise:</label>
+            <ng-container *ngIf="deviseAll">
+              <select id="devise{{i+nbCopyExisting}}" name="purchase_devise{{i+nbCopyExisting}}" ngModel>
+                <option [value]="null">Choissir une devise</option>
+                <ng-container *ngFor="let devise of deviseAll">
+                  <option [value]="devise.id">{{ devise.symbole }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+
+            <!-- BUY DATE -->
+            <label for="buy_date{{i+nbCopyExisting}}">Buy date:</label>
+            <input type="date" id="buy_date{{i+nbCopyExisting}}" ngModel
+                   name="purchase_buy_date{{i+nbCopyExisting}}">
+
+            <!-- BUY WHERE -->
+            <label for="buy_where{{i+nbCopyExisting}}">Buy where:</label>
+            <ng-container *ngIf="buyWhereAll">
+              <select id="buy_where{{i+nbCopyExisting}}" name="purchase_buy_where{{i+nbCopyExisting}}" ngModel>
+                <option [value]="null">Choissir une Buy Where</option>
+                <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                  <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+
+            <!-- PURCHASE CONTENT -->
+            <label for="purchase_content{{i+nbCopyExisting}}">Purchase content:</label>
+            <input type="text" id="purchase_content{{i+nbCopyExisting}}" ngModel
+                   name="purchase_content{{i+nbCopyExisting}}">
           </div>
         </ng-container>
       </div>
