@@ -1,0 +1,44 @@
+.navigateBar ul {
+  color: white;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  width: 100%;
+  text-align: center;
+  height: 96px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  font-size: 27px;
+  justify-content: space-around;
+  padding: 15px;
+}
+
+
+h3.titleInWrapper{
+  margin-left: 40px;
+  margin-bottom: 20px;
+}
+
+.navigateBar ul li{
+  display: flex;
+  justify-content: center;
+}
+
+.navigateBar ul li p{
+  margin: unset!important;
+  width: fit-content;
+  padding: 5px;
+  transition: all 0.5s ease 0s;
+  cursor: pointer;
+}
+
+.navigateBar ul li.active p{
+  background-color: #ffffffc4;
+  border-radius: 10px;
+  color: black;
+}
+
+.navigateBar ul li:hover p{
+  transform: scale(1.2);
+}

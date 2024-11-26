@@ -54,6 +54,7 @@ import { ModalNoteUnselectComponent } from './-global/modal-note-unselect/modal-
 import { ModalAddGameUnselectComponent } from './-global/modal-add-game-unselect/modal-add-game-unselect.component';
 import { PlateformViewComponent } from './mygame/plateform-view/plateform-view.component';
 import { RecentViewComponent } from './mygame/recent-view/recent-view.component';
+import { TabMygameComponent } from './mygame/tab-mygame/tab-mygame.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { RecentViewComponent } from './mygame/recent-view/recent-view.component'
     ModalNoteUnselectComponent,
     ModalAddGameUnselectComponent,
     PlateformViewComponent,
-    RecentViewComponent
+    RecentViewComponent,
+    TabMygameComponent
 
   ],
   imports: [

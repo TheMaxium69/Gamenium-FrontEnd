@@ -51,7 +51,11 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
     if (this.userConnected) {
       this.isColor = this.userConnected.themeColor;
-      this.myGameByUserWithPlateform(this.userConnected.id, this.plateformeId);
+      if (this.task == "all"){
+        this.myGameByUser(this.userConnected.id);
+      } else {
+        this.myGameByUserWithPlateform(this.userConnected.id, this.plateformeId);
+      }
       this.myPlateforme(this.userConnected.id);
       this.getUserRate(this.userConnected.id)
     }
@@ -77,6 +81,17 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         this.HistoireMyGameByUserByPlateform = responseMyGame.result;
+      }
+    });
+  }
+
+  myGameByUser(id_user: number): void {
+    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+      if (responseMyGame.message == "good") {
+        this.HistoireMyGameByUserByPlateform = responseMyGame.result;
+        console.log(this.HistoireMyGameByUserByPlateform);
+      } else {
+        console.log("pas de jeux trouvé pour l'utilisateur")
       }
     });
   }
