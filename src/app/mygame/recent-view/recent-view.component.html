@@ -8,73 +8,43 @@
 <section id="profilWrapper" class="container">
 
   <!-- PAGE HOME-->
-<!--  <ng-container *ngIf="!task">-->
 
-<!--    <article class="navigateBar">-->
+    <article class="navigateBar">
 
-<!--      <ul style="background-color: {{ isColor }}">-->
+      <ul style="background-color: {{ isColor }}">
 
-<!--        &lt;!&ndash; HOME PAGE &ndash;&gt;-->
-<!--        <ng-container *ngIf="!task">-->
-<!--          <li routerLink="/mygame/" class="active">-->
-<!--            <p>Accueil</p>-->
-<!--          </li>-->
-<!--        </ng-container>-->
-<!--        <ng-container *ngIf="task">-->
-<!--          <li routerLink="/mygame/">-->
-<!--            <p>Accueil</p>-->
-<!--          </li>-->
-<!--        </ng-container>-->
+        <!-- HOME PAGE -->
+        <li routerLink="/mygame/">
+          <p>Accueil</p>
+        </li>
 
-<!--        &lt;!&ndash; RECENT PAGE &ndash;&gt;-->
-<!--        <ng-container *ngIf="task == 'recent'">-->
-<!--          <li routerLink="/mygame/recent" class="active">-->
-<!--            <p>Tous</p>-->
-<!--          </li>-->
-<!--        </ng-container>-->
-<!--        <ng-container *ngIf="task != 'recent'">-->
-<!--          <li routerLink="/mygame/recent">-->
-<!--            <p>Tous</p>-->
-<!--          </li>-->
-<!--        </ng-container>-->
+        <!-- RECENT PAGE -->
+        <li routerLink="/mygame-all" class="active">
+          <p>Tous</p>
+        </li>
 
-<!--        &lt;!&ndash; OTHER PAGE &ndash;&gt;-->
-<!--        <ng-container *ngIf="plateformsUser">-->
-<!--          <ng-container *ngFor="let plateform of plateformsUser">-->
+        <!-- OTHER PAGE -->
+        <ng-container *ngIf="plateformsUser">
+          <ng-container *ngFor="let plateform of plateformsUser">
 
-<!--            <ng-container *ngIf="task == plateform.id">-->
-<!--              <li routerLink="/mygame/{{ plateform.id }}" class="active">-->
-<!--                <ng-container *ngIf="plateform.name !== plateform.abbreviation">-->
-<!--                  <p>{{ plateform.name }} ({{ plateform.abbreviation }})</p>-->
-<!--                </ng-container>-->
-<!--                <ng-container *ngIf="plateform.name == plateform.abbreviation">-->
-<!--                  <p>{{ plateform.name }}</p>-->
-<!--                </ng-container>-->
-<!--              </li>-->
-<!--            </ng-container>-->
+              <li routerLink="/mygame/{{ plateform.id }}">
+                <ng-container *ngIf="plateform.name !== plateform.abbreviation">
+                  <p>{{ plateform.name }} ({{ plateform.abbreviation }})</p>
+                </ng-container>
+                <ng-container *ngIf="plateform.name == plateform.abbreviation">
+                  <p>{{ plateform.name }}</p>
+                </ng-container>
+              </li>
 
+          </ng-container>
+        </ng-container>
 
-<!--            <ng-container *ngIf="task != plateform.id">-->
-<!--              <li routerLink="/mygame/{{ plateform.id }}">-->
-<!--                <ng-container *ngIf="plateform.name !== plateform.abbreviation">-->
-<!--                  <p>{{ plateform.name }} ({{ plateform.abbreviation }})</p>-->
-<!--                </ng-container>-->
-<!--                <ng-container *ngIf="plateform.name == plateform.abbreviation">-->
-<!--                  <p>{{ plateform.name }}</p>-->
-<!--                </ng-container>-->
-<!--              </li>-->
-<!--            </ng-container>-->
+      </ul>
 
-<!--          </ng-container>-->
-<!--        </ng-container>-->
+    </article>
 
-<!--      </ul>-->
+    <!--  GAME PINED -->
 
-<!--    </article>-->
+    <!--  GAME UNPINED -->
 
-<!--    &lt;!&ndash;  GAME PINED &ndash;&gt;-->
-
-<!--    &lt;!&ndash;  GAME UNPINED &ndash;&gt;-->
-
-<!--  </ng-container>-->
 </section>
