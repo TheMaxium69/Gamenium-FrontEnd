@@ -9,6 +9,10 @@
 
         <h1>{{ this.app.viewMyGame?.myGame?.game?.name }}</h1>
 
+
+        <ng-container *ngIf="this.app.viewMyGame">
+            <p *ngIf="this.app.viewMyGame.myGame">plateform : {{ this.app.plateformeNameFormatage(this.app.viewMyGame.myGame.plateform.name) }}</p>
+        </ng-container>
         <p>épinglé : {{ this.app.viewMyGame?.myGame?.is_pinned || "Non épinglé" }}</p>
         <p>Date d'ajout : {{ this.app.viewMyGame?.myGame?.added_at }}</p>
         <p>User : {{ this.app.viewMyGame?.myGame?.user?.username }}</p>
