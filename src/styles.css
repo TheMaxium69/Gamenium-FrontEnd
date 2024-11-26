@@ -17,6 +17,7 @@ h1{
   font-size: 30px;
   font-weight: 700;
   color: var(--first-color);
+  margin: unset;
 }
 
 h2{
@@ -24,6 +25,7 @@ h2{
   font-size: 21px;
   font-weight: 600;
   color: var(--second-color);
+  margin: unset;
 }
 
 h3{
@@ -32,6 +34,7 @@ h3{
   font-weight: 500;
   /*text-transform: uppercase;*/
   color: var(--third-color);
+  margin: unset;
 }
 
 p{
@@ -39,6 +42,7 @@ p{
   font-size: 14px;
   font-weight: 400;
   color: var(--first-color);
+  margin: unset;
 }
 
 p.second{
@@ -46,11 +50,13 @@ p.second{
   font-size: 14px;
   font-weight: 400;
   color: var(--second-color);
+  margin: unset;
 }
 
-small{
+small {
   font-family: var(--main-police), sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: var(--third-color);
+  margin: unset;
 }
