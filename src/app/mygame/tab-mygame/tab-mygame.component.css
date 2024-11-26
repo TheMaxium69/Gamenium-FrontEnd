@@ -10,12 +10,13 @@
   margin-bottom: 40px;
   box-shadow: 1px 2px 11px #a6a6a6;
   font-size: 27px;
-  justify-content: space-around;
   padding: 15px;
+  padding-top: 20px;
   overflow-y: hidden !important;
   position: relative;
+  flex-direction: row;
+  justify-content: flex-start;
 }
-
 
 h3.titleInWrapper{
   margin-left: 40px;

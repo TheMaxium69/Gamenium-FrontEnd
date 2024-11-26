@@ -12,6 +12,27 @@
 
 }
 
+.scrollbar::-webkit-scrollbar {
+  height: 5px;
+  border-radius: 10px!important;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  /*background: red;*/
+  border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px!important;
+  background-color: #ffffffc4;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+
+  background-clip: content-box;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  /*border-bottom: 3px solid transparent;*/
+}
+
 h1{
   font-family: var(--main-police), sans-serif;
   font-size: 30px;
