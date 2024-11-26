@@ -10,10 +10,15 @@
   margin-bottom: 40px;
   box-shadow: 1px 2px 11px #a6a6a6;
   font-size: 27px;
-  justify-content: space-around;
   padding: 15px;
   overflow-y: hidden !important;
   position: relative;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.navigateBar ul::-webkit-scrollbar {
+  background: red;
 }
 
 
