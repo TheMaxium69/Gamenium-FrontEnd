@@ -25,7 +25,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   userRatingAll:UserRateInterface[]|undefined;
   isColor: string = this.app.colorDefault;
 
-  constructor(private app:AppComponent,
+  constructor(protected app:AppComponent,
               private myGameService:HistoryMyGameService,
               private userRateService:UserRateService,
               private route: ActivatedRoute,

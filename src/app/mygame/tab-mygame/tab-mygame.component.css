@@ -26,7 +26,13 @@ h3.titleInWrapper{
 .navigateBar ul li{
   display: flex;
   justify-content: center;
-  min-width: 25% !important;
+  /*min-width: 25% !important;*/
+  min-width: 23% !important;
+  border-right: 1px solid white;
+}
+
+.navigateBar ul li:last-child{
+  border-right: unset;
 }
 
 .navigateBar ul li p{

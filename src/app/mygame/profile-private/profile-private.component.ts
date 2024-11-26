@@ -58,10 +58,10 @@ export class ProfilePrivateComponent implements OnInit {
   searchQuery: string = '';
   filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
   sortOption: string = 'name-asc'; // Tri par défaut
-  isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown 
+  isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
 
 
-  constructor(private app: AppComponent,
+  constructor(protected app: AppComponent,
               private taskService: TaskService,
               private commentService: CommentService,
               private likeService: LikeService,
@@ -330,9 +330,9 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
     );
   }
 
-  // methode pour filtrer les jeux 
+  // methode pour filtrer les jeux
 
-  // Toogle le dropdown 
+  // Toogle le dropdown
   toggleFilterDropdown(): void {
     this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
   }
@@ -367,11 +367,11 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
           const dateB = b.myGame?.game?.originalReleaseDate
             ? new Date(b.myGame?.game?.originalReleaseDate).getTime()
             : 0;
-      
-          return dateA - dateB; 
+
+          return dateA - dateB;
         });
         break;
-      
+
       case 'year-desc':
         this.filteredGames.sort((a, b) => {
           const dateA = a.myGame?.game?.originalReleaseDate
@@ -380,8 +380,8 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
           const dateB = b.myGame?.game?.originalReleaseDate
             ? new Date(b.myGame?.game?.originalReleaseDate).getTime()
             : 0;
-      
-          return dateB - dateA; 
+
+          return dateB - dateA;
         });
         break;
 

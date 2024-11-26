@@ -54,7 +54,7 @@
           <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
             <h2>{{ myGameHistorique.myGame.game.name }}</h2>
             <p style="color: {{ isColor }};" class="platform-names">
-              {{ myGameHistorique.myGame.plateform.name }}
+              {{ this.app.plateformeNameFormatage(myGameHistorique.myGame.plateform.name) }}
             </p>
             <p> Ajouté le : {{ myGameHistorique.myGame.added_at | date:'dd / MM / yyyy' }}</p>
           </div>
@@ -109,7 +109,7 @@
           <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
             <h2>{{ myGameHistorique.myGame.game.name }}</h2>
             <p style="color: {{ isColor }};" class="platform-names">
-              {{ myGameHistorique.myGame.plateform.name }}
+              {{ this.app.plateformeNameFormatage(myGameHistorique.myGame.plateform.name) }}
             </p>
             <p> Ajouté le : {{ myGameHistorique.myGame.added_at | date:'dd / MM / yyyy' }}</p>
           </div>

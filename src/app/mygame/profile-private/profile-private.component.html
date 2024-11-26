@@ -41,7 +41,7 @@
               <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
                 <h2>{{ myGameHistorique.myGame.game.name }}</h2>
                 <p style="color: {{ isColor }};" class="platform-names">
-                  {{ myGameHistorique.myGame.plateform.name }}
+                  {{ this.app.plateformeNameFormatage(myGameHistorique.myGame.plateform.name) }}
                 </p>
                 <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
                 <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->
@@ -211,7 +211,7 @@
               <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
                 <h2>{{ myGameHistorique.myGame.game.name }}</h2>
                 <p style="color: {{ isColor }};" class="platform-names">
-                  {{ myGameHistorique.myGame.plateform.name }}
+                  {{ this.app.plateformeNameFormatage(myGameHistorique.myGame.plateform.name) }}
                 </p>
                 <!--              <ng-container *ngIf="myGameHistorique.buy_at">-->
                 <!--                <p> [QUAND] Acheté le : {{ myGameHistorique.buy_at }}</p>-->

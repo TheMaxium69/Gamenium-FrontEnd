@@ -8,7 +8,7 @@
     #input
     (keyup)="onSearchTap(input.value)"
     class="searchTerm"
-    name="searchValue" 
+    name="searchValue"
     [(ngModel)]="searchValue"
     placeholder="Tapez votre recherche ..."
     [style.borderColor]="userColor"
@@ -37,10 +37,10 @@
             <h2>{{ game.name }}</h2>
             <p style="color: {{ userColor ? userColor : 'red' }}" class="platform-names">
               <ng-container *ngFor="let platform of game.platforms; let last = last">
-                {{ platform.name }}<span *ngIf="!last">, </span>
+                {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
               </ng-container>
             </p>
-            
+
             <p> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</p>
           </div>
           <div class="core-right">

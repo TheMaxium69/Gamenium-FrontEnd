@@ -42,7 +42,7 @@ export class SearchPageComponent implements OnInit{
     private postactuService: PostActuService,
     private providerService: ProviderService,
     private profileService: ProfilService,
-    private app: AppComponent
+    protected app: AppComponent
   ) {
   }
 
@@ -74,7 +74,7 @@ export class SearchPageComponent implements OnInit{
     }
     const sum = tab.reduce((acc, val) => acc + val, 0);
     const result = sum / tab.length // -> average fake rates 13.5
-     
+
     if (result - Math.round(result) >= 0.5) {
       return Math.round(sum) + 1
     } else {
@@ -89,7 +89,7 @@ export class SearchPageComponent implements OnInit{
         if (responseProfil.message === "good") {
           this.profilSelected = responseProfil.result;
           if (this.profilSelected?.themeColor) {
-            this.userColor = this.profilSelected.themeColor; 
+            this.userColor = this.profilSelected.themeColor;
           }
         } else {
           console.error("Error: User profile not found");

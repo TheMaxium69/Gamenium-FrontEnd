@@ -75,7 +75,7 @@
               <h2>{{ game.name }}</h2>
             <p style="color: {{ userColor ? userColor : 'red' }}" class="platform-names">
               <ng-container *ngFor="let platform of game.platforms; let last = last">
-                {{ platform.name }}<span *ngIf="!last">, </span>
+                {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
               </ng-container>
             </p>
               <p> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}
@@ -104,7 +104,7 @@
         <div id="card-user" style="background: linear-gradient(180deg, {{user.color ?? 'red'}} 35%, white 35%)">
           <div *ngIf="user?.pp" class="circleImage" style="background-image: url('{{ user.pp?.url }}')">
           </div>
-    
+
           <div *ngIf="!user?.pp" class="circleImage" style="background-color: white!important">
             <p class="lettrePP" style="color: {{user.color ?? 'red'}}">{{ extractFirstLetter(user.displayname) }}</p>
           </div>
@@ -126,7 +126,7 @@
 
     <div class="d-flex justify-content-center gap-5">
       <app-card-actuality></app-card-actuality>
-    </div>      
+    </div>
 
   </section>
 </ng-container>
@@ -148,7 +148,7 @@
               <img src="{{ game.image?.thumb_url }}" alt="...">
             </ng-container> -->
         <div id="card-provider" style="background: linear-gradient(180deg, {{provider.color ?? 'red'}} 35%, white 35%)">
-          <div class="circleImage" style="background-image: url('{{ provider.picture?.url }}');"></div> 
+          <div class="circleImage" style="background-image: url('{{ provider.picture?.url }}');"></div>
           <h2 class="card-title">{{ provider.displayName }}</h2><br>
           <p>{{ provider.content }}</p><br>
         </div>

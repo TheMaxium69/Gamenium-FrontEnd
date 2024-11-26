@@ -18,7 +18,7 @@ export class TabMygameComponent implements OnInit, OnChanges {
   isColor: string = this.app.colorDefault;
   plateformsUser: PlateformInterface[] | undefined;
 
-  constructor(private app:AppComponent,
+  constructor(protected app:AppComponent,
               private route: ActivatedRoute,
               private plateformService: PlateformService) {}
 

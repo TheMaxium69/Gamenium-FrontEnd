@@ -28,7 +28,7 @@ export class SearchGameComponent implements OnInit{
   constructor (
     private userRateService: UserRateService,
     private gameService: GameService,
-    private app: AppComponent,
+    protected app: AppComponent,
     private profileService: ProfilService,
     private router: Router
   ) {}
@@ -40,12 +40,12 @@ export class SearchGameComponent implements OnInit{
     if (this.isLoggedIn) {
       this.updateConnect()
     }
-    
+
     this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.games = results;
     });
 
-    
+
   }
 
   updateConnect(): void {
@@ -55,7 +55,7 @@ export class SearchGameComponent implements OnInit{
         if (responseProfil.message === "good") {
           this.profilSelected = responseProfil.result;
           if (this.profilSelected?.themeColor) {
-            this.userColor = this.profilSelected.themeColor; 
+            this.userColor = this.profilSelected.themeColor;
           }
         } else {
           console.error("Error: User profile not found");
@@ -104,7 +104,7 @@ export class SearchGameComponent implements OnInit{
     }
     const sum = tab.reduce((acc, val) => acc + val, 0);
     const result = sum / tab.length // -> average fake rates 13.5
-     
+
     if (result - Math.round(result) >= 0.5) {
       return Math.round(sum) + 1
     } else {

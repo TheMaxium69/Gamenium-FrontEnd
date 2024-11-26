@@ -326,6 +326,20 @@ export class AppComponent {
     }
   }
 
+  plateformeNameFormatage(plateform:string): string{
+
+    if (plateform == 'Super Nintendo Entertainment System'){
+      return 'SNES'
+    }
+
+    if (plateform == 'Nintendo Entertainment System'){
+      return 'NES'
+    }
+
+    return plateform;
+
+  }
+
   /*
   *
   * FOR MODAL

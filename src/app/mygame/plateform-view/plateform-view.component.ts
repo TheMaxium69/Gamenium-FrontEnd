@@ -33,10 +33,10 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   searchQuery: string = '';
   filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
   sortOption: string = 'added-desc'; // Tri par défaut
-  isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown 
-  
+  isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
 
-  constructor(private app:AppComponent,
+
+  constructor(protected app:AppComponent,
               private route: ActivatedRoute,
               private histoireMyGameService: HistoryMyGameService,
               private plateformService: PlateformService,
@@ -92,9 +92,9 @@ export class PlateformViewComponent implements OnInit, OnChanges {
       );
     }
 
-  // methode pour filtrer les jeux 
+  // methode pour filtrer les jeux
 
-  // Toogle le dropdown 
+  // Toogle le dropdown
   toggleFilterDropdown(): void {
     this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
   }
@@ -107,25 +107,25 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   }
 
   filterGames(): void {
-    //  
+    //
     this.filteredGames = this.HistoireMyGameByUserByPlateform.filter(game => {
       if (!this.searchQuery) {
         // on renvoie true pour laisser la possibilité de filtrer sans recherche
         return true;
       }
-  
-      // ici on filtre si il existe une recherche 
+
+      // ici on filtre si il existe une recherche
       const query = this.searchQuery.toLowerCase();
       const gameName = game.myGame?.game?.name?.toLowerCase() || '';
       const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
       const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
-  
+
       return gameName.includes(query) || platforms.includes(query) || year.includes(query);
     });
     console.log("Filtered Games:", this.filteredGames);
     this.applySorting();
   }
-  
+
 
   applySorting(): void {
     switch (this.sortOption) {

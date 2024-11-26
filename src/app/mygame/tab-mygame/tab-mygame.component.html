@@ -32,24 +32,13 @@
 
         <ng-container *ngIf="task == plateform.id">
           <li routerLink="/mygame/{{ plateform.id }}" class="active">
-            <ng-container *ngIf="plateform.name !== plateform.abbreviation">
-              <p>{{ plateform.name }} ({{ plateform.abbreviation }})</p>
-            </ng-container>
-            <ng-container *ngIf="plateform.name == plateform.abbreviation">
-              <p>{{ plateform.name }}</p>
-            </ng-container>
+            <p>{{ this.app.plateformeNameFormatage(plateform.name) }}</p>
           </li>
         </ng-container>
 
-
         <ng-container *ngIf="task != plateform.id">
           <li routerLink="/mygame/{{ plateform.id }}">
-            <ng-container *ngIf="plateform.name !== plateform.abbreviation">
-              <p>{{ plateform.name }} ({{ plateform.abbreviation }})</p>
-            </ng-container>
-            <ng-container *ngIf="plateform.name == plateform.abbreviation">
-              <p>{{ plateform.name }}</p>
-            </ng-container>
+            <p>{{ this.app.plateformeNameFormatage(plateform.name) }}</p>
           </li>
         </ng-container>
 
