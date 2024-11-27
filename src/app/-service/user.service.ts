@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserInterface } from '../-interface/user.interface';
 import {ApicallInterface} from "../-interface/apicall.interface";
@@ -25,4 +25,7 @@ export class UserService {
     return this.http.post<UserInterface[]>(url + `/users/search`, { searchValue, limit});
   }
 
+  deleleProfilPicture(url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.delete<ApicallInterface>(url + '/delete/pp/', options);
+  }
 }

@@ -55,7 +55,7 @@
               <div>
                 <div class="profile-header" [ngStyle]="{ 'background-color': color }"></div>
                   <div class="profile-avatar" [style.backgroundImage]="'url(' + (profilSelected?.picture || 'https://tyrolium.fr/generate-pp/?l=' + extractFirstLetter(userConnected?.displayname)) + ')'">
-                    <i id="delete-picture" class="ri-delete-bin-line delete-picture-icon" (click)="deletePicture()"></i>
+                    <i *ngIf="profilSelected?.picture" id="delete-picture" class="ri-delete-bin-line delete-picture-icon" (click)="deletePicture()"></i>
                   </div>
                   <h3>{{ userConnected?.displayname || userConnected?.username }}</h3>
                   <!-- <p> {{ userConnected?.username }} </p> -->

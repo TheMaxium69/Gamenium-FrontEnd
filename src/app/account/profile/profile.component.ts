@@ -306,8 +306,11 @@ export class ProfileComponent implements OnInit {
   }
 
   deletePicture() {
-    // TODO:
-    console.log('Supprimer la photo de profil')
+    this.userService.deleleProfilPicture(this.app.setURL(), this.app.createCorsToken()).subscribe(ReponseApi => {
+      if (ReponseApi.message == 'photo supprimée') {
+        console.log(ReponseApi.message)
+      }
+    })
   }
 
 
