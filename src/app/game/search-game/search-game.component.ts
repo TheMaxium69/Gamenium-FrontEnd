@@ -24,6 +24,7 @@ export class SearchGameComponent implements OnInit{
   fakeRates: number[] = [8, 14, 19, 13];
   userColor: string | undefined;
   profilSelected: ProfilInterface | undefined;
+  nbMoreGame:number = 1;
 
   constructor (
     private userRateService: UserRateService,
@@ -113,4 +114,19 @@ export class SearchGameComponent implements OnInit{
   }
 
   //Je pense qu'on peut faire une fonction avec comme param l'id du jeu. Dans cette fonction on récupère d'abord le tableau de note avec getRatesByGame() et ensuite on passe ce tableau de note dans rateAverage().
+
+
+  moreGame(){
+
+    this.nbMoreGame++
+    let limit = this.nbMoreGame * 100;
+    // console.log(limit)
+
+    this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
+      this.games = results;
+      // console.log(this.games.length)
+    });
+
+  }
+
 }
