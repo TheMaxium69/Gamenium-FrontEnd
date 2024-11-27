@@ -15,7 +15,7 @@
 }
 
 .modal{
-  --bs-modal-width: 750px!important;
+  --bs-modal-width: 800px!important;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -92,4 +92,8 @@ small {
 
 .pp-shadow{
   box-shadow: 1px 3px 12px #a6a6a6;
+}
+
+.blocks-shadow{
+  box-shadow: 1px 2px 10px #a6a6a6;
 }

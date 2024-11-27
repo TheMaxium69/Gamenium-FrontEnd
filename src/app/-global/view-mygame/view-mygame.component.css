@@ -1,12 +1,24 @@
-/*
+/************
 *
-* GESTION MODAL
+* GLOBAL
 *
-*/
+************/
 
 #view-mygame {
   padding: 30px;
+  text-align: start;
 }
+
+.btn-primary{
+  background-color: var(--color-variable)!important;
+}
+
+/************
+*
+* GESTION MODAL
+*
+************/
+
 
 .modal-header {
     justify-content: space-between;
@@ -33,17 +45,17 @@
     margin: 0;
 }
 
-.btn-primary{
-  background-color: var(--color-variable)!important;
-}
-
-/*
+/***********
 *
 * CONTENT MODAL
 *
-*/
+************/
 
-/* head */
+/*
+*
+* HEAD
+*
+*/
 #head-img{
   display: flex;
   gap: 25px;
@@ -133,7 +145,7 @@
         .screen{
           box-shadow: 1px 0px 11px -1px #a6a6a6;
           width: auto;
-          height: auto;
+          height: 160px;
           max-width: 300px;
           max-height: 160px;
         }
@@ -155,3 +167,28 @@
 
 }
 
+/*
+*
+* CONTENT VIEW
+*
+*/
+#content-view{
+  background-color: #f2f2f2;
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  border-radius: 9px;
+  padding: 30px;
+
+  .margContent{
+    margin-top: 20px;
+    margin-left: 20px;
+
+    p{
+      margin-bottom: 3px;
+    }
+  }
+
+
+}
