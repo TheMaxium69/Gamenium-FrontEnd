@@ -21,9 +21,9 @@
 
 
 .modal-header {
-    justify-content: space-between;
-    gap: 5px;
-    padding: 10px;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 10px;
 }
 
 .no-btn{
@@ -31,18 +31,51 @@
   border: none;
 }
 
+.pinnedBtn{
+  background: var(--color-variable)!important;
+  border-radius: 100%;
+  margin-right: 6px;
+  width: 35px;
+  height: 35px;
+}
+
+.pinnedBtn i{
+  color: white!important;
+}
+
+.pinnedBtn:hover i{
+  color: white!important;
+}
+
+.pinnedBtn:hover i:hover{
+  color: white!important;
+}
+
+.yourPinned:hover .icon-default {
+  display: none;
+}
+
+.yourPinned:hover .icon-hovered {
+  display: inline-block;
+}
+
+.icon-hovered {
+  display: none;
+}
+
+
 .btn-action {
-    color: gray;
-    font-size: 22px;
-    cursor: pointer;
+  color: gray;
+  font-size: 22px;
+  cursor: pointer;
 }
 
 .btn-action:hover {
-    color: var(--color-variable)!important;
+  color: var(--color-variable)!important;
 }
 
 .btn-close {
-    margin: 0;
+  margin: 0;
 }
 
 /***********
@@ -182,13 +215,36 @@
   padding: 30px;
 
   .margContent{
-    margin-top: 20px;
+    margin-top: 30px;
     margin-left: 20px;
-
-    p{
-      margin-bottom: 3px;
-    }
   }
 
+  ul.ulInfo {
+    list-style-type: none;
+    margin-left: -10px;
+
+    li {
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      p{
+        width: 50%;
+      }
+      h3{
+        font-weight: 600;
+        color: var(--color-variable)!important;
+        i{
+          margin-right: 3px;
+        }
+        small{
+          font-weight: 600;
+          color: var(--color-variable)!important;
+        }
+      }
+
+    }
+  }
 
 }

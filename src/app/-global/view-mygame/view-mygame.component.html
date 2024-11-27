@@ -4,9 +4,17 @@
       <div class="modal-header">
         <div class="modal-header-start">
           <ng-container *ngIf="this.app.viewMyGame?.myGame?.user?.id == this.app.userConnected?.id">
-            <button type="button" class="no-btn">
-              <i class="ri-unpin-line btn-action"></i>
-            </button>
+            <ng-container *ngIf="this.app.viewMyGame?.myGame?.is_pinned">
+              <button type="button" class="no-btn pinnedBtn yourPinned">
+                <i class="ri-pushpin-fill btn-action icon-default"></i>
+                <i class="ri-unpin-fill btn-action icon-hovered"></i>
+              </button>
+            </ng-container>
+            <ng-container *ngIf="!this.app.viewMyGame?.myGame?.is_pinned">
+              <button type="button" class="no-btn">
+                <i class="ri-pushpin-line btn-action"></i>
+              </button>
+            </ng-container>
             <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#noteGame">
               <i class="ri-star-line btn-action"></i>
             </button>
@@ -16,6 +24,13 @@
             <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" (click)="deleteGame(this.app.viewMyGame?.myGame?.id)">
               <i class="ri-delete-bin-line btn-action"></i>
             </button>
+          </ng-container>
+          <ng-container *ngIf="this.app.viewMyGame?.myGame?.user?.id !== this.app.userConnected?.id">
+            <ng-container *ngIf="this.app.viewMyGame?.myGame?.is_pinned">
+              <button type="button" class="no-btn pinnedBtn">
+                <i class="ri-pushpin-fill btn-action"></i>
+              </button>
+            </ng-container>
           </ng-container>
         </div>
         <div class="modal-header-end">
@@ -46,7 +61,11 @@
 
         <div id="head-modal">
 
-          <h2 class="titleGame">{{ this.app.viewMyGame.myGame?.game?.name }}</h2>
+          <div>
+            <h2 class="titleGame">{{ this.app.viewMyGame.myGame?.game?.name }}</h2>
+            <small>Ajouté le {{ this.app.viewMyGame?.myGame?.added_at | date:'dd / MM / yyyy' }}</small>
+          </div>
+
 
           <button class="btn btn-primary" routerLink="/game/{{ this.app.viewMyGame.myGame.game.id }}" data-bs-dismiss="modal">Voir le jeux</button>
 
@@ -59,15 +78,149 @@
 
           <div class="margContent">
 
-            <p *ngIf="this.app.viewMyGame.myGame">plateform : {{ this.app.plateformeNameFormatage(this.app.viewMyGame.myGame.plateform.name) }}</p>
-            <p>épinglé : {{ this.app.viewMyGame?.myGame?.is_pinned || "Non épinglé" }}</p>
-            <p>Date d'ajout : {{ this.app.viewMyGame?.myGame?.added_at }}</p>
-            <p>User : {{ this.app.viewMyGame?.myGame?.user?.username }}</p>
-            <p>Difficulty rating : {{ this.app.viewMyGame?.myGame?.difficulty_rating || "Non noté" }}</p>
-            <p>Lifetime rating : {{ this.app.viewMyGame?.myGame?.lifetime_rating || "Non noté" }}</p>
-            <p>Wish list : {{ this.app.viewMyGame?.myGame?.wish_list || "Non" }}</p>
-            <p>Note Game : {{ this.app.viewMyGame?.rate?.rating || "Non noté" }}</p>
-            <p>Nombre d'exemplaire  : {{ this.app.viewMyGame?.copyGame?.length || '1*' }}</p>
+            <ul class="ulInfo" *ngIf="this.app.viewMyGame.myGame">
+
+              <ng-container *ngIf="this.app.viewMyGame.myGame.game">
+              <li>
+                <p>Plateforme : </p>
+                <h3>{{ this.app.plateformeNameFormatage(this.app.viewMyGame.myGame.plateform.name) }}</h3>
+              </li>
+              <li>
+                <p>Date de sortie : </p>
+                <h3>{{ this.app.viewMyGame.myGame.game.originalReleaseDate | date: 'd MMMM y': undefined : 'fr' }}</h3>
+              </li>
+              </ng-container>
+
+              <li>
+                <p>Nombre d'exemplaire : </p>
+                <h3>{{ this.app.viewMyGame?.copyGame?.length || '1*' }}</h3>
+              </li>
+
+              <li>
+                <p>Note Game : </p>
+                <h3>{{ this.app.viewMyGame?.rate?.rating || 'Non noté' }}<small *ngIf="this.app.viewMyGame?.rate?.rating">/20</small></h3>
+              </li>
+
+              <ng-container *ngIf="this.app.viewMyGame?.myGame?.difficulty_rating">
+                <li>
+                  <p>Difficulty rating : </p>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.difficulty_rating == 1">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-line"></i><i class="ri-star-line"></i><i
+                      class="ri-star-line"></i><i class="ri-star-line"></i></h3>
+                  </ng-container>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.difficulty_rating == 2">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-line"></i><i
+                      class="ri-star-line"></i><i class="ri-star-line"></i></h3>
+                  </ng-container>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.difficulty_rating == 3">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                      class="ri-star-line"></i><i class="ri-star-line"></i></h3>
+                  </ng-container>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.difficulty_rating == 4">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                      class="ri-star-fill"></i><i class="ri-star-line"></i></h3>
+                  </ng-container>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.difficulty_rating == 5">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                      class="ri-star-fill"></i><i class="ri-star-fill"></i></h3>
+                  </ng-container>
+                </li>
+              </ng-container>
+
+              <ng-container *ngIf="this.app.viewMyGame?.myGame?.lifetime_rating">
+                <li>
+                  <p>Lifetime rating : </p>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.lifetime_rating == 1">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-line"></i><i class="ri-star-line"></i><i
+                      class="ri-star-line"></i><i class="ri-star-line"></i></h3>
+                  </ng-container>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.lifetime_rating == 2">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-line"></i><i
+                      class="ri-star-line"></i><i class="ri-star-line"></i></h3>
+                  </ng-container>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.lifetime_rating == 3">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                      class="ri-star-line"></i><i class="ri-star-line"></i></h3>
+                  </ng-container>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.lifetime_rating == 4">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                      class="ri-star-fill"></i><i class="ri-star-line"></i></h3>
+                  </ng-container>
+                  <ng-container *ngIf="this.app.viewMyGame?.myGame?.lifetime_rating == 5">
+                    <h3><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                      class="ri-star-fill"></i><i class="ri-star-fill"></i></h3>
+                  </ng-container>
+                </li>
+              </ng-container>
+
+              <!--<p>Wish list : {{ this.app.viewMyGame?.myGame?.wish_list || "Non" }}</p>-->
+
+              <!-- SI YA UN SEUL EXEMPLAIRE -->
+              <ng-container *ngIf="this.app.viewMyGame?.copyGame?.length === 1">
+                <ng-container *ngFor="let copyGame of app.viewMyGame?.copyGame">
+
+                  <li *ngIf="copyGame.edition">
+                    <p>Editions : </p>
+                    <h3>{{ copyGame.edition }}</h3>
+                  </li>
+
+                  <li *ngIf="copyGame.barcode">
+                    <p>Barcode : </p>
+                    <h3>{{ copyGame.barcode }}</h3>
+                  </li>
+
+                  <li *ngIf="copyGame.content">
+                    <p>Description : </p>
+                    <h3>{{ copyGame.content }}</h3>
+                  </li>
+
+                  <li *ngIf="copyGame.etat">
+                    <p>Etat : </p>
+                    <h3>{{ copyGame.etat.name }}</h3>
+                  </li>
+
+                  <li *ngIf="copyGame.format">
+                    <p>format : </p>
+                    <h3>{{ copyGame.format.name }}</h3>
+                  </li>
+
+                  <li *ngIf="copyGame.region">
+                    <p>region : </p>
+                    <h3>{{ copyGame.region.name }}</h3>
+                  </li>
+
+                    <h5>Purchase :</h5>
+                    <ng-container *ngIf="copyGame.purchase">
+                      <p>price : {{ copyGame.purchase.price || "null" }}</p>
+                      <ng-container *ngIf="copyGame.purchase.devise">
+                        <p>devise : {{ copyGame.purchase.devise.symbole }}</p>
+                      </ng-container>
+                      <ng-container *ngIf="!copyGame.purchase.devise">
+                        <p>devise : null</p>
+                      </ng-container>
+                      <p>buy date : {{ copyGame.purchase.buy_date || "null" }}</p>
+                      <ng-container *ngIf="copyGame.purchase.buy_where">
+                        <p>buy where : {{ copyGame.purchase.buy_where.name }}</p>
+                      </ng-container>
+                      <ng-container *ngIf="!copyGame.purchase.buy_where">
+                        <p>buy where : null</p>
+                      </ng-container>
+                      <p>content purchase : {{ copyGame.purchase.content || "null" }}</p>
+                    </ng-container>
+                    <ng-container *ngIf="!copyGame.purchase">
+                      <p>price : null</p>
+                      <p>devise : null</p>
+                      <p>buy date : null</p>
+                      <p>buy where : null</p>
+                      <p>content purchase : null</p>
+                    </ng-container>
+
+
+                </ng-container>
+              </ng-container>
+
+
+            </ul>
 
             <div>
               <h1>Exemplaire : </h1>
