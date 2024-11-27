@@ -1,13 +1,39 @@
-/*  Bandeau principal  */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-.home-invite {
-  width: 992px;
+/*  Globaux  */
+.home-connected {
+  width: 1140px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 120px;
+  
 }
 
+h2 {
+  color: black;
+}
+
+.rowamoi {
+  display: flex;
+  flex-direction: row;
+}
+
+.mb {
+  margin-bottom: 75px;
+}
+
+.p {
+  padding: 40px;
+}
+
+.gamenium-container-panel {
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 10px;
+  padding: 40px;
+  width: 1140px;
+  margin-right: 75px;
+  
+}
+
+/*  Bandeau principal  */
 .gamenium-banner {
   display: flex;
   justify-content: center;
@@ -37,264 +63,92 @@
   font-weight: bold;
 }
 
-.gamenium-welcome h1{
-  color: white;
-  font-size: 36px;
-  font-family: Inter;
-  font-weight: 700;
-  word-wrap: break-word
-}
-
 .gamenium-welcome p {
-  color: white;
-  font-size: 24px;
-  font-family: Inter;
-  font-weight: 700;
-  word-wrap: break-word;
+  font-size: 28px;
   width: 250px;
-
 }
-/*  Connexion utilisateur  */
 
-.connect-user {
+
+/* profilWrapper*/
+#profilWrapper{
   box-shadow: 1px 2px 11px #a6a6a6;
-  border-radius: 15px;
-  padding: 20px;
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.connect-title {
-  font-size: 32px;
-  font-weight: bold;
-}
-
-.button {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.connect-btn {
-  border: none;
-  background-color: rgb(254, 62, 62);
-  color: white;
-  font-size: 24px;
-  padding: 10px 50px;
-  border-radius: 15px;
-  box-shadow: 0px 5px 6px 0px rgba(0,0,0,0.3);
-  display: flex;
-  justify-content: center;
-}
-
-/* Description Gamenium */
-
-.gamenium-description-container {
-  display: flex;
-  margin-top: 50px;
-  box-shadow: 1px 2px 11px #a6a6a6;
-  border-radius: 15px;
-  padding: 30px 15px;
-  justify-content: space-between;
-}
-
-.description-image {
-  border-radius: 15px;
-  width: 200px;
-  height: 210px;
-  background-color: #C61010;
-  background-image: url('http://tyrolium.fr/Contenu/Image/Background8_black.png');
-  background-size: 135px;
-}
-.description-list {
-  padding-top: 15px;
-}
-
-.description-list li {
-  display: flex;
-  gap: 5px;
-  list-style: none;
-}
-
-.description-text {
-  font-size: 18px;
-}
-
-.description-title {
-  font-weight: bold;
-  padding-bottom: 15px;
-}
-
-/* Nos actualités */
-
-.actu-container {
-  margin-top: 50px;
-  box-shadow: 1px 2px 11px #a6a6a6;
-  border-radius: 15px;
-  padding: 30px 15px;
-}
-
-.actu-connect-button {
-  display: flex;
-  justify-content: center;
-}
-
-.connect-call {
-  font-size: 18px;
-  text-align: center;
-  margin: 15px 0px;
-}
-
-.actu-title {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.actu-icons {
-  border-bottom: 1px solid black;
-}
-
-/* Profil Gamer*/
-
-.profile-gamer {
-  margin-top: 50px;
-  box-shadow: 1px 2px 11px #a6a6a6;
-  border-radius: 15px;
-  padding: 30px 60px;
-  display: flex;
-}
-
-.profile-description {
-  text-align: center;
-  font-size: 18px;
-  padding-left: 60px;
-}
-
-.profile-title {
-  font-weight: bold;
-  padding-bottom: 15px;
-}
-
-.profile-text {
-  padding-bottom: 15px;
-}
-
-.profile-card {
-  height: 10rem;
-  width: 13rem;
-  border-radius: 15px;
-  box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.4);
-  background: white;
-}
-
-.profile-card .follow {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  text-decoration: underline;
-  color: black;
+  border-radius: 10px;
+  padding: 40px;
+  width: 1140px;
 
 }
 
-.profile-card .name {
-  position: relative;
-  top: 10%;
-  display: flex;
-  justify-content: center;
-  color: rgb(254, 62, 62);
-}
-
-.profile-color {
-  position: absolute;
-  height: 3rem;
-  width: 13rem;
-  background-color: rgb(254, 62, 62);
-  filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.2));
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-
-.profile-picture {
-  position: relative;
-  top: 5%;
-  left: 30%;
-  width: 80px;
-  height: 80px;
+#profilWrapper .articleTuto{
   background-color: white;
-  border-radius: 100%;
-  box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
-  background-image: url("https://static.printler.com/cache/7/a/8/0/b/5/7a80b57d1c07de5f165f70644bf8152afb7e2980.jpg");
-  background-position: center;
-  background-size: cover;
+  
+  /*height: 400px;*/
+  width: 100%;
+  max-width: 1222px;
+  margin: 0px auto;
+  border-radius: 16px;
+  padding: 27px 44px;
 }
 
-/* Tyrolium */
-
-.tyrolium-description-container {
-  margin-top: 50px;
-  box-shadow: 1px 2px 11px #a6a6a6;
-  border-radius: 15px;
-  padding: 30px 15px;
-  display: flex;
+#profilWrapper .articleTuto .hello {
+  margin-bottom: 40px;
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px 0px #A6A6A6;
 }
 
-.tyrolium-description {
-  gap: 10px;
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-  padding-left: 60px;
+#profilWrapper .articleTuto h2 span.pseudo{
+  font-weight: 700;
 }
 
-.tyrolium-title {
-  font-weight: bold;
+#profilWrapper .articleTuto {
+  padding: 0px 35px;
 }
 
-.tyrolium-link {
-  justify-content: center;
-  display: flex;
+#profilWrapper .articleTuto .actionPossible {
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px 0px #A6A6A6;
+  padding: 10px 40px;
 }
 
-.tyrolium-link a {
-  width: fit-content;
-  color: black;
+#profilWrapper .articleTuto .action{
+  margin-bottom: 45px;
 }
 
-.tyrolium-image {
-  width: 40%;
-  background-position: center;
-  background-size: cover;
-  background-image: url("/assets/Tyrolium_home.png");
-}
 
-/* Condition d'utilisation */
-
-.condition-utilisation {
-  margin-top: 50px;
-  box-shadow: 1px 2px 11px #a6a6a6;
-  border-radius: 15px;
-  padding: 20px 15px;
-}
-
-.condition-u-container {
-  display: flex;
-  justify-content: center;
+#profilWrapper .articleTuto .card{
   text-align: center;
-  gap: 150px;
+  height: fit-content;
+  transition: all 0.1s ease 0s;
+  border: 1px solid #C5C5C5
 }
 
-.condition-border {
-  border-left: 1px solid black;
+#profilWrapper .articleTuto .card:hover{
+  transform: scale(1.01);
+  background-color: #b3b3b359;
 }
 
-.termes, .cgu {
-  display: flex;
-  justify-content: center;
-  width: 200px;
-  font-size: 18px;
+#profilWrapper .articleTuto .card i{
+  font-size: 50px;
 }
 
-.termes, .cgu,  a {
-  color: black;
+#profilWrapper .articleTuto .taskPossible {
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px 0px #A6A6A6;
+  padding: 10px 40px;
+}
+
+#profilWrapper .articleTuto .task{
+  margin-bottom: 16px;
+}
+
+.progress-bar-container {
+  max-width: 410px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progress-bar {
+  height: 10px;
+  transition: width 0.3s ease;
 }
