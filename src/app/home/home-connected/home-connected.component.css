@@ -29,8 +29,30 @@ h2 {
   border-radius: 10px;
   padding: 40px;
   width: 1140px;
-  margin-right: 75px;
   
+}
+
+.view-more-btn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  display: block;
+  box-shadow: 0px 3px 7px 0px #a6a6a6;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  border: solid 1.5px;
+  border-color: var(--isColor);
+  background-color: var(--isColor);
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.view-more-btn:hover {
+  background-color: white;
+  color: var(--isColor) !important;
+  border: solid 1.5px;
+  border-color: var(--isColor) !important;
 }
 
 /*  Bandeau principal  */
@@ -42,7 +64,7 @@ h2 {
   padding: 40px;
   border-radius: 0px 0px 65px 65px;
   margin-bottom: 50px;
-  background-color: #C61010;
+  /* background-color: #C61010; */
   background-image: url('http://tyrolium.fr/Contenu/Image/Background8_black.png');
   height: 315px;
 }
@@ -80,13 +102,10 @@ h2 {
 
 #profilWrapper .articleTuto{
   background-color: white;
-  
-  /*height: 400px;*/
   width: 100%;
-  max-width: 1222px;
+  max-width: 1140px;
   margin: 0px auto;
   border-radius: 16px;
-  padding: 27px 44px;
 }
 
 #profilWrapper .articleTuto .hello {
@@ -99,9 +118,9 @@ h2 {
   font-weight: 700;
 }
 
-#profilWrapper .articleTuto {
+/* #profilWrapper .articleTuto {
   padding: 0px 35px;
-}
+} */
 
 #profilWrapper .articleTuto .actionPossible {
   border-radius: 10px;
@@ -151,4 +170,157 @@ h2 {
 .progress-bar {
   height: 10px;
   transition: width 0.3s ease;
+}
+
+/* Nos actualités */
+
+#content-actu {
+  padding: 40px 0px;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.actu-card{
+  width: 336px;
+  border: unset!important;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 14px;
+}
+
+.actu-card .actu-card-img-top{
+  object-fit: cover;
+  max-width: 336px;
+  max-height: 234px;
+  border-radius: 14px;
+  transition: transform 0.4s ease-out;
+  will-change: transform;
+}
+.actu-card .actu-card-img-top:hover{
+  transform: scale(1.03);
+}
+
+.actu-card .actu-card-body .actu-card-hr{
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-top: 2.5px;
+  padding-bottom: 4px;
+}
+
+.actu-card .actu-card-body hr{
+  margin: 7px 0;
+  opacity: 0.45;
+}
+
+.actu-card .actu-card-body {
+  padding-top: 8px;
+  padding-right: 14px;
+  padding-bottom: 14px;
+  padding-left: 20px;
+}
+
+.actu-card .actu-card-body .btn{
+  color: white;
+  background-color: rgba(255, 0, 0, 0.54);
+  box-shadow: 1px 2px 11px #a6a6a6;
+}
+
+
+.provider-img{
+  height: 24px;
+  width: 24px;
+  margin-top: 1px;
+  border-radius: 100%;
+  background-color: red;
+  /*background-image: url('https://i.pinimg.com/136x136/e2/cb/6a/e2cb6a3b2d418d4fca14f9ebd84a0c47.jpg');*/
+  background-position: center;
+  background-size: cover;
+  margin-right: 7px;
+}
+
+.actu-card-end{
+  justify-content: space-between;
+  background-color: rgba(33, 37, 41, 0.03);
+}
+.actu-card-end .actu-card-i{
+  font-size: 25px;
+  gap: 2px;
+}
+.card-end .actu-card-i .active i{
+  color: rgba(255, 0, 0);
+}
+
+@media (max-width: 920px) {
+  #content-actu-invite {
+    flex-wrap: wrap;
+  }
+}
+
+/*Dernière sorties*/
+
+#content-latest-release {
+  padding: 40px 0px;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+#gamenium-latest-release h2 {
+  margin: 0;
+}
+
+#content-latest-release .card-game {
+  position: relative;
+  border-radius: 15px;
+  transition: height 0.2s ease-out;
+  width: 320px;
+  height: 180px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+
+}
+
+#content-latest-release .card-thumb{
+  width: 320px;
+  height: 180px;
+  border-radius: 15px;
+}
+
+#content-latest-release .card-thumb .image{
+  position: absolute;
+  width: 320px;
+  height: 180px;
+  z-index: 10;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#content-latest-release .card-thumb .blur{
+  position: absolute;
+  width: 320px;
+  height: 180px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  z-index: 1;
+  background-color: #00000038;
+}
+#content-latest-release .card-thumb img{
+  width: 320px;
+  height: 100%;
+  border-radius: 15px;
+}
+
+#content-latest-release .card-hover {
+  padding: 20px 25px;
+  opacity: 0;
+  visibility: hidden; /* Assure que l'élément reste invisible avant l'animation */
+  transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+}
+
+#content-latest-release .card-game:hover .card-hover {
+  opacity: 1;
+  visibility: visible; /* Montre l'élément après la transition */
+  transition-delay: 0.3s; /* Synchronise avec la durée de l'animation de la hauteur */
+}
+
+#content-latest-release .card-game:hover {
+  height: 280px;
 }

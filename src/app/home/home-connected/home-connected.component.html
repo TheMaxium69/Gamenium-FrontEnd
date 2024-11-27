@@ -4,7 +4,7 @@
  <modal-add-game-unselect></modal-add-game-unselect>
  <modal-note-unselect></modal-note-unselect>
 
-<div class="gamenium-banner">
+<div class="gamenium-banner" style="background-color: {{ isColor }}">
   <div class="gamenium-logo"></div>
   <div class="gamenium-welcome">
     <h1>GAMENIUM</h1>
@@ -13,7 +13,7 @@
 </div>
 
 <div class="home-connected">
-  <section id="profilWrapper">
+  <section id="profilWrapper" class="mb">
     <article class="articleTuto">
       <div class="row ">
         <div class="col-md-12 py-4 hello">
@@ -89,4 +89,96 @@
       </div>
     </article>
   </section>
+
+  <section id="gamenium-actu">
+    <div class="gamenium-container-panel mb">
+        <h2 class="">Les actus à la Une</h2>
+        <div id="content-actu" class="d-flex">
+          <!-- Boucle avec les card actus (en afficher 6) -->
+          <ng-container *ngFor="let actu of postActuFollowOrAll | slice: postActuFollowOrAll.length - 6"> <!--Le slice est la pour afficher les 4 dernières actu stocké dans le tableau donc les 4 + recente -->
+              <div class="actu-card col-4" routerLink="/actuality/{{ actu.id }}">
+                  <img src="{{ actu.picture.url }}" class="actu-card-img-top" alt="..." />
+                  <div class="actu-card-body">
+                      <h3 class="actu-card-title">{{ actu.title }}</h3>
+                      <div class="actu-card-hr">
+                      <hr/>
+                      </div>
+                      <div class="actu-card-end d-flex">
+                          <a
+                          routerLink="/provider/{{ actu.Provider?.id }}"
+                          class="btn"
+                          [ngStyle]="{ 'background-color': actu.Provider?.color + '97!important' }"
+                          >
+                              <div class="d-flex">
+                                  <div
+                                  class="provider-img"
+                                  [ngStyle]="{ 'background-image': 'url(' + actu.Provider?.picture?.url + ')' }"
+                                  ></div>
+                                  {{ actu.Provider?.displayName }}
+                              </div>
+                          </a>
+                          <div class="actu-card-i d-flex">
+                              <div>
+                              <i class="ri-chat-3-line" style="color: #2e3a59;"></i>
+                              </div>
+                              <div class="active">
+                              <i class="ri-heart-line" style="color: #2e3a59;"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </ng-container>
+        </div>
+        <div class="rowamoi justify-content-end">
+            <a [ngStyle]="{ '--isColor': isColor}" class="view-more-btn"  href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
+        </div>
+    </div>
+  </section>
+  <section id="gamenium-latest-release">
+    <div class="gamenium-container-panel mb">
+        <div class="rowamoi justify-content-between align-items-center">
+            <h2>Les dernières sorties</h2>
+            <!-- <a href="" class="view-more-btn">Voir plus <i class="ri-arrow-right-circle-line"></i></a> -->
+        </div>
+        
+            <!-- Boucle avec les cards jeux (en afficher 4)-->
+        <div id="content-latest-release" class="d-flex">
+            <ng-container *ngFor="let game of games | slice: games.length - 3 : games.length">
+                <div class="card-game" routerLink="/game/{{ game.id }}">
+                    <div class="card-thumb">
+                        <ng-container *ngIf="game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+                            <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
+                            <div class="blur"></div>
+                            <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
+                        </ng-container>
+                        <ng-container *ngIf="game.image.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+                            <div class="image" style="background-image: url('{{ game.image.thumb_url }}')"></div>
+                            <div class="blur"></div>
+                            <img src="{{ game.image.thumb_url }}" alt="...">
+                        </ng-container>
+                    </div>
+                    <div class="card-hover">
+                        <!-- contenue déroulant -->
+                        <p>{{ game.name }}<p>
+                        <small style="color: {{isColor}}" class="platform-names d-block">
+                            <ng-container *ngFor="let platform of game.platforms; let last = last">
+                                {{ platform.name }} <span *ngIf="!last">, </span>
+                            </ng-container>
+                        </small>
+            
+                        <small> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</small>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="rowamoi justify-content-end">
+          <a [ngStyle]="{ '--isColor': isColor}" class="view-more-btn"  href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
+      </div>
+        
+    </div>
+
+  </section>
+
 </div>

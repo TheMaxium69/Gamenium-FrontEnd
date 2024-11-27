@@ -14,6 +14,9 @@ import { CommentService } from 'src/app/-service/comment.service';
 import { LikeService } from 'src/app/-service/like.service';
 import { ApicallInterface } from 'src/app/-interface/apicall.interface';
 import { HistoryMyGameInterface } from 'src/app/-interface/history-my-game.interface';
+import { PostActuService } from 'src/app/-service/post-actu.service';
+import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
+import { GameService } from 'src/app/-service/game.service';
 
 @Component({
   selector: 'app-home-connected',
@@ -27,6 +30,9 @@ export class HomeConnectedComponent implements OnInit {
   profilSelected: ProfilInterface | undefined;
   badgeUserConnected: BadgeInterface[] | undefined;
   isYourProfil:boolean = false;
+  postActuFollowOrAll: PostActuInterface[] = [];
+  games: GameInterface[] = [];
+  searchValue: string = ''
   
 
   isColor:string = this.app.colorDefault;
@@ -40,16 +46,16 @@ export class HomeConnectedComponent implements OnInit {
   // progression de la barre de progression
   progress: number = 0;
 
-    // Indicateur pour savoir quand les données sont bien chargées
-    profileLoaded: boolean = false;
-    gamesLoaded: boolean = false;
-    tasksLoaded: boolean = false;
-    userLikesLoaded: boolean = false;
-    userCommentsLoaded: boolean = false;
-  
-    // Stock les likes et commentaire ( surement a delete après )
-    userLikes:any[] = [];
-    userComments:any[]= [];
+  // Indicateur pour savoir quand les données sont bien chargées
+  profileLoaded: boolean = false;
+  gamesLoaded: boolean = false;
+  tasksLoaded: boolean = false;
+  userLikesLoaded: boolean = false;
+  userCommentsLoaded: boolean = false;
+
+  // Stock les likes et commentaire ( surement a delete après )
+  userLikes:any[] = [];
+  userComments:any[]= [];
 
   constructor(private route: ActivatedRoute,
               private app:AppComponent,
@@ -57,6 +63,8 @@ export class HomeConnectedComponent implements OnInit {
               private commentService: CommentService,
               private likeService: LikeService,
               private profileService:ProfilService,
+              private postActuService: PostActuService,
+              private gameService: GameService,
               private badgeService: BadgeService) { }
 
   ngOnInit(): void {
@@ -74,6 +82,8 @@ export class HomeConnectedComponent implements OnInit {
     this.getInfoProfile(this.profileId);
     this.getBadgeByUser(this.profileId);
     this.fetchTasks();
+    this.getActuAll();
+    this.getGames();
 
 
 
@@ -213,56 +223,74 @@ export class HomeConnectedComponent implements OnInit {
   }
 
   // Vérifie les conditions pour chaque tâche incomplète et les marque comme complétées si nécessaire.
-checkAndCompleteTasks(): void {
-  this.tasks.forEach(task => {
-    if (!task.completed) {
-      if (task.name === 'Link Game' && this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
-        this.completeTask(task.id);
+  checkAndCompleteTasks(): void {
+    this.tasks.forEach(task => {
+      if (!task.completed) {
+        if (task.name === 'Link Game' && this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
+          this.completeTask(task.id);
+        }
+        if (task.name === 'Profil Picture' && this.isPp) {
+          this.completeTask(task.id);
+        }
+        if (task.name === 'Liker votre premier article' && this.userLikes && this.userLikes.length > 0) {
+          this.completeTask(task.id);
+        }
+        if (task.name === 'Mettez votre premier commentaire ' && this.userComments && this.userComments.length > 0) {
+          this.completeTask(task.id);
+        }
+        // Si nouvelle task ajouter la verif ici
       }
-      if (task.name === 'Profil Picture' && this.isPp) {
-        this.completeTask(task.id);
+    });
+  }
+
+  //Met à jour la barre de progression en fonction des tâches complétées.
+
+  updateProgressBar(): void {
+    const completedTasks = this.tasks.filter((task) => task.completed).length;
+    this.progress = (completedTasks / this.tasks.length) * 100;
+
+  }
+
+  completeTask(taskId: number): void {
+    const body = JSON.stringify({ taskId });
+    const options = this.app.createCorsToken();
+
+    this.taskService.postCompleteTask(body, this.app.setURL(), options).subscribe((response) => {
+      if (response.message === 'Tâche complétée') {
+        // Met à jour le statut de la tâche dans le tableau local
+        this.tasks = this.tasks.map((task) =>
+          task.id === taskId ? { ...task, completed: true } : task
+        );
+        this.updateProgressBar(); // Recalculer la progression
+
+      } else {
+        console.error('Erreur lors de la complétion de la tâche :', response.message);
       }
-      if (task.name === 'Liker votre premier article' && this.userLikes && this.userLikes.length > 0) {
-        this.completeTask(task.id);
+    }, (error) => {
+      console.error('Erreur lors de la requête completeTask :', error);
+    });
+  }
+
+  unsetModal(){
+    this.app.gameSelected = undefined;
+  }
+
+  getActuAll() {
+    console.log('Fetching all actualities');
+    this.postActuService.getActuAll(this.app.setURL()).subscribe(responseActu => {
+      if (responseActu.message === 'good') {
+        this.postActuFollowOrAll = responseActu.result;
+      } else {
+        console.log("failed fetching")
       }
-      if (task.name === 'Mettez votre premier commentaire ' && this.userComments && this.userComments.length > 0) {
-        this.completeTask(task.id);
-      }
-      // Si nouvelle task ajouter la verif ici
-    }
-  });
-}
+    });
+  }
 
-//Met à jour la barre de progression en fonction des tâches complétées.
-
-updateProgressBar(): void {
-  const completedTasks = this.tasks.filter((task) => task.completed).length;
-  this.progress = (completedTasks / this.tasks.length) * 100;
-
-}
-
-completeTask(taskId: number): void {
-  const body = JSON.stringify({ taskId });
-  const options = this.app.createCorsToken();
-
-  this.taskService.postCompleteTask(body, this.app.setURL(), options).subscribe((response) => {
-    if (response.message === 'Tâche complétée') {
-      // Met à jour le statut de la tâche dans le tableau local
-      this.tasks = this.tasks.map((task) =>
-        task.id === taskId ? { ...task, completed: true } : task
-      );
-      this.updateProgressBar(); // Recalculer la progression
-
-    } else {
-      console.error('Erreur lors de la complétion de la tâche :', response.message);
-    }
-  }, (error) => {
-    console.error('Erreur lors de la requête completeTask :', error);
-  });
-}
-
-unsetModal(){
-  this.app.gameSelected = undefined;
-}
+  getGames() {
+    console.log('Fetching games');
+    this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+      this.games = results;
+    });
+  }
 
 }

@@ -13,7 +13,7 @@ import { AppComponent } from 'src/app/app.component';
 export class HomeInviteComponent implements OnInit {
   postActuFollowOrAll: PostActuInterface[] = [];
   games: GameInterface[] = [];
-  searchValue: string = 'b'
+  searchValue: string = ''
 
   constructor(
     private app: AppComponent,
