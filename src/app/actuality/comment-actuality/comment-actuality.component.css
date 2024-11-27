@@ -177,14 +177,14 @@
 }
 
 .btn-shadow {
-  -webkit-box-shadow: 0px 3px 10px 7px rgba(0,0,0,0.2); 
+  -webkit-box-shadow: 0px 3px 10px 7px rgba(0,0,0,0.2);
   box-shadow:  0px 3px 7px rgba(0,0,0,0.3);;
 }
 
 .btn {
   border: 1px solid;
   color: white;
-  border-color: var(--providerColor); 
+  border-color: var(--providerColor);
 }
 
 .btn:hover {
@@ -216,6 +216,17 @@
 }
 
 #like-value {
+  display: inline-block;
+  color: white;
+  width: 27px;
+  height: 15px;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 10px;
+  font-size: 12px;
+  line-height: 15px;
+}
+.like-value {
   display: inline-block;
   color: white;
   width: 27px;

@@ -26,7 +26,7 @@
 </ng-container>
 
 <!-- <hr> -->
-<div id="division"></div> 
+<div id="division"></div>
 
 <!-- <div style="height: 50px"></div> -->
 <div class="containeur" id="coment-header">
@@ -69,12 +69,12 @@
         </div>
         <div
         (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-        <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLike }}</span>
+        <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLikeByComment[comment.id] || "0" }}</span>
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
           style="color: {{commentLikedMap.get(comment.id) ? providerColor : 'rgb(87,87,87)'}}"
-          [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
+          [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
           <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
@@ -95,7 +95,7 @@
             <!-- <div class="img"
              style="background-image: url({{ comment?.user?.pp?.url }})"></div> -->
              <div *ngIf="comment?.user?.pp?.url" class="img" style="background-image: url('{{ comment?.user?.pp?.url }}')"></div>
-  
+
              <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
                <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
              </div>
@@ -120,12 +120,12 @@
             </div>
             <div
             (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-            <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLike }}</span>
+            <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLikeByComment[comment.id] || "0" }}</span>
             <i
             id="like-icon{{comment.id}}"
             class="comment-action like"
             style="color: {{commentLikedMap.get(comment.id) ? providerColor : 'rgb(87,87,87)'}}"
-            [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
+            [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
             [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
             </i>
             <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
@@ -144,7 +144,7 @@
           <!-- <div class="img"
           style="background-image: url({{ comment?.user?.pp?.url }})"></div> -->
           <div *ngIf="comment?.user?.pp?.url" class="img" style="background-image: url('{{ comment?.user?.pp?.url }}'); border-color: {{comment.user.color}};"></div>
-  
+
           <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
             <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
           </div>
@@ -164,18 +164,18 @@
           </div>
           <div
           (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLike }}</span>
+          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLikeByComment[comment.id] || "0" }}</span>
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
           style="color: {{commentLikedMap.get(comment.id) ? providerColor : 'rgb(87,87,87)'}}"
-          [class.ri-heart-line]="!commentLikedMap.get(comment.id)" 
+          [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
           <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
           </div>
         </div>
-      </div>  
+      </div>
       <div class="comment-border mb-4"></div>
     </ng-container>
   </ng-container>

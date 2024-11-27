@@ -58,7 +58,7 @@ export class CommentActualityComponent implements OnInit{
   @Output()
   commentNbChanged: EventEmitter<'add' | 'delete'> = new EventEmitter<'add' | 'delete'>()
 
-  
+
   ngOnInit(): void {
 
     this.isLoggedIn = this.app.isLoggedIn;
@@ -92,7 +92,7 @@ export class CommentActualityComponent implements OnInit{
 
     });
   }
-  
+
   getLikesOfUser() {
     this.likeService.getLikesByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
 
@@ -105,7 +105,7 @@ export class CommentActualityComponent implements OnInit{
           }
 
         });
-        
+
       }
     });
 
@@ -144,6 +144,10 @@ export class CommentActualityComponent implements OnInit{
         this.commentByActu = reponseMyCommentActu.result;
         this.getBadgesForAllUsers();
 
+        this.commentByActu?.forEach((oneComment:CommentInterface) => {
+          this.getNBLikeByComment(oneComment.id);
+        })
+
       } else {
 
         console.log(reponseMyCommentActu);
@@ -172,15 +176,15 @@ export class CommentActualityComponent implements OnInit{
         "id_post": this.actualitySelected?.id,
         "content": content,
       };
-  
+
       const bodyMyCommentActu = JSON.stringify(bodyNoJsonMyCommentActu);
       const resetForm = form.resetForm();
-  
+
       this.commentService.postCommentInActu(bodyMyCommentActu, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyCommentActuCreate => {
         if (reponseMyCommentActuCreate.message === "good") {
           this.newComment = reponseMyCommentActuCreate.result;
           console.log("Commentaire ajouté");
-          
+
           let noteSpanGame = document.getElementById("yourComment");
           if (noteSpanGame && this.newComment) {
 
@@ -188,33 +192,33 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.setAttribute(commentCard, 'id', `c${this.newComment.id}`);
             this.renderer.addClass(commentCard, 'card');
             this.renderer.addClass(commentCard, 'mb-2');
-            
+
 
             const commentUser = this.renderer.createElement('div');
             this.renderer.addClass(commentUser, 'comment-user');
-  
-            // Si pas de photo de profile 
+
+            // Si pas de photo de profile
             if (this.newComment.user.pp?.url) {
               const profilePicture = this.renderer.createElement('div');
               this.renderer.addClass(profilePicture, 'img');
               this.renderer.setStyle(profilePicture, 'background-image', `url('${this.newComment.user.pp.url}')`);
-              
+
               this.renderer.appendChild(commentUser, profilePicture);
             } else {
               const initialContainer = this.renderer.createElement('div');
               this.renderer.addClass(initialContainer, 'align-content-center');
               this.renderer.addClass(initialContainer, 'lettrePP-border');
               this.renderer.setStyle(initialContainer, 'border-color', this.newComment.user.color);
-  
+
               const initialText = this.renderer.createElement('p');
               this.renderer.addClass(initialText, 'lettrePP');
               this.renderer.setStyle(initialText, 'color', this.newComment.user.color);
               this.renderer.setProperty(initialText, 'textContent', this.newComment.user.displayname.charAt(0).toUpperCase());
-              
+
               this.renderer.appendChild(initialContainer, initialText);
               this.renderer.appendChild(commentUser, initialContainer);
             }
-  
+
             // Ajout de la div username
             const userName = this.renderer.createElement('h4');
             this.renderer.addClass(userName, 'comment-user-name');
@@ -238,13 +242,13 @@ export class CommentActualityComponent implements OnInit{
               });
             }
 
-            // Depuis quand le commentaire est posté 
+            // Depuis quand le commentaire est posté
             const timeAgo = this.renderer.createElement('span');
             const commentDate = this.newComment.created_at ?? 'pas de date';
             this.renderer.addClass(timeAgo, 'time-ago');
             this.renderer.setProperty(timeAgo, 'textContent', commentDate);
             this.renderer.appendChild(userName, timeAgo);
-  
+
             // Ajout du bouton delete
             const commentId = this.newComment.id;
 
@@ -254,15 +258,15 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.setStyle(deleteButton, 'color', 'red');
             this.renderer.listen(deleteButton, 'click', () => this.onDeleteBtnClick(commentId));
             this.renderer.appendChild(commentUser, deleteButton);
-  
+
             this.renderer.appendChild(commentCard, commentUser);
-  
+
             // Comment text div
             const commentText = this.renderer.createElement('p');
             this.renderer.addClass(commentText, 'comment-text');
             this.renderer.setProperty(commentText, 'textContent', this.newComment.content);
             this.renderer.appendChild(commentCard, commentText);
-  
+
             // Ajout de la div reply
             const replySection = this.renderer.createElement('div');
             this.renderer.addClass(replySection, 'reply-section')
@@ -284,13 +288,13 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.setProperty(likeIcon, 'id', 'like-icon' + this.newComment.id)
             this.renderer.listen(likeIcon, 'click', () => this.likeComment(commentId, !this.commentLikedMap.get(commentId) ? 'add' : 'delete'));
 
-            
+
             // Ajout du texte j'aime
             const likeContent = this.renderer.createElement('span')
             this.renderer.addClass(likeContent, 'comment-action')
             this.renderer.setProperty(likeContent, 'textContent', 'j\'aime')
             this.renderer.listen(likeContent, 'click', () => this.likeComment(commentId, !this.commentLikedMap.get(commentId) ? 'add' : 'delete'));
-            
+
 
             // Ajout des éléments a la div Reply
             this.renderer.appendChild(replySection, replyIcon);
@@ -304,7 +308,7 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.setAttribute(commentBorder, 'id', `b${this.newComment.id}`);
             this.renderer.addClass(commentBorder, 'comment-border');
             this.renderer.addClass(commentBorder, 'mb-4');
-  
+
             // Insertion des éléments dans le dom
             if (noteSpanGame.firstChild) {
               this.renderer.insertBefore(noteSpanGame, commentCard, noteSpanGame.firstChild);
@@ -326,20 +330,20 @@ export class CommentActualityComponent implements OnInit{
             if (commentHTML) {
               commentHTML.textContent = this.nbComment.toString()
             }
-            
+
             const noComment = document.querySelector('#no-comment') as HTMLElement
             if (this.nbComment > 0 && noComment) {
               noComment.style.display = 'none'
             }
           }
-          
+
       this.userConnectedId = this.app.userConnected.id;
           console.log(reponseMyCommentActuCreate);
         }
       });
     }
   }
-      
+
 
   getBadgesForAllUsers() {
     // Obtenez les badges pour chaque utilisateur et stockez-les dans badgeByUser
@@ -363,11 +367,11 @@ export class CommentActualityComponent implements OnInit{
       if (ReponseApi.message == 'Comment deleted successfully') {
         const borderToDelete = document.getElementById('b'+commentId)
         const commentToDelete = document.getElementById('c'+commentId)
-    
+
         if (commentToDelete) {
           commentToDelete.style.display = 'none'
         }
-    
+
         if (borderToDelete) {
           borderToDelete.style.display = 'none'
         }
@@ -376,12 +380,12 @@ export class CommentActualityComponent implements OnInit{
           console.log(this.nbComment)
           this.nbComment--
           console.log(this.nbComment)
-          
+
           const commentHTML = document.querySelector('#comment-value')
           if (commentHTML) {
             commentHTML.textContent =  this.nbComment.toString()
           }
-          
+
           const noComment = document.querySelector('#no-comment') as HTMLElement
           if (typeof this.nbComment == 'number' && this.nbComment == 0 ) {
             if (noComment !== null) {
@@ -391,13 +395,13 @@ export class CommentActualityComponent implements OnInit{
               const commentSectionEmpty = this.renderer.createElement('h2');
               this.renderer.setAttribute(commentSectionEmpty, 'id', 'no-comment');
               commentSectionEmpty.textContent = 'Aucun commentaire';
-              
+
               this.renderer.appendChild(form, commentSectionEmpty)
             }
             console.log(noComment)
           }
         }
-        
+
         this.commentNbChanged.emit('delete');
         console.log('message supprimé')
       } else {
@@ -436,7 +440,7 @@ export class CommentActualityComponent implements OnInit{
       let bodyJson = JSON.stringify(bodyNoJson);
 
       this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(
-        (reponseApi) => { 
+        (reponseApi) => {
           if (reponseApi.message == 'good') {
             console.log('commentaire ' + commentId + ' liké par ' + this.userConnectedId)
 
@@ -447,12 +451,14 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.addClass(likeIcon, 'ri-heart-fill')
             this.renderer.setStyle(likeIcon,'color', this.providerColor)
 
+            this.nbLikeByComment[commentId]++;
+
           } else {
             console.log('erreur dans le like du commentaire ' + commentId)
           }
         })
     })
-    
+
   }
 
   liked(btnCommentLike: HTMLElement, state: String) {
@@ -491,7 +497,7 @@ export class CommentActualityComponent implements OnInit{
       let bodyJson = JSON.stringify(bodyNoJson);
 
       this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(
-        (reponseApi) => { 
+        (reponseApi) => {
           if (reponseApi.message == 'good') {
             console.log('commentaire ' + commentId + ' plus liké par ' + this.userConnectedId)
 
@@ -502,12 +508,31 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.addClass(likeIcon, 'ri-heart-line')
             this.renderer.setStyle(likeIcon,'color', 'rgb(87, 87, 87)')
 
+
+            this.nbLikeByComment[commentId]--;
+
           } else {
             console.log('erreur dans la suppression du like du commentaire ' + commentId)
           }
         })
     })
-    
+
   }
+
+
+  nbLikeByComment: number[] = []
+
+  getNBLikeByComment(commentId: number): void {
+
+    this.likeService.getCommentLikes(commentId, this.app.setURL()).subscribe((reponseLikeByCommentActu: {message:string, result:LikeInterface[]}) => {
+
+      if (reponseLikeByCommentActu.message == 'good'){
+        this.nbLikeByComment[commentId] = reponseLikeByCommentActu.result.length;
+      }
+
+    })
+
+  }
+
 
 }
