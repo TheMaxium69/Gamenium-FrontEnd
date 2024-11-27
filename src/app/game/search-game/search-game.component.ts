@@ -44,6 +44,17 @@ export class SearchGameComponent implements OnInit{
 
     this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.games = results;
+
+      let element = document.getElementById("moreGameBTN");
+      if (this.games.length == 100){
+        if (element){
+          element.style.display = "block";
+        }
+      } else {
+        if (element){
+          element.style.display = "none";
+        }
+      }
     });
 
 
@@ -79,9 +90,21 @@ export class SearchGameComponent implements OnInit{
   onSearchTap(value:string): void {
 
     this.searchValue == value;
-
+    this.nbMoreGame = 1;
+    
     this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.games = results;
+
+      let element = document.getElementById("moreGameBTN");
+      if (this.games.length >= 100) {
+        if (element){
+          element.style.display = "block";
+        }
+      } else {
+        if (element){
+          element.style.display = "none";
+        }
+      }
     });
 
   }
@@ -120,11 +143,23 @@ export class SearchGameComponent implements OnInit{
 
     this.nbMoreGame++
     let limit = this.nbMoreGame * 100;
-    // console.log(limit)
+    console.log(limit)
 
     this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
       this.games = results;
-      // console.log(this.games.length)
+      console.log(this.games.length)
+
+      let element = document.getElementById("moreGameBTN");
+      if (this.games.length == limit){
+        if (element){
+          element.style.display = "block";
+        }
+      } else {
+        if (element){
+          element.style.display = "none";
+        }
+      }
+
     });
 
   }

@@ -31,6 +31,7 @@ export class SearchPageComponent implements OnInit{
   providers: ProviderInterface[] = [];
   profilSelected: ProfilInterface | undefined;
   userColor: string | undefined;
+  nbMoreGame:number = 1;
 
   fakeRates: number[] = [8, 14, 19, 13];
 
@@ -123,9 +124,20 @@ export class SearchPageComponent implements OnInit{
   }
 
   searchGame(): void {
-
+    this.nbMoreGame = 1;
     this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.games = results;
+
+      let element = document.getElementById("moreGameBTN");
+      if (this.games.length == 100){
+        if (element){
+          element.style.display = "block";
+        }
+      } else {
+        if (element){
+          element.style.display = "none";
+        }
+      }
     });
 
   }
@@ -167,5 +179,29 @@ export class SearchPageComponent implements OnInit{
 
   extractFirstLetter(str: string|any): string {
     return str.charAt(0);
+  }
+
+  moreGame(){
+
+    this.nbMoreGame++
+    let limit = this.nbMoreGame * 100;
+    console.log(limit)
+
+    this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
+      this.games = results;
+      console.log(this.games.length)
+
+      let element = document.getElementById("moreGameBTN");
+      if (this.games.length == limit){
+        if (element){
+          element.style.display = "block";
+        }
+      } else {
+        if (element){
+          element.style.display = "none";
+        }
+      }
+    });
+
   }
 }
