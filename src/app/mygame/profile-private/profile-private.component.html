@@ -173,13 +173,17 @@
 
       <div class="filter-dropdown">
         <button class="filter-button" (click)="toggleFilterDropdown()">
-          <i class="ri-filter-line"></i>
+          <i *ngIf="!isFilterApplied()"class="ri-filter-line"></i>
+          <i *ngIf="isFilterApplied()"class="ri-filter-fill"></i>
         </button>
         <div class="dropdown-menu" *ngIf="isFilterDropdownOpen">
           <button (click)="setSortOption('name-asc')">Nom (A-Z)</button>
           <button (click)="setSortOption('name-desc')">Nom (Z-A)</button>
-          <button (click)="setSortOption('year-asc')">Année (Croissant)</button>
-          <button (click)="setSortOption('year-desc')">Année (Décroissant)</button>
+          <button (click)="setSortOption('year-asc')">Année de sortie (Croissant)</button>
+          <button (click)="setSortOption('year-desc')">Année de sortie (Décroissant)</button>
+          <button (click)="setSortOption('added-asc')">Date d'ajout (Croissant)</button>
+          <button (click)="setSortOption('added-desc')">Date d'ajout (Décroissant)</button>
+          <button (click)="setSortOption('added-desc')">Réinitialiser</button>
         </div>
       </div>
     </div>

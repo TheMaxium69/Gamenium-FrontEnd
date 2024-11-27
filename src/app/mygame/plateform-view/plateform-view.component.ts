@@ -99,7 +99,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
   }
 
-
   // filtre les jeux 
   filterGames(): void {
     if (this.searchQuery.trim() !== '') {
