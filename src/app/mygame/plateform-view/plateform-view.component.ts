@@ -102,41 +102,40 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   setSortOption(option: string): void {
     this.sortOption = option;
     this.filterGames();
-    this.applySorting();
     this.isFilterDropdownOpen = false;
   }
 
   filterGames(): void {
-    //
-    this.filteredGames = this.HistoireMyGameByUserByPlateform.filter(game => {
-      if (!this.searchQuery) {
-        // on renvoie true pour laisser la possibilité de filtrer sans recherche
-        return true;
-      }
-
-      // ici on filtre si il existe une recherche
+    if (this.searchQuery.trim() !== '') {
+      // applique les filtre de recherche
+      let gamesToFilter = [...this.HistoireMyGameByUserByPlateform];
       const query = this.searchQuery.toLowerCase();
-      const gameName = game.myGame?.game?.name?.toLowerCase() || '';
-      const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
-      const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
-
-      return gameName.includes(query) || platforms.includes(query) || year.includes(query);
-    });
-    console.log("Filtered Games:", this.filteredGames);
+      gamesToFilter = gamesToFilter.filter(game => {
+        const gameName = game.myGame?.game?.name?.toLowerCase() || '';
+        const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+        const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
+        return gameName.includes(query) || platforms.includes(query) || year.includes(query);
+      });
+      this.filteredGames = gamesToFilter;
+    } 
+  
+    // applique le tri sur le bon tableau
     this.applySorting();
   }
-
-
+  
+  
   applySorting(): void {
+    const arrayToSort = this.searchQuery.trim() !== '' ? this.filteredGames : this.HistoireMyGameByUserByPlateform;
+    
     switch (this.sortOption) {
       case 'name-asc':
-        this.filteredGames.sort((a, b) => a.myGame?.game?.name?.localeCompare(b.myGame?.game?.name || '') || 0);
+        arrayToSort.sort((a, b) => a.myGame?.game?.name?.localeCompare(b.myGame?.game?.name || '') || 0);
         break;
       case 'name-desc':
-        this.filteredGames.sort((a, b) => b.myGame?.game?.name?.localeCompare(a.myGame?.game?.name || '') || 0);
+        arrayToSort.sort((a, b) => b.myGame?.game?.name?.localeCompare(a.myGame?.game?.name || '') || 0);
         break;
       case 'year-asc':
-        this.filteredGames.sort((a, b) => {
+        arrayToSort.sort((a, b) => {
           const dateA = a.myGame?.game?.originalReleaseDate
             ? new Date(a.myGame?.game?.originalReleaseDate).getTime()
             : 0;
@@ -147,7 +146,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         });
         break;
       case 'year-desc':
-        this.filteredGames.sort((a, b) => {
+        arrayToSort.sort((a, b) => {
           const dateA = a.myGame?.game?.originalReleaseDate
             ? new Date(a.myGame?.game?.originalReleaseDate).getTime()
             : 0;
@@ -157,14 +156,18 @@ export class PlateformViewComponent implements OnInit, OnChanges {
           return dateB - dateA;
         });
         break;
-        case 'added-asc':
-          this.filteredGames.sort((a, b) => new Date(a.myGame?.added_at).getTime() - new Date(b.myGame?.added_at).getTime());
-          break;
-        case 'added-desc':
-          this.filteredGames.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
-          break;
+      case 'added-asc':
+        arrayToSort.sort((a, b) => new Date(a.myGame?.added_at).getTime() - new Date(b.myGame?.added_at).getTime());
+        break;
+      case 'added-desc':
+        arrayToSort.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
+        break;
+      default:
+        break;
     }
   }
+  
+  
 
   /* OBTENIR TOUTE LES CONSOLE */
   myPlateforme(id:number){
@@ -180,8 +183,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe(response => {
       if (response.message === "good") {
         this.HistoireMyGameByUserByPlateform = response.result || [];
-        this.filteredGames = [...this.HistoireMyGameByUserByPlateform];
-        this.applySorting();
+        this.filterGames();
 
       }
     });
@@ -191,8 +193,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
-        this.filteredGames = [...this.HistoireMyGameByUserByPlateform];
-        this.applySorting();
+        this.filterGames();
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
       }
@@ -251,14 +252,18 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
   /* OBTENIR LES JEUX EPINGLES */
   getPinnedGames(): HistoryMyGameInterface[] {
-    return this.filteredGames?.filter(game => game.myGame.is_pinned) ?? [];
+    if (this.searchQuery.trim() !== '') {
+      return [];
+    }
+    return this.searchQuery ? this.filteredGames : this.HistoireMyGameByUserByPlateform?.filter(game => game.myGame.is_pinned) ?? [];
   }
 
   /* OBTENIR LES JEUX NON EPINGLES */
-
+  
   getUnpinnedGames(): HistoryMyGameInterface[] {
     return this.searchQuery ? this.filteredGames : this.HistoireMyGameByUserByPlateform?.filter(game => !game.myGame.is_pinned) ?? [];
   }
+  
 
   /* FOR MODAL */
   selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
