@@ -422,7 +422,7 @@ h2 {
 
 .filter-button:focus,
 .icon-container:focus {
-  outline: 2px solid #29aefc;
+  outline: 2px solid #00000023;
 }
 
 .filter-dropdown {

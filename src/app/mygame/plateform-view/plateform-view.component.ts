@@ -99,12 +99,8 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
   }
 
-  setSortOption(option: string): void {
-    this.sortOption = option;
-    this.filterGames();
-    this.isFilterDropdownOpen = false;
-  }
 
+  // filtre les jeux 
   filterGames(): void {
     if (this.searchQuery.trim() !== '') {
       // applique les filtre de recherche
@@ -122,8 +118,15 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     // applique le tri sur le bon tableau
     this.applySorting();
   }
+
+  // change la methode de filtre
+  setSortOption(option: string): void {
+    this.sortOption = option;
+    this.filterGames();
+    this.isFilterDropdownOpen = false;
+  }
   
-  
+  // fonction pour appliqué les filtres 
   applySorting(): void {
     const arrayToSort = this.searchQuery.trim() !== '' ? this.filteredGames : this.HistoireMyGameByUserByPlateform;
     
@@ -249,21 +252,36 @@ export class PlateformViewComponent implements OnInit, OnChanges {
       });
   }
 
+  //check si un filtre autre que celui par default est appliqué
+  isFilterApplied(): boolean {
+    return this.sortOption !== 'added-desc';
+  }
 
-  /* OBTENIR LES JEUX EPINGLES */
+  // récup jeu pin
   getPinnedGames(): HistoryMyGameInterface[] {
-    if (this.searchQuery.trim() !== '') {
+    // si aucun filtre appliqué et pas de mot de recherche on rend vide le tableau pour ne rien afficher dans la section pinned
+    if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
       return [];
     }
-    return this.searchQuery ? this.filteredGames : this.HistoireMyGameByUserByPlateform?.filter(game => game.myGame.is_pinned) ?? [];
+    return this.HistoireMyGameByUserByPlateform?.filter(game => game.myGame.is_pinned) ?? [];
   }
 
-  /* OBTENIR LES JEUX NON EPINGLES */
-  
+  // récup jeu unpin
   getUnpinnedGames(): HistoryMyGameInterface[] {
-    return this.searchQuery ? this.filteredGames : this.HistoireMyGameByUserByPlateform?.filter(game => !game.myGame.is_pinned) ?? [];
+    // si aucun filtre appliqué et pas de mot de recherche on rend vide le tableau pour ne rien afficher dans la section unpinned
+    if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
+      return [];
+    }
+    return this.HistoireMyGameByUserByPlateform?.filter(game => !game.myGame.is_pinned) ?? [];
   }
-  
+
+  // Method pour afficher tout les jeux si une recherche ou un filtre et appliqué
+  getAllGamesToDisplay(): HistoryMyGameInterface[] {
+    if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
+      return this.searchQuery.trim() !== '' ? this.filteredGames : this.HistoireMyGameByUserByPlateform;
+    }
+    return [];
+  }
 
   /* FOR MODAL */
   selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {

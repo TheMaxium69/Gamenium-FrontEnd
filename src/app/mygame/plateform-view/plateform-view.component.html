@@ -14,22 +14,79 @@
 
       <div class="filter-dropdown">
         <button class="filter-button" (click)="toggleFilterDropdown()">
-          <i class="ri-filter-line"></i>
+          <i *ngIf="!isFilterApplied()"class="ri-filter-line"></i>
+          <i *ngIf="isFilterApplied()"class="ri-filter-fill"></i>
         </button>
         <div class="dropdown-menu" *ngIf="isFilterDropdownOpen">
           <button (click)="setSortOption('name-asc')">Nom (A-Z)</button>
           <button (click)="setSortOption('name-desc')">Nom (Z-A)</button>
-          <button (click)="setSortOption('year-asc')">Année (Croissant)</button>
-          <button (click)="setSortOption('year-desc')">Année (Décroissant)</button>
+          <button (click)="setSortOption('year-asc')">Année de sortie (Croissant)</button>
+          <button (click)="setSortOption('year-desc')">Année de sortie (Décroissant)</button>
           <button (click)="setSortOption('added-asc')">Date d'ajout (Croissant)</button>
           <button (click)="setSortOption('added-desc')">Date d'ajout (Décroissant)</button>
         </div>
       </div>
     </div>
 
+<!-- SECTION POUR JEUX FILTRER OU RECHERCHER -->
+<div id="show-game" class="d-flex container" *ngIf="getAllGamesToDisplay().length > 0">
+  <ng-container *ngFor="let myGameHistorique of getAllGamesToDisplay()">
+    <div class="card-wrapper">
+      <div class="card-game container d-flex">
+        <div class="isPinned" *ngIf="!isFilterApplied() && !searchQuery.trim() && myGameHistorique.myGame.is_pinned" style="background-color: {{ isColor }}">
+          <p><i class="ri-pushpin-fill"></i></p>
+        </div>
+
+        <div class="card-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame" >
+          <ng-container *ngIf="myGameHistorique.myGame.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+            <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
+            <div class="blur"></div>
+            <img src="https://tyrolium.fr/Contenu/Image/Soon.png" alt="...">
+          </ng-container>
+          <ng-container *ngIf="myGameHistorique.myGame.game.image.icon_url != 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
+            <div class="image" style="background-image: url('{{ myGameHistorique.myGame.game.image?.thumb_url }}')"></div>
+            <div class="blur"></div>
+            <img src="{{ myGameHistorique.myGame.game.image?.thumb_url }}" alt="...">
+          </ng-container>
+        </div>
+
+        <div class="card-right d-flex">
+          <div class="core-left" (click)="selectViewMyGame(myGameHistorique); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
+            <h2>{{ myGameHistorique.myGame.game.name }}</h2>
+            <p style="color: {{ isColor }};" class="platform-names">
+              {{ this.app.plateformeNameFormatage(myGameHistorique.myGame.plateform.name) }}
+            </p>
+            <p> Ajouté le : {{ myGameHistorique.myGame.added_at | date:'dd / MM / yyyy' }}</p>
+          </div>
+          <div class="core-right">
+            <div class="card-note" style="background-color: {{ isColor }}">
+              <p><span id="noteGame{{ myGameHistorique.myGame.game.id }}">
+                    <ng-container *ngIf="!userRatingAll">na</ng-container>
+                    <ng-container *ngIf="userRatingAll">
+                      <ng-container *ngIf="hasUserRatings(myGameHistorique.myGame.game.id)">
+                        <ng-container *ngFor="let userRating of userRatingAll">
+                          <ng-container *ngIf="userRating.game.id == myGameHistorique.myGame.game.id">{{ userRating.rating }}</ng-container>
+                        </ng-container>
+                      </ng-container>
+                      <ng-container *ngIf="!hasUserRatings(myGameHistorique.myGame.game.id)">na</ng-container>
+                    </ng-container>
+                  </span>/20</p>
+            </div>
+            <div class="card-action">
+              <i (click)="togglePin(myGameHistorique); $event.stopPropagation()" class="ri-unpin-line"></i>
+              <i (click)="setModal(myGameHistorique.myGame.game); $event.stopPropagation(); " data-bs-toggle="modal" data-bs-target="#noteGame" class="ri-star-line"></i>
+              <i routerLink="/mygame/edit/{{ myGameHistorique.id }}" class="ri-pencil-line"></i>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </ng-container>
+</div>
     
 <!--  GAME PINED -->
-<div id="show-game" class="d-flex container pinned" *ngIf="getPinnedGames().length > 0">
+<div id="show-game" class="d-flex container pinned" *ngIf="!isFilterApplied() && !searchQuery.trim() && getPinnedGames().length > 0">
   <ng-container *ngFor="let myGameHistorique of getPinnedGames()">
     <div class="card-wrapper">
       <div class="card-game container d-flex">
@@ -88,7 +145,7 @@
 </div>
 
 <!-- UNPINNED GAME -->
-<div id="show-game" class="d-flex container">
+<div id="show-game" class="d-flex container" *ngIf="!isFilterApplied() && !searchQuery.trim()">
   <ng-container *ngFor="let myGameHistorique of getUnpinnedGames()">
     <div class="card-wrapper">
       <div class="card-game container d-flex">
