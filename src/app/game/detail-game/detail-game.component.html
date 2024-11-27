@@ -15,7 +15,7 @@
 
   <div class="pictureAndName">
     <div class="picture" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
-    <div class="name">
+    <div class="name shadow-blocks">
         <div class="game-name">
           <h1 class="mb-0">{{ gameSelected?.name }}</h1>
         </div>
@@ -398,7 +398,7 @@
 
       <!-- Add Note Button -->
       <div *ngIf="isLoggedIn && hasGameInCollection" class="add-note">
-        <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="btn-note shadow-btn" data-bs-toggle="modal" data-bs-target="#noteGame" style="background-color: {{userColor ? userColor : 'red'}}">Ajouter une note</button>
+        <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="btn-note shadow-btn" data-bs-toggle="modal" data-bs-target="#noteGame">Ajouter une note</button>
       </div>
     </div>
   </div>
@@ -410,80 +410,77 @@
 <!-- SECTION CARROUSEL -->
   <div class="carroussel-container">
       <div class="carroussel">
-          <div class="pictures-title">
-          </div>
+        <section>
+          <div id="cCarousel">
+            <div class="arrow" id="prev"><i class="ri-arrow-left-s-line"></i></div>
+            <div class="arrow" id="next"><i class="ri-arrow-right-s-line"></i></div>
 
-          <section>
-              <div id="cCarousel">
-                <div class="arrow" id="prev"><i class="ri-arrow-left-s-line"></i></div>
-                <div class="arrow" id="next"><i class="ri-arrow-right-s-line"></i></div>
+            <div id="carousel-vp">
+              <div id="cCarousel-inner">
 
-                <div id="carousel-vp">
-                  <div id="cCarousel-inner">
-
-                    <article class="cCarousel-item">
-                      <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                      <div class="infos">
-                          <div class="carrousel-sep"></div>
-                        <p>Title 1 / 6</p>
-                      </div>
-                    </article>
-
-                    <article class="cCarousel-item">
-                      <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                      <div class="infos">
-                          <div class="carrousel-sep"></div>
-                        <p>Title 2 / 6</p>
-                      </div>
-                    </article>
-
-                    <article class="cCarousel-item">
-                      <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                      <div class="infos">
-                          <div class="carrousel-sep"></div>
-                        <p>Title 3 / 6</p>
-                      </div>
-                    </article>
-
-                    <article class="cCarousel-item">
-                      <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                      <div class="infos">
-                          <div class="carrousel-sep"></div>
-                        <p>Title 4 / 6</p>
-                      </div>
-                    </article>
-
-                    <article class="cCarousel-item">
-                      <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                      <div class="infos">
-                          <div class="carrousel-sep"></div>
-                        <p>Title 5 / 6</p>
-                      </div>
-                    </article>
-
-
-
-
-                    <article class="cCarousel-item">
-                      <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                      <div class="infos">
-                          <div class="carrousel-sep"></div>
-                        <p>Title 6 / 6</p>
-                      </div>
-                    </article>
-
-
-                    <article class="cCarousel-item" *ngIf="gameSelected?.image?.icon_url">
-                      <img [src]="gameSelected?.image?.icon_url" alt="icon_url">
-                      <div class="infos">
-                        <div class="carrousel-sep"></div>
-                        <p>Title 1 / 8</p>
-                      </div>
-                    </article>
+                <article class="cCarousel-item">
+                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                  <div class="infos">
+                      <div class="carrousel-sep"></div>
+                    <p>Title 1 / 6</p>
                   </div>
-                </div>
+                </article>
+
+                <article class="cCarousel-item">
+                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                  <div class="infos">
+                      <div class="carrousel-sep"></div>
+                    <p>Title 2 / 6</p>
+                  </div>
+                </article>
+
+                <article class="cCarousel-item">
+                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                  <div class="infos">
+                      <div class="carrousel-sep"></div>
+                    <p>Title 3 / 6</p>
+                  </div>
+                </article>
+
+                <article class="cCarousel-item">
+                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                  <div class="infos">
+                      <div class="carrousel-sep"></div>
+                    <p>Title 4 / 6</p>
+                  </div>
+                </article>
+
+                <article class="cCarousel-item">
+                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                  <div class="infos">
+                      <div class="carrousel-sep"></div>
+                    <p>Title 5 / 6</p>
+                  </div>
+                </article>
+
+
+
+
+                <article class="cCarousel-item">
+                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                  <div class="infos">
+                      <div class="carrousel-sep"></div>
+                    <p>Title 6 / 6</p>
+                  </div>
+                </article>
+
+
+                <article class="cCarousel-item" *ngIf="gameSelected?.image?.icon_url">
+                  <img [src]="gameSelected?.image?.icon_url" alt="icon_url">
+                  <div class="infos">
+                    <div class="carrousel-sep"></div>
+                    <p>Title 1 / 8</p>
+                  </div>
+                </article>
               </div>
-            </section>
+            </div>
+          </div>
+        </section>
       </div>
   </div>
 
@@ -519,13 +516,13 @@
               </p>
               <div class="info-release-date">Date de sortie : {{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
           </div>
-          <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame" style="background-color: {{userColor ? userColor : 'red'}}">
+          <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame">
               <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
           </button>
       </div>
 
       <div class="show-collection">
-        <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" routerLink="/mygame" class="my-collection" style="background-color: white; color: {{ userColor ?? 'red' }};">Votre collection</button>
+        <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" routerLink="/mygame" class="my-collection">Votre collection</button>
       </div>
   </div>
 
