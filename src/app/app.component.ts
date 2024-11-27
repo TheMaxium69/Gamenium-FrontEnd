@@ -344,6 +344,10 @@ export class AppComponent {
       return 'Mega Drive'
     }
 
+    if (plateform == 'Browser'){
+      return 'Navigateur'
+    }
+
     return plateform;
 
   }
