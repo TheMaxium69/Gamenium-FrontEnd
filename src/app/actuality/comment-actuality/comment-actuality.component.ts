@@ -166,6 +166,9 @@ export class CommentActualityComponent implements OnInit{
   }
 
   addComment(form: NgForm) {
+
+    let dateHere = new Date()
+
     if (form.value) {
       let content = form.value['content'];
       //Verification que le message n'est pas vide ou plein d'espace
@@ -247,9 +250,9 @@ export class CommentActualityComponent implements OnInit{
 
             // Depuis quand le commentaire est posté
             const timeAgo = this.renderer.createElement('span');
-            const commentDate = this.newComment.created_at ?? 'pas de date';
+            const formattedDate = "Posté le : " + dateHere.getDate() + " " + this.app.moisView(dateHere.getMonth()) + " " + dateHere.getFullYear() + " à " + dateHere.getHours() + ":" + dateHere.getMinutes();
             this.renderer.addClass(timeAgo, 'time-ago');
-            this.renderer.setProperty(timeAgo, 'textContent', commentDate);
+            this.renderer.setProperty(timeAgo, 'textContent', formattedDate);
             this.renderer.appendChild(userName, timeAgo);
 
             // Ajout du bouton delete

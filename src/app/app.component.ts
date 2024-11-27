@@ -348,6 +348,35 @@ export class AppComponent {
 
   }
 
+  moisView(moisChiffre: number): string{
+    if (moisChiffre == 0) {
+      return "janvier";
+    } else if (moisChiffre == 1) {
+      return "février";
+    } else if (moisChiffre == 2) {
+      return "mars";
+    } else if (moisChiffre == 3) {
+      return "avril";
+    } else if (moisChiffre == 4) {
+      return "mai";
+    } else if (moisChiffre == 5) {
+      return "juin";
+    } else if (moisChiffre == 6) {
+      return "juillet";
+    } else if (moisChiffre == 7) {
+      return "août";
+    } else if (moisChiffre == 8) {
+      return "septembre";
+    } else if (moisChiffre == 9) {
+      return "octobre";
+    } else if (moisChiffre == 10) {
+      return "novembre";
+    } else if (moisChiffre == 12) {
+      return "décembre";
+    }
+    return ""
+  }
+
   /*
   *
   * FOR MODAL
