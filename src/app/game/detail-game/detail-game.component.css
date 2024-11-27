@@ -1,3 +1,38 @@
+/* ////////////// DEBUT DE ZONE CLASSES GÉNÉRALES ///////////// */
+
+.second-color { /* red */
+  color: var(--second-color)
+}
+
+.third-color { /* gray */
+  color: var(--third-color);
+}
+
+.second-bg { 
+  background-color: var(--second-color);
+}
+
+.third-bg {
+  background-color: var(--third-color);
+}
+
+.shadow-btn {
+  box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);    
+}
+
+.container-2 { /* Container bootstrap mais sans le padding */
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+
+/* ////////////// DEBUT DE ZONE CLASSES GÉNÉRALES ///////////// */
+
 /* ////////////// DEBUT DE ZONE BANNIERE ////////////////// */
 .banniere-container {
   overflow: hidden;
@@ -401,279 +436,230 @@
 
 /* ////////////// DEBUT DE ZONE RATINGS ///////////// */
 
-
-.ratings {
-max-width: 992px;
-width: fit-content;
-margin: 0px auto;
-border-radius: 15px;
-box-shadow: 1px 2px 10px rgba(166,166,166,1);
-padding: 0px;
-display: flex;
-flex-direction: column;
-gap: 40px;
-}
-
-.media-img {
-  margin-right: 20px;
-}
-
-#press-h1 {
-  padding-top: 40px;
-}
-
-#player-h1 {
-  margin-left: -106px;
-}
-
-#gamer-h1 {
-  margin-left: 75px;
-  margin-top: -83px;
-}
-
-#press-circle {
-  padding-top: 65px;
-  margin-top: -130px;
-}
-
-#player-circle {
-  padding-top: 40px;
-  margin-left: -67px;
-  margin-top: -45px;
-}
-
-.press-ratings,
-.gamers-ratings {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  padding: 0 40px;
-}
-
-@media (max-width: 768px) {
-  .press-ratings,
-  .gamers-ratings {
-    flex-wrap: wrap;
+#ratings {
+  .border-section {
+    width: 70%;
+    padding: 40px 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    box-shadow: 1px 2px 10px rgba(166,166,166,1);
   }
-}
-
-
-.press-ratings-details,
-.gamers-ratings-details {
-  min-width: 300px;
-  padding-left: 30px; 
-}
-
-@media (max-width: 768px) {
-  .press-ratings-details,
-  .gamers-ratings-details {
-    order: 2;
-    padding-left: 20px;
-    margin-top: 20px;
-  }
-}
-
-
-.title-ratings {
-  line-height: 27px;
-  margin-bottom: 30px;
-  margin-left: -30px;
-  color: black;
-}
-
-@media (max-width: 768px) {
-  .title-ratings {
-    margin-left: 0;
-    text-align: center;
-  }
-}
-
-.press-ratings-details-container {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-.gamers-ratings-details-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-left: -59px;
-}
-
-
-.one-press-rating,
-.one-gamer-rating {
-  display: flex;
-  align-items: center;
-}
-
-.one-gamer-rating {
-  margin-left: -20px;
-}
-
-@media (max-width: 768px) {
-  .one-gamer-rating {
-      margin-left: 0;
-    }
-}
-
-.provider-picture img {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-}
-
-
-.press-rating-info,
-.gamer-rating-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.press-ratings-details-name,
-.gamers-ratings-details-name {
-  font-weight: bold;
-  color: #575757;
-}
-
-.press-ratings-details-rate {
-  color: black;
-  font-weight: bold;
-  margin-left: 150px;
-}
-
-.gamers-ratings-details-rate {
-  font-size: 18px;
-  color: black;
-  font-weight: bold;
-  margin-left: 150px;
-}
-
-.big-rate {
-  font-size: 24px;
-}
-
-
-.press-ratings-total {
-  position: relative;
-  margin-left: 215px;
-}
-
-.gamers-ratings-total {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  position: relative;
-  margin-left: 255px;
-  margin-bottom: 40px;
-}
-
-@media (max-width: 768px) {
-  .press-ratings-total,
-  .gamers-ratings-total {
-    order: 1;
-    margin-left: 0;
-    align-self: center;
-  }
-}
-
-.press-ratings-total-rate,
-.gamers-ratings-total-rate {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  background-color: red;
-  color: white;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.2);
-}
-
-.gamers-ratings-total-rate {
-  width: 130px;
-  height: 130px;
-  background-color: rgb(141, 138, 138);
-}
-
-.total-rate-press {
-  font-size: 50px;
-  position: absolute;
-  left: 30px;
-  top: 32px;
-}
-
-.total-rate-gamers {
-  font-size: 40px;
-  position: absolute;
-  left: 29px;
-  top: 26px;
-}
-
-.on-twenty-press {
-  font-size: 35px;
-  position: absolute;
-  bottom: 48px;
-  right: 38px;
-}
-
-.on-twenty-gamers {
-  font-size: 25px;
-  position: absolute;
-  bottom: 36px;
-  right: 22px;
-}
-
-.add-note {
-  display: flex;
-  justify-content: center;
-}
-
-.btn-note {    
-  color: white;
-  border-radius: 15px;
-  padding: 10px 30px;
-  box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  margin-right: 20px;
-  margin-bottom: 40px;
-  border: solid 2px;
-  border-color: var(--userColor);
-}
-
-.btn-note:hover {
-  background-color: white !important;
-  color: var(--userColor) !important;
-  border: solid 2px;
-  border-color: var(--userColor) !important;
-  transition: 0.3s;
-}
-
-@media (max-width: 768px) {
-  .ratings {
-    padding: 10px;
-    width: 90%;
   
+  .row {
+    margin:0px;
+    --bs-gutter-x:0px;
+    justify-content: space-between;
   }
-
+  
+  .w-sections-notes {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  
+  .w-sections-circles {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+  
+  .title-notes-margin {
+    margin-bottom: 25px;
+  }
+  
+  .title-circle-margin {
+    margin-bottom: 40px;
+  }
+  
+  /* les notes */
+  
+  .one-rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mp-notes {
+    padding-left: 30px;
+    margin: 10px 0px;
+  }
+  
+  .mp-notes-last {
+    padding-left: 30px;
+    margin-top: 10px;
+  }
+  
   .provider-picture img {
+    border-radius: 50%;
     width: 30px;
     height: 30px;
   }
-
-  .big-rate {
-    font-size: 20px;
-  }
-
-
-}
   
+  .media-img {
+    margin-right: 20px;
+  }
+  
+  .rating-info {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: space-between;
+  }
+  
+  .ratings-details-name {
+    font-weight: bold;
+    color: #575757;
+  }
+    
+  .ratings-details-rate {
+    color: black;
+    font-weight: bold;
+    margin-left: 120px;
+  }
+    
+  .big-rate {
+    font-size: 24px;
+  }
+  
+  /* les cercles */
+  
+  .justify-content {
+    justify-content: end;
+  }
+  
+  .font-notes {
+    color: white;
+    font-size: 21px;
+  }
+  
+  .font-notes span {
+    font-size: 30px;
+    padding-bottom: 20px;
+  }
+  
+  /* btn note */
+    
+  .add-note {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .btn-note {    
+    color: white;
+    border-radius: 15px;
+    padding: 10px 30px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border: solid 2px;
+    border-color: red;
+  }
+  
+  .btn-note:hover {
+    background-color: white !important;
+    color: red !important;
+    border: solid 1px;
+    border-color: red !important;
+    transition: 0.3s;
+  }
+  
+  @media (max-width: 1399px) {
+    .container-2 {
+      max-width: 1140px;
+    }
+    .ratings-details-rate {
+      margin-left: 60px;
+    }
+    .w-sections-circles {
+      width:25%;
+    }
+  }
+  
+  @media (max-width: 1199px) {
+    .container-2 {
+      max-width: 960px;
+    }
+  
+    .ratings-details-rate {
+      margin-left: 0px;
+    }
+  
+    .w-sections-circles {
+      width:30%;
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .container-2 {
+      max-width: 720px;
+    }
+    .ratings-details-rate {
+      margin-left: 0px;
+    }
+    .w-sections-notes {
+      width:80%;
+    }
+    .w-sections-circles {
+      width:80%;
+    }
+    .row {
+      justify-content: center;
+    }
+    .title-circle-margin {
+      margin-top: 40px;
+    }
+    .col-lg-8 {
+      width: 40%;
+    }
+    .w-100 {
+      width: 60% !important;
+    }
+    .justify-content {
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .container-2 {
+      max-width: 540px;
+    }
+    .provider-picture img {
+      width: 30px;
+      height: 30px;
+    }
+    .big-rate {
+      font-size: 20px;
+    }
+    .rating-info {
+      gap: 10px;
+    }
+    .mp-notes {
+      padding-left: 10px;
+    }
+    .mp-notes-last {
+      padding-left: 10px;
+    }
+    .col-lg-8 {
+      width: 50%;
+    }
+  }
+  
+  @media (max-width: 575px) {
+    .container-2 {
+      max-width: 100%;
+    }
+    .mp-notes {
+      padding-left: 0px;
+    }
+  
+    .mp-notes-last {
+      padding-left: 0px;
+    }
+    .col-lg-8 {
+      width: 50%;
+    }
+  }
+}
+
+
 /* //////////////// FIN DE ZONE RATINGS ///////////////  */
 
 
