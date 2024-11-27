@@ -69,7 +69,7 @@
         </div>
         <div
         (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-        <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
+        <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLike }}</span>
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
@@ -120,7 +120,7 @@
             </div>
             <div
             (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-            <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
+            <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLike }}</span>
             <i
             id="like-icon{{comment.id}}"
             class="comment-action like"
@@ -164,7 +164,7 @@
           </div>
           <div
           (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbLike}}</span>
+          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLike }}</span>
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"

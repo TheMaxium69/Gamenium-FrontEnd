@@ -14,6 +14,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LikeService } from 'src/app/-service/like.service';
 import { IpService } from 'src/app/-service/ip.service';
+import { LikeInterface } from 'src/app/-interface/like.interface';
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -33,6 +34,7 @@ export class CommentActualityComponent implements OnInit{
   newComment : CommentInterface|undefined;
   profileInterface: ProfilInterface | undefined;
   commentLikedMap = new Map<number, boolean>();
+  LikeAll: LikeInterface[]|undefined;
   nbLike: number | undefined = 0;
 
   constructor(
@@ -107,6 +109,28 @@ export class CommentActualityComponent implements OnInit{
       }
     });
 
+  }
+
+  getLikeByComment(idComment: number) {
+
+    this.likeService.getCommentLikes(idComment, this.app.setURL()).subscribe(reponseLikeByCommentActu => {
+
+      if (reponseLikeByCommentActu.message == 'good'){
+
+        this.LikeAll = reponseLikeByCommentActu.result;
+
+        this.nbLike = this.LikeAll?.length;
+
+        const btnCommentLike = document.getElementById("like-value");
+        this.LikeAll?.forEach((Like:LikeInterface) => {
+
+          if (Like.user.id == this.userConnectedId && btnCommentLike){
+            this.liked(btnCommentLike, "add")
+          }
+
+        })
+      }
+    })
   }
 
   getCommentWithActu(id:number){
@@ -429,6 +453,29 @@ export class CommentActualityComponent implements OnInit{
         })
     })
     
+  }
+
+  liked(btnCommentLike: HTMLElement, state: String) {
+
+    if (state == "add"){
+
+      if (this.actualitySelected?.Provider?.color){
+        btnCommentLike.style.color = this.actualitySelected.Provider.color;
+      } else {
+        btnCommentLike.style.color = "red";
+      }
+      btnCommentLike.classList.remove("ri-heart-3-line");
+      btnCommentLike.classList.add("ri-heart-3-fill");
+
+    } else {
+
+      btnCommentLike.style.color = "rgb(46, 58, 89)";
+      btnCommentLike.classList.add("ri-heart-3-line");
+      btnCommentLike.classList.remove("ri-heart-3-fill");
+
+    }
+
+
   }
 
   deleteLikeComment(commentId: number) {
