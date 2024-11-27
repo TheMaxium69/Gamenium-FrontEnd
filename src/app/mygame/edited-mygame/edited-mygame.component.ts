@@ -163,6 +163,21 @@ export class EditedMygameComponent implements OnInit {
       this.idFormValide = this.idFormValide.filter(formId => formId !== id);
       this.nbCopyView--;
       copyCardSelected.style.display = 'none';
+
+      // VIDER LES CHAMP
+      const inputs = copyCardSelected.querySelectorAll('input');
+      inputs.forEach(input => {
+        input.value = '';
+      });
+
+      const selects = copyCardSelected.querySelectorAll('select');
+      selects.forEach(select => {
+        select.selectedIndex = -1;
+      });
+
+
+
+
     } else {
       Swal.fire({
         title: 'Erreur!',
