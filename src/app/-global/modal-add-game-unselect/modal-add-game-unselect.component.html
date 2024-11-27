@@ -49,6 +49,10 @@
               </select>
             </ng-container>
           </ng-container>
+          <ng-container *ngIf="!this.app.gameSelected.platforms">
+            <input type="hidden" [value]="this.app.noPlateform.id" name="plateform_id" ngModel>
+            {{ this.app.plateformeNameFormatage(this.app.noPlateform.name) }}
+          </ng-container>
           <br>
           <br>
           <h6>Épinglez ce jeu :</h6>

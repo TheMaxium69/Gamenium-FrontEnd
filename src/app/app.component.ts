@@ -15,6 +15,7 @@ import {HistoryMyGameService} from "./-service/history-my-game.service";
 import {ProfilePrivateComponent} from "./mygame/profile-private/profile-private.component";
 import {GameService} from "./-service/game.service";
 import Swal from "sweetalert2";
+import {PlateformInterface} from "./-interface/plateform.interface";
 
 @Component({
   selector: 'app-root',
@@ -348,6 +349,10 @@ export class AppComponent {
       return 'Navigateur'
     }
 
+    if (plateform == 'Other'){
+      return 'Autre'
+    }
+
     return plateform;
 
   }
@@ -390,6 +395,10 @@ export class AppComponent {
   gameSelected: GameInterface|undefined;
   viewMyGame:HistoryMyGameInterface|undefined;
   searchResults: GameInterface[] | undefined;
+  noPlateform: { name: string; id: number } = {
+    id: 99999,
+    name: "Other"
+  }
 
 
   addNote(form:NgForm) {
@@ -482,12 +491,18 @@ export class AppComponent {
     }
 
     let plateform_id = form.value['plateform_id'];
+    console.log(plateform_id);
     let noplate:boolean = true;
     if (plateform_id == ""){
       if (this.gameSelected){
-        if (this.gameSelected.platforms.length == 1){
+        if (this.gameSelected.platforms) {
+          if (this.gameSelected.platforms.length == 1) {
+            noplate = false;
+            plateform_id = this.gameSelected.platforms[0].id;
+          }
+        } else {
           noplate = false;
-          plateform_id = this.gameSelected.platforms[0].id;
+          plateform_id = this.noPlateform.id
         }
       }
     } else {
@@ -577,6 +592,7 @@ export class AppComponent {
 
   selectGame(game: GameInterface) {
     this.gameSelected = game;
+    console.log(this.gameSelected);
   }
 
 
