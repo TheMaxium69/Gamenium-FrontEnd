@@ -324,3 +324,84 @@ h2 {
 #content-latest-release .card-game:hover {
   height: 280px;
 }
+
+/*Suggestion*/
+
+#gamenium-suggestion .left-sug-panel{
+  width: 285px;
+  height: 989px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+#gamenium-suggestion .left-sug-panel h2 {
+  margin-bottom: 40px;
+}
+
+.provider_card {
+  height: 180px;
+  width: 205px;
+  margin-bottom: 40px;
+  border-radius: 15px;
+  box-shadow: 1px 2px 10px 0px rgba(89,88,88,0.3);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.provider_card .name {
+  display: flex;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 500;
+  color: black;
+  padding-bottom: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.provider_color {
+  height: 60px;
+  width: 205px;
+  background-color: rgba(255, 0, 0, 0.54);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.provider_profile {
+  width: 96px;
+  height: 96px;
+  margin-top: -48px;
+  background-color: white;
+  border-radius: 100%;
+  box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
+  background-image: url("https://cdn.discordapp.com/attachments/1203971108471177288/1217033755840217168/KT_logo.png?ex=66028e02&is=65f01902&hm=3c7e8b5287eebd8a9caf12b6d6c59e83503208fd996282546e1292cbaec09814&");
+  background-position: center;
+  background-size: cover;
+}
+
+.follow-btn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  display: block;
+  box-shadow: 0px 3px 7px 0px #a6a6a6;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: rgba(255, 0, 0, 0.54);
+  text-align: center;
+}
+
+.follow-btn:hover {
+  background-color: white;
+  color: rgba(255, 0, 0, 0.54);
+  border: solid 1px;
+  border-color: rgba(255, 0, 0, 0.54);
+}
+
+.provider-card-content {
+  padding: 5px 0px;
+}
