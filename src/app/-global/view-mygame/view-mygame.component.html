@@ -2,8 +2,25 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <i class="ri-delete-bin-line btn-delete" (click)="deleteGame(this.app.viewMyGame?.myGame?.id)"></i>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-header-start">
+          <ng-container *ngIf="this.app.viewMyGame?.myGame?.user?.id == this.app.userConnected?.id">
+            <button type="button" class="no-btn">
+              <i class="ri-unpin-line btn-action"></i>
+            </button>
+            <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#noteGame">
+              <i class="ri-star-line btn-action"></i>
+            </button>
+            <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" routerLink="edit/{{ this.app.viewMyGame?.myGame?.id }}">
+              <i class="ri-pencil-line btn-action"></i>
+            </button>
+            <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" (click)="deleteGame(this.app.viewMyGame?.myGame?.id)">
+              <i class="ri-delete-bin-line btn-action"></i>
+            </button>
+          </ng-container>
+        </div>
+        <div class="modal-header-end">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
       </div>
 
       <section id="view-mygame" *ngIf="this.app.viewMyGame">
@@ -15,12 +32,12 @@
             <img class="back" src="{{ this.app.viewMyGame.myGame?.game?.image?.thumb_url }}" alt="blur">
           </div>
           <div class="separe-image"></div>
-          <div class="screen-image">
+          <div class="screen-image" [ngStyle]="{'--color-variable': isColor}">
             <small>Image Utilisateur</small>
             <div class="screen-all">
               <ng-container *ngFor="let oneScreen of [].constructor(10)"> <!-- this.app.viewMyGame.screenshot-->
                 <div class="screen-encard">
-                  <img class="screen pp-shadow" [src]="this.app.viewMyGame.myGame?.game?.image?.screen_large_url" alt="userImage">
+                  <img class="screen" [src]="this.app.viewMyGame.myGame?.game?.image?.screen_large_url" alt="userImage">
                 </div>
               </ng-container>
             </div>

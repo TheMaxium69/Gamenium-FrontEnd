@@ -160,6 +160,9 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
     this.app.viewMyGame = historyMyGameInterface;
+    if (this.profilSelected?.themeColor){
+      document.documentElement.style.setProperty('--color-variable', this.profilSelected.themeColor);
+    }
   }
 
 

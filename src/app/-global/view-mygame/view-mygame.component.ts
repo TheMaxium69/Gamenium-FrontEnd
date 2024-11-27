@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
+import {ProfilService} from "../../-service/profil.service";
+import {ProfilInterface} from "../../-interface/profil.interface";
 
 @Component({
   selector: 'modal-view-mygame',
   templateUrl: './view-mygame.component.html',
   styleUrls: ['./view-mygame.component.css']
 })
-export class ViewMygameComponent implements OnInit {
+export class ViewMygameComponent {
 
   constructor(
-    protected app:AppComponent,) {}
+    protected app:AppComponent) {}
 
-
-  ngOnInit() {
-
-  }
+  isColor: string = this.app.colorDefault;
+  profilSelected: ProfilInterface | undefined;
 
   deleteGame(gameId: string | undefined) {
     console.log('delete game: ' + gameId)

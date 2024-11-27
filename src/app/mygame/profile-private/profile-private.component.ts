@@ -199,7 +199,9 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
 
   selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
     this.app.viewMyGame = historyMyGameInterface;
-    // console.log("MyGame sélectionné avec l'ID :", historyMyGameInterface.id);
+    if (this.userConnected?.themeColor){
+      document.documentElement.style.setProperty('--color-variable', this.userConnected.themeColor);
+    }
   }
 
   unselectViewMyGame() {
@@ -208,16 +210,16 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
 
   filterGames(): void {
     if (!this.myGameHistoriqueAll) return;
-  
+
     const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
-  
+
     if (query) {
       // Si j'ai une query je recherche en fonction de la query
       this.filteredGames = this.myGameHistoriqueAll.filter((game) => {
         const gameName = game.myGame?.game?.name?.toLowerCase() || '';
         const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
         const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
-  
+
         return (
           gameName.includes(query) ||
           platforms.includes(query) ||
@@ -228,7 +230,7 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
       // Sinon je renvoie tout les jeux, pin et unpin
       this.filteredGames = [...this.myGameHistoriqueAll];
     }
-  
+
     this.applySorting();
   }
 

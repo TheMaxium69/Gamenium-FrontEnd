@@ -9,22 +9,32 @@
 }
 
 .modal-header {
-    justify-content: end;
+    justify-content: space-between;
     gap: 5px;
+    padding: 10px;
 }
 
-.btn-delete {
+.no-btn{
+  background: transparent;
+  border: none;
+}
+
+.btn-action {
     color: gray;
     font-size: 22px;
     cursor: pointer;
 }
 
-.btn-delete:hover {
-    color: red;
+.btn-action:hover {
+    color: var(--color-variable)!important;
 }
 
 .btn-close {
     margin: 0;
+}
+
+.btn-primary{
+  background-color: var(--color-variable)!important;
 }
 
 /*
@@ -39,8 +49,6 @@
   gap: 25px;
   height: 242px;
   padding-bottom: 30px;
-  /*overflow-y: hidden !important;*/
-  /*position: relative;*/
 
   .banner-image{
     min-width: 300px;
@@ -83,6 +91,21 @@
     width: 2px;
   }
 
+  .screen-image::-webkit-scrollbar {
+    height: 5px;
+    border-radius: 10px!important;
+  }
+
+  .screen-image::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  .screen-image::-webkit-scrollbar-thumb {
+    border-radius: 10px!important;
+    background-color: gray!important;
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
+
   .screen-image{
     width: auto;
     display: flex;
@@ -99,6 +122,8 @@
     .screen-all{
       display: flex;
       gap: 25px;
+      margin-left:6px;
+      margin-right: 7px;
 
       .screen-encard{
         max-width: 300px;
@@ -106,6 +131,7 @@
         margin: auto 0;
 
         .screen{
+          box-shadow: 1px 0px 11px -1px #a6a6a6;
           width: auto;
           height: auto;
           max-width: 300px;
