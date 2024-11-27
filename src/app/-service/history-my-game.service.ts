@@ -40,4 +40,7 @@ export class HistoryMyGameService {
     return this.http.put<ApicallInterface>(url + '/updatePinMyGame/', body, options);
   }
 
+  deleteMyGame(myGameId: number, url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.delete<ApicallInterface>(url + '/deleteMyGame/' + myGameId, options);
+  }
 }

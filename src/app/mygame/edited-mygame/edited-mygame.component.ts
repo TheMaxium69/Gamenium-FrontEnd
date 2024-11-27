@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {HistoryMyGameService} from "../../-service/history-my-game.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
 import {DeviseInterface} from "../../-interface/devise.interface";
 import {HmgCopyRegionService} from "../../-service/hmg-copy-region.service";
@@ -28,6 +28,7 @@ export class EditedMygameComponent implements OnInit {
     private route: ActivatedRoute,
     protected app: AppComponent,
 
+    private router: Router,
     protected historyMyGameService:HistoryMyGameService,
     private deviseService:DeviseService,
     private buyWhereService:BuyWhereService,
@@ -363,10 +364,24 @@ export class EditedMygameComponent implements OnInit {
    *
    * */
   deleteMyGame() {
+    if (this.idOneMyGame) {
+      this.historyMyGameService.deleteMyGame(this.idOneMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseApi => {
+        if (reponseApi.message == 'delete success') {
+          console.log('jeu retiré de votre collection')
 
+          Swal.fire({
+            title: 'Succès!',
+            text: 'Le jeu a été retiré de votre collection.',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: this.app.userConnected?.themeColor
+          })
+          
+          this.router.navigateByUrl('/mygame')
+        }
+      }) 
 
-
-
+    }
   }
 
 
