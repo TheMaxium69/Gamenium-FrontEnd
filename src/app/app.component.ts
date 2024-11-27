@@ -206,7 +206,11 @@ export class AppComponent {
 
       }
 
-    })
+    }, (error) => {
+      this.cookieService.delete('tokenGamenium');
+      this.cookieService.delete('userGamenium');
+      this.erreurSubcribe()
+    });
 
   }
 

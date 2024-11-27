@@ -294,13 +294,22 @@ export class EditedMygameComponent implements OnInit {
     }
 
     let body = JSON.stringify(updateHistoryMyGame);
-    console.log(body);
+    // console.log(body);
 
     this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
-      // console.log(reponseMyGameUpdate);
       if (reponseMyGameUpdate.message == "updated game") {
+
         this.selectedMyGame = reponseMyGameUpdate.result;
-        // console.log(this.selectedMyGame);
+
+        /* BUF FIX SUR LES NOUVEAU EXEMPLAIRE QUI CE DUPLIQUE*/
+        this.idFormValide.forEach((idForm: number) => {
+          let id:any = '.copyCard' + idForm
+          document.querySelectorAll(id).forEach((element: HTMLElement) => {
+            element.style.display = 'none';
+          });
+        });
+        
+
         Swal.fire({
           title: 'Succès!',
           text: 'Votre jeux à bien été mise à jour.',
@@ -308,8 +317,9 @@ export class EditedMygameComponent implements OnInit {
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor
         })
+
       } else {
-        // console.log("Erreur de mise a jour");
+
         Swal.fire({
           title: 'Erreur!',
           text: 'Échec de la mise à jour de votre jeux',
@@ -317,6 +327,7 @@ export class EditedMygameComponent implements OnInit {
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor
         })
+
       }
     })
 
