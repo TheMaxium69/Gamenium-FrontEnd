@@ -178,12 +178,15 @@ export class CommentActualityComponent implements OnInit{
       };
 
       const bodyMyCommentActu = JSON.stringify(bodyNoJsonMyCommentActu);
+      console.log(bodyMyCommentActu)
       const resetForm = form.resetForm();
 
-      this.commentService.postCommentInActu(bodyMyCommentActu, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyCommentActuCreate => {
+      this.commentService.postCommentInActu(bodyMyCommentActu, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyCommentActuCreate:{message:string, result:CommentInterface }) => {
         if (reponseMyCommentActuCreate.message === "good") {
           this.newComment = reponseMyCommentActuCreate.result;
           console.log("Commentaire ajouté");
+
+          this.nbLikeByComment[reponseMyCommentActuCreate.result.id] = 0;
 
           let noteSpanGame = document.getElementById("yourComment");
           if (noteSpanGame && this.newComment) {
@@ -280,6 +283,19 @@ export class CommentActualityComponent implements OnInit{
             const replyContent = this.renderer.createElement('span');
             this.renderer.setProperty(replyContent, 'textContent', 'répondre');
 
+            /*
+          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLikeByComment[comment.id] || "0" }}</span>
+          */
+            const likeCount = this.renderer.createElement('span')
+            this.renderer.setProperty(likeCount, 'id', 'like-value' + reponseMyCommentActuCreate.result.id);
+            this.renderer.addClass(likeCount, 'like-value');
+            if (this.providerColor){
+              this.renderer.setStyle(likeCount, 'background-color', this.providerColor);
+            } else {
+              this.renderer.setAttribute(likeCount, 'background-color', this.app.colorDefault);
+            }
+            this.renderer.setProperty(likeCount, 'textContent', this.nbLikeByComment[reponseMyCommentActuCreate.result.id].toString());
+
             // Ajout de l'icon j'aime
             const likeIcon = this.renderer.createElement('i')
             this.renderer.addClass(likeIcon, 'ri-heart-line')
@@ -299,8 +315,9 @@ export class CommentActualityComponent implements OnInit{
             // Ajout des éléments a la div Reply
             this.renderer.appendChild(replySection, replyIcon);
             this.renderer.appendChild(replySection, replyContent);
-            this.renderer.appendChild(replySection, likeIcon)
-            this.renderer.appendChild(replySection, likeContent)
+            this.renderer.appendChild(replySection, likeCount);
+            this.renderer.appendChild(replySection, likeIcon);
+            this.renderer.appendChild(replySection, likeContent);
             this.renderer.appendChild(commentCard, replySection);
 
             // Comment border div
@@ -453,6 +470,13 @@ export class CommentActualityComponent implements OnInit{
 
             this.nbLikeByComment[commentId]++;
 
+            /* SEULEMENT POUR CEUX QUI VIENNE DE CE FAIRE CREER*/
+            let idByComment = 'like-value' + commentId
+            let element = document.getElementById(idByComment)
+            if (element){
+              element.innerHTML = this.nbLikeByComment[commentId].toString()
+            }
+
           } else {
             console.log('erreur dans le like du commentaire ' + commentId)
           }
@@ -511,6 +535,13 @@ export class CommentActualityComponent implements OnInit{
 
             this.nbLikeByComment[commentId]--;
 
+            /* SEULEMENT POUR CEUX QUI VIENNE DE CE FAIRE CREER*/
+            let idByComment = 'like-value' + commentId
+            let element = document.getElementById(idByComment)
+            if (element){
+              element.innerHTML = this.nbLikeByComment[commentId].toString()
+            }
+
           } else {
             console.log('erreur dans la suppression du like du commentaire ' + commentId)
           }
@@ -533,6 +564,7 @@ export class CommentActualityComponent implements OnInit{
     })
 
   }
+
 
 
 }

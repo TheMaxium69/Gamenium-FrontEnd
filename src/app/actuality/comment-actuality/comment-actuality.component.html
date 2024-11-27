@@ -77,7 +77,7 @@
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
-          <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
+          <span class="comment-action">{{ nbLikeByComment[comment.id] && nbLikeByComment[comment.id] >= 2 ? 'Likes' : 'Like' }}</span>
         </div>
       </div>
     </div>
@@ -128,7 +128,7 @@
             [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
             [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
             </i>
-            <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
+            <span class="comment-action">{{ nbLikeByComment[comment.id] && nbLikeByComment[comment.id] >= 2 ? 'Likes' : 'Like' }}</span>
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
-          <span class="comment-action">{{ nbLike && nbLike >= 2 ? 'Likes' : 'Like' }}</span>
+          <span class="comment-action">{{ nbLikeByComment[comment.id] && nbLikeByComment[comment.id] >= 2 ? 'Likes' : 'Like' }}</span>
           </div>
         </div>
       </div>
