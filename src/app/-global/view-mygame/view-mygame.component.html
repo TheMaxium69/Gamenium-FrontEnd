@@ -49,9 +49,24 @@
               <p>Editions : {{ copyGame.edition || "null" }}</p>
               <p>Barcode : {{ copyGame.barcode || "null" }}</p>
               <p>content : {{ copyGame.content || "null" }}</p>
-              <p>Etat : {{ copyGame.etat.name || "null" }}</p>
-              <p>format : {{ copyGame.format.name || "null" }}</p>
-              <p>region : {{ copyGame.region.name || "null" }}</p>
+              <ng-container *ngIf="copyGame.etat">
+                <p>Etat : {{ copyGame.etat.name }}</p>
+              </ng-container>
+              <ng-container *ngIf="!copyGame.etat">
+                <p>Etat : null</p>
+              </ng-container>
+              <ng-container *ngIf="copyGame.format">
+                <p>format : {{ copyGame.format.name }}</p>
+              </ng-container>
+              <ng-container *ngIf="!copyGame.format">
+                <p>format : null</p>
+              </ng-container>
+              <ng-container *ngIf="copyGame.region">
+                <p>region : {{ copyGame.region.name }}</p>
+              </ng-container>
+              <ng-container *ngIf="!copyGame.region">
+                <p>region : null</p>
+              </ng-container>
               <h5>Purchase :</h5>
               <ng-container *ngIf="copyGame.purchase">
                 <p>price : {{ copyGame.purchase.price || "null" }}</p>
