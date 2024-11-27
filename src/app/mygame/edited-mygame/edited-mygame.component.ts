@@ -183,6 +183,14 @@ export class EditedMygameComponent implements OnInit {
       return 'none';
     }
   }
+
+  noRealCopy():string{
+    if (this.selectedMyGame?.copyGame.length == 0 && this.nbCopyView != 0){
+      return "*"
+    } else {
+      return "";
+    }
+  }
   addCopyGame() {
 
     let formId = 0;
