@@ -6,14 +6,38 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <section id="view-mygame">
+      <section id="view-mygame" *ngIf="this.app.viewMyGame">
 
-        <h1>{{ this.app.viewMyGame?.myGame?.game?.name }}</h1>
+        <div id="head-img">
+          <div class="banner-image pp-shadow">
+            <div class="banner" style="background-image: url({{this.app.viewMyGame.myGame?.game?.image?.thumb_url}});"></div>
+            <div class="blur"></div>
+            <img class="back" src="{{ this.app.viewMyGame.myGame?.game?.image?.thumb_url }}" alt="blur">
+          </div>
+          <div class="separe-image"></div>
+          <div class="screen-image">
+            <small>Image Utilisateur</small>
+            <div class="screen-all">
+              <ng-container *ngFor="let oneScreen of [].constructor(10)"> <!-- this.app.viewMyGame.screenshot-->
+                <div class="screen-encard">
+                  <img class="screen pp-shadow" [src]="this.app.viewMyGame.myGame?.game?.image?.screen_large_url" alt="userImage">
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div id="head-modal">
+
+          <h2 class="titleGame">{{ this.app.viewMyGame.myGame?.game?.name }}</h2>
+
+          <button class="btn btn-primary" routerLink="/game/{{ this.app.viewMyGame.myGame.game.id }}" data-bs-dismiss="modal">Voir le jeux</button>
+
+        </div>
 
 
-        <ng-container *ngIf="this.app.viewMyGame">
-            <p *ngIf="this.app.viewMyGame.myGame">plateform : {{ this.app.plateformeNameFormatage(this.app.viewMyGame.myGame.plateform.name) }}</p>
-        </ng-container>
+
+        <p *ngIf="this.app.viewMyGame.myGame">plateform : {{ this.app.plateformeNameFormatage(this.app.viewMyGame.myGame.plateform.name) }}</p>
         <p>épinglé : {{ this.app.viewMyGame?.myGame?.is_pinned || "Non épinglé" }}</p>
         <p>Date d'ajout : {{ this.app.viewMyGame?.myGame?.added_at }}</p>
         <p>User : {{ this.app.viewMyGame?.myGame?.user?.username }}</p>

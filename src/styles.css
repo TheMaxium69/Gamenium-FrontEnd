@@ -10,6 +10,12 @@
   --second-color: #FF0000;
   --third-color: #575757;
 
+  --bs-modal-width: 750px;
+
+}
+
+.modal{
+  --bs-modal-width: 750px!important;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -80,4 +86,10 @@ small {
   font-weight: 400;
   color: var(--third-color);
   margin: unset;
+}
+
+/* SHADOW */
+
+.pp-shadow{
+  box-shadow: 1px 3px 12px #a6a6a6;
 }

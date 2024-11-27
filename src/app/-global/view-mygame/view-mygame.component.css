@@ -1,3 +1,13 @@
+/*
+*
+* GESTION MODAL
+*
+*/
+
+#view-mygame {
+  padding: 30px;
+}
+
 .modal-header {
     justify-content: end;
     gap: 5px;
@@ -16,3 +26,106 @@
 .btn-close {
     margin: 0;
 }
+
+/*
+*
+* CONTENT MODAL
+*
+*/
+
+/* head */
+#head-img{
+  display: flex;
+  gap: 25px;
+  height: 242px;
+  padding-bottom: 30px;
+  /*overflow-y: hidden !important;*/
+  /*position: relative;*/
+
+  .banner-image{
+    min-width: 300px;
+    height: 160px;
+    margin: auto 0;
+    border-radius: 10px;
+
+    .banner{
+      position: absolute;
+      width: 300px;
+      height: 160px;
+      z-index: 10;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .blur{
+      position: absolute;
+      width: 300px;
+      height: 160px;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      z-index: 1;
+      background-color: #00000038;
+    }
+
+    .back{
+      width: 300px;
+      height: 100%;
+      border-radius: 15px;
+    }
+
+  }
+
+  .separe-image{
+    height: 100%;
+    background-color: black;
+    width: 2px;
+  }
+
+  .screen-image{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-y: hidden !important;
+    position: relative;
+    margin-top: 8px;
+
+    small{
+      margin-bottom: 10px;
+    }
+
+    .screen-all{
+      display: flex;
+      gap: 25px;
+
+      .screen-encard{
+        max-width: 300px;
+        max-height: 160px;
+        margin: auto 0;
+
+        .screen{
+          width: auto;
+          height: auto;
+          max-width: 300px;
+          max-height: 160px;
+        }
+      }
+
+    }
+
+  }
+
+}
+#head-modal{
+  display: flex;
+  justify-content: space-between;
+
+  h2.titleGame{
+    text-align: start;
+    color: black;
+  }
+
+}
+
