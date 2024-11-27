@@ -305,6 +305,11 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  deletePicture() {
+    // TODO:
+    console.log('Supprimer la photo de profil')
+  }
+
 
   protected readonly ProfilService = ProfilService;
 }

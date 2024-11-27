@@ -25,7 +25,7 @@
       <hr>
       <form action="#" class="search-form">
         <div class="input-container">
-          <input (input)="filterSettings($event)" type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
+          <input  [ngStyle]="{ '--color': color ?? 'red' }" (input)="filterSettings($event)" type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
           <button type="submit" class="search-icon-container" aria-label="Search" style="background-color: {{ color }}!important">
             <i class="ri-search-line"></i>
           </button>
@@ -54,7 +54,9 @@
             <div class="profile-card">
               <div>
                 <div class="profile-header" [ngStyle]="{ 'background-color': color }"></div>
-                  <div class="profile-avatar" [style.backgroundImage]="'url(' + (profilSelected?.picture || 'https://tyrolium.fr/generate-pp/?l=' + extractFirstLetter(userConnected?.displayname)) + ')'"></div>
+                  <div class="profile-avatar" [style.backgroundImage]="'url(' + (profilSelected?.picture || 'https://tyrolium.fr/generate-pp/?l=' + extractFirstLetter(userConnected?.displayname)) + ')'">
+                    <i id="delete-picture" class="ri-delete-bin-line delete-picture-icon" (click)="deletePicture()"></i>
+                  </div>
                   <h3>{{ userConnected?.displayname || userConnected?.username }}</h3>
                   <!-- <p> {{ userConnected?.username }} </p> -->
                   <p> {{ userConnected?.email }} </p>

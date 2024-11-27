@@ -3,6 +3,10 @@ body {
   margin-bottom: 10px;
 }
 
+h2 {
+  color: #333;
+}
+
 .top {
   height: 183px;
   width: 100%;
@@ -21,7 +25,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: 25px;
+  top: 50px;
   display: flex;
   justify-content: center;
 }
@@ -121,6 +125,9 @@ hr {
   box-sizing: border-box;
 }
 
+.searchbar:focus {
+  outline: 2px solid var(--color);
+}
 
 .searchbar::placeholder {
   font-size: 24px;
@@ -284,6 +291,10 @@ a > div {
   box-shadow: 1px 3px 12px #a6a6a6;
 }
 
+.profile-avatar:hover .delete-picture-icon {
+  visibility: visible;
+}
+
 .settings-section {
   margin-top: 30px;
   text-align: left;
@@ -358,8 +369,15 @@ a > div {
   border: 3px solid black;
 }
 
+#upload-button:hover:not([disabled]) {
+  border: 1px solid;
+  background-color: white;
+  border-color: var(--color);
+  color: var(--color);
+}
+
 #upload-button:disabled {
-  filter: grayscale(0.5);
+  filter: grayscale(80%);
   cursor: not-allowed;
 }
 
@@ -390,13 +408,25 @@ a > div {
   float: inline-end;
 }
 
+
 .btn-save:hover,
-.btn-upload:hover,
-.btn-submit:not(:disabled):hover {
+.btn-submit:hover {
   border: 1px solid;
   background-color: white;
   border-color: var(--color);
   color: var(--color);
+}
+
+.delete-picture-icon {
+  font-size: 18px;
+  color: white; 
+  background-color: red; 
+  border-radius: 50%;
+  padding: 5px;
+  position: relative;
+  left: 36px;
+  visibility: hidden;
+  cursor: pointer;
 }
 
 .file-label {
