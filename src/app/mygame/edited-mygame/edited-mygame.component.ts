@@ -196,7 +196,7 @@ export class EditedMygameComponent implements OnInit {
 
     // console.log('DISPO = ' + formId)
 
-    let cardCopy = document.getElementById('copyCard' + formId);
+    let cardCopy = document.getElementById('copyCard' + formId.toString());
     if (!cardCopy) {
       Swal.fire({
         title: 'Erreur!',
@@ -308,7 +308,7 @@ export class EditedMygameComponent implements OnInit {
             element.style.display = 'none';
           });
         });
-        
+
 
         Swal.fire({
           title: 'Succès!',
