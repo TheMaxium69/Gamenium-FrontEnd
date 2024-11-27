@@ -16,4 +16,7 @@ export class ViewMygameComponent implements OnInit {
 
   }
 
+  deleteGame(gameId: string | undefined) {
+    console.log('delete game: ' + gameId)
+  }
 }

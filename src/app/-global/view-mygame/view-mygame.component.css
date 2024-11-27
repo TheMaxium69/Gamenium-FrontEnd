@@ -1,0 +1,18 @@
+.modal-header {
+    justify-content: end;
+    gap: 5px;
+}
+
+.btn-delete {
+    color: gray;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    color: red;
+}
+
+.btn-close {
+    margin: 0;
+}
