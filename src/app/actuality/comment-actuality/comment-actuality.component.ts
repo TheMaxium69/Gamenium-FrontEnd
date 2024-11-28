@@ -292,6 +292,7 @@ export class CommentActualityComponent implements OnInit{
             const likeCount = this.renderer.createElement('span')
             this.renderer.setProperty(likeCount, 'id', 'like-value' + reponseMyCommentActuCreate.result.id);
             this.renderer.addClass(likeCount, 'like-value');
+            this.renderer.setStyle(likeCount, 'margin-top', '3px')
             if (this.providerColor){
               this.renderer.setStyle(likeCount, 'background-color', this.providerColor);
             } else {
