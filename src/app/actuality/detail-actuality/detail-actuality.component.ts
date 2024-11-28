@@ -45,14 +45,17 @@ export class DetailActualityComponent implements OnInit{
   followAllParent:FollowInterface[] = [];
 
 
-  constructor(private route: ActivatedRoute,
-              private postActu: PostActuService,
-              private app: AppComponent,
-              private commentService:CommentService,
-              private followService:FollowService,
-              private ipService: IpService,
-              private likeService: LikeService,
-              private renderer: Renderer2,) {}
+
+  constructor(
+    private route: ActivatedRoute,
+    private postActu: PostActuService,
+    private app: AppComponent,
+    private commentService:CommentService,
+    private followService:FollowService,
+    private ipService: IpService,
+    private likeService: LikeService,
+    private renderer: Renderer2,
+  ) {}
 
   ngOnInit(): void {
 
@@ -75,10 +78,10 @@ export class DetailActualityComponent implements OnInit{
 
     }
 
-    if (this.idUser) {
-      this.checkIfUserFollowProvider(this.idUser)
-      console.log(this.isProviderFollowedByUser)
-    }
+    // if (this.idUser) {
+    //   this.checkIfUserFollowProvider(this.idUser)
+    //   console.log(this.isProviderFollowedByUser)
+    // }
 
     this.updateScreenWidth();
 
@@ -95,17 +98,17 @@ export class DetailActualityComponent implements OnInit{
     // console.log(this.screenWidth);
   };
 
-  checkIfUserFollowProvider(userId: number) {
-    this.providerId = this.route.snapshot.paramMap.get('id')
+  // checkIfUserFollowProvider(userId: number) {
+  //   this.providerId = this.route.snapshot.paramMap.get('id')
 
-    this.followService.getFollowByProvider(this.providerId, this.app.setURL()).subscribe((reponseApi) => {
-      if (reponseApi.message == 'good') {
-        this.isProviderFollowedByUser = reponseApi.result.some((result: any) => result.user.id == userId)
-      } else {
-        this.isProviderFollowedByUser = false
-      }
-    })
-  }
+  //   this.followService.getFollowByProvider(this.providerId, this.app.setURL()).subscribe((reponseApi) => {
+  //     if (reponseApi.message == 'good') {
+  //       this.isProviderFollowedByUser = reponseApi.result.some((result: any) => result.user.id == userId)
+  //     } else {
+  //       this.isProviderFollowedByUser = false
+  //     }
+  //   })
+  // }
 
   getActuById(id:number){
 
@@ -265,19 +268,15 @@ export class DetailActualityComponent implements OnInit{
             
             btnFollowProvider = document.getElementById("followBtn"+Provider.id)
             if (btnFollowProvider){
-              
               btnFollowProvider.innerText = 'Suivie';
-              
             }
-            
+
           } else {
-            
             btnFollowProvider = document.getElementById("followBtn"+Provider.id)
             if (btnFollowProvider){
-              
               btnFollowProvider.innerText = 'Suivre';
-              
             }
+
           }
           
         });
@@ -393,16 +392,15 @@ export class DetailActualityComponent implements OnInit{
 
         this.followService.postFollowProvider(bodyAddFollow, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddFollow => {
           
-          // if (reponseAddFollow.message == "good"){
-            
-            btnFollowProvider = document.getElementById("button-follow-text"+id)
-            if (btnFollowProvider){
-              
-              btnFollowProvider.innerText = 'Suivie';
-            }
+          if (reponseAddFollow.message === "good") {
+            const addedFollow: FollowInterface = reponseAddFollow.result;
+            console.log(addedFollow)
+            this.followAll.push(addedFollow);
+            this.followAllParent.push(addedFollow);
 
-            console.log('follow ajouté avec succès pour le provider'+ id)
-          // }
+            console.log("Follow ajouté pour le provider: " + id);
+          }
+
         });
       },
       (error) => {
@@ -416,7 +414,7 @@ export class DetailActualityComponent implements OnInit{
         const bodyAddFollow = JSON.stringify(bodyNoJsonAddFollow);
 
         this.followService.postFollowProvider(bodyAddFollow, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddFollow => {
-
+          
           if (reponseAddFollow.message == "good"){
             btnFollowProvider = document.getElementById("button-follow-text"+id)
             if (btnFollowProvider){
@@ -433,10 +431,29 @@ export class DetailActualityComponent implements OnInit{
     console.log('delete clicked')
 
     this.followService.deleteFollowProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
-      // if (reponseApi.message == 'follow deleted successfully') {
-        // this.isProviderFollowedByUser = false
-        console.log('follow supprimé avec succès pour le provider' + providerId)
-      // }
+
+      if (reponseApi.message === "follow deleted successfully") {
+
+        this.followAll = this.followAll.filter((follow) => 
+          follow.provider?.id !== providerId &&
+          follow.user.id === this.userConnectedId
+        );
+
+        this.followAllParent = this.followAllParent.filter((follow) => 
+          follow.provider?.id !== providerId &&
+          follow.user.id === this.userConnectedId
+        );
+
+       
+
+        // this.followAllParent = this.followAllParent.filter((follow) => 
+        //   follow.provider?.parentCompany.id !== providerId &&
+        //   follow.user.id === this.userConnectedId
+        // );
+
+        console.log("Follow supprimé pour le provider: " + providerId);
+
+      }
     })
 
   }

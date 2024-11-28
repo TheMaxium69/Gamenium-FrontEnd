@@ -75,9 +75,11 @@ export class CardActualityComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
-    if (changes['providerSelected']) {
-      this.updateActu(changes['providerSelected'].currentValue);
+    if (this.providerSelected) {
+      console.log(changes)
+      if (changes['providerSelected']) {
+        this.updateActu(changes['providerSelected'].currentValue);
+      }
     }
   }
 
