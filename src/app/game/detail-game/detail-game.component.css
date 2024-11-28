@@ -122,26 +122,26 @@
     top: 30px;
     left:40px
   }
+}
   
-  @media (max-width: 768px) {
-    .pictureAndName {
-      gap: 10px;
-      flex-direction: column;
-      height: auto;
-      margin-bottom: 0;  
-      position: static;
-      transform: translateX(0%);
-      transform: translateY(-33%);
-        
-    }
-  
-    .name {
-      width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  
+@media (max-width: 768px) {
+  .pictureAndName {
+    gap: 10px;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 0;  
+    position: static;
+    transform: translateX(0%);
+    transform: translateY(-33%);
+      
   }
+
+  .name {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 }
 
 /* Section Info */
@@ -237,33 +237,33 @@
   .content {
     border-right: 1px solid #575757;
   }
-  
-  @media (max-width: 768px) {
-    .information-container {
-      flex-direction: column;
-      gap: 20px;
-    }
-  
-    .content {
-      border-right: none;
-      border-bottom: 1px solid #ccc;
-      padding: 0;
-    }
-  
-    .context {
-      padding: 0;
-    }
-  
-    .information-lines-data {
-      text-align: left;
-    }
-  
-    .section-info {
-      max-width: 992px;
-      width: 100%;
-      margin: -60px auto 50px auto;
-      padding: 0 15px; 
-    }
+}
+
+@media (max-width: 768px) {
+  .information-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .content {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+  }
+
+  .context {
+    padding: 0;
+  }
+
+  .information-lines-data {
+    text-align: left;
+  }
+
+  .section-info {
+    max-width: 992px;
+    width: 100%;
+    margin: -60px auto 50px auto;
+    padding: 0 15px; 
   }
 }
 
@@ -280,8 +280,7 @@
   display:flex;
   justify-content: center;
   gap:40px;
-  padding-top: 100px;
-  margin-bottom: 100px;
+  padding: 100px 0px;
 }
 
 #actualities {
@@ -305,12 +304,10 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 17px;
-    font-weight: 500;
     color: var(--third-color);
     padding-bottom: 6px;
     margin-left: 8px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
 }
 
   .provider_color {
