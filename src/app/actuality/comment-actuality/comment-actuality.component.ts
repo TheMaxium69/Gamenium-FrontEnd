@@ -312,7 +312,7 @@ export class CommentActualityComponent implements OnInit{
             // Ajout du texte j'aime
             const likeContent = this.renderer.createElement('span')
             this.renderer.addClass(likeContent, 'comment-action')
-            this.renderer.setProperty(likeContent, 'textContent', 'j\'aime')
+            this.renderer.setProperty(likeContent, 'textContent', 'Like')
             this.renderer.listen(likeContent, 'click', () => this.likeComment(commentId, !this.commentLikedMap.get(commentId) ? 'add' : 'delete'));
 
 
