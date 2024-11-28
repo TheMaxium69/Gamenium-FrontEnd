@@ -9,14 +9,16 @@
         <ng-container *ngIf="isLogIn">
 <!--          <h1>Abonne toi pour avoir des actualité</h1>-->
           <ng-container *ngFor="let provider of providerFollowOrAll">
-            <li routerLink="/provider/{{ provider.id }}" >
+            <!-- OLD REDIRECT routerLink="/provider/{{ provider.id }}" -->
+            <li (click)="selectOneProviderActu(provider.id)">
               <div class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
             </li>
           </ng-container>
         </ng-container>
         <ng-container *ngIf="!isLogIn">
           <ng-container *ngFor="let provider of providerFollowOrAll">
-            <li routerLink="/provider/{{ provider.id }}" >
+            <!-- OLD REDIRECT routerLink="/provider/{{ provider.id }}" -->
+            <li (click)="selectOneProviderActu(provider.id)">
               <div class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
             </li>
           </ng-container>
@@ -27,7 +29,7 @@
 
     <div class="open-final">
       <p>
-        <i class="ri-expand-diagonal-line"></i>
+        <i class="ri-expand-diagonal-line nav-icon"></i>
       </p>
     </div>
 

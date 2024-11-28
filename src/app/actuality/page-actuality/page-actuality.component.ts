@@ -9,6 +9,7 @@ import {ActivatedRoute} from "@angular/router";
 export class PageActualityComponent implements OnInit{
 
   actualityId: number|any
+  provider: number | undefined
 
   constructor(
     private route: ActivatedRoute) {
@@ -22,6 +23,9 @@ export class PageActualityComponent implements OnInit{
 
   }
 
+  providerSelected(providerId: number) {
+    this.provider = providerId
+  }
 
 
 }

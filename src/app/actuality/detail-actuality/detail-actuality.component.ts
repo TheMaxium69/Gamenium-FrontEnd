@@ -270,6 +270,14 @@ export class DetailActualityComponent implements OnInit{
               
             }
             
+          } else {
+            
+            btnFollowProvider = document.getElementById("followBtn"+Provider.id)
+            if (btnFollowProvider){
+              
+              btnFollowProvider.innerText = 'Suivre';
+              
+            }
           }
           
         });
@@ -299,6 +307,14 @@ export class DetailActualityComponent implements OnInit{
               
             }
             
+          } else {
+
+            btnFollowProvider = document.getElementById("followBtn"+Provider.id)
+            if (btnFollowProvider){
+              
+              btnFollowProvider.innerText = 'Suivre';
+              
+            }
           }
           
         });
@@ -330,12 +346,15 @@ export class DetailActualityComponent implements OnInit{
 
   followBtnClickParent(providerId: number | undefined) {
     if (providerId) {
+      const btn = document.querySelector('#followBtn' + providerId) as HTMLElement
       const provider = this.followAllParent.find((follow: FollowInterface) => follow.provider?.id === providerId && follow.user.id === this.userConnectedId )
       
       if (provider) {
         this.deleteFollow(providerId)
+        btn.textContent = 'Suivre'
       } else {
         this.followProviderUs(providerId)
+        btn.textContent = 'Suivie'
       }
     }
 
@@ -343,12 +362,15 @@ export class DetailActualityComponent implements OnInit{
 
   followBtnClick(providerId: number | undefined) {
     if (providerId) {
+      const btn = document.querySelector('#followBtn' + providerId) as HTMLElement
       const provider = this.followAll.find((follow: FollowInterface) => follow.provider?.id === providerId && follow.user.id === this.userConnectedId )
       
       if (provider) {
         this.deleteFollow(providerId)
+        btn.textContent = 'Suivre'
       } else {
         this.followProviderUs(providerId)
+        btn.textContent = 'Suivie'
       }
     }
     

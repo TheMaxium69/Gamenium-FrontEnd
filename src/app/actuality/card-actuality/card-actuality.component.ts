@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { UserInterface } from "../../-interface/user.interface";
 import { AppComponent } from "../../app.component";
 import { PostActuService } from "../../-service/post-actu.service";
@@ -13,9 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './card-actuality.component.html',
   styleUrls: ['./card-actuality.component.css']
 })
-export class CardActualityComponent implements OnInit {
-  @Input() numberOfPosts: number | undefined;
-
+export class CardActualityComponent implements OnInit, OnChanges {
+  
   isLogIn: boolean | undefined;
   userConnected: UserInterface | undefined;
   userConnectedId: number | undefined;
@@ -23,7 +22,7 @@ export class CardActualityComponent implements OnInit {
   postByProvider: PostActuInterface[] = [];
   LikeAll: LikeInterface[] | undefined;
   providerId: number | undefined;
-
+  
   likedStatus: { [key: number]: boolean } = {};
 
   constructor(
@@ -34,6 +33,11 @@ export class CardActualityComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  
+  @Input() numberOfPosts: number | undefined;
+
+  @Input()
+  providerSelected: number | undefined
 
   @Output()
   nbActuOfProvider: EventEmitter<number> = new EventEmitter<number>();
@@ -68,6 +72,17 @@ export class CardActualityComponent implements OnInit {
     } else if (this.postActuFollowOrAll.length === 0) {
       this.getActuAll();
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+    if (changes['providerSelected']) {
+      this.updateActu(changes['providerSelected'].currentValue);
+    }
+  }
+
+  updateActu(providerId: number) {
+    this.getPostByProvider(providerId);
   }
 
   followActuByUser(id: number) {

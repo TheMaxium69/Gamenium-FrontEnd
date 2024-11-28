@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {ProviderService} from "../../-service/provider.service";
 import {UserInterface} from "../../-interface/user.interface";
@@ -16,13 +16,21 @@ export class NavbarActualityComponent implements OnInit {
   isLogIn:boolean|undefined;
   userConnected:UserInterface|undefined;
   providerFollowOrAll:ProviderInterface[] = [];
+  followAll:FollowInterface[] = [];
+
   mouseDown: boolean = false;
   startX: number = 0;
   scrollLeft: number = 0;
+  
 
-  constructor(private app:AppComponent,
-              private providerService:ProviderService,
-              private followService:FollowService) {}
+  constructor(
+    private app:AppComponent,
+    private providerService:ProviderService,
+    private followService:FollowService
+  ) {}
+
+  @Output()
+  providerSelected: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
@@ -47,9 +55,10 @@ export class NavbarActualityComponent implements OnInit {
     this.followService.getMyFollowByUser(id, this.app.setURL()).subscribe(reponseMyFollowProvider => {
       if (reponseMyFollowProvider.message == "good") {
 
-        let followAll:FollowInterface[] = reponseMyFollowProvider.result;
+        // let followAll:FollowInterface[] = reponseMyFollowProvider.result;
+        this.followAll = reponseMyFollowProvider.result;
 
-        followAll.forEach((followOne:FollowInterface) => {
+        this.followAll.forEach((followOne:FollowInterface) => {
 
           if (followOne.provider) {
             this.providerFollowOrAll.push(followOne.provider);
@@ -62,6 +71,17 @@ export class NavbarActualityComponent implements OnInit {
     });
 
 
+  }
+
+  selectOneProviderActu(providerId: number) {
+
+    this.followAll.forEach((followOne:FollowInterface) => {
+
+      if (followOne?.provider?.id == providerId) {
+        return this.providerSelected.emit(followOne.provider.id)
+      }
+
+    })
   }
 
 
