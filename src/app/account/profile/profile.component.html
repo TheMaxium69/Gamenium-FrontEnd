@@ -73,7 +73,7 @@
                   <div class="colorpick">
                     
                     <label  for="themeColor">Choisir la couleur du thème:</label>
-                    <input type="color" id="themeColor" value="{{color ?? 'red'}}" [(ngModel)]="tempColor" />
+                    <input type="color" id="themeColor" value="{{color ?? 'red'}}" [(ngModel)]="color" />
 
                   </div>
                   <button [ngStyle]="{ '--color': color ?? 'red' }" class="btn-save" (click)="saveColor()">Enregistrer la couleur</button>
