@@ -221,16 +221,25 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
     const slider = document.querySelector('.provider-card-container') as HTMLElement;
 
     if (slider) {
-        this.mouseDown = true;
-        this.startX = mouse.pageX - slider.offsetLeft;
-        this.scrollLeft = slider.scrollLeft;
+      this.mouseDown = true;
+      this.startX = mouse.pageX - slider.offsetLeft;
+      this.scrollLeft = slider.scrollLeft;
+
+      slider.classList.add('no-select');
     }
 
   }
 
   stopDrag(): void {
     console.log('drag stop') // A SUPPRIMER
+    const slider = document.querySelector('.provider-card-container') as HTMLElement;
     this.mouseDown = false;
+
+    if (slider) {
+      slider.classList.remove('no-select');
+    }
+
+    document.body.classList.remove('no-select');
   }
 
   move(mouse: MouseEvent): void {
@@ -253,7 +262,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   }
 
   setModal(){
-     this.app.gameSelected = this.gameSelected;
+    this.app.gameSelected = this.gameSelected;
   }
 
 

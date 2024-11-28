@@ -9,13 +9,13 @@
 
 
 
-  <div class="banniere-container">
-    <div class="banniere" style="background-image: url({{gameSelected?.image?.screen_large_url}});"></div>
+  <div id="banniere-container" class="banniere-container">
+    <div class="banniere" [ngStyle]="{ '--imgGameUrlLarge': 'url(' + gameSelected?.image?.screen_large_url + ')' }"></div>
   </div>
 
-  <div class="pictureAndName">
-    <div class="picture" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
-    <div class="name shadow-blocks">
+  <div id="pictureAndName" class="pictureAndName">
+    <div class="picture" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+    <div class="name blocks-shadow">
         <div class="game-name">
           <h1 class="mb-0">{{ gameSelected?.name }}</h1>
         </div>
@@ -29,7 +29,7 @@
 
 
 <!-- INFORMATIONS  -->
-  <div class="section-info">
+  <div id="section-info" class="section-info">
     <div class="information">
         <h2 class="title">Informations</h2>
 
@@ -200,68 +200,64 @@
 
 
 <!-- SUIVI DES ACTUALITES -->
-  <div class="actualities">
-    <div class="game-actu">
-        <div class="game-actu-title">
-            <p>Suivre les actus du jeu:</p>
-        </div>
-        <div class="padding">
-          <div class="game-card">
-              <div class="top-card"></div>
-              <div class="picture-card" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
-              <div class="game-card-name">{{gameSelected?.name}}</div>
-              <div class="follow">
-                <a href="">Suivre</a>
-              </div>
-          </div>
-        </div>
-    </div>
-
-    <div class="actu-separation"></div>
-
-    <div class="provider-actu">
-        <div class="provider-actu-title">
-            <p id="follow-provider">Suivre les actus des créateurs:</p>
-        </div>
-        <div class="provider-card-container"
-        (mousedown)="startDrag($event)"
-        (mousemove)="move($event)"
-        (mouseup)="stopDrag()">
-            <div class="provider-card">
-                <div class="top-card"></div>
-                <div class="picture-card"></div>
-                <div class="provider-card-name">Nintendo 1</div>
-                <div class="follow">
-                  <a href="">Suivre</a>
-                </div>
-            </div>
-            <div class="provider-card">
-                <div class="top-card"></div>
-                <div class="picture-card"></div>
-                <div class="provider-card-name">Nintendo 2</div>
-                <div class="follow">
-                  <a href="">Suivre</a>
-                </div>
-            </div>
-            <div class="provider-card">
-                <div class="top-card"></div>
-                <div class="picture-card"></div>
-                <div class="provider-card-name">Nintendo 3</div>
-                <div class="follow">
-                  <a href="">Suivre</a>
-                </div>
-            </div>
-            <div class="provider-card">
-                <div class="top-card"></div>
-                <div class="picture-card"></div>
-                <div class="provider-card-name">Nintendo 4</div>
-                <div class="follow">
-                  <a href="">Suivre</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="actualities" class="actualities">
+  <div>
+      <p class="title">Suivre les actus du jeu:</p>
+      <div class="provider_card blocks-shadow">
+          <div class="provider_color" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+          <div class="provider_profile pp-shadow"  [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+          <div>
+              <p class="name">{{gameSelected?.name}}</p>
+          </div>            
+          <small class="follow-btn shadow-btn">Suivre</small>
+      </div>
   </div>
+
+  <div class="actu-separation"></div>
+
+  <div>
+      <div>
+        <p id="follow-provider" class="title">Suivre les actus des créateurs:</p>
+      </div>
+      <div class="provider-card-container"
+      (mousedown)="startDrag($event)"
+      (mousemove)="move($event)"
+      (mouseup)="stopDrag()">
+          <div class="provider_card blocks-shadow">
+              <div class="provider_color" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+              <div class="provider_profile pp-shadow" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+              <div>
+                  <p class="name">{{gameSelected?.name}}</p>
+              </div>            
+              <small class="follow-btn shadow-btn">Suivre</small>
+          </div>
+          <div class="provider_card blocks-shadow">
+              <div class="provider_color" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+              <div class="provider_profile pp-shadow" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+              <div>
+                  <p class="name">{{gameSelected?.name}}</p>
+              </div>            
+              <small class="follow-btn shadow-btn">Suivre</small>
+          </div>
+          <div class="provider_card blocks-shadow">
+              <div class="provider_color" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+              <div class="provider_profile pp-shadow" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+              <div>
+                  <p class="name">{{gameSelected?.name}}</p>
+              </div>            
+              <small class="follow-btn shadow-btn">Suivre</small>
+          </div>
+          <div class="provider_card blocks-shadow">
+              <div class="provider_color" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+              <div class="provider_profile pp-shadow" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+              <div>
+                  <p class="name">{{gameSelected?.name}}</p>
+              </div>            
+              <small class="follow-btn shadow-btn">Suivre</small>
+          </div>
+      </div>
+  </div>
+</div>
 
 
 
@@ -500,9 +496,9 @@
       <div class="card-add-to-collection">
           <div class="game-picture">
               <div class="game-cover-center">
-                  <div class="cover" style="background-image: url({{gameSelected?.image?.small_url}});"></div>
+                  <div class="cover" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
               </div>
-              <div class="background" style="background-image: url({{gameSelected?.image?.small_url}});">
+              <div class="background" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }">
                   <div class="inner-shadow"></div>
               </div>
 
