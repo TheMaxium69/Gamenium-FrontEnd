@@ -1,13 +1,5 @@
 /* ////////////// DEBUT DE ZONE CLASSES GÉNÉRALES ///////////// */
 
-.second-color { /* red */
-  color: var(--second-color)
-}
-
-.third-color { /* gray */
-  color: var(--third-color);
-}
-
 .second-bg { 
   background-color: var(--second-color);
 }
@@ -20,13 +12,9 @@
   box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);    
 }
 
-.shadow-blocks {
-  box-shadow: 1px 2px 10px 0px rgba(166,166,166);    
-}
-
-.container-2 { /* Container bootstrap mais sans le padding */
+.container-2 { /* Container bootstrap mais sans le padding et le margin */
   width: 100%;
-  max-width: 1320px;
+  max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -328,7 +316,7 @@
   .provider_color {
     height: 60px;
     width: 205px;
-    background-image:  var(--imgGameUrl);
+    background-image: var(--imgGameUrl);
     background-position: center;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -351,18 +339,19 @@
     color: white;
     border-radius: 5px;
     border: solid 1px;
-    border-color: rgba(255, 0, 0, 0);
-    background-color: rgba(255, 0, 0, 0.54);
+    border-color: var(--second-color);
+    background-color: var(--second-color);
     text-align: center;
     padding: 4px 15px;
+    cursor: pointer;
   
   }
   
   .follow-btn:hover {
     background-color: white;
-    color: rgba(255, 0, 0, 0.54);
+    color: var(--second-color);
     border: solid 1px;
-    border-color: rgba(255, 0, 0, 0.54);
+    border-color: var(--second-color);
     
   }
   
@@ -449,28 +438,19 @@
     margin:0px;
     --bs-gutter-x:0px;
     justify-content: space-between;
-  }
+  }  
+  
+  /* les notes */
   
   .w-sections-notes {
     flex: 0 0 auto;
     width: 50%;
   }
   
-  .w-sections-circles {
-    flex: 0 0 auto;
-    width: 20%;
-  }
-  
   .title-notes-margin {
     margin-bottom: 25px;
   }
-  
-  .title-circle-margin {
-    margin-bottom: 40px;
-  }
-  
-  /* les notes */
-  
+
   .one-rating {
     display: flex;
     align-items: center;
@@ -511,7 +491,7 @@
   .ratings-details-rate {
     color: black;
     font-weight: bold;
-    margin-left: 120px;
+    margin-left: 60px;
   }
     
   .big-rate {
@@ -520,6 +500,24 @@
   
   /* les cercles */
   
+  .w-sections-circles {
+    flex: 0 0 auto;
+    width: 24%;
+  }
+
+  .width-circle {
+    width: 85%;
+  }
+
+  .width-circle2 {
+    width: 70%;
+    flex: 0 0 auto;
+  }
+
+  .title-circle-margin {
+    margin-bottom: 40px;
+  }
+
   .justify-content {
     justify-content: end;
   }
@@ -561,27 +559,13 @@
     transition: 0.3s;
   }
   
-  @media (max-width: 1399px) {
-    .container-2 {
-      max-width: 1140px;
-    }
-    .ratings-details-rate {
-      margin-left: 60px;
-    }
-    .w-sections-circles {
-      width:25%;
-    }
-  }
-  
   @media (max-width: 1199px) {
     .container-2 {
       max-width: 960px;
     }
-  
     .ratings-details-rate {
       margin-left: 0px;
-    }
-  
+    }  
     .w-sections-circles {
       width:30%;
     }
@@ -606,11 +590,11 @@
     .title-circle-margin {
       margin-top: 40px;
     }
-    .col-lg-8 {
-      width: 40%;
+    .width-circle {
+      width: 60%;
     }
-    .w-100 {
-      width: 60% !important;
+    .width-circle2 {
+      width: 40%;
     }
     .justify-content {
       justify-content: center;
@@ -637,7 +621,7 @@
     .mp-notes-last {
       padding-left: 10px;
     }
-    .col-lg-8 {
+    .width-circle2 {
       width: 50%;
     }
   }
@@ -653,7 +637,7 @@
     .mp-notes-last {
       padding-left: 0px;
     }
-    .col-lg-8 {
+    .width-circle2 {
       width: 50%;
     }
   }
