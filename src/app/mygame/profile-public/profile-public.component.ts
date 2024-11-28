@@ -25,6 +25,12 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   userRatingAll:UserRateInterface[]|undefined;
   isColor: string = this.app.colorDefault;
 
+  // Pour la recherche
+  searchQuery: string = '';
+  filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
+  sortOption: string = 'added-desc'; // Tri par défaut
+  isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
+
   constructor(protected app:AppComponent,
               private myGameService:HistoryMyGameService,
               private userRateService:UserRateService,
@@ -166,14 +172,133 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   }
 
 
-  /* OBTENIR LES JEUX EPINGLES */
-  getPinnedGames(): HistoryMyGameInterface[] {
-    return this.myGameHistoriqueAll?.filter(game => game.myGame.is_pinned) ?? [];
+  // recup les jeux pin
+getPinnedGames(): HistoryMyGameInterface[] {
+  // retourne un tableau vide si une recherche ou un filtre est appliqué
+  if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
+    return [];
+  }
+  return this.myGameHistoriqueAll?.filter(game => game.myGame.is_pinned) ?? [];
+}
+
+// recup jeux unpin
+getUnpinnedGames(): HistoryMyGameInterface[] {
+  // retourne un tableau vide si une recherche ou un filtre est appliqué
+  if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
+    return [];
+  }
+  return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
+}
+
+
+// recupere tout les jeux quand un filtre ou une recherche est effectué
+getAllGamesToDisplay(): HistoryMyGameInterface[] {
+  if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
+    return this.filteredGames ?? [];
+  }
+  return [];
+}
+
+filterGames(): void {
+  if (!this.myGameHistoriqueAll) return;
+
+  const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
+
+  if (query) {
+    // filtre les jeux basé sur la recherche, pin et unpin
+    this.filteredGames = this.myGameHistoriqueAll.filter((game) => {
+      const gameName = game.myGame?.game?.name?.toLowerCase() || '';
+      const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+      const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
+
+      return (
+        gameName.includes(query) ||
+        platforms.includes(query) ||
+        year.includes(query)
+      );
+    });
+  } else if (this.isFilterApplied()) {
+    // sans recherche mais filtre appliqué on inclus tout les jeux
+    this.filteredGames = [...this.myGameHistoriqueAll];
+  } else {
+    // sans recherche et sans filtre appliqué on vide le tableau
+    this.filteredGames = [];
   }
 
-  /* OBTENIR LES JEUX NON EPINGLES */
-  getUnpinnedGames(): HistoryMyGameInterface[] {
-    return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
+  this.applySorting();
+}
+
+
+
+  // Toogle le dropdown
+  toggleFilterDropdown(): void {
+    this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
+  }
+
+  // change le filtre de tri
+  setSortOption(option: string): void {
+    this.sortOption = option;
+    this.filterGames();
+    this.isFilterDropdownOpen = false; 
+  }
+
+  //check si un filtre autre que celui par default est appliqué
+  isFilterApplied(): boolean {
+    return this.sortOption !== 'added-desc';
+  }
+  
+  // different filtre de tri
+  applySorting(): void {
+    if (!this.filteredGames) return;
+
+    switch (this.sortOption) {
+      case 'name-asc':
+        this.filteredGames.sort((a, b) =>
+          a.myGame?.game?.name?.localeCompare(b.myGame?.game?.name || '') || 0
+        );
+        break;
+
+      case 'name-desc':
+        this.filteredGames.sort((a, b) =>
+          b.myGame?.game?.name?.localeCompare(a.myGame?.game?.name || '') || 0
+        );
+        break;
+
+      case 'year-asc':
+        this.filteredGames.sort((a, b) => {
+          const dateA = a.myGame?.game?.originalReleaseDate
+            ? new Date(a.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+          const dateB = b.myGame?.game?.originalReleaseDate
+            ? new Date(b.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+
+          return dateA - dateB;
+        });
+        break;
+
+      case 'year-desc':
+        this.filteredGames.sort((a, b) => {
+          const dateA = a.myGame?.game?.originalReleaseDate
+            ? new Date(a.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+          const dateB = b.myGame?.game?.originalReleaseDate
+            ? new Date(b.myGame?.game?.originalReleaseDate).getTime()
+            : 0;
+
+          return dateB - dateA;
+        });
+        break;
+        case 'added-asc':
+          this.filteredGames.sort((a, b) => new Date(a.myGame?.added_at).getTime() - new Date(b.myGame?.added_at).getTime());
+          break;
+        case 'added-desc':
+          this.filteredGames.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
+          break;
+
+      default:
+        break;
+    }
   }
 
 }
