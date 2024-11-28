@@ -3,203 +3,205 @@
 </ng-container>
 <ng-container *ngIf="!noneGame">
 
-  <!--- MODAL --->
-  <modal-note></modal-note>
-  <modal-add-game></modal-add-game>
+<!--- MODAL --->
+<modal-note></modal-note>
+<modal-add-game></modal-add-game>
 
 
+<div id="banniere-container" class="banniere-container">
+  <div class="banniere" [ngStyle]="{ '--imgGameUrlLarge': 'url(' + gameSelected?.image?.screen_large_url + ')' }"></div>
+</div>
 
-  <div id="banniere-container" class="banniere-container">
-    <div class="banniere" [ngStyle]="{ '--imgGameUrlLarge': 'url(' + gameSelected?.image?.screen_large_url + ')' }"></div>
+
+<div id="pictureAndName" class="pictureAndName">
+  <div class="picture" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+  <div class="name blocks-shadow">
+      <div class="game-name">
+        <h1 class="mb-0">{{ gameSelected?.name }}</h1>
+      </div>
+      <div class="global-game-rate">
+          <div class="global-rate">10</div>
+          <div class="global-slash">/</div>
+          <div class="global-20">20</div>
+      </div>
   </div>
-
-  <div id="pictureAndName" class="pictureAndName">
-    <div class="picture" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
-    <div class="name blocks-shadow">
-        <div class="game-name">
-          <h1 class="mb-0">{{ gameSelected?.name }}</h1>
-        </div>
-        <div class="global-game-rate">
-            <div class="global-rate">10</div>
-            <div class="global-slash">/</div>
-            <div class="global-20">20</div>
-        </div>
-    </div>
-  </div>
+</div>
 
 
 <!-- INFORMATIONS  -->
-  <div id="section-info" class="section-info">
-    <div class="information">
-        <h2 class="title">Informations</h2>
+<div id="section-info" class="section-info">
+  <div class="information">
+      <h2 class="title">Informations</h2>
 
 
-        <div class="information-container">
-          <div class="content">
-              <p>Contenu</p>
-              <div class="information-line-container">
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Genre
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          Plate-Forme
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Plate-Forme
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          WII
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Classification
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          +3 ans
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Multijoueurs
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          Oui
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Nombre de joueurs
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          1 à 2
-                        </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="context">
-              <p>Context</p>
-              <div class="information-line-container">
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Développeur
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          Nintendo EAD
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Editeur
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          Nintendo
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Franchises
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          Mario, Super Mario
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Date de sortie FR
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          11 juin 2010
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Date de sortie US
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          23 mai 2010
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Date de sortie JP
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          27 mai 2010
-                        </p>
-                      </div>
-                  </div>
-                  <div class="information-lines">
-                      <div class="field">
-                        <p>
-                          Prix de lancement
-                        </p>
-                      </div>
-                      <div class="data">
-                        <p>
-                          50 €
-                        </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-
-
+      <div class="information-container">
+        <div class="content">
+            <p>Contenu</p>
+            <div class="information-line-container">
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Genre
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        Plate-Forme
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Plate-Forme
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        WII
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Classification
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        +3 ans
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Multijoueurs
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        Oui
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Nombre de joueurs
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        1 à 2
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="context">
+            <p>Context</p>
+            <div class="information-line-container">
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Développeur
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        Nintendo EAD
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Editeur
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        Nintendo
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Franchises
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        Mario, Super Mario
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Date de sortie FR
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        11 juin 2010
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Date de sortie US
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        23 mai 2010
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Date de sortie JP
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        27 mai 2010
+                      </p>
+                    </div>
+                </div>
+                <div class="information-lines">
+                    <div class="field">
+                      <p>
+                        Prix de lancement
+                      </p>
+                    </div>
+                    <div class="data">
+                      <p>
+                        50 €
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
 
-  <div class="container-2">
-    <div class="pictures-separation"></div>
+
   </div>
+</div>
+
+
+<!-- PREMIÉRE SÉPARATION -->
+<div class="container-2">
+  <div class="pictures-separation"></div>
+</div>
+
 
 <!-- SUIVI DES ACTUALITES -->
 <div id="actualities" class="actualities">
@@ -260,10 +262,6 @@
       </div>
   </div>
 </div>
-
-
-
-
 
 
 <!-- SECTION NOTE -->
@@ -403,137 +401,125 @@
 </div>
 
 
-
-
 <!-- SECTION CARROUSEL -->
-  <div class="carroussel-container">
-      <div class="carroussel">
-        <section>
-          <div id="cCarousel">
-            <div class="arrow" id="prev"><i class="ri-arrow-left-s-line"></i></div>
-            <div class="arrow" id="next"><i class="ri-arrow-right-s-line"></i></div>
+<div class="carroussel-container">
+    <div class="carroussel">
+      <section>
+        <div id="cCarousel">
+          <div class="arrow" id="prev"><i class="ri-arrow-left-s-line"></i></div>
+          <div class="arrow" id="next"><i class="ri-arrow-right-s-line"></i></div>
 
-            <div id="carousel-vp">
-              <div id="cCarousel-inner">
+          <div id="carousel-vp">
+            <div id="cCarousel-inner">
 
-                <article class="cCarousel-item">
-                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                  <div class="infos">
-                      <div class="carrousel-sep"></div>
-                    <p>Title 1 / 6</p>
-                  </div>
-                </article>
-
-                <article class="cCarousel-item">
-                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                  <div class="infos">
-                      <div class="carrousel-sep"></div>
-                    <p>Title 2 / 6</p>
-                  </div>
-                </article>
-
-                <article class="cCarousel-item">
-                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                  <div class="infos">
-                      <div class="carrousel-sep"></div>
-                    <p>Title 3 / 6</p>
-                  </div>
-                </article>
-
-                <article class="cCarousel-item">
-                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                  <div class="infos">
-                      <div class="carrousel-sep"></div>
-                    <p>Title 4 / 6</p>
-                  </div>
-                </article>
-
-                <article class="cCarousel-item">
-                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                  <div class="infos">
-                      <div class="carrousel-sep"></div>
-                    <p>Title 5 / 6</p>
-                  </div>
-                </article>
-
-
-
-
-                <article class="cCarousel-item">
-                  <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                  <div class="infos">
-                      <div class="carrousel-sep"></div>
-                    <p>Title 6 / 6</p>
-                  </div>
-                </article>
-
-
-                <article class="cCarousel-item" *ngIf="gameSelected?.image?.icon_url">
-                  <img [src]="gameSelected?.image?.icon_url" alt="icon_url">
-                  <div class="infos">
+              <article class="cCarousel-item">
+                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                <div class="infos">
                     <div class="carrousel-sep"></div>
-                    <p>Title 1 / 8</p>
-                  </div>
-                </article>
-              </div>
+                  <p>Title 1 / 6</p>
+                </div>
+              </article>
+
+              <article class="cCarousel-item">
+                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                <div class="infos">
+                    <div class="carrousel-sep"></div>
+                  <p>Title 2 / 6</p>
+                </div>
+              </article>
+
+              <article class="cCarousel-item">
+                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                <div class="infos">
+                    <div class="carrousel-sep"></div>
+                  <p>Title 3 / 6</p>
+                </div>
+              </article>
+
+              <article class="cCarousel-item">
+                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                <div class="infos">
+                    <div class="carrousel-sep"></div>
+                  <p>Title 4 / 6</p>
+                </div>
+              </article>
+
+              <article class="cCarousel-item">
+                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                <div class="infos">
+                    <div class="carrousel-sep"></div>
+                  <p>Title 5 / 6</p>
+                </div>
+              </article>
+
+
+
+
+              <article class="cCarousel-item">
+                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                <div class="infos">
+                    <div class="carrousel-sep"></div>
+                  <p>Title 6 / 6</p>
+                </div>
+              </article>
+
+
+              <article class="cCarousel-item" *ngIf="gameSelected?.image?.icon_url">
+                <img [src]="gameSelected?.image?.icon_url" alt="icon_url">
+                <div class="infos">
+                  <div class="carrousel-sep"></div>
+                  <p>Title 1 / 8</p>
+                </div>
+              </article>
             </div>
           </div>
-        </section>
-      </div>
-  </div>
-
-  <div class="container-2">
-    <div class="pictures-separation"></div>
-  </div>
+        </div>
+      </section>
+    </div>
+</div>
 
 
-
+<!-- SECONDE SÉPARATION -->
+<div class="container-2">
+  <div class="pictures-separation"></div>
+</div>
 
 
 <!-- SECTION AJOUT COLLECTION -->
-  <div class="add-collection">
+<div class="add-collection">
 
-      <div class="title-add">
-          <h3><span style="color: {{ userColor ? userColor : 'red' }}">{{ capitalizedUserName }}</span>Vous possedez le jeu ? Ajoutez le à votre collection :</h3>
-      </div>
+    <div class="title-add">
+        <h3><span style="color: {{ userColor ? userColor : 'red' }}">{{ capitalizedUserName }}</span>Vous possedez le jeu ? Ajoutez le à votre collection :</h3>
+    </div>
 
-      <div class="card-add-to-collection">
-          <div class="game-picture">
-              <div class="game-cover-center">
-                  <div class="cover" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
-              </div>
-              <div class="background" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }">
-                  <div class="inner-shadow"></div>
-              </div>
+    <div class="card-add-to-collection">
+        <div class="game-picture">
+            <div class="game-cover-center">
+                <div class="cover" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+            </div>
+            <div class="background" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }">
+                <div class="inner-shadow"></div>
+            </div>
 
-          </div>
-          <div class="game-info">
-              <h2 class="info-name">{{gameSelected?.name}}</h2>
-              <p style="color: {{ userColor ? userColor : 'red' }}" class="platform-names">
-                <ng-container *ngFor="let platform of gameSelected?.platforms; let last = last">
-                  {{ platform.name }}<span *ngIf="!last">, </span>
-                </ng-container>
-              </p>
-              <div class="info-release-date">Date de sortie : {{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
-          </div>
-          <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame">
-              <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
-          </button>
-      </div>
+        </div>
+        <div class="game-info">
+            <h2 class="info-name">{{gameSelected?.name}}</h2>
+            <p style="color: {{ userColor ? userColor : 'red' }}" class="platform-names">
+              <ng-container *ngFor="let platform of gameSelected?.platforms; let last = last">
+                {{ platform.name }}<span *ngIf="!last">, </span>
+              </ng-container>
+            </p>
+            <div class="info-release-date">Date de sortie : {{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
+        </div>
+        <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" (click)="setModal()" class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame">
+            <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
+        </button>
+    </div>
 
-      <div class="show-collection">
-        <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" routerLink="/mygame" class="my-collection">Votre collection</button>
-      </div>
-  </div>
-
-
-
-
-
-
-
+    <div class="show-collection">
+      <button [ngStyle]="{ '--userColor': userColor ?? 'red' }" routerLink="/mygame" class="my-collection">Votre collection</button>
+    </div>
+</div>
 
 
 </ng-container>
-
-
