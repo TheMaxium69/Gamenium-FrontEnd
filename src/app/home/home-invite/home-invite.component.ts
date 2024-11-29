@@ -16,7 +16,7 @@ export class HomeInviteComponent implements OnInit {
   searchValue: string = ''
 
   constructor(
-    private app: AppComponent,
+    protected app: AppComponent,
     private postActuService: PostActuService,
     private gameService: GameService
   ) {}

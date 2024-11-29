@@ -58,7 +58,7 @@ export class HomeConnectedComponent implements OnInit {
   userComments:any[]= [];
 
   constructor(private route: ActivatedRoute,
-              private app:AppComponent,
+              protected app:AppComponent,
               private taskService: TaskService,
               private commentService: CommentService,
               private likeService: LikeService,

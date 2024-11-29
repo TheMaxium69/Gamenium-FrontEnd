@@ -158,13 +158,13 @@
                             <img src="{{ game.image.thumb_url }}" alt="...">
                         </ng-container>
                     </div>
-                    <div class="card-hover">
+                    <div class="card-content">
                         <!-- contenue déroulant -->
                         <p>{{ game.name }}<p>
                         <small style="color: {{isColor}}" class="platform-names d-block">
-                            <ng-container *ngFor="let platform of game.platforms; let last = last">
-                                {{ platform.name }} <span *ngIf="!last">, </span>
-                            </ng-container>
+                          <ng-container *ngFor="let platform of game.platforms; let last = last">
+                            {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
+                          </ng-container>
                         </small>
             
                         <small> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</small>

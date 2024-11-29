@@ -106,12 +106,11 @@
                                 <img src="{{ game.image.thumb_url }}" alt="...">
                             </ng-container>
                         </div>
-                        <div class="card-hover">
-                            <!-- contenue déroulant -->
+                        <div class="card-content">
                             <p>{{ game.name }}<p>
                             <small style="color: red" class="platform-names d-block">
                                 <ng-container *ngFor="let platform of game.platforms; let last = last">
-                                    {{ platform.name }} <span *ngIf="!last">, </span>
+                                    {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
                                 </ng-container>
                             </small>
                 

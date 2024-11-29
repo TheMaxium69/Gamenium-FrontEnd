@@ -95,7 +95,7 @@ h2 {
 
 .gamenium-welcome p {
     font-size: 28px;
-    width: 250px;
+    width: 275px;
 }
 
 
@@ -280,7 +280,6 @@ h2 {
   
   .actu-card-end{
     justify-content: space-between;
-    background-color: rgba(33, 37, 41, 0.03);
   }
   .actu-card-end .actu-card-i{
     font-size: 25px;
@@ -313,7 +312,7 @@ h2 {
   border-radius: 15px;
   transition: height 0.2s ease-out;
   width: 320px;
-  height: 180px;
+  height: 280px;
   box-shadow: 1px 2px 11px #a6a6a6;
 
 }
@@ -345,26 +344,15 @@ h2 {
 }
 #content-latest-release .card-thumb img{
   width: 320px;
-  height: 100%;
+  height: 180px;
   border-radius: 15px;
 }
 
-#content-latest-release .card-hover {
+#content-latest-release .card-content {
   padding: 20px 25px;
-  opacity: 0;
-  visibility: hidden; /* Assure que l'élément reste invisible avant l'animation */
-  transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
 }
 
-#content-latest-release .card-game:hover .card-hover {
-  opacity: 1;
-  visibility: visible; /* Montre l'élément après la transition */
-  transition-delay: 0.3s; /* Synchronise avec la durée de l'animation de la hauteur */
-}
 
-#content-latest-release .card-game:hover {
-  height: 280px;
-}
 
 /* Responsive */
 
