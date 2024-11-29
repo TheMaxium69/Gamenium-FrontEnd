@@ -78,6 +78,7 @@ export class NavbarActualityComponent implements OnInit {
     this.followAll.forEach((followOne:FollowInterface) => {
 
       if (followOne?.provider?.id == providerId) {
+        console.log(followOne.provider.id)
         return this.providerSelected.emit(followOne.provider.id)
       }
 

@@ -9,7 +9,8 @@ import {ActivatedRoute} from "@angular/router";
 export class PageActualityComponent implements OnInit{
 
   actualityId: number|any
-  provider: number | undefined
+  providerSelected: number | undefined;
+  lastProviderSelected: number | undefined;
 
   constructor(
     private route: ActivatedRoute) {
@@ -23,8 +24,19 @@ export class PageActualityComponent implements OnInit{
 
   }
 
-  providerSelected(providerId: number) {
-    this.provider = providerId
+  onProviderSelected(providerId: number) {
+    if (this.lastProviderSelected === providerId) {
+      console.log('Same provider clicked, resetting to all');
+      this.providerSelected = undefined;
+      this.lastProviderSelected = undefined;
+
+    } else {
+      console.log('Provider selected:', providerId);
+      this.providerSelected = providerId;
+      this.lastProviderSelected = providerId;
+
+    }
+  
   }
 
 

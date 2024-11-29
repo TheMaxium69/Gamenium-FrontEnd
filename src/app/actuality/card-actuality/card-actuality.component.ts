@@ -22,6 +22,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
   postByProvider: PostActuInterface[] = [];
   LikeAll: LikeInterface[] | undefined;
   providerId: number | undefined;
+  lastProviderSelected: number | undefined
   
   likedStatus: { [key: number]: boolean } = {};
 
@@ -75,17 +76,33 @@ export class CardActualityComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.providerSelected) {
-      console.log(changes)
-      if (changes['providerSelected']) {
-        this.updateActu(changes['providerSelected'].currentValue);
+    if (changes['providerSelected']) {
+      
+      if (changes['providerSelected'].currentValue === undefined) {
+        console.log('Reset detected: fetching all actu');
+        this.getActuAll();
+
+      } else {
+        console.log('Fetching actu for provider:', this.providerSelected);
+        this.filterActuOne();
       }
+      
     }
   }
 
-  updateActu(providerId: number) {
-    this.getPostByProvider(providerId);
+  filterActuOne() {
+    if (this.lastProviderSelected === this.providerSelected) {
+      console.log('Fetching all actu');
+      this.getActuAll();
+      this.lastProviderSelected = undefined;
+      
+    } else {
+      console.log('Updating actu for provider:', this.providerSelected);
+      this.lastProviderSelected = this.providerSelected;
+      this.getPostByProvider(this.providerSelected!);
+    }
   }
+
 
   followActuByUser(id: number) {
     console.log('Fetching followed actualities');
