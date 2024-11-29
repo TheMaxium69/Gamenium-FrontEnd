@@ -102,7 +102,7 @@ export class ProfilePrivateComponent implements OnInit {
   myGameByUser(id_user: number): void {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
-        this.myGameHistoriqueAll = responseMyGame.result;
+        this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
         console.log(this.myGameHistoriqueAll);
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
