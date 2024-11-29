@@ -93,9 +93,6 @@ h2 {
 
 /* profilWrapper*/
 #profilWrapper{
-  box-shadow: 1px 2px 11px #a6a6a6;
-  border-radius: 10px;
-  padding: 40px;
   max-width: 1140px;
 
 }
@@ -505,9 +502,6 @@ h2 {
     width: auto;
   }
 
-  #profilWrapper {
-    box-shadow: unset;
-  }
 
   .gamenium-container-panel {
     width: 70%;
