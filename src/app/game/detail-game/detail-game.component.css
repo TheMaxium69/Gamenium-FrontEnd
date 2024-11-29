@@ -121,7 +121,7 @@
     width:70px;
     height: 70px;
     margin-right: 40px;
-    background-color: red;
+    background-color: var(--userColor);
     border-radius: 50%;
     color: white;
     position: relative;
@@ -200,7 +200,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 15px; 
+    gap: 40px; 
     flex-wrap: wrap; 
   }
   
@@ -247,7 +247,7 @@
   .data p {
     display: flex;
     font-weight: 500;
-    color: #FF0000;
+    color: var(--userColor);
     flex-wrap: wrap;
     text-align: left;
     margin: 0;
@@ -331,7 +331,7 @@
     padding-bottom: 6px;
     margin-left: 8px;
     font-size: 18px;
-}
+  }
 
   .provider_color {
     height: 60px;
@@ -478,16 +478,15 @@
   
   .mp-notes {
     padding-left: 30px;
-    margin: 10px 0px;
+    margin: 20px 0px;
   }
   
   .mp-notes-last {
     padding-left: 30px;
-    margin-top: 10px;
+    margin-top: 20px;
   }
   
   .provider-picture img {
-    border-radius: 50%;
     width: 30px;
     height: 30px;
   }
@@ -550,6 +549,10 @@
   .font-notes span {
     font-size: 30px;
     padding-bottom: 20px;
+  }
+  
+  .color-circle {
+    background-color: var(--userColor);
   }
   
   /* btn note */
@@ -778,10 +781,10 @@
 
 /* //////////////// FIN DE ZONE CARROUSSEL /////////////// */
 
-/* //////////////// DEBUT DE ZONE AJOUT COLLECTION /////////////// */
+/* //////////////// DEBUT DE ZONE SÉPARATION /////////////// */
 
 .pictures-separation{
-  border: solid 1px black;
+  border: solid 1px var(--third-color);
   margin-bottom: 100px;
   width: 100%;
   max-width: 1140px;
@@ -794,6 +797,10 @@
     border: none;
   }
 }
+
+/* //////////////// FIN DE ZONE SÉPARATION /////////////// */
+
+/* //////////////// DEBUT DE ZONE AJOUT COLLECTION /////////////// */
 
 .title-add {
   width: 100%;
@@ -878,6 +885,14 @@
   padding: 15px;
 }
 
+.info-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 10px;
+}
+
 .info-name {
   color: #575757;
   display: -webkit-box;
@@ -925,7 +940,7 @@
 
 @media (max-width: 768px) {
   .card-add-to-collection {
-    width: 90%;
+    width: 300px;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -942,7 +957,7 @@
   }
 
   .game-add-button {
-    width: 50%;
+    width: 70%;
     margin: 0 auto 10px auto;
     justify-content: center;
     text-align: center;
@@ -950,6 +965,12 @@
 
   .title-add {
     text-align: center;
+  }
+}
+
+@media (max-width: 660px) {
+  .card-add-to-collection {
+    width: 300px;
   }
 }
 

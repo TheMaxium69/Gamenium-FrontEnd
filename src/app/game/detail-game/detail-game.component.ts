@@ -109,7 +109,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   }
 
   get capitalizedUserName(): string {
-    if (!this.displayName) return this.userName + ", ";
+    if (!this.displayName) return "";
     return this.displayName.charAt(0).toUpperCase() + this.displayName.slice(1) + ", ";
   }
 
