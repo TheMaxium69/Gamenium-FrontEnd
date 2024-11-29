@@ -1,5 +1,12 @@
 <section id="actu-all" class="d-flex">
+
+  <div *ngIf="postActuFollowOrAll.length == 0">
+    <h3>Ce provider n'a pas encore posté d'actualités.</h3>
+  </div>
+
   <ng-container *ngFor="let actu of postActuFollowOrAll | slice: 0 : numberOfPosts">
+
+
     <div class="card col-4" routerLink="/actuality/{{ actu.id }}">
       <img src="{{ actu.picture.url }}" class="card-img-top" alt="..." />
       <div class="card-body">
