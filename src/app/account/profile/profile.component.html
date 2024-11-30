@@ -4,7 +4,7 @@
 
 <div class="circle">
   <div *ngIf="profilSelected?.picture" class="circle-img" style="background-image: url('{{ profilSelected?.picture }}')"></div>
-  
+
   <div *ngIf="!profilSelected?.picture" class="profilPhoto" style="background-color: white!important">
     <p class="lettrePP" style="color: {{color}}">{{ extractFirstLetter(profilSelected?.displayname) }}</p>
   </div>
@@ -32,7 +32,7 @@
         </div>
       </form>
     </div>
-    
+
 
     <!-- PARAMETRE DU COMPTE -->
     <div class="composant para-container">
@@ -71,7 +71,7 @@
                 <h5>Couleur du Thème</h5>
                 <div class="color-picker">
                   <div class="colorpick">
-                    
+
                     <label  for="themeColor">Choisir la couleur du thème:</label>
                     <input type="color" id="themeColor" value="{{color ?? 'red'}}" [(ngModel)]="color" />
 
@@ -173,7 +173,7 @@
       <h2>Informations</h2>
       <hr>
       <div class="para radius mb-4">
-        <a href="">
+        <a routerLink="/terms">
           <div><i class="ri-information-2-line"></i>Termes et conditions de comptes</div>
           <div><i class="ri-arrow-right-s-line"></i></div>
         </a>
