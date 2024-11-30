@@ -14,7 +14,7 @@ import { PageGameComponent } from './game/page-game/page-game.component';
 import { DetailGameComponent } from './game/detail-game/detail-game.component';
 import { NavbarComponent } from "./-global/navbar/navbar.component";
 import { NavbarActualityComponent } from './actuality/navbar-actuality/navbar-actuality.component';
-import { CardActualityComponent } from "./actuality/card-actuality/card-actuality.component";
+import { ViewActualityComponent } from "./actuality/view-actuality/view-actuality.component";
 import { LoginComponent } from './account/login/login.component';
 import { BadgeInterfaceComponent } from './-components/badge.interface/badge.interface.component';
 import {PostActuInterfaceComponent} from "./-components/post-actu.interface/post-actu.interface.component";
@@ -57,6 +57,7 @@ import { TabMygameComponent } from './mygame/tab-mygame/tab-mygame.component';
 import { TabPublicComponent } from './mygame/tab-public/tab-public.component';
 import { PageThermeComponent } from './-other/page-therme/page-therme.component';
 import { CardGameComponent } from './-global/card-game/card-game.component';
+import { CardActuComponent } from './-global/card-actu/card-actu.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import { CardGameComponent } from './-global/card-game/card-game.component';
     DetailGameComponent,
     NavbarComponent,
     NavbarActualityComponent,
-    CardActualityComponent,
+    ViewActualityComponent,
     LoginComponent,
     BadgeInterfaceComponent,
     PostActuInterfaceComponent,
@@ -111,7 +112,8 @@ import { CardGameComponent } from './-global/card-game/card-game.component';
     TabMygameComponent,
     TabPublicComponent,
     PageThermeComponent,
-    CardGameComponent
+    CardGameComponent,
+    CardActuComponent
 
   ],
   imports: [

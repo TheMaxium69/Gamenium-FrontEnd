@@ -9,12 +9,12 @@ import { LikeInterface } from 'src/app/-interface/like.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-card-actuality',
-  templateUrl: './card-actuality.component.html',
-  styleUrls: ['./card-actuality.component.css']
+  selector: 'app-view-actuality',
+  templateUrl: './view-actuality.component.html',
+  styleUrls: ['./view-actuality.component.css']
 })
-export class CardActualityComponent implements OnInit, OnChanges {
-  
+export class ViewActualityComponent implements OnInit, OnChanges {
+
   isLogIn: boolean | undefined;
   userConnected: UserInterface | undefined;
   userConnectedId: number | undefined;
@@ -23,7 +23,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
   LikeAll: LikeInterface[] | undefined;
   providerId: number | undefined;
   lastProviderSelected: number | undefined
-  
+
   likedStatus: { [key: number]: boolean } = {};
 
   constructor(
@@ -34,7 +34,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-  
+
   @Input() numberOfPosts: number | undefined;
 
   @Input()
@@ -48,7 +48,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
 
     if (this.isLogIn) {
       this.userConnectedId = this.app.userConnected?.id;
-      // console.log('User ID', this.userConnectedId); 
+      // console.log('User ID', this.userConnectedId);
     }
 
     if (this.router.url.includes('provider')) {
@@ -58,7 +58,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
 
       if (typeof this.providerId === 'number') {
         this.getPostByProvider(this.providerId);
-        return; 
+        return;
       }
     }
 
@@ -77,7 +77,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['providerSelected']) {
-      
+
       if (changes['providerSelected'].currentValue === undefined) {
         console.log('Reset detected: fetching all actu');
         this.getActuAll();
@@ -86,7 +86,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
         console.log('Fetching actu for provider:', this.providerSelected);
         this.filterActuOne();
       }
-      
+
     }
   }
 
@@ -95,7 +95,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
       console.log('Fetching all actu');
       this.getActuAll();
       this.lastProviderSelected = undefined;
-      
+
     } else {
       console.log('Updating actu for provider:', this.providerSelected);
       this.lastProviderSelected = this.providerSelected;
@@ -118,7 +118,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
       if (responseActu.message === 'good') {
         this.postActuFollowOrAll = responseActu.result;
 
-        
+
         this.postActuFollowOrAll.forEach((actu: any) => {
           this.getLikeByActu(actu.id);
         });
@@ -133,10 +133,10 @@ export class CardActualityComponent implements OnInit, OnChanges {
         this.postActuFollowOrAll = response.result;
         // envoie le nombre d'actu du provider au commposant provider
         this.nbActuOfProvider.emit(this.postActuFollowOrAll.length);
-        
+
         this.postActuFollowOrAll.forEach((actu: any) => {
           // console.log(this.userConnectedId)
-          if (this.userConnectedId) { 
+          if (this.userConnectedId) {
             this.getLikeByActu(actu.id);
           }
         });
@@ -207,7 +207,7 @@ export class CardActualityComponent implements OnInit, OnChanges {
           .addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken())
           .subscribe(responseAddLikeByPostActu => {
             if (responseAddLikeByPostActu.message === 'good') {
-      
+
             }
           });
       }
