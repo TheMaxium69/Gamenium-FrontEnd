@@ -9,6 +9,8 @@ import { PostActuInterface } from "../../-interface/post-actu.interface";
 import { UserInterface } from 'src/app/-interface/user.interface';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import Swal from "sweetalert2";
+// import "/node_modules/flag-icons/css/flag-icons.min.css";
 registerLocaleData(localeFr, 'fr');
 
 
@@ -24,26 +26,25 @@ export class ProviderComponent implements OnInit{
   providerSelected: ProviderInterface|undefined;
   noneProvider:boolean|undefined = false;
   nonePostActu:boolean|undefined = false;
-  providerNbFollower: number|undefined; 
-  postactuSelected: PostActuInterface|undefined; 
+  postactuSelected: PostActuInterface|undefined;
   actus: any[] = [];
   idUser: number | undefined;
   isProviderFollowedByUser: boolean | undefined;
+
+  /*STAT*/
+  providerNbFollower: number|undefined;
   providerNbActu: number|undefined;
+  providerNbGame: number|undefined;
 
   constructor(
     private route: ActivatedRoute,
     private providerService: ProviderService,
-    private followService: FollowService, 
-    private postactuService: PostActuService, 
+    private followService: FollowService,
+    private postactuService: PostActuService,
     private app: AppComponent
   ) {}
 
 
-  //fake variables
-  providerNbGame: number|undefined=2689;
-  actuTitle: string|undefined='test'
-  //end
 
   ngOnInit(): void {
 
@@ -54,12 +55,12 @@ export class ProviderComponent implements OnInit{
       this.checkIfUserFollowProvider(this.idUser)
       console.log(this.isProviderFollowedByUser)
     }
-  
+
     this.providerId = this.route.snapshot.paramMap.get('id');
     console.log("Provider Id", this.providerId)
 
     this.getProviders(this.providerId);
-    this.getNumberOfFollowers(this.providerId); 
+    this.getNumberOfFollowers(this.providerId);
   }
 
   getProviders(id:number): void {
@@ -68,8 +69,15 @@ export class ProviderComponent implements OnInit{
         this.providerSelected = reponseProviders.result;
       } else {
         this.noneProvider = true;
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Aucun profile trouver',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.app.colorDefault
+        })
       }
-    });
+    }, (error) => this.app.erreurSubcribe());
   }
 
   updateNbProviderActu(nbActu: number) {
@@ -92,7 +100,7 @@ export class ProviderComponent implements OnInit{
     this.followService.getFollowByProvider(providerId, this.app.setURL()).subscribe(
       (response) => {
         if (response.result) {
-          this.providerNbFollower = response.result.length; 
+          this.providerNbFollower = response.result.length;
         } else {
           this.providerNbFollower = 0;
         }

@@ -212,12 +212,17 @@ ul {
 
 .firsttext,
 .secondtext {
-    line-height: 1.5rem;
+    /*line-height: 1.5rem;*/
+    line-height: 2.5rem;
 }
 
 .actu-titre {
     margin-bottom: 30px;
     margin-left: 15px;
+}
+
+span.fi{
+  border-radius: 5px;
 }
 
 @media (max-width: 1060px) {
@@ -281,6 +286,6 @@ ul {
     .firsttext,
     .secondtext {
         line-height: 2.5rem;
-        
+
     }
 }

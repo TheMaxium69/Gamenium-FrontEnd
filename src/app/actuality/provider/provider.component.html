@@ -1,12 +1,12 @@
 <ng-container *ngIf="!noneProvider">
-  
-  <div id="provider" style="background-color: {{ providerSelected?.color }}54"> 
+
+  <div id="provider" style="background-color: {{ providerSelected?.color }}54">
     <div id="providerInfo" >
       <div class="d-flex">
-        
+
         <div class="provider-main">
-          <div class="logoprovider" style="background-image: url('{{ providerSelected?.picture?.url }}');"></div> 
-            
+          <div class="logoprovider" style="background-image: url('{{ providerSelected?.picture?.url }}');"></div>
+
           <div class="wrapper">
             <div id="infos">
                 <div id="displayname">
@@ -18,7 +18,7 @@
                     <h2 style="color: {{ providerSelected?.color }}">{{providerNbFollower}}</h2>
                      <h3> {{providerNbFollower && providerNbFollower >= 2 ? 'Abonnés' : 'Abonné'}} </h3>
                   </div>
-   
+
                  <div id="nb_actus">
                    <h2 style="color: {{ providerSelected?.color }}">{{providerNbActu}}</h2>
                    <h3> {{providerNbActu && providerNbActu >= 2 ? 'Actus' : 'Actu'}} </h3>
@@ -27,7 +27,7 @@
             </div>
 
             <div id="button_follow">
-              <button 
+              <button
                 id="button-follow-text"
                 type="button"
                 style="background-color: {{ providerSelected?.color }}"
@@ -40,34 +40,34 @@
           </div>
         </div>
           <section id="provider_infos"> <!-- Informations Secondaires et détaillées du Provider -->
-            
+
             <div class="info-container">
             <!-- <div id="informations">
-              
+
               <h3 class="mb-4">Informations</h3>
-              
+
             </div> -->
-            
-            <div 
+
+            <div
             [class.mb-4]="providerSelected?.joindeAt"
             id="info-details-container">
                 <div id="infos_details">
                   <h3 class="firsttext">Création</h3>
                   <h3 class="firsttext">Pays</h3>
-                  <h3 class="firsttext">Nombre de jeux</h3>
+                  <h3 class="firsttext" *ngIf="providerNbGame">Nombre de jeux</h3>
                   <h3 class="firsttext">Nombre d'actualités</h3>
                   <h3 class="firsttext">Nombre d'abonnés</h3>
                 </div>
 
                 <div id="infos_details_values">
                   <h2 class="secondtext" style="color: {{ providerSelected?.color }}">1889</h2>
-                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerSelected?.country }}</h2>
-                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbGame && providerNbGame >= 2 ? providerNbGame + ' jeux' : providerNbGame + ' jeu'}}</h2>
-                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbActu && providerNbActu >= 2 ? providerNbActu + ' actualités' : providerNbActu + ' actualité'}}</h2>
-                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbFollower && providerNbFollower >= 2 ? providerNbFollower + ' abonnés' : providerNbFollower + ' abonné'}}</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerSelected?.country }} <span class="fi fi-fr"></span></h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}" *ngIf="providerNbGame">{{providerNbGame && providerNbGame >= 2 ? providerNbGame + ' jeux' : providerNbGame + ' jeu'}}</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbActu && providerNbActu >= 2 ? providerNbActu + ' actualités' : providerNbActu + ' actualité' || "0 actualité"}}</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbFollower && providerNbFollower >= 2 ? providerNbFollower + ' abonnés' : providerNbFollower + ' abonné' || "0 abonné"}}</h2>
                 </div>
             </div>
-        
+
               <div id="joinedAt" *ngIf="providerSelected?.joindeAt">
                 <img src="../../../assets/logo.png" alt="logo_gamenium">
                 <div class="joined-text">
@@ -76,7 +76,7 @@
               </div>
             </div>
           </section>
-          
+
           <section id="last_actus"><!-- Dernières Actualités liées au Provider -->
             <div>
               <div class="actu-titre">
@@ -91,11 +91,11 @@
                </div>
             </div>
           </section>
-          
+
       </div>
     </div>
   </div>
-  
+
 
 <!-- <p>Color : <i style="color: {{ providerSelected?.color }}; font-size: 100px" class="ri-checkbox-blank-fill"></i></p> -->
 
