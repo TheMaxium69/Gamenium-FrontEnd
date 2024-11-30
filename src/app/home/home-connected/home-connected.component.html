@@ -23,12 +23,12 @@
 
       <div class="row">
 
-        <div class="col-md-6 actionPossible">
+        <div class="col-md-6 actionPossible" [ngClass]="{'no-task': progress === 101}">
           <div class="action">
 
             <h3 class="text-center py-4 mb-0">Que Souhaitez-vous faire ?</h3>
 
-            <div class=" ">
+            <div class="cotainerbtn">
 
               <div class="row">
                 <div class="col-lg-6 ">
@@ -62,7 +62,7 @@
           </div>
         </div>
 
-        <div class="col-md-5 offset-md-1 taskPossible">
+        <div class="col-md-5 offset-md-1 taskPossible" *ngIf="progress !== 101">
           <div class="task">
             <h3 class="text-center py-4 mb-0">Vos tâches</h3>
             <p class="">Finaliser vos tâches :</p>

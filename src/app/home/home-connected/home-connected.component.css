@@ -7,6 +7,15 @@
 
 }
 
+.no-task{
+  width: 100%!important;
+}
+
+.cotainerbtn{
+  width: 437px;
+  margin: auto;
+}
+
 h2 {
   color: black;
 }
