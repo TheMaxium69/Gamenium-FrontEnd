@@ -14,6 +14,7 @@ import {ProfilService} from "../../-service/profil.service";
 import {ProfilInterface} from "../../-interface/profil.interface";
 import Swal from "sweetalert2";
 import {ProfilSocialNetworkInterface} from "../../-interface/profil-social-network.interface";
+import {ApicallInterface} from "../../-interface/apicall.interface";
 
 @Component({
   selector: 'app-profile',
@@ -32,7 +33,8 @@ export class ProfileComponent implements OnInit {
   selectedColor: string = '';
   tempColor: string = '';
 
-  color: string | [] = "red";
+  color: string = this.app.colorDefault;
+  oldColor:string = this.app.colorDefault;
 
   selectedFile: File | undefined;
   socialNetworkAll: SocialNetworkInterface[] | undefined;
@@ -115,6 +117,7 @@ export class ProfileComponent implements OnInit {
         if (this.userConnected) {
           this.userConnected.themeColor = themeColor;
           this.color = this.userConnected.themeColor;
+          this.oldColor = this.userConnected.themeColor;
           this.cdRef.detectChanges();
         }
       });
@@ -175,23 +178,38 @@ export class ProfileComponent implements OnInit {
   }
 
   saveColor(): void {
-    if (this.tempColor && this.userConnected) {
-      this.selectedColor = this.tempColor;
-      this.userConnected.themeColor = this.tempColor;
+    if (this.color && this.userConnected) {
+      this.selectedColor = this.color;
+      this.userConnected.themeColor = this.color;
 
-      this.userService.updateThemeColor(this.userConnected.id, this.tempColor, this.app.setURL()).subscribe((response) => {
-        // console.log('Couleur du thème mise à jour avec succès', response);
-        if (this.userConnected){
+      this.userService.updateThemeColor(this.userConnected.id, this.color, this.app.setURL()).subscribe((response:ApicallInterface) => {
+        if (this.userConnected && response.message == "Theme color updated successfully"){
           this.color = this.userConnected.themeColor;
           Swal.fire({
             title: 'Succès!',
             text: 'Votre thème à bien été mise à jour.',
             icon: 'success',
             confirmButtonText: 'Ok',
-            confirmButtonColor: this.userConnected.themeColor
+            confirmButtonColor: this.oldColor
+          })
+        } else {
+          this.selectedColor = this.oldColor;
+          this.color = this.oldColor;
+          Swal.fire({
+            title: 'Échec!',
+            text: 'Échec de la mise à jour du thème',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: this.oldColor
           })
         }
-      });
+      }, (error) => {
+        this.selectedColor = this.oldColor;
+        this.color = this.oldColor;
+        if (this.userConnected) {
+          this.userConnected.themeColor = this.oldColor;
+        }
+        this.app.erreurSubcribe()  });
     }
   }
 

@@ -76,7 +76,8 @@
                     <input type="color" id="themeColor" value="{{color ?? 'red'}}" [(ngModel)]="color" />
 
                   </div>
-                  <button [ngStyle]="{ '--color': color ?? 'red' }" class="btn-save" (click)="saveColor()">Enregistrer la couleur</button>
+<!--                  <button [ngStyle]="{ '&#45;&#45;color': color ?? 'red' }" class="btn-save" (click)="saveColor()">Enregistrer la couleur</button>-->
+                  <button style="background-color: {{ color }}" class="main-gamenium-btn" (click)="saveColor()">Enregistrer la couleur</button>
                 </div>
               </div>
               <!-- Update la photo de profil -->
@@ -88,7 +89,8 @@
                     <label for="profilePictureInput" class="file-label">
                       <i class="ri-upload-cloud-line"></i> Sélectionner une image
                     </label>
-                    <button [ngStyle]="{ '--color': color ?? 'red' }" type="button" id="upload-button" class="btn-upload" (click)="onUpload()">Télécharger</button>
+<!--                    <button [ngStyle]="{ '&#45;&#45;color': color ?? 'red' }" type="button" id="upload-button" class="btn-upload" (click)="onUpload()">Télécharger</button>-->
+                    <button style="background-color: {{ color }}" type="button" id="upload-button" class="main-gamenium-btn" (click)="onUpload()">Télécharger</button>
                   </div>
                 </form>
               </div>
