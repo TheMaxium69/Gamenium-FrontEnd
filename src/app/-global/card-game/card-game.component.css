@@ -1,0 +1,158 @@
+
+.card-game{
+  height: 160px;
+  /*border: 1px solid gray;*/
+  margin: unset!important;
+  padding: unset!important;
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px 0px #a6a6a6;
+
+}
+
+.card-left{
+  width: 326px;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.card-left .image{
+  position: absolute;
+  width: 300px;
+  height: 160px;
+  z-index: 10;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-left .blur{
+  position: absolute;
+  width: 300px;
+  height: 160px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  z-index: 1;
+  background-color: #00000038;
+}
+.card-left img{
+  width: 300px;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.card-right{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.card-right .core-left{
+  max-width: clamp(200px, 50%, 500px);
+  min-width: 280px;
+}
+
+.card-right .core-right{
+  width: 100px;
+}
+
+.card-right .core-right .card-note{
+  background-color: red;
+  text-align: center;
+  color: white;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  margin-top: -3px;
+  margin-left: 5px;
+}
+
+.card-right .core-right .card-note p{
+  margin-bottom: 0px;
+  position: absolute;
+  margin-top: 18px;
+  margin-left: 14px;
+}
+
+.card-right .core-right .card-note p span{
+  font-size: 30px;
+}
+
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-right .core-left h2 {
+  color: #575757;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-spacing: -5px;
+
+}
+
+.platform-names {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* GAME SMALL SCREEN */
+@media (max-width: 770px) {
+  .card-right {
+    overflow: visible;
+  }
+
+  .card-right .core-left h5 {
+    font-size: clamp(16px, 4vw, 20px);
+  }
+
+  .card-right .core-right {
+    width: 0;
+    display: flex;
+    justify-content: end;
+    margin-left: -10px;
+  }
+
+  .card-right .core-right .card-note {
+    margin-left: 0;
+    position: absolute;
+    z-index: 999;
+    margin-top: -170px;
+    width: 47px;
+    height: 47px;
+  }
+
+  .card-right .core-right .card-note p {
+    margin-bottom: 0px;
+    position: absolute;
+    margin-top: 13px;
+    margin-left: 5px;
+  }
+
+
+  .card-right .core-right .card-note p span {
+    font-size: 14px;
+  }
+
+  .card-game {
+    max-width: 300px;
+    flex-direction: column;
+  }
+
+  .card-wrapper {
+    height: 300px;
+    box-shadow: 1px 2px 11px #a6a6a6;
+    width: fit-content;
+    border-radius: 15px;
+  }
+
+}

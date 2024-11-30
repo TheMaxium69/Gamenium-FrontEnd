@@ -56,6 +56,7 @@ import { PlateformViewComponent } from './mygame/plateform-view/plateform-view.c
 import { TabMygameComponent } from './mygame/tab-mygame/tab-mygame.component';
 import { TabPublicComponent } from './mygame/tab-public/tab-public.component';
 import { PageThermeComponent } from './-other/page-therme/page-therme.component';
+import { CardGameComponent } from './-global/card-game/card-game.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { PageThermeComponent } from './-other/page-therme/page-therme.component'
     PlateformViewComponent,
     TabMygameComponent,
     TabPublicComponent,
-    PageThermeComponent
+    PageThermeComponent,
+    CardGameComponent
 
   ],
   imports: [
