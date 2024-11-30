@@ -358,34 +358,6 @@ export class EditedMygameComponent implements OnInit {
   }
 
 
-  /*
-   *
-   * DELETE MY GAME
-   *
-   * */
-  deleteMyGame() {
-    if (this.idOneMyGame) {
-      this.historyMyGameService.deleteMyGame(this.idOneMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseApi => {
-        if (reponseApi.message == 'delete success') {
-          console.log('jeu retiré de votre collection')
-
-          Swal.fire({
-            title: 'Succès!',
-            text: 'Le jeu a été retiré de votre collection.',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-            confirmButtonColor: this.app.userConnected?.themeColor
-          })
-          
-          this.router.navigateByUrl('/mygame')
-        }
-      }) 
-
-    }
-  }
-
-
-
 
 
 

@@ -6,7 +6,7 @@ import {PlateformInterface} from "./plateform.interface";
 
 export interface MyGameInterface {
 
-  id:string,
+  id:number,
   is_pinned:boolean,
   added_at:Date,
   user:UserInterface,

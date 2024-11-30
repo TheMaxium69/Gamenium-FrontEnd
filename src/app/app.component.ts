@@ -596,6 +596,34 @@ export class AppComponent {
     console.log(this.gameSelected);
   }
 
+  deleteMyGame(idOneMyGame:number) {
+    if (idOneMyGame) {
+      this.histoireMyGameService.deleteMyGame(idOneMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseApi => {
+        if (reponseApi.message == 'delete success') {
+
+          Swal.fire({
+            title: 'Succès!',
+            text: 'Le jeu a été retiré de votre collection.',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+
+          this.router.navigateByUrl('/mygame')
+        } else {
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Une erreur s\'est produite lors de la suppression du jeu.',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        }
+      }, (error) => this.erreurSubcribe())
+
+    }
+  }
+
 
   /*
   *

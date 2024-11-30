@@ -16,7 +16,4 @@ export class ViewMygameComponent {
   isColor: string = this.app.colorDefault;
   profilSelected: ProfilInterface | undefined;
 
-  deleteGame(gameId: string | undefined) {
-    console.log('delete game: ' + gameId)
-  }
 }

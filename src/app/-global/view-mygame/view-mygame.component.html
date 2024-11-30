@@ -21,9 +21,13 @@
             <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" routerLink="edit/{{ this.app.viewMyGame?.myGame?.id }}">
               <i class="ri-pencil-line btn-action"></i>
             </button>
-            <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" (click)="deleteGame(this.app.viewMyGame?.myGame?.id)">
-              <i class="ri-delete-bin-line btn-action"></i>
-            </button>
+            <ng-container *ngIf="this.app.viewMyGame">
+            <ng-container *ngIf="this.app.viewMyGame.myGame">
+              <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" (click)="this.app.deleteMyGame(this.app.viewMyGame.myGame.id)">
+                <i class="ri-delete-bin-line btn-action"></i>
+              </button>
+            </ng-container>
+            </ng-container>
           </ng-container>
           <ng-container *ngIf="this.app.viewMyGame?.myGame?.user?.id !== this.app.userConnected?.id">
             <ng-container *ngIf="this.app.viewMyGame?.myGame?.is_pinned">
