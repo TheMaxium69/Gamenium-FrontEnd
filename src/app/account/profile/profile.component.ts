@@ -116,12 +116,21 @@ export class ProfileComponent implements OnInit {
       this.userService.getThemeColor(userId, this.app.setURL()).subscribe((themeColor) => {
         if (this.userConnected) {
           this.userConnected.themeColor = themeColor;
-          this.color = this.userConnected.themeColor;
-          this.oldColor = this.userConnected.themeColor;
+          if (this.userConnected.themeColor !== null && this.userConnected.themeColor[0] !== null){
+            this.color = this.userConnected.themeColor;
+            this.oldColor = this.userConnected.themeColor;
+          } else {
+            this.color = this.app.colorDefault;
+            this.oldColor = this.app.colorDefault;
+          }
           this.cdRef.detectChanges();
         }
       });
     }
+  }
+
+  debug(){
+    console.log(this.color)
   }
 
   getInfoProfile(id:number){

@@ -41,7 +41,10 @@ export class TabMygameComponent implements OnInit, OnChanges {
     this.userConnected = this.app.userConnected;
 
     if (this.userConnected) {
-      this.isColor = this.userConnected.themeColor;
+      if (this.userConnected.themeColor !== null) {
+        this.isColor = this.userConnected.themeColor;
+      }
+
       this.myPlateforme(this.userConnected.id);
     }
   }
