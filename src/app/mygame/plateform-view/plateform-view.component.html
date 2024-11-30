@@ -80,12 +80,12 @@
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   </ng-container>
 </div>
-    
+
 <!--  GAME PINED -->
 <div id="show-game" class="d-flex container pinned" *ngIf="!isFilterApplied() && !searchQuery.trim() && getPinnedGames().length > 0">
   <ng-container *ngFor="let myGameHistorique of getPinnedGames()">
@@ -148,6 +148,7 @@
 <!-- UNPINNED GAME -->
 <div id="show-game" class="d-flex container" *ngIf="!isFilterApplied() && !searchQuery.trim()">
   <ng-container *ngFor="let myGameHistorique of getUnpinnedGames()">
+    <app-card-game [Hmg]="myGameHistorique" style="width: 100%"></app-card-game>
     <div class="card-wrapper">
       <div class="card-game container d-flex">
 

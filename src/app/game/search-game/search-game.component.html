@@ -20,7 +20,7 @@
 
   <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>
 
-  <button id="moreGameBTN" class="btn btn-primary" (click)="moreGame()" style="display: none">Voir plus</button>
+  <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>
 
 </div>
 

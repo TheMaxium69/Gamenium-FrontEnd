@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GameInterface} from "../../-interface/game.interface";
 import {AppComponent} from "../../app.component";
+import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
 
 @Component({
   selector: 'app-card-game',
@@ -13,7 +14,7 @@ export class CardGameComponent implements OnInit {
   public game: GameInterface|null = null;
 
   @Input()
-  public userColor: string|null = null;
+  public Hmg: HistoryMyGameInterface|null = null;
 
   constructor(protected app:AppComponent) { }
 

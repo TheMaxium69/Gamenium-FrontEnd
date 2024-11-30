@@ -58,6 +58,10 @@
   cursor: pointer;
 }
 
+.main-gamenium-btn{
+  width: 100%;
+}
+
 
 /* GAME */
 #show-game{
