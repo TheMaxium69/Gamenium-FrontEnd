@@ -5,7 +5,7 @@
         <div class="modal-header-start">
           <ng-container *ngIf="this.app.viewMyGame?.myGame?.user?.id == this.app.userConnected?.id">
             <ng-container *ngIf="this.app.viewMyGame?.myGame?.is_pinned">
-              <button type="button" class="no-btn pinnedBtn yourPinned">
+              <button type="button" class="no-btn pinnedBtn yourPinned" style="background-color: {{ isColor }}">
                 <i class="ri-pushpin-fill btn-action icon-default"></i>
                 <i class="ri-unpin-fill btn-action icon-hovered"></i>
               </button>
@@ -31,7 +31,7 @@
           </ng-container>
           <ng-container *ngIf="this.app.viewMyGame?.myGame?.user?.id !== this.app.userConnected?.id">
             <ng-container *ngIf="this.app.viewMyGame?.myGame?.is_pinned">
-              <button type="button" class="no-btn pinnedBtn">
+              <button type="button" class="no-btn pinnedBtn" style="background-color: {{ isColor }}">
                 <i class="ri-pushpin-fill btn-action"></i>
               </button>
             </ng-container>
@@ -71,7 +71,7 @@
           </div>
 
 
-          <button class="main-gamenium-btn" routerLink="/game/{{ this.app.viewMyGame.myGame.game.id }}" data-bs-dismiss="modal">Voir le jeux</button>
+          <button class="main-gamenium-btn" routerLink="/game/{{ this.app.viewMyGame.myGame.game.id }}" data-bs-dismiss="modal" style="background-color: {{ isColor }}">Voir le jeux</button>
 
         </div>
 

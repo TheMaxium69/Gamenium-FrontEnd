@@ -9,10 +9,6 @@
   text-align: start;
 }
 
-.main-gamenium-btn{
-  background-color: var(--color-variable)!important;
-}
-
 /************
 *
 * GESTION MODAL
@@ -32,7 +28,6 @@
 }
 
 .pinnedBtn{
-  background: var(--color-variable)!important;
   border-radius: 100%;
   margin-right: 6px;
   width: 35px;
