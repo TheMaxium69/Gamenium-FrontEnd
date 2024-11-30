@@ -26,7 +26,7 @@ export class HeadProfileComponent implements OnInit{
   // isPp:string|undefined;
 
   constructor(private route: ActivatedRoute,
-              private app:AppComponent,
+              protected app:AppComponent,
               private profileService:ProfilService,
               private badgeService: BadgeService) { }
 

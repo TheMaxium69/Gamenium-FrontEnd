@@ -3,11 +3,7 @@
 
 
 <div class="circle">
-  <div *ngIf="profilSelected?.picture" class="circle-img" style="background-image: url('{{ profilSelected?.picture }}')"></div>
-
-  <div *ngIf="!profilSelected?.picture" class="profilPhoto" style="background-color: white!important">
-    <p class="lettrePP" style="color: {{color}}">{{ extractFirstLetter(profilSelected?.displayname) }}</p>
-  </div>
+  <div class="circle-img" style="{{ this.app.generatePPUseritium(this.userConnected?.pp?.url, this.userConnected?.displayname || this.userConnected?.username, color) }}"></div>
 </div>
 
 <div class="container-fluid first-div" style="margin-bottom: 120px;">
@@ -54,17 +50,15 @@
             <div class="profile-card">
               <div>
                 <div class="profile-header" [ngStyle]="{ 'background-color': color }"></div>
-                  <div class="profile-avatar" [style.backgroundImage]="'url(' + (profilSelected?.picture || 'https://tyrolium.fr/generate-pp/?l=' + extractFirstLetter(userConnected?.displayname)) + ')'">
+                  <div class="profile-avatar" style="{{ this.app.generatePPUseritium(this.userConnected?.pp?.url, this.userConnected?.displayname || this.userConnected?.username, color) }}">
                     <i *ngIf="profilSelected?.picture" id="delete-picture" class="ri-delete-bin-line delete-picture-icon" (click)="deletePicture()"></i>
                   </div>
                   <h3>{{ userConnected?.displayname || userConnected?.username }}</h3>
-                  <!-- <p> {{ userConnected?.username }} </p> -->
-                  <p> {{ userConnected?.email }} </p>
-
-                  <ng-container *ngIf="userConnected?.displaynameUseritium">
+                  <ng-container *ngIf="userConnected?.displayname && userConnected?.username !== userConnected?.displayname">
                     <p><img width="20px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{
-                      userConnected?.displaynameUseritium }}</p>
+                      userConnected?.username }}</p>
                   </ng-container>
+                  <p> {{ userConnected?.email }} </p>
               </div>
               <!-- Color Picker -->
               <div class="settings-section">

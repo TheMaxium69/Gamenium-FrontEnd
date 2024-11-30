@@ -41,7 +41,7 @@ export class CommentActualityComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private postActu: PostActuService,
-    private app: AppComponent,
+    protected app: AppComponent,
     private commentService:CommentService,
     private badgeService:BadgeService,
     private renderer: Renderer2,

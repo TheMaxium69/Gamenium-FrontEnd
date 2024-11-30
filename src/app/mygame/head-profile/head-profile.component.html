@@ -10,25 +10,21 @@
     <div class="container">
       <div id="profilInfo" >
         <div class="d-flex container">
-          <div *ngIf="profilSelected?.picture" class="profilPhoto" style="background-image: url('{{ profilSelected?.picture }}')"></div>
-
-          <div *ngIf="!profilSelected?.picture" class="profilPhoto" style="background-color: white">
-            <p class="lettrePP" style="color: {{isColor}}">{{ extractFirstLetter(profilSelected?.displayname) }}</p>
-          </div>
+          <div class="profilPhoto" style="{{ this.app.generatePPUseritium(this.profilSelected?.picture, this.profilSelected?.displayname || this.profilSelected?.username, this.profilSelected?.themeColor) }}"></div>
 
           <div class="wrapper">
             <div id="inWrapper">
               <div id="profilInfoLeft">
                 <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length > 0">
                   <div class="articleInfoLeft">
-                    <h1>{{ profilSelected?.displayname }}
+                    <h1>{{ profilSelected?.displayname || profilSelected.username }}
                       <ng-container *ngIf="badgeUserConnected">
                         <ng-container *ngFor="let badge of badgeUserConnected">
                           <img class="badgeIMG" src="{{ badge.picture?.url }}">
                         </ng-container>
                       </ng-container>
                     </h1>
-                    <small><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
+                    <small *ngIf="profilSelected?.displayname !== profilSelected?.username"><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
 
                     <div class="articleReseau">
                       <ng-container *ngFor="let reseauOne of profilSelected?.reseau">
@@ -47,7 +43,7 @@
                         </ng-container>
                       </ng-container>
                     </h1>
-                    <small><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
+                    <small *ngIf="profilSelected?.displayname !== profilSelected?.username"><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
                   </div>
                 </ng-container>
               </div>

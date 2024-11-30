@@ -17,19 +17,19 @@
     <article class="articleTuto">
       <div class="row ">
         <div class="col-md-12 py-4 hello">
-          <h2 class="text-center">Bonjour, <span class="pseudo" style="color: {{ isColor }};">{{ userConnected?.username }}</span></h2>
+          <h2 class="text-center">Bonjour, <span class="pseudo" style="color: {{ isColor }};">{{ userConnected?.displayname || userConnected?.username }}</span></h2>
         </div>
       </div>
-  
+
       <div class="row">
-  
+
         <div class="col-md-6 actionPossible">
           <div class="action">
-  
+
             <h3 class="text-center py-4 mb-0">Que Souhaitez-vous faire ?</h3>
-  
+
             <div class=" ">
-  
+
               <div class="row">
                 <div class="col-lg-6 ">
                   <article (click)="unsetModal()" class="card py-4 mb-3 mx-auto" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
@@ -61,17 +61,17 @@
             </div>
           </div>
         </div>
-  
+
         <div class="col-md-5 offset-md-1 taskPossible">
           <div class="task">
             <h3 class="text-center py-4 mb-0">Vos tâches</h3>
             <p class="">Finaliser vos tâches :</p>
-  
+
             <div class="progress-bar-container">
               <div class="progress-bar" style="background-color: {{ isColor }}" [style.width.%]="progress"></div>
             </div>
-  
-  
+
+
             <h3>Pour finaliser votre compte :</h3>
             <br>
             <ng-container *ngFor="let task of tasks">
@@ -84,7 +84,7 @@
               </h6>
             </ng-container>
           </div>
-  
+
         </div>
       </div>
     </article>
@@ -141,7 +141,7 @@
             <h2>Les dernières sorties</h2>
             <!-- <a href="" class="view-more-btn">Voir plus <i class="ri-arrow-right-circle-line"></i></a> -->
         </div>
-        
+
             <!-- Boucle avec les cards jeux (en afficher 4)-->
         <div id="content-latest-release" class="d-flex">
             <ng-container *ngFor="let game of games | slice: games.length - 3 : games.length">
@@ -166,7 +166,7 @@
                             {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
                           </ng-container>
                         </small>
-            
+
                         <small> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</small>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
 
         <div class="rowamoi justify-content-end">
           <a [ngStyle]="{ '--isColor': isColor}" class="view-more-btn"  href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
-      </div>  
+      </div>
     </div>
   </section>
 
@@ -217,7 +217,7 @@
         </div>
       </div>
       <div class="right-sug-panel"> <!-- PANNEAU 2 -->
-        
+
       </div>
     </div>
   </section>

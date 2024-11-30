@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
   socialNetworkAll: SocialNetworkInterface[] | undefined;
 
   constructor(
-    private app: AppComponent,
+    protected app: AppComponent,
     private badgeService: BadgeService,
     private userService: UserService,
     private cdRef: ChangeDetectorRef,
@@ -270,7 +270,7 @@ export class ProfileComponent implements OnInit {
         })
       }
 
-    });
+    }, (error) => this.app.erreurSubcribe());
   }
 
   // onFileChanged(event: any) {
@@ -350,9 +350,23 @@ export class ProfileComponent implements OnInit {
   deletePicture() {
     this.userService.deleleProfilPicture(this.app.setURL(), this.app.createCorsToken()).subscribe(ReponseApi => {
       if (ReponseApi.message == 'photo supprimée') {
-        console.log('photo supprimée')
+        Swal.fire({
+          title: 'Succès!',
+          text: 'Votre photo de profil à bien été supprimé.',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.userConnected?.themeColor
+        })
+      } else {
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Échec de la mise à jour de la photo de profil',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.colorDefault
+        })
       }
-    })
+    }, (error) => this.app.erreurSubcribe())
   }
 
 

@@ -103,13 +103,9 @@
 
       <div routerLink="/profil/{{ user.id }}">
         <div id="card-user" style="background: linear-gradient(180deg, {{user.color ?? 'red'}} 35%, white 35%)">
-          <div *ngIf="user?.pp" class="circleImage" style="background-image: url('{{ user.pp?.url }}')">
-          </div>
-
-          <div *ngIf="!user?.pp" class="circleImage" style="background-color: white!important">
-            <p class="lettrePP" style="color: {{user.color ?? 'red'}}">{{ extractFirstLetter(user.displayname) }}</p>
-          </div>
-          <h2 class="card-title mt-4">{{ user.username }}</h2><br>
+          <div class="circleImage" style="{{ this.app.generatePPUseritium(this.user?.pp?.url, this.user?.displayname || this.user.username, this.user?.color ) }}"></div>
+          <h2 class="card-title mt-4">{{ user.displayname || user.username }}</h2>
+          <small *ngIf="user.displayname !== user.username"><img width="20px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{ user.username }}</small><br>
         </div>
 
       </div>

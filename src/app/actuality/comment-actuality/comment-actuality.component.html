@@ -46,14 +46,10 @@
   <ng-container *ngFor="let comment of commentByActu">
     <div class="card mb-2">
       <div class="comment-user">
-        <!-- <div class="img"
-        style="background-image: url({{ comment?.user?.pp?.url }})"></div> -->
-        <div *ngIf="comment?.user?.pp?.url" class="img" style="background-image: url('{{ comment?.user?.pp?.url }}'); border-color: {{comment.user.color}};"></div>
 
-        <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
-          <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
-        </div>
-        <h4 class="comment-user-name"><span style="color: {{ providerColor }}">{{ comment.user.displayname }}</span>
+        <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname || comment.user.username, comment.user.color) }}"></div>
+
+        <h4 class="comment-user-name"><span style="color: {{ providerColor }}">{{ comment.user.displayname || comment.user.username }}</span>
           <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
             <img class="badgeIMG" src="{{ badge.picture?.url }}">
           </ng-container>
@@ -92,15 +88,9 @@
         <div id="c{{comment.id}}" class="card mb-2">
           <div class="comment-user ">
 
-            <!-- <div class="img"
-             style="background-image: url({{ comment?.user?.pp?.url }})"></div> -->
-             <div *ngIf="comment?.user?.pp?.url" class="img" style="background-image: url('{{ comment?.user?.pp?.url }}')"></div>
+            <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname || comment.user.username, comment.user.color) }}"></div>
 
-             <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
-               <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
-             </div>
-
-              <h4 class="comment-user-name"><span>{{ comment.user.displayname }}</span>
+              <h4 class="comment-user-name"><span>{{ comment.user.displayname || comment.user.username }}</span>
               <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
@@ -141,14 +131,10 @@
     <ng-container *ngIf="comment.user.id != userConnectedId">
       <div class="card mb-2">
         <div class="comment-user">
-          <!-- <div class="img"
-          style="background-image: url({{ comment?.user?.pp?.url }})"></div> -->
-          <div *ngIf="comment?.user?.pp?.url" class="img" style="background-image: url('{{ comment?.user?.pp?.url }}'); border-color: {{comment.user.color}};"></div>
 
-          <div class="align-content-center lettrePP-border" *ngIf="!comment?.user?.pp?.url" style="background-color: white!important; border-color: {{comment.user.color}};">
-            <p class="lettrePP" style="color: {{comment.user.color}}">{{ extractFirstLetter(comment.user.displayname) }}</p>
-          </div>
-          <h4 class="comment-user-name"><span>{{ comment.user.displayname }}</span>
+          <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname || comment.user.username, comment.user.color) }}"></div>
+
+          <h4 class="comment-user-name"><span>{{ comment.user.displayname || comment.user.username }}</span>
             <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
               <img class="badgeIMG" src="{{ badge.picture?.url }}">
             </ng-container>

@@ -57,6 +57,7 @@ export class AppComponent {
   urlApiProd: string = "http://vps216.tyrolium.fr:8000";
   urlApiProdMax: string = "http://home.vps216.tyrolium.fr:8000";
   urlIp:string = "https://tyrolium.fr/Contenu/Php/ip.php?api=json"
+  urlGeneratePP:string = "https://tyrolium.fr/generate-pp/"
   Debug:Boolean = true; // Active la view Serv and Local
   isLoggedIn: boolean = false;
   token: string|any;
@@ -309,6 +310,29 @@ export class AppComponent {
       return reponseTyroIp.ip;
 
     });
+
+  }
+
+  generatePPUseritium(pp:string|undefined|null, username:string|undefined, colorSelected:string|undefined):string {
+
+    let result:string = this.urlGeneratePP;
+
+    let color = this.colorDefault
+    if (colorSelected){
+      if (Array.isArray(colorSelected)) {
+        color = colorSelected[0];
+      } else {
+        color = colorSelected;
+      }
+    }
+
+    if (pp){
+      result = pp
+    } else if (username) {
+      result = this.urlGeneratePP + '?l=' + username[0] + '&c='+ color.substring(1);
+    }
+
+    return 'background-image: url(' + result + ')';
 
   }
 
