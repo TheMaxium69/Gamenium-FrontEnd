@@ -3,7 +3,7 @@
 
 
 <div class="circle">
-  <div class="circle-img" style="{{ this.app.generatePPUseritium(this.userConnected?.pp?.url, this.userConnected?.displayname || this.userConnected?.username, color) }}"></div>
+  <div class="circle-img" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displayname || this.userConnected?.username, color) }}"></div>
 </div>
 
 <div class="container-fluid first-div" style="margin-bottom: 120px;">
@@ -50,7 +50,7 @@
             <div class="profile-card">
               <div>
                 <div class="profile-header" [ngStyle]="{ 'background-color': color }"></div>
-                  <div class="profile-avatar" style="{{ this.app.generatePPUseritium(this.userConnected?.pp?.url, this.userConnected?.displayname || this.userConnected?.username, color) }}">
+                  <div class="profile-avatar" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displayname || this.userConnected?.username, color) }}">
                     <i *ngIf="profilSelected?.picture" id="delete-picture" class="ri-delete-bin-line delete-picture-icon" (click)="deletePicture()"></i>
                   </div>
                   <h3>{{ userConnected?.displayname || userConnected?.username }}</h3>
