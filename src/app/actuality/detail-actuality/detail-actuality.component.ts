@@ -12,6 +12,7 @@ import {BadgeInterface} from "../../-interface/badge.interface";
 import {IpService} from "../../-service/ip.service";
 import {LikeService} from "../../-service/like.service";
 import {LikeInterface} from "../../-interface/like.interface";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-detail-actuality',
@@ -173,7 +174,13 @@ export class DetailActualityComponent implements OnInit{
   addLikeByActu(){
 
     if (!this.isLoggedIn) {
-      return console.log('Vous devez etre connecté pour liker')
+      Swal.fire({
+        title: 'Attention!',
+        text: 'Vous devez être connectez pour liké',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+        confirmButtonColor: this.app.colorDefault
+      })
     }
 
     const btnActuLike = document.getElementById("actulike");
@@ -265,7 +272,7 @@ export class DetailActualityComponent implements OnInit{
         this.followAll = reponseFollowByProvider.result;
         this.followAll.forEach((followOne:FollowInterface)=>{
           if (followOne.user.id == this.userConnectedId){
-            
+
             btnFollowProvider = document.getElementById("followBtn"+Provider.id)
             if (btnFollowProvider){
               btnFollowProvider.innerText = 'Suivie';
@@ -278,9 +285,9 @@ export class DetailActualityComponent implements OnInit{
             }
 
           }
-          
+
         });
-        
+
       }
       console.table(this.followAll)
 
@@ -298,26 +305,26 @@ export class DetailActualityComponent implements OnInit{
         this.followAllParent = reponseFollowByProvider.result;
         this.followAllParent.forEach((followOne:FollowInterface)=>{
           if (followOne.user.id == this.userConnectedId){
-            
+
             btnFollowProvider = document.getElementById("followBtn"+Provider.id)
             if (btnFollowProvider){
-              
+
               btnFollowProvider.innerText = 'Suivie';
-              
+
             }
-            
+
           } else {
 
             btnFollowProvider = document.getElementById("followBtn"+Provider.id)
             if (btnFollowProvider){
-              
+
               btnFollowProvider.innerText = 'Suivre';
-              
+
             }
           }
-          
+
         });
-        
+
       }
       console.table(this.followAll)
 
@@ -347,7 +354,7 @@ export class DetailActualityComponent implements OnInit{
     if (providerId) {
       const btn = document.querySelector('#followBtn' + providerId) as HTMLElement
       const provider = this.followAllParent.find((follow: FollowInterface) => follow.provider?.id === providerId && follow.user.id === this.userConnectedId )
-      
+
       if (provider) {
         this.deleteFollow(providerId)
         btn.textContent = 'Suivre'
@@ -363,7 +370,7 @@ export class DetailActualityComponent implements OnInit{
     if (providerId) {
       const btn = document.querySelector('#followBtn' + providerId) as HTMLElement
       const provider = this.followAll.find((follow: FollowInterface) => follow.provider?.id === providerId && follow.user.id === this.userConnectedId )
-      
+
       if (provider) {
         this.deleteFollow(providerId)
         btn.textContent = 'Suivre'
@@ -372,7 +379,7 @@ export class DetailActualityComponent implements OnInit{
         btn.textContent = 'Suivie'
       }
     }
-    
+
   }
 
   followProviderUs(id: number|undefined) {
@@ -391,7 +398,7 @@ export class DetailActualityComponent implements OnInit{
         const bodyAddFollow = JSON.stringify(bodyNoJsonAddFollow);
 
         this.followService.postFollowProvider(bodyAddFollow, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddFollow => {
-          
+
           if (reponseAddFollow.message === "good") {
             const addedFollow: FollowInterface = reponseAddFollow.result;
             console.log(addedFollow)
@@ -414,13 +421,13 @@ export class DetailActualityComponent implements OnInit{
         const bodyAddFollow = JSON.stringify(bodyNoJsonAddFollow);
 
         this.followService.postFollowProvider(bodyAddFollow, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddFollow => {
-          
+
           if (reponseAddFollow.message == "good"){
             btnFollowProvider = document.getElementById("button-follow-text"+id)
             if (btnFollowProvider){
 
               btnFollowProvider.innerText = 'Suivie';
-              
+
             }
           }
         });
@@ -434,19 +441,19 @@ export class DetailActualityComponent implements OnInit{
 
       if (reponseApi.message === "follow deleted successfully") {
 
-        this.followAll = this.followAll.filter((follow) => 
+        this.followAll = this.followAll.filter((follow) =>
           follow.provider?.id !== providerId &&
           follow.user.id === this.userConnectedId
         );
 
-        this.followAllParent = this.followAllParent.filter((follow) => 
+        this.followAllParent = this.followAllParent.filter((follow) =>
           follow.provider?.id !== providerId &&
           follow.user.id === this.userConnectedId
         );
 
-       
 
-        // this.followAllParent = this.followAllParent.filter((follow) => 
+
+        // this.followAllParent = this.followAllParent.filter((follow) =>
         //   follow.provider?.parentCompany.id !== providerId &&
         //   follow.user.id === this.userConnectedId
         // );

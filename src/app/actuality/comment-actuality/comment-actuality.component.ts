@@ -15,6 +15,7 @@ import localeFr from '@angular/common/locales/fr';
 import { LikeService } from 'src/app/-service/like.service';
 import { IpService } from 'src/app/-service/ip.service';
 import { LikeInterface } from 'src/app/-interface/like.interface';
+import Swal from "sweetalert2";
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -481,11 +482,25 @@ export class CommentActualityComponent implements OnInit{
               element.innerHTML = this.nbLikeByComment[commentId].toString()
             }
 
+          } else if (reponseApi.message == "token is failed") {
+            Swal.fire({
+              title: 'Attention!',
+              text: 'Vous devez être connectez pour liké',
+              icon: 'warning',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.app.colorDefault
+            })
           } else {
-            console.log('erreur dans le like du commentaire ' + commentId)
+            Swal.fire({
+              title: 'Echec!',
+              text: 'Echec du j\'aime sur le commentaire',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.app.colorDefault
+            })
           }
         })
-    })
+    }, (error) => this.app.erreurSubcribe())
 
   }
 

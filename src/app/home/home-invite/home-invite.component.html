@@ -89,7 +89,7 @@
                 <h2>Les dernières sorties</h2>
                 <!-- <a href="" class="view-more-btn">Voir plus <i class="ri-arrow-right-circle-line"></i></a> -->
             </div>
-            
+
                 <!-- Boucle avec les cards jeux (en afficher 4)-->
             <div id="content-latest-release" class="d-flex">
                 <ng-container *ngFor="let game of games | slice: games.length - 3 : games.length">
@@ -113,7 +113,7 @@
                                     {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
                                 </ng-container>
                             </small>
-                
+
                             <small> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</small>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
             <div class="rowamoi justify-content-end">
                 <a class="view-more-btn" href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
-            
+
         </div>
 
     </div>
@@ -173,5 +173,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>
