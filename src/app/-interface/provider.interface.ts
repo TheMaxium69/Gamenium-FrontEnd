@@ -1,17 +1,19 @@
 import {PictureInterface} from "./picture.interface";
+import {CountryInterface} from "./country.interface";
 
 export interface ProviderInterface {
 
   id:number,
   tagName:string,
   displayName:string,
-  country:number,
+  country:CountryInterface|undefined,
   joindeAt: string|undefined,
   parentCompany:ProviderInterface,
   content: string,
   banner:number,
   picture: PictureInterface|undefined,
   color:string,
+  founded_at:string|undefined,
 
 }
 

@@ -1,6 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+/* import */
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* VARIABLE */
 :root{
 
   --main-police: "Poppins";
@@ -9,15 +10,18 @@
   --first-color: back;
   --second-color: #FF0000;
   --third-color: #575757;
+  --sponsor-color: #FFC120;
 
   --bs-modal-width: 750px;
 
 }
 
+/* FOR MODAL */
 .modal{
   --bs-modal-width: 800px!important;
 }
 
+/* FOR SCROLLBAR*/
 .scrollbar::-webkit-scrollbar {
   height: 5px;
   border-radius: 10px!important;
@@ -39,6 +43,14 @@
   /*border-bottom: 3px solid transparent;*/
 }
 
+/*******************
+*
+* GLOBAL DISGN
+*
+*******************/
+
+/* TYPO */
+
 h1{
   font-family: var(--main-police), sans-serif;
   font-size: 30px;
@@ -53,6 +65,10 @@ h2{
   font-weight: 600;
   color: var(--second-color);
   margin: unset;
+}
+
+h2.no-color{
+  color: var(--first-color);
 }
 
 h3{
@@ -97,3 +113,55 @@ small {
 .blocks-shadow{
   box-shadow: 1px 2px 10px #a6a6a6;
 }
+
+.btn-shadow{
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+}
+
+.searchbar-shadow{
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.flag-shadow{
+  box-shadow: 0px 0px 3px #a6a6a6;
+}
+
+/* BUTTOM */
+
+.main-gamenium-btn{
+  border-radius: 10px;
+  color: white;
+  font-size: 17px;
+  font-family: var(--main-police), sans-serif;
+  font-weight: 400;
+  background-color: var(--second-color);
+  border: unset;
+  outline: none;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  padding: 10px 30px;
+}
+
+.main-gamenium-btn:hover{
+  opacity: .58;
+}
+
+.sub-gamenium-btn{
+  border-radius: 10px;
+  color: var(--second-color);
+  font-size: 17px;
+  font-family: var(--main-police), sans-serif;
+  font-weight: 500;
+  background-color: white;
+  border: 1px solid var(--second-color);
+  outline: none;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  padding: 9px 30px;
+}
+
+.sub-gamenium-btn:hover{
+  opacity: .48;
+}
+
+
+
+

@@ -41,7 +41,7 @@ export class ProviderComponent implements OnInit{
     private providerService: ProviderService,
     private followService: FollowService,
     private postactuService: PostActuService,
-    private app: AppComponent
+    protected app: AppComponent
   ) {}
 
 
@@ -138,10 +138,6 @@ export class ProviderComponent implements OnInit{
     const btnTxt = document.querySelector('#button-follow-text') as HTMLElement
     if (btnTxt && this.isProviderFollowedByUser) {
       btnTxt.textContent = 'Ne plus suivre'
-      btnTxt.style.backgroundColor = 'white'
-      btnTxt.style.color = this.providerSelected?.color ?? 'red'
-      btnTxt.style.border = '2px solid'
-      btnTxt.style.borderColor = this.providerSelected?.color ?? 'red'
       btnTxt.style.transition = 'all 0.2s ease';
     }
   }
@@ -151,9 +147,6 @@ export class ProviderComponent implements OnInit{
     const btnTxt = document.querySelector('#button-follow-text') as HTMLElement
     if (btnTxt) {
       btnTxt.textContent = this.isProviderFollowedByUser ? 'Suivie' : 'Suivre'
-      btnTxt.style.backgroundColor = this.providerSelected?.color ?? 'red'
-      btnTxt.style.color = 'white'
-      btnTxt.style.border = 'none'
       btnTxt.style.transition = 'all 0.2s ease';
     }
   }

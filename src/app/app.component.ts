@@ -16,6 +16,7 @@ import {ProfilePrivateComponent} from "./mygame/profile-private/profile-private.
 import {GameService} from "./-service/game.service";
 import Swal from "sweetalert2";
 import {PlateformInterface} from "./-interface/plateform.interface";
+import {CountryInterface} from "./-interface/country.interface";
 
 @Component({
   selector: 'app-root',
@@ -596,6 +597,26 @@ export class AppComponent {
   }
 
 
+  /*
+  *
+  * SYSTEME LANG
+  *
+  * */
+
+  lang:string = "fr";
+
+  getVariableCountryLang(country:CountryInterface|undefined):string {
+
+    if (!country) {
+      return "";
+    }
+    if (this.lang == "fr"){
+      return country.name_fr;
+    } else {
+      return country.name_en;
+    }
+
+  }
 
 
 }
