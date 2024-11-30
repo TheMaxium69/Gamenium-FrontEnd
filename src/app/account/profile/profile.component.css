@@ -115,7 +115,7 @@ hr {
 .searchbar {
   width: 100%;
   padding: 15px;
-  padding-right: 60px; 
+  padding-right: 60px;
   height: 60px;
   font-size: 24px;
   border: none;
@@ -166,6 +166,10 @@ hr {
 .unlog {
   background-color: #ffafaf !important;
   cursor: pointer;
+}
+
+.urluserSocialNetwork{
+  text-align: end;
 }
 
 
@@ -408,6 +412,13 @@ a > div {
   float: inline-end;
 }
 
+.main-gamenium-btn {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  float: inline-end;
+}
+
 
 .btn-save:hover,
 .btn-submit:hover {
@@ -419,8 +430,8 @@ a > div {
 
 .delete-picture-icon {
   font-size: 18px;
-  color: white; 
-  background-color: red; 
+  color: white;
+  background-color: red;
   border-radius: 50%;
   padding: 5px;
   position: relative;
@@ -515,7 +526,7 @@ a > div {
 
   .color-picker {
     display: block;
-  
+
   }
 
   .btn-save,

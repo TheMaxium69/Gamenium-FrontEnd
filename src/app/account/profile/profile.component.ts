@@ -13,6 +13,7 @@ import { NgForm } from '@angular/forms';
 import {ProfilService} from "../../-service/profil.service";
 import {ProfilInterface} from "../../-interface/profil.interface";
 import Swal from "sweetalert2";
+import {ProfilSocialNetworkInterface} from "../../-interface/profil-social-network.interface";
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   allBadges: BadgeInterface[] | undefined;
   profileImage: String|undefined;
   profilSelected: ProfilInterface | undefined;
+  reseauSelected: ProfilSocialNetworkInterface[] | undefined;
 
   selectedColor: string = '';
   tempColor: string = '';
@@ -128,6 +130,11 @@ export class ProfileComponent implements OnInit {
         this.profilSelected = responseProfil.result;
         console.log(this.profilSelected)
 
+        this.profilSelected?.reseau.forEach(reseau => {
+          this.reseauSelected = this.reseauSelected || [];
+          this.reseauSelected[reseau.socialnetwork.id] = reseau;
+        });
+
       } else {
 
         console.log("err user not existing");
@@ -192,17 +199,17 @@ export class ProfileComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       this.selectedFile = input.files[0]
-      
+
       // crée une preview de limage quand avant de l'upload
       const previewImage = URL.createObjectURL(this.selectedFile)
-  
+
       const preview = document.querySelector('.profile-avatar') as HTMLElement
       if (preview) {
         preview.style.backgroundImage = `url(${previewImage})`
         preview.style.backgroundSize = 'cover'
         preview.style.backgroundPosition = 'center'
       }
-  
+
       console.log(this.selectedFile);
       console.log(previewImage)
     }
@@ -297,11 +304,28 @@ export class ProfileComponent implements OnInit {
 
     let bodyJson = JSON.stringify(bodyNoJson);
 
-    console.log(bodyJson);
+    // console.log(bodyJson);
 
       this.socialnetworkService.postSocialNetworkByUser(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(response => {
-        console.log(response);
-      });
+        if (response.message == "succefuly updated"){
+          Swal.fire({
+            title: 'Succès!',
+            text: 'Vos réseaux on bien été mise à jour',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.app.userConnected.themeColor
+          })
+        } else {
+          Swal.fire({
+            title: 'Echec!',
+            text: 'Echec de la mise à jour des réseaux',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.app.userConnected.themeColor
+          })
+        }
+
+      }, (error) => { this.app.erreurSubcribe() });
 
   }
 

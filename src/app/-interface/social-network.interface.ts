@@ -4,6 +4,7 @@ export interface SocialNetworkInterface {
     name:string,
     icon_class:string,
     urlApi:string|undefined,
+    url_user:string,
 
 }
 

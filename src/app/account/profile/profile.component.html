@@ -128,11 +128,17 @@
                 <ng-container *ngFor="let socialNetworkOne of socialNetworkAll">
                   <div class="social-item">
                     <i class="{{ socialNetworkOne.icon_class }}"></i>
-                    <label for="{{ socialNetworkOne.name }}">Votre lien {{ socialNetworkOne.name }} :</label>
-                    <input  [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" ngModel>
+                    <label for="{{ socialNetworkOne.name }}">{{ socialNetworkOne.name }} :</label>
+                    <input [value]="socialNetworkOne.url_user" type="text" class="social-input urluserSocialNetwork" disabled>
+                    <ng-container *ngIf="reseauSelected">
+                      <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" [(ngModel)]="reseauSelected[socialNetworkOne.id].url">
+                    </ng-container>
+                    <ng-container *ngIf="!reseauSelected">
+                      <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" ngModel>
+                    </ng-container>
                   </div>
                 </ng-container>
-                <input [ngStyle]="{ '--color': color ?? 'red' }" type="submit" class="btn-submit" value="Valider">
+                <input style="background-color: {{ color }}" type="submit" class="main-gamenium-btn" value="Valider">
               </form>
             </div>
           </div>
