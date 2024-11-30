@@ -87,7 +87,29 @@
               </li>
               <li>
                 <p>Date de sortie : </p>
-                <h3>{{ this.app.viewMyGame.myGame.game.originalReleaseDate | date: 'd MMMM y': undefined : 'fr' }}</h3>
+                <ng-container *ngIf="this.app.viewMyGame.myGame.game.originalReleaseDate">
+                  <h3>{{ this.app.viewMyGame.myGame.game.originalReleaseDate | date: 'd MMMM y': undefined : 'fr' }}</h3>
+                </ng-container>
+                <ng-container *ngIf="!this.app.viewMyGame.myGame.game.originalReleaseDate">
+                  <h3>
+                    <ng-container *ngIf="this.app.viewMyGame.myGame.game?.expectedReleaseYear">
+                      <ng-container *ngIf="this.app.viewMyGame.myGame.game?.expectedReleaseMonth">
+                        <ng-container *ngIf="this.app.viewMyGame.myGame.game?.expectedReleaseDay">
+                          {{ this.app.viewMyGame.myGame.game?.expectedReleaseDay }}
+                          /
+                        </ng-container>
+                        <ng-container *ngIf="this.app.viewMyGame.myGame.game.expectedReleaseMonth < 10">
+                          0{{ this.app.viewMyGame.myGame.game?.expectedReleaseMonth }}
+                        </ng-container>
+                        <ng-container *ngIf="this.app.viewMyGame.myGame.game.expectedReleaseMonth >= 10">
+                          {{ this.app.viewMyGame.myGame.game?.expectedReleaseMonth }}
+                        </ng-container>
+                        /
+                      </ng-container>
+                      {{ this.app.viewMyGame.myGame.game?.expectedReleaseYear }}
+                    </ng-container>
+                  </h3>
+                </ng-container>
               </li>
               </ng-container>
 

@@ -37,7 +37,7 @@
       <div class="content">
         <p>Contenu</p>
         <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="information-line-container">
-          <div class="information-lines">
+          <div class="information-lines" *ngIf="0 !== 0">
             <div class="field">
               <p>
                 Genre
@@ -45,7 +45,7 @@
             </div>
             <div class="data">
               <p>
-                Plate-Forme
+                Genre Exemple
               </p>
             </div>
           </div>
@@ -55,13 +55,24 @@
                 Plate-Forme
               </p>
             </div>
-            <div class="data">
-              <p>
-                WII
-              </p>
+            <div class="data" *ngIf="gameSelected?.platforms">
+              <ng-container *ngFor="let platform of gameSelected?.platforms; let last = last">
+                <ng-container *ngIf="gameSelected">
+                <ng-container *ngIf="gameSelected.platforms">
+                  <p>
+                    <span *ngIf="gameSelected.platforms.length > 1">-</span> {{ this.app.plateformeNameFormatage(platform.name) }}
+                  </p>
+                </ng-container>
+                </ng-container>
+              </ng-container>
+            </div>
+            <div class="data" *ngIf="!gameSelected?.platforms">
+                <p>
+                  {{ this.app.plateformeNameFormatage(this.app.noPlateform.name) }}
+                </p>
             </div>
           </div>
-          <div class="information-lines">
+          <div class="information-lines" *ngIf="gameSelected?.originalGameRating">
             <div class="field">
               <p>
                 Classification
@@ -69,11 +80,13 @@
             </div>
             <div class="data">
               <p>
-                +3 ans
+                <ng-container *ngFor="let orignalGameRatingOne of gameSelected?.originalGameRating; let last = last">
+                  {{ orignalGameRatingOne.name }}<br><!--<span *ngIf="!last">, </span>-->
+                </ng-container>
               </p>
             </div>
           </div>
-          <div class="information-lines">
+          <div class="information-lines" *ngIf="0 !== 0">
             <div class="field">
               <p>
                 Multijoueurs
@@ -85,7 +98,7 @@
               </p>
             </div>
           </div>
-          <div class="information-lines">
+          <div class="information-lines" *ngIf="0 !== 0">
             <div class="field">
               <p>
                 Nombre de joueurs
@@ -110,11 +123,11 @@
             </div>
             <div class="data">
               <p>
-                Nintendo EAD
+                Exemple
               </p>
             </div>
           </div>
-          <div class="information-lines">
+          <div class="information-lines" >
             <div class="field">
               <p>
                 Editeur
@@ -122,11 +135,11 @@
             </div>
             <div class="data">
               <p>
-                Nintendo
+                Exemple
               </p>
             </div>
           </div>
-          <div class="information-lines">
+          <div class="information-lines" *ngIf="0 !== 0">
             <div class="field">
               <p>
                 Franchises
@@ -134,11 +147,11 @@
             </div>
             <div class="data">
               <p>
-                Mario, Super Mario
+                Exemple
               </p>
             </div>
           </div>
-          <div class="information-lines">
+          <div class="information-lines" *ngIf="0 !== 0">
             <div class="field">
               <p>
                 Date de sortie FR
@@ -146,11 +159,11 @@
             </div>
             <div class="data">
               <p>
-                11 juin 2010
+                01 janvier 1970
               </p>
             </div>
           </div>
-          <div class="information-lines">
+          <div class="information-lines" *ngIf="0 !== 0">
             <div class="field">
               <p>
                 Date de sortie US
@@ -158,11 +171,11 @@
             </div>
             <div class="data">
               <p>
-                23 mai 2010
+                01 janvier 1970
               </p>
             </div>
           </div>
-          <div class="information-lines">
+          <div class="information-lines" *ngIf="0 !== 0">
             <div class="field">
               <p>
                 Date de sortie JP
@@ -170,11 +183,47 @@
             </div>
             <div class="data">
               <p>
-                27 mai 2010
+                01 janvier 1970
               </p>
             </div>
           </div>
           <div class="information-lines">
+            <div class="field">
+              <p>
+                Date de sortie
+              </p>
+            </div>
+            <div class="data">
+              <ng-container *ngIf="gameSelected?.originalReleaseDate">
+                <p>
+                  {{ gameSelected?.originalReleaseDate | date:'dd / MM / yyyy' }}
+                </p>
+              </ng-container>
+              <ng-container *ngIf="gameSelected">
+              <ng-container *ngIf="!gameSelected?.originalReleaseDate">
+                <p>
+                  <ng-container *ngIf="gameSelected?.expectedReleaseYear">
+                    <ng-container *ngIf="gameSelected?.expectedReleaseMonth">
+                      <ng-container *ngIf="gameSelected?.expectedReleaseDay">
+                        {{ gameSelected?.expectedReleaseDay }}
+                        /
+                      </ng-container>
+                      <ng-container *ngIf="gameSelected.expectedReleaseMonth < 10">
+                        0{{ gameSelected?.expectedReleaseMonth }}
+                      </ng-container>
+                      <ng-container *ngIf="gameSelected.expectedReleaseMonth >= 10">
+                        {{ gameSelected?.expectedReleaseMonth }}
+                      </ng-container>
+                      /
+                    </ng-container>
+                    {{ gameSelected?.expectedReleaseYear }}
+                  </ng-container>
+                </p>
+              </ng-container>
+              </ng-container>
+            </div>
+          </div>
+          <div class="information-lines" *ngIf="0 !== 0">
             <div class="field">
               <p>
                 Prix de lancement
@@ -208,7 +257,7 @@
           <div class="provider_profile pp-shadow"  [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
           <div>
               <p class="name">{{gameSelected?.name}}</p>
-          </div>            
+          </div>
           <small class="follow-btn shadow-btn">Suivre</small>
       </div>
   </div>
@@ -228,7 +277,7 @@
               <div class="provider_profile pp-shadow" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
               <div>
                   <p class="name">{{gameSelected?.name}}</p>
-              </div>            
+              </div>
               <small class="follow-btn shadow-btn">Suivre</small>
           </div>
           <div class="provider_card blocks-shadow">
@@ -236,7 +285,7 @@
               <div class="provider_profile pp-shadow" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
               <div>
                   <p class="name">{{gameSelected?.name}}</p>
-              </div>            
+              </div>
               <small class="follow-btn shadow-btn">Suivre</small>
           </div>
           <div class="provider_card blocks-shadow">
@@ -244,7 +293,7 @@
               <div class="provider_profile pp-shadow" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
               <div>
                   <p class="name">{{gameSelected?.name}}</p>
-              </div>            
+              </div>
               <small class="follow-btn shadow-btn">Suivre</small>
           </div>
           <div class="provider_card blocks-shadow">
@@ -252,7 +301,7 @@
               <div class="provider_profile pp-shadow" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
               <div>
                   <p class="name">{{gameSelected?.name}}</p>
-              </div>            
+              </div>
               <small class="follow-btn shadow-btn">Suivre</small>
           </div>
       </div>
@@ -267,7 +316,7 @@
       <!-- les notes de la Presse -->
       <div class="row mb-40">
         <!-- notes -->
-        <div class="w-sections-notes"> 
+        <div class="w-sections-notes">
             <p class="title-notes-margin third-color">Notes de la presse:</p>
 
             <div class="one-rating mp-notes">
@@ -347,7 +396,7 @@
       <!-- les notes des Joueurs -->
       <div class="row mb-40">
         <!-- notes -->
-        <div class="w-sections-notes">                 
+        <div class="w-sections-notes">
             <p class="title-notes-margin third-color">Notes des joueurs:</p>
 
             <div class="one-rating mp-notes">

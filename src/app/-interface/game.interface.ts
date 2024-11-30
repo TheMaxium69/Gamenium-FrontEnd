@@ -15,17 +15,17 @@ export interface GameInterface {
   description: string,
   nbEdit:number,
   expectedReleaseDay:number,
-  expectedReleaseMonth:string,
+  expectedReleaseMonth:number,
   expectedReleaseYear:number,
-  originalReleaseDate:string,
+  originalReleaseDate:string|null,
   image:GameImageInterface,
   imageTags:JSON,
   numberOfUserReviews:number,
-  originalGameRating: string,
+  originalGameRating: any[],
   platforms:PlatformsInterface[],
   siteDetailUrl: string,
   searchValue?: string;
-  
+
 
 }
 

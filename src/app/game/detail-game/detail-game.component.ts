@@ -13,7 +13,7 @@ import { HistoryMyGameInterface } from 'src/app/-interface/history-my-game.inter
   styleUrls: ['./detail-game.component.css']
 })
 export class DetailGameComponent implements OnInit, AfterViewInit{
-  
+
   myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
   hasGameInCollection : boolean = false;
 
@@ -35,7 +35,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
-    private app: AppComponent,
+    protected app: AppComponent,
     private histoireMyGameService: HistoryMyGameService
   ) {
   }
