@@ -146,8 +146,8 @@
               <!-- Tache -->
               <h6 class="py-2">
                 <!-- Cercle remplis ou vide selon si completé -->
-                <i *ngIf="task.completed" class="ri-checkbox-blank-fill" style="color: {{ isColor }}"></i>
-                <i *ngIf="!task.completed" class="ri-checkbox-blank-line" style="color: {{ isColor }}"></i>
+                <i *ngIf="task.completed" class="ri-checkbox-circle-fill" style="color: {{ isColor }}"></i>
+                <i *ngIf="!task.completed" class="ri-checkbox-blank-circle-line" style="color: {{ isColor }}"></i>
                 {{ task.name }}
               </h6>
             </ng-container>
