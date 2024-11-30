@@ -10,21 +10,21 @@
     <div class="container">
       <div id="profilInfo" >
         <div class="d-flex container">
-          <div class="profilPhoto" style="{{ this.app.generatePPUseritium(this.profilSelected?.picture, this.profilSelected?.displayname || this.profilSelected?.username, this.profilSelected?.themeColor) }}"></div>
+          <div class="profilPhoto" style="{{ this.app.generatePPUseritium(this.profilSelected?.picture, this.profilSelected?.displaynameUseritium || this.profilSelected?.username, this.profilSelected?.themeColor) }}"></div>
 
           <div class="wrapper">
             <div id="inWrapper">
               <div id="profilInfoLeft">
                 <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length > 0">
                   <div class="articleInfoLeft">
-                    <h1>{{ profilSelected?.displayname || profilSelected.username }}
+                    <h1>{{ profilSelected?.displaynameUseritium || profilSelected?.username }}
                       <ng-container *ngIf="badgeUserConnected">
                         <ng-container *ngFor="let badge of badgeUserConnected">
                           <img class="badgeIMG" src="{{ badge.picture?.url }}">
                         </ng-container>
                       </ng-container>
                     </h1>
-                    <small *ngIf="profilSelected?.displayname !== profilSelected?.username"><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
+                    <small *ngIf="profilSelected?.displaynameUseritium !== profilSelected?.username"><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
 
                     <div class="articleReseau">
                       <ng-container *ngFor="let reseauOne of profilSelected?.reseau">
@@ -36,14 +36,14 @@
 
                 <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length == 0">
                   <div class="articleInfoLeft">
-                    <h1>{{ profilSelected?.displayname }}
+                    <h1>{{ profilSelected?.displaynameUseritium || profilSelected.username }}
                       <ng-container *ngIf="badgeUserConnected">
                         <ng-container *ngFor="let badge of badgeUserConnected">
                           <img class="badgeIMG" src="{{ badge.picture?.url }}">
                         </ng-container>
                       </ng-container>
                     </h1>
-                    <small *ngIf="profilSelected?.displayname !== profilSelected?.username"><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
+                    <small *ngIf="profilSelected?.displaynameUseritium && profilSelected?.displaynameUseritium !== profilSelected?.username"><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
                   </div>
                 </ng-container>
               </div>

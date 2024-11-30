@@ -6,6 +6,7 @@ export interface UserInterface {
   email:string,
   displayname:string,
   displaynameUseritium:string,
+  displayname_useritium:string|undefined,
   joinAt:Date,
   userRole:string[]
   pp: PictureInterface|undefined,

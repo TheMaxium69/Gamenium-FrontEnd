@@ -1,9 +1,9 @@
-<div class="top" style="background-color: {{ color }}!important;"></div>
+<div class="top" style="background-color: {{ color || this.app.colorDefault }}!important;"></div>
 
 
 
 <div class="circle">
-  <div class="circle-img" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displayname || this.userConnected?.username, color) }}"></div>
+  <div class="circle-img" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displaynameUseritium || this.userConnected?.username, color) }}"></div>
 </div>
 
 <div class="container-fluid first-div" style="margin-bottom: 120px;">
@@ -11,7 +11,7 @@
     <!-- Zone de recherche -->
     <div class="composant search-form-container">
       <h2>Bonjour
-        <span class="name" style="color: {{ color }}!important">{{ userConnected?.username }}</span>
+        <span class="name" style="color: {{ color }}!important">{{ userConnected?.displaynameUseritium || userConnected?.username }}</span>
         <ng-container *ngIf="badgeUserConnected">
           <ng-container *ngFor="let badge of badgeUserConnected">
             <img style="margin-left: 6px" width="30px" src="{{ badge.picture?.url }}">
@@ -50,11 +50,11 @@
             <div class="profile-card">
               <div>
                 <div class="profile-header" [ngStyle]="{ 'background-color': color }"></div>
-                  <div class="profile-avatar" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displayname || this.userConnected?.username, color) }}">
+                  <div class="profile-avatar" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displaynameUseritium || this.userConnected?.username, color) }}">
                     <i *ngIf="profilSelected?.picture" id="delete-picture" class="ri-delete-bin-line delete-picture-icon" (click)="deletePicture()"></i>
                   </div>
-                  <h3>{{ userConnected?.displayname || userConnected?.username }}</h3>
-                  <ng-container *ngIf="userConnected?.displayname && userConnected?.username !== userConnected?.displayname">
+                  <h3>{{ userConnected?.displaynameUseritium || userConnected?.username }}</h3>
+                  <ng-container *ngIf="userConnected?.displaynameUseritium && userConnected?.username !== userConnected?.displaynameUseritium">
                     <p><img width="20px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{
                       userConnected?.username }}</p>
                   </ng-container>

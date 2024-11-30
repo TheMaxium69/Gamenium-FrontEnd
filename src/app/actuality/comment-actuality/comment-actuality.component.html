@@ -47,9 +47,9 @@
     <div class="card mb-2">
       <div class="comment-user">
 
-        <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname || comment.user.username, comment.user.color) }}"></div>
+        <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color) }}"></div>
 
-        <h4 class="comment-user-name"><span style="color: {{ providerColor }}">{{ comment.user.displayname || comment.user.username }}</span>
+        <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
           <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
             <img class="badgeIMG" src="{{ badge.picture?.url }}">
           </ng-container>
@@ -88,9 +88,9 @@
         <div id="c{{comment.id}}" class="card mb-2">
           <div class="comment-user ">
 
-            <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname || comment.user.username, comment.user.color) }}"></div>
+            <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color) }}"></div>
 
-              <h4 class="comment-user-name"><span>{{ comment.user.displayname || comment.user.username }}</span>
+              <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
               <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
@@ -132,9 +132,9 @@
       <div class="card mb-2">
         <div class="comment-user">
 
-          <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname || comment.user.username, comment.user.color) }}"></div>
+          <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color) }}"></div>
 
-          <h4 class="comment-user-name"><span>{{ comment.user.displayname || comment.user.username }}</span>
+          <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
             <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
               <img class="badgeIMG" src="{{ badge.picture?.url }}">
             </ng-container>
