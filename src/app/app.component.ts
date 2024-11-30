@@ -412,6 +412,46 @@ export class AppComponent {
   }
 
   /*
+  * CARD GAME
+  * */
+  togglePin(myGameHistorique: HistoryMyGameInterface) {
+
+    myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
+
+    const body = JSON.stringify({
+      id_game: myGameHistorique.myGame.game.id,
+      is_pinned: myGameHistorique.myGame.is_pinned,
+    });
+
+    this.histoireMyGameService.updatePinMyGame(body, this.setURL(), this.createCorsToken())
+      .subscribe(response => {
+        if (response.message === 'game is pinned') {
+          console.log('Statut épinglé mis à jour dans la base de données');
+          Swal.fire({
+            title: 'Succès!',
+            text: this.gameSelected?.name + ' a bien été épinglé',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        } else {
+          myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
+          Swal.fire({
+            title: 'Echec!',
+            text: this.gameSelected?.name + ' n\'a pas pu être épinglé',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+        }
+      }, error => {
+        myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
+        this.erreurSubcribe()
+      });
+  }
+
+
+  /*
   *
   * FOR MODAL
   *

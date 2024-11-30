@@ -1,4 +1,43 @@
 
+/* GAME */
+
+#show-game.pinned{
+  margin-bottom: 35px;
+}
+
+#show-game{
+  justify-content: center;
+  gap: 35px;
+  flex-wrap: wrap;
+
+  max-width: 1287px;
+}
+
+
+.isPinned{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  z-index: 800;
+  border-radius: 100%;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+.isPinned p{
+  text-align: center;
+  margin: 1px;
+  margin-left: 2px;
+  color:white;
+  font-size: 18px;
+}
+
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
 .card-game{
   height: 160px;
   /*border: 1px solid gray;*/
@@ -53,6 +92,27 @@
   min-width: 280px;
 }
 
+.card-right .core-left h2 {
+  color: #575757;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-spacing: -5px;
+
+}
+
+.platform-names {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
 .card-right .core-right{
   width: 100px;
 }
@@ -79,34 +139,80 @@
   font-size: 30px;
 }
 
-.card-wrapper {
+.card-action{
   display: flex;
-  justify-content: center;
-  width: 100%;
+  margin-top: 22px;
+  text-align: end;
+  font-size: 26px;
 }
 
-.card-right .core-left h2 {
-  color: #575757;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+.card-action i:hover {
+  cursor: pointer;
+  font-size: 32px;
+  animation: jiggle 0.5s forwards;
+  transition: 0.3s;
+
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+#delete-comment-icon {
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 5%;
+  font-size: 28px;
+  display: none;
+}
+
+.card-right:hover #delete-comment-icon {
+  display: block;
+}
+
+.progress-bar-container {
+  max-width: 410px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  word-spacing: -5px;
-
+  margin-bottom: 16px;
 }
 
-.platform-names {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.progress-bar {
+  height: 10px;
+  transition: width 0.3s ease;
 }
 
+@media (max-width: 900px) {
+  #profilWrapper {
+    position: relative;
+    top: 280px;
+  }
+
+  #profilWrapper .articleTuto .inUserTuto .d-flex{
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  #profilWrapper .articleTuto .inUserTuto .d-flex .card{
+    width: 65%;
+  }
+
+  #profilWrapper .articleTuto .inUserTuto .d-flex h6{
+    word-wrap: normal;
+    justify-content: space-between;
+  }
+}
 
 /* GAME SMALL SCREEN */
 @media (max-width: 770px) {
+  #show-game {
+    width: 400px;
+
+  }
+
   .card-right {
     overflow: visible;
   }
@@ -119,7 +225,6 @@
     width: 0;
     display: flex;
     justify-content: end;
-    margin-left: -10px;
   }
 
   .card-right .core-right .card-note {
@@ -155,4 +260,36 @@
     border-radius: 15px;
   }
 
+  .card-action {
+    align-items: flex-end;
+  }
+
 }
+
+@keyframes jiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 768px) {
+
+  #profilWrapper .articleTuto .actionPossible {
+    margin-bottom: 20px;
+  }
+
+
+}
+

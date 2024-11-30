@@ -1,5 +1,7 @@
 <div class="card-wrapper" *ngIf="game !== null">
   <div class="card-game container d-flex" routerLink="/game/{{ game.id }}">
+
+    <!-- PICTURE -->
     <div class="card-left">
       <ng-container *ngIf="game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
         <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
@@ -12,7 +14,11 @@
         <img src="{{ game.image.thumb_url }}" alt="...">
       </ng-container>
     </div>
+
+    <!-- INFO -->
     <div class="card-right d-flex">
+
+      <!-- TEXT -->
       <div class="core-left">
         <h2>{{ game.name }}</h2>
         <p style="color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" class="platform-names">
@@ -23,19 +29,30 @@
 
         <p> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</p>
       </div>
+
+      <!-- ACTION/NOTE -->
       <div class="core-right">
         <div class="card-note" style="background-color: {{this.app.userConnected.themeColor || this.app.colorDefault}};">
            <p><span>10</span>/20</p>
 <!--          <p><span>{{rateAverage(fakeRates)}}</span>/20</p>-->
         </div>
       </div>
+
     </div>
+
   </div>
 </div>
 
 <div class="card-wrapper" *ngIf="Hmg !== null">
-  <div class="card-game container d-flex" routerLink="/game/{{ Hmg.myGame.game.id }}">
-    <div class="card-left">
+  <div class="card-game container d-flex">
+
+    <!-- PINNED -->
+    <div class="isPinned" style="background-color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" *ngIf="Hmg.myGame.is_pinned">
+      <p><i class="ri-pushpin-fill"></i></p>
+    </div>
+
+    <!-- PICTURE -->
+    <div class="card-left" (click)="selectViewMyGame(Hmg); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
       <ng-container *ngIf="Hmg.myGame.game.image.icon_url == 'https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg'">
         <div class="image" style="background-image: url('https://tyrolium.fr/Contenu/Image/Soon.png')"></div>
         <div class="blur"></div>
@@ -47,23 +64,57 @@
         <img src="{{ Hmg.myGame.game.image.thumb_url }}" alt="...">
       </ng-container>
     </div>
+
+    <!-- INFO -->
     <div class="card-right d-flex">
-      <div class="core-left">
+
+      <!-- TEXT -->
+      <div class="core-left" (click)="selectViewMyGame(Hmg); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">
+        <!-- NAME-->
         <h2>{{ Hmg.myGame.game.name }}</h2>
+
+        <!-- PLATEFORME -->
         <p style="color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" class="platform-names">
-          <ng-container *ngFor="let platform of Hmg.myGame.game.platforms; let last = last">
-            {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
-          </ng-container>
+          {{ this.app.plateformeNameFormatage(Hmg.myGame.plateform.name) }}
         </p>
 
-        <p> Date de sortie : {{ Hmg.myGame.game.expectedReleaseDay + Hmg.myGame.game.expectedReleaseMonth + Hmg.myGame.game.expectedReleaseYear }}</p>
+        <!-- DATE D'AJOUT -->
+        <p> Ajouté le : {{ Hmg.myGame.added_at | date:'dd / MM / yyyy' }}</p>
       </div>
+
+      <!-- ACTION/NOTE -->
       <div class="core-right">
+
+        <!-- NOTE -->
         <div class="card-note" style="background-color: {{this.app.userConnected.themeColor || this.app.colorDefault}};">
-          <p><span>10</span>/20</p>
-          <!--          <p><span>{{rateAverage(fakeRates)}}</span>/20</p>-->
+          <p><span id="noteGame{{ Hmg.myGame.game.id }}">
+            <!-- AUCUNE NOTE-->
+            <ng-container *ngIf="!userRatingAll">na</ng-container>
+
+            <!-- IL Y A DES NOTE-->
+            <ng-container *ngIf="userRatingAll">
+
+              <ng-container *ngIf="hasUserRatings(Hmg.myGame.game.id)"> <!-- VERIFIER SI IL EST NOTE-->
+                <ng-container *ngFor="let userRating of userRatingAll"> <!-- REGARDER TOUTE LES NOTE -->
+                  <ng-container *ngIf="userRating.game.id == Hmg.myGame.game.id">{{ userRating.rating }}</ng-container> <!-- AFFICHER LA NOTE CORRESPONDANTE-->
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngIf="!hasUserRatings(Hmg.myGame.game.id)">na</ng-container> <!-- NA PAS TROUVER DE NOTE A CE JEUX-->
+
+            </ng-container>
+          </span>/20</p>
+        </div>
+
+        <!-- ACTION -->
+        <div class="card-action">
+          <i (click)="this.app.togglePin(Hmg); $event.stopPropagation()" class="ri-pushpin-line"></i>
+          <i (click)="setModal(Hmg.myGame.game); $event.stopPropagation(); " data-bs-toggle="modal" data-bs-target="#noteGame" class="ri-star-line"></i>
+          <i routerLink="/mygame/edit/{{ Hmg.id }}" class="ri-pencil-line"></i>
         </div>
       </div>
+
     </div>
+
   </div>
 </div>
