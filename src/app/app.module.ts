@@ -58,6 +58,7 @@ import { TabPublicComponent } from './mygame/tab-public/tab-public.component';
 import { PageThermeComponent } from './-other/page-therme/page-therme.component';
 import { CardGameComponent } from './-global/card-game/card-game.component';
 import { CardActuComponent } from './-global/card-actu/card-actu.component';
+import { CardGameSubComponent } from './-global/card-game-sub/card-game-sub.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { CardActuComponent } from './-global/card-actu/card-actu.component';
     TabPublicComponent,
     PageThermeComponent,
     CardGameComponent,
-    CardActuComponent
+    CardActuComponent,
+    CardGameSubComponent
 
   ],
   imports: [

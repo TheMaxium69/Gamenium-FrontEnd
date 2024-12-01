@@ -1,0 +1,44 @@
+.card-game {
+  position: relative;
+  border-radius: 15px;
+  transition: height 0.2s ease-out;
+  width: 320px;
+  height: 280px;
+  box-shadow: 1px 2px 11px #a6a6a6;
+
+}
+
+.card-thumb{
+  width: 320px;
+  height: 180px;
+  border-radius: 15px;
+}
+
+.card-thumb .image{
+  position: absolute;
+  width: 320px;
+  height: 180px;
+  z-index: 10;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-thumb .blur{
+  position: absolute;
+  width: 320px;
+  height: 180px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  z-index: 1;
+  background-color: #00000038;
+}
+.card-thumb img{
+  width: 320px;
+  height: 180px;
+  border-radius: 15px;
+}
+
+.card-content {
+  padding: 20px 25px;
+}
