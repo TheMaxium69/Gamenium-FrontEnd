@@ -17,6 +17,7 @@ import {GameService} from "./-service/game.service";
 import Swal from "sweetalert2";
 import {PlateformInterface} from "./-interface/plateform.interface";
 import {CountryInterface} from "./-interface/country.interface";
+import {LikeService} from "./-service/like.service";
 
 @Component({
   selector: 'app-root',
@@ -449,7 +450,6 @@ export class AppComponent {
         this.erreurSubcribe()
       });
   }
-
 
   /*
   *

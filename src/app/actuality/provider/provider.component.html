@@ -84,9 +84,7 @@
 
               <!-- /// Carte actu /// appelle le composant /// -->
                <div>
-                 <app-view-actuality
-                 (nbActuOfProvider)="updateNbProviderActu($event)">
-                 </app-view-actuality>
+                 <app-view-actuality [providerIdSelected]="providerId"></app-view-actuality>
                </div>
             </div>
           </section>

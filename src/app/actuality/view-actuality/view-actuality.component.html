@@ -1,97 +1,21 @@
-<section id="actu-all" class="d-flex">
+<!-- SI AUCUN PROVIDER EST SELECTION-->
+<section id="actu-all" class="d-flex" *ngIf="!providerIdSelected">
 
-  <div *ngIf="postActuFollowOrAll.length == 0">
-    <h3>Ce provider n'a pas encore posté d'actualités.</h3>
+  <div *ngIf="this.postActuAll.length == 0">
+    <h3>Aucune actualité pour cette entreprise.</h3>
   </div>
 
-  <ng-container *ngFor="let actu of postActuFollowOrAll | slice: 0 : numberOfPosts">
+  <app-card-actu  *ngFor="let actu of ActuAll()" [actu]="actu"></app-card-actu>
 
-
-    <div class="card col-4" routerLink="/actuality/{{ actu.id }}">
-      <img src="{{ actu.picture.url }}" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h3 class="card-title">{{ actu.title }}</h3>
-        <div class="card-hr">
-          <hr />
-        </div>
-        <div class="card-end d-flex">
-          <a
-            routerLink="/provider/{{ actu.Provider?.id }}"
-            class="btn"
-            style="background-color: {{ actu.Provider?.color }}97!important"
-          >
-            <div class="d-flex">
-              <div
-                class="provider-img"
-                [ngStyle]="{ 'background-image': 'url(' + actu.Provider?.picture?.url + ')' }"
-              ></div>
-              {{ actu.Provider?.displayName }}
-            </div>
-          </a>
-          <div
-            class="card-i d-flex"
-            (click)="onClickLike(actu.id); $event.stopPropagation();">
-            <div>
-              <i class="ri-chat-3-line" style="color: #2e3a59;"></i>
-            </div>
-            <div class="active">
-              <i
-                [attr.data-bs-toggle]="!isLogIn ? 'modal' : null"
-                [attr.data-bs-target]="!isLogIn ? '#exampleModal' : null"
-                id="likeIcon{{ actu.id }}"
-                class="cardActuLike"
-                [ngStyle]="{
-                  color: likedStatus[actu.id]
-                    ? actu.Provider?.color || 'red'
-                    : '#2e3a59'
-                }"
-                [class.ri-heart-fill]="likedStatus[actu.id]"
-                [class.ri-heart-line]="!likedStatus[actu.id]"
-              ></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-container>
 </section>
 
-<!--
-Button trigger modal 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
+<!-- SI UN PROVIDER EST SELECTIONER -->
+<section id="actu-all" class="d-flex" *ngIf="providerIdSelected">
 
-Modal 
--->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content" style="box-shadow: 1px 2px 11px #a6a6a6;">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Vous devez être connecté avant de liker</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <!-- <div class="modal-body">
-        ...
-      </div> -->
-      <div class="modal-footer">
-        <button 
-          routerLink="/account"
-          data-bs-dismiss="modal"
-          type="button" 
-          class="btn text-white" 
-          style="background-color: red;">
-        Se connecter</button>
-      </div>
-    </div>
+  <div *ngIf="this.postActuProvider.length == 0">
+    <h3>Aucune actualité.</h3>
   </div>
-</div>
 
-<!-- 
-  *** Pour appelez TOUTES les cartes *** 
-    <app-card-actuality></app-card-actuality>
+  <app-card-actu *ngFor="let actu of ActuByProvider()" [actu]="actu"></app-card-actu>
 
-  *** Pour appelez un nombre spécifique de cartes ***
-      <app-card-actuality [numberOfPosts]="23"></app-card-actuality>
-        * Remplacer 23 par le nombre d'actualités souhaiter *
--->
+</section>

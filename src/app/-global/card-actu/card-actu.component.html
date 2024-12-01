@@ -1,1 +1,50 @@
-<p>card-actu works!</p>
+<div class="card col-4" routerLink="/actuality/{{ actu.id }}" *ngIf="actu">
+
+  <!--Miniature-->
+  <img src="{{ actu.picture.url }}" class="card-img-top" alt="..." />
+
+  <!--CONTENT-->
+  <div class="card-body">
+
+    <!-- TITRE -->
+    <h3 class="card-title">{{ actu.title }}</h3>
+
+    <div class="card-hr">
+      <hr/>
+    </div>
+
+    <!-- DOWN TAB -->
+    <div class="card-end d-flex">
+
+      <!-- PROVIDER -->
+      <a routerLink="/provider/{{ actu.Provider?.id }}" class="btn" style="background-color: {{ actu.Provider?.color }}97!important">
+        <div class="d-flex">
+          <div class="provider-img" [ngStyle]="{ 'background-image': 'url(' + actu.Provider?.picture?.url + ')' }"></div>
+          {{ actu.Provider?.displayName }}
+        </div>
+      </a>
+
+      <!-- ICONE -->
+      <div class="card-i d-flex" >
+
+        <!-- COMMENTAIRE -->
+        <div>
+          <i class="ri-chat-3-line" style="color: #2e3a59;"></i>
+        </div>
+
+        <!-- LIKE -->
+        <div (click)="this.onClickLike(actu.id); $event.stopPropagation();">
+          <i id="likeIcon{{ actu.id }}" class="cardActuLike"
+            [ngStyle]="{ color: likedStatus[actu.id] ? actu.Provider?.color || this.app.colorDefault : '#2e3a59' }"
+            [class.ri-heart-fill]="likedStatus[actu.id]"
+            [class.ri-heart-line]="!likedStatus[actu.id]">
+          </i>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

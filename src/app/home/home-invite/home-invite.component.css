@@ -8,11 +8,15 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 120px;
-    
+
 }
 
 h2 {
     color: black;
+}
+
+a{
+  text-decoration: none;
 }
 
 .rowamoi {
@@ -33,7 +37,7 @@ h2 {
     border-radius: 10px;
     padding: 40px;
     width: 1140px;
-    
+
 }
 
 
@@ -76,7 +80,7 @@ h2 {
     background-image: url('http://tyrolium.fr/Contenu/Image/Background8_black.png');
     height: 315px;
   }
-  
+
   .gamenium-logo {
     /*background-color: gray;*/
     border-radius: 100%;
@@ -128,7 +132,7 @@ h2 {
     border-radius: 10px;
     width: 200px;
     height: 200px;
-    
+
 }
 
 .description-list {
@@ -148,9 +152,15 @@ h2 {
 }
 
 .connect-button {
-    margin-top: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+
 }
 
+.main-gamenium-btn{
+  margin-bottom: 20px;
+}
 
 .login-btn {
     font-family: Arial, Helvetica, sans-serif;
@@ -220,14 +230,14 @@ h2 {
     gap: 26px;
     flex-wrap: wrap;
   }
-  
+
   .actu-card{
     width: 336px;
     border: unset!important;
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 14px;
   }
-  
+
   .actu-card .actu-card-img-top{
     object-fit: cover;
     max-width: 336px;
@@ -239,33 +249,33 @@ h2 {
   .actu-card .actu-card-img-top:hover{
     transform: scale(1.03);
   }
-  
+
   .actu-card .actu-card-body .actu-card-hr{
     padding-right: 8px;
     padding-left: 8px;
     padding-top: 2.5px;
     padding-bottom: 4px;
   }
-  
+
   .actu-card .actu-card-body hr{
     margin: 7px 0;
     opacity: 0.45;
   }
-  
+
   .actu-card .actu-card-body {
     padding-top: 8px;
     padding-right: 14px;
     padding-bottom: 14px;
     padding-left: 20px;
   }
-  
+
   .actu-card .actu-card-body .btn{
     color: white;
     background-color: rgba(255, 0, 0, 0.54);
     box-shadow: 1px 2px 11px #a6a6a6;
   }
-  
-  
+
+
   .provider-img{
     height: 24px;
     width: 24px;
@@ -277,7 +287,7 @@ h2 {
     background-size: cover;
     margin-right: 7px;
   }
-  
+
   .actu-card-end{
     justify-content: space-between;
   }
@@ -288,7 +298,7 @@ h2 {
   .card-end .actu-card-i .active i{
     color: rgba(255, 0, 0);
   }
-  
+
   @media (max-width: 920px) {
     #content-actu-invite {
       flex-wrap: wrap;
@@ -379,7 +389,7 @@ h2 {
     margin-right: auto;
     margin-bottom: 75px;
   }
-  
+
   #gamenium-intro-invite .gamenium-connect-panel {
     width: 70%;
     margin-left: auto;

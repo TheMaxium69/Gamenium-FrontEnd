@@ -20,6 +20,10 @@ h2 {
   color: black;
 }
 
+a{
+  text-decoration: none;
+}
+
 .rowamoi {
   display: flex;
   flex-direction: row;

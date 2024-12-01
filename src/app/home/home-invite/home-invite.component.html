@@ -29,8 +29,8 @@
         <div class="gamenium-connect-panel">
             <h2 class="text-center">Pour profiter pleinement de toutes les fonctionnalités offertes par Gamenium</h2>
             <div class="connect-button">
-                <a class="login-btn" routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Connectez-vous</a>
-                <a class="sign-in-btn">Inscrivez-vous</a>
+                <button class="main-gamenium-btn" routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Connectez-vous</button>
+                <button class="sub-gamenium-btn">Inscrivez-vous</button>
             </div>
         </div>
 
@@ -41,44 +41,10 @@
             <h2 class="">Les actus à la Une</h2>
             <div id="content-actu-invite" class="d-flex">
                 <!-- Boucle avec les card actus (en afficher 6) -->
-                <ng-container *ngFor="let actu of postActuFollowOrAll | slice: postActuFollowOrAll.length - 6"> <!--Le slice est la pour afficher les 4 dernières actu stocké dans le tableau donc les 4 + recente -->
-                    <div class="actu-card col-4" routerLink="/actuality/{{ actu.id }}">
-                        <img src="{{ actu.picture.url }}" class="actu-card-img-top" alt="..." />
-                        <div class="actu-card-body">
-                            <h3 class="actu-card-title">{{ actu.title }}</h3>
-                            <div class="actu-card-hr">
-                            <hr />
-                            </div>
-                            <div class="actu-card-end d-flex">
-                                <a
-                                routerLink="/provider/{{ actu.Provider?.id }}"
-                                class="btn"
-                                [ngStyle]="{ 'background-color': actu.Provider?.color + '97!important' }"
-                                >
-                                    <div class="d-flex">
-                                        <div
-                                        class="provider-img"
-                                        [ngStyle]="{ 'background-image': 'url(' + actu.Provider?.picture?.url + ')' }"
-                                        ></div>
-                                        {{ actu.Provider?.displayName }}
-                                    </div>
-                                </a>
-                                <div class="actu-card-i d-flex">
-                                    <div>
-                                    <i class="ri-chat-3-line" style="color: #2e3a59;"></i>
-                                    </div>
-                                    <div class="active">
-                                    <i class="ri-heart-line" style="color: #2e3a59;"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
-
+                <app-card-actu *ngFor="let actu of postActuFollowOrAll | slice: postActuFollowOrAll.length - 6" [actu]="actu"></app-card-actu>
             </div>
             <div class="rowamoi justify-content-end">
-                <a class="view-more-btn " href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
+              <a class="main-gamenium-btn" routerLink="/actuality">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
         </div>
     </div>
@@ -121,7 +87,7 @@
             </div>
 
             <div class="rowamoi justify-content-end">
-                <a class="view-more-btn" href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
+              <a class="main-gamenium-btn" routerLink="/game">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
 
         </div>
@@ -133,43 +99,10 @@
             <h2>Les tops du mois</h2>
             <div id="content-actu-invite" class="d-flex">
                 <!-- Boucle avec les card actus (en afficher 6) -->
-                <ng-container *ngFor="let actu of postActuFollowOrAll | slice: postActuFollowOrAll.length - 9"> <!--Le slice est la pour afficher les 4 dernières actu stocké dans le tableau donc les 4 + recente -->
-                    <div class="actu-card col-4" routerLink="/actuality/{{ actu.id }}">
-                        <img src="{{ actu.picture.url }}" class="actu-card-img-top" alt="..." />
-                        <div class="actu-card-body">
-                            <h3 class="actu-card-title">{{ actu.title }}</h3>
-                            <div class="actu-card-hr">
-                            <hr />
-                            </div>
-                            <div class="actu-card-end d-flex">
-                                <a
-                                routerLink="/provider/{{ actu.Provider?.id }}"
-                                class="btn"
-                                [ngStyle]="{ 'background-color': actu.Provider?.color + '97!important' }"
-                                >
-                                    <div class="d-flex">
-                                        <div
-                                        class="provider-img"
-                                        [ngStyle]="{ 'background-image': 'url(' + actu.Provider?.picture?.url + ')' }"
-                                        ></div>
-                                        {{ actu.Provider?.displayName }}
-                                    </div>
-                                </a>
-                                <div class="actu-card-i d-flex">
-                                    <div>
-                                    <i class="ri-chat-3-line" style="color: #2e3a59;"></i>
-                                    </div>
-                                    <div class="active">
-                                    <i class="ri-heart-line" style="color: #2e3a59;"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
+                <app-card-actu *ngFor="let actu of postActuFollowOrAll | slice: postActuFollowOrAll.length - 9" [actu]="actu"></app-card-actu>
             </div>
             <div class="rowamoi justify-content-end">
-                <a class="view-more-btn" href="">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
+                <a class="main-gamenium-btn" routerLink="/actuality">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
         </div>
     </div>
