@@ -67,10 +67,6 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
         this.gameSelected = reponseGameOne.result
 
-        console.log(this?.gameSelected?.image)
-        console.log("image tags :" + this?.gameSelected?.imageTags)
-
-
       } else {
 
         this.noneGame = true;

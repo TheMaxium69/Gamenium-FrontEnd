@@ -23,8 +23,8 @@ export class CardActuComponent implements OnInit {
               private ipService: IpService,
               private commentService: CommentService) { }
 
-  commentAll: CommentInterface[] = [];
-  likeAll: LikeInterface[] = [];
+  commentAll: number = 0;
+  likeAll: number = 0;
   likedStatus: { [key: number]: boolean } = {};
 
   ngOnInit() {
@@ -42,9 +42,9 @@ export class CardActuComponent implements OnInit {
       if (responseLikeByPostActu.message === 'good') {
         let isLiked = false;
 
-        this.likeAll = responseLikeByPostActu.result;
+        this.likeAll = responseLikeByPostActu.result.length;
 
-        this.likeAll?.forEach((like: LikeInterface) => {
+        responseLikeByPostActu.result.forEach((like: LikeInterface) => {
           if (like.user.id === this.app.userConnected?.id) {
             isLiked = true;
           }
@@ -59,7 +59,7 @@ export class CardActuComponent implements OnInit {
   getCommentWithActu(id:number){
     this.commentService.getCommentWithActu(id, this.app.setURL()).subscribe(reponseMyCommentActu => {
       if (reponseMyCommentActu.message == "good") {
-        this.commentAll = reponseMyCommentActu.result;
+        this.commentAll = reponseMyCommentActu.result.length;
       }
     });
   }
@@ -94,9 +94,11 @@ export class CardActuComponent implements OnInit {
                 if (responseAddLikeByPostActu.result === 'like is delete') {
                   this.liked(id, 'del');
                   this.likedStatus[id] = false;
+                  this.likeAll--
                 } else {
                   this.liked(id, 'add');
                   this.likedStatus[id] = true;
+                  this.likeAll++
                 }
               }
             }
@@ -115,9 +117,11 @@ export class CardActuComponent implements OnInit {
               if (responseAddLikeByPostActu.result === 'like is delete') {
                 this.liked(id, 'del');
                 this.likedStatus[id] = false;
+                this.likeAll--
               } else {
                 this.liked(id, 'add');
                 this.likedStatus[id] = true;
+                this.likeAll++
               }
             }
           }
@@ -132,7 +136,7 @@ export class CardActuComponent implements OnInit {
 
     if (state === 'add' && cardActuIcon) {
       if (this.actu) {
-        cardActuIcon.style.color = this.actu.Provider?.color ? this.actu.Provider?.color : 'red';
+        cardActuIcon.style.color = this.actu.Provider?.color ? this.actu.Provider?.color : this.app.colorDefault;
       }
       cardActuIcon.classList.remove('ri-heart-line');
       cardActuIcon.classList.add('ri-heart-fill');
