@@ -13,7 +13,7 @@
   </div>
   <div class="card-content">
     <p>{{ game.name }}<p>
-    <small style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="platform-names d-block">
+    <small style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="platform-names">
       <ng-container *ngFor="let platform of game.platforms; let last = last">
         {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
       </ng-container>
