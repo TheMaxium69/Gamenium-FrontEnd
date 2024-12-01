@@ -7,7 +7,7 @@ h2 {
 }
 
 .cotainerbtn{
-  width: 437px;
+  max-width: 437px;
   margin: auto;
 }
 

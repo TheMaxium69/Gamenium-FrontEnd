@@ -95,6 +95,10 @@
 .card-right .core-left{
   max-width: clamp(200px, 50%, 500px);
   min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: -10px;
 }
 
 .card-right .core-left h2 {

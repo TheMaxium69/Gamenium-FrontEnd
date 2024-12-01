@@ -27,7 +27,6 @@ export class CardGameComponent implements OnInit {
               private userRateService:UserRateService) { }
 
   ngOnInit() {
-    console.log(this.isDetailGame)
     if (this.app.isLoggedIn) {
       this.getUserRate(this.app.userConnected.id)
     }
