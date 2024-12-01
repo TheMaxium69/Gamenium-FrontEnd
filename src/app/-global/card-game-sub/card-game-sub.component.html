@@ -19,6 +19,30 @@
       </ng-container>
     </small>
 
-    <small> Date de sortie : {{ game.expectedReleaseDay + game.expectedReleaseMonth + game.expectedReleaseYear }}</small>
+    <ng-container *ngIf="game.originalReleaseDate">
+      <small>
+        Date de sortie : {{ game.originalReleaseDate | date:'dd / MM / yyyy' }}
+      </small>
+    </ng-container>
+    <ng-container *ngIf="!game.originalReleaseDate">
+      <small> Date de sortie :
+        <ng-container *ngIf="game.expectedReleaseYear">
+          <ng-container *ngIf="game.expectedReleaseMonth">
+            <ng-container *ngIf="game.expectedReleaseDay">
+              {{ game.expectedReleaseDay }}
+              /
+            </ng-container>
+            <ng-container *ngIf="game.expectedReleaseMonth < 10">
+              0{{ game.expectedReleaseMonth }}
+            </ng-container>
+            <ng-container *ngIf="game.expectedReleaseMonth >= 10">
+              {{ game.expectedReleaseMonth }}
+            </ng-container>
+            /
+          </ng-container>
+          {{ game.expectedReleaseYear }}
+        </ng-container>
+      </small>
+    </ng-container>
   </div>
 </div>
