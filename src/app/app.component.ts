@@ -357,6 +357,20 @@ export class AppComponent {
     }
   }
 
+  bigNombreFormatage(nombreFormatage:number): string {
+
+    if (nombreFormatage >= 1000000) {
+      return Math.round(nombreFormatage / 1000000) + "M";
+    }
+
+    if (nombreFormatage >= 1000) {
+      return Math.round(nombreFormatage / 1000) + "K";
+    }
+
+    return nombreFormatage.toString();
+
+  }
+
   plateformeNameFormatage(plateform:string): string{
 
     if (plateform == 'Super Nintendo Entertainment System'){

@@ -29,11 +29,13 @@
 
         <!-- COMMENTAIRE -->
         <div>
+          <small>{{ this.app.bigNombreFormatage(commentAll.length || 0) }}</small>
           <i class="ri-chat-3-line" style="color: #2e3a59;"></i>
         </div>
 
         <!-- LIKE -->
         <div (click)="this.onClickLike(actu.id); $event.stopPropagation();">
+          <small>{{ this.app.bigNombreFormatage(likeAll.length || 0) }}</small>
           <i id="likeIcon{{ actu.id }}" class="cardActuLike"
             [ngStyle]="{ color: likedStatus[actu.id] ? actu.Provider?.color || this.app.colorDefault : '#2e3a59' }"
             [class.ri-heart-fill]="likedStatus[actu.id]"

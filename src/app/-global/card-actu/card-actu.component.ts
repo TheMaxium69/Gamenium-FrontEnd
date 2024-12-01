@@ -5,6 +5,8 @@ import {LikeInterface} from "../../-interface/like.interface";
 import {LikeService} from "../../-service/like.service";
 import {IpService} from "../../-service/ip.service";
 import Swal from "sweetalert2";
+import {CommentInterface} from "../../-interface/comment.interface";
+import {CommentService} from "../../-service/comment.service";
 
 @Component({
   selector: 'app-card-actu',
@@ -18,34 +20,46 @@ export class CardActuComponent implements OnInit {
 
   constructor(protected app:AppComponent,
               private likeService:LikeService,
-              private ipService: IpService) { }
+              private ipService: IpService,
+              private commentService: CommentService) { }
 
-  LikeAll: LikeInterface[] | undefined;
+  commentAll: CommentInterface[] = [];
+  likeAll: LikeInterface[] = [];
   likedStatus: { [key: number]: boolean } = {};
 
   ngOnInit() {
 
     if (this.app.isLoggedIn && this.actu){
-      this.getLikeByActu(this.actu.id) /* RECUPERE LE LIKE */
+      this.getLikeByActu(this.actu.id) /* RECUPERE LES LIKES */
+      this.getCommentWithActu(this.actu.id) /* RECUPERE LES COMS */
     }
 
   }
 
-  /* SAVOIR SI TU A LIKE UNE ACTU */
+  /* RECUPERE TOUT LES LIKE ET SAVOIR SI TU A LIKE UNE ACTU */
   getLikeByActu(idActu: number) {
     this.likeService.getPostActuLikes(idActu, this.app.setURL()).subscribe(responseLikeByPostActu => {
       if (responseLikeByPostActu.message === 'good') {
         let isLiked = false;
 
-        this.LikeAll = responseLikeByPostActu.result;
+        this.likeAll = responseLikeByPostActu.result;
 
-        this.LikeAll?.forEach((like: LikeInterface) => {
+        this.likeAll?.forEach((like: LikeInterface) => {
           if (like.user.id === this.app.userConnected?.id) {
             isLiked = true;
           }
         });
 
         this.likedStatus[idActu] = isLiked;
+      }
+    });
+  }
+
+  /* RECUPERE TOUT LES COM DE L'ACTU */
+  getCommentWithActu(id:number){
+    this.commentService.getCommentWithActu(id, this.app.setURL()).subscribe(reponseMyCommentActu => {
+      if (reponseMyCommentActu.message == "good") {
+        this.commentAll = reponseMyCommentActu.result;
       }
     });
   }
