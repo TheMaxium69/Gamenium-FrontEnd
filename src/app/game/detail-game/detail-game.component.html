@@ -537,29 +537,8 @@
     <h3><span style="color: {{ userColor ? userColor : '#FF0000' }}">{{ capitalizedUserName }}</span>Vous possedez le jeu ? Ajoutez le à votre collection :</h3>
   </div>
 
-  <div class="card-add-to-collection">
-    <div class="game-picture">
-      <div class="game-cover-center">
-          <div class="cover" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
-      </div>
-      <div class="background" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }">
-          <div class="inner-shadow"></div>
-      </div>
-    </div>
-    <div class="game-info">
-      <div class="info-content">
-        <h2 class="info-name">{{gameSelected?.name}}</h2>
-        <p style="color: {{ userColor ? userColor : '#FF0000' }}" class="platform-names">
-          <ng-container *ngFor="let platform of gameSelected?.platforms; let last = last">
-            {{ platform.name }}<span *ngIf="!last">, </span>
-          </ng-container>
-        </p>
-        <div class="info-release-date">Date de sortie : {{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
-      </div>
-    </div>
-    <button style="background-color: {{ userColor || this.app.colorDefault }}" class="main-gamenium-btn game-add-button" (click)="setModal()" data-bs-toggle="modal" data-bs-target="#ajouteGame">
-      <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
-    </button>
+  <div *ngIf="gameSelected" class="card-add-to-collection">
+    <app-card-game [game]="gameSelected" [isDetailGame]="true" style="width: 100%"></app-card-game>
   </div>
 
   <div class="show-collection">

@@ -86,6 +86,11 @@
   justify-content: space-between;
   overflow: hidden;
 }
+.core-right-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .card-right .core-left{
   max-width: clamp(200px, 50%, 500px);

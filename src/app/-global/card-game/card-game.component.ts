@@ -16,6 +16,9 @@ export class CardGameComponent implements OnInit {
   public game: GameInterface|null = null;
 
   @Input()
+  public isDetailGame: boolean | null = null;
+
+  @Input()
   public Hmg: HistoryMyGameInterface|null = null;
 
   userRatingAll: UserRateInterface[] | undefined;
@@ -24,6 +27,7 @@ export class CardGameComponent implements OnInit {
               private userRateService:UserRateService) { }
 
   ngOnInit() {
+    console.log(this.isDetailGame)
     if (this.app.isLoggedIn) {
       this.getUserRate(this.app.userConnected.id)
     }

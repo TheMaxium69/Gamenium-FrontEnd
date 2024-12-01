@@ -31,12 +31,21 @@
       </div>
 
       <!-- ACTION/NOTE -->
-      <div class="core-right">
+      <div class="core-right" *ngIf="!isDetailGame">
         <div class="card-note" style="background-color: {{this.app.userConnected.themeColor || this.app.colorDefault}};">
            <p><span>10</span>/20</p>
 <!--          <p><span>{{rateAverage(fakeRates)}}</span>/20</p>-->
         </div>
       </div>
+
+      <!-- FOR DETAIL GAME-->
+      <div class="core-right-detail" *ngIf="isDetailGame">
+        <button style="background-color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" class="main-gamenium-btn" (click)="setModal(game)" data-bs-toggle="modal" data-bs-target="#ajouteGame">
+          <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
+        </button>
+      </div>
+
+
 
     </div>
 
