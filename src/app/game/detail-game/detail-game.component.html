@@ -439,7 +439,7 @@
 
       <!-- Add Note Button -->
       <div *ngIf="isLoggedIn && hasGameInCollection" class="add-note">
-        <button [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" (click)="setModal()" class="btn-note shadow-btn" data-bs-toggle="modal" data-bs-target="#noteGame">Ajouter une note</button>
+        <button style="background-color: {{ userColor || this.app.colorDefault }}" class="main-gamenium-btn" data-bs-toggle="modal" data-bs-target="#noteGame" (click)="setModal()">Ajouter une note</button>
       </div>
     </div>
   </div>
@@ -557,13 +557,15 @@
         <div class="info-release-date">Date de sortie : {{gameSelected?.expectedReleaseDay}} {{gameSelected?.expectedReleaseMonth}} {{gameSelected?.expectedReleaseYear}}</div>
       </div>
     </div>
-    <button [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" (click)="setModal()" class="game-add-button"  data-bs-toggle="modal" data-bs-target="#ajouteGame">
+    <button style="background-color: {{ userColor || this.app.colorDefault }}" class="main-gamenium-btn game-add-button" (click)="setModal()" data-bs-toggle="modal" data-bs-target="#ajouteGame">
       <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
     </button>
   </div>
 
   <div class="show-collection">
-    <button [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" routerLink="/mygame" class="my-collection">Votre collection</button>
+    <button style="color: {{ userColor || this.app.colorDefault }};border-color: {{ userColor || this.app.colorDefault }}" class="sub-gamenium-btn"  routerLink="/mygame">
+      Votre collection
+    </button>
   </div>
 
 </div>

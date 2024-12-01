@@ -914,30 +914,15 @@
 }
 
 .game-add-button {
-  color: white;
-  border-radius: 15px;
-  padding: 10px 20px;
-  box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
   margin-right: 20px;
-  border: solid 2px;
-  border-color: var(--userColor);
-  background-color: var(--userColor);
 }
 
 .game-add-button i {
   font-size: 20px;
-}
-
-.game-add-button:hover {
-  background-color: white !important;
-  color: var(--userColor) !important;
-  border: solid 2px;
-  border-color: var(--userColor) !important;
-  transition: 0.3s;
 }
 
 @media (max-width: 768px) {
@@ -984,24 +969,7 @@
   margin-top: 40px;
   display: flex;
   justify-content: center;
-}
-
-.my-collection:hover {
-  background-color: var(--userColor) !important;
-  color: white !important;
-  border: solid 2px;
-  border-color: var(--userColor) !important;
-  transition: 0.3s;
-}
-
-.my-collection {
-  padding: 10px 50px;
   margin-bottom: 130px;
-  border-radius: 15px;
-  border: solid 2px;
-  box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.2);
-  background-color: white;
-  color: var(--userColor);
 }
 
 /* //////////////// FIN DE ZONE SHOW COLLECTION /////////////// */
