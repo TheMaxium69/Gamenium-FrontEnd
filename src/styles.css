@@ -16,6 +16,10 @@
 
 }
 
+:disabled{
+  cursor: not-allowed;
+}
+
 /* FOR MODAL */
 .modal{
   --bs-modal-width: 800px!important;
@@ -128,7 +132,7 @@ small {
 
 /* BUTTOM */
 
-.main-gamenium-btn{
+.main-gamenium-btn {
   border-radius: 10px;
   color: white;
   font-size: 17px;
@@ -139,10 +143,16 @@ small {
   outline: none;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
   padding: 10px 30px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-.main-gamenium-btn:hover{
-  opacity: .58;
+.main-gamenium-btn:hover {
+  opacity: 0.58;
+}
+
+.main-gamenium-btn:disabled {
+  opacity: 0.5;
 }
 
 .sub-gamenium-btn{

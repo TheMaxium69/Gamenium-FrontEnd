@@ -6,7 +6,7 @@
       <textarea id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
     </div>
     <div class="comment-send mb4">
-      <button [ngStyle]="{ '--providerColor': providerColor ?? 'red' }" class="btn btn-shadow" type="submit" style="background-color: {{ providerColor ?? 'red' }};">Envoyer</button>
+      <button class="main-gamenium-btn" style="background-color: {{ providerColor || this.app.colorDefault }}" type="submit">Envoyé</button>
     </div>
   </div>
 </form>
@@ -19,7 +19,7 @@
         <textarea class="comment-content" cols="35" placeholder="Votre devez d'abord vous connecter pour laisser un commentaire" disabled></textarea>
       </div>
       <div class="comment-send mb4">
-        <button [ngStyle]="{ '--providerColor': providerColor ?? 'red' }" class="btn btn-shadow" style="background-color: {{ providerColor ?? 'red' }};" disabled>Envoyer</button>
+        <button class="main-gamenium-btn" style="background-color: {{ providerColor || this.app.colorDefault }}" disabled>Envoyé</button>
       </div>
     </div>
   </form>
