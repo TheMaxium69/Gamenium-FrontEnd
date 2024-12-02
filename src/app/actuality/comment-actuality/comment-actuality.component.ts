@@ -294,11 +294,6 @@ export class CommentActualityComponent implements OnInit{
             this.renderer.setProperty(likeCount, 'id', 'like-value' + reponseMyCommentActuCreate.result.id);
             this.renderer.addClass(likeCount, 'like-value');
             this.renderer.setStyle(likeCount, 'margin-top', '3px')
-            if (this.providerColor){
-              this.renderer.setStyle(likeCount, 'background-color', this.providerColor);
-            } else {
-              this.renderer.setAttribute(likeCount, 'background-color', this.app.colorDefault);
-            }
             this.renderer.setProperty(likeCount, 'textContent', this.nbLikeByComment[reponseMyCommentActuCreate.result.id].toString());
 
             // Ajout de l'icon j'aime
@@ -320,8 +315,8 @@ export class CommentActualityComponent implements OnInit{
             // Ajout des éléments a la div Reply
             this.renderer.appendChild(replySection, replyIcon);
             this.renderer.appendChild(replySection, replyContent);
-            this.renderer.appendChild(replySection, likeCount);
             this.renderer.appendChild(replySection, likeIcon);
+            this.renderer.appendChild(replySection, likeCount);
             this.renderer.appendChild(replySection, likeContent);
             this.renderer.appendChild(commentCard, replySection);
 
