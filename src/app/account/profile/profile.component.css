@@ -117,7 +117,7 @@ hr {
   padding: 15px;
   padding-right: 60px;
   height: 60px;
-  font-size: 24px;
+  font-size: 18px;
   border: none;
   border-radius: 15px;
   box-shadow: inset 0px 0px 11px -6px rgba(0, 0, 0, 0.5);
@@ -130,7 +130,7 @@ hr {
 }
 
 .searchbar::placeholder {
-  font-size: 24px;
+  font-size: 18px;
   color: #aaa;
   caret-color: auto;
 }
@@ -304,7 +304,9 @@ a > div {
   text-align: left;
 }
 
+.badges-section h5,
 .settings-section h5 {
+  text-align: start;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -476,12 +478,15 @@ a > div {
 .badge img {
   width: 50px;
   height: 50px;
-  border-radius: 10px;
   transition: transform 0.2s;
 }
 
 .badge img:hover {
   transform: scale(1.1);
+}
+
+.badge-list-container {
+  padding-bottom: 10px;
 }
 
 .badge-list-item {

@@ -62,7 +62,7 @@
               </div>
               <!-- Color Picker -->
               <div class="settings-section">
-                <h5>Couleur du Thème</h5>
+                <h5>Couleur du thème</h5>
                 <div class="color-picker">
                   <div class="colorpick">
 
@@ -90,12 +90,11 @@
               </div>
               <!-- Affichage des badges -->
               <div class="badges-section" *ngIf="badgeUserConnected">
-                <h5>Vos Badges</h5>
+                <h5>Vos badges</h5>
                 <div class="badges">
                   <ng-container *ngFor="let badge of badgeUserConnected">
                     <div class="badge">
                       <img src="{{ badge.picture?.url }}" alt="{{ badge.name }}">
-                      <span>{{ badge.name }}</span>
                     </div>
                   </ng-container>
                 </div>
@@ -164,7 +163,11 @@
       <!-- Se Deconnecter -->
       <div class="para radius unlog">
         <a (click)="loggout()">
-          <div><i class="ri-shut-down-line"></i>Déconnexion de votre compte</div>
+          <div><i class="ri-shut-down-line"></i>
+            <h3>
+              Déconnexion de votre compte
+            </h3>
+          </div>
           <div><i class="ri-arrow-right-s-line"></i></div>
         </a>
       </div>
@@ -176,14 +179,22 @@
       <hr>
       <div class="para radius mb-4">
         <a routerLink="/terms">
-          <div><i class="ri-information-2-line"></i>Termes et conditions de comptes</div>
+          <div><i class="ri-information-2-line"></i>
+            <h3>
+              Termes et conditions de comptes
+            </h3>
+          </div>
           <div><i class="ri-arrow-right-s-line"></i></div>
         </a>
       </div>
 
     <div class="para radius mb-4">
       <a data-bs-toggle="collapse" href="#collapseBadges" role="button" aria-expanded="false" aria-controls="collapseBadges">
-        <div><i class="ri-emotion-happy-line"></i>Tous nos badges disponibles</div>
+        <div><i class="ri-emotion-happy-line"></i>
+          <h3>
+            Tous nos badges disponibles
+          </h3>
+        </div>
         <div><i class="ri-arrow-right-s-line"></i></div>
       </a>
       <div class="collapse" id="collapseBadges">
