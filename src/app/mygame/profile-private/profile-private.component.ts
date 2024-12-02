@@ -57,7 +57,7 @@ export class ProfilePrivateComponent implements OnInit {
   // Pour la recherche
   searchQuery: string = '';
   filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
-  sortOption: string = 'added-desc'; // Tri par défaut
+  sortOption: string = ''; // Tri par défaut
   isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
 
 
@@ -103,7 +103,7 @@ export class ProfilePrivateComponent implements OnInit {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
-        console.log(this.myGameHistoriqueAll);
+        console.log("Fonction My Game By User", this.myGameHistoriqueAll);
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
       }
@@ -146,13 +146,20 @@ getPinnedGames(): HistoryMyGameInterface[] {
 /* OBTENIR LES JEUX NON EPINGLES */
 getUnpinnedGames(): HistoryMyGameInterface[] {
   if (this.searchQuery || this.isFilterApplied()) {
-    // Si un filtre ou une recherche et appliqué on renvoie le tableau filtré
+    // Si un filtre ou une recherche et appliqué on renvoie le tableau filtré 
+    let filteredSecondArray = this.myGameHistoriqueAll;
+    for (let i = 0; i < filteredSecondArray.length; i++) {
+      const element = filteredSecondArray[i].myGame.is_pinned = false;;
+      
+    }
+    
     return this.filteredGames ?? [];
   } else {
     // Sinon on renvoie les jeux unpin
     return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
   }
 }
+
 
 
 
@@ -220,6 +227,7 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
         const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
         const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
 
+
         return (
           gameName.includes(query) ||
           platforms.includes(query) ||
@@ -233,8 +241,6 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
 
     this.applySorting();
   }
-
-
 
 
   gameSelected: GameInterface | undefined;
@@ -349,7 +355,7 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
 
   //check si un filtre autre que celui par default est appliqué
   isFilterApplied(): boolean {
-    return this.sortOption !== 'added-desc';
+    return this.sortOption !== '';
   }
 
   applySorting(): void {
