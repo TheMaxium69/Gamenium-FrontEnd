@@ -141,7 +141,9 @@
 
         <!-- ACTION -->
         <div class="card-action">
-          <i (click)="this.app.togglePin(Hmg); $event.stopPropagation()" class="ri-pushpin-line"></i>
+          <i (click)="this.app.togglePin(Hmg); $event.stopPropagation()"
+             [class.ri-unpin-line]="Hmg.myGame.is_pinned"
+             [class.ri-pushpin-line]="!Hmg.myGame.is_pinned"></i>
           <i (click)="setModal(Hmg.myGame.game); $event.stopPropagation(); " data-bs-toggle="modal" data-bs-target="#noteGame" class="ri-star-line"></i>
           <i routerLink="/mygame/edit/{{ Hmg.id }}" class="ri-pencil-line"></i>
         </div>
