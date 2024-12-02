@@ -1,8 +1,9 @@
 #actu-all{
   justify-content: center;
-  gap: 26px;
+  gap: 35px;
   flex-wrap: wrap;
   margin: 0 auto;
+  max-width: 1450px;
 }
 
 @media (max-width: 920px) {
