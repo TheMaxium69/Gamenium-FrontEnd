@@ -6,7 +6,8 @@
       <textarea id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
     </div>
     <div class="comment-send mb4">
-      <button class="main-gamenium-btn" style="background-color: {{ providerColor || this.app.colorDefault }}" type="submit">Envoyé</button>
+      <div id="CharCount">1/20</div>
+      <button class="main-gamenium-btn" style="background-color: {{ providerColor || this.app.colorDefault }}" type="submit">Envoyer</button>
     </div>
   </div>
 </form>
@@ -19,7 +20,7 @@
         <textarea class="comment-content" cols="35" placeholder="Votre devez d'abord vous connecter pour laisser un commentaire" disabled></textarea>
       </div>
       <div class="comment-send mb4">
-        <button class="main-gamenium-btn" style="background-color: {{ providerColor || this.app.colorDefault }}" disabled>Envoyé</button>
+        <button class="main-gamenium-btn" style="background-color: {{ providerColor || this.app.colorDefault }}" disabled>Envoyer</button>
       </div>
     </div>
   </form>
@@ -53,7 +54,7 @@
           <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
             <img class="badgeIMG" src="{{ badge.picture?.url }}">
           </ng-container>
-          <span class="time-ago">Posté le : {{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
+          <span class="time-ago">{{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
         </h4>
       </div>
       <p class="comment-text">{{comment.content}}</p>
@@ -65,7 +66,6 @@
         </div>
         <div
         (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-        <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLikeByComment[comment.id] || "0" }}</span>
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
@@ -73,6 +73,7 @@
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
+          <span id="like-value">{{ nbLikeByComment[comment.id] || "0" }}</span>
           <span class="comment-action">{{ nbLikeByComment[comment.id] && nbLikeByComment[comment.id] >= 2 ? 'Likes' : 'Like' }}</span>
         </div>
       </div>
@@ -94,7 +95,7 @@
               <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
-              <span class="time-ago">Posté le : {{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
+              <span class="time-ago">{{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
               </h4>
             <i id="delete-comment-icon"
               class="ri-delete-bin-line"
@@ -110,7 +111,6 @@
             </div>
             <div
             (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-            <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLikeByComment[comment.id] || "0" }}</span>
             <i
             id="like-icon{{comment.id}}"
             class="comment-action like"
@@ -118,6 +118,7 @@
             [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
             [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
             </i>
+            <span id="like-value">{{ nbLikeByComment[comment.id] || "0" }}</span>
             <span class="comment-action">{{ nbLikeByComment[comment.id] && nbLikeByComment[comment.id] >= 2 ? 'Likes' : 'Like' }}</span>
             </div>
           </div>
@@ -138,7 +139,7 @@
             <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
               <img class="badgeIMG" src="{{ badge.picture?.url }}">
             </ng-container>
-            <span class="time-ago">Posté le : {{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
+            <span class="time-ago">{{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
           </h4>
         </div>
         <p class="comment-text">{{comment.content}}</p>
@@ -150,7 +151,6 @@
           </div>
           <div
           (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLikeByComment[comment.id] || "0" }}</span>
           <i
           id="like-icon{{comment.id}}"
           class="comment-action like"
@@ -158,6 +158,7 @@
           [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
           [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
           </i>
+          <span id="like-value">{{ nbLikeByComment[comment.id] || "0" }}</span>
           <span class="comment-action">{{ nbLikeByComment[comment.id] && nbLikeByComment[comment.id] >= 2 ? 'Likes' : 'Like' }}</span>
           </div>
         </div>

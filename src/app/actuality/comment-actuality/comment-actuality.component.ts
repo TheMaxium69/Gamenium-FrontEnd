@@ -251,7 +251,7 @@ export class CommentActualityComponent implements OnInit{
 
             // Depuis quand le commentaire est posté
             const timeAgo = this.renderer.createElement('span');
-            const formattedDate = "Posté le : " + dateHere.getDate() + " " + this.app.moisView(dateHere.getMonth()) + " " + dateHere.getFullYear() + " à " + dateHere.getHours() + ":" + (dateHere.getMinutes() < 10 ? '0' : '') + dateHere.getMinutes() ;
+            const formattedDate ="" + dateHere.getDate() + " " + this.app.moisView(dateHere.getMonth()) + " " + dateHere.getFullYear() + " à " + dateHere.getHours() + ":" + (dateHere.getMinutes() < 10 ? '0' : '') + dateHere.getMinutes() ;
             this.renderer.addClass(timeAgo, 'time-ago');
             this.renderer.setProperty(timeAgo, 'textContent', formattedDate);
             this.renderer.appendChild(userName, timeAgo);

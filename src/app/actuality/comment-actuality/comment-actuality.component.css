@@ -217,12 +217,10 @@
 
 #like-value {
   display: inline-block;
-  color: white;
-  width: 27px;
-  height: 15px;
+  color: #575757;
+  margin-right: 10px;
   text-align: center;
   border-radius: 10px;
-  margin-left: 10px;
   font-size: 12px;
   line-height: 15px;
 }
@@ -236,4 +234,11 @@
   margin-left: 10px;
   font-size: 12px;
   line-height: 15px;
+}
+
+#CharCount {
+  margin: auto 0;
+  margin-right: 56rem;
+  color:#575757;
+  font-size: small;
 }
