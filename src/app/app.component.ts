@@ -420,7 +420,7 @@ export class AppComponent {
       return "octobre";
     } else if (moisChiffre == 10) {
       return "novembre";
-    } else if (moisChiffre == 12) {
+    } else if (moisChiffre == 11) {
       return "décembre";
     }
     return ""
