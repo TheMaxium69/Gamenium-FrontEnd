@@ -146,13 +146,7 @@ getPinnedGames(): HistoryMyGameInterface[] {
 /* OBTENIR LES JEUX NON EPINGLES */
 getUnpinnedGames(): HistoryMyGameInterface[] {
   if (this.searchQuery || this.isFilterApplied()) {
-    // Si un filtre ou une recherche et appliqué on renvoie le tableau filtré 
-    let filteredSecondArray = this.myGameHistoriqueAll;
-    for (let i = 0; i < filteredSecondArray.length; i++) {
-      const element = filteredSecondArray[i].myGame.is_pinned = false;;
-      
-    }
-    
+    // Si un filtre ou une recherche et appliqué on renvoie le tableau filtré   
     return this.filteredGames ?? [];
   } else {
     // Sinon on renvoie les jeux unpin
