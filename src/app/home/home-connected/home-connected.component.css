@@ -374,7 +374,7 @@ a{
   background-color: white;
   border-radius: 100%;
   box-shadow: 0px 0px 12px 0px rgba(89,88,88,0.7);
-  background-image: url("https://cdn.discordapp.com/attachments/1203971108471177288/1217033755840217168/KT_logo.png?ex=66028e02&is=65f01902&hm=3c7e8b5287eebd8a9caf12b6d6c59e83503208fd996282546e1292cbaec09814&");
+  /*background-image: url("https://cdn.discordapp.com/attachments/1203971108471177288/1217033755840217168/KT_logo.png?ex=66028e02&is=65f01902&hm=3c7e8b5287eebd8a9caf12b6d6c59e83503208fd996282546e1292cbaec09814&");*/
   background-position: center;
   background-size: cover;
 }

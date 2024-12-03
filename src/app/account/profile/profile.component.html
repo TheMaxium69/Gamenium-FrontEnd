@@ -1,6 +1,7 @@
 <div class="top" style="background-color: {{ color }}!important;"></div>
 
 
+<!--<input type="file" (change)="onFileChanged($event)" id="profilePictureInput">-->
 
 <div class="circle">
   <div class="circle-img" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displaynameUseritium || this.userConnected?.username, color) }}"></div>
@@ -81,16 +82,16 @@
               <!-- Update la photo de profil -->
               <div class="settings-section">
                 <h5 class="setting-title">Photo de profil</h5>
-                <form enctype="multipart/form-data">
+                <div>
                   <div class="file-upload">
                     <input type="file" (change)="onFileChanged($event)" id="profilePictureInput">
-                    <label for="profilePictureInput" class="file-label">
-                      <i class="ri-upload-cloud-line"></i> Sélectionner une image
-                    </label>
+<!--                    <label for="profilePictureInput" class="file-label">-->
+<!--                      <i class="ri-upload-cloud-line"></i> Sélectionner une image-->
+<!--                    </label>-->
 <!--                    <button [ngStyle]="{ '&#45;&#45;color': color ?? 'red' }" type="button" id="upload-button" class="btn-upload" (click)="onUpload()">Télécharger</button>-->
                     <button style="background-color: {{ color }}" type="button" id="upload-button" class="main-gamenium-btn" (click)="onUpload()">Télécharger</button>
                   </div>
-                </form>
+                </div>
               </div>
               <!-- Affichage des badges -->
               <div class="badges-section" *ngIf="badgeUserConnected">

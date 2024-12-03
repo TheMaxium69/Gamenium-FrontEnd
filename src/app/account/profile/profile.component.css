@@ -446,9 +446,9 @@ a > div {
   margin-right: 5px;
 }
 
-.file-upload input[type="file"] {
-  display: none;
-}
+/*.file-upload input[type="file"] {*/
+/*  display: none;*/
+/*}*/
 
 .social-input:focus {
   outline: 2px solid var(--color);
