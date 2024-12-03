@@ -91,24 +91,27 @@ export class SearchGameComponent implements OnInit{
     if (this.searchValue.trim() !== '') {
       this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
         this.games = results;
-        if (this.games.length >= 1){
-          this.router.navigate(['/search/game/' + this.searchValue.trim()]);
-        }
       });
+      if (this.games.length >= 1){
+        console.log('game');
+        this.router.navigate(['/search/game/' + this.searchValue.trim()]);
+      }
       
       this.userService.searchUsers(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
         this.users = results;
-        if (this.users.length >= 1){
-          this.router.navigate(['/search/user/' + this.searchValue.trim()]);
-        }
       });
+      if (this.users.length >= 1){
+        console.log('user');
+        this.router.navigate(['/search/user/' + this.searchValue.trim()]);
+      }
 
       this.providerService.searchProviders(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
         this.providers = results;
-        if (this.providers.length >= 1){
-          this.router.navigate(['/search/provider/' + this.searchValue.trim()]);
-        }
       });
+      if (this.providers.length >= 1){
+        console.log('provider')
+        this.router.navigate(['/search/provider/' + this.searchValue.trim()]);;
+      }
 
     } else {
       // this.router.navigate(['/search/game/' + this.searchValue.trim()]);
