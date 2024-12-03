@@ -52,8 +52,6 @@ export class EditedMygameComponent implements OnInit {
   nbCopyGenerate:number = 10;
   isNewCopy:string ="new";
 
-  debug(){console.log(this.idFormValide);console.log('nbCopyView : ' + this.nbCopyView)}
-
   ngOnInit() {
 
     this.idOneMyGame = this.route.snapshot.paramMap.get('editid');
@@ -245,7 +243,7 @@ export class EditedMygameComponent implements OnInit {
 
   updateMyGame(form: NgForm){
 
-    // console.log(form.value);
+    console.log(form.value);
 
     /* SAVOIR LE NOMBRE DE COPY*/
     let copyCount: number = 0;
@@ -255,11 +253,20 @@ export class EditedMygameComponent implements OnInit {
       }
     }
     // console.log(`Number of copies: ${copyCount}`);
+    let is_pinned: boolean | undefined = this.selectedMyGame?.myGame.is_pinned
+    if (form.value.is_pinned == true || form.value.is_pinned == "true") {
+      is_pinned = true;
+    }
+    if (form.value.is_pinned == false || form.value.is_pinned == "false") {
+      is_pinned = false;
+    }
+
+
 
     /* MODIFIER LE MYGAME */
     let newMyGame = {
       id: form.value.myGameId,
-      is_pinned: form.value.is_pinned,
+      is_pinned: is_pinned,
       difficulty_rating: form.value.difficulty_rating,
       lifetime_rating: form.value.lifetime_rating,
       wish_list: form.value.wish_list,

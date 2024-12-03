@@ -31,7 +31,7 @@
       </div>
 
 
-      <button class="main-gamenium-btn" routerLink="/game/{{ selectedMyGame.myGame.game.id }}" data-bs-dismiss="modal" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Voir le jeux</button>
+      <button type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Sauvegardé <i class="ri-save-3-fill"></i></button>
 
     </div>
 
@@ -46,20 +46,25 @@
     <div class="panel">
 
       <div class="head-panel">
-        <h2><i class="ri-pushpin-fill"></i>Épinglé</h2>
+        <h2 style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}"><i class="ri-pushpin-fill"></i>Épinglé</h2>
       </div>
 
 
-      <label for="is_pinned_true">
-        <input type="radio" id="is_pinned_true" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned"
-               [value]="true">
-        Épinglé
-      </label>
-      <label for="is_pinned_false">
-        <input type="radio" id="is_pinned_false" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned"
-               [value]="false">
-        Non épinglé
-      </label>
+<!--      <label for="is_pinned_true">-->
+<!--        <input type="radio" id="is_pinned_true" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned"-->
+<!--               [value]="true">-->
+<!--        Épinglé-->
+<!--      </label>-->
+<!--      <label for="is_pinned_false">-->
+<!--        <input type="radio" id="is_pinned_false" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned"-->
+<!--               [value]="false">-->
+<!--        Non épinglé-->
+<!--      </label>-->
+
+      <select id="is_pinned" name="is_pinned" [(ngModel)]="selectedMyGame.myGame.is_pinned">
+        <option [value]="true">Épinglé</option>
+        <option [value]="false">Non épinglé</option>
+      </select>
 
     </div>
 
@@ -86,7 +91,7 @@
     <div class="panel">
 
       <div class="head-panel">
-        <h2><i class="ri-user-star-fill"></i>Evaluation</h2>
+        <h2 style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}"><i class="ri-medal-fill"></i>Evaluation</h2>
       </div>
 
       <!-- NOTE GLOBAL -->
@@ -99,8 +104,19 @@
         <input type="number" id="rating" name="rating" ngModel>
       </ng-container>
 
+      <br>
+      <textarea type="text" id="content_rating" name="content_rating" placeholder="Expliqué votre note"></textarea>
+
+    </div>
+
+    <div class="panel">
+
+      <div class="head-panel">
+        <h2><i class="ri-user-star-fill"></i>Avis</h2>
+      </div>
+
       <!-- DIFICULTER -->
-      <label >Difficulty rating:</label>
+      <label>Difficulty rating:</label>
       <label for="difficulty_rating_1">
         <input type="radio" id="difficulty_rating_1" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
                name="difficulty_rating" [value]="1">
@@ -158,21 +174,28 @@
 
     <!-- EXEMPLAIRE -->
     <div>
-      <h1>Exemplaire <span>{{ nbCopyView }}{{ noRealCopy() }}</span> :</h1>
-      <button type="button" (click)="addCopyGame()">Ajouter un exemplaire</button>
-      <button type="button" (click)="debug()">debug</button>
+
+      <div class="head-all-exemplaire">
+        <h1>Exemplaire (Total <span>{{ nbCopyView }}{{ noRealCopy() }}</span>)</h1>
+        <button class="sub-gamenium-btn" type="button" (click)="addCopyGame()" style="border-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}; color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }};"><i class="ri-add-large-fill"></i></button>
+<!--        <i class="ri-sticky-note-add-fill" (click)="addCopyGame()" style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}"></i>-->
+      </div>
+
+      <!-- UN EXEMPLAIRE -->
       <ng-container *ngFor="let copyGame of selectedMyGame.copyGame; let i = index">
 
         <div class="oneExemplaire copyCard{{i}}" id="copyCard{{i}}">
-          <h1>Form ID {{i}}</h1>
-          <button type="button" (click)="deleteCopyGame(i)">Del cette exemplaire</button>
+          <div class="head-one-exemplaire">
+            <h3>Exemplaire #{{i+1}}</h3>
+            <i class="ri-delete-bin-fill" (click)="deleteCopyGame(i)"></i>
+          </div>
 
           <input type="hidden" [(ngModel)]="copyGame.id" name="copy{{i}}">
 
           <!-- EDITIONS-->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-id-card-fill"></i>Editions</h2>
+              <h2><i class="ri-id-card-fill"></i>Editions <small>#{{i+1}}</small></h2>
             </div>
             <input type="text" id="edition{{i}}" [(ngModel)]="copyGame.edition" name="edition{{i}}" placeholder="Editions">
           </div>
@@ -180,7 +203,7 @@
           <!-- BARCODE -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-barcode-fill"></i>Barcode</h2>
+              <h2><i class="ri-barcode-fill"></i>Barcode <small>#{{i+1}}</small></h2>
             </div>
             <input type="text" id="barcode{{i}}" [(ngModel)]="copyGame.barcode" name="barcode{{i}}" placeholder="Barcode">
           </div>
@@ -188,7 +211,7 @@
           <!-- CONTENT -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-message-2-fill"></i>Description de l'exemplaire</h2>
+              <h2><i class="ri-message-2-fill"></i>Description de l'exemplaire <small>#{{i+1}}</small></h2>
             </div>
             <textarea type="text" id="content{{i}}" [(ngModel)]="copyGame.content" name="content{{i}}" placeholder="Description de l'exemplaire"></textarea>
           </div>
@@ -196,7 +219,7 @@
           <!-- ETAT -->
           <div class="panel">
             <div class="head-panel">
-              <h2>Etat</h2>
+              <h2><i class="ri-hand-coin-fill"></i>Etat <small>#{{i+1}}</small></h2>
             </div>
             <ng-container *ngIf="hmgCopyEtatAll && copyGame.etat">
               <select id="etat{{i}}" [(ngModel)]="copyGame.etat.id" name="etat{{i}}">
@@ -219,7 +242,7 @@
           <!-- FORMAT -->
           <div class="panel">
             <div class="head-panel">
-              <h2>Format</h2>
+              <h2><i class="ri-instance-fill"></i>Format <small>#{{i+1}}</small></h2>
             </div>
             <ng-container *ngIf="hmgCopyFormatAll && copyGame.format">
               <select id="format{{i}}" [(ngModel)]="copyGame.format.id" name="format{{i}}">
@@ -242,7 +265,7 @@
           <!-- REGION -->
           <div class="panel">
             <div class="head-panel">
-              <h2>Region</h2>
+              <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1}}</small></h2>
             </div>
             <ng-container *ngIf="hmgCopyRegionAll && copyGame.region">
               <select id="region{{i}}" [(ngModel)]="copyGame.region.id" name="region{{i}}">
@@ -269,7 +292,7 @@
           <div class="panel">
 
             <div class="head-panel">
-              <h2>Purchase</h2>
+              <h2><i class="ri-shopping-cart-2-fill"></i>Purchase <small>#{{i+1}}</small></h2>
               <i class="ri-more-2-fill"></i>
             </div>
             <ng-container *ngIf="copyGame.purchase">
@@ -472,10 +495,12 @@
   </div>
   </ng-container>
 
-  <button class="main-gamenium-btn" type="submit" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Sauvegardé</button>
+  <div class="end-action">
+    <button class="main-gamenium-btn" type="submit" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Sauvegardé <i class="ri-save-3-fill"></i></button>
+    <button class="sub-gamenium-btn" (click)="this.app.deleteMyGame(idOneMyGame)">Supprimer le jeux de votre collection</button>
+  </div>
 </form>
 
-  <button class="sub-gamenium-btn" (click)="this.app.deleteMyGame(idOneMyGame)">Supprimer le jeux de votre collection</button>
 </section>
 
 
