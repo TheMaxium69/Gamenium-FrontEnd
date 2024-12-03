@@ -157,6 +157,9 @@ hr {
   padding-right: 8px;
 }
 
+.search-setting p {
+  color: var(--third-color);
+}
 
 .search-icon-container:hover i  {
   color: #ffffff;
@@ -243,14 +246,6 @@ a > div {
   margin-top: unset;
 }
 
-.card-body h5 {
-  border-bottom: 1px solid black;
-  padding-bottom: 25px;
-  margin-bottom: 23px;
-  margin-top: 24px;
-  font-weight: bold;
-}
-
 .card-body {
   background: transparent;
   border: unset;
@@ -304,8 +299,7 @@ a > div {
   text-align: left;
 }
 
-.badges-section h5,
-.settings-section h5 {
+.setting-title {
   text-align: start;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
@@ -567,8 +561,8 @@ a > div {
 #no-results.no-result-message {
   padding: 15px;
   border-radius: 15px;
-  font-size: 24px;
-  color: black;
+  font-size: 18px;
+  color: var(--third-color);
   background-color: #F3F3F3;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 }

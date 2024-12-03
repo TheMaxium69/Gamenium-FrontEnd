@@ -29,6 +29,10 @@
       </form>
     </div>
 
+    <div id="result" class="composant" style="display: none;">
+      <h2>Résultats</h2>
+      <hr>
+    </div>
 
     <!-- PARAMETRE DU COMPTE -->
     <div class="composant para-container">
@@ -62,7 +66,7 @@
               </div>
               <!-- Color Picker -->
               <div class="settings-section">
-                <h5>Couleur du thème</h5>
+                <h5 class="setting-title">Couleur du thème</h5>
                 <div class="color-picker">
                   <div class="colorpick">
 
@@ -76,7 +80,7 @@
               </div>
               <!-- Update la photo de profil -->
               <div class="settings-section">
-                <h5>Photo de profil</h5>
+                <h5 class="setting-title">Photo de profil</h5>
                 <form enctype="multipart/form-data">
                   <div class="file-upload">
                     <input type="file" (change)="onFileChanged($event)" id="profilePictureInput">
@@ -90,7 +94,7 @@
               </div>
               <!-- Affichage des badges -->
               <div class="badges-section" *ngIf="badgeUserConnected">
-                <h5>Vos badges</h5>
+                <h5 class="setting-title">Vos badges</h5>
                 <div class="badges">
                   <ng-container *ngFor="let badge of badgeUserConnected">
                     <div class="badge">
@@ -118,7 +122,7 @@
           <div class="card card-body modern-card">
             <!-- Card Connexion -->
             <div class="connection-card">
-              <h5>Vos réseaux</h5>
+              <h5 class="setting-title">Vos réseaux</h5>
               <form class="reseau" #addUrlForm="ngForm" (ngSubmit)="addUrlSocial(addUrlForm)" method="post">
                 <ng-container *ngFor="let socialNetworkOne of socialNetworkAll">
                   <div class="social-item">
@@ -153,7 +157,7 @@
           <div class="card card-body modern-card">
             <!-- COntent Changement de MDP -->
             <div class="password-card">
-              <h5>Changer le mot de passe</h5>
+              <h5 class="setting-title">Changer le mot de passe</h5>
             </div>
             <p>Faire redirection ou gestion de création de MDP ici</p>
           </div>
@@ -174,10 +178,10 @@
     </div>
 
     <!-- Section Information -->
-    <div class="composant">
+    <div class="composant informations-section">
       <h2>Informations</h2>
       <hr>
-      <div class="para radius mb-4">
+      <div class="para radius mb-4 search-setting">
         <a routerLink="/terms">
           <div><i class="ri-information-2-line"></i>
             <h3>
@@ -188,7 +192,7 @@
         </a>
       </div>
 
-    <div class="para radius mb-4">
+    <div class="para radius mb-4 search-setting">
       <a data-bs-toggle="collapse" href="#collapseBadges" role="button" aria-expanded="false" aria-controls="collapseBadges">
         <div><i class="ri-emotion-happy-line"></i>
           <h3>
@@ -201,7 +205,7 @@
         <div class="card card-body modern-card">
           <!-- Contenu de la section Tous nos badges -->
           <div class="badges-card">
-            <h5>Vitrine de nos badges</h5>
+            <h5 class="setting-title">Vitrine de nos badges</h5>
           </div>
           <div>
           <ng-container *ngFor="let badge of allBadges">

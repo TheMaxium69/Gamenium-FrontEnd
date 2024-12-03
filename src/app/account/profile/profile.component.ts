@@ -47,12 +47,12 @@ export class ProfileComponent implements OnInit {
     private uploadService: UploadProfilePictureService,
     private socialnetworkService: SocialNetworkService,
     private profileService: ProfilService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
   ) {}
 
   ngOnInit() {
     this.userConnected = this.app.userConnected;
-    console.log(this.userConnected)
+
     if (this.userConnected) {
       this.getBadgeByUser(this.userConnected.id);
 
@@ -61,6 +61,8 @@ export class ProfileComponent implements OnInit {
       this.getInfoProfile(this.userConnected.id)
 
       this.loadThemeColor();
+
+      this.populateResultDiv()
     }
 
     this.getAllSocialNetwork();
@@ -68,48 +70,87 @@ export class ProfileComponent implements OnInit {
     this.getAllBadges();
   }
 
-  filterSettings(event: Event) {
-    const inputValue = (event.target as HTMLInputElement).value;
-    const search = inputValue?.toLowerCase()
+  populateResultDiv() {
+    const resultDiv = document.querySelector('#result') as HTMLElement
     const settings = document.querySelectorAll('.search-setting')
-    let settingsResultNumber = settings.length
 
     settings.forEach((setting) => {
       if (setting instanceof HTMLElement) {
-        const settingText = setting.innerText.toLocaleLowerCase()
-
-        if (search && !settingText.includes(search)) {
-          setting.style.display = 'none'
-          settingsResultNumber--
-        } else {
-          setting.style.display = 'block'
-        }
+        const clone = setting.cloneNode(true) as HTMLElement;
+        resultDiv.appendChild(clone);
       }
     });
-
-    console.log(settingsResultNumber)
-    const settingSection = document.querySelector('#settings-hr')
-    if (settingsResultNumber == 0) {
-      let noResult = document.querySelector('#no-results') as HTMLElement
-
-      if (!noResult) {
-        noResult = this.renderer.createElement('div')
-        this.renderer.setAttribute(noResult, 'id', 'no-results')
-        this.renderer.addClass(noResult, 'no-result-message')
-        this.renderer.addClass(noResult, 'mb-4')
-        const noResultContent = 'Pas de résultat pour la recherche'
-        this.renderer.setProperty(noResult, 'innerText', noResultContent)
-        settingSection?.after(noResult)
-      }
-    } else {
-      const noResult = document.querySelector('#no-results')
-      if (noResult) {
-        noResult.remove()
-      }
-    }
-
   }
 
+
+  filterSettings(event: Event) {
+    const inputValue = (event.target as HTMLInputElement).value.trim();
+    const search = inputValue.toLowerCase();
+    const resultDiv = document.querySelector('#result') as HTMLElement;
+    const accountSection = document.querySelector('.para-container') as HTMLElement;
+    const infoSection = document.querySelector('.informations-section') as HTMLElement;
+    const unlog = document.querySelector('.unlog') as HTMLElement;
+  
+    let settingsResultNumber = 0;
+  
+    resultDiv.style.display = 'block';
+  
+    Array.from(resultDiv.children).forEach((child) => {
+      const setting = child as HTMLElement;
+      const settingText = setting.innerText.toLowerCase();
+  
+      if (search && !settingText.includes(search)) {
+        setting.style.display = 'none';
+
+      } else {
+        setting.style.display = 'block';
+        settingsResultNumber++;
+      }
+    });
+  
+    if (!search) {
+      resultDiv.style.display = 'none';
+      accountSection.style.display = 'block';
+      infoSection.style.display = 'block';
+      unlog.style.display = 'block';
+      this.removeNoResultMessage(resultDiv);
+
+    } else {
+      accountSection.style.display = 'none';
+      infoSection.style.display = 'none';
+      unlog.style.display = settingsResultNumber > 0 ? 'block' : 'none';
+    }
+  
+    if (settingsResultNumber === 0) {
+      this.displayNoResultMessage(resultDiv);
+
+    } else {
+      this.removeNoResultMessage(resultDiv);
+    }
+  }
+
+  displayNoResultMessage(container: HTMLElement) {
+    let noResult = document.querySelector('#no-results') as HTMLElement;
+  
+    if (!noResult) {
+      noResult = document.createElement('div');
+      noResult.id = 'no-results';
+      noResult.classList.add('no-result-message');
+      noResult.innerText = 'Pas de résultat pour la recherche';
+      container.appendChild(noResult);
+    }
+    
+    noResult.style.display = 'block';
+  }
+  
+  removeNoResultMessage(container: HTMLElement) {
+    const noResult = document.querySelector('#no-results');
+
+    if (noResult) {
+      noResult.remove();
+    }
+  }
+    
   loadThemeColor() {
     const userId = this.userConnected?.id;
     if (userId) {
