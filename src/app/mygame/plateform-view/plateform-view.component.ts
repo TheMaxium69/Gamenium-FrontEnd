@@ -32,7 +32,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   searchValue: string = '';
   searchQuery: string = '';
   filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
-  sortOption: string = 'added-desc'; // Tri par défaut
+  sortOption: string = ''; // Tri par défaut
   isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
 
 
@@ -180,13 +180,25 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     })
   }
 
-  /* OBTENIR LES JEUX PAR PLATEFORME */
-  myGameByUserWithPlateform(id_user: number, id_plateform:number) {
-    this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe(response => {
-      if (response.message === "good") {
-        this.HistoireMyGameByUserByPlateform = response.result || [];
-        this.filterGames();
+  // /* OBTENIR LES JEUX PAR PLATEFORME */
+  // myGameByUserWithPlateform(id_user: number, id_plateform:number) {
+  //   this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe(response => {
+  //     if (response.message === "good") {
+  //       // this.HistoireMyGameByUserByPlateform = response.result || [];
+  //       this.filterGames();
 
+  //     }
+  //   });
+  // }
+
+  myGameByUserWithPlateform(id_user: number, id_plateform:number): void {
+    this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+      if (responseMyGame.message == "good") {
+        // this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
+        this.HistoireMyGameByUserByPlateform = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
+        this.filterGames();
+      } else {
+        console.log("pas de jeux trouvé pour l'utilisateur")
       }
     });
   }
@@ -194,7 +206,8 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   myGameByUser(id_user: number): void {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
-        this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
+        // this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
+        this.HistoireMyGameByUserByPlateform = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
         this.filterGames();
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
@@ -253,7 +266,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
   //check si un filtre autre que celui par default est appliqué
   isFilterApplied(): boolean {
-    return this.sortOption !== 'added-desc';
+    return this.sortOption !== '';
   }
 
   // récup jeu pin

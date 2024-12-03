@@ -28,7 +28,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   // Pour la recherche
   searchQuery: string = '';
   filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
-  sortOption: string = 'added-desc'; // Tri par défaut
+  sortOption: string = ''; // Tri par défaut
   isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
 
   constructor(protected app:AppComponent,
@@ -89,28 +89,31 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   }
 
 
-
-  /* OBTENIR LES JEUX PAR PLATEFORME */
-  myGameByUserWithPlateform(id_user: number, id_plateform:number) {
+  myGameByUserWithPlateform(id_user: number, id_plateform:number): void {
     this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
-        this.myGameHistoriqueAll = responseMyGame.result;
+        // this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
+        this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
+        this.filterGames();
+      } else {
+        console.log("pas de jeux trouvé pour l'utilisateur")
       }
     });
   }
 
+  myGameByUser(id_user:number): void {
 
-  myGameByUser(id_user:number){
-
-    this.myGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe(responseMyGame => {
+    this.myGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
 
       if (responseMyGame.message == "good"){
+        this.myGameHistoriqueAll = responseMyGame.result?.sort((a,b) => new Date(b.myGame.added_at).getTime() - new Date (a.myGame.added_at).getTime()) || [];
         this.myGameHistoriqueAll = responseMyGame.result;
       } else {
         console.log("pas de jeux")
       }
 
     });
+    
 
     this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
 
@@ -244,7 +247,7 @@ filterGames(): void {
 
   //check si un filtre autre que celui par default est appliqué
   isFilterApplied(): boolean {
-    return this.sortOption !== 'added-desc';
+    return this.sortOption !== '';
   }
   
   // different filtre de tri
