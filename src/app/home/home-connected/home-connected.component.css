@@ -128,8 +128,9 @@ a{
   font-weight: 700;
 }
 
-#profilWrapper .articleTuto {
-  padding: 0px 35px;
+
+#profilWrapper .row {
+  margin: 0 !important;
 }
 
 #profilWrapper .articleTuto .actionPossible {
@@ -505,7 +506,6 @@ a{
   #profilWrapper .articleTuto .actionPossible {
     margin-bottom: 20px;
   }
-
 
 }
 
