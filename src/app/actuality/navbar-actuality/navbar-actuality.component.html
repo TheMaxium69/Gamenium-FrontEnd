@@ -11,7 +11,7 @@
           <ng-container *ngFor="let provider of providerFollowOrAll">
             <!-- OLD REDIRECT routerLink="/provider/{{ provider.id }}" -->
             <li (click)="selectOneProviderActu(provider.id)">
-              <div class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
+              <div id="provider{{provider.id}}" class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
             </li>
           </ng-container>
         </ng-container>
@@ -19,7 +19,7 @@
           <ng-container *ngFor="let provider of providerFollowOrAll">
             <!-- OLD REDIRECT routerLink="/provider/{{ provider.id }}" -->
             <li (click)="selectOneProviderActu(provider.id)">
-              <div class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
+              <div id="provider{{provider.id}}" class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
             </li>
           </ng-container>
         </ng-container>

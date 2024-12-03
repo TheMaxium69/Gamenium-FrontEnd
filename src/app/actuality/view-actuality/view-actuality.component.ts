@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges, Renderer2} from '@angular/core';
 import { UserInterface } from "../../-interface/user.interface";
 import { AppComponent } from "../../app.component";
 import { PostActuService } from "../../-service/post-actu.service";
@@ -10,14 +10,15 @@ import Swal from "sweetalert2";
   templateUrl: './view-actuality.component.html',
   styleUrls: ['./view-actuality.component.css']
 })
-export class ViewActualityComponent implements OnInit {
+export class ViewActualityComponent implements OnInit, OnChanges {
 
   @Input()
   public providerIdSelected: number | null = null;
 
   constructor(
     private app: AppComponent,
-    private postActuService: PostActuService
+    private postActuService: PostActuService,
+    private renderer: Renderer2
   ) {}
 
   isLogIn: boolean | undefined;
@@ -38,6 +39,28 @@ export class ViewActualityComponent implements OnInit {
       }
     } else {
       this.getActuByProvider(this.providerIdSelected);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const providerSelected = document.querySelector('#provider' + changes['providerIdSelected'].currentValue)
+    const lastProviderSelected = document.querySelector('#provider' + changes['providerIdSelected'].previousValue)
+    
+    if (changes['providerIdSelected'].currentValue) {
+
+      if (lastProviderSelected) {
+        this.renderer.removeClass(lastProviderSelected, 'provider-selected')
+      }
+
+      this.renderer.addClass(providerSelected, 'provider-selected')
+      
+      this.getActuByProvider(changes['providerIdSelected'].currentValue)
+      return this.ActuByProvider()
+      
+    } else {
+      this.renderer.removeClass(lastProviderSelected, 'provider-selected')
+
+      return this.getActuAll()
     }
   }
 
