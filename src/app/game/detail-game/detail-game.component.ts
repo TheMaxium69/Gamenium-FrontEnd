@@ -1,4 +1,4 @@
-import {AfterContentInit, AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GameService} from "../../-service/game.service";
 import {AppComponent} from "../../app.component";
@@ -31,6 +31,8 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   mouseDown: boolean = false;
   startX: number = 0;
   scrollLeft: number = 0;
+
+  showBackToTop = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -133,6 +135,18 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
     return false;
 
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    // Affiche l'icône si le scroll dépasse une certaine hauteur (ex: 300px)
+    this.showBackToTop = scrollPosition > 300;
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   ////////////////////////////// Initialisation après l'initialisation du DOM pour que le carroussel fonctionne  /////////////////////

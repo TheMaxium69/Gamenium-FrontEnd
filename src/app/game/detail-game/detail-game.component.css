@@ -969,3 +969,21 @@
 }
 
 /* //////////////// FIN DE ZONE SHOW COLLECTION /////////////// */
+
+/* //////////////// DEBUT DE ZONE BACK TO TOP /////////////// */
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 5;
+}
+
+.back-to-top i {
+  font-size: xx-large;
+  color: black;
+  cursor: pointer;
+}
+
+
+/* //////////////// FIN DE ZONE BACK TO TOP /////////////// */
