@@ -25,6 +25,11 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   userRatingAll:UserRateInterface[]|undefined;
   isColor: string = this.app.colorDefault;
 
+  //Pour les jeux communs
+  userConnected: UserInterface | undefined;
+  userConnectedGame: HistoryMyGameInterface[] | undefined ;
+  commonGame : HistoryMyGameInterface [] | undefined;
+
   // Pour la recherche
   searchQuery: string = '';
   filteredGames: HistoryMyGameInterface[] = []; // liste des jeux filtré
@@ -43,6 +48,11 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   ngOnInit(): void {
 
     this.profileId = this.route.snapshot.paramMap.get('id');
+    this.userConnected = this.app.userConnected;
+
+    if(this.userConnected) {
+      this.myGameByUser(this.userConnected.id);
+    }
 
     this.route.paramMap.subscribe(params => {
       const newTask = params.get('task');
@@ -52,6 +62,9 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         this.loadProfil();
       }
     });
+
+ 
+    
 
   }
 
@@ -79,6 +92,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
       // Set la recher
       if (this.task){
         this.myGameByUserWithPlateform(this.profilSelected.id, this.plateformeId);
+
       } else {
         this.myGameByUser(this.profilSelected.id);
       }
@@ -103,16 +117,25 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   myGameByUser(id_user:number): void {
 
-    this.myGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
-
-      if (responseMyGame.message == "good"){
-        this.myGameHistoriqueAll = responseMyGame.result?.sort((a,b) => new Date(b.myGame.added_at).getTime() - new Date (a.myGame.added_at).getTime()) || [];
-        this.myGameHistoriqueAll = responseMyGame.result;
-      } else {
-        console.log("pas de jeux")
-      }
-
-    });
+      this.myGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+        if (responseMyGame.message === "good") {
+          if (id_user === this.userConnected?.id) {
+            // on save les jeux de l'user connecté
+            this.userConnectedGame = responseMyGame.result || [];
+            console.log("Jeux de l'user connecter", this.userConnectedGame);
+          } else {
+            // on save les jeux lié au profil 
+            this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) =>
+              new Date(b.myGame.added_at).getTime() - new Date(a.myGame.added_at).getTime()
+            ) || [];
+            console.log("Jeux lié a ce profil", this.myGameHistoriqueAll);
+          }
+        } else {
+          console.log("Pas de jeux pour l'utilisateur courrant", id_user);
+        }
+        this.findCommonGames();
+      });
+    
     
 
     this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
@@ -303,6 +326,26 @@ filterGames(): void {
         break;
     }
   }
+
+  // JEUX EN COMMUNS 
+  
+  findCommonGames(): void {
+    if (!this.userConnectedGame || !this.myGameHistoriqueAll) {
+      console.log("Un des deux utilisateur n'a pas de jeux .");
+      return;
+    }
+    this.commonGame = this.userConnectedGame.filter(connectedGame => 
+      this.myGameHistoriqueAll?.some(
+        secondUserGame => secondUserGame.myGame.game.id === connectedGame.myGame.game.id
+      )
+    );
+
+    console.log('Common games:', this.commonGame);
+
+
+  
+  }
+  
 
 }
 
