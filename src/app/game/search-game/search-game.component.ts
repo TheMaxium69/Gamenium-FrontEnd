@@ -7,6 +7,10 @@ import { UserRateService } from 'src/app/-service/user-rate.service';
 import { UserRateInterface } from 'src/app/-interface/user-rate.interface';
 import { ProfilService } from 'src/app/-service/profil.service';
 import { ProfilInterface } from 'src/app/-interface/profil.interface';
+import { UserInterface } from 'src/app/-interface/user.interface';
+import { UserService } from 'src/app/-service/user.service';
+import { ProviderService } from 'src/app/-service/provider.service';
+import { ProviderInterface } from 'src/app/-interface/provider.interface';
 
 
 @Component({
@@ -19,6 +23,8 @@ export class SearchGameComponent implements OnInit{
   isLoggedIn:boolean|undefined;
 
   games: GameInterface[] = [];
+  users: UserInterface[] = [];
+  providers: ProviderInterface[] = [];
   searchValue: string = '';
   userRatingAll: UserRateInterface[] | undefined;
   fakeRates: number[] = [8, 14, 19, 13];
@@ -29,6 +35,8 @@ export class SearchGameComponent implements OnInit{
   constructor (
     private userRateService: UserRateService,
     private gameService: GameService,
+    private userService: UserService,
+    private providerService: ProviderService,
     protected app: AppComponent,
     private profileService: ProfilService,
     private router: Router
@@ -79,11 +87,32 @@ export class SearchGameComponent implements OnInit{
 
 
   onSearch(): void {
-
+    this.games = [];
     if (this.searchValue.trim() !== '') {
+      this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+        this.games = results;
+        if (this.games.length >= 1){
+          this.router.navigate(['/search/game/' + this.searchValue.trim()]);
+        }
+      });
+      
+      this.userService.searchUsers(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+        this.users = results;
+        if (this.users.length >= 1){
+          this.router.navigate(['/search/user/' + this.searchValue.trim()]);
+        }
+      });
 
-      this.router.navigate(['/search/game/' + this.searchValue.trim()]);
+      this.providerService.searchProviders(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+        this.providers = results;
+        if (this.providers.length >= 1){
+          this.router.navigate(['/search/provider/' + this.searchValue.trim()]);
+        }
+      });
 
+    } else {
+      // this.router.navigate(['/search/game/' + this.searchValue.trim()]);
+      this.router.navigate(['/search/game/-']);
     }
   }
 
