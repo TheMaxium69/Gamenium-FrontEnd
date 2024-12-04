@@ -139,6 +139,7 @@
 
 #last-header {
   margin-left: auto;
+  cursor: pointer;
 }
 
 #sort {
@@ -239,4 +240,9 @@
   margin-right: 56rem;
   color:#575757;
   font-size: small;
+}
+
+.invertSort {
+  display: flex;
+  flex-direction: column-reverse;
 }

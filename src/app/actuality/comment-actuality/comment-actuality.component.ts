@@ -16,6 +16,7 @@ import { LikeService } from 'src/app/-service/like.service';
 import { IpService } from 'src/app/-service/ip.service';
 import { LikeInterface } from 'src/app/-interface/like.interface';
 import Swal from "sweetalert2";
+import { empty } from 'rxjs';
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -37,6 +38,10 @@ export class CommentActualityComponent implements OnInit{
   commentLikedMap = new Map<number, boolean>();
   LikeAll: LikeInterface[]|undefined;
   nbLike: number | undefined = 0;
+  sort: boolean = true;
+  sortText: string | undefined = "récents";
+  textValue: string = ""
+  textLenght: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -579,6 +584,28 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
+  sortComment() {
+    const otherComment = document.querySelector('#OtherComments') as HTMLElement;
+    //sort  recent - oldest
 
+    if (this.sort) {
+      otherComment.classList.add('invertSort');
+      this.sort = false;
+      console.log('recents')
+      this.sortText = "anciens";
+    } 
+    else {
+      otherComment.classList.remove('invertSort');
+      this.sort = true;
+      console.log('pasrecents')
+      this.sortText = "récents";
+    }
+
+  }
+
+  getCommentLenght() {
+    this.textLenght = this.textValue.length+1
+    console.log(this.textLenght)
+  }
 
 }
