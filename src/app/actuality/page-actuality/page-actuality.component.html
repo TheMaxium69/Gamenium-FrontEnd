@@ -5,6 +5,9 @@
     <app-view-actuality [providerIdSelected]="providerSelected ?? null" 
     [providerFollowed]="providerFollowed"></app-view-actuality>
   </div>
+
+  <!-- FLECHE POUR REMONTER EN HAUT DE LA PAGE -->
+  <app-back-to-top></app-back-to-top>
 </ng-container>
 
 <ng-container *ngIf="actualityId">

@@ -61,6 +61,7 @@ import { CardActuComponent } from './-global/card-actu/card-actu.component';
 import { CardGameSubComponent } from './-global/card-game-sub/card-game-sub.component';
 import { CardProviderComponent } from './-global/card-provider/card-provider.component';
 import { CardProfilComponent } from './-global/card-profil/card-profil.component';
+import { BackToTopComponent } from './-global/back-to-top/back-to-top.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import { CardProfilComponent } from './-global/card-profil/card-profil.component
     CardActuComponent,
     CardGameSubComponent,
     CardProviderComponent,
-    CardProfilComponent
+    CardProfilComponent,
+    BackToTopComponent
 
   ],
   imports: [

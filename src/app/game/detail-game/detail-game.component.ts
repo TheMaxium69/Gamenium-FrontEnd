@@ -32,8 +32,6 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   startX: number = 0;
   scrollLeft: number = 0;
 
-  showBackToTop = false;
-
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
@@ -135,16 +133,6 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
     return false;
 
-  }
-
-  @HostListener('window:scroll', [])
-  onScroll(): void {
-    const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    this.showBackToTop = scrollPosition > 800;
-  }
-
-  scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   ////////////////////////////// Initialisation après l'initialisation du DOM pour que le carroussel fonctionne  /////////////////////

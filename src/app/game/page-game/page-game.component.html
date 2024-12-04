@@ -1,7 +1,14 @@
 <ng-container *ngIf="!gameId">
   <app-search-game></app-search-game>
+
+  <!-- FLECHE POUR REMONTER EN HAUT DE LA PAGE -->
+  <app-back-to-top></app-back-to-top>
+
 <!--  <app-preview-game></app-preview-game>-->
 </ng-container>
 <ng-container *ngIf="gameId">
   <app-detail-game></app-detail-game>
+
+  <!-- FLECHE POUR REMONTER EN HAUT DE LA PAGE -->
+  <app-back-to-top></app-back-to-top>
 </ng-container>
