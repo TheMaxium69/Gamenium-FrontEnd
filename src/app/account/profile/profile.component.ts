@@ -162,10 +162,11 @@ export class ProfileComponent implements OnInit {
   
     if (!noResult) {
       noResult = document.createElement('div');
-      noResult.id = 'no-results';
-      noResult.classList.add('no-result-message');
-      noResult.innerText = 'Pas de résultat pour la recherche';
-      container.appendChild(noResult);
+      this.renderer.setAttribute(noResult, 'id', 'no-results')
+      this.renderer.addClass(noResult, 'no-result-message')
+      this.renderer.setProperty(noResult, 'innerText', 'Pas de résultat pour la recherche')
+      this.renderer.setStyle(noResult, 'fontSize', '18px')
+      this.renderer.appendChild(container, noResult);
     }
     
     noResult.style.display = 'block';
