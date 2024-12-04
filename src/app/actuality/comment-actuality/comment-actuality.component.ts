@@ -604,8 +604,11 @@ export class CommentActualityComponent implements OnInit{
   }
 
   getCommentLenght() {
-    this.textLenght = this.textValue.length+1
-    console.log(this.textLenght)
+    console.log(this.textValue)
+    if (this.textValue == "") {
+      this.textLenght = 0;
+    }
+    this.textLenght = this.textValue.length
   }
 
 }
