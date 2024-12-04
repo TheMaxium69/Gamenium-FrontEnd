@@ -977,6 +977,14 @@
   bottom: 90px;
   right: 90px;
   z-index: 5;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .back-to-top i {
