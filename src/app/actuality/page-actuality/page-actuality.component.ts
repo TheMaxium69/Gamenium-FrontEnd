@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import { ProviderInterface } from 'src/app/-interface/provider.interface';
 
 @Component({
   selector: 'app-page-actuality',
@@ -11,6 +12,7 @@ export class PageActualityComponent implements OnInit{
   actualityId: number|any
   providerSelected: number | undefined;
   lastProviderSelected: number | undefined;
+  providerFollowed: ProviderInterface[] = []
 
   constructor(
     private route: ActivatedRoute) {
@@ -39,5 +41,9 @@ export class PageActualityComponent implements OnInit{
   
   }
 
+  getProviderFollowed(providers: ProviderInterface[]) {
+    this.providerFollowed = providers
+    console.log(this.providerFollowed)
+  }
 
 }

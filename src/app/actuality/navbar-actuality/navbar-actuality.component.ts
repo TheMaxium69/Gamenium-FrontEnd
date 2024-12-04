@@ -31,6 +31,9 @@ export class NavbarActualityComponent implements OnInit {
 
   @Output()
   providerSelected: EventEmitter<number> = new EventEmitter<number>();
+  
+  @Output()
+  providerFollowed: EventEmitter<ProviderInterface[]> = new EventEmitter<ProviderInterface[]>();
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
@@ -67,7 +70,7 @@ export class NavbarActualityComponent implements OnInit {
         })
 
       }
-
+      this.providerFollowed.emit(this.providerFollowOrAll)
     });
 
 

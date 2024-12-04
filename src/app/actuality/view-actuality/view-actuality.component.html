@@ -1,5 +1,12 @@
+<section id="actu-all" class="d-flex" *ngIf="!providerIdSelected && isLogIn">
+  <div *ngIf="postActuFollow.length === 0">
+    <h3>Aucune actualité pour les providers suivis.</h3>
+  </div>
+  <app-card-actu *ngFor="let actu of ActuByFollow()" [actu]="actu"></app-card-actu>
+</section>
+
 <!-- SI AUCUN PROVIDER EST SELECTION-->
-<section id="actu-all" class="d-flex" *ngIf="!providerIdSelected">
+<section id="actu-all" class="d-flex" *ngIf="!providerIdSelected && !isLogIn">
 
   <div *ngIf="this.postActuAll.length == 0">
     <h3>Aucune actualité pour cette entreprise.</h3>

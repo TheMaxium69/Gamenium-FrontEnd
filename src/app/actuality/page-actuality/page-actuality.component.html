@@ -1,8 +1,9 @@
 <ng-container *ngIf="!actualityId">
-  <app-navbar-actuality (providerSelected)="onProviderSelected($event)">
+  <app-navbar-actuality (providerSelected)="onProviderSelected($event)" (providerFollowed)="getProviderFollowed($event)"> 
   </app-navbar-actuality>
   <div style="margin-bottom: 120px;">
-    <app-view-actuality [providerIdSelected]="providerSelected ?? null"></app-view-actuality>
+    <app-view-actuality [providerIdSelected]="providerSelected ?? null" 
+    [providerFollowed]="providerFollowed"></app-view-actuality>
   </div>
 </ng-container>
 

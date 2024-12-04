@@ -4,6 +4,7 @@ import { AppComponent } from "../../app.component";
 import { PostActuService } from "../../-service/post-actu.service";
 import { PostActuInterface } from "../../-interface/post-actu.interface";
 import Swal from "sweetalert2";
+import { ProviderInterface } from 'src/app/-interface/provider.interface';
 
 @Component({
   selector: 'app-view-actuality',
@@ -14,6 +15,9 @@ export class ViewActualityComponent implements OnInit, OnChanges {
 
   @Input()
   public providerIdSelected: number | null = null;
+
+  @Input()
+  providerFollowed: ProviderInterface[] = []
 
   constructor(
     private app: AppComponent,
@@ -26,6 +30,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
 
   postActuAll: PostActuInterface[] = [];
   postActuProvider: PostActuInterface[] = [];
+  postActuFollow: PostActuInterface[] = []
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
@@ -33,7 +38,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
 
     if (!this.providerIdSelected){
       if (this.isLogIn) {
-        this.getActuAll(); /* Todo: Nos abonnement uniquement */
+        this.getActuByFollow();
       } else {
         this.getActuAll()
       }
@@ -43,24 +48,32 @@ export class ViewActualityComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const providerSelected = document.querySelector('#provider' + changes['providerIdSelected'].currentValue)
-    const lastProviderSelected = document.querySelector('#provider' + changes['providerIdSelected'].previousValue)
-    
-    if (changes['providerIdSelected'].currentValue) {
-
-      if (lastProviderSelected) {
-        this.renderer.removeClass(lastProviderSelected, 'provider-selected')
+    if (changes['providerIdSelected']) {
+      const currentValue = changes['providerIdSelected'].currentValue;
+      const previousValue = changes['providerIdSelected'].previousValue;
+  
+      if (previousValue) {
+        const lastProviderSelected = document.querySelector(`#provider${previousValue}`);
+        if (lastProviderSelected) {
+          this.renderer.removeClass(lastProviderSelected, 'provider-selected');
+        }
       }
+  
+      if (currentValue) {
+        const providerSelected = document.querySelector(`#provider${currentValue}`);
+        if (providerSelected) {
+          this.renderer.addClass(providerSelected, 'provider-selected');
+        }
+        this.getActuByProvider(currentValue);
+      } else {
+        this.getActuAll();
+      }
+    }
 
-      this.renderer.addClass(providerSelected, 'provider-selected')
-      
-      this.getActuByProvider(changes['providerIdSelected'].currentValue)
-      return this.ActuByProvider()
-      
-    } else {
-      this.renderer.removeClass(lastProviderSelected, 'provider-selected')
-
-      return this.getActuAll()
+    if (changes['providerFollowed']) {
+      if (this.isLogIn && !this.providerIdSelected) {
+        this.getActuByFollow();
+      }
     }
   }
 
@@ -94,6 +107,20 @@ export class ViewActualityComponent implements OnInit, OnChanges {
     }, error => { this.app.erreurSubcribe() });
   }
 
+  /* RECUPERE LES ACTU DES PROVIDERS SUIVIENT UNIQUEMENT */
+  getActuByFollow() {
+    this.postActuFollow = [];
+  
+    this.providerFollowed.forEach(provider => {
+      this.postActuService.getPostByProvider(provider.id, this.app.setURL()).subscribe(
+        response => {
+          if (response.message === 'good') {
+            this.postActuFollow.push(...response.result);
+          }
+        }
+      );
+    });
+  }
 
   /*
   *
@@ -111,6 +138,9 @@ export class ViewActualityComponent implements OnInit, OnChanges {
     return this.postActuProvider;
   }
 
+  ActuByFollow(): PostActuInterface[] {
+    return this.postActuFollow
+  }
 
 
 
