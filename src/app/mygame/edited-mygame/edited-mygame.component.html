@@ -1,4 +1,4 @@
-<section id="editedmygame" class="container" *ngIf="selectedMyGame">
+<section id="editedmygame" class="container" *ngIf="selectedMyGame" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
 
 <form #editedMyGame="ngForm" (ngSubmit)="updateMyGame(editedMyGame)">
 
@@ -11,7 +11,7 @@
         <img class="back" src="{{ selectedMyGame.myGame?.game?.image?.thumb_url }}" alt="blur">
       </div>
       <div class="separe-image"></div>
-      <div class="screen-image" [ngStyle]="{'--color-variable': this.app.userConnected?.themeColor || this.app.colorDefault}">
+      <div class="screen-image">
         <small>Image Utilisateur</small>
         <div class="screen-all">
           <ng-container *ngFor="let oneScreen of [].constructor(10)"> <!-- this.app.viewMyGame.screenshot-->
@@ -31,7 +31,7 @@
       </div>
 
 
-      <button type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Sauvegardé <i class="ri-save-3-fill"></i></button>
+      <button type="submit" class="main-gamenium-btn">Sauvegardé <i class="ri-save-3-fill"></i></button>
 
     </div>
 
@@ -40,26 +40,15 @@
   <ng-container *ngIf="selectedMyGame.myGame">
   <div id="startFormEditedMyGame">
 
+
     <input type="hidden" [(ngModel)]="selectedMyGame.myGame.id" name="myGameId">
 
     <!-- EPINGLER -->
     <div class="panel">
 
       <div class="head-panel">
-        <h2 style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}"><i class="ri-pushpin-fill"></i>Épinglé</h2>
+        <h2><i class="ri-pushpin-fill"></i>Épinglé</h2>
       </div>
-
-
-<!--      <label for="is_pinned_true">-->
-<!--        <input type="radio" id="is_pinned_true" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned"-->
-<!--               [value]="true">-->
-<!--        Épinglé-->
-<!--      </label>-->
-<!--      <label for="is_pinned_false">-->
-<!--        <input type="radio" id="is_pinned_false" [(ngModel)]="selectedMyGame.myGame.is_pinned" name="is_pinned"-->
-<!--               [value]="false">-->
-<!--        Non épinglé-->
-<!--      </label>-->
 
       <select id="is_pinned" name="is_pinned" [(ngModel)]="selectedMyGame.myGame.is_pinned">
         <option [value]="true">Épinglé</option>
@@ -72,36 +61,28 @@
     <div class="panel" style="display: none">
 
       <div class="head-panel">
-        <h2>List de souhait</h2>
+        <h2><i class="ri-hand-heart-fill"></i>List de souhaite</h2>
       </div>
 
-      <label for="wish_list_yes">
-        <input type="radio" id="wish_list_yes" [(ngModel)]="selectedMyGame.myGame.wish_list" name="wish_list"
-               [value]="true">
-        Oui
-      </label>
-      <label for="wish_list_no">
-        <input type="radio" id="wish_list_no" [(ngModel)]="selectedMyGame.myGame.wish_list" name="wish_list"
-               [value]="false">
-        Non
-      </label>
+      <select id="wish_list" name="wish_list" [(ngModel)]="selectedMyGame.myGame.wish_list">
+        <option [value]="true">Oui</option>
+        <option [value]="false">Non</option>
+      </select>
 
     </div>
 
     <div class="panel">
 
       <div class="head-panel">
-        <h2 style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}"><i class="ri-medal-fill"></i>Evaluation</h2>
+        <h2><i class="ri-medal-fill"></i>Evaluation</h2>
       </div>
 
-      <!-- NOTE GLOBAL -->
-      <label for="rating">Note Game:</label>
       <ng-container *ngIf="selectedMyGame.rate">
         <input type="hidden" [(ngModel)]="selectedMyGame.rate.id" name="rateId">
-        <input type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating">
+        <input max="20" min="0" type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating" placeholder="Note du jeux (/20)">
       </ng-container>
       <ng-container *ngIf="!selectedMyGame.rate">
-        <input type="number" id="rating" name="rating" ngModel>
+        <input max="20" min="0" type="number" id="rating" name="rating" ngModel placeholder="Note du jeux (/20)">
       </ng-container>
 
       <br>
@@ -116,60 +97,79 @@
       </div>
 
       <!-- DIFICULTER -->
-      <label>Difficulty rating:</label>
-      <label for="difficulty_rating_1">
-        <input type="radio" id="difficulty_rating_1" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-               name="difficulty_rating" [value]="1">
-        1
-      </label>
-      <label for="difficulty_rating_2">
-        <input type="radio" id="difficulty_rating_2" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-               name="difficulty_rating" [value]="2">
-        2
-      </label>
-      <label for="difficulty_rating_3">
-        <input type="radio" id="difficulty_rating_3" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-               name="difficulty_rating" [value]="3">
-        3
-      </label>
-      <label for="difficulty_rating_4">
-        <input type="radio" id="difficulty_rating_4" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-               name="difficulty_rating" [value]="4">
-        4
-      </label>
-      <label for="difficulty_rating_5">
-        <input type="radio" id="difficulty_rating_5" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-               name="difficulty_rating" [value]="5">
-        5
-      </label>
+      <label>Votre avis sur la Difficulté</label>
+      <div class="star-rating">
+        <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+           [class.ri-star-line]="star > selectedMyGame.myGame.difficulty_rating"
+           [class.ri-star-fill]="star <= selectedMyGame.myGame.difficulty_rating"
+           (click)="selectedMyGame.myGame.difficulty_rating = i + 1"></i>
+      </div>
+
+      <div style="display: none">
+        <label for="difficulty_rating_1">
+          <input type="radio" id="difficulty_rating_1" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                 name="difficulty_rating" [value]="1">
+          1
+        </label>
+        <label for="difficulty_rating_2">
+          <input type="radio" id="difficulty_rating_2" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                 name="difficulty_rating" [value]="2">
+          2
+        </label>
+        <label for="difficulty_rating_3">
+          <input type="radio" id="difficulty_rating_3" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                 name="difficulty_rating" [value]="3">
+          3
+        </label>
+        <label for="difficulty_rating_4">
+          <input type="radio" id="difficulty_rating_4" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                 name="difficulty_rating" [value]="4">
+          4
+        </label>
+        <label for="difficulty_rating_5">
+          <input type="radio" id="difficulty_rating_5" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                 name="difficulty_rating" [value]="5">
+          5
+        </label>
+      </div>
 
       <!-- TEMPS DE JEUX -->
-      <label>Lifetime rating:</label>
-      <label for="lifetime_rating_1">
-        <input type="radio" id="lifetime_rating_1" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-               name="lifetime_rating" [value]="1">
-        1
-      </label>
-      <label for="lifetime_rating_2">
-        <input type="radio" id="lifetime_rating_2" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-               name="lifetime_rating" [value]="2">
-        2
-      </label>
-      <label for="lifetime_rating_3">
-        <input type="radio" id="lifetime_rating_3" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-               name="lifetime_rating" [value]="3">
-        3
-      </label>
-      <label for="lifetime_rating_4">
-        <input type="radio" id="lifetime_rating_4" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-               name="lifetime_rating" [value]="4">
-        4
-      </label>
-      <label for="lifetime_rating_5">
-        <input type="radio" id="lifetime_rating_5" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-               name="lifetime_rating" [value]="5">
-        5
-      </label>
+      <label>Votre avis sur le Temps de jeux</label>
+      <div class="star-rating">
+        <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+           [class.ri-star-line]="star > selectedMyGame.myGame.lifetime_rating"
+           [class.ri-star-fill]="star <= selectedMyGame.myGame.lifetime_rating"
+           (click)="selectedMyGame.myGame.lifetime_rating = i + 1"></i>
+      </div>
+
+      <div style="display: none">
+        <label for="lifetime_rating_1">
+          <input type="radio" id="lifetime_rating_1" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                 name="lifetime_rating" [value]="1">
+          1
+        </label>
+        <label for="lifetime_rating_2">
+          <input type="radio" id="lifetime_rating_2" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                 name="lifetime_rating" [value]="2">
+          2
+        </label>
+        <label for="lifetime_rating_3">
+          <input type="radio" id="lifetime_rating_3" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                 name="lifetime_rating" [value]="3">
+          3
+        </label>
+        <label for="lifetime_rating_4">
+          <input type="radio" id="lifetime_rating_4" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                 name="lifetime_rating" [value]="4">
+          4
+        </label>
+        <label for="lifetime_rating_5">
+          <input type="radio" id="lifetime_rating_5" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                 name="lifetime_rating" [value]="5">
+          5
+        </label>
+      </div>
+
     </div>
 
     <!-- EXEMPLAIRE -->
@@ -177,8 +177,8 @@
 
       <div class="head-all-exemplaire">
         <h1>Exemplaire (Total <span>{{ nbCopyView }}{{ noRealCopy() }}</span>)</h1>
-        <button class="sub-gamenium-btn" type="button" (click)="addCopyGame()" style="border-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}; color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }};"><i class="ri-add-large-fill"></i></button>
-<!--        <i class="ri-sticky-note-add-fill" (click)="addCopyGame()" style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}"></i>-->
+        <button class="sub-gamenium-btn" type="button" (click)="addCopyGame()"><i class="ri-add-large-fill"></i></button>
+<!--        <i class="ri-sticky-note-add-fill" (click)="addCopyGame()"></i>-->
       </div>
 
       <!-- UN EXEMPLAIRE -->
@@ -231,7 +231,7 @@
             </ng-container>
             <ng-container *ngIf="hmgCopyEtatAll && !copyGame.etat">
               <select id="etat{{i}}" name="etat{{i}}" ngModel>
-                <option [value]="null">Choissir un etat</option>
+                <option value="">Choissir un etat</option>
                 <ng-container *ngFor="let etat of hmgCopyEtatAll">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
@@ -254,7 +254,7 @@
             </ng-container>
             <ng-container *ngIf="hmgCopyFormatAll && !copyGame.format">
               <select id="format{{i}}" name="format{{i}}" ngModel>
-                <option [value]="null">Choissir un format</option>
+                <option value="">Choissir un format</option>
                 <ng-container *ngFor="let format of hmgCopyFormatAll">
                   <option [value]="format.id">{{ format.name }}</option>
                 </ng-container>
@@ -277,7 +277,7 @@
             </ng-container>
             <ng-container *ngIf="hmgCopyRegionAll && !copyGame.region">
               <select id="region{{i}}" name="region{{i}}" ngModel>
-                <option [value]="null">Choissir une Region</option>
+                <option value="">Choissir une Region</option>
                 <ng-container *ngFor="let region of hmgCopyRegionAll">
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
@@ -299,40 +299,35 @@
 
               <input type="hidden" [(ngModel)]="copyGame.purchase.id" name="purchase{{i}}">
 
-              <!-- PRICE -->
-              <label for="price{{i}}">Price:</label>
-              <input type="number" id="price{{i}}" [(ngModel)]="copyGame.purchase.price" name="purchase_price{{i}}">
+              <div class="head-purchase">
 
-              <!-- DEVISE -->
-              <label for="devise{{i}}">Devise:</label>
-              <ng-container *ngIf="deviseAll && copyGame.purchase.devise">
-                <select id="devise{{i}}" [(ngModel)]="copyGame.purchase.devise.id" name="purchase_devise{{i}}">
-                  <option [value]="null">Choissir une devise</option>
-                  <ng-container *ngFor="let devise of deviseAll">
-                    <option [value]="devise.id">{{ devise.symbole }}</option>
-                  </ng-container>
-                </select>
-              </ng-container>
-              <ng-container *ngIf="deviseAll && !copyGame.purchase.devise">
-                <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
-                  <option [value]="null">Choissir une devise</option>
-                  <ng-container *ngFor="let devise of deviseAll">
-                    <option [value]="devise.id">{{ devise.symbole }}</option>
-                  </ng-container>
-                </select>
-              </ng-container>
+                <!-- PRICE -->
+                <input type="number" id="price{{i}}" [(ngModel)]="copyGame.purchase.price" name="purchase_price{{i}}" placeholder="Prix d'achat" min="0.00" max="10000.00" step="0.01">
 
-              <!-- BUY DATE -->
-              <label for="buy_date{{i}}">Buy date:</label>
-              <input type="date" id="buy_date{{i}}" [(ngModel)]="copyGame.purchase.buy_date"
-                     name="purchase_buy_date{{i}}">
+                <!-- DEVISE -->
+                <ng-container *ngIf="deviseAll && copyGame.purchase.devise">
+                  <select id="devise{{i}}" [(ngModel)]="copyGame.purchase.devise.id" name="purchase_devise{{i}}">
+                    <option [value]="null">Choissir une devise</option>
+                    <ng-container *ngFor="let devise of deviseAll">
+                      <option [value]="devise.id">{{ devise.symbole }}</option>
+                    </ng-container>
+                  </select>
+                </ng-container>
+                <ng-container *ngIf="deviseAll && !copyGame.purchase.devise">
+                  <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
+                    <option value="">Choissir une devise</option>
+                    <ng-container *ngFor="let devise of deviseAll">
+                      <option [value]="devise.id">{{ devise.symbole }}</option>
+                    </ng-container>
+                  </select>
+                </ng-container>
+
+              </div>
 
               <!-- BUY WHERE -->
-              <label for="buy_where{{i}}">Buy where:</label>
-<!--              <input type="text" id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.name" name="purchase_buy_where{{i}}">-->
               <ng-container *ngIf="buyWhereAll && copyGame.purchase.buy_where">
                 <select id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.id" name="purchase_buy_where{{i}}">
-                  <option [value]="null">Choissir une Buy Where</option>
+                  <option [value]="null">Lieux d'achat</option>
                   <ng-container *ngFor="let buyWhereOne of buyWhereAll">
                     <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                   </ng-container>
@@ -340,17 +335,19 @@
               </ng-container>
               <ng-container *ngIf="buyWhereAll && !copyGame.purchase.buy_where">
                 <select id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
-                  <option [value]="null">Choissir une Buy Where</option>
+                  <option value="">Lieux d'achat</option>
                   <ng-container *ngFor="let buyWhereOne of buyWhereAll">
                     <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                   </ng-container>
                 </select>
               </ng-container>
 
+              <!-- BUY DATE -->
+              <input type="date" id="buy_date{{i}}" [(ngModel)]="copyGame.purchase.buy_date"
+                     name="purchase_buy_date{{i}}">
+
               <!-- PURCHASE CONTENT -->
-              <label for="purchase_content{{i}}">Purchase content:</label>
-              <input type="text" id="purchase_content{{i}}" [(ngModel)]="copyGame.purchase.content"
-                     name="purchase_content{{i}}">
+              <textarea type="text" id="purchase_content{{i}}" [(ngModel)]="copyGame.purchase.content" name="purchase_content{{i}}" placeholder="Plus d'inforamtions sur l'achat"></textarea>
 
             </ng-container>
             <ng-container *ngIf="!copyGame.purchase">
@@ -496,8 +493,8 @@
   </ng-container>
 
   <div class="end-action">
-    <button class="main-gamenium-btn" type="submit" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Sauvegardé <i class="ri-save-3-fill"></i></button>
-    <button class="sub-gamenium-btn" (click)="this.app.deleteMyGame(idOneMyGame)">Supprimer le jeux de votre collection</button>
+    <button class="main-gamenium-btn" type="submit">Sauvegardé <i class="ri-save-3-fill"></i></button>
+    <button class="sub-gamenium-btn delete-btn" (click)="this.app.deleteMyGame(idOneMyGame)">Supprimer le jeux de votre collection <i class="ri-delete-bin-line"></i></button>
   </div>
 </form>
 
