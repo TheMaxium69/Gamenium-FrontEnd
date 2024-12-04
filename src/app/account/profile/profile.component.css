@@ -558,6 +558,19 @@ a > div {
   transition: transform 0.3s ease;
 }
 
+::file-selector-button {
+  border: none;
+  padding: 15px;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid;
+  border-color: var(--color);
+  color: var(--color);
+  cursor: pointer;
+}
+
 /* .no-result-message {
   padding: 15px;
   border-radius: 15px;

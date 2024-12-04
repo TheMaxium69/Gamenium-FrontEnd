@@ -84,7 +84,7 @@
                 <h5 class="setting-title">Photo de profil</h5>
                 <div>
                   <div class="file-upload">
-                    <input type="file" (change)="onFileChanged($event)" id="profilePictureInput">
+                    <input type="file" [ngStyle]="{ '--color': color ?? 'red' }" (change)="onFileChanged($event)" id="profilePictureInput">
 <!--                    <label for="profilePictureInput" class="file-label">-->
 <!--                      <i class="ri-upload-cloud-line"></i> Sélectionner une image-->
 <!--                    </label>-->
