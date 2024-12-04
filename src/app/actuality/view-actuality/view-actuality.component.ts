@@ -139,6 +139,10 @@ export class ViewActualityComponent implements OnInit, OnChanges {
   }
 
   ActuByFollow(): PostActuInterface[] {
+    // Si aucun provider suivi, reset par défaut en affichant tout les providers
+    if (this.postActuFollow.length === 0) {
+      return this.postActuAll
+    }
     return this.postActuFollow
   }
 
