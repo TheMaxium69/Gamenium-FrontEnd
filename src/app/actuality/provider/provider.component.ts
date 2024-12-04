@@ -113,7 +113,7 @@ export class ProviderComponent implements OnInit{
     );
   }
 
-  setNumberOfActus (event: number | undefined): void {
+  setNumberOfActus (event: number): void {
     this.providerNbActu = event;
   }
 
