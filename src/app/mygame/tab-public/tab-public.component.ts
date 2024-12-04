@@ -64,7 +64,7 @@ export class TabPublicComponent implements OnInit, OnChanges {
     }
   }
 
-  get commonGameAvailable(): boolean {
+  commonGameAvailable(): boolean {
     return !!this.commonGame && this.commonGame.length > 0;
   }
 

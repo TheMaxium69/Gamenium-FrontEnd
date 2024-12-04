@@ -30,6 +30,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   userConnectedGame: HistoryMyGameInterface[] | undefined ;
   commonGame : HistoryMyGameInterface [] | undefined;
   originalGameHistoriqueAll : HistoryMyGameInterface[] | undefined;
+  isCommonView:boolean = false;
 
   // Pour la recherche
   searchQuery: string = '';
@@ -68,8 +69,8 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
     });
 
 
- 
-    
+
+
 
   }
 
@@ -87,21 +88,24 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   }
 
   load(){
+    this.isCommonView = false;
     if (this.profilSelected) {
 
       // Set la color
       if (this.profilSelected.themeColor){
         this.isColor = this.profilSelected.themeColor;
       }
-
       if (this.task === "common-games") {
         console.log("Fonction Load - La tache est common games ");
+        this.isCommonView = true;
 
-        this.filteredGames = this.commonGame || [];
-        console.log("JEUX FILTRER EN BAS ")
-        console.log(this.filteredGames);
-
-        console.log(this.originalGameHistoriqueAll)     }
+        //
+        // this.filteredGames = this.commonGame || [];
+        // console.log("JEUX FILTRER EN BAS ")
+        // console.log(this.filteredGames);
+        //
+        // console.log(this.originalGameHistoriqueAll)
+      }
       // Set la recher
       else if (this.task){
         this.myGameByUserWithPlateform(this.profilSelected.id, this.plateformeId);
@@ -137,11 +141,11 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
             this.userConnectedGame = responseMyGame.result || [];
             console.log("Jeux de l'user connecter", this.userConnectedGame);
           } else {
-            // on save les jeux lié au profil 
+            // on save les jeux lié au profil
             this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) =>
               new Date(b.myGame.added_at).getTime() - new Date(a.myGame.added_at).getTime()
             ) || [];
-            // on save une copie de ce tableau 
+            // on save une copie de ce tableau
             this.originalGameHistoriqueAll = [...this.myGameHistoriqueAll];
             console.log("Jeux lié a ce profil", this.myGameHistoriqueAll);
           }
@@ -151,8 +155,8 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         this.findCommonGames();
 
       });
-    
-    
+
+
 
     this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
 
@@ -216,20 +220,26 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   // recup les jeux pin
 getPinnedGames(): HistoryMyGameInterface[] {
-  // retourne un tableau vide si une recherche ou un filtre est appliqué
-  if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
-    return [];
-  }
-  return this.myGameHistoriqueAll?.filter(game => game.myGame.is_pinned) ?? [];
+    if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
+      return [];
+    }
+    if (this.isCommonView){
+      return this.commonGame?.filter(game => game.myGame.is_pinned) ?? [];
+    } else {
+      return this.myGameHistoriqueAll?.filter(game => game.myGame.is_pinned) ?? [];
+    }
 }
 
 // recup jeux unpin
 getUnpinnedGames(): HistoryMyGameInterface[] {
-  // retourne un tableau vide si une recherche ou un filtre est appliqué
-  if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
-    return [];
-  }
-  return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
+    if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
+      return [];
+    }
+    if (this.isCommonView){
+        return this.commonGame?.filter(game => !game.myGame.is_pinned) ?? [];
+    } else {
+      return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
+    }
 }
 
 
@@ -242,8 +252,10 @@ getAllGamesToDisplay(): HistoryMyGameInterface[] {
 }
 
 filterGames(): void {
-  if (this.task === "common-games" && this.commonGame) {
+  if (this.isCommonView) {
     if (!this.commonGame) return;
+
+    console.log("COUCOU JE FILTRE BIEN")
 
     const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
 
@@ -259,17 +271,19 @@ filterGames(): void {
           year.includes(query)
         );
       });
-    } 
+    } else {
+      this.filteredGames = [...this.commonGame];
+    }
   } else if (this.myGameHistoriqueAll) {
 
     const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
-  
+
     if (query) {
       this.filteredGames = this.myGameHistoriqueAll.filter(game => {
         const gameName = game.myGame?.game?.name?.toLowerCase() || '';
         const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
         const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
-  
+
         return (
           gameName.includes(query) ||
           platforms.includes(query) ||
@@ -296,14 +310,14 @@ filterGames(): void {
   setSortOption(option: string): void {
     this.sortOption = option;
     this.filterGames();
-    this.isFilterDropdownOpen = false; 
+    this.isFilterDropdownOpen = false;
   }
 
   //check si un filtre autre que celui par default est appliqué
   isFilterApplied(): boolean {
     return this.sortOption !== '';
   }
-  
+
   // different filtre de tri
   applySorting(): void {
     if (!this.filteredGames) return;
@@ -358,17 +372,17 @@ filterGames(): void {
     }
   }
 
-  // JEUX EN COMMUNS 
-  
+  // JEUX EN COMMUNS
+
   findCommonGames(): void {
     if (!this.originalGameHistoriqueAll || !this.userConnectedGame) {
       console.log("Un des utilisateurs n'a pas de jeux");
       return;
     }
 
-    this.commonGame = this.userConnectedGame.filter(connectedGame => 
-      this.originalGameHistoriqueAll?.some(
-        secondUserGame => secondUserGame.myGame.game.id === connectedGame.myGame.game.id
+    this.commonGame = this.originalGameHistoriqueAll.filter(connectedGame =>
+      this.userConnectedGame?.some(
+        secondUserGame => secondUserGame.myGame.game.id === connectedGame.myGame.game.id && secondUserGame.myGame.plateform.id == connectedGame.myGame.plateform.id
       )
     );
 
@@ -376,9 +390,8 @@ filterGames(): void {
     console.log("********************************************")
 
 
-  
   }
-  
+
 
 }
 

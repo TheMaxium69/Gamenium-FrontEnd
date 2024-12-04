@@ -14,7 +14,7 @@
       </li>
     </ng-container>
 
-    <ng-container *ngIf="commonGameAvailable">
+    <ng-container *ngIf="commonGameAvailable()">
       <li routerLink="/profil/{{ profileId }}/common-games" [class.active]="task === 'common-games'">
         <p>Jeux communs</p>
       </li>
