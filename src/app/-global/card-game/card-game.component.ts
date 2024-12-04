@@ -21,6 +21,9 @@ export class CardGameComponent implements OnInit {
   @Input()
   public Hmg: HistoryMyGameInterface|null = null;
 
+  @Input()
+  public colorProfil: string | undefined | null = null;
+
   userRatingAll: UserRateInterface[] | undefined;
 
   constructor(protected app:AppComponent,

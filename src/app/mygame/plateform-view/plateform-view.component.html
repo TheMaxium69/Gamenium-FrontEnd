@@ -31,15 +31,15 @@
 
 <!-- SECTION POUR JEUX FILTRER OU RECHERCHER -->
 <div id="show-game" class="d-flex container" *ngIf="getAllGamesToDisplay().length > 0">
-    <app-card-game *ngFor="let myGameHistorique of getAllGamesToDisplay()" [Hmg]="myGameHistorique" style="width: 100%"></app-card-game>
+    <app-card-game *ngFor="let myGameHistorique of getAllGamesToDisplay()" [Hmg]="myGameHistorique" [colorProfil]="isColor" style="width: 100%"></app-card-game>
 </div>
 
 <!--  GAME PINED -->
 <div id="show-game" class="d-flex container pinned" *ngIf="!isFilterApplied() && !searchQuery.trim() && getPinnedGames().length > 0">
-  <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" style="width: 100%"></app-card-game>
+  <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="isColor" style="width: 100%"></app-card-game>
 </div>
 
 <!-- UNPINNED GAME -->
 <div id="show-game" class="d-flex container" *ngIf="!isFilterApplied() && !searchQuery.trim()">
-  <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" style="width: 100%"></app-card-game>
+  <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="isColor" style="width: 100%"></app-card-game>
 </div>

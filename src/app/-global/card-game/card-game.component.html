@@ -80,7 +80,7 @@
   <div class="card-game container d-flex">
 
     <!-- PINNED -->
-    <div class="isPinned" style="background-color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" *ngIf="Hmg.myGame.is_pinned">
+    <div class="isPinned" style="background-color: {{ this.colorProfil || this.app.colorDefault }}" *ngIf="Hmg.myGame.is_pinned">
       <p><i class="ri-pushpin-fill"></i></p>
     </div>
 
@@ -107,7 +107,7 @@
         <h2>{{ Hmg.myGame.game.name }}</h2>
 
         <!-- PLATEFORME -->
-        <p style="color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" class="platform-names">
+        <p style="color: {{ this.colorProfil || this.app.colorDefault }}" class="platform-names">
           {{ this.app.plateformeNameFormatage(Hmg.myGame.plateform.name) }}
         </p>
 
@@ -119,7 +119,7 @@
       <div class="core-right">
 
         <!-- NOTE -->
-        <div class="card-note" style="background-color: {{this.app.userConnected.themeColor || this.app.colorDefault}};">
+        <div class="card-note" style="background-color: {{this.colorProfil|| this.app.colorDefault}};">
           <p><span id="noteGame{{ Hmg.myGame.game.id }}">
             <!-- AUCUNE NOTE-->
             <ng-container *ngIf="!userRatingAll">na</ng-container>
@@ -140,7 +140,7 @@
         </div>
 
         <!-- ACTION -->
-        <div class="card-action">
+        <div class="card-action" *ngIf="this.app.userConnected.id == Hmg.myGame.user.id">
           <i (click)="this.app.togglePin(Hmg); $event.stopPropagation()"
              [class.ri-unpin-line]="Hmg.myGame.is_pinned"
              [class.ri-pushpin-line]="!Hmg.myGame.is_pinned"></i>
