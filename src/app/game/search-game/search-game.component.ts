@@ -50,11 +50,11 @@ export class SearchGameComponent implements OnInit{
       this.updateConnect()
     }
 
-    this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+    this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.games = results;
 
       let element = document.getElementById("moreGameBTN");
-      if (this.games.length == 100){
+      if (this.games.length == this.app.fetchLimit){
         if (element){
           element.style.display = "block";
         }
@@ -87,34 +87,9 @@ export class SearchGameComponent implements OnInit{
 
 
   onSearch(): void {
-    this.games = [];
     if (this.searchValue.trim() !== '') {
-      this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
-        this.games = results;
-      });
-      if (this.games.length >= 1){
-        console.log('game');
-        this.router.navigate(['/search/game/' + this.searchValue.trim()]);
-      }
-      
-      this.userService.searchUsers(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
-        this.users = results;
-      });
-      if (this.users.length >= 1){
-        console.log('user');
-        this.router.navigate(['/search/user/' + this.searchValue.trim()]);
-      }
-
-      this.providerService.searchProviders(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
-        this.providers = results;
-      });
-      if (this.providers.length >= 1){
-        console.log('provider')
-        this.router.navigate(['/search/provider/' + this.searchValue.trim()]);;
-      }
-
+      this.router.navigate(['/search/game/' + this.searchValue.trim()]);
     } else {
-      // this.router.navigate(['/search/game/' + this.searchValue.trim()]);
       this.router.navigate(['/search/game/-']);
     }
   }
@@ -123,12 +98,12 @@ export class SearchGameComponent implements OnInit{
 
     this.searchValue == value;
     this.nbMoreGame = 1;
-    
-    this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+
+    this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.games = results;
 
       let element = document.getElementById("moreGameBTN");
-      if (this.games.length >= 100) {
+      if (this.games.length >= this.app.fetchLimit) {
         if (element){
           element.style.display = "block";
         }
@@ -174,7 +149,7 @@ export class SearchGameComponent implements OnInit{
   moreGame(){
 
     this.nbMoreGame++
-    let limit = this.nbMoreGame * 100;
+    let limit = this.nbMoreGame * this.app.fetchLimit;
     console.log(limit)
 
     this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {

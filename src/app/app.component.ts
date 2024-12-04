@@ -64,6 +64,7 @@ export class AppComponent {
   token: string|any;
   userConnected: UserInterface|any;
   currentDate: Date = new Date();
+  fetchLimit:number = 50;
 
   // DEFAULT
   colorDefault = "#FF0000";
