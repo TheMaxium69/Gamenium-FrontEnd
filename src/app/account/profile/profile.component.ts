@@ -62,7 +62,6 @@ export class ProfileComponent implements OnInit {
 
       this.loadThemeColor();
 
-      this.populateResultDiv()
     }
 
     this.getAllSocialNetwork();
@@ -74,10 +73,10 @@ export class ProfileComponent implements OnInit {
     const resultDiv = document.querySelector('#result') as HTMLElement
     const settings = document.querySelectorAll('.search-setting')
 
+
     settings.forEach((setting) => {
       if (setting instanceof HTMLElement) {
-        const clone = setting.cloneNode(true) as HTMLElement;
-        resultDiv.appendChild(clone);
+        resultDiv.appendChild(setting)
       }
     });
   }
@@ -90,12 +89,14 @@ export class ProfileComponent implements OnInit {
     const accountSection = document.querySelector('.para-container') as HTMLElement;
     const infoSection = document.querySelector('.informations-section') as HTMLElement;
     const unlog = document.querySelector('.unlog') as HTMLElement;
+    const settings = document.querySelectorAll('.search-setting')
   
     let settingsResultNumber = 0;
-  
+    
+    this.populateResultDiv()
     resultDiv.style.display = 'block';
   
-    Array.from(resultDiv.children).forEach((child) => {
+    settings.forEach((child) => {
       const setting = child as HTMLElement;
       const settingText = setting.innerText.toLowerCase();
   
@@ -114,6 +115,8 @@ export class ProfileComponent implements OnInit {
       infoSection.style.display = 'block';
       unlog.style.display = 'block';
       this.removeNoResultMessage(resultDiv);
+      this.resetParaContainer()
+      this.resetInfoContainer()
 
     } else {
       accountSection.style.display = 'none';
@@ -127,6 +130,31 @@ export class ProfileComponent implements OnInit {
     } else {
       this.removeNoResultMessage(resultDiv);
     }
+  }
+
+  resetParaContainer() {
+    console.log('reset para')
+    const paraContainer = document.querySelector('.para-container') as HTMLElement
+    const settings = document.querySelectorAll('.para-setting')
+    const unlogBtn = document.querySelector('.unlog')
+
+    settings.forEach(setting => {
+      if (setting instanceof HTMLElement) {
+        paraContainer.insertBefore(setting, unlogBtn)
+      }
+    });
+  }
+
+  resetInfoContainer() {
+    console.log('reset info')
+    const infoContainer = document.querySelector('.informations-section') as HTMLElement
+    const settings = document.querySelectorAll('.information-setting')
+
+    settings.forEach(setting => {
+      if (setting instanceof HTMLElement) {
+        infoContainer.appendChild(setting)
+      }
+    });
   }
 
   displayNoResultMessage(container: HTMLElement) {
