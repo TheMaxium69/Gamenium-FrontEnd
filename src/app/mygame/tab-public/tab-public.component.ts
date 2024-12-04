@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {UserInterface} from "../../-interface/user.interface";
 import {PlateformInterface} from "../../-interface/plateform.interface";
 import {AppComponent} from "../../app.component";
@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {PlateformService} from "../../-service/plateform.service";
 import {ProfilInterface} from "../../-interface/profil.interface";
 import {ProfilService} from "../../-service/profil.service";
+import { HistoryMyGameInterface } from 'src/app/-interface/history-my-game.interface';
 
 @Component({
   selector: 'app-tab-public',
@@ -13,6 +14,7 @@ import {ProfilService} from "../../-service/profil.service";
   styleUrls: ['./tab-public.component.css']
 })
 export class TabPublicComponent implements OnInit, OnChanges {
+  @Input() commonGame: HistoryMyGameInterface[] | any ;
 
   profileId: number|any;
   profilSelected: ProfilInterface | undefined;
@@ -60,6 +62,10 @@ export class TabPublicComponent implements OnInit, OnChanges {
     if (changes['task']) {
       this.load()
     }
+  }
+
+  get commonGameAvailable(): boolean {
+    return !!this.commonGame && this.commonGame.length > 0;
   }
 
   /* OBTENIR TOUTE LES CONSOLE */

@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {UserInterface} from "../../-interface/user.interface";
 import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
 import {UserRateInterface} from "../../-interface/user-rate.interface";
@@ -29,6 +29,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   userConnected: UserInterface | undefined;
   userConnectedGame: HistoryMyGameInterface[] | undefined ;
   commonGame : HistoryMyGameInterface [] | undefined;
+  originalGameHistoriqueAll : HistoryMyGameInterface[] | undefined;
 
   // Pour la recherche
   searchQuery: string = '';
@@ -50,6 +51,9 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.userConnected = this.app.userConnected;
 
+    // récupère tout les jeux du profil visité
+    this.myGameByUser(this.profileId);
+
     if(this.userConnected) {
       this.myGameByUser(this.userConnected.id);
     }
@@ -62,6 +66,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         this.loadProfil();
       }
     });
+
 
  
     
@@ -89,8 +94,16 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         this.isColor = this.profilSelected.themeColor;
       }
 
+      if (this.task === "common-games") {
+        console.log("Fonction Load - La tache est common games ");
+
+        this.filteredGames = this.commonGame || [];
+        console.log("JEUX FILTRER EN BAS ")
+        console.log(this.filteredGames);
+
+        console.log(this.originalGameHistoriqueAll)     }
       // Set la recher
-      if (this.task){
+      else if (this.task){
         this.myGameByUserWithPlateform(this.profilSelected.id, this.plateformeId);
 
       } else {
@@ -128,12 +141,15 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
             this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) =>
               new Date(b.myGame.added_at).getTime() - new Date(a.myGame.added_at).getTime()
             ) || [];
+            // on save une copie de ce tableau 
+            this.originalGameHistoriqueAll = [...this.myGameHistoriqueAll];
             console.log("Jeux lié a ce profil", this.myGameHistoriqueAll);
           }
         } else {
           console.log("Pas de jeux pour l'utilisateur courrant", id_user);
         }
         this.findCommonGames();
+
       });
     
     
@@ -226,33 +242,48 @@ getAllGamesToDisplay(): HistoryMyGameInterface[] {
 }
 
 filterGames(): void {
-  if (!this.myGameHistoriqueAll) return;
+  if (this.task === "common-games" && this.commonGame) {
+    if (!this.commonGame) return;
 
-  const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
+    const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
 
-  if (query) {
-    // filtre les jeux basé sur la recherche, pin et unpin
-    this.filteredGames = this.myGameHistoriqueAll.filter((game) => {
-      const gameName = game.myGame?.game?.name?.toLowerCase() || '';
-      const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
-      const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
+    if (query) {
+      this.filteredGames = this.commonGame.filter(game => {
+        const gameName = game.myGame?.game?.name?.toLowerCase() || '';
+        const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+        const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
 
-      return (
-        gameName.includes(query) ||
-        platforms.includes(query) ||
-        year.includes(query)
-      );
-    });
-  } else if (this.isFilterApplied()) {
-    // sans recherche mais filtre appliqué on inclus tout les jeux
-    this.filteredGames = [...this.myGameHistoriqueAll];
-  } else {
-    // sans recherche et sans filtre appliqué on vide le tableau
-    this.filteredGames = [];
+        return (
+          gameName.includes(query) ||
+          platforms.includes(query) ||
+          year.includes(query)
+        );
+      });
+    } 
+  } else if (this.myGameHistoriqueAll) {
+
+    const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
+  
+    if (query) {
+      this.filteredGames = this.myGameHistoriqueAll.filter(game => {
+        const gameName = game.myGame?.game?.name?.toLowerCase() || '';
+        const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+        const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
+  
+        return (
+          gameName.includes(query) ||
+          platforms.includes(query) ||
+          year.includes(query)
+        );
+      });
+    } else {
+      this.filteredGames = [...this.myGameHistoriqueAll];
+    }
   }
 
   this.applySorting();
 }
+
 
 
 
@@ -330,17 +361,19 @@ filterGames(): void {
   // JEUX EN COMMUNS 
   
   findCommonGames(): void {
-    if (!this.userConnectedGame || !this.myGameHistoriqueAll) {
-      console.log("Un des deux utilisateur n'a pas de jeux .");
+    if (!this.originalGameHistoriqueAll || !this.userConnectedGame) {
+      console.log("Un des utilisateurs n'a pas de jeux");
       return;
     }
+
     this.commonGame = this.userConnectedGame.filter(connectedGame => 
-      this.myGameHistoriqueAll?.some(
+      this.originalGameHistoriqueAll?.some(
         secondUserGame => secondUserGame.myGame.game.id === connectedGame.myGame.game.id
       )
     );
 
     console.log('Common games:', this.commonGame);
+    console.log("********************************************")
 
 
   
