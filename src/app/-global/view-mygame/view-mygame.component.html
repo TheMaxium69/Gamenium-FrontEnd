@@ -224,7 +224,7 @@
                       <ng-container *ngIf="!copyGame.purchase.devise">
                         <p>devise : null</p>
                       </ng-container>
-                      <p>buy date : {{ copyGame.purchase.buy_date || "null" }}</p>
+                      <p>buy date : {{ copyGame.purchase.year_buy_date || "null" }}</p>
                       <ng-container *ngIf="copyGame.purchase.buy_where">
                         <p>buy where : {{ copyGame.purchase.buy_where.name }}</p>
                       </ng-container>
@@ -302,7 +302,7 @@
                     <ng-container *ngIf="!copyGame.purchase.devise">
                       <p>devise : null</p>
                     </ng-container>
-                    <p>buy date : {{ copyGame.purchase.buy_date || "null" }}</p>
+                    <p>buy date : {{ copyGame.purchase.year_buy_date || "null" }}</p>
                     <ng-container *ngIf="copyGame.purchase.buy_where">
                       <p>buy where : {{ copyGame.purchase.buy_where.name }}</p>
                     </ng-container>
