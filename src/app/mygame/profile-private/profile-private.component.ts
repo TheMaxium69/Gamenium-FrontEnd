@@ -146,7 +146,7 @@ getPinnedGames(): HistoryMyGameInterface[] {
 /* OBTENIR LES JEUX NON EPINGLES */
 getUnpinnedGames(): HistoryMyGameInterface[] {
   if (this.searchQuery || this.isFilterApplied()) {
-    // Si un filtre ou une recherche et appliqué on renvoie le tableau filtré   
+    // Si un filtre ou une recherche et appliqué on renvoie le tableau filtré
     return this.filteredGames ?? [];
   } else {
     // Sinon on renvoie les jeux unpin
@@ -218,7 +218,7 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
       // Si j'ai une query je recherche en fonction de la query
       this.filteredGames = this.myGameHistoriqueAll.filter((game) => {
         const gameName = game.myGame?.game?.name?.toLowerCase() || '';
-        const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+        const platforms = game.myGame?.plateform?.name?.toLowerCase() || '';
         const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
 
 

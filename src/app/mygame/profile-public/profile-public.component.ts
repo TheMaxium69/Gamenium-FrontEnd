@@ -262,7 +262,7 @@ filterGames(): void {
     if (query) {
       this.filteredGames = this.commonGame.filter(game => {
         const gameName = game.myGame?.game?.name?.toLowerCase() || '';
-        const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+        const platforms = game.myGame?.plateform?.name?.toLowerCase() || '';
         const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
 
         return (
@@ -281,7 +281,7 @@ filterGames(): void {
     if (query) {
       this.filteredGames = this.myGameHistoriqueAll.filter(game => {
         const gameName = game.myGame?.game?.name?.toLowerCase() || '';
-        const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+        const platforms = game.myGame?.plateform?.name?.toLowerCase() || '';
         const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
 
         return (

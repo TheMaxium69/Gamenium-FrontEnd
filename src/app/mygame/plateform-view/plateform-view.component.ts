@@ -99,7 +99,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
   }
 
-  // filtre les jeux 
+  // filtre les jeux
   filterGames(): void {
     if (this.searchQuery.trim() !== '') {
       // applique les filtre de recherche
@@ -107,13 +107,13 @@ export class PlateformViewComponent implements OnInit, OnChanges {
       const query = this.searchQuery.toLowerCase();
       gamesToFilter = gamesToFilter.filter(game => {
         const gameName = game.myGame?.game?.name?.toLowerCase() || '';
-        const platforms = game.myGame?.game?.platforms?.map(p => p.name?.toLowerCase()).join(', ') || '';
+        const platforms = game.myGame?.plateform?.name?.toLowerCase()  || '';
         const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
         return gameName.includes(query) || platforms.includes(query) || year.includes(query);
       });
       this.filteredGames = gamesToFilter;
-    } 
-  
+    }
+
     // applique le tri sur le bon tableau
     this.applySorting();
   }
@@ -124,11 +124,11 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     this.filterGames();
     this.isFilterDropdownOpen = false;
   }
-  
-  // fonction pour appliqué les filtres 
+
+  // fonction pour appliqué les filtres
   applySorting(): void {
     const arrayToSort = this.searchQuery.trim() !== '' ? this.filteredGames : this.HistoireMyGameByUserByPlateform;
-    
+
     switch (this.sortOption) {
       case 'name-asc':
         arrayToSort.sort((a, b) => a.myGame?.game?.name?.localeCompare(b.myGame?.game?.name || '') || 0);
@@ -168,8 +168,8 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         break;
     }
   }
-  
-  
+
+
 
   /* OBTENIR TOUTE LES CONSOLE */
   myPlateforme(id:number){
