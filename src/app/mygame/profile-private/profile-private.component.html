@@ -83,7 +83,8 @@
                 <!-- Cercle remplis ou vide selon si completé -->
                 <i *ngIf="task.completed" class="ri-checkbox-circle-fill" style="color: {{ isColor }}"></i>
                 <i *ngIf="!task.completed" class="ri-checkbox-blank-circle-line" style="color: {{ isColor }}"></i>
-                {{ task.name }}
+                {{ task.name }}<br>
+                <small>{{ task.content }}</small>
               </h6>
             </ng-container>
           </div>
