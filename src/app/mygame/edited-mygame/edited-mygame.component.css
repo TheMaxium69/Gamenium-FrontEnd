@@ -273,6 +273,11 @@
   justify-content: space-between;
 }
 
+.head-buy select {
+  width: calc(33.33% - 10px);
+  margin-right: 5px;
+}
+
 
 /*
 * INPUT
