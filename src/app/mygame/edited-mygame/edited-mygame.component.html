@@ -343,14 +343,18 @@
               </ng-container>
 
               <!-- BUY DATE -->
-              <input type="number" id="year_buy_date{{i}}" [(ngModel)]="copyGame.purchase.year_buy_at"
-                     name="purchase_year_buy_date{{i}}">
+              <div class="head-buy">
 
-              <input type="number" id="month_buy_date{{i}}" [(ngModel)]="copyGame.purchase.month_buy_at"
-                     name="purchase_month_buy_date{{i}}">
+                <input type="number" id="day_buy_date{{i}}" [(ngModel)]="copyGame.purchase.day_buy_at"
+                       name="purchase_day_buy_date{{i}}" placeholder="Jour d'achat">
 
-              <input type="number" id="day_buy_date{{i}}" [(ngModel)]="copyGame.purchase.day_buy_at"
-                     name="purchase_day_buy_date{{i}}">
+                <input type="number" id="month_buy_date{{i}}" [(ngModel)]="copyGame.purchase.month_buy_at"
+                       name="purchase_month_buy_date{{i}}" placeholder="Mois d'achat">
+
+                <input type="number" id="year_buy_date{{i}}" [(ngModel)]="copyGame.purchase.year_buy_at"
+                     name="purchase_year_buy_date{{i}}" placeholder="Années d'achat">
+              </div>
+
 
               <!-- PURCHASE CONTENT -->
               <textarea type="text" id="purchase_content{{i}}" [(ngModel)]="copyGame.purchase.content" name="purchase_content{{i}}" placeholder="Plus d'inforamtions sur l'achat"></textarea>
