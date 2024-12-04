@@ -29,7 +29,7 @@ export class CardActuComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.app.isLoggedIn && this.actu){
+    if (this.actu){
       this.getLikeByActu(this.actu.id) /* RECUPERE LES LIKES */
       this.getCommentWithActu(this.actu.id) /* RECUPERE LES COMS */
     }
