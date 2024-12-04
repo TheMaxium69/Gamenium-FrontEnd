@@ -140,9 +140,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   @HostListener('window:scroll', [])
   onScroll(): void {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-
-    // Affiche l'icône si le scroll dépasse une certaine hauteur (ex: 300px)
-    this.showBackToTop = scrollPosition > 300;
+    this.showBackToTop = scrollPosition > 800;
   }
 
   scrollToTop() {

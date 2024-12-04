@@ -974,16 +974,15 @@
 
 .back-to-top {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 90px;
+  right: 90px;
   z-index: 5;
 }
 
 .back-to-top i {
-  font-size: xx-large;
+  font-size: 45px;
   color: black;
   cursor: pointer;
 }
-
 
 /* //////////////// FIN DE ZONE BACK TO TOP /////////////// */
