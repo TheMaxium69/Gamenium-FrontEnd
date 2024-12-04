@@ -51,6 +51,8 @@ export class ProviderComponent implements OnInit{
     this.userConnected = this.app.userConnected;
     this.idUser = this.userConnected?.id;
 
+    console.log(this.providerNbActu);
+
     if (this.idUser) {
       this.checkIfUserFollowProvider(this.idUser)
       console.log(this.isProviderFollowedByUser)
@@ -109,6 +111,10 @@ export class ProviderComponent implements OnInit{
         console.error(`Error fetching followers for provider ${providerId}:`, error);
       }
     );
+  }
+
+  setNumberOfActus (event: number | undefined): void {
+    this.providerNbActu = event;
   }
 
   getLatestPostActus(id:number): void {

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges, Renderer2} from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges, Renderer2, Output, EventEmitter} from '@angular/core';
 import { UserInterface } from "../../-interface/user.interface";
 import { AppComponent } from "../../app.component";
 import { PostActuService } from "../../-service/post-actu.service";
@@ -18,6 +18,9 @@ export class ViewActualityComponent implements OnInit, OnChanges {
 
   @Input()
   providerFollowed: ProviderInterface[] = []
+
+  @Output()
+  providerNbActu = new EventEmitter<number> ;
 
   constructor(
     private app: AppComponent,
@@ -103,6 +106,9 @@ export class ViewActualityComponent implements OnInit, OnChanges {
         /*GET ACTU BY PROVIDER*/
         this.postActuProvider = response.result;
 
+        // ENVOIE LE NOMBRE D'ACTU AU PROVIDER
+        const actuNbr = this.postActuProvider.length;
+        this.providerNbActu.emit(actuNbr);
       }
     }, error => { this.app.erreurSubcribe() });
   }
