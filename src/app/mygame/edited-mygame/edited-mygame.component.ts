@@ -290,7 +290,9 @@ export class EditedMygameComponent implements OnInit {
           content: form.value['purchase_content' + i],
           devise_id: form.value['purchase_devise' + i],
           buy_where_id: form.value['purchase_buy_where' + i],
-          buy_date: form.value['purchase_buy_date' + i],
+          year_buy_date: form.value['purchase_year_buy_date' + i],
+          month_buy_date: form.value['purchase_month_buy_date' + i],
+          day_buy_date: form.value['purchase_day_buy_date' + i],
         }
 
         let tempMyGame = {

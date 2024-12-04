@@ -343,8 +343,14 @@
               </ng-container>
 
               <!-- BUY DATE -->
-              <input type="date" id="buy_date{{i}}" [(ngModel)]="copyGame.purchase.buy_date"
-                     name="purchase_buy_date{{i}}">
+              <input type="number" id="year_buy_date{{i}}" [(ngModel)]="copyGame.purchase.year_buy_date"
+                     name="purchase_year_buy_date{{i}}">
+
+              <input type="number" id="month_buy_date{{i}}" [(ngModel)]="copyGame.purchase.month_buy_date"
+                     name="purchase_month_buy_date{{i}}">
+
+              <input type="number" id="day_buy_date{{i}}" [(ngModel)]="copyGame.purchase.day_buy_date"
+                     name="purchase_day_buy_date{{i}}">
 
               <!-- PURCHASE CONTENT -->
               <textarea type="text" id="purchase_content{{i}}" [(ngModel)]="copyGame.purchase.content" name="purchase_content{{i}}" placeholder="Plus d'inforamtions sur l'achat"></textarea>
@@ -468,8 +474,14 @@
 
           <!-- BUY DATE -->
           <label for="buy_date{{i+nbCopyExisting}}">Buy date:</label>
-          <input type="date" id="buy_date{{i+nbCopyExisting}}" ngModel
-                 name="purchase_buy_date{{i+nbCopyExisting}}">
+          <input type="number" id="year_buy_date{{i+nbCopyExisting}}" ngModel
+                 name="purchase_year_buy_date{{i+nbCopyExisting}}">
+
+          <input type="number" id="month_buy_date{{i+nbCopyExisting}}" ngModel
+                 name="purchase_month_buy_date{{i+nbCopyExisting}}">
+
+          <input type="number" id="day_buy_date{{i+nbCopyExisting}}" ngModel
+                 name="purchase_day_buy_date{{i+nbCopyExisting}}">
 
           <!-- BUY WHERE -->
           <label for="buy_where{{i+nbCopyExisting}}">Buy where:</label>
