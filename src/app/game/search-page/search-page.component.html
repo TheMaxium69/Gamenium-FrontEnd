@@ -88,7 +88,8 @@
             <div class="d-flex flex-row flex-wrap align-items-center">
               <div
                 *ngFor="let badge of user.badges"
-                class="badge-item me-2 mb-2"
+                [ngClass]="{'pe-1': user.badges.length > 1}"
+                class="badge-item"
               >
                 <img
                   [src]="badge.picture?.url || 'assets/default-badge.png'"
