@@ -11,6 +11,9 @@ import {ProviderService} from "../../-service/provider.service";
 import {AppComponent} from "../../app.component";
 import { ProfilService } from 'src/app/-service/profil.service';
 import { ProfilInterface } from 'src/app/-interface/profil.interface';
+import { catchError, forkJoin, of } from 'rxjs';
+import { BadgeService } from 'src/app/-service/badge.service';
+import { ApicallInterface } from 'src/app/-interface/apicall.interface';
 
 @Component({
   selector: 'app-search-page',
@@ -18,6 +21,8 @@ import { ProfilInterface } from 'src/app/-interface/profil.interface';
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit{
+
+  
 
   isLoggedIn:boolean|undefined;
 
@@ -43,6 +48,7 @@ export class SearchPageComponent implements OnInit{
     private postactuService: PostActuService,
     private providerService: ProviderService,
     private profileService: ProfilService,
+    private badgeService: BadgeService,
     protected app: AppComponent
   ) {
   }
@@ -143,13 +149,47 @@ export class SearchPageComponent implements OnInit{
   }
 
   searchUser(): void {
-
-    this.userService.searchUsers(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
-      this.users = results;
-      console.log(this.users)
-    });
-
+    this.userService.searchUsers(this.searchValue, 100, this.app.setURL()).subscribe(
+      (results) => {
+        this.users = results;
+        console.log("Fetched Users:", this.users);
+  
+        // Fetch badges for each user with error handling
+        const badgeRequests = this.users.map(user => 
+          this.badgeService.getBadgeByUser(user.id, this.app.setURL()).pipe(
+            catchError(error => {
+              console.error(`Error fetching badges for user ${user.id}:`, error);
+              // Return an observable with empty badges to prevent forkJoin from failing
+              return of({ message: 'error', result: [] } as ApicallInterface);
+            })
+          )
+        );
+  
+        // Execute all badge requests in parallel
+        forkJoin(badgeRequests).subscribe(
+          (badgeResponses: ApicallInterface[]) => {
+            badgeResponses.forEach((badgeResponse, index) => {
+              if (badgeResponse && badgeResponse.result) {
+                this.users[index].badges = badgeResponse.result;
+                console.log(`User ID ${this.users[index].id} Badges:`, this.users[index].badges);
+              } else {
+                this.users[index].badges = [];
+                console.log(`User ID ${this.users[index].id} has no badges.`);
+              }
+            });
+            console.log("Users after assigning badges:", this.users);
+          },
+          (error) => {
+            console.error("Error fetching badges:", error);
+          }
+        );
+      },
+      (error) => {
+        console.error("Error fetching users:", error);
+      }
+    );
   }
+
 
   searchPostActu(): void {
 

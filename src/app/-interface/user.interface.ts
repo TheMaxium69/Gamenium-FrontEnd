@@ -1,3 +1,4 @@
+import { BadgeInterface } from "./badge.interface";
 import {PictureInterface} from "./picture.interface";
 
 export interface UserInterface {
@@ -13,4 +14,5 @@ export interface UserInterface {
   themeColor: string;
   /* ATTENTION J'AI ENLEVER LE [] a theme j'espere que ça buggera pas */
   color: string;
+  badges?: BadgeInterface[];
 }

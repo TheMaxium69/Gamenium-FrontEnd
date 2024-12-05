@@ -7,7 +7,7 @@ import { BadgeVersUserInterface } from '../-interface/badge-vers-user.interface'
   providedIn: 'root',
 })
 export class BadgeVersUserService {
-  private apiUrl = 'http://localhost:8000/'; // A REMPLACER AVEC L'URL DE L'API
+  private apiUrl = 'http://localhost:8000'; // A REMPLACER AVEC L'URL DE L'API
 
   constructor(private http: HttpClient) {}
 
