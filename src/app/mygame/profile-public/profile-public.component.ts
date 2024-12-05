@@ -62,13 +62,6 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
       this.myGameByUser(this.userConnected.id);
     }
 
-    
-    if(this.userConnected?.id != this.profileId){
-
-      console.log(this.userConnected);
-      console.log(this.profileId);
-      this.addViewProfile(this.profileId);
-    }
 
     this.route.paramMap.subscribe(params => {
       const newTask = params.get('task');
@@ -159,6 +152,13 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
             // on save une copie de ce tableau
             this.originalGameHistoriqueAll = [...this.myGameHistoriqueAll];
             console.log("Jeux lié a ce profil", this.myGameHistoriqueAll);
+          }
+
+          if(this.userConnected?.id != this.profileId){
+
+            console.log(this.userConnected);
+            console.log(this.profileId);
+            this.addViewProfile(this.profileId);
           }
         } else {
           console.log("Pas de jeux pour l'utilisateur courrant", id_user);
