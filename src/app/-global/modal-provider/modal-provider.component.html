@@ -1,25 +1,39 @@
 <div class="modal fade text-center" id="providerModal" tabindex="-1" aria-labelledby="providerModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Gérer mes abonnements</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        
-        <div *ngFor="let provider of providerFollowed">
-            <div class="">
-                <div class="d-flex provider-row">
-                    <div  data-bs-dismiss="modal" id="provider{{provider.id}}" class="provider-img" style="background-image: url('{{ provider.picture?.url }}')" routerLink="/provider/{{ provider.id }}" data-dismiss="modal"></div>
-                    <h3 class="align-center">{{provider.displayName}}</h3>
-                    <p class="align-center">{{getNbOfActu(provider.id)}} actualités</p>
-                    <p class="align-center">Dernier post le {{(lastPostDate(provider.id) | date:'dd / MM / yyyy') ?? 'Pas actu'}}</p>
-                    <button class="align-center" (click)="unfollowProvider(provider.id)">Ne plus suivre</button>
-                </div>
-            </div>
-        </div>
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- BAR -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Gérer mes abonnements</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
+      <!-- CONTENU -->
+      <div class="providerAll">
+          <div class="oneProvider" *ngFor="let provider of providerFollowed">
+
+            <div data-bs-dismiss="modal" class="head-provider" routerLink="/provider/{{ provider.id }}">
+              <div class="provider-img" style="background-image: url('{{ provider.picture?.url }}')"></div>
+              <h3>{{provider.displayName}}</h3>
+            </div>
+
+            <div class="middle-provider">
+              <p>{{getNbOfActu(provider.id)}} actualités</p>
+              <small>Dernier post le {{(lastPostDate(provider.id) | date:'dd / MM / yyyy') ?? 'Pas actu'}}</small>
+            </div>
+
+            <div class="end-provider">
+              <button class="sub-gamenium-btn" style="color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}; border-color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" (click)="unfollowProvider(provider.id)">Ne plus suivre</button>
+            </div>
+
+          </div>
+      </div>
+
     </div>
   </div>
+
+</div>
 
 
 

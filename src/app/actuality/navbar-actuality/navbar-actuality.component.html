@@ -31,9 +31,15 @@
 
     </div>
 
-    <div class="open-final" data-bs-toggle="modal" data-bs-target="#providerModal">
+    <div class="open-final" data-bs-toggle="modal" data-bs-target="#providerModal" *ngIf="this.app.isLoggedIn">
       <p (click)="toggleProviderModal()">
-        <i class="ri-expand-diagonal-line nav-icon"></i>
+        <i class="ri-settings-3-fill nav-icon"></i>
+      </p>
+    </div>
+
+    <div class="open-final" routerLink="/search/provider/-" *ngIf="!this.app.isLoggedIn">
+      <p>
+        <i class="ri-apps-2-add-fill nav-icon"></i>
       </p>
     </div>
 

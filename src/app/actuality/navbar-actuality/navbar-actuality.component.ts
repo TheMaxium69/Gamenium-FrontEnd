@@ -22,17 +22,17 @@ export class NavbarActualityComponent implements OnInit {
   mouseDown: boolean = false;
   startX: number = 0;
   scrollLeft: number = 0;
-  
+
 
   constructor(
-    private app:AppComponent,
+    protected app:AppComponent,
     private providerService:ProviderService,
     private followService:FollowService
   ) {}
 
   @Output()
   providerSelected: EventEmitter<number> = new EventEmitter<number>();
-  
+
   @Output()
   providerFollowed: EventEmitter<ProviderInterface[]> = new EventEmitter<ProviderInterface[]>();
 
@@ -115,8 +115,8 @@ export class NavbarActualityComponent implements OnInit {
         this.mouseDown = true;
         this.startX = mouse.pageX - slider.offsetLeft;
         this.scrollLeft = slider.scrollLeft;
-    } 
-    
+    }
+
   }
 
   stopDrag(): void {
@@ -130,7 +130,7 @@ export class NavbarActualityComponent implements OnInit {
     }
 
     const slider = document.querySelector('#provider-nav-container') as HTMLElement;
-    
+
     mouse.stopPropagation();
 
     if (slider) {
@@ -138,7 +138,7 @@ export class NavbarActualityComponent implements OnInit {
       const scroll = x - this.startX;
       slider.scrollLeft = this.scrollLeft - scroll;
     }
-    
+
   }
 
   toggleProviderModal() {
@@ -146,12 +146,12 @@ export class NavbarActualityComponent implements OnInit {
       this.isUserManagingProvider = true
       this.isProviderModalOpen.emit(this.isUserManagingProvider)
       console.log('data sent:' + this.isUserManagingProvider)
-      
+
     } else {
       this.isUserManagingProvider = false
       this.isProviderModalOpen.emit(this.isUserManagingProvider)
       console.log('data sent:' + this.isUserManagingProvider)
     }
   }
-  
+
 }
