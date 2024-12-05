@@ -9,6 +9,8 @@ import {ActivatedRoute} from "@angular/router";
 import {ProfilService} from "../../-service/profil.service";
 import {ProfilInterface} from "../../-interface/profil.interface";
 import {PlateformService} from "../../-service/plateform.service";
+import { ViewService } from 'src/app/-service/view.service';
+import { ApicallInterface } from 'src/app/-interface/apicall.interface';
 
 @Component({
   selector: 'app-profile-public',
@@ -42,6 +44,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
               private myGameService:HistoryMyGameService,
               private userRateService:UserRateService,
               private route: ActivatedRoute,
+              private viewService: ViewService,
               private profileService:ProfilService,
               private histoireMyGameService:HistoryMyGameService
   ) {
@@ -57,6 +60,14 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
     if(this.userConnected) {
       this.myGameByUser(this.userConnected.id);
+    }
+
+    
+    if(this.userConnected?.id != this.profileId){
+
+      console.log(this.userConnected);
+      console.log(this.profileId);
+      this.addViewProfile(this.profileId);
     }
 
     this.route.paramMap.subscribe(params => {
@@ -390,6 +401,25 @@ filterGames(): void {
     console.log("********************************************")
 
 
+  }
+
+  addViewProfile(id:number){
+    setTimeout(() => {
+
+      let bodyNoJson = {
+        "id": id,
+        "ip": "10.10.10.10"
+      }
+
+      let body = JSON.stringify(bodyNoJson);
+
+      this.viewService.addProfileView(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseAddViewActu:ApicallInterface) => {
+        if (reponseAddViewActu.message == "good"){
+          console.log("+1 vue");
+        }
+      })
+
+    }, 2000)
   }
 
 
