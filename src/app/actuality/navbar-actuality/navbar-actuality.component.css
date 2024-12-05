@@ -29,7 +29,7 @@
   margin-left: auto;
 }
 
-.provider-selected {
+.provider-inactive {
   filter: opacity(0.5);
 }
 

@@ -54,18 +54,24 @@ export class ViewActualityComponent implements OnInit, OnChanges {
     if (changes['providerIdSelected']) {
       const currentValue = changes['providerIdSelected'].currentValue;
       const previousValue = changes['providerIdSelected'].previousValue;
+      const providerAll = document.querySelectorAll('.provider-img');
   
       if (previousValue) {
         const lastProviderSelected = document.querySelector(`#provider${previousValue}`);
         if (lastProviderSelected) {
-          this.renderer.removeClass(lastProviderSelected, 'provider-selected');
+          providerAll.forEach(provider => {
+            this.renderer.removeClass(provider, 'provider-inactive');
+          });
         }
       }
   
       if (currentValue) {
         const providerSelected = document.querySelector(`#provider${currentValue}`);
         if (providerSelected) {
-          this.renderer.addClass(providerSelected, 'provider-selected');
+          providerAll.forEach(provider => {
+            this.renderer.addClass(provider, 'provider-inactive');
+          });
+          this.renderer.removeClass(providerSelected, 'provider-inactive');
         }
         this.getActuByProvider(currentValue);
       } else {
