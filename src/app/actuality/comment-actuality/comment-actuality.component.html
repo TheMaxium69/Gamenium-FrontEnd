@@ -36,11 +36,11 @@
     <h3 id="comment-value" style="background-color: {{ providerColor ?? 'red' }}">{{nbComment}}</h3>
   </div>
   <div id="sortTypes">
-    <div class="d-flex" id="last-header" (click)="sortCommentByLike()">
+    <div class="d-flex" id="last-header" (click)="sortCommentByLike()" *ngIf="isShortByDate">
       <i class="ri-arrow-up-down-line" id="sort"></i>
       <h3 id="sort-name">Les plus Likés</h3>
     </div>
-    <div class="d-flex" id="last-header" (click)="sortCommentByDate()">
+    <div class="d-flex" id="last-header" (click)="sortCommentByDate()" *ngIf="!isShortByDate">
       <i class="ri-arrow-up-down-line" id="sort"></i>
       <h3 id="sort-name">Les plus récents</h3>
     </div>
@@ -135,14 +135,14 @@
   </div>
 
   <div>
-    <div id="OtherCommentsByDate">
+    <div id="OtherCommentsByDate" [class.displayNone]="isShortByDate">
       <ng-container *ngFor="let comment of commentByActu">
         <ng-container *ngIf="comment.user.id != userConnectedId">
           <div class="card mb-2">
             <div class="comment-user">
-    
+
               <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color) }}"></div>
-    
+
               <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
                 <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                   <img class="badgeIMG" src="{{ badge.picture?.url }}">
@@ -173,17 +173,17 @@
             <div class="comment-border mb-4"></div>
           </div>
         </ng-container>
-      </ng-container>  
+      </ng-container>
     </div>
-  
-    <div id="OtherCommentsByLike" class="displayNone">
+
+    <div id="OtherCommentsByLike" [class.displayNone]="!isShortByDate">
       <ng-container *ngFor="let comment of commentByActu">
         <ng-container *ngIf="comment.user.id != userConnectedId">
           <div class="card mb-2">
             <div class="comment-user">
-    
+
               <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color) }}"></div>
-    
+
               <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
                 <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                   <img class="badgeIMG" src="{{ badge.picture?.url }}">
@@ -214,7 +214,7 @@
             <div class="comment-border mb-4"></div>
           </div>
         </ng-container>
-      </ng-container>  
+      </ng-container>
     </div>
   </div>
 </ng-container>

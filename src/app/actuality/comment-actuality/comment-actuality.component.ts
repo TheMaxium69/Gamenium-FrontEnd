@@ -583,61 +583,32 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
+  isShortByDate:boolean = false;
+
   sortCommentByDate() {
+    this.isShortByDate = true;
 
-    //select Div in html
-      const OtherCommentsByDate = document.querySelector('#OtherCommentsByDate') as HTMLElement;
-      const OtherCommentsByLike = document.querySelector('#OtherCommentsByLike') as HTMLElement;
+    //fonction trie par date
+    this.commentByActu = this.commentByActu?.sort((a, b) => {
+      const dateA = a.created_at
+        ? new Date(a.created_at).getTime()
+        : 0;
+      const dateB = b.created_at
+        ? new Date(b.created_at).getTime()
+        : 0;
 
-    //sort most recent comment
-
-
-      //seciton like
-        OtherCommentsByLike.classList.remove('display');
-        OtherCommentsByLike.classList.add('displayNone');
-
-      //section date
-        OtherCommentsByDate.classList.remove('displayNone');
-        OtherCommentsByDate.classList.add('display');
-
-      //fonction trie par date
-        this.commentByActu = this.commentByActu?.sort((a, b) => {
-          const dateA = a.created_at
-            ? new Date(a.created_at).getTime()
-            : 0;
-          const dateB = b.created_at
-            ? new Date(b.created_at).getTime()
-            : 0;
-
-          return dateB - dateA;
-        });
+      return dateB - dateA;
+    });
 
   }
 
   sortCommentByLike() {
-    console.log(this.commentByActu)
-    //select Div in html
-      const OtherCommentsByLike = document.querySelector('#OtherCommentsByLike') as HTMLElement;
-      const OtherCommentsByDate = document.querySelector('#OtherCommentsByDate') as HTMLElement;
-    //sort most liked comment
+    this.isShortByDate = false;
 
-      //section date
-        OtherCommentsByDate.classList.remove('display');
-        OtherCommentsByDate.classList.add('displayNone');
+    /* PAR LE PLUS LIKER */
+    this.commentByActu?.sort((a, b) => (this.nbLikeByComment[b.id] || 0) - (this.nbLikeByComment[a.id] || 0));
 
-      //section like
-        OtherCommentsByLike.classList.remove('displayNone');
-        OtherCommentsByLike.classList.add('display');
 
-  }
-
-  sortByLikeOrDate() {
-    //TRUE = SORTBYLIKE FALSE = SORTBYDATE
-    if (this.sortDateOrLike) {
-      this.sortCommentByLike()
-    } else {
-      this.sortCommentByDate()
-    }
   }
 
   getCommentLenght() {
