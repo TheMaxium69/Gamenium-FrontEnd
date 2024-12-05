@@ -21,7 +21,7 @@
       <!-- TEXT -->
       <div class="core-left">
         <h2>{{ game.name }}</h2>
-        <p style="color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" class="platform-names">
+        <p style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="platform-names">
           <ng-container *ngFor="let platform of game.platforms; let last = last">
             {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
           </ng-container>
@@ -56,7 +56,7 @@
 
       <!-- ACTION/NOTE -->
       <div class="core-right" *ngIf="!isDetailGame">
-        <div class="card-note" style="background-color: {{this.app.userConnected.themeColor || this.app.colorDefault}};">
+        <div class="card-note" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}};">
            <p><span>10</span>/20</p>
 <!--          <p><span>{{rateAverage(fakeRates)}}</span>/20</p>-->
         </div>
