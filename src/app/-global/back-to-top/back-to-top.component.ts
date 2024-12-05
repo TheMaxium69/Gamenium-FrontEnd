@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-back-to-top',
@@ -8,6 +9,8 @@ import { Component, HostListener } from '@angular/core';
 export class BackToTopComponent {
 
   showBackToTop = false;
+
+  constructor(protected app:AppComponent) {}
 
   @HostListener('window:scroll', [])
   onScroll(): void {

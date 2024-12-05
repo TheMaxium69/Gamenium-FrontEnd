@@ -1,4 +1,5 @@
 <!-- SECTION BACK TO TOP -->
 <div id="back-to-top" class="back-to-top justify-content-end" [ngClass]="{ 'visible': showBackToTop}" (click)="scrollToTop()">
-    <i class="ri-arrow-up-circle-line"></i>
+  <i style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="ri-arrow-up-circle-fill" *ngIf="this.app.isLoggedIn"></i>
+  <i style="color: {{ this.app.colorDefault }}" class="ri-arrow-up-circle-fill" *ngIf="!this.app.isLoggedIn"></i>
 </div>

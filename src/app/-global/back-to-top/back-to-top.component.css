@@ -4,13 +4,13 @@
 .back-to-top {
     position: fixed;
     bottom: 90px;
-    right: 90px;
+    right: 60px;
     z-index: 5;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     visibility: hidden;
     opacity: 0;
 }
-  
+
 .back-to-top.visible {
     opacity: 1;
     visibility: visible;
@@ -21,5 +21,5 @@
     color: black;
     cursor: pointer;
 }
-  
+
 /* //////////////// FIN DE ZONE BACK TO TOP /////////////// */
