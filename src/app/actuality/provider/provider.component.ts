@@ -10,6 +10,8 @@ import { UserInterface } from 'src/app/-interface/user.interface';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import Swal from "sweetalert2";
+import { ViewService } from 'src/app/-service/view.service';
+import { ApicallInterface } from 'src/app/-interface/apicall.interface';
 // import "/node_modules/flag-icons/css/flag-icons.min.css";
 registerLocaleData(localeFr, 'fr');
 
@@ -40,6 +42,7 @@ export class ProviderComponent implements OnInit{
     private route: ActivatedRoute,
     private providerService: ProviderService,
     private followService: FollowService,
+    private viewService: ViewService,
     private postactuService: PostActuService,
     protected app: AppComponent
   ) {}
@@ -67,8 +70,12 @@ export class ProviderComponent implements OnInit{
 
   getProviders(id:number): void {
     this.providerService.getProviderById(id, this.app.setURL()).subscribe((reponseProviders) => {
-      if (reponseProviders.message !== "Provider not found"){
+      if (reponseProviders.message == "good"){
         this.providerSelected = reponseProviders.result;
+
+        if(this.providerSelected){
+          this.addPoviderView(this.providerSelected.id)
+        }
       } else {
         this.noneProvider = true;
         Swal.fire({
@@ -183,5 +190,25 @@ export class ProviderComponent implements OnInit{
     })
 
     // console.log(providerId);
+  }
+
+  addPoviderView(id:number){
+
+    setTimeout(() => {
+
+      let bodyNoJson = {
+        "id": id,
+        "ip": "10.10.10.10"
+      }
+
+      let body = JSON.stringify(bodyNoJson);
+
+      this.viewService.addProviderView(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseAddViewActu:ApicallInterface) => {
+        if (reponseAddViewActu.message == "good"){
+          console.log("+1 vue");
+        }
+      })
+
+    }, 2000)
   }
 }
