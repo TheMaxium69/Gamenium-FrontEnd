@@ -129,7 +129,7 @@
                   <div class="social-item">
                     <i class="{{ socialNetworkOne.icon_class }} socials-icon"></i>
                     <label class="socials-label" for="{{ socialNetworkOne.name }}">{{ socialNetworkOne.name | titlecase }}</label>
-                    <input [value]="socialNetworkOne.url_user.replace('https://', '')" type="text" class="social-input urluserSocialNetwork" disabled>
+                    <input [value]="socialNetworkOne.url_user.replace('https://', '')" type="text" class="social-input-locked urluserSocialNetwork" disabled>
                     <ng-container *ngIf="reseauSelected">
                       <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name}}" class="social-input" name="{{ socialNetworkOne.name }}" [(ngModel)]="reseauSelected[socialNetworkOne.id].url">
                     </ng-container>

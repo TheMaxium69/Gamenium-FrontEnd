@@ -448,7 +448,7 @@ a > div {
 /* .file-upload input[type="file"] {
  display: none;
 } */
-
+.social-input-locked,
 .social-input {
   border: none;
   padding: 8px;
@@ -462,6 +462,16 @@ a > div {
   color: #575757;
   height: 100%;
   transition: border-bottom 0.3s ease;
+}
+
+.social-input {
+  font-weight: 500;
+  color: black;
+}
+
+.social-input-locked {
+  opacity: 0.6;
+  width: 200px;
 }
 
 .social-input:focus {
