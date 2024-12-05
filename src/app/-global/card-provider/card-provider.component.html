@@ -1,1 +1,35 @@
-<p>card-provider works!</p>
+<div class="provider_card" *ngIf="provider">
+    <!-- Provider Color Bar -->
+    <div
+      class="provider_color"
+      [style.background-color]="provider.color"
+      [routerLink]="['/provider', provider.id]"
+    ></div>
+  
+    <!-- Provider Profile Image -->
+    <div
+      class="provider_profile"
+      [routerLink]="['/provider', provider.id]"
+      
+    ><img class="pp-shadow"src="{{provider.picture?.url}}" alt=""></div>
+  
+    <!-- Provider Card Content -->
+    <div class="provider-card-content">
+      <p
+        class="name"
+        [routerLink]="['/provider', provider.id]"
+      >
+        {{ provider.displayName }}
+      </p>
+      <a
+        class="follow-btn"
+        [ngClass]="{'followed': isFollowed, 'hover-effect': hoverText !== null}"
+        (click)="onFollow();"
+        (mouseenter)="onMouseEnter()"
+        (mouseleave)="onMouseLeave()"
+      >
+        {{getButtonText() }}
+      </a>
+    </div>
+  </div>
+  

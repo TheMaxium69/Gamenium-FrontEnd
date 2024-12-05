@@ -17,6 +17,8 @@ import { HistoryMyGameInterface } from 'src/app/-interface/history-my-game.inter
 import { PostActuService } from 'src/app/-service/post-actu.service';
 import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
 import { GameService } from 'src/app/-service/game.service';
+import { ProviderService } from 'src/app/-service/provider.service';
+import { ProviderInterface } from 'src/app/-interface/provider.interface';
 
 @Component({
   selector: 'app-home-connected',
@@ -57,6 +59,11 @@ export class HomeConnectedComponent implements OnInit {
   userLikes:any[] = [];
   userComments:any[]= [];
 
+  // Provider
+  providers: ProviderInterface[] = []
+  randomProviders: ProviderInterface[] = [];
+  followedStates: { [id: number]: boolean } = {}
+
   constructor(private route: ActivatedRoute,
               protected app:AppComponent,
               private taskService: TaskService,
@@ -65,7 +72,9 @@ export class HomeConnectedComponent implements OnInit {
               private profileService:ProfilService,
               private postActuService: PostActuService,
               private gameService: GameService,
-              private badgeService: BadgeService) { }
+              private badgeService: BadgeService,
+              private providerService: ProviderService) 
+              { }
 
   ngOnInit(): void {
 
@@ -84,6 +93,7 @@ export class HomeConnectedComponent implements OnInit {
     this.fetchTasks();
     this.getActuAll();
     this.getGames();
+    this.fetchProviders();
 
 
 
@@ -291,6 +301,42 @@ export class HomeConnectedComponent implements OnInit {
     this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
       this.games = results;
     });
+  }
+
+  // PROVIDER 
+
+  fetchProviders(): void {
+    this.providerService.getAllProviders(this.app.setURL()).subscribe({
+      next: (response) => {
+        if (response && response.result) {
+          this.providers = response.result; 
+          this.selectRandomProviders(4);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching providers:', err);
+      }
+    });
+  }
+
+  handleFollowed(providerId: number): void {
+    console.log(`Provider with ID ${providerId} followed.`);
+    this.followedStates[providerId] = true;
+  }
+  
+  handleUnfollowed(providerId: number): void {
+    console.log(`Provider with ID ${providerId} unfollowed.`);
+    this.followedStates[providerId] = false;
+  }
+  
+
+  isProviderFollowed(providerId: number): boolean {
+    return this.followedStates[providerId] || false; // Default to false if not tracked
+  }
+
+  selectRandomProviders(count: number): void {
+    const shuffled = [...this.providers].sort(() => 0.5 - Math.random());
+    this.randomProviders = shuffled.slice(0, count); // Pick the first `count` items
   }
 
 }
