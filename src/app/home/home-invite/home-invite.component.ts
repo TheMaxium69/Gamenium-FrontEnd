@@ -23,25 +23,35 @@ export class HomeInviteComponent implements OnInit {
 
   ngOnInit(): void {
     this.getActuAll();
-    this.getGames();
+    this.getLatestGames(3);
   }
 
   getActuAll() {
-    console.log('Fetching all actualities');
+    
     this.postActuService.getActuAll(this.app.setURL()).subscribe(responseActu => {
       if (responseActu.message === 'good') {
         this.postActuFollowOrAll = responseActu.result;
+        console.log('Fetching all actualities');
       } else {
         console.log("failed fetching")
       }
     });
   }
 
-  getGames() {
-    console.log('Fetching games');
-    this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
-      this.games = results;
-    });
+
+  getLatestGames(limit: number){
+
+    let bodyNoJson = {
+      "limit": limit,
+    }
+
+    let body = JSON.stringify(bodyNoJson);
+
+    console.log('Fetching latest games');
+    this.gameService.getLatestGames(body, this.app.setURL()).subscribe((results) => {
+      this.games = results.result;
+      console.log(results.result)
+    })
   }
 
 }

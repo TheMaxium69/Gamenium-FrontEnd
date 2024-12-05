@@ -38,9 +38,8 @@
 
     <div id="gamenium-actu-invite">
         <div class="gamenium-container-panel mb">
-            <h2 class="">Les actus à la Une</h2>
+            <h2 class="">Les dernières actualités</h2>
             <div id="content-actu-invite" class="d-flex">
-                <!-- Boucle avec les card actus (en afficher 6) -->
               <app-card-actu *ngFor="let actu of postActuFollowOrAll | slice: 0 : 6" [actu]="actu"></app-card-actu>
             </div>
             <div class="rowamoi justify-content-end">
@@ -57,7 +56,7 @@
 
             <!-- Boucle avec les cards jeux (en afficher 3)-->
             <div id="content-latest-release" class="d-flex">
-                <app-card-game-sub *ngFor="let game of games | slice: 0: 3" [game]="game"></app-card-game-sub>
+                <app-card-game-sub *ngFor="let game of games " [game]="game"></app-card-game-sub>
             </div>
 
             <div class="rowamoi justify-content-end">
@@ -72,7 +71,6 @@
         <div class="gamenium-container-panel mb">
             <h2>Les tops du mois</h2>
             <div id="content-actu-invite" class="d-flex">
-                <!-- Boucle avec les card actus (en afficher 9) -->
               <app-card-actu *ngFor="let actu of postActuFollowOrAll | slice: 0 : 9" [actu]="actu"></app-card-actu>
             </div>
             <div class="rowamoi justify-content-end">

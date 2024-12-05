@@ -26,5 +26,9 @@ export class GameService {
 
   searchGames(searchValue: string, limit: number, url: string): Observable<GameInterface[]> {
     return this.http.post<GameInterface[]>(url + `/games/search`, { searchValue, limit});
-  } 
+  }
+  
+  getLatestGames(body: string, url: string): Observable<ApicallInterface> {
+    return this.http.post<ApicallInterface>( url + `/latest-games`, body);
+  }
 }
