@@ -42,6 +42,9 @@
 .form .register-form {
   display: none;
 }
+.form .form-check {
+  text-align: start;
+}
 .container {
   position: relative;
   z-index: 1;
