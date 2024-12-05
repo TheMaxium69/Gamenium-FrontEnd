@@ -18,9 +18,9 @@
 
       <!-- PROVIDER -->
       <a routerLink="/provider/{{ actu.Provider?.id }}" class="btn" style="background-color: {{ actu.Provider?.color }}97!important">
-        <div class="d-flex">
+        <div class="d-flex provider">
           <div class="provider-img" [ngStyle]="{ 'background-image': 'url(' + actu.Provider?.picture?.url + ')' }"></div>
-          {{ actu.Provider?.displayName }}
+          <p>{{ actu.Provider?.displayName }}</p>
         </div>
       </a>
 
@@ -28,14 +28,14 @@
       <div class="card-i d-flex" >
 
         <!-- COMMENTAIRE -->
-        <div>
-          <small>{{ this.app.bigNombreFormatage(commentAll || 0) }}</small>
+        <div class="icone-stat">
+          <p>{{ this.app.bigNombreFormatage(commentAll || 0) }}</p>
           <i class="ri-chat-3-line" style="color: #2e3a59;"></i>
         </div>
 
         <!-- LIKE -->
-        <div (click)="this.onClickLike(actu.id); $event.stopPropagation();">
-          <small>{{ this.app.bigNombreFormatage(likeAll || 0) }}</small>
+        <div (click)="this.onClickLike(actu.id); $event.stopPropagation();" class="icone-stat">
+          <p>{{ this.app.bigNombreFormatage(likeAll || 0) }}</p>
           <i id="likeIcon{{ actu.id }}" class="cardActuLike"
             [ngStyle]="{ color: likedStatus[actu.id] ? actu.Provider?.color || this.app.colorDefault : '#2e3a59' }"
             [class.ri-heart-fill]="likedStatus[actu.id]"
