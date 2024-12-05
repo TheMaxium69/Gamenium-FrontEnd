@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProviderInterface } from 'src/app/-interface/provider.interface';
+import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
+import { FollowService } from 'src/app/-service/follow.service';
+import { AppComponent } from 'src/app/app.component';
+
 
 @Component({
   selector: 'app-modal-provider',
@@ -8,16 +12,40 @@ import { ProviderInterface } from 'src/app/-interface/provider.interface';
 })
 export class ModalProviderComponent implements OnInit {
 
-  constructor() {
 
+  constructor(
+    private followService: FollowService,
+    protected app: AppComponent
+  ) {
   }
 
   @Input()
   providerFollowed: ProviderInterface[] = []
 
+  @Input()
+  providerFollowActuAll: PostActuInterface[] = []
+
   ngOnInit(): void {
-    
   }
   
+  getNbOfActu(providerId: number) {
+    return this.providerFollowActuAll.filter(actu => actu.Provider?.id === providerId).length
+  }
+
+  lastPostDate(providerId: number) {
+    const latest = this.providerFollowActuAll
+    .filter(actu => actu.Provider?.id === providerId)
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+    return latest ? latest.created_at : ''
+  }
+
+  unfollowProvider(providerId: number) {
+    this.followService.deleteFollowProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe(response => {
+      if (response.message == 'follow deleted successfully') {
+        console.log('follow supprimé avec succès')
+      }
+    })
+  }
+
 
 }

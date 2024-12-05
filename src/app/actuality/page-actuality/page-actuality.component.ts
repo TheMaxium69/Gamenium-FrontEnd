@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
 import { ProviderInterface } from 'src/app/-interface/provider.interface';
 
 @Component({
@@ -13,6 +14,7 @@ export class PageActualityComponent implements OnInit{
   providerSelected: number | undefined;
   lastProviderSelected: number | undefined;
   providerFollowed: ProviderInterface[] = []
+  providerFollowActuAll: PostActuInterface[] = []
   manageProviders: boolean = false
 
   constructor(
@@ -50,6 +52,10 @@ export class PageActualityComponent implements OnInit{
   openModal(event: any) {
     this.manageProviders = event;
     console.log('open modal called with parameter:' + event);
+  }
+
+  providerActu(event: PostActuInterface[]) {
+    this.providerFollowActuAll = event
   }
 
 }

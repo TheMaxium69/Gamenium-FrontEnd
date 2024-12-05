@@ -22,6 +22,9 @@ export class ViewActualityComponent implements OnInit, OnChanges {
   @Output()
   providerNbActu = new EventEmitter<number> ;
 
+  @Output()
+  providerFollowActuAll: EventEmitter<PostActuInterface[]> = new EventEmitter<PostActuInterface[]>()
+
   constructor(
     private app: AppComponent,
     private postActuService: PostActuService,
@@ -132,6 +135,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
         }
       );
     });
+    this.providerFollowActuAll.emit(this.postActuFollow)
   }
 
   /*

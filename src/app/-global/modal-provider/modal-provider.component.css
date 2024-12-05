@@ -1,0 +1,18 @@
+.provider-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 2px 2px 9px #888;
+    cursor: pointer;
+}
+
+.provider-row {
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.align-center {
+    align-content: center;
+}

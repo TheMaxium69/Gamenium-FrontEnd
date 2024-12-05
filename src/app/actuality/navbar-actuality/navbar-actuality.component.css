@@ -86,6 +86,7 @@
   border-bottom-right-radius: 8px;
   text-align: center;
   font-size: 34px;
+  cursor: pointer;
 }
 
 .navbar-actuality .open-final p{

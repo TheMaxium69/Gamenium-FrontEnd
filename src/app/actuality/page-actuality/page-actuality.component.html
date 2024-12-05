@@ -1,3 +1,8 @@
+<app-modal-provider 
+  [providerFollowed]="providerFollowed"
+  [providerFollowActuAll]="providerFollowActuAll">
+</app-modal-provider>
+
 <ng-container *ngIf="!actualityId">
   <app-navbar-actuality 
     (providerSelected)="onProviderSelected($event)" 
@@ -7,13 +12,9 @@
 
   
   <div style="margin-bottom: 120px;">
-    <app-modal-provider 
-      *ngIf="manageProviders"
-      [providerFollowed]="providerFollowed">
-    </app-modal-provider>
-    
+
     <app-view-actuality 
-      *ngIf="!manageProviders"
+      (providerFollowActuAll)="providerActu($event)"
       [providerIdSelected]="providerSelected ?? null" 
       [providerFollowed]="providerFollowed">
     </app-view-actuality>
