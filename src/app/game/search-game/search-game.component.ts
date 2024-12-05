@@ -32,6 +32,8 @@ export class SearchGameComponent implements OnInit{
   profilSelected: ProfilInterface | undefined;
   nbMoreGame:number = 1;
 
+  providerExact: ProviderInterface | null = null;
+
   constructor (
     private userRateService: UserRateService,
     private gameService: GameService,
@@ -102,18 +104,71 @@ export class SearchGameComponent implements OnInit{
     this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.games = results;
 
+      let providersFetchLimit = 50 - this.games.length;
+
+
       let element = document.getElementById("moreGameBTN");
+      let provideUser = document.getElementById("provider-user");
+
       if (this.games.length >= this.app.fetchLimit) {
-        if (element){
+        if (element && provideUser){
           element.style.display = "block";
+          provideUser.style.display = "none";
         }
       } else {
-        if (element){
+        if (element && provideUser){
           element.style.display = "none";
+          provideUser.style.display = "block";
+        }
+
+        if (provideUser) {
+          
+          this.providerService.searchProviders(this.searchValue, providersFetchLimit, this.app.setURL()).subscribe((results) => {
+            this.providers = results;
+
+            let userFetchLimit = providersFetchLimit - this.providers.length;
+
+            // console.log("//////////// nombre de jeu ///////////");
+            // console.log(this.games.length);
+            // console.log("///////////////////////");
+            // console.log("//////////// nombre de provider possible d'afficher ///////////");
+            // console.log(providersFetchLimit);
+            // console.log("///////////////////////");         
+            // console.log("//////////// nombre de provider affiché ///////////");
+            // console.log(this.providers.length);
+            // console.log("///////////////////////");   
+            // console.log("//////////// nombre de user possible d'afficher ///////////");
+            // console.log(userFetchLimit);
+            // console.log("///////////////////////");
+
+            this.userService.searchUsers(this.searchValue, userFetchLimit, this.app.setURL()).subscribe((results) => {
+              this.users = results;
+            });
+
+          });
+
+
+          
+
         }
       }
+      
     });
 
+    this.providerService.searchProviders(this.searchValue, 1, this.app.setURL()).subscribe((responseProviders) => {
+      responseProviders.forEach((responseProvider) => {
+        
+        if (responseProvider.tagName === this.searchValue) {
+          this.providerExact = responseProvider;
+          console.log(this.providerExact);
+        } 
+      })
+    });
+
+
+
+
+    
   }
 
   // LIKE CARD ACTU SYSTEM
