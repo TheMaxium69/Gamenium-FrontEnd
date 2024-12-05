@@ -22,7 +22,7 @@
       <hr>
       <form action="#" class="search-form">
         <div class="input-container">
-          <input  [ngStyle]="{ '--color': color ?? 'red' }" (input)="filterSettings($event)" type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
+          <input  [ngStyle]="{ '--color': color ?? this.app.colorDefault }" (input)="filterSettings($event)" type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
           <button type="submit" class="search-icon-container" aria-label="Search" style="background-color: {{ color }}!important">
             <i class="ri-search-line"></i>
           </button>

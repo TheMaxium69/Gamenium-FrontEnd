@@ -1,5 +1,6 @@
+<div style="height: 153px;width: 100%"></div>
 <form
-  class="search"
+  class="search fixed-top"
   (ngSubmit)="onSearch()"
   #searchForm="ngForm"
   [ngStyle]="{ '--userColor': userColor }"
@@ -12,7 +13,7 @@
     name="searchValue"
     [(ngModel)]="searchValue"
     placeholder="Tapez votre recherche ..."
-    [style.borderColor]="userColor"
+    [ngStyle]="{ '--color': userColor ?? this.app.colorDefault }"
   />
   <input class="searchButton" type="submit" />
 </form>

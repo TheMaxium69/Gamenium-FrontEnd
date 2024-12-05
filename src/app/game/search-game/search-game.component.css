@@ -3,9 +3,10 @@
 
 @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 .search {
-  position: relative;
+  /*position: relative;*/
   width: 90%;
   margin: 20px auto;
+  margin-bottom: 40px;
   --userColor: red;
 }
 .search:before {
@@ -29,22 +30,26 @@
   margin: 10px;
 }
 
+.searchTerm:focus-within {
+  outline: 2px solid var(--color);
+}
 .searchTerm {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+
   width: 100%;
-  border: 3px solid red;
-  padding: 5px;
   height: 95px;
 
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  border-bottom-left-radius: 30px;
+  padding: 5px;
+  padding-right: 75px;
+  padding-left: 25px;
 
   outline: none;
-  box-shadow: 1px 2px 11px #a6a6a6;
+  border-radius: 30px;
+  border: unset;
+  box-shadow: 1px 2px 11px #a6a6a6,inset 0px 0px 7px -3px rgba(0, 0, 0, 0.5);
+  background-color: #F3F3F3;
   font-size: 20px;
 }
 

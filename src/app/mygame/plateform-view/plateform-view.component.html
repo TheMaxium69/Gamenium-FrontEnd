@@ -1,6 +1,6 @@
     <!-- SECTION BARRE DE RECHERCHE -->
 
-    <div class="search-container">
+    <div class="search-container" [ngStyle]="{ '--color': isColor ?? this.app.colorDefault }">
       <div class="icon-container" [ngStyle]="{ 'background-color': isColor }">
         <i class="ri-search-2-line ico1"></i>
       </div>
