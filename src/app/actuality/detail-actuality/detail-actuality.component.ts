@@ -13,6 +13,9 @@ import {IpService} from "../../-service/ip.service";
 import {LikeService} from "../../-service/like.service";
 import {LikeInterface} from "../../-interface/like.interface";
 import Swal from "sweetalert2";
+import {timeout} from "rxjs";
+import {ViewService} from "../../-service/view.service";
+import {ApicallInterface} from "../../-interface/apicall.interface";
 
 @Component({
   selector: 'app-detail-actuality',
@@ -56,11 +59,10 @@ export class DetailActualityComponent implements OnInit{
     private ipService: IpService,
     private likeService: LikeService,
     private renderer: Renderer2,
+    private viewService:ViewService,
   ) {}
 
   ngOnInit(): void {
-
-
 
     this.actualityId = this.route.snapshot.paramMap.get('id');
     this.globalUrl = this.route.snapshot.url.join('/');
@@ -113,7 +115,7 @@ export class DetailActualityComponent implements OnInit{
 
   getActuById(id:number){
 
-    this.postActu.getPostActuById(id, this.app.setURL()).subscribe((reponsePostActu) => {
+    this.postActu.getPostActuById(id, this.app.setURL()).subscribe((reponsePostActu:{message:string,result:PostActuInterface}) => {
 
       if (reponsePostActu.message == "good"){
 
@@ -132,6 +134,10 @@ export class DetailActualityComponent implements OnInit{
           if (this.actualitySelected?.GameProfile) {
             this.verifFollowGameProfil(this.actualitySelected?.GameProfile)
           }
+        }
+
+        if (this.actualitySelected){
+          this.addViewActu(this.actualitySelected.id)
         }
 
       } else {
@@ -536,6 +542,27 @@ export class DetailActualityComponent implements OnInit{
 
   getProviderColor(){
     this.providerColor = this.actualitySelected?.Provider?.color;
+  }
+
+
+  /* VIEW */
+  addViewActu(id:number){
+    setTimeout(() => {
+
+      let bodyNoJson = {
+        "id":id,
+        "ip":"10.10.10.10"
+      }
+
+      let body = JSON.stringify(bodyNoJson);
+
+      this.viewService.addActuView(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseAddViewActu:ApicallInterface) => {
+        if (reponseAddViewActu.message == "good"){
+          console.log("+1 vue");
+        }
+      })
+
+    }, 2000);
   }
 
 }
