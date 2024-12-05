@@ -315,6 +315,7 @@ a > div {
   flex-direction: row;
   gap: 15px;
   margin-bottom: 15px;
+  align-items: center;
 }
 
 .file-upload,
@@ -451,7 +452,6 @@ a > div {
 .social-input-locked,
 .social-input {
   border: none;
-  padding: 8px;
   font-size: 14px;
   border-radius: 5px;
   background: #F3F3F3;
@@ -467,11 +467,14 @@ a > div {
 .social-input {
   font-weight: 500;
   color: black;
+  border-color: #575757;
+  padding: 12px;
 }
 
 .social-input-locked {
   opacity: 0.6;
   width: 200px;
+  padding: 8px;
 }
 
 .social-input:focus {
