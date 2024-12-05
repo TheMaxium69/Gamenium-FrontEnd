@@ -16,7 +16,7 @@
     <!-- Provider Card Content -->
     <div class="provider-card-content">
       <p
-        class="name"
+        class="name mt-2"
         [routerLink]="['/provider', provider.id]"
       >
         {{ provider.displayName }}
@@ -27,8 +27,9 @@
         (click)="onFollow();"
         (mouseenter)="onMouseEnter()"
         (mouseleave)="onMouseLeave()"
+        [style.color]="provider.color"
       >
-        {{getButtonText() }}
+        {{ getButtonText() }}
       </a>
     </div>
   </div>
