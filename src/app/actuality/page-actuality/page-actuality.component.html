@@ -1,9 +1,22 @@
 <ng-container *ngIf="!actualityId">
-  <app-navbar-actuality (providerSelected)="onProviderSelected($event)" (providerFollowed)="getProviderFollowed($event)"> 
+  <app-navbar-actuality 
+    (providerSelected)="onProviderSelected($event)" 
+    (providerFollowed)="getProviderFollowed($event)"
+    (isProviderModalOpen)="openModal($event)"> 
   </app-navbar-actuality>
+
+  
   <div style="margin-bottom: 120px;">
-    <app-view-actuality [providerIdSelected]="providerSelected ?? null" 
-    [providerFollowed]="providerFollowed"></app-view-actuality>
+    <app-modal-provider 
+      *ngIf="manageProviders"
+      [providerFollowed]="providerFollowed">
+    </app-modal-provider>
+    
+    <app-view-actuality 
+      *ngIf="!manageProviders"
+      [providerIdSelected]="providerSelected ?? null" 
+      [providerFollowed]="providerFollowed">
+    </app-view-actuality>
   </div>
 
   <!-- FLECHE POUR REMONTER EN HAUT DE LA PAGE -->

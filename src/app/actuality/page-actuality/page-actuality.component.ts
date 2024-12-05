@@ -13,6 +13,7 @@ export class PageActualityComponent implements OnInit{
   providerSelected: number | undefined;
   lastProviderSelected: number | undefined;
   providerFollowed: ProviderInterface[] = []
+  manageProviders: boolean = false
 
   constructor(
     private route: ActivatedRoute) {
@@ -44,6 +45,11 @@ export class PageActualityComponent implements OnInit{
   getProviderFollowed(providers: ProviderInterface[]) {
     this.providerFollowed = providers
     console.log(this.providerFollowed)
+  }
+
+  openModal(event: any) {
+    this.manageProviders = event;
+    console.log('open modal called with parameter:' + event);
   }
 
 }

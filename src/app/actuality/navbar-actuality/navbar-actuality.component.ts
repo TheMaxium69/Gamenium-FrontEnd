@@ -17,6 +17,7 @@ export class NavbarActualityComponent implements OnInit {
   userConnected:UserInterface|undefined;
   providerFollowOrAll:ProviderInterface[] = [];
   followAll:FollowInterface[] = [];
+  isUserManagingProvider: boolean = false
 
   mouseDown: boolean = false;
   startX: number = 0;
@@ -34,6 +35,9 @@ export class NavbarActualityComponent implements OnInit {
   
   @Output()
   providerFollowed: EventEmitter<ProviderInterface[]> = new EventEmitter<ProviderInterface[]>();
+
+  @Output()
+  isProviderModalOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
@@ -135,6 +139,19 @@ export class NavbarActualityComponent implements OnInit {
       slider.scrollLeft = this.scrollLeft - scroll;
     }
     
+  }
+
+  toggleProviderModal() {
+    if (!this.isUserManagingProvider) {
+      this.isUserManagingProvider = true
+      this.isProviderModalOpen.emit(this.isUserManagingProvider)
+      console.log('data sent:' + this.isUserManagingProvider)
+      
+    } else {
+      this.isUserManagingProvider = false
+      this.isProviderModalOpen.emit(this.isUserManagingProvider)
+      console.log('data sent:' + this.isUserManagingProvider)
+    }
   }
   
 }
