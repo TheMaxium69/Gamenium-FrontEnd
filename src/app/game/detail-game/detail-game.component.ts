@@ -6,6 +6,8 @@ import {GameInterface} from "../../-interface/game.interface";
 import {HistoryMyGameService} from "../../-service/history-my-game.service";
 import {NgForm} from "@angular/forms";
 import { HistoryMyGameInterface } from 'src/app/-interface/history-my-game.interface';
+import { ViewService } from 'src/app/-service/view.service';
+import { ApicallInterface } from 'src/app/-interface/apicall.interface';
 
 @Component({
   selector: 'app-detail-game',
@@ -35,6 +37,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
+    private viewService: ViewService,
     protected app: AppComponent,
     private histoireMyGameService: HistoryMyGameService
   ) {
@@ -66,6 +69,10 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
       if (reponseGameOne.message == "good"){
 
         this.gameSelected = reponseGameOne.result
+
+        if(this.gameSelected){
+          this.addViewGame(this.gameSelected.id)
+        }
 
       } else {
 
@@ -259,6 +266,25 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
   setModal(){
     this.app.gameSelected = this.gameSelected;
+  }
+
+  addViewGame(id:number){
+    setTimeout(() => {
+
+      let bodyNoJson = {
+        "id": id,
+        "ip": "10.10.10.10"
+      }
+
+      let body = JSON.stringify(bodyNoJson);
+
+      this.viewService.addGameView(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseAddViewActu:ApicallInterface) => {
+        if (reponseAddViewActu.message == "good"){
+          console.log("+1 vue");
+        }
+      })
+
+    }, 2000)
   }
 
 
