@@ -331,12 +331,12 @@ export class HomeConnectedComponent implements OnInit {
   
 
   isProviderFollowed(providerId: number): boolean {
-    return this.followedStates[providerId] || false; // Default to false if not tracked
+    return this.followedStates[providerId] || false; 
   }
 
   selectRandomProviders(count: number): void {
     const shuffled = [...this.providers].sort(() => 0.5 - Math.random());
-    this.randomProviders = shuffled.slice(0, count); // Pick the first `count` items
+    this.randomProviders = shuffled.slice(0, count); 
   }
 
 }

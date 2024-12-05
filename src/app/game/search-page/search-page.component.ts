@@ -244,4 +244,16 @@ export class SearchPageComponent implements OnInit{
     });
 
   }
+  
+  //PROVIDER 
+  handleFollowed(providerId: number): void {
+    console.log(`Provider followed with ID: ${providerId}`);
+    const provider = this.providers.find((p) => p.id === providerId);
+  }
+  
+  handleUnfollowed(providerId: number): void {
+    console.log(`Provider unfollowed with ID: ${providerId}`);
+    const provider = this.providers.find((p) => p.id === providerId);
+  }
+  
 }
