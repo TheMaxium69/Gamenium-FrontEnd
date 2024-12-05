@@ -36,6 +36,10 @@
     </div>
   </div>
 
+  <div *ngIf="!myGameHistoriqueAll?.length">
+    <h3>La collection de jeux est vide</h3>
+  </div>
+
   <!-- SECTION POUR JEUX FILTRER OU RECHERCHER -->
   <div id="show-game" class="d-flex container" *ngIf="getAllGamesToDisplay().length > 0">
     <app-card-game *ngFor="let game of getAllGamesToDisplay()" [Hmg]="game" [colorProfil]="profilSelected?.themeColor" style="width: 100%"></app-card-game>

@@ -124,6 +124,10 @@
       </div>
     </div>
 
+    <div *ngIf="!myGameHistoriqueAll?.length">
+      <h3>La collection de jeux est vide</h3>
+    </div>
+
     <!-- UNPINNED GAME -->
     <div id="show-game" class="d-flex container">
       <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" style="width: 100%"></app-card-game>
