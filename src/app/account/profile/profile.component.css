@@ -334,8 +334,7 @@ a > div {
   flex: 1;
 }
 
-.password-input input,
-.social-item input {
+.password-input input {
   flex: 2;
   padding: 5px;
   border: 1px solid #ccc;
@@ -450,8 +449,32 @@ a > div {
  display: none;
 } */
 
+.social-input {
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  background: #F3F3F3;
+  border-radius: 4px 4px 0 0;
+  border-color: var(--color);
+  border-bottom: 2px solid;
+  font-family: var(--main-police), sans-serif;
+  color: #575757;
+  height: 100%;
+  transition: border-bottom 0.3s ease;
+}
+
 .social-input:focus {
-  outline: 2px solid var(--color);
+  transition: border-bottom 0.3s ease;  outline: none;
+  border-color: var(--color);
+}
+
+.socials-icon {
+  align-content: center;
+}
+
+.socials-label {
+  align-content: center;
 }
 
 .badges-section {
@@ -560,16 +583,21 @@ a > div {
 
 ::file-selector-button {
   border: none;
-  padding: 15px;
+  padding: 8px;
   width: 100%;
-  font-size: 18px;
+  font-size: 14px;
   border-radius: 5px;
-  background-color: white;
-  border: 1px solid;
+  background: #F3F3F3;
+  border-radius: 4px 4px 0 0;
   border-color: var(--color);
-  color: var(--color);
+  border-bottom: 2px solid;
+  font-family: var(--main-police), sans-serif;
+  color: #575757;
   cursor: pointer;
+  height: 100%;
 }
+
+
 
 /* .no-result-message {
   padding: 15px;
