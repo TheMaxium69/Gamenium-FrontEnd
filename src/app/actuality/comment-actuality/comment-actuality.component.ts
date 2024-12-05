@@ -38,8 +38,7 @@ export class CommentActualityComponent implements OnInit{
   commentLikedMap = new Map<number, boolean>();
   LikeAll: LikeInterface[]|undefined;
   nbLike: number | undefined = 0;
-  sort: boolean = true;
-  sortText: string | undefined = "récents";
+  sortDateOrLike: boolean = true;
   textValue: string = ""
   textLenght: number = 0;
 
@@ -584,23 +583,61 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
-  sortComment() {
-    const otherComment = document.querySelector('#OtherComments') as HTMLElement;
-    //sort  recent - oldest
+  sortCommentByDate() {
 
-    if (this.sort) {
-      otherComment.classList.add('invertSort');
-      this.sort = false;
-      console.log('recents')
-      this.sortText = "anciens";
-    } 
-    else {
-      otherComment.classList.remove('invertSort');
-      this.sort = true;
-      console.log('pasrecents')
-      this.sortText = "récents";
+    //select Div in html
+      const OtherCommentsByDate = document.querySelector('#OtherCommentsByDate') as HTMLElement;
+      const OtherCommentsByLike = document.querySelector('#OtherCommentsByLike') as HTMLElement;
+
+    //sort most recent comment
+
+
+      //seciton like
+        OtherCommentsByLike.classList.remove('display');
+        OtherCommentsByLike.classList.add('displayNone');
+
+      //section date
+        OtherCommentsByDate.classList.remove('displayNone');
+        OtherCommentsByDate.classList.add('display');
+
+      //fonction trie par date
+        this.commentByActu = this.commentByActu?.sort((a, b) => {
+          const dateA = a.created_at
+            ? new Date(a.created_at).getTime()
+            : 0;
+          const dateB = b.created_at
+            ? new Date(b.created_at).getTime()
+            : 0;
+
+          return dateB - dateA;
+        });
+
+  }
+
+  sortCommentByLike() {
+    console.log(this.commentByActu)
+    //select Div in html
+      const OtherCommentsByLike = document.querySelector('#OtherCommentsByLike') as HTMLElement;
+      const OtherCommentsByDate = document.querySelector('#OtherCommentsByDate') as HTMLElement;
+    //sort most liked comment
+
+      //section date
+        OtherCommentsByDate.classList.remove('display');
+        OtherCommentsByDate.classList.add('displayNone');
+
+      //section like
+        OtherCommentsByLike.classList.remove('displayNone');
+        OtherCommentsByLike.classList.add('display');
+
+  }
+
+  sortByLikeOrDate() {
+    //TRUE = SORTBYLIKE FALSE = SORTBYDATE
+    if (this.sortDateOrLike) {
+      this.sortCommentByLike()
+    } else {
+      this.sortCommentByDate()
     }
-
   }
 
   getCommentLenght() {

@@ -242,7 +242,19 @@
   font-size: small;
 }
 
-.invertSort {
-  display: flex;
-  flex-direction: column-reverse;
+#OtherCommentsByDate {
+  /* display: flex;
+  flex-direction: column-reverse; */
+}
+
+#sortTypes {
+  margin-left: auto;
+}
+
+.display {
+  display: inline;
+}
+
+.displayNone {
+  display: none;
 }
