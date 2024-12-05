@@ -31,6 +31,10 @@ h3.titleInWrapper{
   border-right: 1px solid white;
 }
 
+.navigateBar ul li:last-child{
+  border-right: unset;
+}
+
 .navigateBar ul li p{
   margin: unset!important;
   width: fit-content;
