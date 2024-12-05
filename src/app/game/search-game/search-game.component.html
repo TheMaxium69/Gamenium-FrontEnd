@@ -19,13 +19,14 @@
 
 <div id="show-game" class="d-flex container">
 
-  <div id="providerExact">
-    <!-- <div routerLink="/provider/{{ provider.id }}">
-      <div id="card-provider" style="background: linear-gradient(180deg, {{provider.color ?? 'red'}} 35%, white 35%)">
-        <div class="circleImage" style="background-image: url('{{ provider.picture?.url }}');"></div>
-        <h2 class="card-title">{{ provider.displayName }}</h2><br>
-        <p>{{ provider.content }}</p><br>
-      </div> -->
+  <div *ngIf="providerExact">
+    <div routerLink="/provider/{{ providerExact.id }}">
+      <div id="card-provider" style="background: linear-gradient(180deg, {{providerExact.color ?? 'red'}} 35%, white 35%)">
+        <div class="circleImage" style="background-image: url('{{ providerExact.picture?.url }}');"></div>
+        <h2 class="card-title">{{ providerExact.displayName }}</h2><br>
+        <p>{{ providerExact.content }}</p><br>
+      </div>
+    </div>
   </div>
 
   <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>

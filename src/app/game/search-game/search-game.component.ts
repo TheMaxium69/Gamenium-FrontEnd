@@ -100,11 +100,12 @@ export class SearchGameComponent implements OnInit{
 
     this.searchValue == value;
     this.nbMoreGame = 1;
+    this.providerExact = null;
 
     this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.games = results;
 
-      let providersFetchLimit = 50 - this.games.length;
+      let providersFetchLimit = this.app.fetchLimit - this.games.length;
 
 
       let element = document.getElementById("moreGameBTN");
@@ -119,55 +120,31 @@ export class SearchGameComponent implements OnInit{
         if (element && provideUser){
           element.style.display = "none";
           provideUser.style.display = "block";
-        }
 
-        if (provideUser) {
-          
           this.providerService.searchProviders(this.searchValue, providersFetchLimit, this.app.setURL()).subscribe((results) => {
             this.providers = results;
 
             let userFetchLimit = providersFetchLimit - this.providers.length;
 
-            // console.log("//////////// nombre de jeu ///////////");
-            // console.log(this.games.length);
-            // console.log("///////////////////////");
-            // console.log("//////////// nombre de provider possible d'afficher ///////////");
-            // console.log(providersFetchLimit);
-            // console.log("///////////////////////");         
-            // console.log("//////////// nombre de provider affiché ///////////");
-            // console.log(this.providers.length);
-            // console.log("///////////////////////");   
-            // console.log("//////////// nombre de user possible d'afficher ///////////");
-            // console.log(userFetchLimit);
-            // console.log("///////////////////////");
-
+            // affiche les users si la limite de 50 objects (games + providers) n'a pas été atteinte et va jusqu'à 50 objects en tout (games + providers + users)
             this.userService.searchUsers(this.searchValue, userFetchLimit, this.app.setURL()).subscribe((results) => {
               this.users = results;
             });
 
           });
-
-
-          
-
         }
       }
       
     });
 
+    // ressort le provider avec le nom seulement identique
     this.providerService.searchProviders(this.searchValue, 1, this.app.setURL()).subscribe((responseProviders) => {
       responseProviders.forEach((responseProvider) => {
-        
         if (responseProvider.tagName === this.searchValue) {
           this.providerExact = responseProvider;
-          console.log(this.providerExact);
         } 
       })
     });
-
-
-
-
     
   }
 
