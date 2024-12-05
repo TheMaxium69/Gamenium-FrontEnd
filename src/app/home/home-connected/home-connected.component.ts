@@ -92,7 +92,7 @@ export class HomeConnectedComponent implements OnInit {
     this.getBadgeByUser(this.profileId);
     this.fetchTasks();
     this.getActuAll();
-    this.getGames();
+    this.getLatestGames(3);
     this.fetchProviders();
 
 
@@ -337,6 +337,21 @@ export class HomeConnectedComponent implements OnInit {
   selectRandomProviders(count: number): void {
     const shuffled = [...this.providers].sort(() => 0.5 - Math.random());
     this.randomProviders = shuffled.slice(0, count); 
+  }
+
+  getLatestGames(limit: number){
+
+    let bodyNoJson = {
+      "limit": limit,
+    }
+
+    let body = JSON.stringify(bodyNoJson);
+
+    console.log('Fetching latest games');
+    this.gameService.getLatestGames(body, this.app.setURL()).subscribe((results) => {
+      this.games = results.result;
+      console.log(results.result)
+    })
   }
 
 }

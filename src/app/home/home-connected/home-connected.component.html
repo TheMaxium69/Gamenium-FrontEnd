@@ -121,22 +121,19 @@
   </section>
 
   <section id="gamenium-suggestion" class="mb">
-    <div class="rowamoi justify-content-between">
-      <div class="left-sug-panel"> <!-- PANNEAU 1 -->
-        <h2 class="text-center align-items-center">Suggestion</h2>
-        <div *ngFor="let provider of randomProviders">
-          <app-card-provider
-          [provider]="provider"
-          [isFollowed]="isProviderFollowed(provider.id)"
-          (followed)="handleFollowed($event)"
-          (unfollowed)="handleUnfollowed($event)"
-          ></app-card-provider>
+      <div class="gamenium-container-panel">
+        <h2 class="p-b">Suggestion</h2>
+        <div id="gamenium-suggestion-content"class="rowamoi justify-content-between">
+          <div *ngFor="let provider of randomProviders">
+            <app-card-provider
+            [provider]="provider"
+            [isFollowed]="isProviderFollowed(provider.id)"
+            (followed)="handleFollowed($event)"
+            (unfollowed)="handleUnfollowed($event)"
+            ></app-card-provider>
+          </div>
         </div>
       </div>
-      <div class="right-sug-panel"> <!-- PANNEAU 2 -->
-          
-      </div>
-    </div>
   </section>
 
 </div>
