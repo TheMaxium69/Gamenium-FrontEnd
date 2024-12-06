@@ -69,6 +69,9 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
       if (reponseGameOne.message == "good"){
 
         this.gameSelected = reponseGameOne.result
+        if (this.gameSelected?.name){
+          this.getNotePress(this.gameSelected.name)
+        }
 
         if(this.gameSelected){
           this.addViewGame(this.gameSelected.id)
@@ -285,6 +288,32 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
       })
 
     }, 2000)
+  }
+
+
+  /*
+  *
+  * PRESS
+  *
+  * */
+
+  metacritic: { url: string } | null = null;
+
+  getNotePress(name: string) {
+
+    let formateName = name.toLowerCase().replace(/ /g, '-');
+
+    /* METACRITIC */
+    this.metacritic = {
+      url: 'https://www.metacritic.com/game/'+ formateName +'/'
+    };
+
+  }
+
+  redirectUrl(url:string|undefined){
+    if (url) {
+      window.location.href = url;
+    }
   }
 
 
