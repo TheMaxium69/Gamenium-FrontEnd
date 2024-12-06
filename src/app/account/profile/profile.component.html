@@ -134,7 +134,7 @@
                       <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name}}" class="social-input" name="{{ socialNetworkOne.name }}" [(ngModel)]="reseauSelected[socialNetworkOne.id].url">
                     </ng-container>
                     <ng-container *ngIf="!reseauSelected">
-                      <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" ngModel>
+                      <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" ngModel placeholder="Nom d'utilisateur">
                     </ng-container>
                   </div>
                 </ng-container>
@@ -160,7 +160,10 @@
             <div class="password-card">
               <h5 class="setting-title">Changer le mot de passe</h5>
             </div>
-            <p>Faire redirection ou gestion de création de MDP ici</p>
+            <div class="d-flex redirect-section">
+              <p class="redirect-message">Besoin de mettre à jour vos informations ? Rendez-vous sur Useritium pour accéder et modifier votre profil.</p>
+              <a href="https://useritium.fr/" target="_blank" class="main-gamenium-btn redirect-btn" style="background-color: {{ color }}">Aller sur Useritium</a>
+            </div>
           </div>
         </div>
       </div>
