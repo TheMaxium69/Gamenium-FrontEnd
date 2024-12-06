@@ -151,7 +151,9 @@ export class SearchPageComponent implements OnInit{
   searchUser(): void {
     this.userService.searchUsers(this.searchValue, 100, this.app.setURL()).subscribe(
       (results) => {
-        this.users = results;
+        
+        const connectedUserId = this.app.userConnected?.id;
+        this.users = results.filter((user) => user.id !== connectedUserId);
         console.log("Fetched Users:", this.users);
   
         // Fetch badges for each user with error handling

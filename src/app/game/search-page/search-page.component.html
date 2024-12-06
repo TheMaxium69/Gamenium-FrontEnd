@@ -60,52 +60,17 @@
 
 </ng-container>
 
-<ng-container *ngIf="searchType == 'user'">
+<ng-container *ngIf="searchType === 'user'">
   <div id="show-user" class="container d-flex justify-content-center flex-wrap">
-    <ng-container *ngFor="let user of users">
-      <div
-        routerLink="/profil/{{ user.id }}"
-        *ngIf="user.id != this.app.userConnected.id"
-        class="user-card-wrapper m-3"
-      >
-        <div
-          id="card-user"
-          class="card-user p-3"
-          [style.background]=" 'linear-gradient(180deg, ' + (user.color ?? 'red') + ' 35%, white 35%)' "
-        >
-        <div class="circleImage" style="{{ this.app.generatePPUseritium(user?.pp?.url, user?.displayname_useritium || user.username, user?.color ) }}"></div>
-          <h2 class="card-title mt-4">{{ user.displayname_useritium || user.username }}</h2>
-          <small *ngIf="user.displayname_useritium && user.displayname_useritium !== user.username" class="mt-1">
-            <img
-              width="20px"
-              src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"
-              alt="Useritium Logo"
-            />
-            {{ user.username }}
-          </small>
-
-
-          <div *ngIf="user.badges && user.badges.length > 0" class="mt-1">
-            <div class="d-flex flex-row flex-wrap align-items-center">
-              <div
-                *ngFor="let badge of user.badges"
-                [ngClass]="{'pe-1': user.badges.length > 1}"
-                class="badge-item"
-              >
-                <img
-                  [src]="badge.picture?.url || 'assets/default-badge.png'"
-                  alt="{{ badge.name }}"
-                  class="badge-image"
-                  [title]="badge.name || 'No description available'"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ng-container>
+    <app-card-profil
+      *ngFor="let user of users"
+      [user]="user"
+      [currentUser]="app.userConnected"
+    ></app-card-profil>
   </div>
 </ng-container>
+
+
 
 
 

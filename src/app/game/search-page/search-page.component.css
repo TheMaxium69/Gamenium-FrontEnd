@@ -356,47 +356,6 @@
   margin-bottom: 120px;
 }
 
-.user-card-wrapper {
-  width: 16rem;
-  display: flex;
-  justify-content: center;
-}
-
-
-
-#card-user {
-  width: 16rem;
-  /* height: 16rem; ou 291px en fix  */
-  border: unset!important;
-  box-shadow: 1px 2px 11px #a6a6a6;
-  border-radius: 14px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.user-card-wrapper {
-  width: 16rem;
-  display: flex;
-  justify-content: center;
-}
-#card-user .circleImage{
-  width: 120px;
-  height: 120px;
-  border-radius: 100%;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  box-shadow: 2px 2px 9px #888;
-
-}
-
-
-
-
 
 #show-provider {
   justify-content: start;
@@ -421,15 +380,6 @@
   box-shadow: 2px 2px 9px #888;
 }
 
-#show-user .card-title {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-}
-
 #card-provider {
   width: 16rem;
   height: 16rem;
@@ -447,7 +397,3 @@
   margin-top: -20px;
 }
 
-.badge-image {
-  width: 20px;
-  height: 20px;
-}
