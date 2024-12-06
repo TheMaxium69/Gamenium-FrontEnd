@@ -138,6 +138,10 @@ export class ViewActualityComponent implements OnInit, OnChanges {
     this.providerFollowActuAll.emit(this.postActuFollow)
   }
 
+  filterActu(arr: PostActuInterface[]): PostActuInterface[] {
+    return arr.sort((a,b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  }
+
   /*
   *
   * GENERATE VIEW
@@ -159,7 +163,8 @@ export class ViewActualityComponent implements OnInit, OnChanges {
     if (this.postActuFollow.length === 0) {
       return this.postActuAll
     }
-    return this.postActuFollow
+    return this.filterActu(this.postActuFollow)
+    // return this.postActuFollow
   }
 
 

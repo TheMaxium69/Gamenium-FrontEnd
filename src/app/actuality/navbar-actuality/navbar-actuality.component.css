@@ -96,3 +96,8 @@
 .nav-icon {
   font-size: 40px;
 }
+
+.recent-news {
+  border: 4px solid;
+  border-color: #008000;
+}

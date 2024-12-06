@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, Renderer2} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {ProviderService} from "../../-service/provider.service";
 import {UserInterface} from "../../-interface/user.interface";
@@ -28,7 +28,8 @@ export class NavbarActualityComponent implements OnInit {
   constructor(
     protected app:AppComponent,
     private providerService:ProviderService,
-    private followService:FollowService
+    private followService:FollowService,
+    private renderer: Renderer2
   ) {}
 
   @Output()
@@ -124,12 +125,25 @@ export class NavbarActualityComponent implements OnInit {
   
   getLatestActuDate(providerId: number): string {
     const latestActu = this.providerFollowActuAll
-      .filter(actu => actu.Provider?.id === providerId)
-      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
-  
+    .filter(actu => actu.Provider?.id === providerId)
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+
     return latestActu ? latestActu.created_at.toString() : '0';
   }
   
+  isPostRecent(providerId: number): boolean {
+    const latestActuDate = this.getLatestActuDate(providerId);
+    if (latestActuDate === '0') {
+      return false;
+    }
+  
+    const twoDaysInMS = 2 * 24 * 60 * 60 * 1000;
+    const lastPostInMS = new Date(latestActuDate).getTime();
+    let isRecent = Date.now() - lastPostInMS <= twoDaysInMS;
+  
+    return isRecent = true;
+  }
+
   // Provider navbar scroll effect
   startDrag(mouse: MouseEvent): void {
     const slider = document.querySelector('#provider-nav-container') as HTMLElement;

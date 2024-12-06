@@ -13,7 +13,7 @@
         <ng-container *ngIf="isLogIn">
           <ng-container *ngFor="let provider of getProvidersSortedByLastActu()">
             <li (click)="selectOneProviderActu(provider.id)">
-              <div id="provider{{provider.id}}" class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
+              <div id="provider{{provider.id}}" class="provider-img" [ngClass]="{'recent-news': isPostRecent(provider.id)}" style="background-image: url('{{ provider.picture?.url }}') "></div>
             </li>
           </ng-container>
         </ng-container>
