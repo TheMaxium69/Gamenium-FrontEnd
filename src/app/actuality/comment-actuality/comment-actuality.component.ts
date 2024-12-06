@@ -341,7 +341,9 @@ export class CommentActualityComponent implements OnInit{
               this.renderer.appendChild(noteSpanGame, commentBorder);
             }
           }
+          this.commentNbChanged.emit('add');
           const resetForm = form.resetForm(); 
+          this.text = ''
 
           // Incrémente le nombre de commentaires après en avoir ajouté un.
           if (this.nbComment !== undefined) {
