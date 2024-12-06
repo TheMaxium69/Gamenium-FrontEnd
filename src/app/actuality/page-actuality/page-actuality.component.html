@@ -5,6 +5,7 @@
 
 <ng-container *ngIf="!actualityId">
   <app-navbar-actuality 
+    [providerFollowActuAll]="providerFollowActuAll"
     (providerSelected)="onProviderSelected($event)" 
     (providerFollowed)="getProviderFollowed($event)"
     (isProviderModalOpen)="openModal($event)"> 

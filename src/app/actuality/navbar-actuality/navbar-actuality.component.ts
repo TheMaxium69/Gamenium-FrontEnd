@@ -1,10 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {ProviderService} from "../../-service/provider.service";
 import {UserInterface} from "../../-interface/user.interface";
 import {ProviderInterface} from "../../-interface/provider.interface";
 import {FollowService} from "../../-service/follow.service";
 import {FollowInterface} from "../../-interface/follow.interface";
+import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
 
 @Component({
   selector: 'app-navbar-actuality',
@@ -38,6 +39,9 @@ export class NavbarActualityComponent implements OnInit {
 
   @Output()
   isProviderModalOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Input()
+  providerFollowActuAll: PostActuInterface[] = []
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
@@ -107,6 +111,25 @@ export class NavbarActualityComponent implements OnInit {
 
   }
 
+  getProvidersSortedByLastActu(): ProviderInterface[] {
+    const providerByLastPost = this.providerFollowOrAll.sort((a, b) => {
+      const latestA = this.getLatestActuDate(a.id);
+      const latestB = this.getLatestActuDate(b.id);
+  
+      return new Date(latestB).getTime() - new Date(latestA).getTime();
+    });
+
+    return providerByLastPost;
+  }
+  
+  getLatestActuDate(providerId: number): string {
+    const latestActu = this.providerFollowActuAll
+      .filter(actu => actu.Provider?.id === providerId)
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
+  
+    return latestActu ? latestActu.created_at.toString() : '0';
+  }
+  
   // Provider navbar scroll effect
   startDrag(mouse: MouseEvent): void {
     const slider = document.querySelector('#provider-nav-container') as HTMLElement;

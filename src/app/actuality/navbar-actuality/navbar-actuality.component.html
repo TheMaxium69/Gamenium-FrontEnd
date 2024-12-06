@@ -3,7 +3,7 @@
     <div id="provider-nav-container">
 
       <div *ngIf="providerFollowOrAll.length === 0" style="align-content: center; height: 100%;">
-        <p style="font-size: 18px;">Vous ne suivez personnes et personne ne vous aime.</p>
+        <p style="font-size: 18px;">Abonnez vous pour suivre toutes les dernières actualités de vos éditeurs</p>
       </div>
 
       <ul class="d-flex"
@@ -11,17 +11,15 @@
       (mousemove)="move($event)"
       (mouseup)="stopDrag()">
         <ng-container *ngIf="isLogIn">
-<!--          <h1>Abonne toi pour avoir des actualité</h1>-->
-          <ng-container *ngFor="let provider of providerFollowOrAll">
-            <!-- OLD REDIRECT routerLink="/provider/{{ provider.id }}" -->
+          <ng-container *ngFor="let provider of getProvidersSortedByLastActu()">
             <li (click)="selectOneProviderActu(provider.id)">
               <div id="provider{{provider.id}}" class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
             </li>
           </ng-container>
         </ng-container>
+
         <ng-container *ngIf="!isLogIn">
-          <ng-container *ngFor="let provider of providerFollowOrAll">
-            <!-- OLD REDIRECT routerLink="/provider/{{ provider.id }}" -->
+          <ng-container *ngFor="let provider of getProvidersSortedByLastActu()">
             <li (click)="selectOneProviderActu(provider.id)">
               <div id="provider{{provider.id}}" class="provider-img" style="background-image: url('{{ provider.picture?.url }}') "></div>
             </li>
