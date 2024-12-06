@@ -200,7 +200,11 @@ hr {
 }
 
 
-
+@media (max-width: 720px) {
+  .badge-container {
+    padding: 0 !important;
+  }
+}
 
 
 
@@ -520,8 +524,14 @@ a > div {
   transform: scale(1.1);
 }
 
+.badge-container {
+  padding: 0 90px;
+}
+
 .badge-list-container {
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .badge-list-item {
@@ -533,11 +543,19 @@ a > div {
 }
 
 .badge-list-name {
-  min-width: 60px;
+  min-width: 100px;
+}
+
+.badge-header {
+  display: flex;
 }
 
 .gray-badge {
   filter: grayscale(100%);
+}
+
+.badge-owned {
+  font-weight: 600;
 }
 
 .password-card form {
