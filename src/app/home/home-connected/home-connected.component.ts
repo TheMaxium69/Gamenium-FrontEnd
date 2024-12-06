@@ -62,6 +62,7 @@ export class HomeConnectedComponent implements OnInit {
   // Provider
   providers: ProviderInterface[] = []
   randomProviders: ProviderInterface[] = [];
+  unfollowedProviders: ProviderInterface[] = [];
   followedStates: { [id: number]: boolean } = {}
 
   constructor(private route: ActivatedRoute,
@@ -296,12 +297,12 @@ export class HomeConnectedComponent implements OnInit {
     });
   }
 
-  getGames() {
-    console.log('Fetching games');
-    this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
-      this.games = results;
-    });
-  }
+  // getGames() {
+  //   console.log('Fetching games');
+  //   this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+  //     this.games = results;
+  //   });
+  // }
 
   // PROVIDER 
 
@@ -309,7 +310,7 @@ export class HomeConnectedComponent implements OnInit {
     this.providerService.getAllProviders(this.app.setURL()).subscribe({
       next: (response) => {
         if (response && response.result) {
-          this.providers = response.result; 
+          this.providers = response.result;
           this.selectRandomProviders(4);
         }
       },
@@ -328,17 +329,19 @@ export class HomeConnectedComponent implements OnInit {
     console.log(`Provider with ID ${providerId} unfollowed.`);
     this.followedStates[providerId] = false;
   }
-  
+
 
   isProviderFollowed(providerId: number): boolean {
     return this.followedStates[providerId] || false; 
   }
 
   selectRandomProviders(count: number): void {
-    const shuffled = [...this.providers].sort(() => 0.5 - Math.random());
-    this.randomProviders = shuffled.slice(0, count); 
+    const unfollowedProviders = this.providers.filter(provider => 
+        !this.isProviderFollowed(provider.id)
+    );
+    const shuffled = [...unfollowedProviders].sort(() => 0.5 - Math.random());
+    this.randomProviders = shuffled.slice(0, count);
   }
-
   getLatestGames(limit: number){
 
     let bodyNoJson = {
