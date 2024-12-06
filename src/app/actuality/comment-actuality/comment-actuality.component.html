@@ -6,7 +6,7 @@
       <textarea (ngModelChange)="getCommentLenght()"[(ngModel)]="text" id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
     </div>
     <div class="comment-send mb4">
-      <div id="CharCount">{{ text.length }}/300</div>
+      <div id="CharCount">{{ text.length }}/255</div>
       <button class="main-gamenium-btn" style="background-color: {{ providerColor || this.app.colorDefault }}" type="submit">Envoyer</button>
     </div>
   </div>

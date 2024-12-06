@@ -626,14 +626,18 @@ export class CommentActualityComponent implements OnInit{
   }
 
   getCommentLenght() {
-    const charcount = document.querySelector('#CharCount') as HTMLElement
-    console.log(this.text)
-    this.textLenght = this.text.length 
-    if (this.textLenght > 300) {
-      charcount.classList.add('red');
-    } else {
-      charcount.classList.remove('red');
-    }
+
+    //recupere le textarea
+      const charcount = document.querySelector('#CharCount') as HTMLElement
+
+    //si ça dépasse le max le count vois rouge
+
+      if (this.text.length > 255) {
+        charcount.classList.add('red');
+      } else {
+        charcount.classList.remove('red');
+      }
+
   }
 
 }
