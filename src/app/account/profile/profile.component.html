@@ -214,12 +214,14 @@
           <div class="badge-container">
           <ng-container *ngFor="let badge of allBadges">
             <div class="badge-list-container d-flex">
+              <div>
+                <i class="badge-owned-icon" [ngClass]="!isBadgeInUserConnected(badge) ? 'ri-checkbox-blank-circle-line' : 'ri-checkbox-circle-fill' " style="color: {{ color }}"></i>
+              </div>
               <div class="badge-header">
-                <div class="badge-list-item" style="background-image: url({{badge.picture?.url}});"
-                [ngClass]="{'gray-badge': !isBadgeInUserConnected(badge)}"></div>
+                <div class="badge-list-item" style="background-image: url({{badge.picture?.url}});"></div>
                 <p [ngClass]="{'badge-owned': isBadgeInUserConnected(badge)}" class="align-content-center mx-2 badge-list-name">{{badge.name}}</p>
               </div>
-              <p [ngClass]="{'badge-owned': isBadgeInUserConnected(badge)}" class="align-content-center mx-2">{{badge.unlockDescription ? badge.unlockDescription : 'Non renseigné'}}</p>
+              <p [ngClass]="{'badge-owned': isBadgeInUserConnected(badge)}" class="badge-description align-content-center mx-2">{{badge.unlockDescription ? badge.unlockDescription : 'Non renseigné'}}</p>
             </div>
           </ng-container>
           </div>

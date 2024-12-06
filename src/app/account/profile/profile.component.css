@@ -474,6 +474,7 @@ a > div {
   color: black;
   border-color: #575757;
   padding: 14px;
+  width: 360px;
 }
 
 .social-input-locked {
@@ -525,13 +526,20 @@ a > div {
 }
 
 .badge-container {
-  padding: 0 90px;
+  padding: 0 50px;
 }
 
 .badge-list-container {
   padding-bottom: 20px;
-  justify-content: space-between;
   align-items: center;
+}
+
+.badge-owned-icon {
+  margin-right: 10px;
+}
+
+.badge-description {
+  margin-left: auto !important;
 }
 
 .badge-list-item {
