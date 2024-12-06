@@ -23,15 +23,17 @@
             (click)="addLikeByActu()">
             </i>
           </button>
-          <h2 class="btn_text">{{ nbLike }}</h2>
+          <h2 class="btn_text">{{ this.app.bigNombreFormatage(this.nbLike || 0) }}</h2>
           <button class="btn" (click)="redirectComment()">
             <i class="ri-chat-3-line"></i>
           </button>
-          <h2 class="btn_text" (click)="redirectComment()">{{ nbCommentaire }}</h2>
-          <div class="btn" id="ri-eye-line">
-            <i class="ri-eye-line"></i>
-          </div>
-          <h2 class="btn_text">{{ nbView }}</h2>
+          <h2 class="btn_text" (click)="redirectComment()">{{ this.app.bigNombreFormatage(this.nbCommentaire) }}</h2>
+          <ng-container *ngIf="nbView">
+            <div class="btn" id="ri-eye-line">
+              <i class="ri-eye-line"></i>
+            </div>
+            <h2 class="btn_text">{{ this.app.bigNombreFormatage(this.nbView) }}</h2>
+          </ng-container>
         </div>
 
         <div class="txt_container">
