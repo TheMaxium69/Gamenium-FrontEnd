@@ -32,6 +32,10 @@ a{
     padding: 40px;
 }
 
+.p-b {
+  padding-bottom: 40px;
+}
+
 .gamenium-container-panel {
     box-shadow: 1px 2px 11px #a6a6a6;
     border-radius: 10px;

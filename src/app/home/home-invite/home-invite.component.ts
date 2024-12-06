@@ -32,6 +32,7 @@ export class HomeInviteComponent implements OnInit {
   ngOnInit(): void {
     this.getActuAll();
     this.getLatestGames(3);
+    this.fetchProviders();
   }
 
   getActuAll() {
