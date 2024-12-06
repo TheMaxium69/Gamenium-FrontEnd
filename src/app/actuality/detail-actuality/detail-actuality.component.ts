@@ -35,7 +35,7 @@ export class DetailActualityComponent implements OnInit{
   nbLike:number | undefined = 0;
   nbCommentaire:number = 0;
   screenWidth: number = window.innerWidth;
-  nbView: number | undefined;
+  nbView: number | null = null;
 
   globalUrl:string = "";
 
