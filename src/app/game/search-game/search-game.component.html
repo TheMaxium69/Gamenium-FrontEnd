@@ -46,17 +46,13 @@
     </ng-container>
 
     <ng-container *ngFor="let user of users">
-
-      <div routerLink="/profil/{{ user.id }}" *ngIf="user.id != this.app.userConnected.id">
-        <div id="card-user" style="background: linear-gradient(180deg, {{user.color ?? 'red'}} 35%, white 35%)">
-          <div class="circleImage" style="{{ this.app.generatePPUseritium(user?.pp?.url, user?.displayname_useritium || user.username, user?.color ) }}"></div>
-          <h2 class="card-title mt-4">{{ user.displayname_useritium || user.username }}</h2>
-          <small *ngIf="user.displayname_useritium && user.displayname_useritium !== user.username"><img width="20px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png">{{ user.username }}</small><br>
-        </div>
-
-      </div>
-
+      <app-card-profil
+        *ngIf="user.id !== app.userConnected?.id"
+        [user]="user"
+        [currentUser]="app.userConnected"
+      ></app-card-profil>
     </ng-container>
+    
   </div>
 
   <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>

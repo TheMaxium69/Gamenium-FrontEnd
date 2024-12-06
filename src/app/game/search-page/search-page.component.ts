@@ -156,18 +156,18 @@ export class SearchPageComponent implements OnInit{
         this.users = results.filter((user) => user.id !== connectedUserId);
         console.log("Fetched Users:", this.users);
   
-        // Fetch badges for each user with error handling
+        // récupère les badge pour chaque utilisateur 
         const badgeRequests = this.users.map(user => 
           this.badgeService.getBadgeByUser(user.id, this.app.setURL()).pipe(
             catchError(error => {
               console.error(`Error fetching badges for user ${user.id}:`, error);
-              // Return an observable with empty badges to prevent forkJoin from failing
+              // retourn un observable avec les badge vide pour eviter une erreur
               return of({ message: 'error', result: [] } as ApicallInterface);
             })
           )
         );
   
-        // Execute all badge requests in parallel
+        // execute la recherche de badge 
         forkJoin(badgeRequests).subscribe(
           (badgeResponses: ApicallInterface[]) => {
             badgeResponses.forEach((badgeResponse, index) => {
