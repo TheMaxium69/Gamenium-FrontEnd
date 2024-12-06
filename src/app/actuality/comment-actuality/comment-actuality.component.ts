@@ -51,7 +51,7 @@ export class CommentActualityComponent implements OnInit{
     private renderer: Renderer2,
     private likeService: LikeService,
     private ipService: IpService,
-    private profileService: ProfilService
+    private profileService: ProfilService,
   ) {}
 
   @Input()

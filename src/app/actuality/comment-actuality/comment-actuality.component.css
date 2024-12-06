@@ -241,11 +241,6 @@
   font-size: small;
 }
 
-#OtherCommentsByDate {
-  /* display: flex;
-  flex-direction: column-reverse; */
-}
-
 #sortTypes {
   margin-left: auto;
 }

@@ -110,6 +110,7 @@ export class DetailActualityComponent implements OnInit{
   
         if (this.actualitySelected) {
           this.addViewActu(this.actualitySelected.id);
+          this.getProviderColor()
         }
       } else {
         this.noneActu = true;
