@@ -39,7 +39,7 @@ export class CommentActualityComponent implements OnInit{
   LikeAll: LikeInterface[]|undefined;
   nbLike: number | undefined = 0;
   sortDateOrLike: boolean = true;
-  textValue: string = ""
+  text: string = ""
   textLenght: number = 0;
 
   constructor(
@@ -627,11 +627,8 @@ export class CommentActualityComponent implements OnInit{
 
   getCommentLenght() {
     const charcount = document.querySelector('#CharCount') as HTMLElement
-    console.log(this.textValue)
-    if (this.textValue == "") {
-      this.textLenght = 0;
-    }
-    this.textLenght = this.textValue.length
+    console.log(this.text)
+    this.textLenght = this.text.length 
     if (this.textLenght > 300) {
       charcount.classList.add('red');
     } else {

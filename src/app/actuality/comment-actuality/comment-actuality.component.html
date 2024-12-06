@@ -3,10 +3,10 @@
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
   <div class="comment-input">
     <div class="mb4">
-      <textarea (ngModelChange)="getCommentLenght()"[(ngModel)]="textValue" id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
+      <textarea (ngModelChange)="getCommentLenght()"[(ngModel)]="text" id="BtnAddComment" class="comment-content" cols="35" placeholder="Votre commentaire" name="content" ngModel (keydown.enter)="preventTabulation($event)" (keyup.enter)="addComment(addForm)" required></textarea>
     </div>
     <div class="comment-send mb4">
-      <div id="CharCount">{{textLenght}}/300</div>
+      <div id="CharCount">{{ text.length }}/300</div>
       <button class="main-gamenium-btn" style="background-color: {{ providerColor || this.app.colorDefault }}" type="submit">Envoyer</button>
     </div>
   </div>
