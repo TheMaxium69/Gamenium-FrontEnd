@@ -25,7 +25,7 @@ export interface GameInterface {
   platforms:PlatformsInterface[],
   siteDetailUrl: string,
   searchValue?: string;
-
+  views_count?: number
 
 }
 
