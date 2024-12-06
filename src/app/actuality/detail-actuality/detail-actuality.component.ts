@@ -81,10 +81,6 @@ export class DetailActualityComponent implements OnInit{
 
     }
 
-    // if (this.idUser) {
-    //   this.checkIfUserFollowProvider(this.idUser)
-    //   console.log(this.isProviderFollowedByUser)
-    // }
 
     this.updateScreenWidth();
 
@@ -101,54 +97,23 @@ export class DetailActualityComponent implements OnInit{
     // console.log(this.screenWidth);
   };
 
-  // checkIfUserFollowProvider(userId: number) {
-  //   this.providerId = this.route.snapshot.paramMap.get('id')
 
-  //   this.followService.getFollowByProvider(this.providerId, this.app.setURL()).subscribe((reponseApi) => {
-  //     if (reponseApi.message == 'good') {
-  //       this.isProviderFollowedByUser = reponseApi.result.some((result: any) => result.user.id == userId)
-  //     } else {
-  //       this.isProviderFollowedByUser = false
-  //     }
-  //   })
-  // }
-
-  getActuById(id:number){
-
-    this.postActu.getPostActuById(id, this.app.setURL()).subscribe((reponsePostActu:{message:string,result:PostActuInterface}) => {
-
-      if (reponsePostActu.message == "good"){
-
-        this.actualitySelected = reponsePostActu.result
-        this.getProviderColor();
-
-        console.log(this.actualitySelected)
-
-        if (this.isLoggedIn) {
-          if (this.actualitySelected?.Provider) {
-            this.verifFollowProvider(this.actualitySelected?.Provider)
-          }
-          if (this.actualitySelected?.Provider?.parentCompany) {
-            this.verifFollowParentProvider(this.actualitySelected?.Provider?.parentCompany)
-          }
-          if (this.actualitySelected?.GameProfile) {
-            this.verifFollowGameProfil(this.actualitySelected?.GameProfile)
-          }
+  getActuById(id: number): void {
+    this.postActu.getPostActuById(id, this.app.setURL()).subscribe((response: { message: string; result: PostActuInterface }) => {
+      if (response.message === "good") {
+        this.actualitySelected = response.result;
+  
+        console.log('Fetched Actuality:', this.actualitySelected);
+  
+        if (this.actualitySelected) {
+          this.addViewActu(this.actualitySelected.id);
         }
-
-        if (this.actualitySelected){
-          this.addViewActu(this.actualitySelected.id)
-        }
-
       } else {
-
         this.noneActu = true;
-
       }
-
-
     });
   }
+  
 
   getLikeByActu(idActu: number){
 
@@ -268,75 +233,16 @@ export class DetailActualityComponent implements OnInit{
 
   }
 
-  verifFollowProvider(Provider: ProviderInterface){
-    let btnFollowProvider:HTMLElement|null;
+  // provider
 
-    this.followService.getFollowByProvider(Provider.id, this.app.setURL()).subscribe(reponseFollowByProvider => {
-
-      if (reponseFollowByProvider.message == "good") {
-
-        this.followAll = reponseFollowByProvider.result;
-        this.followAll.forEach((followOne:FollowInterface)=>{
-          if (followOne.user.id == this.userConnectedId){
-
-            btnFollowProvider = document.getElementById("followBtn"+Provider.id)
-            if (btnFollowProvider){
-              btnFollowProvider.innerText = 'Suivie';
-            }
-
-          } else {
-            btnFollowProvider = document.getElementById("followBtn"+Provider.id)
-            if (btnFollowProvider){
-              btnFollowProvider.innerText = 'Suivre';
-            }
-
-          }
-
-        });
-
-      }
-      console.table(this.followAll)
-
-    });
-
+  handleFollowed(providerId: number): void {
+    console.log(`Provider followed with ID: ${providerId}`);
   }
-
-  verifFollowParentProvider(Provider: ProviderInterface){
-    let btnFollowProvider:HTMLElement|null;
-
-    this.followService.getFollowByProvider(Provider.id, this.app.setURL()).subscribe(reponseFollowByProvider => {
-
-      if (reponseFollowByProvider.message == "good") {
-
-        this.followAllParent = reponseFollowByProvider.result;
-        this.followAllParent.forEach((followOne:FollowInterface)=>{
-          if (followOne.user.id == this.userConnectedId){
-
-            btnFollowProvider = document.getElementById("followBtn"+Provider.id)
-            if (btnFollowProvider){
-
-              btnFollowProvider.innerText = 'Suivie';
-
-            }
-
-          } else {
-
-            btnFollowProvider = document.getElementById("followBtn"+Provider.id)
-            if (btnFollowProvider){
-
-              btnFollowProvider.innerText = 'Suivre';
-
-            }
-          }
-
-        });
-
-      }
-      console.table(this.followAll)
-
-    });
-
+  
+  handleUnfollowed(providerId: number): void {
+    console.log(`Provider unfollowed with ID: ${providerId}`);
   }
+  
 
   verifFollowGameProfil(GameProfil: GameProfileInterface){
       // a faire
@@ -354,152 +260,6 @@ export class DetailActualityComponent implements OnInit{
 
     });
 
-  }
-
-  followBtnClickParent(providerId: number | undefined) {
-    if (providerId) {
-      const btn = document.querySelector('#followBtn' + providerId) as HTMLElement
-      const provider = this.followAllParent.find((follow: FollowInterface) => follow.provider?.id === providerId && follow.user.id === this.userConnectedId )
-
-      if (provider) {
-        this.deleteFollow(providerId)
-        btn.textContent = 'Suivre'
-      } else {
-        this.followProviderUs(providerId)
-        btn.textContent = 'Suivie'
-      }
-    }
-
-  }
-
-  followBtnClick(providerId: number | undefined) {
-    if (providerId) {
-      const btn = document.querySelector('#followBtn' + providerId) as HTMLElement
-      const provider = this.followAll.find((follow: FollowInterface) => follow.provider?.id === providerId && follow.user.id === this.userConnectedId )
-
-      if (provider) {
-        this.deleteFollow(providerId)
-        btn.textContent = 'Suivre'
-      } else {
-        this.followProviderUs(providerId)
-        btn.textContent = 'Suivie'
-      }
-    }
-
-  }
-
-  followProviderUs(id: number|undefined) {
-
-    if (!id){
-      return;
-    }
-
-    let btnFollowProvider:HTMLElement|null;
-    this.ipService.getMyIp(this.app.urlIp).subscribe(reponseTyroIp => {
-        let bodyNoJsonAddFollow: any = {
-          "id_provider": id,
-          "ip": reponseTyroIp.ip,
-        };
-
-        const bodyAddFollow = JSON.stringify(bodyNoJsonAddFollow);
-
-        this.followService.postFollowProvider(bodyAddFollow, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddFollow => {
-
-          if (reponseAddFollow.message === "good") {
-            const addedFollow: FollowInterface = reponseAddFollow.result;
-            console.log(addedFollow)
-            this.followAll.push(addedFollow);
-            this.followAllParent.push(addedFollow);
-
-            console.log("Follow ajouté pour le provider: " + id);
-          }
-
-        });
-      },
-      (error) => {
-
-        console.error("TyroIp : ", error);
-
-        let bodyNoJsonAddFollow: any = {
-          "id_provider": id
-        };
-
-        const bodyAddFollow = JSON.stringify(bodyNoJsonAddFollow);
-
-        this.followService.postFollowProvider(bodyAddFollow, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddFollow => {
-
-          if (reponseAddFollow.message == "good"){
-            btnFollowProvider = document.getElementById("button-follow-text"+id)
-            if (btnFollowProvider){
-
-              btnFollowProvider.innerText = 'Suivie';
-
-            }
-          }
-        });
-      });
-  }
-
-  deleteFollow(providerId: number) {
-    console.log('delete clicked')
-
-    this.followService.deleteFollowProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
-
-      if (reponseApi.message === "follow deleted successfully") {
-
-        this.followAll = this.followAll.filter((follow) =>
-          follow.provider?.id !== providerId &&
-          follow.user.id === this.userConnectedId
-        );
-
-        this.followAllParent = this.followAllParent.filter((follow) =>
-          follow.provider?.id !== providerId &&
-          follow.user.id === this.userConnectedId
-        );
-
-
-
-        // this.followAllParent = this.followAllParent.filter((follow) =>
-        //   follow.provider?.parentCompany.id !== providerId &&
-        //   follow.user.id === this.userConnectedId
-        // );
-
-        console.log("Follow supprimé pour le provider: " + providerId);
-
-      }
-    })
-
-  }
-
-  followBtnMouseEnter(id: number|undefined) {
-    // console.log('mouse enter')
-    // const btnTxt = document.querySelector('#button-follow-text'+id) as HTMLElement
-    // const plusI = this.renderer.createElement('i')
-    // this.renderer.addClass(plusI, 'ri-add-circle-line')
-    // this.renderer.appendChild(btnTxt, plusI)
-    // if (btnTxt && this.isProviderFollowedByUser) {
-    //   btnTxt.textContent = 'Ne plus suivre'
-    //   btnTxt.style.backgroundColor = 'white'
-    //   btnTxt.style.color = this.providerSelected?.color ?? 'red'
-    //   btnTxt.style.border = '2px solid'
-    //   btnTxt.style.borderColor = this.providerSelected?.color ?? 'red'
-    //   btnTxt.style.transition = 'all 0.2s ease';
-    // }
-  }
-
-  followBtnMouseLeave(id: number|undefined) {
-    // console.log('mouse leave')
-    // const btnTxt = document.querySelector('#button-follow-text'+id) as HTMLElement
-    // const plusI = this.renderer.createElement('i')
-    // this.renderer.addClass(plusI, 'ri-add-circle-line')
-    // this.renderer.appendChild(btnTxt, plusI)
-    // if (btnTxt) {
-    //   btnTxt.textContent = this.isProviderFollowedByUser ? 'Suivie' : 'Suivre'
-    //   btnTxt.style.backgroundColor = this.providerSelected?.color ?? 'red'
-    //   btnTxt.style.color = 'white'
-    //   btnTxt.style.border = 'none'
-    //   btnTxt.style.transition = 'all 0.2s ease';
-    // }
   }
 
   liked(btnActuLike: HTMLElement, state: String) {

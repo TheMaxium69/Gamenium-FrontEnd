@@ -50,21 +50,27 @@
       <section id="right-section"
       [ngClass]="{'col-3': screenWidth >= 1200, 'd-flex justify-content-center gap-5 mt-4': screenWidth < 1200}"
       class="d-flex justify-content-center">
-        <!-- <div class="provider_wrapper"> -->
-          <div class="provider_card" *ngIf="actualitySelected?.Provider?.parentCompany">
-            <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.parentCompany?.color }}" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}"></div>
-            <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.parentCompany?.picture?.url }})" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}"></div>
-            <p class="name" routerLink="/provider/{{ actualitySelected?.Provider?.parentCompany?.id }}">{{ actualitySelected?.Provider?.parentCompany?.displayName }} </p>
-            <a id="followBtn{{ actualitySelected?.Provider?.parentCompany?.id }}" style="background-color: {{ actualitySelected?.Provider?.parentCompany?.color }}; border-color: {{ actualitySelected?.Provider?.parentCompany?.color }}" (click)="followBtnClickParent(actualitySelected?.Provider?.parentCompany?.id)"></a>
-          </div>
-          <div class="provider_card">
-            <div class="provider_color" style="background-color: {{ actualitySelected?.Provider?.color }}"  routerLink="/provider/{{ actualitySelected?.Provider?.id }}"></div>
-            <div class="provider_profile" style="background-image: url({{ actualitySelected?.Provider?.picture?.url }})"  routerLink="/provider/{{ actualitySelected?.Provider?.id }}"></div>
-            <p class="name" routerLink="/provider/{{ actualitySelected?.Provider?.id }}">{{ actualitySelected?.Provider?.displayName }} </p>
-            <a id="followBtn{{ actualitySelected?.Provider?.id }}" style="background-color: {{ actualitySelected?.Provider?.color }}; border-color: {{ actualitySelected?.Provider?.color }}" (click)="followBtnClick(actualitySelected?.Provider?.id)"></a>
-          </div>
-        <!-- </div> -->
-      </section>
+      <!-- Parent Provider -->
+      <ng-container *ngIf="actualitySelected?.Provider?.parentCompany">
+        <app-card-provider
+          [provider]="actualitySelected?.Provider?.parentCompany ?? null"
+          [isDetailView]="false"
+          (followed)="handleFollowed($event)"
+          (unfollowed)="handleUnfollowed($event)"
+        ></app-card-provider>
+      </ng-container>
+    
+      <!-- Main Provider -->
+      <ng-container *ngIf="actualitySelected?.Provider">
+        <app-card-provider
+          [provider]="actualitySelected?.Provider ?? null"
+          [isDetailView]="true"
+          (followed)="handleFollowed($event)"
+          (unfollowed)="handleUnfollowed($event)"
+        ></app-card-provider>
+      </ng-container>
+    </section>
+    
     </div>
   </div>
 
