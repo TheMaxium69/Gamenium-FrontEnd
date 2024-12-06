@@ -131,11 +131,11 @@ export class SearchPageComponent implements OnInit{
 
   searchGame(): void {
     this.nbMoreGame = 1;
-    this.gameService.searchGames(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+    this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.games = results;
 
       let element = document.getElementById("moreGameBTN");
-      if (this.games.length == 100){
+      if (this.games.length == this.app.fetchLimit){
         if (element){
           element.style.display = "block";
         }
@@ -149,7 +149,7 @@ export class SearchPageComponent implements OnInit{
   }
 
   searchUser(): void {
-    this.userService.searchUsers(this.searchValue, 100, this.app.setURL()).subscribe(
+    this.userService.searchUsers(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe(
       (results) => {
         
         const connectedUserId = this.app.userConnected?.id;
@@ -195,7 +195,7 @@ export class SearchPageComponent implements OnInit{
 
   searchPostActu(): void {
 
-    this.postactuService.searchPostActus(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+    this.postactuService.searchPostActus(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.postactus = results;
       console.log(this.postactus)
     });
@@ -204,7 +204,7 @@ export class SearchPageComponent implements OnInit{
 
   searchProvider(): void {
 
-    this.providerService.searchProviders(this.searchValue, 100, this.app.setURL()).subscribe((results) => {
+    this.providerService.searchProviders(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.providers = results;
       console.log(this.providers)
     });
@@ -226,7 +226,7 @@ export class SearchPageComponent implements OnInit{
   moreGame(){
 
     this.nbMoreGame++
-    let limit = this.nbMoreGame * 100;
+    let limit = this.nbMoreGame * this.app.fetchLimit;
     console.log(limit)
 
     this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
