@@ -35,6 +35,7 @@ export class DetailActualityComponent implements OnInit{
   nbLike:number | undefined = 0;
   nbCommentaire:number = 0;
   screenWidth: number = window.innerWidth;
+  nbView: number = 0;
 
   globalUrl:string = "";
 
@@ -72,6 +73,8 @@ export class DetailActualityComponent implements OnInit{
     this.getLikeByActu(this.actualityId);
 
     this.getCommentWithActu(this.actualityId);
+
+    this.getViewsByActu(this.actualityId);
 
     this.isLoggedIn = this.app.isLoggedIn;
 
@@ -323,6 +326,16 @@ export class DetailActualityComponent implements OnInit{
       })
 
     }, 2000);
+  }
+
+  getViewsByActu(idActu: number) {
+    this.viewService.getPostActuViews(idActu, this.app.setURL()).subscribe(reponseViewByPostActu => {
+
+      if (reponseViewByPostActu.message == "good"){
+        
+        this.nbView = reponseViewByPostActu.result;
+      }
+    })
   }
 
 }

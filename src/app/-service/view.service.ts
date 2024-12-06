@@ -27,4 +27,8 @@ export class ViewService {
   addProfileView(body:string, url:string, options: { headers: HttpHeaders}): Observable<ApicallInterface>{
     return this.http.post<ApicallInterface>(url + `/view-profile-add`, body, options)
   }
+
+  getPostActuViews(idPostActu: number, url: string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/view-actu-show/' + idPostActu);
+  }
 }
