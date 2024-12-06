@@ -35,7 +35,7 @@ export class HomeConnectedComponent implements OnInit {
   postActuFollowOrAll: PostActuInterface[] = [];
   games: GameInterface[] = [];
   searchValue: string = ''
-  
+
 
   isColor:string = this.app.colorDefault;
   isPp: string | undefined;
@@ -74,7 +74,7 @@ export class HomeConnectedComponent implements OnInit {
               private postActuService: PostActuService,
               private gameService: GameService,
               private badgeService: BadgeService,
-              private providerService: ProviderService) 
+              private providerService: ProviderService)
               { }
 
   ngOnInit(): void {
@@ -304,7 +304,7 @@ export class HomeConnectedComponent implements OnInit {
   //   });
   // }
 
-  // PROVIDER 
+  // PROVIDER
 
   fetchProviders(): void {
     this.providerService.getAllProviders(this.app.setURL()).subscribe({
@@ -324,7 +324,7 @@ export class HomeConnectedComponent implements OnInit {
     console.log(`Provider with ID ${providerId} followed.`);
     this.followedStates[providerId] = true;
   }
-  
+
   handleUnfollowed(providerId: number): void {
     console.log(`Provider with ID ${providerId} unfollowed.`);
     this.followedStates[providerId] = false;
@@ -332,16 +332,15 @@ export class HomeConnectedComponent implements OnInit {
 
 
   isProviderFollowed(providerId: number): boolean {
-    return this.followedStates[providerId] || false; 
+    return this.followedStates[providerId] || false;
   }
 
   selectRandomProviders(count: number): void {
-    const unfollowedProviders = this.providers.filter(provider => 
-        !this.isProviderFollowed(provider.id)
-    );
-    const shuffled = [...unfollowedProviders].sort(() => 0.5 - Math.random());
+    const shuffled = [...this.providers].sort(() => 0.5 - Math.random());
     this.randomProviders = shuffled.slice(0, count);
   }
+
+
   getLatestGames(limit: number){
 
     let bodyNoJson = {
