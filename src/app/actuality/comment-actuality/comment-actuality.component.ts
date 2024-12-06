@@ -187,7 +187,6 @@ export class CommentActualityComponent implements OnInit{
 
       const bodyMyCommentActu = JSON.stringify(bodyNoJsonMyCommentActu);
       console.log(bodyMyCommentActu)
-      const resetForm = form.resetForm();
 
       this.commentService.postCommentInActu(bodyMyCommentActu, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyCommentActuCreate:{message:string, result:CommentInterface }) => {
         if (reponseMyCommentActuCreate.message === "good") {
@@ -342,6 +341,7 @@ export class CommentActualityComponent implements OnInit{
               this.renderer.appendChild(noteSpanGame, commentBorder);
             }
           }
+          const resetForm = form.resetForm(); 
 
           // Incrémente le nombre de commentaires après en avoir ajouté un.
           if (this.nbComment !== undefined) {
@@ -361,6 +361,20 @@ export class CommentActualityComponent implements OnInit{
       this.userConnectedId = this.app.userConnected.id;
           console.log(reponseMyCommentActuCreate);
         }
+      if (reponseMyCommentActuCreate.message === "to long content") {
+
+        const textArea = document.querySelector('#BtnAddComment') as HTMLElement
+        textArea.textContent = content;
+
+        Swal.fire({
+          title: 'Aie !',
+          text: 'Le message ne dois pas dépasser 300 nombre de charactere.',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: 'red'
+        })
+
+      }
       });
     }
   }
@@ -612,11 +626,17 @@ export class CommentActualityComponent implements OnInit{
   }
 
   getCommentLenght() {
+    const charcount = document.querySelector('#CharCount') as HTMLElement
     console.log(this.textValue)
     if (this.textValue == "") {
       this.textLenght = 0;
     }
     this.textLenght = this.textValue.length
+    if (this.textLenght > 300) {
+      charcount.classList.add('red');
+    } else {
+      charcount.classList.remove('red');
+    }
   }
 
 }

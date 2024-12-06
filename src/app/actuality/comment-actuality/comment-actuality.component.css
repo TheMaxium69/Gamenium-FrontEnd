@@ -238,7 +238,6 @@
 #CharCount {
   margin: auto 0;
   margin-right: 56rem;
-  color:#575757;
   font-size: small;
 }
 
@@ -257,4 +256,8 @@
 
 .displayNone {
   display: none;
+}
+
+.red {
+  color: red;
 }
