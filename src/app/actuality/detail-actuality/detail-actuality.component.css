@@ -71,13 +71,14 @@
 }
 
 .game_description {
-  margin-right: 30%;
   overflow-wrap: anywhere;
   line-height: 21px;
+  max-width: 855px;
 }
 
 .game_title {
   margin: 1.5% 0%;
+  max-width: 855px;
   overflow-wrap: anywhere;
 }
 
@@ -92,8 +93,8 @@
 }
 
 .border-actu {
-  width: fit-content;
-  padding-right: 14vh;
+  /* width: fit-content;
+  padding-right: 14vh; */
   /* border-right: 1px solid black; */
 }
 
