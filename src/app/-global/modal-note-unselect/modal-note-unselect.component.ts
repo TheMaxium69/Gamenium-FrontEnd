@@ -49,7 +49,7 @@ export class ModalNoteUnselectComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe((results: GameInterface[]) => {
-      this.isLoading = true;
+      this.isLoading = false;
       this.searchResults = results;
     });
   }

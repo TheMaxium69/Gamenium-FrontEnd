@@ -501,12 +501,24 @@ export class AppComponent {
 
     if (form.value['noteGame'] >= 0 && form.value['noteGame'] <= 20){
 
+      let bodyNoJsonMyGameNote: any = ''
+
       let noteGame = form.value['noteGame'];
 
-      let bodyNoJsonMyGameNote: any = {
-        "id_game":this.gameSelected?.id,
-        "note":noteGame,
-      };
+      let content = form.value['content'];
+
+      if (content == ''){
+        bodyNoJsonMyGameNote = {
+          "id_game":this.gameSelected?.id,
+          "note":noteGame,
+        };
+      } else {
+        bodyNoJsonMyGameNote = {
+          "id_game":this.gameSelected?.id,
+          "note":noteGame,
+          "content":content
+        };
+      }
 
       const bodyMyGameNote = JSON.stringify(bodyNoJsonMyGameNote);
 
