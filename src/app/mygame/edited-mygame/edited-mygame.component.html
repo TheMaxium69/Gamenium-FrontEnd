@@ -292,7 +292,7 @@
           <div class="panel">
 
             <div class="head-panel">
-              <h2><i class="ri-shopping-cart-2-fill"></i>Purchase <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-shopping-cart-2-fill"></i>Achat <small>#{{i+1}}</small></h2>
               <i class="ri-more-2-fill"></i>
             </div>
             <ng-container *ngIf="copyGame.purchase">
@@ -364,7 +364,7 @@
                 <select id="year_buy_date{{i}}" [(ngModel)]="copyGame.purchase.year_buy_at"
                         name="purchase_year_buy_date{{i}}">
                   <option [value]="null">Année d'achat</option>
-                  <ng-container *ngFor="let year of getYears(); let y = index">
+                  <ng-container *ngFor="let year of this.app.getYears(); let y = index">
                     <option [value]="year">{{ year }}</option>
                   </ng-container>
                 </select>
@@ -503,7 +503,7 @@
           <div class="panel">
 
             <div class="head-panel">
-              <h2><i class="ri-shopping-cart-2-fill"></i>Purchase <small>#{{i+1+nbCopyExisting}}</small></h2>
+              <h2><i class="ri-shopping-cart-2-fill"></i>Achat <small>#{{i+1+nbCopyExisting}}</small></h2>
               <i class="ri-more-2-fill"></i>
             </div>
 
@@ -559,7 +559,7 @@
 
               <select id="year_buy_date{{i+nbCopyExisting}}" ngModel name="purchase_year_buy_date{{i+nbCopyExisting}}">
                 <option value="">Année d'achat</option>
-                <ng-container *ngFor="let year of getYears(); let y = index">
+                <ng-container *ngFor="let year of this.app.getYears(); let y = index">
                   <option [value]="year">{{ year }}</option>
                 </ng-container>
               </select>

@@ -1,86 +1,128 @@
-<div class="modal fade text-center" id="ajouteGamePage" tabindex="-1" aria-labelledby="addGameModalLabel" aria-hidden="true">
+<div class="modal fade text-center" id="ajouteGamePage" tabindex="-1" aria-labelledby="addGameModalLabel" aria-hidden="true" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <p>Ajoutez un jeu à votre liste</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form id="addGameForm" #addForm="ngForm" (ngSubmit)="this.app.addGame(addForm)" class="modal-body" style="padding-top: 40px;">
 
-        <h2>Ajoutez un jeu à votre liste</h2>
-
-        <br>
-        <h5><span style="color: red">*</span>Recherchez un jeu :</h5>
-        <input *ngIf="this.app.gameSelected" type="text" placeholder="Votre jeu" disabled value="{{ this.app.gameSelected?.name }}">
-        <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.app.onSubmitSearch(addForm)">
-        <br>
-
-        <div *ngIf="this.app.searchResults && this.app.searchResults.length > 0 && !this.app.gameSelected" class="row">
-          <div class="col-md-4" *ngFor="let result of this.app.searchResults">
-            <div class="card mb-4 shadow-sm" (click)="this.app.selectGame(result)">
-              <img [src]="result.image.icon_url" class="bd-placeholder-img card-img-top" alt="Image du jeu">
-              <div class="card-body">
-                <p class="card-text">{{ result.name }}</p>
-              </div>
-            </div>
+        <div class="panel">
+          <div class="head-panel">
+            <h2><i class="ri-search-2-line"></i>Recherchez un jeu</h2>
           </div>
+          <input *ngIf="this.app.gameSelected" type="text" class="disable" placeholder="Votre jeu" value="{{ this.app.gameSelected?.name }}" (click)="this.app.unselectGame()">
+          <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.app.onSubmitSearch(addForm)">
         </div>
 
-        <div *ngIf="this.app.searchResults && this.app.searchResults.length === 0">
-          <p>Aucun résultat trouvé.</p>
+        <div *ngIf="this.app.searchResults && this.app.searchResults.length > 0 && !this.app.gameSelected" class="row-search-game">
+          <app-card-game-sub *ngFor="let result of this.app.searchResults" [game]="result" (click)="this.app.selectGame(result)"></app-card-game-sub>
         </div>
 
-        <ng-container *ngIf="this.app.gameSelected">
 
-          <br>
-          <h6><span style="color: red">*</span>Plateforme :</h6>
-          <ng-container *ngIf="this.app.gameSelected.platforms">
-            <ng-container *ngIf="this.app.gameSelected.platforms.length == 1">
-              <ng-container *ngFor="let plateformOne of this.app.gameSelected?.platforms">
-                <input type="hidden" [value]="plateformOne.id" name="plateform_id" ngModel>
-                {{ this.app.plateformeNameFormatage(plateformOne.name) }}
+        <div *ngIf="this.app.searchResults && this.app.searchResults.length === 0 && !this.app.gameSelected">
+          <p class="none-game">Aucun résultat trouvé.</p>
+        </div>
+
+        <div class="start-form" *ngIf="this.app.gameSelected">
+
+          <input type="checkbox" name="whishListGame" ngModel style="display: none"><br>
+
+          <!-- PLATEFORM -->
+          <div class="panel">
+
+            <div class="head-panel">
+              <h2><i class="ri-gamepad-fill"></i>Plateforme<span style="color: red">*</span></h2>
+            </div>
+            <ng-container *ngIf="this.app.gameSelected.platforms">
+              <ng-container *ngIf="this.app.gameSelected.platforms.length == 1">
+                <ng-container *ngFor="let plateformOne of this.app.gameSelected?.platforms">
+                  <input type="hidden" [value]="plateformOne.id" name="plateform_id" ngModel>
+                  <input type="text" value="{{ this.app.plateformeNameFormatage(plateformOne.name) }}" class="disable" disabled>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="this.app.gameSelected.platforms.length > 1">
+                <select id="plateform" name="plateform_id" ngModel>
+                  <option value="">Choissir une plateforme</option>
+                  <ng-container *ngFor="let plateformOne of this.app.gameSelected?.platforms">
+                    <option [value]="plateformOne.id">{{ this.app.plateformeNameFormatage(plateformOne.name) }}</option>
+                  </ng-container>
+                </select>
               </ng-container>
             </ng-container>
-            <ng-container *ngIf="this.app.gameSelected.platforms.length > 1">
-              <select id="plateform" name="plateform_id" ngModel>
-                <option value="">Choissir une plateforme</option>
-                <ng-container *ngFor="let plateformOne of this.app.gameSelected?.platforms">
-                  <option [value]="plateformOne.id">{{ this.app.plateformeNameFormatage(plateformOne.name) }}</option>
+            <ng-container *ngIf="!this.app.gameSelected.platforms">
+              <input type="hidden" [value]="this.app.noPlateform.id" name="plateform_id" ngModel>
+              <input type="text" value="{{ this.app.plateformeNameFormatage(this.app.noPlateform.name) }}" class="disable" disabled>
+            </ng-container>
+          </div>
+
+          <!-- EPINGLER -->
+          <div class="panel">
+
+            <div class="head-panel">
+              <h2><i class="ri-pushpin-fill"></i>Épinglé</h2>
+            </div>
+
+            <select id="is_pinned" name="pinnedGame" ngModel>
+              <option value="">Non épinglé</option>
+              <option [value]="true">Épinglé</option>
+            </select>
+
+          </div>
+
+          <div class="panel">
+
+            <div class="head-panel">
+              <h2><i class="ri-shopping-cart-2-fill"></i>Achat</h2>
+              <i class="ri-more-2-fill"></i>
+            </div>
+
+            <div class="head-buy">
+
+              <select id="day_buy_date" ngModel name="purchase_day_buy_date">
+                <option value="">Jour d'achat</option>
+                <ng-container *ngFor="let day of [].constructor(31); let d = index">
+                  <option [value]="d+1">{{ d + 1 }}</option>
+                </ng-container>
+              </select>
+
+              <select id="month_buy_date" ngModel name="purchase_month_buy_date">
+                <option value="">Mois d'achat</option>
+                <ng-container *ngFor="let month of [].constructor(12); let m = index">
+                  <option [value]="m+1">{{ m + 1 }}</option>
+                </ng-container>
+              </select>
+
+              <select id="year_buy_date" ngModel name="purchase_year_buy_date">
+                <option value="">Année d'achat</option>
+                <ng-container *ngFor="let year of this.app.getYears(); let y = index">
+                  <option [value]="year">{{ year }}</option>
+                </ng-container>
+              </select>
+
+            </div>
+
+            <ng-container *ngIf="buyWhereAll">
+              <select id="buy_where" name="buyWhere" ngModel>
+                <option value="">Lieux d'achat</option>
+                <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                  <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                 </ng-container>
               </select>
             </ng-container>
-          </ng-container>
-          <ng-container *ngIf="!this.app.gameSelected.platforms">
-            <input type="hidden" [value]="this.app.noPlateform.id" name="plateform_id" ngModel>
-            {{ this.app.plateformeNameFormatage(this.app.noPlateform.name) }}
-          </ng-container>
-          <br>
-          <br>
-          <h6>Épinglez ce jeu :</h6>
-          <input type="checkbox" name="pinnedGame" ngModel><br>
-          <br>
-          <h6 style="display: none">Ajoutez le jeux dans la liste de vos souhaite :</h6>
-          <input type="checkbox" name="whishListGame" ngModel style="display: none"><br>
-          <br>
-          <h6>Quand avez-vous obtenu ce jeu :</h6>
-          <input type="date" name="buyAt" ngModel>
-          <br>
-          <br>
-          <h6>Ou à tu obtenu ton jeux :</h6>
-          <ng-container *ngIf="buyWhereAll">
-            <select id="buy_where" name="buyWhere" ngModel>
-              <option value="">Choissir une Buy Where</option>
-              <ng-container *ngFor="let buyWhereOne of buyWhereAll">
-                <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
-              </ng-container>
-            </select>
-          </ng-container>
+
+          </div>
+
+          <div class="moreHMG">
+            <button type="button" class="sub-gamenium-btn" (click)="moreCompletion()">Compléter de manière plus détaillée.</button>
+          </div>
 
 
-        </ng-container>
+        </div>
 
         <div class="modal-footer" style="margin-top: 74px;">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistrer</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button *ngIf="this.app.gameSelected" type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-dismiss="modal">Sauvegardé <i class="ri-save-3-fill"></i></button>
+          <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
         </div>
 
       </form>

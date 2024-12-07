@@ -366,13 +366,6 @@ export class EditedMygameComponent implements OnInit {
 
   }
 
-  getYears(): number[] {
-    const currentYear = new Date().getFullYear();
-    const startYear = 1970;
-    return Array.from({ length: currentYear - startYear + 1 }, (_, i) => startYear + i);
-  }
-
-
 
 
 }

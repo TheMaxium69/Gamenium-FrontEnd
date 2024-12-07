@@ -466,6 +466,13 @@ export class AppComponent {
       });
   }
 
+  getYears(): number[] {
+    const currentYear = new Date().getFullYear();
+    const startYear = 1970;
+    return Array.from({ length: currentYear - startYear + 1 }, (_, i) => startYear + i);
+  }
+
+
   /*
   *
   * FOR MODAL
@@ -652,7 +659,7 @@ export class AppComponent {
 
   onSubmitSearch(form: NgForm): void {
     const searchValue = form.value['searchValue'];
-    this.gameService.searchGames(searchValue, 5, this.setURL()).subscribe(
+    this.gameService.searchGames(searchValue, 6, this.setURL()).subscribe(
       (results: GameInterface[]) => {
         this.searchResults = results;
       },
@@ -672,7 +679,10 @@ export class AppComponent {
 
   selectGame(game: GameInterface) {
     this.gameSelected = game;
-    console.log(this.gameSelected);
+  }
+
+  unselectGame() {
+    this.gameSelected = undefined;
   }
 
   deleteMyGame(idOneMyGame:number) {

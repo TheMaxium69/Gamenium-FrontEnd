@@ -14,24 +14,25 @@
         <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.app.onSubmitSearch(noteGamePage2)">
         <br>
 
-        <div *ngIf="this.app.searchResults && this.app.searchResults.length > 0 && !this.app.gameSelected" class="row">
-          <div class="col-md-4" *ngFor="let result of this.app.searchResults">
-            <div class="card mb-4 shadow-sm" (click)="this.app.selectGame(result)">
-              <img [src]="result.image.icon_url" class="bd-placeholder-img card-img-top" alt="Image du jeu">
-              <div class="card-body">
-                <p class="card-text">{{ result.name }}</p>
-              </div>
-            </div>
-          </div>
+        <div *ngIf="this.app.searchResults && this.app.searchResults.length > 0 && !this.app.gameSelected" class="row-search-game">
+          <app-card-game-sub *ngFor="let result of this.app.searchResults" [game]="result" (click)="this.app.selectGame(result)"></app-card-game-sub>
         </div>
 
-        <br>
-        <h6><span style="color: red">*</span>Note de votre jeu :</h6>
-        <input type="number" placeholder="10" name="noteGame" ngModel>/20
+        <div *ngIf="this.app.searchResults && this.app.searchResults.length === 0">
+          <p>Aucun résultat trouvé.</p>
+        </div>
+
+        <ng-container *ngIf="this.app.gameSelected">
+
+          <br>
+          <h6><span style="color: red">*</span>Note de votre jeu :</h6>
+          <input type="number" placeholder="10" name="noteGame" ngModel>/20
+
+        </ng-container>
 
         <div class="modal-footer" style="margin-top: 74px;">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Enregistrer</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-dismiss="modal">Enregistrer</button>
+          <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
         </div>
 
       </form>

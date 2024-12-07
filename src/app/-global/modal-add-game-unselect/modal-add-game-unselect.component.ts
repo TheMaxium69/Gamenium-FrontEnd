@@ -47,4 +47,8 @@ export class ModalAddGameUnselectComponent implements OnInit {
 
   }
 
+  moreCompletion(){
+    console.log('more complter');
+  }
+
 }

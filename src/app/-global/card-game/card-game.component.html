@@ -25,32 +25,36 @@
           <ng-container *ngFor="let platform of game.platforms; let last = last">
             {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
           </ng-container>
+          <ng-container *ngIf="!game.platforms">
+            {{ this.app.plateformeNameFormatage(this.app.noPlateform.name) }}
+          </ng-container>
         </p>
 
         <ng-container *ngIf="game.originalReleaseDate">
-          <p>
+          <small>
             Date de sortie : {{ game.originalReleaseDate | date:'dd / MM / yyyy' }}
-          </p>
+          </small>
         </ng-container>
-        <ng-container *ngIf="!game.originalReleaseDate">
-          <p> Date de sortie :
-            <ng-container *ngIf="game.expectedReleaseYear">
-              <ng-container *ngIf="game.expectedReleaseMonth">
-                <ng-container *ngIf="game.expectedReleaseDay">
-                  {{ game.expectedReleaseDay }}
-                  /
-                </ng-container>
-                <ng-container *ngIf="game.expectedReleaseMonth < 10">
-                  0{{ game.expectedReleaseMonth }}
-                </ng-container>
-                <ng-container *ngIf="game.expectedReleaseMonth >= 10">
-                  {{ game.expectedReleaseMonth }}
-                </ng-container>
+        <ng-container *ngIf="!game.originalReleaseDate && game.expectedReleaseYear">
+          <small> Date de sortie :
+            <ng-container *ngIf="game.expectedReleaseMonth">
+              <ng-container *ngIf="game.expectedReleaseDay">
+                {{ game.expectedReleaseDay }}
                 /
               </ng-container>
-              {{ game.expectedReleaseYear }}
+              <ng-container *ngIf="game.expectedReleaseMonth < 10">
+                0{{ game.expectedReleaseMonth }}
+              </ng-container>
+              <ng-container *ngIf="game.expectedReleaseMonth >= 10">
+                {{ game.expectedReleaseMonth }}
+              </ng-container>
+              /
             </ng-container>
-          </p>
+            {{ game.expectedReleaseYear }}
+          </small>
+        </ng-container>
+        <ng-container *ngIf="!game.originalReleaseDate && !game.expectedReleaseYear">
+          <small>Aucune date de sortie connue</small>
         </ng-container>
       </div>
 
