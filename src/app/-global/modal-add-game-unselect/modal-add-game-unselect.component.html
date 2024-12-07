@@ -12,15 +12,15 @@
             <h2><i class="ri-search-2-line"></i>Recherchez un jeu</h2>
           </div>
           <input *ngIf="this.app.gameSelected" type="text" class="disable" placeholder="Votre jeu" value="{{ this.app.gameSelected?.name }}" (click)="this.app.unselectGame()">
-          <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.app.onSubmitSearch(addForm)">
+          <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.onSearchValueChange($event)">
         </div>
 
-        <div *ngIf="this.app.searchResults && this.app.searchResults.length > 0 && !this.app.gameSelected" class="row-search-game">
-          <app-card-game-sub *ngFor="let result of this.app.searchResults" [game]="result" (click)="this.app.selectGame(result)"></app-card-game-sub>
+        <div *ngIf="this.searchResults && this.searchResults.length > 0 && !this.app.gameSelected" class="row-search-game">
+          <app-card-game-sub *ngFor="let result of this.searchResults" [game]="result" (click)="this.app.selectGame(result)"></app-card-game-sub>
         </div>
 
 
-        <div *ngIf="this.app.searchResults && this.app.searchResults.length === 0 && !this.app.gameSelected">
+        <div *ngIf="this.searchResults && this.searchResults.length === 0 && !this.app.gameSelected">
           <p class="none-game">Aucun résultat trouvé.</p>
         </div>
 

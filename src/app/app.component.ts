@@ -64,14 +64,18 @@ export class AppComponent {
   token: string|any;
   userConnected: UserInterface|any;
   currentDate: Date = new Date();
+
+  // LIMIT
   fetchLimit:number = 50;
+  deadlineSearch:number = 300;
+  deadlineView:number = 2000;
+  modalSearchLimit:number = 6
 
   // DEFAULT
   colorDefault = "#FF0000";
   noBoxartImage_default:string = "https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg";
   noBoxartImage:string = "assets/noBoxart.png";
 
-  // Card Game
 
   /******************************************************************************************************************
    *
