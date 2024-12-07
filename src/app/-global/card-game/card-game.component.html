@@ -115,8 +115,10 @@
           {{ this.app.plateformeNameFormatage(Hmg.myGame.plateform.name) }}
         </p>
 
+        <p><small>Nombre d'exemplaire {{ Hmg.copyGame.length || "1*" }}</small></p>
+
         <!-- DATE D'AJOUT -->
-        <p> Ajouté le : {{ Hmg.myGame.added_at | date:'dd / MM / yyyy' }}</p>
+        <p><small> Ajouté le : {{ Hmg.myGame.added_at | date:'dd / MM / yyyy' }} </small></p>
       </div>
 
       <!-- ACTION/NOTE -->

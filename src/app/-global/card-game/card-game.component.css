@@ -157,10 +157,6 @@
 
 .card-action i:hover {
   cursor: pointer;
-  font-size: 32px;
-  animation: jiggle 0.5s forwards;
-  transition: 0.3s;
-
 }
 
 .card:hover {
