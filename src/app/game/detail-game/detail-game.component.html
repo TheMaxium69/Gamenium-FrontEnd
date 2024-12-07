@@ -9,12 +9,23 @@
 
 
 <div id="banniere-container" class="banniere-container">
-  <div class="banniere" [ngStyle]="{ '--imgGameUrlLarge': 'url(' + gameSelected?.image?.screen_large_url + ')' }"></div>
+
+  <ng-container *ngIf="gameSelected?.image?.icon_url == this.app.noBoxartImage_default">
+    <div class="banniere" [ngStyle]="{ '--imgGameUrlLarge': 'url(' + this.app.noBoxartImage + ')' }"></div>
+  </ng-container>
+  <ng-container *ngIf="gameSelected?.image?.icon_url != this.app.noBoxartImage_default">
+    <div class="banniere" [ngStyle]="{ '--imgGameUrlLarge': 'url(' + gameSelected?.image?.screen_large_url + ')' }"></div>
+  </ng-container>
 </div>
 
 
 <div id="pictureAndName" class="pictureAndName">
-  <div class="picture" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+  <ng-container *ngIf="gameSelected?.image?.icon_url == this.app.noBoxartImage_default">
+    <div class="picture" [ngStyle]="{ '--imgGameUrl': 'url(' + this.app.noBoxartImage + ')' }"></div>
+  </ng-container>
+  <ng-container *ngIf="gameSelected?.image?.icon_url != this.app.noBoxartImage_default">
+    <div class="picture" [ngStyle]="{ '--imgGameUrl': 'url(' + gameSelected?.image?.small_url + ')' }"></div>
+  </ng-container>
   <div class="name blocks-shadow">
     <div class="game-name">
       <h1 class="mb-0">{{ gameSelected?.name }}</h1>
@@ -31,6 +42,8 @@
 <!-- INFORMATIONS  -->
 <div id="section-info" class="section-info">
   <div class="information">
+    <a target="_blank" href="http://vps216.tyrolium.fr/html-to-api/metacritic.php?game_title={{ gameSelected?.name }}" class="main-gamenium-btn">test api metacritic</a>
+    <a target="_blank" href="http://vps216.tyrolium.fr/html-to-api/giantbomb.php?guid={{ gameSelected?.guid }}&game_title={{ gameSelected?.name }}" class="main-gamenium-btn">test api giantbomb</a>
     <h2 class="title">Informations</h2>
 
     <div class="information-container">

@@ -68,6 +68,10 @@ export class AppComponent {
 
   // DEFAULT
   colorDefault = "#FF0000";
+  noBoxartImage_default:string = "https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg";
+  noBoxartImage:string = "assets/noBoxart.png";
+
+  // Card Game
 
   /******************************************************************************************************************
    *
