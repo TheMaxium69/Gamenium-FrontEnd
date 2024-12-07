@@ -5,7 +5,7 @@
         <p>Ajoutez un jeu</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form id="addGameForm" #addForm="ngForm" (ngSubmit)="this.app.addGame(addForm)" class="modal-body" style="padding-top: 40px;">
+      <form id="addGameForm" #addForm="ngForm" (ngSubmit)="this.addGame(addForm)" class="modal-body" style="padding-top: 40px;">
 
         <div class="panel">
           <div class="head-panel">
@@ -124,7 +124,14 @@
           </div>
 
           <div class="moreHMG">
-            <button type="button" class="sub-gamenium-btn" (click)="moreCompletion()">Compléter de manière plus détaillée.</button>
+            <button *ngIf="!isLoadingMore" type="button" class="sub-gamenium-btn"
+                    (click)="moreCompletion(); addForm.ngSubmit.emit()" data-bs-dismiss="modal">Compléter de manière plus détaillée.
+            </button>
+            <button *ngIf="isLoadingMore" type="button" class="sub-gamenium-btn" style="padding-top: 12px;">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
           </div>
 
 

@@ -25,6 +25,15 @@
     color: var(--userColor);
     font-size: 12px;
     padding: 8px 38px;
+    text-align: center;
+    width: 350px;
+    height: 42px;
+  }
+
+  .spinner-border{
+    --bs-spinner-width: 1rem;
+    --bs-spinner-height: 1rem;
+    --bs-spinner-border-width: 0.10em;
   }
 
 }

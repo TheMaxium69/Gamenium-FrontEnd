@@ -572,7 +572,7 @@ export class AppComponent {
     }
   }
 
-  addGame(form: NgForm) {
+  addGame(form: NgForm, isMore: boolean = false) {
 
     // console.log(form.value)
 
@@ -643,16 +643,21 @@ export class AppComponent {
       // console.log(bodyMyGame);
 
       // return console.log(bodyMyGame);
-      this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
+      this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe((reponseMyGameAdd:{message:string,result:HistoryMyGameInterface}) => {
         if (reponseMyGameAdd.message == "add game is collection") {
 
-          Swal.fire({
-            title: 'Succès!',
-            text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
-          })
+          if (isMore){
+            this.router.navigate(['/mygame/edit/' + reponseMyGameAdd.result.id]);
+          } else {
+            Swal.fire({
+              title: 'Succès!',
+              text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
+              icon: 'success',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.userConnected?.themeColor
+            })
+          }
+
 
           // Actualiser la liste des jeux après l'ajout
           if (this.userConnected) {

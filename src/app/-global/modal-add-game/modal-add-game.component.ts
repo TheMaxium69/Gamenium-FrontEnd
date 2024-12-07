@@ -9,6 +9,7 @@ import {GameInterface} from "../../-interface/game.interface";
 import {of, Subject} from "rxjs";
 import {catchError, debounceTime, distinctUntilChanged, switchMap, takeUntil} from "rxjs/operators";
 import Swal from "sweetalert2";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'modal-add-game',
@@ -96,8 +97,14 @@ export class ModalAddGameComponent implements OnInit, OnDestroy {
 
   }
 
+  isLoadingMore:boolean = false;
   moreCompletion(){
-    console.log('more complter');
+    this.isLoadingMore = true;
+  }
+
+  addGame(form:NgForm){
+    this.app.addGame(form, this.isLoadingMore);
+
   }
 
 }
