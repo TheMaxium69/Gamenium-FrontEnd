@@ -668,22 +668,28 @@ export class AppComponent {
 
   onSubmitSearch(form: NgForm): void {
     const searchValue = form.value['searchValue'];
-    this.gameService.searchGames(searchValue, 6, this.setURL()).subscribe(
-      (results: GameInterface[]) => {
-        this.searchResults = results;
-      },
-      (error: any) => {
-        console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
-        Swal.fire({
-          title: 'Erreur!',
-          text: 'Une erreur s\'est produite lors de la recherche',
-          icon: 'error',
-          confirmButtonText: 'OK',
-          confirmButtonColor: this.userConnected?.themeColor
-        })
+      this.gameService.searchGames(searchValue, 6, this.setURL()).subscribe(
+        (results: GameInterface[]) => {
+          this.searchResults = results;
 
-      }
-    );
+          if (searchValue.trim() == "") {
+            this.searchResults = [];
+          }
+        },
+        (error: any) => {
+          this.searchResults = [];
+          console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Une erreur s\'est produite lors de la recherche',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor
+          })
+
+        }
+      );
+
   }
 
   selectGame(game: GameInterface) {

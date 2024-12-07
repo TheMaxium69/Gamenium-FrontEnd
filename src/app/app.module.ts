@@ -63,6 +63,7 @@ import { CardProviderComponent } from './-global/card-provider/card-provider.com
 import { CardProfilComponent } from './-global/card-profil/card-profil.component';
 import { BackToTopComponent } from './-global/back-to-top/back-to-top.component';
 import { ModalProviderComponent } from './-global/modal-provider/modal-provider.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import { ModalProviderComponent } from './-global/modal-provider/modal-provider.
     CardProviderComponent,
     CardProfilComponent,
     BackToTopComponent,
-    ModalProviderComponent
+    ModalProviderComponent,
+    TestComponent
 
   ],
   imports: [
