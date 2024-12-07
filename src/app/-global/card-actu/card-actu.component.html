@@ -50,3 +50,54 @@
   </div>
 
 </div>
+
+<!-- LOADING -->
+<div id="squelette" class="card col-4" *ngIf="!actu">
+
+  <!--Miniature-->
+  <div class="card-img-top"></div>
+
+  <!--CONTENT-->
+  <div class="card-body">
+
+    <!-- TITRE -->
+    <div class="card-title"></div>
+
+    <div class="card-hr">
+      <hr/>
+    </div>
+
+    <!-- DOWN TAB -->
+    <div class="card-end d-flex">
+
+      <!-- PROVIDER -->
+      <a class="btn" >
+        <div class="d-flex provider">
+          <div class="provider-img" ></div>
+          <div class="squel-provider"></div>
+        </div>
+      </a>
+
+      <!-- ICONE -->
+      <div class="card-i d-flex" >
+
+        <!-- COMMENTAIRE -->
+        <div class="icone-stat">
+          <p></p>
+          <i class="ri-chat-3-fill" style="color: #2e3a59;"></i>
+        </div>
+
+        <!-- LIKE -->
+        <div class="icone-stat">
+          <p></p>
+          <i class="ri-heart-fill cardActuLike"></i>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

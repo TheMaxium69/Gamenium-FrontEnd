@@ -96,6 +96,9 @@
         <h2 class="">Les dernières actualités</h2>
         <div id="content-actu" class="d-flex">
           <!-- Boucle avec les card actus (en afficher 6) -->
+          <ng-container *ngIf="postActuFollowOrAll.length === 0">
+              <app-card-actu *ngFor="let i of [0, 1, 2, 3, 4, 5]"></app-card-actu>
+          </ng-container>
           <app-card-actu *ngFor="let actu of postActuFollowOrAll | slice: 0 : 6" [actu]="actu"></app-card-actu>
         </div>
         <div class="rowamoi justify-content-end">

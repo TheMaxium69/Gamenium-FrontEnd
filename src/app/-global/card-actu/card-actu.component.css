@@ -39,7 +39,7 @@
 
 .card .card-body .btn{
   color: white;
-  background-color: rgba(255, 0, 0, 0.54);
+  background-color: rgba(128, 128, 128, 0.50);
   box-shadow: 1px 2px 11px #a6a6a6;
 
 
@@ -74,7 +74,7 @@
   min-height: 24px;
   margin-top: 1px;
   border-radius: 100%;
-  background-color: red;
+  background-color: gray;
   /*background-image: url('https://i.pinimg.com/136x136/e2/cb/6a/e2cb6a3b2d418d4fca14f9ebd84a0c47.jpg');*/
   background-position: center;
   background-size: cover;
@@ -101,5 +101,58 @@
 
   p{
     margin-top: 2px;
+  }
+}
+
+
+/* LOADING */
+#squelette {
+  animation: fadeInOut 2s infinite;
+  box-shadow: unset;
+
+  /* IMG */
+  .card-img-top:hover {
+    transform: scale(1);
+  }
+  .card-img-top {
+    background-color: gray;
+    width: 336px;
+    height: 189px;
+  }
+
+  /* TITRE */
+  .card-title{
+    height: 21px;
+    background: gray;
+    border-radius: 5px;
+  }
+
+  /* PROVIDER */
+  .card-body .btn{
+    width: 180px;
+    background: transparent;
+    box-shadow: unset;
+  }
+
+  .squel-provider{
+    background-color: gray;
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+  }
+
+  i{
+    color: gray!important;
+  }
+
+}
+
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.4;
   }
 }
