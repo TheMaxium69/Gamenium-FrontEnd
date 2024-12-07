@@ -566,23 +566,26 @@ export class AppComponent {
       is_pinned = false;
     }
 
-    let is_wishlist = form.value['whishListGame']
-    if (is_wishlist == "") {
-      is_wishlist = false;
-    }
-
     let buywhere_id = form.value['buyWhere'];
     if (buywhere_id == "") {
-      buywhere_id = undefined;
+      buywhere_id = null;
     }
 
-    let buy_at = form.value['buyAt']
-    if (buy_at == "") {
-      buy_at = undefined;
+    let day_buy_date = form.value['day_buy_date']
+    if (day_buy_date == "") {
+      day_buy_date = null;
+    }
+    let month_buy_date = form.value['month_buy_date']
+    if (month_buy_date == "") {
+      month_buy_date = null;
+    }
+    let year_buy_date = form.value['year_buy_date']
+    if (year_buy_date == "") {
+      year_buy_date = null;
     }
 
     let plateform_id = form.value['plateform_id'];
-    console.log(plateform_id);
+    // console.log(plateform_id);
     let noplate:boolean = true;
     if (plateform_id == ""){
       if (this.gameSelected){
@@ -614,15 +617,17 @@ export class AppComponent {
 
       let bodyNoJsonMyGame: any = {
         "id_game": this.gameSelected?.id,
+        "id_plateform":plateform_id,
         "is_pinned": is_pinned,
-        "is_wishlist": is_wishlist,
         "buywhere_id": buywhere_id,
-        "buy_at": buy_at,
-        "id_plateform":plateform_id
+        "year_buy_at":year_buy_date,
+        "month_buy_at":month_buy_date,
+        "day_buy_at":day_buy_date
       };
       const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
       // console.log(bodyMyGame);
 
+      // return console.log(bodyMyGame);
       this.histoireMyGameService.postMyGame(bodyMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseMyGameAdd => {
         if (reponseMyGameAdd.message == "add game is collection") {
 

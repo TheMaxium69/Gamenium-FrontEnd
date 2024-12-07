@@ -26,8 +26,6 @@
 
         <div class="start-form" *ngIf="this.app.gameSelected">
 
-          <input type="checkbox" name="whishListGame" ngModel style="display: none"><br>
-
           <!-- PLATEFORM -->
           <div class="panel">
 
@@ -79,21 +77,21 @@
 
             <div class="head-buy">
 
-              <select id="day_buy_date" ngModel name="purchase_day_buy_date">
+              <select id="day_buy_date" ngModel name="day_buy_date">
                 <option value="">Jour d'achat</option>
                 <ng-container *ngFor="let day of [].constructor(31); let d = index">
                   <option [value]="d+1">{{ d + 1 }}</option>
                 </ng-container>
               </select>
 
-              <select id="month_buy_date" ngModel name="purchase_month_buy_date">
+              <select id="month_buy_date" ngModel name="month_buy_date">
                 <option value="">Mois d'achat</option>
                 <ng-container *ngFor="let month of [].constructor(12); let m = index">
                   <option [value]="m+1">{{ m + 1 }}</option>
                 </ng-container>
               </select>
 
-              <select id="year_buy_date" ngModel name="purchase_year_buy_date">
+              <select id="year_buy_date" ngModel name="year_buy_date">
                 <option value="">Année d'achat</option>
                 <ng-container *ngFor="let year of this.app.getYears(); let y = index">
                   <option [value]="year">{{ year }}</option>
