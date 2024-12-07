@@ -1,37 +1,66 @@
-<div class="modal fade text-center" id="noteGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-center" id="noteGamePage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <p>Ajoutez une note</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form id="noteGamePage2" #noteGamePage2="ngForm" (ngSubmit)="this.app.addNote(noteGamePage2)" class="modal-body" style="padding-top: 40px;">
 
-        <h2>Ajoutez une note à votre jeu</h2>
-
-        <br>
-        <h5><span style="color: red">*</span>Recherchez un jeu :</h5>
-        <input *ngIf="this.app.gameSelected" type="text" placeholder="Votre jeu" disabled value="{{ this.app.gameSelected?.name }}">
-        <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.onSearchValueChange($event)">
-        <br>
+        <div class="panel">
+          <div class="head-panel">
+            <h2><i class="ri-search-2-line"></i>Recherchez un jeu</h2>
+          </div>
+          <input *ngIf="this.app.gameSelected" type="text" class="disable" placeholder="Votre jeu" value="{{ this.app.gameSelected?.name }}" (click)="this.app.unselectGame()">
+          <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.onSearchValueChange($event)">
+        </div>
 
         <div *ngIf="this.searchResults && this.searchResults.length > 0 && !this.app.gameSelected" class="row-search-game">
           <app-card-game-sub *ngFor="let result of this.searchResults" [game]="result" (click)="this.app.selectGame(result)"></app-card-game-sub>
         </div>
 
-        <div *ngIf="isFirstSearch && this.searchResults && this.searchResults.length === 0">
-          <p>Aucun résultat trouvé.</p>
+        <div *ngIf="isFirstSearch && !isLoading && this.searchResults && this.searchResults.length === 0 && !this.app.gameSelected">
+          <p class="none-game">Aucun résultat trouvé.</p>
         </div>
 
-        <ng-container *ngIf="this.app.gameSelected">
+        <!-- BUG = quand on supprime trop avant la fin de la requette -->
+        <div *ngIf="isFirstSearch && isLoading && searchValue == ''">
+          <p class="none-game">Aucun résultat trouvé.</p>
+        </div>
 
-          <br>
-          <h6><span style="color: red">*</span>Note de votre jeu :</h6>
-          <input type="number" placeholder="10" name="noteGame" ngModel>/20
+        <div *ngIf="isLoading && searchValue !== '' && !this.app.gameSelected" class="laoding-search">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
 
-        </ng-container>
+        <div class="start-form" *ngIf="this.app.gameSelected">
+
+          <!-- EPINGLER -->
+          <div class="panel">
+
+            <div class="head-panel">
+              <h2><i class="ri-medal-fill"></i>Evaluation</h2>
+            </div>
+
+<!--            <ng-container *ngIf="selectedMyGame.rate">-->
+<!--              <input type="hidden" [(ngModel)]="selectedMyGame.rate.id" name="rateId">-->
+<!--              <input max="20" min="0" type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating" placeholder="Note du jeux (/20)">-->
+<!--            </ng-container>-->
+<!--            <ng-container *ngIf="!selectedMyGame.rate">-->
+              <input max="20" min="0" type="number" id="rating" name="noteGame" ngModel placeholder="Note du jeux (/20)">
+<!--            </ng-container>-->
+
+            <br>
+            <textarea type="text" id="content_rating" name="content_rating" placeholder="Expliqué votre note"></textarea>
+
+
+          </div>
+
+        </div>
 
         <div class="modal-footer" style="margin-top: 74px;">
-          <button type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-dismiss="modal">Enregistrer</button>
+          <button *ngIf="this.app.gameSelected" type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-dismiss="modal">Sauvegardé <i class="ri-save-3-fill"></i></button>
           <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
         </div>
 

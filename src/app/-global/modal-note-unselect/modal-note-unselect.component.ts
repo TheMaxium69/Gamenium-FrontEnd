@@ -17,7 +17,9 @@ export class ModalNoteUnselectComponent implements OnInit, OnDestroy {
               private gameService: GameService) {}
 
   searchResults: GameInterface[] = [];
+  searchValue: string = '';
   isFirstSearch: boolean = false;
+  isLoading: boolean = false;
 
   private searchSubject = new Subject<string>();
   private unsubscribe$ = new Subject<void>();
@@ -32,6 +34,7 @@ export class ModalNoteUnselectComponent implements OnInit, OnDestroy {
         }
         return this.gameService.searchGames(searchValue, this.app.modalSearchLimit, this.app.setURL()).pipe(
           catchError((error) => {
+            this.isLoading = false;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
             Swal.fire({
               title: 'Erreur!',
@@ -46,16 +49,17 @@ export class ModalNoteUnselectComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe((results: GameInterface[]) => {
+      this.isLoading = true;
       this.searchResults = results;
-      console.log(results)
     });
   }
 
   onSearchValueChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    const searchValue = inputElement.value;
+    this.searchValue = inputElement.value;
     this.isFirstSearch = true;
-    this.searchSubject.next(searchValue);
+    this.isLoading = true;
+    this.searchSubject.next(this.searchValue);
   }
 
   ngOnDestroy() {

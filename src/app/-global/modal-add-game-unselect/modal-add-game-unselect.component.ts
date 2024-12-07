@@ -62,7 +62,6 @@ export class ModalAddGameUnselectComponent implements OnInit, OnDestroy {
       console.log('results valide');
       this.isLoading = false;
       this.searchResults = results;
-      console.log(results)
     });
   }
 

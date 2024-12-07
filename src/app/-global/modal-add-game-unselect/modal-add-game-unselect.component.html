@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <p>Ajoutez un jeu à votre liste</p>
+        <p>Ajoutez un jeu</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form id="addGameForm" #addForm="ngForm" (ngSubmit)="this.app.addGame(addForm)" class="modal-body" style="padding-top: 40px;">
@@ -29,7 +29,7 @@
           <p class="none-game">Aucun résultat trouvé.</p>
         </div>
 
-        <div *ngIf="isLoading && searchValue !== ''" class="laoding-search">
+        <div *ngIf="isLoading && searchValue !== '' && !this.app.gameSelected" class="laoding-search">
           <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
