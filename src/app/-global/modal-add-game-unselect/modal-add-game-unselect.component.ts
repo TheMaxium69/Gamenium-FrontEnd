@@ -15,7 +15,7 @@ import {GameService} from "../../-service/game.service";
   templateUrl: './modal-add-game-unselect.component.html',
   styleUrls: ['./modal-add-game-unselect.component.css']
 })
-export class ModalAddGameUnselectComponent implements OnInit {
+export class ModalAddGameUnselectComponent implements OnInit, OnDestroy {
 
   constructor(protected app:AppComponent,
               private deviseService:DeviseService,

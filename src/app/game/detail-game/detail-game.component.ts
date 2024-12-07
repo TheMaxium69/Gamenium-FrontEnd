@@ -287,7 +287,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
         }
       })
 
-    }, 2000)
+    }, this.app.deadlineView)
   }
 
 

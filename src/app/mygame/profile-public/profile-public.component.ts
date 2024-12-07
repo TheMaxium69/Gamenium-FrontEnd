@@ -419,7 +419,7 @@ filterGames(): void {
         }
       })
 
-    }, 2000)
+    }, this.app.deadlineView)
   }
 
 

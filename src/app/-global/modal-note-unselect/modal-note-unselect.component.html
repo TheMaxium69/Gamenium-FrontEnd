@@ -11,14 +11,14 @@
         <br>
         <h5><span style="color: red">*</span>Recherchez un jeu :</h5>
         <input *ngIf="this.app.gameSelected" type="text" placeholder="Votre jeu" disabled value="{{ this.app.gameSelected?.name }}">
-        <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.app.onSubmitSearch(noteGamePage2)">
+        <input *ngIf="!this.app.gameSelected" type="text" placeholder="Tapez pour rechercher un jeu" name="searchValue" ngModel (keyup)="this.onSearchValueChange($event)">
         <br>
 
-        <div *ngIf="this.app.searchResults && this.app.searchResults.length > 0 && !this.app.gameSelected" class="row-search-game">
-          <app-card-game-sub *ngFor="let result of this.app.searchResults" [game]="result" (click)="this.app.selectGame(result)"></app-card-game-sub>
+        <div *ngIf="this.searchResults && this.searchResults.length > 0 && !this.app.gameSelected" class="row-search-game">
+          <app-card-game-sub *ngFor="let result of this.searchResults" [game]="result" (click)="this.app.selectGame(result)"></app-card-game-sub>
         </div>
 
-        <div *ngIf="this.app.searchResults && this.app.searchResults.length === 0">
+        <div *ngIf="this.searchResults && this.searchResults.length === 0">
           <p>Aucun résultat trouvé.</p>
         </div>
 

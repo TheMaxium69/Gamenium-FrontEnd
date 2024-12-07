@@ -209,6 +209,6 @@ export class ProviderComponent implements OnInit{
         }
       })
 
-    }, 2000)
+    }, this.app.deadlineView)
   }
 }

@@ -105,9 +105,9 @@ export class DetailActualityComponent implements OnInit{
     this.postActu.getPostActuById(id, this.app.setURL()).subscribe((response: { message: string; result: PostActuInterface }) => {
       if (response.message === "good") {
         this.actualitySelected = response.result;
-  
+
         console.log('Fetched Actuality:', this.actualitySelected);
-  
+
         if (this.actualitySelected) {
           this.addViewActu(this.actualitySelected.id);
           this.getProviderColor()
@@ -117,7 +117,7 @@ export class DetailActualityComponent implements OnInit{
       }
     });
   }
-  
+
 
   getLikeByActu(idActu: number){
 
@@ -242,11 +242,11 @@ export class DetailActualityComponent implements OnInit{
   handleFollowed(providerId: number): void {
     console.log(`Provider followed with ID: ${providerId}`);
   }
-  
+
   handleUnfollowed(providerId: number): void {
     console.log(`Provider unfollowed with ID: ${providerId}`);
   }
-  
+
 
   verifFollowGameProfil(GameProfil: GameProfileInterface){
       // a faire
@@ -326,14 +326,14 @@ export class DetailActualityComponent implements OnInit{
         }
       })
 
-    }, 2000);
+    }, this.app.deadlineView);
   }
 
   getViewsByActu(idActu: number) {
     this.viewService.getPostActuViews(idActu, this.app.setURL()).subscribe(reponseViewByPostActu => {
 
       if (reponseViewByPostActu.message == "good"){
-        
+
         this.nbView = reponseViewByPostActu.result;
       }
     })
