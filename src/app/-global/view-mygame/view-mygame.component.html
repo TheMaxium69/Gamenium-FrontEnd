@@ -15,7 +15,7 @@
                 <i class="ri-pushpin-line btn-action"></i>
               </button>
             </ng-container>
-            <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#noteGame">
+            <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#noteGamePage">
               <i class="ri-star-line btn-action" [ngStyle]="{'color': this.app.viewMyGame?.rate?.rating ? '#f4da00' : 'gray'}"></i>
             </button>
             <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" routerLink="edit/{{ this.app.viewMyGame?.myGame?.id }}">

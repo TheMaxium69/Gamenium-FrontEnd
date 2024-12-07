@@ -50,8 +50,6 @@ import { ViewMygameComponent } from './-global/view-mygame/view-mygame.component
 import { EditedMygameComponent } from './mygame/edited-mygame/edited-mygame.component';
 import { ModalNoteComponent } from './-global/modal-note/modal-note.component';
 import { ModalAddGameComponent } from './-global/modal-add-game/modal-add-game.component';
-import { ModalNoteUnselectComponent } from './-global/modal-note-unselect/modal-note-unselect.component';
-import { ModalAddGameUnselectComponent } from './-global/modal-add-game-unselect/modal-add-game-unselect.component';
 import { PlateformViewComponent } from './mygame/plateform-view/plateform-view.component';
 import { TabMygameComponent } from './mygame/tab-mygame/tab-mygame.component';
 import { TabPublicComponent } from './mygame/tab-public/tab-public.component';
@@ -112,8 +110,6 @@ import { TestComponent } from './test/test.component';
     EditedMygameComponent,
     ModalNoteComponent,
     ModalAddGameComponent,
-    ModalNoteUnselectComponent,
-    ModalAddGameUnselectComponent,
     PlateformViewComponent,
     TabMygameComponent,
     TabPublicComponent,
