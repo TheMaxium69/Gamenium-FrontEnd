@@ -22,13 +22,15 @@ export class ModalAddGameUnselectComponent implements OnInit, OnDestroy {
               private buyWhereService:BuyWhereService,
               private gameService:GameService) {}
 
+  deviseAll:DeviseInterface[]|undefined;
+  buyWhereAll:BuyWhereInterface[]|undefined;
   searchResults: GameInterface[] = [];
+  searchValue: string = '';
+  isFirstSearch: boolean = false;
+  isLoading: boolean = false;
 
   private searchSubject = new Subject<string>();
   private unsubscribe$ = new Subject<void>();
-
-  deviseAll:DeviseInterface[]|undefined;
-  buyWhereAll:BuyWhereInterface[]|undefined;
 
   ngOnInit() {
     this.getAllInfo();
@@ -42,6 +44,7 @@ export class ModalAddGameUnselectComponent implements OnInit, OnDestroy {
         }
         return this.gameService.searchGames(searchValue, this.app.modalSearchLimit, this.app.setURL()).pipe(
           catchError((error) => {
+            this.isLoading = false;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
             Swal.fire({
               title: 'Erreur!',
@@ -56,6 +59,8 @@ export class ModalAddGameUnselectComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe((results: GameInterface[]) => {
+      console.log('results valide');
+      this.isLoading = false;
       this.searchResults = results;
       console.log(results)
     });
@@ -63,8 +68,10 @@ export class ModalAddGameUnselectComponent implements OnInit, OnDestroy {
 
   onSearchValueChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    const searchValue = inputElement.value;
-    this.searchSubject.next(searchValue);
+    this.searchValue = inputElement.value;
+    this.isFirstSearch = true;
+    this.isLoading = true;
+    this.searchSubject.next(this.searchValue);
   }
 
   ngOnDestroy() {

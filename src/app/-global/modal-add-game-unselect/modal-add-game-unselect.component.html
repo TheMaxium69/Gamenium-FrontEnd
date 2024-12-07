@@ -20,9 +20,21 @@
         </div>
 
 
-        <div *ngIf="this.searchResults && this.searchResults.length === 0 && !this.app.gameSelected">
+        <div *ngIf="isFirstSearch && !isLoading && this.searchResults && this.searchResults.length === 0 && !this.app.gameSelected">
           <p class="none-game">Aucun résultat trouvé.</p>
         </div>
+
+        <!-- BUG = quand on supprime trop avant la fin de la requette -->
+        <div *ngIf="isFirstSearch && isLoading && searchValue == ''">
+          <p class="none-game">Aucun résultat trouvé.</p>
+        </div>
+
+        <div *ngIf="isLoading && searchValue !== ''" class="laoding-search">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
 
         <div class="start-form" *ngIf="this.app.gameSelected">
 

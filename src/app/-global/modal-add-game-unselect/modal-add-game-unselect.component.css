@@ -12,7 +12,8 @@
   padding: 20px 60px;
 }
 
-.none-game{
+.none-game,
+.laoding-search{
   margin: 65px 0 30px;
 }
 

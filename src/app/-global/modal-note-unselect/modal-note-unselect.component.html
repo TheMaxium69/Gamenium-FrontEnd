@@ -18,7 +18,7 @@
           <app-card-game-sub *ngFor="let result of this.searchResults" [game]="result" (click)="this.app.selectGame(result)"></app-card-game-sub>
         </div>
 
-        <div *ngIf="this.searchResults && this.searchResults.length === 0">
+        <div *ngIf="isFirstSearch && this.searchResults && this.searchResults.length === 0">
           <p>Aucun résultat trouvé.</p>
         </div>
 

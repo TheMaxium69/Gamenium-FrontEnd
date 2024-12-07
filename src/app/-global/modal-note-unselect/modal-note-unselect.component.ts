@@ -17,6 +17,7 @@ export class ModalNoteUnselectComponent implements OnInit, OnDestroy {
               private gameService: GameService) {}
 
   searchResults: GameInterface[] = [];
+  isFirstSearch: boolean = false;
 
   private searchSubject = new Subject<string>();
   private unsubscribe$ = new Subject<void>();
@@ -53,6 +54,7 @@ export class ModalNoteUnselectComponent implements OnInit, OnDestroy {
   onSearchValueChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const searchValue = inputElement.value;
+    this.isFirstSearch = true;
     this.searchSubject.next(searchValue);
   }
 
