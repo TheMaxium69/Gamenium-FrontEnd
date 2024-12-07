@@ -1,4 +1,4 @@
-<section id="actu-all" class="d-flex" *ngIf="!providerIdSelected && isLogIn">
+<section id="actu-all" class="d-flex" *ngIf="!providerIdSelected && isLogIn && !isLoading">
   <div *ngIf="postActuFollow.length === 0 && postActuAll.length === 0">
     <h3>Aucune actualité pour les providers suivis.</h3>
   </div>
@@ -6,7 +6,7 @@
 </section>
 
 <!-- SI AUCUN PROVIDER EST SELECTION-->
-<section id="actu-all" class="d-flex" *ngIf="!providerIdSelected && !isLogIn">
+<section id="actu-all" class="d-flex" *ngIf="!providerIdSelected && !isLogIn && !isLoading">
 
   <div *ngIf="this.postActuAll.length == 0">
     <h3>Aucune actualité pour cette entreprise.</h3>
@@ -17,12 +17,20 @@
 </section>
 
 <!-- SI UN PROVIDER EST SELECTIONER -->
-<section id="actu-all" class="d-flex" *ngIf="providerIdSelected">
+<section id="actu-all" class="d-flex" *ngIf="providerIdSelected && !isLoading">
 
   <div *ngIf="this.postActuProvider.length == 0">
     <h3>Aucune actualité.</h3>
   </div>
 
   <app-card-actu *ngFor="let actu of ActuByProvider()" [actu]="actu"></app-card-actu>
+
+</section>
+
+
+<!-- LOADGIN -->
+<section id="actu-all" class="d-flex" *ngIf="isLoading">
+
+  <app-card-actu *ngFor="let actu of [].constructor(16)"></app-card-actu>
 
 </section>

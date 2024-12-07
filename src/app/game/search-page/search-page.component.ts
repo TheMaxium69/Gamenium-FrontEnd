@@ -22,9 +22,11 @@ import { ApicallInterface } from 'src/app/-interface/apicall.interface';
 })
 export class SearchPageComponent implements OnInit{
 
-  
+
 
   isLoggedIn:boolean|undefined;
+
+  isLoading:boolean = true;
 
 
   searchValue: string = '';
@@ -151,13 +153,13 @@ export class SearchPageComponent implements OnInit{
   searchUser(): void {
     this.userService.searchUsers(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe(
       (results) => {
-        
+
         const connectedUserId = this.app.userConnected?.id;
         this.users = results.filter((user) => user.id !== connectedUserId);
         console.log("Fetched Users:", this.users);
-  
-        // récupère les badge pour chaque utilisateur 
-        const badgeRequests = this.users.map(user => 
+
+        // récupère les badge pour chaque utilisateur
+        const badgeRequests = this.users.map(user =>
           this.badgeService.getBadgeByUser(user.id, this.app.setURL()).pipe(
             catchError(error => {
               console.error(`Error fetching badges for user ${user.id}:`, error);
@@ -166,8 +168,8 @@ export class SearchPageComponent implements OnInit{
             })
           )
         );
-  
-        // execute la recherche de badge 
+
+        // execute la recherche de badge
         forkJoin(badgeRequests).subscribe(
           (badgeResponses: ApicallInterface[]) => {
             badgeResponses.forEach((badgeResponse, index) => {
@@ -197,6 +199,7 @@ export class SearchPageComponent implements OnInit{
 
     this.postactuService.searchPostActus(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.postactus = results;
+      this.isLoading = false;
       console.log(this.postactus)
     });
 
@@ -246,16 +249,16 @@ export class SearchPageComponent implements OnInit{
     });
 
   }
-  
-  //PROVIDER 
+
+  //PROVIDER
   handleFollowed(providerId: number): void {
     console.log(`Provider followed with ID: ${providerId}`);
     const provider = this.providers.find((p) => p.id === providerId);
   }
-  
+
   handleUnfollowed(providerId: number): void {
     console.log(`Provider unfollowed with ID: ${providerId}`);
     const provider = this.providers.find((p) => p.id === providerId);
   }
-  
+
 }

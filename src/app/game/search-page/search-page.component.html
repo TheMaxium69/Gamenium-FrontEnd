@@ -79,6 +79,10 @@
 <ng-container *ngIf="searchType == 'postactu'">
   <section id="show-actu" class="container d-flex justify-content-center">
     <app-card-actu *ngFor="let actu of postactus" [actu]="actu"></app-card-actu>
+    <ng-container *ngIf="isLoading">
+      <app-card-actu *ngFor="let actu of [].constructor(16)"></app-card-actu>
+    </ng-container>
+
   </section>
 </ng-container>
 

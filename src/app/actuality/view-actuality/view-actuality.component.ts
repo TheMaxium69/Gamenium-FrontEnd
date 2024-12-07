@@ -33,6 +33,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
 
   isLogIn: boolean | undefined;
   userConnected: UserInterface | undefined;
+  isLoading:boolean = true;
 
   postActuAll: PostActuInterface[] = [];
   postActuProvider: PostActuInterface[] = [];
@@ -58,7 +59,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
       const currentValue = changes['providerIdSelected'].currentValue;
       const previousValue = changes['providerIdSelected'].previousValue;
       const providerAll = document.querySelectorAll('.provider-img');
-  
+
       if (previousValue) {
         const lastProviderSelected = document.querySelector(`#provider${previousValue}`);
         if (lastProviderSelected) {
@@ -67,7 +68,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
           });
         }
       }
-  
+
       if (currentValue) {
         const providerSelected = document.querySelector(`#provider${currentValue}`);
         if (providerSelected) {
@@ -95,6 +96,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
       if (responseActu.message === 'good') {
         /*GET ACTU ALL*/
         this.postActuAll = responseActu.result;
+        this.isLoading = false;
 
       } else {
         Swal.fire({
@@ -114,6 +116,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
       if (response.message === 'good') {
         /*GET ACTU BY PROVIDER*/
         this.postActuProvider = response.result;
+        this.isLoading = false;
 
         // ENVOIE LE NOMBRE D'ACTU AU PROVIDER
         const actuNbr = this.postActuProvider.length;
@@ -125,11 +128,12 @@ export class ViewActualityComponent implements OnInit, OnChanges {
   /* RECUPERE LES ACTU DES PROVIDERS SUIVIENT UNIQUEMENT */
   getActuByFollow() {
     this.postActuFollow = [];
-  
+
     this.providerFollowed.forEach(provider => {
       this.postActuService.getPostByProvider(provider.id, this.app.setURL()).subscribe(
         response => {
           if (response.message === 'good') {
+            this.isLoading = false;
             this.postActuFollow.push(...response.result);
           }
         }
