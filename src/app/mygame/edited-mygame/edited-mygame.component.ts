@@ -372,11 +372,11 @@ export class EditedMygameComponent implements OnInit {
 
 
   /* VERIFIER SI IL Y A 0 SPEEDRUN */
-  noRealSpeedrun():string{
+  countSpeedrunView():string{
     if (this.selectedMyGame?.speedrun.length == 0 && this.nbSpeedrun != 0){
-      return "*"
+      return "0"
     } else {
-      return "";
+      return this.nbSpeedrunView.toString();
     }
   }
 
@@ -397,13 +397,6 @@ export class EditedMygameComponent implements OnInit {
 
     console.log(form.value);
 
-    /* SAVOIR LE NOMBRE DE COPY*/
-    let copyCount: number = 0;
-    for (const property in form.value) {
-      if (form.value.hasOwnProperty(property) && property.startsWith('copy')) {
-        copyCount++;
-      }
-    }
     // console.log(`Number of copies: ${copyCount}`);
     let is_pinned: boolean | undefined = this.selectedMyGame?.myGame.is_pinned
     if (form.value.is_pinned == true || form.value.is_pinned == "true") {
@@ -412,8 +405,6 @@ export class EditedMygameComponent implements OnInit {
     if (form.value.is_pinned == false || form.value.is_pinned == "false") {
       is_pinned = false;
     }
-
-
 
     /* MODIFIER LE MYGAME */
     let newMyGame = {
@@ -431,8 +422,16 @@ export class EditedMygameComponent implements OnInit {
       content: form.value['content_rating']
     }
 
-    /* MODIFIER LES COPY */
 
+    /* SAVOIR LE NOMBRE DE COPY*/
+    let copyCount: number = 0;
+    for (const property in form.value) {
+      if (form.value.hasOwnProperty(property) && property.startsWith('copy')) {
+        copyCount++;
+      }
+    }
+
+    /* MODIFIER LES COPY */
     let newCopyGame = []
     for (let i = 0; i < copyCount; i++) {
 
@@ -464,13 +463,55 @@ export class EditedMygameComponent implements OnInit {
 
     }
 
+    /* SAVOIR LE NOMBRE DE SPEEDRUN*/
+    let speedrunCount: number = 0;
+    for (const property in form.value) {
+      if (form.value.hasOwnProperty(property) && property.startsWith('speedrun')) {
+        speedrunCount++;
+      }
+    }
 
     /* MODIFIER LES SPEEDRUN */
     let newSpeedrun: any[] = []
+    for (let i = 0; i < speedrunCount; i++) {
+
+      if (this.idFormValideSpeedrun.includes(i)) {
+
+        let tempSpeedrun = {}
+        if (form.value['speedrun' + i] == "new") {
+          tempSpeedrun = {
+            category: form.value['category' + i],
+            chrono: form.value['chrono' + i],
+            link: form.value['link' + i]
+          }
+        } else {
+          tempSpeedrun = {
+            id: form.value['speedrun' + i],
+            category: form.value['category' + i],
+            chrono: form.value['chrono' + i],
+            link: form.value['link' + i]
+          }
+        }
+
+        newSpeedrun.push(tempSpeedrun);
+      }
+
+    }
+
+    /*BUGFIX speedrun*/
+
+    let bugNoSpeedrun = false
+    if (newSpeedrun.length == 1) {
+      if (newSpeedrun[0].category == "" && newSpeedrun[0].chrono == "") {
+        newSpeedrun = [];
+        bugNoSpeedrun = true;
+      }
+    }
+
+
     /* MODIFIER LES SCREENSHOT */
     let newScreenshot: any[] = []
 
-    console.log(newRate)
     /* FINAL FORMATAGE */
     let updateHistoryMyGame = {
       myGame: newMyGame,
@@ -479,23 +520,72 @@ export class EditedMygameComponent implements OnInit {
       speedrun:newSpeedrun,
       screenshot:newScreenshot
     }
+    // return console.log(updateHistoryMyGame)
     console.log(updateHistoryMyGame)
 
     let body = JSON.stringify(updateHistoryMyGame);
-    console.log(body);
 
     this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
       if (reponseMyGameUpdate.message == "updated game") {
 
         this.selectedMyGame = reponseMyGameUpdate.result;
 
+        this.calcSpeedrun() /* CALCULER CAR QUAND UN SPEEDRUN EST VIDE IL LE SUPPRIME*/
+
         /* BUF FIX SUR LES NOUVEAU EXEMPLAIRE QUI CE DUPLIQUE*/
         this.idFormValideCopy.forEach((idForm: number) => {
           let id:any = '.copyCard' + idForm
           document.querySelectorAll(id).forEach((element: HTMLElement) => {
             element.style.display = 'none';
+
+            // VIDER LES CHAMP
+            const inputs = element.querySelectorAll('input');
+            inputs.forEach(input => {
+              input.value = '';
+            });
+
+            const selects = element.querySelectorAll('select');
+            selects.forEach(select => {
+              select.selectedIndex = 0;
+            });
+
+            const textareas = element.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+              textarea.value = '';
+            });
           });
         });
+
+        /* BUF FIX SUR LES NOUVEAU EXEMPLAIRE QUI CE DUPLIQUE*/
+        this.idFormValideSpeedrun.forEach((idForm: number) => {
+          let id:any = '.speedrunCard' + idForm
+          document.querySelectorAll(id).forEach((element: HTMLElement) => {
+            element.style.display = 'none';
+
+            // VIDER LES CHAMP
+            const inputs = element.querySelectorAll('input');
+            inputs.forEach(input => {
+              input.value = '';
+            });
+
+            const selects = element.querySelectorAll('select');
+            selects.forEach(select => {
+              select.selectedIndex = 0;
+            });
+
+            const textareas = element.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+              textarea.value = '';
+            });
+          });
+        });
+
+        if (bugNoSpeedrun){
+          let firstSpeedrun = document.getElementById("speedrunCard0")
+          if (firstSpeedrun){
+            firstSpeedrun.style.display = "flex";
+          }
+        }
 
 
         Swal.fire({
@@ -503,7 +593,7 @@ export class EditedMygameComponent implements OnInit {
           text: 'Votre jeux à bien été mise à jour.',
           icon: 'success',
           confirmButtonText: 'Ok',
-          confirmButtonColor: this.app.userConnected?.themeColor
+          confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
         })
 
       } else {
@@ -513,11 +603,19 @@ export class EditedMygameComponent implements OnInit {
           text: 'Échec de la mise à jour de votre jeux',
           icon: 'error',
           confirmButtonText: 'Ok',
-          confirmButtonColor: this.app.userConnected?.themeColor
+          confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
         })
 
       }
-    })
+    }, (error) => (
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Échec de la mise à jour de votre jeux',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
+      })
+    ))
 
   }
 

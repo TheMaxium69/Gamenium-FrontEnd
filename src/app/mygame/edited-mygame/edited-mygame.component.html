@@ -202,7 +202,7 @@
     <section id="editedHmgSpeedrun" class="container" [class.displayNone]="tabSelected !== 2">
 
       <div class="head-all-exemplaire">
-        <h1>Speedrun <small>(Total <span>{{ nbSpeedrunView }}{{ noRealSpeedrun() }}</span>)</small></h1>
+        <h1>Speedrun <small>(Total <span>{{ countSpeedrunView() }}</span>)</small></h1>
         <button class="sub-gamenium-btn" type="button" (click)="addSpeedrun()"><i class="ri-add-large-fill"></i></button>
       </div>
 
@@ -250,7 +250,6 @@
       <ng-container *ngFor="let n of [].constructor(nbSpeedrun); let i = index">
 
         <div class="oneExemplaire speedrunCard{{i}}" id="speedrunCard{{i+nbSpeedrunExisting}}" style="display: {{ displayDefault(i+ nbSpeedrunExisting) }}">
-
           <div class="head-one-exemplaire">
             <h3>Speedrun #{{i+1 + nbSpeedrunExisting}}</h3>
             <i class="ri-delete-bin-fill" (click)="deleteSpeedrun(i+nbSpeedrunExisting)"></i>
