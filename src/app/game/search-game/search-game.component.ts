@@ -59,6 +59,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       this.gameService.searchGames(this.app.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
         this.app.gameNoReload = results;
         this.games = this.app.gameNoReload;
+        this.app.gamesSearchDefault = this.app.gameNoReload;
         this.isLoading = false;
 
         this.calcMoreBtn(true);
@@ -76,7 +77,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       // distinctUntilChanged(),
       switchMap((searchValue) => {
         if (!searchValue.trim()) {
-          return of(this.app.gameNoReload);
+          return of(this.app.gamesSearchDefault);
         }
         return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
           catchError((error) => {

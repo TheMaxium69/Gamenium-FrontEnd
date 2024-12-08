@@ -70,6 +70,7 @@ export class AppComponent {
   gameNoReload: GameInterface[] = [];
   usersNoReload: UserInterface[] = [];
   providersNoReload: ProviderInterface[] = [];
+  gamesSearchDefault: GameInterface[] = [];
   searchValue: string = '';
 
   // LIMIT
