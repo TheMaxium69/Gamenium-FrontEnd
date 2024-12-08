@@ -127,7 +127,7 @@
 }
 
 .card-right .core-right .card-note{
-  background-color: red;
+  background-color: gray;
   text-align: center;
   color: white;
   border-radius: 100%;
@@ -295,6 +295,41 @@
     margin-bottom: 20px;
   }
 
+
+}
+
+/* loading */
+#squelette .card-game {
+  box-shadow: none;
+
+  .card-left{
+    .color{
+      width: 300px;
+      height: 160px;
+      background-color: gray;
+      border-radius: 15px;
+    }
+  }
+
+  .core-left{
+    /* TITRE */
+    .squellette-title{
+      height: 30px;
+      width: 280px;
+      background: gray;
+      border-radius: 5px;
+    }.squellette-platform{
+       height: 20px;
+       width: 210px;
+       background: gray;
+       border-radius: 5px;
+     }.squellette-date{
+        height: 17px;
+        width: 180px;
+        background: gray;
+        border-radius: 5px;
+      }
+  }
 
 }
 

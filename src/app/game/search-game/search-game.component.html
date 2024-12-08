@@ -21,20 +21,16 @@
 <div id="show-game" class="container">
 
   <!-- LOADING -->
-  <div *ngIf="isLoading;" class="laoding-search">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
-
-<!--  <div>-->
-<!--    <app-card-game *ngFor="let game of [].constructor(50);"></app-card-game>-->
+<!--  <div *ngIf="isLoading;" class="laoding-search">-->
+<!--    <div class="spinner-border" role="status">-->
+<!--      <span class="visually-hidden">Loading...</span>-->
+<!--    </div>-->
 <!--  </div>-->
 
   <section id="content-search">
 
     <!-- PROVIDER -->
-    <div id="provider">
+    <div id="provider" [class.displayNone]="providers.length === 0">
 
       <ng-container *ngFor="let provider of providers">
         <div routerLink="/provider/{{ provider.id }}">
@@ -51,8 +47,13 @@
     <!-- JEUX -->
     <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>
 
+    <!-- LOADING -->
+    <ng-container *ngIf="isLoading">
+      <app-card-game *ngFor="let game of [].constructor(50);" style="width: 100%"></app-card-game>
+    </ng-container>
+
     <!-- USER -->
-    <div id="user">
+    <div id="user" [class.displayNone]="providers.length === 0">
 
       <ng-container *ngFor="let user of users">
         <app-card-profil *ngIf="user.id !== app.userConnected?.id"

@@ -176,7 +176,19 @@ small {
   opacity: .48;
 }
 
+/* LOADING */
+#squelette{
+  animation: LoadingSquellette 2s infinite;
+}
 
+@keyframes LoadingSquellette {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
 
 
 

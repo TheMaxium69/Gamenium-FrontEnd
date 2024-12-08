@@ -107,7 +107,6 @@
 
 /* LOADING */
 #squelette {
-  animation: fadeInOut 2s infinite;
   box-shadow: unset;
 
   /* IMG */
@@ -148,11 +147,3 @@
 }
 
 
-@keyframes fadeInOut {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
