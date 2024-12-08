@@ -70,12 +70,22 @@
 
 /* GAME */
 #show-game{
-  justify-content: center;
-  gap: 35px;
-  flex-wrap: wrap;
-
   margin-bottom: 120px;
   max-width: 1287px;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-direction: column;
+
+  #content-search{
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    flex-wrap: wrap;
+    margin-top: -30px;
+  }
 }
 
 

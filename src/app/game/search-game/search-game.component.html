@@ -18,44 +18,54 @@
   <input class="searchButton" type="submit" />
 </form>
 
-<div id="show-game" class="d-flex container">
+<div id="show-game" class="container">
 
-  <div *ngIf="providerExact">
-    <div routerLink="/provider/{{ providerExact.id }}">
-      <div id="card-provider" style="background: linear-gradient(180deg, {{providerExact.color ?? 'red'}} 35%, white 35%)">
-        <div class="circleImage" style="background-image: url('{{ providerExact.picture?.url }}');"></div>
-        <h2 class="card-title">{{ providerExact.displayName }}</h2><br>
-        <p>{{ providerExact.content }}</p><br>
-      </div>
+  <!-- LOADING -->
+  <div *ngIf="isLoading;" class="laoding-search">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 
-  <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>
+<!--  <div>-->
+<!--    <app-card-game *ngFor="let game of [].constructor(50);"></app-card-game>-->
+<!--  </div>-->
 
-  <div id="provider-user">
-    <ng-container *ngFor="let provider of providers">
-      <div routerLink="/provider/{{ provider.id }}" *ngIf="providerExact?.tagName != searchValue">
-        <div id="card-provider" style="background: linear-gradient(180deg, {{provider.color ?? 'red'}} 35%, white 35%)">
-          <div class="circleImage" style="background-image: url('{{ provider.picture?.url }}');"></div>
-          <h2 class="card-title">{{ provider.displayName }}</h2><br>
-          <p>{{ provider.content }}</p><br>
+  <section id="content-search">
+
+    <!-- PROVIDER -->
+    <div id="provider">
+
+      <ng-container *ngFor="let provider of providers">
+        <div routerLink="/provider/{{ provider.id }}">
+          <div id="card-provider" style="background: linear-gradient(180deg, {{provider.color ?? 'red'}} 35%, white 35%)">
+            <div class="circleImage" style="background-image: url('{{ provider.picture?.url }}');"></div>
+            <h2 class="card-title">{{ provider.displayName }}</h2><br>
+            <p>{{ provider.content }}</p><br>
+          </div>
         </div>
+      </ng-container>
 
-      </div>
+    </div>
 
-    </ng-container>
+    <!-- JEUX -->
+    <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>
 
-    <ng-container *ngFor="let user of users">
-      <app-card-profil
-        *ngIf="user.id !== app.userConnected?.id"
-        [user]="user"
-        [currentUser]="app.userConnected"
-      ></app-card-profil>
-    </ng-container>
+    <!-- USER -->
+    <div id="user">
 
-  </div>
+      <ng-container *ngFor="let user of users">
+        <app-card-profil *ngIf="user.id !== app.userConnected?.id"
+          [user]="user"
+          [currentUser]="app.userConnected"
+        ></app-card-profil>
+      </ng-container>
 
-  <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>
+    </div>
+
+    <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>
+
+  </section>
 
 </div>
 

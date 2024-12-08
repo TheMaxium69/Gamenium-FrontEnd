@@ -26,7 +26,6 @@ export class SearchGameComponent implements OnInit, OnDestroy{
   /* GAME & PROVIDER*/
   gameNoSearch: GameInterface[] = [];
   games: GameInterface[] = [];
-  providerExact: ProviderInterface | null = null;
 
   /* MORE GAME */
   nbMoreGame:number = 1;
@@ -35,7 +34,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
 
   /* searchVariable */
   searchValue: string = '';
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   private searchSubject = new Subject<string>();
   private unsubscribe$ = new Subject<void>();
@@ -61,6 +60,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.gameNoSearch = results;
       this.games = this.gameNoSearch;
+      this.isLoading = false;
 
       this.calcMoreBtn(true);
     });
@@ -90,9 +90,9 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe((results: GameInterface[]) => {
-      this.isLoading = false;
-      this.games = results;
-      this.calcMoreBtn();
+        this.games = results;
+        this.isLoading = false;
+        this.calcMoreBtn();
     });
   }
 
@@ -103,7 +103,10 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     this.searchValue = inputElement.value;
     this.isLoading = true;
     this.nbMoreGame = 1;
-    this.providerExact = null;
+    this.games = [];
+    this.providers = [];
+    this.users = [];
+    this.resetMoreBtn();
 
     /* LAUNCH SEARCH*/
     this.searchSubject.next(this.searchValue);
@@ -122,6 +125,12 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     }
   }
 
+  resetMoreBtn(){
+    let morebtn = document.getElementById("moreGameBTN");
+    if (morebtn){
+      morebtn.style.display = "none";
+    }
+  }
 
   /* SET BTN MORE GAME ou PROVIDER ET USER */
   calcMoreBtn(isFirst:boolean = false){
@@ -161,12 +170,6 @@ export class SearchGameComponent implements OnInit, OnDestroy{
         let providersFetchLimit = this.app.fetchLimit - this.games.length;
         this.providerService.searchProviders(this.searchValue, providersFetchLimit, this.app.setURL()).subscribe((results) => {
           this.providers = results;
-
-          this.providers.forEach(provider => {
-            if (provider.tagName === this.searchValue) {
-              this.providerExact = provider;
-            }
-          });
 
           let userFetchLimit = providersFetchLimit - this.providers.length;
 
