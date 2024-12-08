@@ -18,7 +18,7 @@
               </ng-container>
             </ng-container>
             <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#noteGamePage">
-              <i class="ri-star-line btn-action" [ngStyle]="{'color': this.app.viewMyGame?.rate?.rating ? '#f4da00' : 'gray'}"></i>
+              <i class="ri-star-line btn-action" [ngStyle]="{'color': (this.app.viewMyGame?.rate?.rating || this.app.viewMyGame?.tempNote) ? '#f4da00' : 'gray'}"></i>
             </button>
             <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" routerLink="edit/{{ this.app.viewMyGame?.myGame?.id }}">
               <i class="ri-pencil-line btn-action"></i>
@@ -126,7 +126,7 @@
 
               <li>
                 <p>Note Game : </p>
-                <h3>{{ this.app.viewMyGame?.rate?.rating || 'Non noté' }}<small *ngIf="this.app.viewMyGame?.rate?.rating">/20</small></h3>
+                <h3>{{ this.app.viewMyGame?.rate?.rating || this.app.viewMyGame.tempNote ||'Non noté' }}<small *ngIf="this.app.viewMyGame?.rate?.rating">/20</small></h3>
               </li>
 
               <ng-container *ngIf="this.app.viewMyGame?.myGame?.difficulty_rating">
