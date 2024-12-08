@@ -27,6 +27,10 @@ export class CardGameComponent implements OnInit {
   @Input()
   public userNote: number | undefined;
 
+
+  @Input()
+  public isPublic: boolean = false;
+
   userRatingAll: UserRateInterface[] | undefined;
 
   constructor(protected app:AppComponent,

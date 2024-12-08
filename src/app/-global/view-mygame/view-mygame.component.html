@@ -5,15 +5,17 @@
         <div class="modal-header-start">
           <ng-container *ngIf="this.app.viewMyGame?.myGame?.user?.id == this.app.userConnected?.id">
             <ng-container *ngIf="this.app.viewMyGame?.myGame?.is_pinned">
-              <button type="button" class="no-btn pinnedBtn yourPinned" style="background-color: {{ isColor }}">
+              <button type="button" class="no-btn pinnedBtn yourPinned" style="background-color: {{ isColor }}" (click)="this.app.togglePin(this.app.viewMyGame)">
                 <i class="ri-pushpin-fill btn-action icon-default"></i>
                 <i class="ri-unpin-fill btn-action icon-hovered"></i>
               </button>
             </ng-container>
-            <ng-container *ngIf="!this.app.viewMyGame?.myGame?.is_pinned">
-              <button type="button" class="no-btn">
-                <i class="ri-pushpin-line btn-action"></i>
-              </button>
+            <ng-container *ngIf="this.app.viewMyGame?.myGame">
+              <ng-container *ngIf="!this.app.viewMyGame?.myGame?.is_pinned">
+                <button type="button" class="no-btn" (click)="this.app.togglePin(this.app.viewMyGame)">
+                  <i class="ri-pushpin-line btn-action"></i>
+                </button>
+              </ng-container>
             </ng-container>
             <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#noteGamePage">
               <i class="ri-star-line btn-action" [ngStyle]="{'color': this.app.viewMyGame?.rate?.rating ? '#f4da00' : 'gray'}"></i>
@@ -23,7 +25,7 @@
             </button>
             <ng-container *ngIf="this.app.viewMyGame">
             <ng-container *ngIf="this.app.viewMyGame.myGame">
-              <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" (click)="this.app.deleteMyGame(this.app.viewMyGame.myGame.id)">
+              <button type="button" class="no-btn" data-bs-dismiss="modal" aria-label="Close" (click)="this.app.deleteMyGame(this.app.viewMyGame)">
                 <i class="ri-delete-bin-line btn-action"></i>
               </button>
             </ng-container>

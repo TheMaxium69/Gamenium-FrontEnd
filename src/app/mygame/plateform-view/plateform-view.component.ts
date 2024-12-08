@@ -25,7 +25,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   HistoireMyGameByUserByPlateform: HistoryMyGameInterface[] = [];
   userRatingAll: UserRateInterface[] | undefined;
   isColor: string = this.app.colorDefault;
-  plateformsUser: PlateformInterface[] | undefined;
 
   // Pour la recherche
   searchResults: GameInterface[] | undefined;
@@ -70,7 +69,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
       } else {
         this.myGameByUserWithPlateform(this.userConnected.id, this.plateformeId);
       }
-      this.myPlateforme(this.userConnected.id);
       this.getUserRate(this.userConnected.id)
     }
   }
@@ -80,21 +78,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
       this.load()
     }
   }
-
-    // Méthode pour effectuer la recherche de jeux
-    onSubmitSearch(form: NgForm): void {
-      const searchValue = form.value['searchValue'];
-      this.myGameService.searchGames(searchValue, 5, this.app.setURL()).subscribe(
-        (results: GameInterface[]) => {
-          this.searchResults = results;
-        },
-        (error: any) => {
-          console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
-        }
-      );
-    }
-
-  // methode pour filtrer les jeux
 
   // Toogle le dropdown
   toggleFilterDropdown(): void {
@@ -171,28 +154,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     }
   }
 
-
-
-  /* OBTENIR TOUTE LES CONSOLE */
-  myPlateforme(id:number){
-    this.plateformService.getPlateformWithUser(id, this.app.setURL()).subscribe((reponsePlateformUser: {message:string, result:PlateformInterface[]}) => {
-      if (reponsePlateformUser.message == "good") {
-        this.plateformsUser = reponsePlateformUser.result;
-      }
-    })
-  }
-
-  // /* OBTENIR LES JEUX PAR PLATEFORME */
-  // myGameByUserWithPlateform(id_user: number, id_plateform:number) {
-  //   this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe(response => {
-  //     if (response.message === "good") {
-  //       // this.HistoireMyGameByUserByPlateform = response.result || [];
-  //       this.filterGames();
-
-  //     }
-  //   });
-  // }
-
   myGameByUserWithPlateform(id_user: number, id_plateform:number): void {
     this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
@@ -207,16 +168,22 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   }
 
   myGameByUser(id_user: number): void {
-    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
-      if (responseMyGame.message == "good") {
-        // this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
-        this.HistoireMyGameByUserByPlateform = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
-        this.filterGames();
-        this.isLoading = false;
-      } else {
-        console.log("pas de jeux trouvé pour l'utilisateur")
-      }
-    });
+
+    if (this.app.myGameAll){
+      this.HistoireMyGameByUserByPlateform = this.app.myGameAll;
+    } else {
+      this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+        if (responseMyGame.message == "good") {
+          this.HistoireMyGameByUserByPlateform = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
+          this.app.myGameAll = this.HistoireMyGameByUserByPlateform;
+          this.filterGames();
+          this.isLoading = false;
+        } else {
+          console.log("pas de jeux trouvé pour l'utilisateur")
+        }
+      });
+    }
+
   }
 
   /* OBTENIR LES NOTES DE JEU */
@@ -230,46 +197,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         }
       });
     }
-  }
-  hasUserRatings(game_id: any): boolean {
-    if (this.userRatingAll) {
-      for (let userRating of this.userRatingAll) {
-        if (userRating.game.id === game_id) {
-          return true;
-        }
-      }
-      return false;
-    } else {
-      return false
-    }
-  }
-
-  /* METHOD DU TOGGLE SUR BUTTON EPINGLE */
-  togglePin(myGameHistorique: HistoryMyGameInterface) {
-    // maj du pin localement
-    myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
-
-    // Préparer le corps de la requête
-    const body = JSON.stringify({
-      id_game: myGameHistorique.myGame.game.id,
-      is_pinned: myGameHistorique.myGame.is_pinned,
-    });
-
-    // Envoyer la requête au backend pour mettre à jour le statut is_pinned
-    this.histoireMyGameService.updatePinMyGame(body, this.app.setURL(), this.app.createCorsToken())
-      .subscribe(response => {
-        if (response.message === 'game is pinned') {
-          console.log('Statut épinglé mis à jour dans la base de données');
-        } else {
-          console.error('Échec de la mise à jour du statut épinglé :', response.message);
-          // En cas d'erreur, on rétablit l'ancien statut
-          myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
-        }
-      }, error => {
-        console.error('Erreur lors de la mise à jour du statut épinglé :', error);
-        // En cas d'erreur, on rétablit l'ancien statut
-        myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
-      });
   }
 
   //check si un filtre autre que celui par default est appliqué
@@ -301,14 +228,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
       return this.searchQuery.trim() !== '' ? this.filteredGames : this.HistoireMyGameByUserByPlateform;
     }
     return [];
-  }
-
-  /* FOR MODAL */
-  selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
-    this.app.viewMyGame = historyMyGameInterface;
-  }
-  setModal(game: GameInterface){
-    this.app.gameSelected = game;
   }
 
 }

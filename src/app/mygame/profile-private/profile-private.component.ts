@@ -29,7 +29,6 @@ import {PlateformInterface} from "../../-interface/plateform.interface";
 export class ProfilePrivateComponent implements OnInit {
 
   userConnected: UserInterface | undefined;
-  myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
   userRatingAll: UserRateInterface[] | undefined;
   task: string | any;
   // tableau des taches avec leur statu de complétion
@@ -82,6 +81,7 @@ export class ProfilePrivateComponent implements OnInit {
 
     if (this.userConnected) {
       this.myGameByUser(this.userConnected.id);
+      this.getUserRate(this.userConnected.id);
       this.getInfoProfile(this.userConnected.id);
       this.fetchTasks();
     }
@@ -92,18 +92,26 @@ export class ProfilePrivateComponent implements OnInit {
 
   // récup des jeux par utilisateur
   myGameByUser(id_user: number): void {
-    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
-      if (responseMyGame.message == "good") {
-        this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
-        this.isLoading = false;
-      } else {
-        console.log("pas de jeux trouvé pour l'utilisateur")
-      }
-      // on pase le gamesloaded a true et on appelle la method qui vérifie les taches complétés
+    if (this.app.myGameAll){
+      this.app.myGameAll = this.app.myGameAll?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
+      this.isLoading = false;
       this.gamesLoaded = true;
       this.tryCheckAndCompleteTasks();
-    });
+    } else {
+      this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+        if (responseMyGame.message == "good") {
+          this.app.myGameAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
+          this.isLoading = false;
+        } else {
+          console.log("pas de jeux trouvé pour l'utilisateur")
+        }
+        this.gamesLoaded = true;
+        this.tryCheckAndCompleteTasks();
+      });
+    }
+  }
 
+  getUserRate(id_user: number){
     if (this.app.userRatingAll){
       this.userRatingAll = this.app.userRatingAll;
     } else {
@@ -116,104 +124,30 @@ export class ProfilePrivateComponent implements OnInit {
     }
   }
 
-  // on vérifie si l'utilisateur à noté un jeux spécifique
-  hasUserRatings(game_id: any): boolean {
-    if (this.userRatingAll) {
-      for (let userRating of this.userRatingAll) {
-        if (userRating.game.id === game_id) {
-          return true;
-        }
-      }
-      return false;
+  /* OBTENIR LES JEUX EPINGLES */
+  getPinnedGames(): HistoryMyGameInterface[] {
+    return this.app.myGameAll?.filter(game => game.myGame.is_pinned) ?? [];
+  }
+
+  /* OBTENIR LES JEUX NON EPINGLES */
+  getUnpinnedGames(): HistoryMyGameInterface[] {
+    if (this.searchQuery || this.isFilterApplied()) {
+      // Si un filtre ou une recherche et appliqué on renvoie le tableau filtré
+      return this.filteredGames ?? [];
     } else {
-      return false
+      // Sinon on renvoie les jeux unpin
+      return this.app.myGameAll?.filter(game => !game.myGame.is_pinned) ?? [];
     }
-  }
-
-  /* VERIF SI IL Y A DES JEUX EPINGLES */
-  hasPinnedGames(): boolean {
-    return this.myGameHistoriqueAll?.some(game => game.myGame.is_pinned) ?? false;
-  }
-
-/* OBTENIR LES JEUX EPINGLES */
-getPinnedGames(): HistoryMyGameInterface[] {
-  return this.myGameHistoriqueAll?.filter(game => game.myGame.is_pinned) ?? [];
-}
-
-/* OBTENIR LES JEUX NON EPINGLES */
-getUnpinnedGames(): HistoryMyGameInterface[] {
-  if (this.searchQuery || this.isFilterApplied()) {
-    // Si un filtre ou une recherche et appliqué on renvoie le tableau filtré
-    return this.filteredGames ?? [];
-  } else {
-    // Sinon on renvoie les jeux unpin
-    return this.myGameHistoriqueAll?.filter(game => !game.myGame.is_pinned) ?? [];
-  }
-}
-
-
-
-
-  /* METHOD DU TOGGLE SUR BUTTON EPINGLE */
-  togglePin(myGameHistorique: HistoryMyGameInterface) {
-    // maj du pin localement
-    myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
-
-    // Préparer le corps de la requête
-    const body = JSON.stringify({
-      id_game: myGameHistorique.myGame.game.id,
-      is_pinned: myGameHistorique.myGame.is_pinned,
-    });
-
-    // Envoyer la requête au backend pour mettre à jour le statut is_pinned
-    this.histoireMyGameService.updatePinMyGame(body, this.app.setURL(), this.app.createCorsToken())
-      .subscribe(response => {
-        if (response.message === 'game is pinned') {
-          console.log('Statut épinglé mis à jour dans la base de données');
-        } else {
-          console.error('Échec de la mise à jour du statut épinglé :', response.message);
-          // En cas d'erreur, on rétablit l'ancien statut
-          myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
-        }
-      }, error => {
-        console.error('Erreur lors de la mise à jour du statut épinglé :', error);
-        // En cas d'erreur, on rétablit l'ancien statut
-        myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
-      });
-  }
-
-  existingPinned(): boolean {
-    if (this.myGameHistoriqueAll) {
-      for (let myGame of this.myGameHistoriqueAll) {
-        if (myGame.myGame.is_pinned) {
-          return true;
-        }
-      }
-      return false;
-    } else {
-      return false
-    }
-  }
-
-  selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
-    this.app.viewMyGame = historyMyGameInterface;
-    if (this.userConnected?.themeColor){
-      document.documentElement.style.setProperty('--color-variable', this.userConnected.themeColor);
-    }
-  }
-
-  unselectViewMyGame() {
-    this.app.viewMyGame = undefined;
   }
 
   filterGames(): void {
-    if (!this.myGameHistoriqueAll) return;
+    if (!this.app.myGameAll) return;
 
     const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
 
     if (query) {
       // Si j'ai une query je recherche en fonction de la query
-      this.filteredGames = this.myGameHistoriqueAll.filter((game) => {
+      this.filteredGames = this.app.myGameAll.filter((game) => {
         const gameName = game.myGame?.game?.name?.toLowerCase() || '';
         const platforms = game.myGame?.plateform?.name?.toLowerCase() || '';
         const year = game.myGame?.game?.expectedReleaseYear?.toString() || '';
@@ -227,72 +161,13 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
       });
     } else {
       // Sinon je renvoie tout les jeux, pin et unpin
-      this.filteredGames = [...this.myGameHistoriqueAll];
+      this.filteredGames = [...this.app.myGameAll];
     }
 
     this.applySorting();
   }
 
 
-  gameSelected: GameInterface | undefined;
-
-  selectGame(game: GameInterface) {
-    this.gameSelected = game;
-    console.log("Jeu sélectionné avec l'ID :", game.id);
-  }
-
-  unselectGame() {
-    this.gameSelected = undefined;
-  }
-
-  myGameByUserAfterAddGame(id_user: number): void {
-    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame) => {
-      if (responseMyGame.message == "good") {
-        this.myGameHistoriqueAll = responseMyGame.result;
-      } else {
-        console.log("Pas de jeux trouvés pour l'utilisateur");
-      }
-      // Après avoir rechargé les jeux, réévaluer les tâches
-      this.checkAndCompleteTasks();
-    });
-  }
-
-  deleteFromMyGame(gameId: number) {
-    console.log(gameId)
-  }
-
-  addNote(form: NgForm) {
-    console.log(form.value);
-    if (form.value['noteGame'] >= 0 && form.value['noteGame'] <= 20) {
-      let noteGame = form.value['noteGame'];
-      let bodyNoJsonMyGameNote: any = {
-        "id_game": this.gameSelected?.id,
-        "note": noteGame,
-      };
-      const bodyMyGameNote = JSON.stringify(bodyNoJsonMyGameNote);
-      this.histoireMyGameService.postNoteMyGame(bodyMyGameNote, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyGameNoteAdd => {
-        if (reponseMyGameNoteAdd.message == "add note is game") {
-          console.log("note ajoutée")
-          let noteSpanGame = document.getElementById("noteGame" + this.gameSelected?.id)
-          if (noteSpanGame) {
-            noteSpanGame.innerHTML = noteGame;
-          }
-          const inputNote: HTMLElement | null = document.getElementById('inputNote');
-          if (inputNote) {
-            this.renderer.setProperty(inputNote, 'value', '');
-          }
-          // Actualiser la liste des notes après l'ajout
-          if (this.userConnected) {
-            this.myGameByUser(this.userConnected.id);
-          }
-        } else {
-          console.log(reponseMyGameNoteAdd);
-        }
-      });
-    } else {
-      console.log("note invalide");
-    }
-  }
   // récupere les info du profil de l'utilisateur
   getInfoProfile(id: number) {
     this.profileService.getProfilByUserId(id, this.app.setURL()).subscribe(responseProfil => {
@@ -317,21 +192,6 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
       this.tryCheckAndCompleteTasks();
     });
   }
-
-  // Méthode pour effectuer la recherche de jeux
-  onSubmitSearch(form: NgForm): void {
-    const searchValue = form.value['searchValue'];
-    this.myGameService.searchGames(searchValue, 5, this.app.setURL()).subscribe(
-      (results: GameInterface[]) => {
-        this.searchResults = results;
-      },
-      (error: any) => {
-        console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
-      }
-    );
-  }
-
-  // methode pour filtrer les jeux
 
   // Toogle le dropdown
   toggleFilterDropdown(): void {
@@ -402,11 +262,6 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
     }
   }
 
-
-  goToGame(gameId: number): void {
-    this.router.navigate(['/game', gameId]);
-  }
-
   // ********* Gestion des tâches ********* //
 
   //Récupère les tâches depuis le backend et met à jour leur statut de complétion.
@@ -446,7 +301,6 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
 
           // on passe les tache chargé a true et on vérifie les tache complété
           this.tasksLoaded = true;
-          console.log(this.progress)
           if (this.progress !== 100){
             this.loadUserLikesAndComments();
           }
@@ -514,7 +368,7 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
 checkAndCompleteTasks(): void {
   this.tasks.forEach(task => {
     if (!task.completed) {
-      if (task.name === 'Link Game' && this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
+      if (task.name === 'Link Game' && this.app.myGameAll && this.app.myGameAll.length > 0) {
         this.completeTask(task.id);
       }
       if (task.name === 'Profil Picture' && this.isPp) {
@@ -562,10 +416,6 @@ checkAndCompleteTasks(): void {
     }, (error) => {
       console.error('Erreur lors de la requête completeTask :', error);
     });
-  }
-
-  setModal(game: GameInterface){
-    this.app.gameSelected = game;
   }
 
   unsetModal(){

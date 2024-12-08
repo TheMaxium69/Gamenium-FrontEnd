@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<div class="card-wrapper" *ngIf="Hmg !== null">
+<div class="card-wrapper" *ngIf="Hmg !== null && !Hmg.isDelete">
   <div class="card-game container d-flex">
 
     <!-- PINNED -->
@@ -128,10 +128,10 @@
         <div class="card-note" style="background-color: {{this.colorProfil|| this.app.colorDefault}};">
           <p><span id="noteGame{{ Hmg.myGame.game.id }}">
             <!-- AUCUNE NOTE-->
-            <ng-container *ngIf="!userRatingAll">na</ng-container>
+            <ng-container *ngIf="!userRatingAll && !Hmg.tempNote">na</ng-container>
 
             <!-- IL Y A DES NOTE-->
-            <ng-container *ngIf="userRatingAll">
+            <ng-container *ngIf="userRatingAll && !Hmg.tempNote">
 
               <ng-container *ngIf="hasUserRatings(Hmg.myGame.game.id)"> <!-- VERIFIER SI IL EST NOTE-->
                 <ng-container *ngFor="let userRating of userRatingAll"> <!-- REGARDER TOUTE LES NOTE -->
@@ -142,11 +142,13 @@
               <ng-container *ngIf="!hasUserRatings(Hmg.myGame.game.id)">na</ng-container> <!-- NA PAS TROUVER DE NOTE A CE JEUX-->
 
             </ng-container>
+
+            <ng-container *ngIf="Hmg.tempNote">{{ Hmg.tempNote }}</ng-container>
           </span>/20</p>
         </div>
 
         <!-- ACTION -->
-        <div class="card-action" *ngIf="this.app.userConnected.id == Hmg.myGame.user.id">
+        <div class="card-action" *ngIf="this.app.userConnected.id == Hmg.myGame.user.id && isPublic == false">
           <i (click)="this.app.togglePin(Hmg); $event.stopPropagation()"
              [class.ri-unpin-line]="Hmg.myGame.is_pinned"
              [class.ri-pushpin-line]="!Hmg.myGame.is_pinned"></i>

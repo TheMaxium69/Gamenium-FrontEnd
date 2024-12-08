@@ -93,6 +93,7 @@ export class AppComponent {
 
   // MYGAME
   userRatingAll: UserRateInterface[] | undefined;
+  myGameAll:HistoryMyGameInterface[] | undefined;
 
 
 
@@ -458,7 +459,11 @@ export class AppComponent {
   /*
   * CARD GAME
   * */
-  togglePin(myGameHistorique: HistoryMyGameInterface) {
+  togglePin(myGameHistorique: HistoryMyGameInterface | undefined) {
+
+    if (!myGameHistorique) {
+      return;
+    }
 
     myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
 
@@ -546,6 +551,19 @@ export class AppComponent {
 
         // console.log(reponseMyGameNoteAdd);
         if (reponseMyGameNoteAdd.message == "add note is game"){
+
+          if (this.userConnected && this.userRatingAll) {
+            this.userRatingAll = [reponseMyGameNoteAdd.result, ...(this.userRatingAll || [])];
+          }
+
+          if (this.userConnected && this.myGameAll && this.gameSelected){
+            const selectedGame = this.myGameAll.find(game => game.myGame.game.id === this.gameSelected?.id);
+            if (selectedGame) {
+              selectedGame.tempNote = noteGame;
+            }
+          }
+
+
           Swal.fire({
             title: 'Succès!',
             text: 'La note de ' + this.gameSelected?.name + ' a bien été ajoutée',
@@ -680,8 +698,8 @@ export class AppComponent {
 
 
           // Actualiser la liste des jeux après l'ajout
-          if (this.userConnected) {
-            // this.profilePrivateComponet.myGameByUserAfterAddGame(this.userConnected.id);
+          if (this.userConnected && this.myGameAll) {
+            this.myGameAll = [reponseMyGameAdd.result, ...(this.myGameAll || [])];
           }
         } else if (reponseMyGameAdd.message == "has already been added") {
           Swal.fire({
@@ -714,10 +732,29 @@ export class AppComponent {
     this.gameSelected = undefined;
   }
 
-  deleteMyGame(idOneMyGame:number) {
+  /*
+  *
+  * SYSTEME LANG
+  *
+  * */
+
+
+  deleteMyGame(myGameHistorique: HistoryMyGameInterface | undefined) {
+
+    if (!myGameHistorique) {
+      return;
+    }
+
+    myGameHistorique.isDelete = true;
+    let idOneMyGame = myGameHistorique.id;
+
     if (idOneMyGame) {
       this.histoireMyGameService.deleteMyGame(idOneMyGame, this.setURL(), this.createCorsToken()).subscribe(reponseApi => {
         if (reponseApi.message == 'delete success') {
+
+          if (this.userConnected && this.myGameAll) {
+            this.myGameAll = this.myGameAll.filter(game => game.id !== idOneMyGame);
+          }
 
           Swal.fire({
             title: 'Succès!',
@@ -727,8 +764,9 @@ export class AppComponent {
             confirmButtonColor: this.userConnected?.themeColor
           })
 
-          this.router.navigateByUrl('/mygame')
+          // this.router.navigateByUrl('/mygame') /* pK ?*/
         } else {
+          myGameHistorique.isDelete = false;
           Swal.fire({
             title: 'Erreur!',
             text: 'Une erreur s\'est produite lors de la suppression du jeu.',
@@ -737,17 +775,13 @@ export class AppComponent {
             confirmButtonColor: this.userConnected?.themeColor
           })
         }
-      }, (error) => this.erreurSubcribe())
+      }, (error) => {
+        myGameHistorique.isDelete = false;
+        this.erreurSubcribe()
+      })
 
     }
   }
-
-
-  /*
-  *
-  * SYSTEME LANG
-  *
-  * */
 
   lang:string = "fr";
 
