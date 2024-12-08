@@ -1,6 +1,6 @@
 export interface HmgSpeedrunInterface {
   id: number;
-  chrono: Date;
+  chrono: string;
   category: string;
   link: string|undefined;
 }

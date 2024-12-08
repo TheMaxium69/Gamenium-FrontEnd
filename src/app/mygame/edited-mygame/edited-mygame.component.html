@@ -197,11 +197,113 @@
       </ul>
     </section>
 
+<!--    <button class="main-gamenium-btn" (click)="debug()" type="button">debug</button>-->
+    <!-- speedrun -->
+    <section id="editedHmgSpeedrun" class="container" [class.displayNone]="tabSelected !== 2">
+
+      <div class="head-all-exemplaire">
+        <h1>Speedrun <small>(Total <span>{{ nbSpeedrunView }}{{ noRealSpeedrun() }}</span>)</small></h1>
+        <button class="sub-gamenium-btn" type="button" (click)="addSpeedrun()"><i class="ri-add-large-fill"></i></button>
+      </div>
+
+      <!-- UN SPEEDRUN -->
+
+
+      <ng-container *ngFor="let speedrun of selectedMyGame.speedrun; let i = index">
+
+        <div class="oneExemplaire speedrunCard{{i}}" id="speedrunCard{{i}}">
+
+          <div class="head-one-exemplaire">
+            <h3>Speedrun #{{i+1}}</h3>
+            <i class="ri-delete-bin-fill" (click)="deleteSpeedrun(i)"></i>
+          </div>
+
+          <input type="hidden" [(ngModel)]="speedrun.id" name="speedrun{{i}}">
+
+          <!-- category -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-booklet-fill"></i>Category <small>#{{i+1}}</small></h2>
+            </div>
+            <input type="text" id="category{{i}}" [(ngModel)]="speedrun.category" name="category{{i}}" placeholder="Category (exemple : any%)">
+          </div>
+
+          <!-- chrono -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-timer-fill"></i>Chrono <small>#{{i+1}}</small></h2>
+            </div>
+            <input type="text" id="chrono{{i}}" [(ngModel)]="speedrun.chrono" name="chrono{{i}}" placeholder="Chrono (exemple : 1H30)">
+          </div>
+
+          <!-- LINK -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-links-fill"></i>Lien <small>#{{i+1}}</small></h2>
+            </div>
+            <input type="text" id="link{{i}}" [(ngModel)]="speedrun.link" name="link{{i}}" placeholder="Lien (exemple : https://speedrun.com/)">
+          </div>
+
+        </div>
+
+      </ng-container>
+      <ng-container *ngFor="let n of [].constructor(nbSpeedrun); let i = index">
+
+        <div class="oneExemplaire speedrunCard{{i}}" id="speedrunCard{{i+nbSpeedrunExisting}}" style="display: {{ displayDefault(i+ nbSpeedrunExisting) }}">
+
+          <div class="head-one-exemplaire">
+            <h3>Speedrun #{{i+1 + nbSpeedrunExisting}}</h3>
+            <i class="ri-delete-bin-fill" (click)="deleteSpeedrun(i+nbSpeedrunExisting)"></i>
+          </div>
+
+          <input type="hidden" [(ngModel)]="isNew" name="speedrun{{i+nbSpeedrunExisting}}">
+
+          <!-- category -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-booklet-fill"></i>Category <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
+            </div>
+            <input type="text" id="category{{i+nbSpeedrunExisting}}" ngModel name="category{{i+nbSpeedrunExisting}}" placeholder="Category (exemple : any%)">
+          </div>
+
+          <!-- chrono -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-timer-fill"></i>Chrono <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
+            </div>
+            <input type="text" id="chrono{{i+nbSpeedrunExisting}}" ngModel name="chrono{{i+nbSpeedrunExisting}}" placeholder="Chrono (exemple : 1H30)">
+          </div>
+
+          <!-- LINK -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-links-fill"></i>Lien <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
+            </div>
+            <input type="text" id="link{{i+nbSpeedrunExisting}}" ngModel name="link{{i+nbSpeedrunExisting}}" placeholder="Lien (exemple : https://speedrun.com/)">
+          </div>
+
+        </div>
+
+
+      </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+    </section>
+
     <!-- EXEMPLAIRE -->
     <section id="editedHmgCopy" class="container" [class.displayNone]="tabSelected !== 1">
 
       <div class="head-all-exemplaire">
-        <h1>Exemplaire (Total <span>{{ nbCopyView }}{{ noRealCopy() }}</span>)</h1>
+        <h1>Exemplaire <small>(Total <span>{{ nbCopyView }}{{ noRealCopy() }}</span>)</small></h1>
         <button class="sub-gamenium-btn" type="button" (click)="addCopyGame()"><i class="ri-add-large-fill"></i></button>
 <!--        <i class="ri-sticky-note-add-fill" (click)="addCopyGame()"></i>-->
       </div>
@@ -449,7 +551,7 @@
             <i class="ri-delete-bin-fill" (click)="deleteCopyGame(i+nbCopyExisting)"></i>
           </div>
 
-          <input type="hidden" [(ngModel)]="isNewCopy" name="copy{{i+nbCopyExisting}}">
+          <input type="hidden" [(ngModel)]="isNew" name="copy{{i+nbCopyExisting}}">
 
           <!-- RESTE DU CODE -->
           <!-- EDITIONS-->

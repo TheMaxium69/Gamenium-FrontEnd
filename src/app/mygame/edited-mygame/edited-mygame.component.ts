@@ -37,56 +37,66 @@ export class EditedMygameComponent implements OnInit {
     private hmgCopyRegionService:HmgCopyRegionService,
   ) {}
 
+  /* SELECTED */
   idOneMyGame:number|any;
   selectedMyGame:HistoryMyGameInterface|undefined;
+
+  /* GLOBAL VARIABLE */
   deviseAll:DeviseInterface[]|undefined;
   buyWhereAll:BuyWhereInterface[]|undefined;
   hmgCopyEtatAll:HmgCopyEtatInterface[]|undefined;
   hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
   hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
 
-  idFormValide: number[] = [];
+  /*
+  *
+  * FORMULAIRE GESTION
+  *
+  * */
+  tabSelected:number = 1;
+  isNew:string ="new";
+
+  /* HmgCopy*/
+  idFormValideCopy: number[] = [];
   nbCopyView:number = 0;
   nbCopy:number = 0;
   nbCopyExisting:number = 0;
   nbCopyGenerate:number = 10;
-  isNewCopy:string ="new";
 
-  tabSelected:number = 1;
+  /* HmgSpeedrun*/
+  idFormValideSpeedrun: number[] = [];
+  nbSpeedrunView:number = 0;
+  nbSpeedrun:number = 0;
+  nbSpeedrunExisting:number = 0;
+  nbSpeedrunGenerate:number = 10;
+
+  debug(){console.log(this.idFormValideCopy)}
+
 
   ngOnInit() {
 
     this.idOneMyGame = this.route.snapshot.paramMap.get('editid');
 
     if (this.idOneMyGame) {
-      this.getAllInfo();
-      this.getMyGame(this.idOneMyGame);
+      this.getAllInfo(); /* GET VARIABLE GLOBAL */
+      this.getMyGame(this.idOneMyGame); /* GET LE JEUX */
     }
   }
 
+  /* RECUPRE LE JEUX*/
   getMyGame(idEditedMyGame: number){
 
     this.historyMyGameService.getOneMyGame(idEditedMyGame, this.app.setURL()).subscribe((reponseMyGame: { message: string; result: HistoryMyGameInterface | undefined; }) => {
 
       if (reponseMyGame.message == "good") {
         this.selectedMyGame = reponseMyGame.result;
-        if (this.selectedMyGame?.copyGame){
-          this.nbCopyExisting = this.selectedMyGame.copyGame.length
-          this.nbCopyView = this.nbCopyExisting
-          while (this.nbCopyExisting >= this.nbCopyGenerate) {
-            this.nbCopyGenerate = this.nbCopyGenerate * 2;
-          }
-          this.nbCopy = this.nbCopyGenerate - this.nbCopyExisting;
-          for (let i = 0; i < this.nbCopyExisting; i++) {
-            this.idFormValide.push(i)
-          }
 
-          if (this.nbCopyExisting == 0){
-            this.nbCopyView++;
-            this.idFormValide.push(0);
-          }
+        /* GEREZ LES COPY*/
+        this.calcCopy();
 
-        }
+        /* GEREZ LES SPEEDRUN*/
+        this.calcSpeedrun();
+
       } else {
         Swal.fire({
           title: 'Erreur!',
@@ -97,101 +107,57 @@ export class EditedMygameComponent implements OnInit {
         })
       }
 
-    })
+    }, (error) => this.app.erreurSubcribe() )
 
   }
 
-
+  /* GET VARIABLE GLOBAL*/
   getAllInfo(){
 
     this.deviseService.getAllDevise(this.app.setURL()).subscribe((reponseDevise: { message: string; result: DeviseInterface[] | undefined; }) => {
-
       if (reponseDevise.message == "good") {
         this.deviseAll = reponseDevise.result;
-      } else {
-        // console.log("pas de devise");
       }
-
     })
 
     this.buyWhereService.getAllBuyWheres(this.app.setURL()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[] | undefined; }) => {
-
       if (reponseBuyWhere.message == "good") {
         this.buyWhereAll = reponseBuyWhere.result;
-      } else {
-        // console.log("pas de buy where");
       }
-
     })
 
     this.hmgCopyEtatService.getAllHmgCopyEtat(this.app.setURL()).subscribe((reponseEtat: { message: string; result: HmgCopyEtatInterface[] | undefined; }) => {
-
       if (reponseEtat.message == "good") {
         this.hmgCopyEtatAll = reponseEtat.result;
-      } else {
-        // console.log("pas de hmgCopyEtat");
       }
-
     })
 
     this.hmgCopyFormatService.getAllHmgCopyFormat(this.app.setURL()).subscribe((reponseFormat: { message: string; result: HmgCopyFormatInterface[] | undefined; }) => {
-
       if (reponseFormat.message == "good") {
         this.hmgCopyFormatAll = reponseFormat.result;
-      } else {
-        // console.log("pas de hmgCopyFormat");
       }
-
     })
 
     this.hmgCopyRegionService.getAllHmgCopyRegion(this.app.setURL()).subscribe((reponseRegion: { message: string; result: HmgCopyRegionInterface[] | undefined; }) => {
-
       if (reponseRegion.message == "good") {
         this.hmgCopyRegionAll = reponseRegion.result;
-      } else {
-        // console.log("pas de hmgCopyRegion");
       }
-
-
     })
 
   }
 
-  deleteCopyGame(id:number) {
-    let copyCardSelected = document.getElementById('copyCard'+id)
-
-    if (copyCardSelected) {
-      this.idFormValide = this.idFormValide.filter(formId => formId !== id);
-      this.nbCopyView--;
-      copyCardSelected.style.display = 'none';
-
-      // VIDER LES CHAMP
-      const inputs = copyCardSelected.querySelectorAll('input');
-      inputs.forEach(input => {
-        input.value = '';
-      });
-
-      const selects = copyCardSelected.querySelectorAll('select');
-      selects.forEach(select => {
-        select.selectedIndex = -1;
-      });
+  /*
+  *
+  * AFFICHAGE
+  *
+  * */
 
 
-
-
-    } else {
-      Swal.fire({
-        title: 'Erreur!',
-        text: 'Erreur inatendu',
-        icon: 'error',
-        confirmButtonText: 'Ok',
-        confirmButtonColor: this.app.userConnected?.themeColor
-      })
-    }
-
-
+  tabActive(tab:number){
+    this.tabSelected = tab;
   }
 
+  /* AFFICHER UN PREMIER EXEMPLAIRE/SPEEDRUN A 0*/
   displayDefault(id:number):string {
     if (id==0){
       return "flex";
@@ -200,19 +166,40 @@ export class EditedMygameComponent implements OnInit {
     }
   }
 
-  noRealCopy():string{
-    if (this.selectedMyGame?.copyGame.length == 0 && this.nbCopyView != 0){
-      return "*"
-    } else {
-      return "";
+  /*
+  *
+  * GESTION EXEMPLAIRE
+  *
+  * */
+
+  /* GEREZ LA PREMIER AFFICHAGE DES COPY*/
+  calcCopy(){
+    if (this.selectedMyGame?.copyGame){
+      this.nbCopyExisting = this.selectedMyGame.copyGame.length
+      this.nbCopyView = this.nbCopyExisting
+      while (this.nbCopyExisting >= this.nbCopyGenerate) {
+        this.nbCopyGenerate = this.nbCopyGenerate * 2;
+      }
+      this.nbCopy = this.nbCopyGenerate - this.nbCopyExisting;
+      for (let i = 0; i < this.nbCopyExisting; i++) {
+        this.idFormValideCopy.push(i)
+      }
+
+      if (this.nbCopyExisting == 0){
+        this.nbCopyView++;
+        this.idFormValideCopy.push(0);
+      }
+
     }
   }
+
+  /* ADD EXEMPLAIRE*/
   addCopyGame() {
 
     let formId = 0;
     // console.log('Question ? =' + formId)
-    if (this.idFormValide.includes(formId)){
-      while (this.idFormValide.includes(formId)) {
+    if (this.idFormValideCopy.includes(formId)){
+      while (this.idFormValideCopy.includes(formId)) {
         formId++;
         // console.log('Question ? =' + formId)
       }
@@ -227,15 +214,178 @@ export class EditedMygameComponent implements OnInit {
         text: 'Veuillez sauvegardez et recommancez',
         icon: 'error',
         confirmButtonText: 'Ok',
-        confirmButtonColor: this.app.userConnected?.themeColor
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
       })
     } else {
       this.nbCopyView++;
-      this.idFormValide.push(formId);
+      this.idFormValideCopy.push(formId);
       cardCopy.style.display = 'flex';
     }
 
   }
+
+  /* SUPPRMIER UNE COPY*/
+  deleteCopyGame(id:number) {
+    let copyCardSelected = document.getElementById('copyCard'+id)
+
+    if (copyCardSelected) {
+      this.idFormValideCopy = this.idFormValideCopy.filter(formId => formId !== id);
+      this.nbCopyView--;
+      copyCardSelected.style.display = 'none';
+
+      // VIDER LES CHAMP
+      const inputs = copyCardSelected.querySelectorAll('input');
+      inputs.forEach(input => {
+        input.value = '';
+      });
+
+      const selects = copyCardSelected.querySelectorAll('select');
+      selects.forEach(select => {
+        select.selectedIndex = 0;
+      });
+
+      const textareas = copyCardSelected.querySelectorAll('textarea');
+      textareas.forEach(textarea => {
+        textarea.value = '';
+      });
+
+    } else {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur inatendu',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+      })
+    }
+
+
+  }
+
+  /* VERIFIER SI IL Y A 0 COPY */
+  noRealCopy():string{
+    if (this.selectedMyGame?.copyGame.length == 0 && this.nbCopyView != 0){
+      return "*"
+    } else {
+      return "";
+    }
+  }
+
+  /*
+  *
+  * END GESTION EXEMPLAIRE
+  *
+  * */
+
+  /*
+  *
+  * GESTION SPEEDRUN
+  *
+  * */
+
+  calcSpeedrun(){
+    if (this.selectedMyGame?.speedrun){
+      this.nbSpeedrunExisting = this.selectedMyGame.speedrun.length
+      this.nbSpeedrunView = this.nbSpeedrunExisting
+      while (this.nbSpeedrunExisting >= this.nbSpeedrunGenerate) {
+        this.nbSpeedrunGenerate = this.nbSpeedrunGenerate * 2;
+      }
+      this.nbSpeedrun = this.nbSpeedrunGenerate - this.nbSpeedrunExisting;
+      for (let i = 0; i < this.nbSpeedrunExisting; i++) {
+        this.idFormValideSpeedrun.push(i)
+      }
+
+      if (this.nbSpeedrunExisting == 0){
+        this.nbSpeedrunView++;
+        this.idFormValideSpeedrun.push(0);
+      }
+
+    }
+  }
+
+  /* ADD SPEEDRUN*/
+  addSpeedrun(){
+
+    let formId = 0;
+    // console.log('Question ? =' + formId)
+    if (this.idFormValideSpeedrun.includes(formId)){
+      while (this.idFormValideSpeedrun.includes(formId)) {
+        formId++;
+        // console.log('Question ? =' + formId)
+      }
+    }
+
+    // console.log('DISPO = ' + formId)
+
+    let cardSpeedrun = document.getElementById('speedrunCard' + formId.toString());
+    if (!cardSpeedrun) {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Veuillez sauvegardez et recommancez',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+      })
+    } else {
+      this.nbSpeedrunView++;
+      this.idFormValideSpeedrun.push(formId);
+      cardSpeedrun.style.display = 'flex';
+    }
+
+  }
+
+  /* SUPPRIMER UN SPEEDRUN */
+  deleteSpeedrun(id:number){
+    let speedrunCardSelected = document.getElementById('speedrunCard'+id)
+
+    if (speedrunCardSelected) {
+      this.idFormValideSpeedrun = this.idFormValideSpeedrun.filter(formId => formId !== id);
+      this.nbSpeedrunView--;
+      speedrunCardSelected.style.display = 'none';
+
+      // VIDER LES CHAMP
+      const inputs = speedrunCardSelected.querySelectorAll('input');
+      inputs.forEach(input => {
+        input.value = '';
+      });
+
+      const selects = speedrunCardSelected.querySelectorAll('select');
+      selects.forEach(select => {
+        select.selectedIndex = 0;
+      });
+
+      const textareas = speedrunCardSelected.querySelectorAll('textarea');
+      textareas.forEach(textarea => {
+        textarea.value = '';
+      });
+
+    } else {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur inatendu',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+      })
+    }
+  }
+
+
+  /* VERIFIER SI IL Y A 0 SPEEDRUN */
+  noRealSpeedrun():string{
+    if (this.selectedMyGame?.speedrun.length == 0 && this.nbSpeedrun != 0){
+      return "*"
+    } else {
+      return "";
+    }
+  }
+
+
+  /*
+  *
+  * GESTION EXEMPLAIRE
+  *
+  * */
 
   /*
   *
@@ -286,7 +436,7 @@ export class EditedMygameComponent implements OnInit {
     let newCopyGame = []
     for (let i = 0; i < copyCount; i++) {
 
-      if (this.idFormValide.includes(i)) {
+      if (this.idFormValideCopy.includes(i)) {
         let tempPurchase = {
           id: form.value['purchase' + i] || null,
           price: form.value['purchase_price' + i],
@@ -340,7 +490,7 @@ export class EditedMygameComponent implements OnInit {
         this.selectedMyGame = reponseMyGameUpdate.result;
 
         /* BUF FIX SUR LES NOUVEAU EXEMPLAIRE QUI CE DUPLIQUE*/
-        this.idFormValide.forEach((idForm: number) => {
+        this.idFormValideCopy.forEach((idForm: number) => {
           let id:any = '.copyCard' + idForm
           document.querySelectorAll(id).forEach((element: HTMLElement) => {
             element.style.display = 'none';
@@ -371,10 +521,11 @@ export class EditedMygameComponent implements OnInit {
 
   }
 
-
-  tabActive(tab:number){
-    this.tabSelected = tab;
-  }
+  /*
+  *
+  * END UPDATE MY GAME
+  *
+  * */
 
 
 
