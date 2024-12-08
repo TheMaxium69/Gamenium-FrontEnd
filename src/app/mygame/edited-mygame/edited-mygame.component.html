@@ -1,8 +1,8 @@
-<section id="editedmygame" class="container" *ngIf="selectedMyGame" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+<section id="editedmygame" *ngIf="selectedMyGame" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
 
 <form #editedMyGame="ngForm" (ngSubmit)="updateMyGame(editedMyGame)">
 
-  <section id="headeEditMyGame">
+  <section id="headeEditMyGame" class="container">
 
     <div id="head-img">
       <div class="banner-image pp-shadow">
@@ -40,140 +40,165 @@
   <ng-container *ngIf="selectedMyGame.myGame">
   <div id="startFormEditedMyGame">
 
+    <section id="editedHistoryMyGame" class="container">
 
-    <input type="hidden" [(ngModel)]="selectedMyGame.myGame.id" name="myGameId">
+      <input type="hidden" [(ngModel)]="selectedMyGame.myGame.id" name="myGameId">
 
-    <!-- EPINGLER -->
-    <div class="panel">
+      <!-- EPINGLER -->
+      <div class="panel">
 
-      <div class="head-panel">
-        <h2><i class="ri-pushpin-fill"></i>Épinglé</h2>
+        <div class="head-panel">
+          <h2><i class="ri-pushpin-fill"></i>Épinglé</h2>
+        </div>
+
+        <select id="is_pinned" name="is_pinned" [(ngModel)]="selectedMyGame.myGame.is_pinned">
+          <option [value]="true">Épinglé</option>
+          <option [value]="false">Non épinglé</option>
+        </select>
+
       </div>
 
-      <select id="is_pinned" name="is_pinned" [(ngModel)]="selectedMyGame.myGame.is_pinned">
-        <option [value]="true">Épinglé</option>
-        <option [value]="false">Non épinglé</option>
-      </select>
+      <!-- LISTE DE SOUHAIT-->
+      <div class="panel" style="display: none">
 
-    </div>
+        <div class="head-panel">
+          <h2><i class="ri-hand-heart-fill"></i>List de souhaite</h2>
+        </div>
 
-    <!-- LISTE DE SOUHAIT-->
-    <div class="panel" style="display: none">
+        <select id="wish_list" name="wish_list" [(ngModel)]="selectedMyGame.myGame.wish_list">
+          <option [value]="true">Oui</option>
+          <option [value]="false">Non</option>
+        </select>
 
-      <div class="head-panel">
-        <h2><i class="ri-hand-heart-fill"></i>List de souhaite</h2>
       </div>
 
-      <select id="wish_list" name="wish_list" [(ngModel)]="selectedMyGame.myGame.wish_list">
-        <option [value]="true">Oui</option>
-        <option [value]="false">Non</option>
-      </select>
+      <div class="panel">
 
-    </div>
+        <div class="head-panel">
+          <h2><i class="ri-medal-fill"></i>Evaluation</h2>
+        </div>
 
-    <div class="panel">
+        <ng-container *ngIf="selectedMyGame.rate">
+          <input type="hidden" [(ngModel)]="selectedMyGame.rate.id" name="rateId">
+          <input max="20" min="0" type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating" placeholder="Note du jeux (/20)">
 
-      <div class="head-panel">
-        <h2><i class="ri-medal-fill"></i>Evaluation</h2>
+          <ng-container *ngIf="selectedMyGame.rate.content">
+            <textarea type="text" id="content_rating" name="content_rating" [(ngModel)]="selectedMyGame.rate.content" placeholder="Expliqué votre note"></textarea>
+          </ng-container>
+          <ng-container *ngIf="!selectedMyGame.rate.content">
+            <textarea type="text" id="content_rating" name="content_rating" ngModel placeholder="Expliqué votre note"></textarea>
+          </ng-container>
+
+        </ng-container>
+        <ng-container *ngIf="!selectedMyGame.rate">
+          <input max="20" min="0" type="number" id="rating" name="rating" ngModel placeholder="Note du jeux (/20)">
+          <textarea type="text" id="content_rating" name="content_rating" ngModel placeholder="Expliqué votre note"></textarea>
+        </ng-container>
+
       </div>
 
-      <ng-container *ngIf="selectedMyGame.rate">
-        <input type="hidden" [(ngModel)]="selectedMyGame.rate.id" name="rateId">
-        <input max="20" min="0" type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating" placeholder="Note du jeux (/20)">
-      </ng-container>
-      <ng-container *ngIf="!selectedMyGame.rate">
-        <input max="20" min="0" type="number" id="rating" name="rating" ngModel placeholder="Note du jeux (/20)">
-      </ng-container>
+      <div class="panel">
 
-      <br>
-      <textarea type="text" id="content_rating" name="content_rating" placeholder="Expliqué votre note"></textarea>
+        <div class="head-panel">
+          <h2><i class="ri-user-star-fill"></i>Avis</h2>
+        </div>
 
-    </div>
+        <!-- DIFICULTER -->
+        <label>Votre avis sur la Difficulté</label>
+        <div class="star-rating">
+          <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+             [class.ri-star-line]="star > selectedMyGame.myGame.difficulty_rating"
+             [class.ri-star-fill]="star <= selectedMyGame.myGame.difficulty_rating"
+             (click)="selectedMyGame.myGame.difficulty_rating = i + 1"></i>
+        </div>
 
-    <div class="panel">
+        <div style="display: none">
+          <label for="difficulty_rating_1">
+            <input type="radio" id="difficulty_rating_1" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="1">
+            1
+          </label>
+          <label for="difficulty_rating_2">
+            <input type="radio" id="difficulty_rating_2" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="2">
+            2
+          </label>
+          <label for="difficulty_rating_3">
+            <input type="radio" id="difficulty_rating_3" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="3">
+            3
+          </label>
+          <label for="difficulty_rating_4">
+            <input type="radio" id="difficulty_rating_4" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="4">
+            4
+          </label>
+          <label for="difficulty_rating_5">
+            <input type="radio" id="difficulty_rating_5" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="5">
+            5
+          </label>
+        </div>
 
-      <div class="head-panel">
-        <h2><i class="ri-user-star-fill"></i>Avis</h2>
+        <!-- TEMPS DE JEUX -->
+        <label>Votre avis sur le Temps de jeux</label>
+        <div class="star-rating">
+          <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+             [class.ri-star-line]="star > selectedMyGame.myGame.lifetime_rating"
+             [class.ri-star-fill]="star <= selectedMyGame.myGame.lifetime_rating"
+             (click)="selectedMyGame.myGame.lifetime_rating = i + 1"></i>
+        </div>
+
+        <div style="display: none">
+          <label for="lifetime_rating_1">
+            <input type="radio" id="lifetime_rating_1" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="1">
+            1
+          </label>
+          <label for="lifetime_rating_2">
+            <input type="radio" id="lifetime_rating_2" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="2">
+            2
+          </label>
+          <label for="lifetime_rating_3">
+            <input type="radio" id="lifetime_rating_3" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="3">
+            3
+          </label>
+          <label for="lifetime_rating_4">
+            <input type="radio" id="lifetime_rating_4" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="4">
+            4
+          </label>
+          <label for="lifetime_rating_5">
+            <input type="radio" id="lifetime_rating_5" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="5">
+            5
+          </label>
+        </div>
+
       </div>
+    </section>
 
-      <!-- DIFICULTER -->
-      <label>Votre avis sur la Difficulté</label>
-      <div class="star-rating">
-        <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
-           [class.ri-star-line]="star > selectedMyGame.myGame.difficulty_rating"
-           [class.ri-star-fill]="star <= selectedMyGame.myGame.difficulty_rating"
-           (click)="selectedMyGame.myGame.difficulty_rating = i + 1"></i>
-      </div>
-
-      <div style="display: none">
-        <label for="difficulty_rating_1">
-          <input type="radio" id="difficulty_rating_1" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-                 name="difficulty_rating" [value]="1">
-          1
-        </label>
-        <label for="difficulty_rating_2">
-          <input type="radio" id="difficulty_rating_2" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-                 name="difficulty_rating" [value]="2">
-          2
-        </label>
-        <label for="difficulty_rating_3">
-          <input type="radio" id="difficulty_rating_3" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-                 name="difficulty_rating" [value]="3">
-          3
-        </label>
-        <label for="difficulty_rating_4">
-          <input type="radio" id="difficulty_rating_4" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-                 name="difficulty_rating" [value]="4">
-          4
-        </label>
-        <label for="difficulty_rating_5">
-          <input type="radio" id="difficulty_rating_5" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
-                 name="difficulty_rating" [value]="5">
-          5
-        </label>
-      </div>
-
-      <!-- TEMPS DE JEUX -->
-      <label>Votre avis sur le Temps de jeux</label>
-      <div class="star-rating">
-        <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
-           [class.ri-star-line]="star > selectedMyGame.myGame.lifetime_rating"
-           [class.ri-star-fill]="star <= selectedMyGame.myGame.lifetime_rating"
-           (click)="selectedMyGame.myGame.lifetime_rating = i + 1"></i>
-      </div>
-
-      <div style="display: none">
-        <label for="lifetime_rating_1">
-          <input type="radio" id="lifetime_rating_1" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-                 name="lifetime_rating" [value]="1">
-          1
-        </label>
-        <label for="lifetime_rating_2">
-          <input type="radio" id="lifetime_rating_2" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-                 name="lifetime_rating" [value]="2">
-          2
-        </label>
-        <label for="lifetime_rating_3">
-          <input type="radio" id="lifetime_rating_3" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-                 name="lifetime_rating" [value]="3">
-          3
-        </label>
-        <label for="lifetime_rating_4">
-          <input type="radio" id="lifetime_rating_4" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-                 name="lifetime_rating" [value]="4">
-          4
-        </label>
-        <label for="lifetime_rating_5">
-          <input type="radio" id="lifetime_rating_5" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
-                 name="lifetime_rating" [value]="5">
-          5
-        </label>
-      </div>
-
-    </div>
+    <section id="tab">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="tabSelected == 1" (click)="tabActive(1)">Exemplaire</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="tabSelected == 2"  (click)="tabActive(2)">Speedrun</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="tabSelected == 3"  (click)="tabActive(3)">Image</a>
+        </li>
+        <!--<li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>-->
+      </ul>
+    </section>
 
     <!-- EXEMPLAIRE -->
-    <div>
+    <section id="editedHmgCopy" class="container" [class.displayNone]="tabSelected !== 1">
 
       <div class="head-all-exemplaire">
         <h1>Exemplaire (Total <span>{{ nbCopyView }}{{ noRealCopy() }}</span>)</h1>
@@ -575,11 +600,11 @@
           </div>
         </div>
       </ng-container>
-    </div>
+    </section>
   </div>
   </ng-container>
 
-  <div class="end-action">
+  <div class="end-action container">
     <button class="main-gamenium-btn" type="submit">Sauvegardé <i class="ri-save-3-fill"></i></button>
     <button class="sub-gamenium-btn delete-btn" (click)="this.app.deleteMyGame(idOneMyGame)">Supprimer le jeux de votre collection <i class="ri-delete-bin-line"></i></button>
   </div>

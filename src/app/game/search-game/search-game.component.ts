@@ -22,12 +22,11 @@ export class SearchGameComponent implements OnInit{
 
   isLoggedIn:boolean|undefined;
 
+  gameNoSearch: GameInterface[] = [];
   games: GameInterface[] = [];
   users: UserInterface[] = [];
   providers: ProviderInterface[] = [];
   searchValue: string = '';
-  userRatingAll: UserRateInterface[] | undefined;
-  fakeRates: number[] = [8, 14, 19, 13];
   userColor: string | undefined;
   profilSelected: ProfilInterface | undefined;
   nbMoreGame:number = 1;
@@ -53,7 +52,8 @@ export class SearchGameComponent implements OnInit{
     }
 
     this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
-      this.games = results;
+      this.gameNoSearch = results;
+      this.games = this.gameNoSearch;
 
       let element = document.getElementById("moreGameBTN");
       if (this.games.length == this.app.fetchLimit){
@@ -134,7 +134,7 @@ export class SearchGameComponent implements OnInit{
           });
         }
       }
-      
+
     });
 
     // ressort le provider avec le nom seulement identique
@@ -142,10 +142,10 @@ export class SearchGameComponent implements OnInit{
       responseProviders.forEach((responseProvider) => {
         if (responseProvider.tagName === this.searchValue) {
           this.providerExact = responseProvider;
-        } 
+        }
       })
     });
-    
+
   }
 
   // LIKE CARD ACTU SYSTEM

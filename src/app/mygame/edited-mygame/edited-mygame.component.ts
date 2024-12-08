@@ -52,6 +52,8 @@ export class EditedMygameComponent implements OnInit {
   nbCopyGenerate:number = 10;
   isNewCopy:string ="new";
 
+  tabSelected:number = 1;
+
   ngOnInit() {
 
     this.idOneMyGame = this.route.snapshot.paramMap.get('editid');
@@ -276,6 +278,7 @@ export class EditedMygameComponent implements OnInit {
     let newRate = {
       id: form.value.myGameId || null,
       rating: form.value.rating,
+      content: form.value['content_rating']
     }
 
     /* MODIFIER LES COPY */
@@ -317,6 +320,7 @@ export class EditedMygameComponent implements OnInit {
     /* MODIFIER LES SCREENSHOT */
     let newScreenshot: any[] = []
 
+    console.log(newRate)
     /* FINAL FORMATAGE */
     let updateHistoryMyGame = {
       myGame: newMyGame,
@@ -325,9 +329,10 @@ export class EditedMygameComponent implements OnInit {
       speedrun:newSpeedrun,
       screenshot:newScreenshot
     }
+    console.log(updateHistoryMyGame)
 
     let body = JSON.stringify(updateHistoryMyGame);
-    // console.log(body);
+    console.log(body);
 
     this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
       if (reponseMyGameUpdate.message == "updated game") {
@@ -364,6 +369,11 @@ export class EditedMygameComponent implements OnInit {
       }
     })
 
+  }
+
+
+  tabActive(tab:number){
+    this.tabSelected = tab;
   }
 
 

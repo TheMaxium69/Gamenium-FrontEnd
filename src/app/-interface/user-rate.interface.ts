@@ -7,6 +7,7 @@ export interface UserRateInterface {
   rating:number,
   user: UserInterface,
   game: GameInterface,
+  content: string|null,
 
 }
 

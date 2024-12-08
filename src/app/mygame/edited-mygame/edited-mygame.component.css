@@ -2,8 +2,13 @@
 * GLOBAL
 */
 #editedmygame{
-  margin: auto auto 120px;
+  margin-bottom: 120px;
+}
+
+.container{
   max-width: 925px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .main-gamenium-btn{
@@ -215,7 +220,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: 25px;
+  padding-top: 10px;
   padding-bottom: 20px;
   border-bottom: 1px solid gray;
 
@@ -365,3 +370,45 @@ select{
   }
 }
 
+/* TAB */
+
+.displayNone{
+  display: none!important;
+}
+
+#tab {
+  margin: 20px 0;
+  --colorTab:#8a8a8a;
+  --colorTab-hover: #b7b7b7;
+  ul {
+    display: flex;
+    justify-content: center;
+    border-color: var(--colorTab);
+
+    li a.active{
+      border-top-color: var(--colorTab);
+      border-left-color: var(--colorTab);
+      border-right-color: var(--colorTab);
+      color: black;
+      font-weight: 500;
+    }
+    li a.active:hover{
+      border-top-color: var(--colorTab);
+      border-left-color: var(--colorTab);
+      border-right-color: var(--colorTab);
+      border-bottom-color: transparent;
+      color: black;
+    }
+
+    li a {
+      font-size: 18px;
+      color: #444444;
+      padding: 15px 50px;
+      font-weight: 400;
+    }
+
+    li a:hover {
+      border-color: var(--colorTab-hover);
+    }
+  }
+}
