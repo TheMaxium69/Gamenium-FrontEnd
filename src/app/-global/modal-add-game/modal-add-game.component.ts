@@ -38,7 +38,7 @@ export class ModalAddGameComponent implements OnInit, OnDestroy {
 
     this.searchSubject.pipe(
       debounceTime(this.app.deadlineSearch),
-      distinctUntilChanged(),
+      // distinctUntilChanged(),
       switchMap((searchValue) => {
         if (!searchValue.trim()) {
           return of([]);
