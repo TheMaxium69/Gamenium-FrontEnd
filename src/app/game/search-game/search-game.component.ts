@@ -24,7 +24,6 @@ export class SearchGameComponent implements OnInit, OnDestroy{
   userColor: string | undefined;
 
   /* GAME & PROVIDER*/
-  gameNoSearch: GameInterface[] = [];
   games: GameInterface[] = [];
 
   /* MORE GAME */
@@ -33,7 +32,6 @@ export class SearchGameComponent implements OnInit, OnDestroy{
   providers: ProviderInterface[] = [];
 
   /* searchVariable */
-  searchValue: string = '';
   isLoading: boolean = true;
 
   private searchSubject = new Subject<string>();
@@ -57,13 +55,20 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     }
 
     /* FIRST REQUESTE*/
-    this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
-      this.gameNoSearch = results;
-      this.games = this.gameNoSearch;
-      this.isLoading = false;
+    if (this.app.gameNoReload.length == 0) {
+      this.gameService.searchGames(this.app.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
+        this.app.gameNoReload = results;
+        this.games = this.app.gameNoReload;
+        this.isLoading = false;
 
-      this.calcMoreBtn(true);
-    });
+        this.calcMoreBtn(true);
+      });
+    } else {
+      this.games = this.app.gameNoReload;
+      this.providers = this.app.providersNoReload;
+      this.users = this.app.usersNoReload;
+      this.isLoading = false;
+    }
 
     /* SET SEARCH*/
     this.searchSubject.pipe(
@@ -71,11 +76,11 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       // distinctUntilChanged(),
       switchMap((searchValue) => {
         if (!searchValue.trim()) {
-          return of(this.gameNoSearch);
+          return of(this.app.gameNoReload);
         }
         return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
           catchError((error) => {
-            this.isLoading = false;
+            this.isLoading = true;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
             Swal.fire({
               title: 'Erreur!',
@@ -90,7 +95,8 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe((results: GameInterface[]) => {
-        this.games = results;
+        this.app.gameNoReload = results;
+        this.games = this.app.gameNoReload;
         this.isLoading = false;
         this.calcMoreBtn();
     });
@@ -100,16 +106,18 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     const inputElement = event.target as HTMLInputElement;
 
     /* VARIABLE*/
-    this.searchValue = inputElement.value;
+    this.app.searchValue = inputElement.value;
     this.isLoading = true;
     this.nbMoreGame = 1;
     this.games = [];
-    this.providers = [];
-    this.users = [];
+    this.app.providersNoReload = [];
+    this.providers = this.app.providersNoReload;
+    this.app.usersNoReload = [];
+    this.users = this.app.usersNoReload;
     this.resetMoreBtn();
 
     /* LAUNCH SEARCH*/
-    this.searchSubject.next(this.searchValue);
+    this.searchSubject.next(this.app.searchValue);
   }
 
   ngOnDestroy() {
@@ -118,8 +126,8 @@ export class SearchGameComponent implements OnInit, OnDestroy{
   }
 
   onSearch(): void {
-    if (this.searchValue.trim() !== '') {
-      this.router.navigate(['/search/game/' + this.searchValue.trim()]);
+    if (this.app.searchValue.trim() !== '') {
+      this.router.navigate(['/search/game/' + this.app.searchValue.trim()]);
     } else {
       this.router.navigate(['/search/game/-']);
     }
@@ -157,7 +165,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
         if (provideUser) {
           provideUser.style.display = "none";
         }
-      } else if (this.searchValue.trim() !== '') {
+      } else if (this.app.searchValue.trim() !== '') {
 
         if (morebtn){
           morebtn.style.display = "none";
@@ -168,14 +176,16 @@ export class SearchGameComponent implements OnInit, OnDestroy{
         }
 
         let providersFetchLimit = this.app.fetchLimit - this.games.length;
-        this.providerService.searchProviders(this.searchValue, providersFetchLimit, this.app.setURL()).subscribe((results) => {
-          this.providers = results;
+        this.providerService.searchProviders(this.app.searchValue, providersFetchLimit, this.app.setURL()).subscribe((results) => {
+          this.app.providersNoReload = results;
+          this.providers = this.app.providersNoReload;
 
           let userFetchLimit = providersFetchLimit - this.providers.length;
 
           // affiche les users si la limite de 50 objects (games + providers) n'a pas été atteinte et va jusqu'à 50 objects en tout (games + providers + users)
-          this.userService.searchUsers(this.searchValue, userFetchLimit, this.app.setURL()).subscribe((results) => {
-            this.users = results;
+          this.userService.searchUsers(this.app.searchValue, userFetchLimit, this.app.setURL()).subscribe((results) => {
+            this.app.usersNoReload = results;
+            this.users = this.app.usersNoReload;
           });
 
         });
@@ -193,7 +203,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     console.log(limit)
 
     /* TODO : faire un offset*/
-    this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
+    this.gameService.searchGames(this.app.searchValue, limit, this.app.setURL()).subscribe((results) => {
       this.games = results;
       console.log(this.games.length)
 

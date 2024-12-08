@@ -11,7 +11,7 @@
     (keyup.enter)="onSearch()"
     class="searchTerm"
     name="searchValue"
-    [(ngModel)]="searchValue"
+    [(ngModel)]="this.app.searchValue"
     placeholder="Tapez votre recherche ..."
     [ngStyle]="{ '--color': userColor ?? this.app.colorDefault }"
   />
@@ -33,13 +33,9 @@
     <div id="provider" [class.displayNone]="providers.length === 0">
 
       <ng-container *ngFor="let provider of providers">
-        <div routerLink="/provider/{{ provider.id }}">
-          <div id="card-provider" style="background: linear-gradient(180deg, {{provider.color ?? 'red'}} 35%, white 35%)">
-            <div class="circleImage" style="background-image: url('{{ provider.picture?.url }}');"></div>
-            <h2 class="card-title">{{ provider.displayName }}</h2><br>
-            <p>{{ provider.content }}</p><br>
-          </div>
-        </div>
+        <app-card-provider
+          [provider]="provider"
+          [isDetailView]="false"></app-card-provider>
       </ng-container>
 
     </div>
@@ -53,10 +49,10 @@
     </ng-container>
 
     <!-- USER -->
-    <div id="user" [class.displayNone]="providers.length === 0">
+    <div id="user" [class.displayNone]="users.length === 0">
 
       <ng-container *ngFor="let user of users">
-        <app-card-profil *ngIf="user.id !== app.userConnected?.id"
+        <app-card-profil
           [user]="user"
           [currentUser]="app.userConnected"
         ></app-card-profil>
@@ -65,6 +61,11 @@
     </div>
 
     <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>
+
+    <!-- NADA -->
+    <ng-container *ngIf="!isLoading && games.length === 0 && users.length === 0 && providers.length === 0">
+      <p class="none-game">Aucun résultat trouvé.</p>
+    </ng-container>
 
   </section>
 

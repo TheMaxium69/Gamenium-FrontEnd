@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 import {PlateformInterface} from "./-interface/plateform.interface";
 import {CountryInterface} from "./-interface/country.interface";
 import {LikeService} from "./-service/like.service";
+import {ProviderInterface} from "./-interface/provider.interface";
 
 @Component({
   selector: 'app-root',
@@ -64,6 +65,12 @@ export class AppComponent {
   token: string|any;
   userConnected: UserInterface|any;
   currentDate: Date = new Date();
+
+  // SEARCH
+  gameNoReload: GameInterface[] = [];
+  usersNoReload: UserInterface[] = [];
+  providersNoReload: ProviderInterface[] = [];
+  searchValue: string = '';
 
   // LIMIT
   fetchLimit:number = 50;
