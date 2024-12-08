@@ -40,6 +40,8 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   sortOption: string = ''; // Tri par défaut
   isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
 
+  isLoading:boolean = true;
+
   constructor(protected app:AppComponent,
               private myGameService:HistoryMyGameService,
               private userRateService:UserRateService,
@@ -55,13 +57,12 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.userConnected = this.app.userConnected;
 
-    // récupère tout les jeux du profil visité
+
     this.myGameByUser(this.profileId);
 
     if(this.userConnected) {
       this.myGameByUser(this.userConnected.id);
     }
-
 
     this.route.paramMap.subscribe(params => {
       const newTask = params.get('task');
@@ -100,8 +101,9 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         this.isColor = this.profilSelected.themeColor;
       }
       if (this.task === "common-games") {
-        console.log("Fonction Load - La tache est common games ");
         this.isCommonView = true;
+
+
 
         //
         // this.filteredGames = this.commonGame || [];
@@ -114,11 +116,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
       else if (this.task){
         this.myGameByUserWithPlateform(this.profilSelected.id, this.plateformeId);
 
-      } else {
-        this.myGameByUser(this.profilSelected.id);
       }
-
-      this.getUserRate(this.profilSelected.id)
 
     }
   }
@@ -143,7 +141,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
           if (id_user === this.userConnected?.id) {
             // on save les jeux de l'user connecté
             this.userConnectedGame = responseMyGame.result || [];
-            console.log("Jeux de l'user connecter", this.userConnectedGame);
+            // console.log("Jeux de l'user connecter", this.userConnectedGame);
           } else {
             // on save les jeux lié au profil
             this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) =>
@@ -151,13 +149,12 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
             ) || [];
             // on save une copie de ce tableau
             this.originalGameHistoriqueAll = [...this.myGameHistoriqueAll];
-            console.log("Jeux lié a ce profil", this.myGameHistoriqueAll);
+            // console.log("Jeux lié a ce profil", this.myGameHistoriqueAll);
           }
 
-          if(this.userConnected?.id != this.profileId){
+          this.isLoading = false;
 
-            console.log(this.userConnected);
-            console.log(this.profileId);
+          if(this.userConnected?.id != id_user){
             this.addViewProfile(this.profileId);
           }
         } else {
@@ -166,16 +163,6 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         this.findCommonGames();
 
       });
-
-
-
-    this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
-
-      if (responseRates.message == "good"){
-        this.userRatingAll = responseRates.result;
-      }
-
-    });
 
   }
 
@@ -210,15 +197,6 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
     });
 
-  }
-
-  /* OBTENIR LES NOTES DE JEU */
-  getUserRate(id_user: number){
-    this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
-      if (responseRates.message == "good") {
-        this.userRatingAll = responseRates.result;
-      }
-    });
   }
 
   selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
@@ -266,7 +244,7 @@ filterGames(): void {
   if (this.isCommonView) {
     if (!this.commonGame) return;
 
-    console.log("COUCOU JE FILTRE BIEN")
+    // console.log("COUCOU JE FILTRE BIEN")
 
     const query = this.searchQuery ? this.searchQuery.toLowerCase() : '';
 
@@ -387,7 +365,7 @@ filterGames(): void {
 
   findCommonGames(): void {
     if (!this.originalGameHistoriqueAll || !this.userConnectedGame) {
-      console.log("Un des utilisateurs n'a pas de jeux");
+      // console.log("Un des utilisateurs n'a pas de jeux");
       return;
     }
 
@@ -397,8 +375,8 @@ filterGames(): void {
       )
     );
 
-    console.log('Common games:', this.commonGame);
-    console.log("********************************************")
+    // console.log('Common games:', this.commonGame);
+    // console.log("********************************************")
 
 
   }

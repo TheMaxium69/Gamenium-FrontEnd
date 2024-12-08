@@ -19,6 +19,7 @@ import {PlateformInterface} from "./-interface/plateform.interface";
 import {CountryInterface} from "./-interface/country.interface";
 import {LikeService} from "./-service/like.service";
 import {ProviderInterface} from "./-interface/provider.interface";
+import {UserRateInterface} from "./-interface/user-rate.interface";
 
 @Component({
   selector: 'app-root',
@@ -66,13 +67,6 @@ export class AppComponent {
   userConnected: UserInterface|any;
   currentDate: Date = new Date();
 
-  // SEARCH
-  gameNoReload: GameInterface[] = [];
-  usersNoReload: UserInterface[] = [];
-  providersNoReload: ProviderInterface[] = [];
-  gamesSearchDefault: GameInterface[] = [];
-  searchValue: string = '';
-
   // LIMIT
   fetchLimit:number = 50;
   deadlineSearch:number = 300;
@@ -83,6 +77,24 @@ export class AppComponent {
   colorDefault = "#FF0000";
   noBoxartImage_default:string = "https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg";
   noBoxartImage:string = "assets/noBoxart.png";
+
+  /******************************************************************************************************************
+   *
+   * STOCK (FOR NO RELOAD)
+   *
+   * ******************************************************************************************************************/
+
+  // SEARCH GAME
+  gameNoReload: GameInterface[] = [];
+  usersNoReload: UserInterface[] = [];
+  providersNoReload: ProviderInterface[] = [];
+  gamesSearchDefault: GameInterface[] = [];
+  searchValue: string = '';
+
+  // MYGAME
+  userRatingAll: UserRateInterface[] | undefined;
+
+
 
 
   /******************************************************************************************************************

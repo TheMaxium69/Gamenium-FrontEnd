@@ -60,6 +60,7 @@ export class ProfilePrivateComponent implements OnInit {
   sortOption: string = ''; // Tri par défaut
   isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
 
+  isLoading:boolean = true
 
   constructor(protected app: AppComponent,
               private taskService: TaskService,
@@ -80,7 +81,6 @@ export class ProfilePrivateComponent implements OnInit {
     this.userConnected = this.app.userConnected;
 
     if (this.userConnected) {
-      this.myPlateforme(this.userConnected.id)
       this.myGameByUser(this.userConnected.id);
       this.getInfoProfile(this.userConnected.id);
       this.fetchTasks();
@@ -89,21 +89,13 @@ export class ProfilePrivateComponent implements OnInit {
 
   }
 
-  myPlateforme(id:number){
-    this.plateformService.getPlateformWithUser(id, this.app.setURL()).subscribe((reponsePlateformUser: {message:string, result:PlateformInterface[]}) => {
-      if (reponsePlateformUser.message == "good") {
-        this.plateformsUser = reponsePlateformUser.result;
-      }
-    })
-  }
-
 
   // récup des jeux par utilisateur
   myGameByUser(id_user: number): void {
     this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
-        console.log("Fonction My Game By User", this.myGameHistoriqueAll);
+        this.isLoading = false;
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
       }
@@ -112,11 +104,16 @@ export class ProfilePrivateComponent implements OnInit {
       this.tryCheckAndCompleteTasks();
     });
 
-    this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
-      if (responseRates.message == "good") {
-        this.userRatingAll = responseRates.result;
-      }
-    });
+    if (this.app.userRatingAll){
+      this.userRatingAll = this.app.userRatingAll;
+    } else {
+      this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
+        if (responseRates.message == "good") {
+          this.userRatingAll = responseRates.result;
+          this.app.userRatingAll = this.userRatingAll;
+        }
+      });
+    }
   }
 
   // on vérifie si l'utilisateur à noté un jeux spécifique
@@ -449,7 +446,10 @@ getUnpinnedGames(): HistoryMyGameInterface[] {
 
           // on passe les tache chargé a true et on vérifie les tache complété
           this.tasksLoaded = true;
-          this.loadUserLikesAndComments();
+          console.log(this.progress)
+          if (this.progress !== 100){
+            this.loadUserLikesAndComments();
+          }
 
         }, (error) => {
           console.error('Erreur lors de la récupération des tâches complétées:', error);

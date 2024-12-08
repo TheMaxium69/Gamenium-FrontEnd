@@ -24,19 +24,38 @@ export class CardGameComponent implements OnInit {
   @Input()
   public colorProfil: string | undefined | null = null;
 
+  @Input()
+  public userNote: number | undefined;
+
   userRatingAll: UserRateInterface[] | undefined;
 
   constructor(protected app:AppComponent,
               private userRateService:UserRateService) { }
 
   ngOnInit() {
-    if (this.app.isLoggedIn && this.Hmg) {
+    if (this.userNote && this.userNote != this.app.userConnected.id) {
+      this.getProfilRate(this.userNote)
+    } else if (this.app.isLoggedIn && this.Hmg) {
       this.getUserRate(this.app.userConnected.id)
     }
   }
 
   getUserRate(id_user: number){
-    this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
+    if (this.app.userRatingAll){
+      this.userRatingAll = this.app.userRatingAll;
+    } else {
+      this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
+        if (responseRates.message == "good") {
+          this.userRatingAll = responseRates.result;
+          this.app.userRatingAll = this.userRatingAll;
+        }
+      });
+    }
+  }
+
+  getProfilRate(id_profil:number){
+    console.log("here")
+    this.userRateService.getRateByUser(id_profil, this.app.setURL()).subscribe(responseRates => {
       if (responseRates.message == "good") {
         this.userRatingAll = responseRates.result;
       }

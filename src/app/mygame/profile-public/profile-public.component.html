@@ -36,23 +36,29 @@
     </div>
   </div>
 
-  <div *ngIf="!myGameHistoriqueAll?.length">
+  <div *ngIf="!myGameHistoriqueAll?.length && !isLoading">
     <h3>La collection de jeux est vide</h3>
   </div>
 
   <!-- SECTION POUR JEUX FILTRER OU RECHERCHER -->
   <div id="show-game" class="d-flex container" *ngIf="getAllGamesToDisplay().length > 0">
-    <app-card-game *ngFor="let game of getAllGamesToDisplay()" [Hmg]="game" [colorProfil]="profilSelected?.themeColor" style="width: 100%"></app-card-game>
+    <app-card-game *ngFor="let game of getAllGamesToDisplay()" [Hmg]="game" [colorProfil]="profilSelected?.themeColor" [userNote]="profileId" style="width: 100%"></app-card-game>
   </div>
 
   <!--  GAME PINED -->
   <div id="show-game" class="d-flex container pinned" *ngIf="!isFilterApplied() && !searchQuery.trim() && getPinnedGames().length > 0">
-    <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" style="width: 100%"></app-card-game>
+    <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" [userNote]="profileId" style="width: 100%"></app-card-game>
   </div>
 
   <!-- UNPINNED GAME -->
   <div id="show-game" class="d-flex container" *ngIf="!isFilterApplied() && !searchQuery.trim() && getUnpinnedGames().length > 0">
-    <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" style="width: 100%"></app-card-game>
+    <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" [userNote]="profileId" style="width: 100%"></app-card-game>
   </div>
+
+  <!-- LOADING -->
+  <div id="show-game" class="d-flex container" *ngIf="isLoading">
+    <app-card-game *ngFor="let game of [].constructor(30);" style="width: 100%"></app-card-game>
+  </div>
+
 
 </section>

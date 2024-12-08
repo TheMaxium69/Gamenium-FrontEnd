@@ -35,6 +35,8 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   sortOption: string = ''; // Tri par défaut
   isFilterDropdownOpen: boolean = false; // Control la visibilité du dropdown
 
+  isLoading:boolean = true;
+
 
   constructor(protected app:AppComponent,
               private route: ActivatedRoute,
@@ -197,6 +199,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         // this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
         this.HistoireMyGameByUserByPlateform = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
         this.filterGames();
+        this.isLoading = false;
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
       }
@@ -209,6 +212,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         // this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
         this.HistoireMyGameByUserByPlateform = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
         this.filterGames();
+        this.isLoading = false;
       } else {
         console.log("pas de jeux trouvé pour l'utilisateur")
       }
@@ -217,11 +221,15 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
   /* OBTENIR LES NOTES DE JEU */
   getUserRate(id_user: number){
-    this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
-      if (responseRates.message == "good") {
-        this.userRatingAll = responseRates.result;
-      }
-    });
+    if (this.app.userRatingAll){
+      this.userRatingAll = this.app.userRatingAll;
+    } else {
+      this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
+        if (responseRates.message == "good") {
+          this.userRatingAll = responseRates.result;
+        }
+      });
+    }
   }
   hasUserRatings(game_id: any): boolean {
     if (this.userRatingAll) {

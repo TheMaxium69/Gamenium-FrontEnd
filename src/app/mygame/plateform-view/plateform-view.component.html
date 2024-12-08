@@ -43,3 +43,8 @@
 <div id="show-game" class="d-flex container" *ngIf="!isFilterApplied() && !searchQuery.trim()">
   <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="isColor" style="width: 100%"></app-card-game>
 </div>
+
+<!-- LOADING -->
+<div id="show-game" class="d-flex container" *ngIf="isLoading">
+  <app-card-game *ngFor="let game of [].constructor(30);" style="width: 100%"></app-card-game>
+</div>
