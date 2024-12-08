@@ -7,7 +7,7 @@
 >
   <input
     #input
-    (keyup)="onSearchTap(input.value)"
+    (keyup)="onSearchValueChange($event)"
     (keyup.enter)="onSearch()"
     class="searchTerm"
     name="searchValue"
@@ -52,7 +52,7 @@
         [currentUser]="app.userConnected"
       ></app-card-profil>
     </ng-container>
-    
+
   </div>
 
   <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>

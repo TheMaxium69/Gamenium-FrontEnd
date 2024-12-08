@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { GameService } from '../../-service/game.service';
 import { GameInterface } from '../../-interface/game.interface';
 import {AppComponent} from "../../app.component";
 import {Router} from "@angular/router";
-import { UserRateService } from 'src/app/-service/user-rate.service';
-import { UserRateInterface } from 'src/app/-interface/user-rate.interface';
-import { ProfilService } from 'src/app/-service/profil.service';
-import { ProfilInterface } from 'src/app/-interface/profil.interface';
 import { UserInterface } from 'src/app/-interface/user.interface';
 import { UserService } from 'src/app/-service/user.service';
 import { ProviderService } from 'src/app/-service/provider.service';
 import { ProviderInterface } from 'src/app/-interface/provider.interface';
+import {catchError, debounceTime, distinctUntilChanged, switchMap, takeUntil} from "rxjs/operators";
+import {of, Subject} from "rxjs";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -18,75 +17,102 @@ import { ProviderInterface } from 'src/app/-interface/provider.interface';
   templateUrl: './search-game.component.html',
   styleUrls: ['./search-game.component.css']
 })
-export class SearchGameComponent implements OnInit{
+export class SearchGameComponent implements OnInit, OnDestroy{
 
+  /* USER VARIABLE*/
   isLoggedIn:boolean|undefined;
+  userColor: string | undefined;
 
+  /* GAME & PROVIDER*/
   gameNoSearch: GameInterface[] = [];
   games: GameInterface[] = [];
-  users: UserInterface[] = [];
-  providers: ProviderInterface[] = [];
-  searchValue: string = '';
-  userColor: string | undefined;
-  profilSelected: ProfilInterface | undefined;
-  nbMoreGame:number = 1;
-
   providerExact: ProviderInterface | null = null;
 
+  /* MORE GAME */
+  nbMoreGame:number = 1;
+  users: UserInterface[] = [];
+  providers: ProviderInterface[] = [];
+
+  /* searchVariable */
+  searchValue: string = '';
+  isLoading: boolean = false;
+
+  private searchSubject = new Subject<string>();
+  private unsubscribe$ = new Subject<void>();
+
+
   constructor (
-    private userRateService: UserRateService,
     private gameService: GameService,
     private userService: UserService,
     private providerService: ProviderService,
     protected app: AppComponent,
-    private profileService: ProfilService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
 
+    /* SET GLOBAL VARIABLE*/
     this.isLoggedIn = this.app.isLoggedIn;
-
     if (this.isLoggedIn) {
-      this.updateConnect()
+      this.userColor = this.app.userConnected.themeColor;
     }
 
+    /* FIRST REQUESTE*/
     this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.gameNoSearch = results;
       this.games = this.gameNoSearch;
 
-      let element = document.getElementById("moreGameBTN");
-      if (this.games.length == this.app.fetchLimit){
-        if (element){
-          element.style.display = "block";
-        }
-      } else {
-        if (element){
-          element.style.display = "none";
-        }
-      }
+      this.calcMoreBtn(true);
     });
 
-
-  }
-
-  updateConnect(): void {
-    const userId = this.app.userConnected?.id;
-    if (userId) {
-      this.profileService.getProfilByUserId(userId, this.app.setURL()).subscribe(responseProfil => {
-        if (responseProfil.message === "good") {
-          this.profilSelected = responseProfil.result;
-          if (this.profilSelected?.themeColor) {
-            this.userColor = this.profilSelected.themeColor;
-          }
-        } else {
-          console.error("Error: User profile not found");
+    /* SET SEARCH*/
+    this.searchSubject.pipe(
+      debounceTime(this.app.deadlineSearch),
+      distinctUntilChanged(),
+      switchMap((searchValue) => {
+        if (!searchValue.trim()) {
+          return of(this.gameNoSearch);
         }
-      });
-    }
+        return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+          catchError((error) => {
+            this.isLoading = false;
+            console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+            Swal.fire({
+              title: 'Erreur!',
+              text: 'Une erreur s\'est produite lors de la recherche',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+            });
+            return of([]);
+          })
+        );
+      }),
+      takeUntil(this.unsubscribe$)
+    ).subscribe((results: GameInterface[]) => {
+      this.isLoading = false;
+      this.games = results;
+      this.calcMoreBtn();
+    });
   }
 
+  onSearchValueChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
 
+    /* VARIABLE*/
+    this.searchValue = inputElement.value;
+    this.isLoading = true;
+    this.nbMoreGame = 1;
+    this.providerExact = null;
+
+    /* LAUNCH SEARCH*/
+    this.searchSubject.next(this.searchValue);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
   onSearch(): void {
     if (this.searchValue.trim() !== '') {
@@ -96,94 +122,74 @@ export class SearchGameComponent implements OnInit{
     }
   }
 
-  onSearchTap(value:string): void {
 
-    this.searchValue == value;
-    this.nbMoreGame = 1;
-    this.providerExact = null;
+  /* SET BTN MORE GAME ou PROVIDER ET USER */
+  calcMoreBtn(isFirst:boolean = false){
 
-    this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
-      this.games = results;
+    let morebtn = document.getElementById("moreGameBTN");
+    let provideUser = document.getElementById("provider-user");
 
-      let providersFetchLimit = this.app.fetchLimit - this.games.length;
-
-
-      let element = document.getElementById("moreGameBTN");
-      let provideUser = document.getElementById("provider-user");
-
-      if (this.games.length >= this.app.fetchLimit) {
-        if (element && provideUser){
-          element.style.display = "block";
-          provideUser.style.display = "none";
+    if (isFirst) {
+      if (this.games.length == this.app.fetchLimit){
+        if (morebtn){
+          morebtn.style.display = "block";
         }
       } else {
-        if (element && provideUser){
-          element.style.display = "none";
-          provideUser.style.display = "block";
-
-          this.providerService.searchProviders(this.searchValue, providersFetchLimit, this.app.setURL()).subscribe((results) => {
-            this.providers = results;
-
-            let userFetchLimit = providersFetchLimit - this.providers.length;
-
-            // affiche les users si la limite de 50 objects (games + providers) n'a pas été atteinte et va jusqu'à 50 objects en tout (games + providers + users)
-            this.userService.searchUsers(this.searchValue, userFetchLimit, this.app.setURL()).subscribe((results) => {
-              this.users = results;
-            });
-
-          });
+        if (morebtn){
+          morebtn.style.display = "none";
         }
       }
-
-    });
-
-    // ressort le provider avec le nom seulement identique
-    this.providerService.searchProviders(this.searchValue, 1, this.app.setURL()).subscribe((responseProviders) => {
-      responseProviders.forEach((responseProvider) => {
-        if (responseProvider.tagName === this.searchValue) {
-          this.providerExact = responseProvider;
-        }
-      })
-    });
-
-  }
-
-  // LIKE CARD ACTU SYSTEM
-
-  // GESTION MOYENNE DES NOTES CARTES JEUX
-
-  // getRatesByGame(id_game: number){
-  //   this.userRateService.getRateByGame(id_game, this.app.setURL()).subscribe(responseRates => {
-  //     if (responseRates.message == "good") {
-  //       this.userRatingAll = responseRates.result;
-  //     }
-  //   })
-  //   console.log(`Jeux: ${id_game}, Note: ${this.userRatingAll}`)
-  // }
-
-  rateAverage(tab: number[]): number{
-    if(tab.length === 0){
-      return 0;
-    }
-    const sum = tab.reduce((acc, val) => acc + val, 0);
-    const result = sum / tab.length // -> average fake rates 13.5
-
-    if (result - Math.round(result) >= 0.5) {
-      return Math.round(sum) + 1
     } else {
-      return Math.round(result)
+
+      if (this.games.length >= this.app.fetchLimit) {
+        if (morebtn){
+          morebtn.style.display = "block";
+        }
+        if (provideUser) {
+          provideUser.style.display = "none";
+        }
+      } else if (this.searchValue.trim() !== '') {
+
+        if (morebtn){
+          morebtn.style.display = "none";
+        }
+
+        if (provideUser) {
+          provideUser.style.display = "block";
+        }
+
+        let providersFetchLimit = this.app.fetchLimit - this.games.length;
+        this.providerService.searchProviders(this.searchValue, providersFetchLimit, this.app.setURL()).subscribe((results) => {
+          this.providers = results;
+
+          this.providers.forEach(provider => {
+            if (provider.tagName === this.searchValue) {
+              this.providerExact = provider;
+            }
+          });
+
+          let userFetchLimit = providersFetchLimit - this.providers.length;
+
+          // affiche les users si la limite de 50 objects (games + providers) n'a pas été atteinte et va jusqu'à 50 objects en tout (games + providers + users)
+          this.userService.searchUsers(this.searchValue, userFetchLimit, this.app.setURL()).subscribe((results) => {
+            this.users = results;
+          });
+
+        });
+      }
+
     }
+
   }
 
-  //Je pense qu'on peut faire une fonction avec comme param l'id du jeu. Dans cette fonction on récupère d'abord le tableau de note avec getRatesByGame() et ensuite on passe ce tableau de note dans rateAverage().
-
-
+  /* BUTTOM MORE GAME */
   moreGame(){
 
     this.nbMoreGame++
     let limit = this.nbMoreGame * this.app.fetchLimit;
     console.log(limit)
 
+    /* TODO : faire un offset*/
     this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
       this.games = results;
       console.log(this.games.length)

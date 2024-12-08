@@ -30,7 +30,7 @@ export class CardGameComponent implements OnInit {
               private userRateService:UserRateService) { }
 
   ngOnInit() {
-    if (this.app.isLoggedIn) {
+    if (this.app.isLoggedIn && this.Hmg) {
       this.getUserRate(this.app.userConnected.id)
     }
   }
