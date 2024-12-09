@@ -1,3 +1,4 @@
+<modal-buywhere></modal-buywhere>
 <section id="editedmygame" *ngIf="selectedMyGame" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
 
 <form #editedMyGame="ngForm" (ngSubmit)="updateMyGame(editedMyGame)">
@@ -419,7 +420,7 @@
 
             <div class="head-panel">
               <h2><i class="ri-shopping-cart-2-fill"></i>Achat <small>#{{i+1}}</small></h2>
-              <i class="ri-more-2-fill"></i>
+              <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageBuyWhere"></i>
             </div>
             <ng-container *ngIf="copyGame.purchase">
 
@@ -630,7 +631,7 @@
 
             <div class="head-panel">
               <h2><i class="ri-shopping-cart-2-fill"></i>Achat <small>#{{i+1+nbCopyExisting}}</small></h2>
-              <i class="ri-more-2-fill"></i>
+              <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageBuyWhere"></i>
             </div>
 
             <input type="hidden" name="purchase{{i+nbCopyExisting}}" ngModel>

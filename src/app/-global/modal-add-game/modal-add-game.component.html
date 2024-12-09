@@ -1,3 +1,4 @@
+<modal-buywhere></modal-buywhere>
 <div class="modal fade text-center" id="ajouteGamePage" tabindex="-1" aria-labelledby="addGameModalLabel" aria-hidden="true" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -84,7 +85,7 @@
 
             <div class="head-panel">
               <h2><i class="ri-shopping-cart-2-fill"></i>Achat</h2>
-              <i class="ri-more-2-fill"></i>
+              <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageBuyWhere"></i>
             </div>
 
             <div class="head-buy">

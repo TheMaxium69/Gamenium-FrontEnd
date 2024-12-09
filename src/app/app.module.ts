@@ -62,6 +62,7 @@ import { CardProfilComponent } from './-global/card-profil/card-profil.component
 import { BackToTopComponent } from './-global/back-to-top/back-to-top.component';
 import { ModalProviderComponent } from './-global/modal-provider/modal-provider.component';
 import { TestComponent } from './test/test.component';
+import { ModalBuywhereComponent } from './-global/modal-buywhere/modal-buywhere.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { TestComponent } from './test/test.component';
     CardProfilComponent,
     BackToTopComponent,
     ModalProviderComponent,
-    TestComponent
+    TestComponent,
+    ModalBuywhereComponent
 
   ],
   imports: [

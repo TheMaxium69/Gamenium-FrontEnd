@@ -4,6 +4,7 @@ export interface BuyWhereInterface {
 
     id:number,
     isPublic:boolean,
+    is_public:boolean,
     name:string,
     createdAt:string,
     nb_use:number|undefined|null

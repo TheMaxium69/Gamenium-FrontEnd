@@ -1,0 +1,48 @@
+<div class="modal fade text-center" id="manageBuyWhere" tabindex="-1" aria-labelledby="manageBuyWhereLabel" aria-hidden="true" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p>Gerez ses lieux d'achats</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <div class="modal-body">
+        <!-- Insert content here -->
+
+
+        <form id="addBuyWhere" #addFormBuyWhere="ngForm" (ngSubmit)="this.addBuyWhere(addFormBuyWhere)">
+          <input type="text" placeholder="new buywhere" name="name_buywhere" ngModel>
+          <button type="submit">Upload</button>
+
+        </form>
+
+
+
+        <ul>
+          <ng-container *ngFor="let oneBuyWhere of buyWhereAll">
+            <li *ngIf="!oneBuyWhere.is_public">
+              {{oneBuyWhere.name}} | use : {{ oneBuyWhere.nb_use || "0" }}
+
+              <a (click)="deleteBuyWhere(oneBuyWhere)"> DELETE</a>
+            </li>
+          </ng-container>
+        </ul>
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <div class="modal-footer" style="margin-top: 74px;">
+        <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
+      </div>
+
+    </div>
+  </div>
+</div>
