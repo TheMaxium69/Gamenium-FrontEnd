@@ -377,11 +377,41 @@ a{
     gap: 75px;
   }
 
+  #gamenium-suggestion {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #gamenium-suggestion .rowamoi{
+    flex-wrap: wrap;
+  }
+
+}
+
+@media(max-width: 779px){
+  #gamenium-suggestion .rowamoi{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
 }
 
 
 @media (max-width: 611px) {
   .gamenium-container-panel {
+    width: 416px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #gamenium-intro-invite .gamenium-connect-panel {
+    width: 416px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #gamenium-intro-invite .gamenium-description-panel {
     width: 416px;
     margin-left: auto;
     margin-right: auto;
@@ -397,6 +427,5 @@ a{
     width: 125px;
     height: 125px;
   }
-
+  
 }
-
