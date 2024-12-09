@@ -120,7 +120,7 @@ export class EditedMygameComponent implements OnInit {
       }
     })
 
-    this.buyWhereService.getAllBuyWheres(this.app.setURL()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[] | undefined; }) => {
+    this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[] | undefined; }) => {
       if (reponseBuyWhere.message == "good") {
         this.buyWhereAll = reponseBuyWhere.result;
       }

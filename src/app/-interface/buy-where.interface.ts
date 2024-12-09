@@ -6,6 +6,7 @@ export interface BuyWhereInterface {
     isPublic:boolean,
     name:string,
     createdAt:string,
+    nb_use:number|undefined|null
     //user
 }
 

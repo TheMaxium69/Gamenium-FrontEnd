@@ -19,8 +19,12 @@ export class BuyWhereService {
     return this.http.get<ApicallInterface>(url + '/buywherebyuser/', option);
   }
 
-  getOneBuyWhere(url:string, id: number): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/buywhere/' + id);
+  createBuyWhere(body:string, url:string, options:{headers:HttpHeaders}):Observable<ApicallInterface>{
+    return this.http.post<ApicallInterface>(url + '/createbuywhere/', body, options);
+  }
+
+  deleteBuyWhere(id:number, url:string, options:{headers:HttpHeaders}):Observable<ApicallInterface> {
+    return this.http.delete<ApicallInterface>(url + '/deletebuywhere/' + id, options);
   }
 
 }
