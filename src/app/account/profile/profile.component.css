@@ -669,3 +669,11 @@ a > div {
     margin: 0 auto;
   }
 }
+
+.badge-border {
+  background-color: lightgray;
+  height: 1px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
