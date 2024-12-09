@@ -137,11 +137,15 @@ export class NavbarActualityComponent implements OnInit {
       return false;
     }
   
-    const twoDaysInMS = 2 * 24 * 60 * 60 * 1000;
+    const twoDaysInMS = 172800000;
     const lastPostInMS = new Date(latestActuDate).getTime();
     let isRecent = Date.now() - lastPostInMS <= twoDaysInMS;
-  
-    return isRecent = true;
+    
+    if (!isRecent) {
+      return false
+    } else {
+      return isRecent = true;
+    }
   }
 
   // Provider navbar scroll effect
