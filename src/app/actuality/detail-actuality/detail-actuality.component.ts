@@ -72,7 +72,7 @@ export class DetailActualityComponent implements OnInit{
 
     this.getLikeByActu(this.actualityId);
 
-    this.getCommentWithActu(this.actualityId);
+    this.getCountByActu(this.actualityId);
 
     this.getViewsByActu(this.actualityId);
 
@@ -253,12 +253,12 @@ export class DetailActualityComponent implements OnInit{
   }
 
 
-  getCommentWithActu(id:number){
+  getCountByActu(id:number){
 
-    this.commentService.getCommentWithActu(id, this.app.setURL()).subscribe(reponseMyCommentActu => {
-      if (reponseMyCommentActu.message == "good") {
+    this.commentService.getCountByActu(id, this.app.setURL()).subscribe(reponseMyCountActu => {
+      if (reponseMyCountActu.message == "good") {
 
-        this.nbCommentaire = reponseMyCommentActu.result.length;
+        this.nbCommentaire = reponseMyCountActu.result;
 
       }
 

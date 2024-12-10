@@ -31,7 +31,7 @@ export class CardActuComponent implements OnInit {
 
     if (this.actu){
       this.getLikeByActu(this.actu.id) /* RECUPERE LES LIKES */
-      this.getCommentWithActu(this.actu.id) /* RECUPERE LES COMS */
+      this.getCountByActu(this.actu.id) /* RECUPERE LES COMS */
     }
 
   }
@@ -56,10 +56,10 @@ export class CardActuComponent implements OnInit {
   }
 
   /* RECUPERE TOUT LES COM DE L'ACTU */
-  getCommentWithActu(id:number){
-    this.commentService.getCommentWithActu(id, this.app.setURL()).subscribe(reponseMyCommentActu => {
-      if (reponseMyCommentActu.message == "good") {
-        this.commentAll = reponseMyCommentActu.result.length;
+  getCountByActu(id:number){
+    this.commentService.getCountByActu(id, this.app.setURL()).subscribe(reponseMyCountActu => {
+      if (reponseMyCountActu.message == "good") {
+        this.commentAll = reponseMyCountActu.result;
       }
     });
   }

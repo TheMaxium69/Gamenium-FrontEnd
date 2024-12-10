@@ -26,5 +26,7 @@ export class CommentService {
     return this.http.get<ApicallInterface>(url + '/comments/me', option);
   }
 
-
+  getCountByActu(id_actu: number, url:string): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/countCommentByActu/'+id_actu);
+  }
 }
