@@ -647,4 +647,36 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
+  deleteCommentReply(commentReply: CommentReplyInterface){
+    this.commentService.deleteCommentReply(commentReply.id, this.app.setURL(), this.app.createCorsToken()).subscribe(
+      response => {
+        if(response.message == "good"){
+
+          
+
+
+        //   const index = this.commentReplyAll.findIndex(item => item['id'] === commentReply.id);
+        // if (index !== -1) {
+        //   this.app.buyWhereUserNoReload.splice(index, 1);
+        // }
+          Swal.fire({
+            title: 'Success',
+            text: 'Votre commentaire à bien été supprimé',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.app.colorDefault
+          })
+        } else { 
+          Swal.fire({
+            title: 'Echec!',
+            text: 'Echec de la suppression du commentaire',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.app.colorDefault
+          })
+        }
+      },(error) => {this.app.erreurSubcribe()}
+    )
+  }
+
 }

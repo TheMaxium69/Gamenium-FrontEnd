@@ -29,4 +29,8 @@ export class CommentService {
   getCountByActu(id_actu: number, url:string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url + '/countCommentByActu/'+id_actu);
   }
+
+  deleteCommentReply(id: number, url: string, option: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.delete<ApicallInterface>(url + '/deleteReply/'+id, option);
+  }
 }

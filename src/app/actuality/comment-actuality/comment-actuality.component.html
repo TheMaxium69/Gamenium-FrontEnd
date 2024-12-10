@@ -176,7 +176,9 @@
             <p>affiché un btn - nb : {{commentReplyAll[comment.id].length}}</p>
 
             <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]">
-              <small>Comment : {{ commentReply['content'] }}</small><br>
+              <small>Comment : {{ commentReply['content'] }}</small>
+                <button (click)="deleteCommentReply(commentReply, )">delete</button>
+              <br>
             </ng-container>
             <br><br>
           </ng-container>
