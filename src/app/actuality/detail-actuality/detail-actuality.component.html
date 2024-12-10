@@ -65,7 +65,7 @@
           (unfollowed)="handleUnfollowed($event)"
         ></app-card-provider>
       </ng-container>
-    
+
       <!-- Main Provider -->
       <ng-container *ngIf="actualitySelected?.Provider">
         <app-card-provider
@@ -76,7 +76,7 @@
         ></app-card-provider>
       </ng-container>
     </section>
-    
+
     </div>
   </div>
 
@@ -164,6 +164,7 @@
   <div class="containeur mt10 no-pading" id="commentSection">
     <app-comment-actuality
     [nbComment]="nbCommentaire"
+    [commentReplyAll]="commentReplyAll"
     [providerColor]="providerColor"
     (commentNbChanged)="updateNbComment($event)" class="containeur"></app-comment-actuality>
   </div>

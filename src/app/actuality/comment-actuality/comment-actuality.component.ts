@@ -17,6 +17,7 @@ import { IpService } from 'src/app/-service/ip.service';
 import { LikeInterface } from 'src/app/-interface/like.interface';
 import Swal from "sweetalert2";
 import { empty } from 'rxjs';
+import {CommentReplyInterface} from "../../-interface/comment-reply.interface";
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -62,6 +63,10 @@ export class CommentActualityComponent implements OnInit{
 
   @Output()
   commentNbChanged: EventEmitter<'add' | 'delete'> = new EventEmitter<'add' | 'delete'>()
+
+
+  @Input()
+  commentReplyAll: [][] = [];
 
 
   ngOnInit(): void {
@@ -342,7 +347,7 @@ export class CommentActualityComponent implements OnInit{
             }
           }
           this.commentNbChanged.emit('add');
-          const resetForm = form.resetForm(); 
+          const resetForm = form.resetForm();
           this.text = ''
 
           // Incrémente le nombre de commentaires après en avoir ajouté un.

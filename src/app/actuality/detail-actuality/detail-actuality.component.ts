@@ -16,6 +16,8 @@ import Swal from "sweetalert2";
 import {timeout} from "rxjs";
 import {ViewService} from "../../-service/view.service";
 import {ApicallInterface} from "../../-interface/apicall.interface";
+import {CommentInterface} from "../../-interface/comment.interface";
+import {CommentReplyInterface} from "../../-interface/comment-reply.interface";
 
 @Component({
   selector: 'app-detail-actuality',
@@ -34,6 +36,7 @@ export class DetailActualityComponent implements OnInit{
   LikeAll: LikeInterface[]|undefined;
   nbLike:number | undefined = 0;
   nbCommentaire:number = 0;
+  commentReplyAll:[][] = [];
   screenWidth: number = window.innerWidth;
   nbView: number | null = null;
 
@@ -255,13 +258,14 @@ export class DetailActualityComponent implements OnInit{
 
   getCountByActu(id:number){
 
-    this.commentService.getCountByActu(id, this.app.setURL()).subscribe(reponseMyCountActu => {
+    this.commentService.getCountByActu(id, this.app.setURL()).subscribe((reponseMyCountActu:{message:string, result: {
+        total:number,
+        reply:[][],
+      }}) => {
       if (reponseMyCountActu.message == "good") {
-
-        this.nbCommentaire = reponseMyCountActu.result;
-
+        this.nbCommentaire = reponseMyCountActu.result.total;
+        this.commentReplyAll = reponseMyCountActu.result.reply;
       }
-
     });
 
   }

@@ -23,7 +23,7 @@ export class CardActuComponent implements OnInit {
               private ipService: IpService,
               private commentService: CommentService) { }
 
-  commentAll: number = 0;
+  nbCountCom: number = 0;
   likeAll: number = 0;
   likedStatus: { [key: number]: boolean } = {};
 
@@ -57,9 +57,12 @@ export class CardActuComponent implements OnInit {
 
   /* RECUPERE TOUT LES COM DE L'ACTU */
   getCountByActu(id:number){
-    this.commentService.getCountByActu(id, this.app.setURL()).subscribe(reponseMyCountActu => {
+    this.commentService.getCountByActu(id, this.app.setURL()).subscribe((reponseMyCountActu:{message:string, result: {
+        total:number,
+        reply:CommentInterface[],
+      }}) => {
       if (reponseMyCountActu.message == "good") {
-        this.commentAll = reponseMyCountActu.result;
+        this.nbCountCom = reponseMyCountActu.result.total;
       }
     });
   }

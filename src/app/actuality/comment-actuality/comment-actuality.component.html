@@ -172,6 +172,14 @@
             </div>
             <div class="comment-border mb-4"></div>
           </div>
+          <ng-container *ngIf="commentReplyAll[comment.id]">
+            <p>affiché un btn - nb : {{commentReplyAll[comment.id].length}}</p>
+
+            <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]">
+              <small>Comment : {{ commentReply['content'] }}</small><br>
+            </ng-container>
+            <br><br>
+          </ng-container>
         </ng-container>
       </ng-container>
     </div>
