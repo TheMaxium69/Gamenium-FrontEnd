@@ -647,18 +647,11 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
-  deleteCommentReply(commentReply: CommentReplyInterface){
+  deleteCommentReply(commentReply: CommentReplyInterface, index:number){
     this.commentService.deleteCommentReply(commentReply.id, this.app.setURL(), this.app.createCorsToken()).subscribe(
       response => {
         if(response.message == "good"){
-
-          
-
-
-        //   const index = this.commentReplyAll.findIndex(item => item['id'] === commentReply.id);
-        // if (index !== -1) {
-        //   this.app.buyWhereUserNoReload.splice(index, 1);
-        // }
+          this.commentReplyAll[commentReply.comment.id].splice(index, 1);
           Swal.fire({
             title: 'Success',
             text: 'Votre commentaire à bien été supprimé',
@@ -666,7 +659,7 @@ export class CommentActualityComponent implements OnInit{
             confirmButtonText: 'OK',
             confirmButtonColor: this.app.colorDefault
           })
-        } else { 
+        } else {
           Swal.fire({
             title: 'Echec!',
             text: 'Echec de la suppression du commentaire',
