@@ -452,18 +452,18 @@
               </div>
 
               <!-- BUY WHERE -->
-              <ng-container *ngIf="buyWhereAll && copyGame.purchase.buy_where">
+              <ng-container *ngIf="app.buyWhereUserNoReload && copyGame.purchase.buy_where">
                 <select id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.id" name="purchase_buy_where{{i}}">
                   <option [value]="null">Lieux d'achat</option>
-                  <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                  <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload">
                     <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                   </ng-container>
                 </select>
               </ng-container>
-              <ng-container *ngIf="buyWhereAll && !copyGame.purchase.buy_where">
+              <ng-container *ngIf="app.buyWhereUserNoReload && !copyGame.purchase.buy_where">
                 <select id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
                   <option value="">Lieu d'achat</option>
-                  <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                  <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload ">
                     <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                   </ng-container>
                 </select>
@@ -526,10 +526,10 @@
 
               <!-- BUY WHERE -->
               <label for="buy_where{{i}}">Buy where:</label>
-              <ng-container *ngIf="buyWhereAll">
+              <ng-container *ngIf="app.buyWhereUserNoReload ">
                 <select id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
                   <option [value]="null">Choissir une Buy Where</option>
-                  <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                  <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload ">
                     <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                   </ng-container>
                 </select>
@@ -656,10 +656,10 @@
 
 
             <!-- BUY WHERE -->
-            <ng-container *ngIf="buyWhereAll">
+            <ng-container *ngIf="app.buyWhereUserNoReload ">
               <select id="buy_where{{i+nbCopyExisting}}" name="purchase_buy_where{{i+nbCopyExisting}}" ngModel>
                 <option value="">Lieu d'achat</option>
-                <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload ">
                   <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                 </ng-container>
               </select>

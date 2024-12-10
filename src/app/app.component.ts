@@ -20,6 +20,7 @@ import {CountryInterface} from "./-interface/country.interface";
 import {LikeService} from "./-service/like.service";
 import {ProviderInterface} from "./-interface/provider.interface";
 import {UserRateInterface} from "./-interface/user-rate.interface";
+import {BuyWhereInterface} from "./-interface/buy-where.interface";
 
 @Component({
   selector: 'app-root',
@@ -80,7 +81,7 @@ export class AppComponent {
 
   /******************************************************************************************************************
    *
-   * STOCK (FOR NO RELOAD)
+   * STOCK / CACHE (FOR NO RELOAD)
    *
    * ******************************************************************************************************************/
 
@@ -94,6 +95,7 @@ export class AppComponent {
   // MYGAME
   userRatingAll: UserRateInterface[] | undefined;
   myGameAll:HistoryMyGameInterface[] | undefined;
+  buyWhereUserNoReload:BuyWhereInterface[] = [];
 
 
 

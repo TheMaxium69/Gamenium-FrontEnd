@@ -12,9 +12,6 @@ import {NgForm} from "@angular/forms";
 })
 export class ModalBuywhereComponent implements OnInit{
 
-
-  buyWhereAll:BuyWhereInterface[] = [];
-
   constructor(protected app:AppComponent,
               private buyWhereService:BuyWhereService,) {}
 
@@ -26,13 +23,15 @@ export class ModalBuywhereComponent implements OnInit{
 
   getBuyWhere() {
 
-    this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[]; }) => {
-      if (reponseBuyWhere.message == "good") {
-        this.buyWhereAll = reponseBuyWhere.result;
-        console.log(this.buyWhereAll);
-      }
-    }, (error) => this.app.erreurSubcribe())
+    if (this.app.buyWhereUserNoReload.length == 0){
 
+      this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[]; }) => {
+        if (reponseBuyWhere.message == "good") {
+          this.app.buyWhereUserNoReload = reponseBuyWhere.result;
+        }
+      }, (error) => this.app.erreurSubcribe())
+
+    }
 
   }
 
@@ -40,9 +39,9 @@ export class ModalBuywhereComponent implements OnInit{
 
     this.buyWhereService.deleteBuyWhere(buyWhere.id, this.app.setURL(), this.app.createCorsToken()).subscribe((response: { message: string; }) => {
       if (response.message === "good") {
-        const index = this.buyWhereAll.findIndex(item => item.id === buyWhere.id);
+        const index = this.app.buyWhereUserNoReload.findIndex(item => item.id === buyWhere.id);
         if (index !== -1) {
-          this.buyWhereAll.splice(index, 1);
+          this.app.buyWhereUserNoReload.splice(index, 1);
         }
         Swal.fire({
           title: 'Succès!',
@@ -91,7 +90,7 @@ export class ModalBuywhereComponent implements OnInit{
     this.buyWhereService.createBuyWhere(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseCreateBuyWhere:{message:string, result:BuyWhereInterface}) => {
       if (reponseCreateBuyWhere.message == "good") {
 
-        this.buyWhereAll.push(reponseCreateBuyWhere.result);
+        this.app.buyWhereUserNoReload.push(reponseCreateBuyWhere.result);
 
         Swal.fire({
           title: 'Succès!',

@@ -113,10 +113,10 @@
 
             </div>
 
-            <ng-container *ngIf="buyWhereAll">
+            <ng-container *ngIf="app.buyWhereUserNoReload">
               <select id="buy_where" name="buyWhere" ngModel>
                 <option value="">Lieux d'achat</option>
-                <ng-container *ngFor="let buyWhereOne of buyWhereAll">
+                <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload">
                   <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                 </ng-container>
               </select>

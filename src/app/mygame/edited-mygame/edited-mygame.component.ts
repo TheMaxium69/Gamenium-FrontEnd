@@ -43,7 +43,7 @@ export class EditedMygameComponent implements OnInit {
 
   /* GLOBAL VARIABLE */
   deviseAll:DeviseInterface[]|undefined;
-  buyWhereAll:BuyWhereInterface[]|undefined;
+  // buyWhereAll:BuyWhereInterface[]|undefined;
   hmgCopyEtatAll:HmgCopyEtatInterface[]|undefined;
   hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
   hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
@@ -120,11 +120,13 @@ export class EditedMygameComponent implements OnInit {
       }
     })
 
-    this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[] | undefined; }) => {
-      if (reponseBuyWhere.message == "good") {
-        this.buyWhereAll = reponseBuyWhere.result;
-      }
-    })
+    if (this.app.buyWhereUserNoReload.length === 0 ){
+      this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[]; }) => {
+        if (reponseBuyWhere.message == "good") {
+          this.app.buyWhereUserNoReload = reponseBuyWhere.result;
+        }
+      })
+    }
 
     this.hmgCopyEtatService.getAllHmgCopyEtat(this.app.setURL()).subscribe((reponseEtat: { message: string; result: HmgCopyEtatInterface[] | undefined; }) => {
       if (reponseEtat.message == "good") {

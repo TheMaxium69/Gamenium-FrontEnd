@@ -20,7 +20,7 @@
 
 
         <ul>
-          <ng-container *ngFor="let oneBuyWhere of buyWhereAll">
+          <ng-container *ngFor="let oneBuyWhere of app.buyWhereUserNoReload">
             <li *ngIf="!oneBuyWhere.is_public">
               {{oneBuyWhere.name}} | use : {{ oneBuyWhere.nb_use || "0" }}
 

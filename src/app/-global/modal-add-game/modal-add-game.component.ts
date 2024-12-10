@@ -24,7 +24,7 @@ export class ModalAddGameComponent implements OnInit, OnDestroy {
               private gameService:GameService) {}
 
   deviseAll:DeviseInterface[]|undefined;
-  buyWhereAll:BuyWhereInterface[]|undefined;
+  // buyWhereAll:BuyWhereInterface[]|undefined;
   searchResults: GameInterface[] = [];
   searchValue: string = '';
   isFirstSearch: boolean = false;
@@ -89,12 +89,16 @@ export class ModalAddGameComponent implements OnInit, OnDestroy {
     })
 
     /* RECUPERE LES BUYWHERE*/
-    this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[] | undefined; }) => {
-      if (reponseBuyWhere.message == "good") {
-        this.buyWhereAll = reponseBuyWhere.result;
-      }
-    })
-
+    if (this.app.buyWhereUserNoReload.length == 0) {
+      this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: {
+        message: string;
+        result: BuyWhereInterface[];
+      }) => {
+        if (reponseBuyWhere.message == "good") {
+          this.app.buyWhereUserNoReload = reponseBuyWhere.result;
+        }
+      })
+    }
   }
 
   isLoadingMore:boolean = false;
