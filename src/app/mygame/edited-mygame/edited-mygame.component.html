@@ -1,4 +1,6 @@
 <modal-buywhere></modal-buywhere>
+<modal-tag></modal-tag>
+
 <section id="editedmygame" *ngIf="selectedMyGame" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
 
 <form #editedMyGame="ngForm" (ngSubmit)="updateMyGame(editedMyGame)">
@@ -184,7 +186,7 @@
 
         <div class="head-panel">
           <h2><i class="ri-price-tag-3-fill"></i>Tags</h2>
-          <i class="ri-more-2-fill"></i> <!--data-bs-toggle="modal" data-bs-target="#manageBuyWhere"-->
+          <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageTags"></i>
         </div>
 
         <ng-container *ngIf="AllTagsByUser.length > 0">
@@ -213,7 +215,7 @@
                   </a>
                 </li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item">Créer un tag</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#manageTags">Créer un tag</a></li>
               </ul>
 
 
