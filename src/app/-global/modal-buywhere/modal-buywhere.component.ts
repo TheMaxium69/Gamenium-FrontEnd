@@ -92,6 +92,8 @@ export class ModalBuywhereComponent implements OnInit{
 
         this.app.buyWhereUserNoReload.push(reponseCreateBuyWhere.result);
 
+        form.resetForm();
+
         Swal.fire({
           title: 'Succès!',
           text: nameNewBuyWhere + ' a bien été créer',

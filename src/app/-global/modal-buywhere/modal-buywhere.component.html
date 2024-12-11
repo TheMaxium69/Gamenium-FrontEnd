@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <p>Gerez ses lieux d'achats</p>
+<!--        <p>Gerez ses lieux d'achats</p>-->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
@@ -10,34 +10,89 @@
       <div class="modal-body">
         <!-- Insert content here -->
 
-
         <form id="addBuyWhere" #addFormBuyWhere="ngForm" (ngSubmit)="this.addBuyWhere(addFormBuyWhere)">
-          <input type="text" placeholder="new buywhere" name="name_buywhere" ngModel>
-          <button type="submit">Upload</button>
-
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-search-2-line"></i>Ajoutez un lieu d'achat</h2>
+            </div>
+            <input type="text" placeholder="Lieu d'achat" name="name_buywhere" ngModel>
+            <button class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" type="submit">Enregistrez</button>
+          </div>
         </form>
 
+        <div class="start-form" >
 
+          <!-- PLATEFORM -->
+          <div class="panel">
 
-        <ul>
-          <ng-container *ngFor="let oneBuyWhere of app.buyWhereUserNoReload">
-            <li *ngIf="!oneBuyWhere.is_public">
-              {{oneBuyWhere.name}} | use : {{ oneBuyWhere.nb_use || "0" }}
+            <div class="head-panel">
+              <h2><i class="ri-pencil-fill"></i>Éditez</h2>
+            </div>
 
-              <a (click)="deleteBuyWhere(oneBuyWhere)"> DELETE</a>
-            </li>
-          </ng-container>
-        </ul>
+            <div *ngIf="app.buyWhereUserNoReload">
+              <ng-container *ngFor="let oneBuyWhere of app.buyWhereUserNoReload">
+                <div *ngIf="!oneBuyWhere.is_public" class="buyWhereOne">
+                  <h3>
+                    {{oneBuyWhere.name}}
+                  </h3>
+                  <p>
+                    Utilisation : {{ oneBuyWhere.nb_use || "0" }}
+                  </p>
+                  <i class="ri-delete-bin-fill" (click)="deleteBuyWhere(oneBuyWhere)"></i>
+                </div>
+              </ng-container>
 
+              <style>
+                .buyWhereOne:first-child{
+                  margin-top: unset!important;
+                }
+                .buyWhereOne{
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin: 15px 0px;
 
+                  h3{
+                    width: 40%;
+                    text-align: start;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    word-break: break-word;
+                  }
+
+                  p{
+                    text-align: start;
+                    width: 30%;
+                  }
+
+                  i{
+                    width: 10%;
+                    font-size: 20px;
+                  }
+
+                  i:hover{
+                    color: red;
+                  }
+                }
+              </style>
+            </div>
+
+            <div *ngIf="!app.buyWhereUserNoReload">
+
+              <h3>Aucun lieu d'achat</h3>
+
+            </div>
+
+          </div>
+
+        </div>
 
 
       </div>
-
-
-
-
-
 
       <div class="modal-footer" style="margin-top: 74px;">
         <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
