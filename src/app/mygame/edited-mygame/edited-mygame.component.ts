@@ -73,8 +73,6 @@ export class EditedMygameComponent implements OnInit {
   nbSpeedrunExisting:number = 0;
   nbSpeedrunGenerate:number = 10;
 
-  /*Tags*/
-  AllTagsByUser: HmgTagsInterface[] = []
 
   debug(){console.log(this.idFormValideCopy)}
 
@@ -158,11 +156,15 @@ export class EditedMygameComponent implements OnInit {
       }
     })
 
-    this.hmgTagsService.getTagsAllByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((response) => {
-      if(response.message == "good"){
-        this.AllTagsByUser = response.result;
-      }
-    })
+    if (this.app.tagsUserNoReload.length === 0){
+      this.hmgTagsService.getTagsAllByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((response) => {
+        if(response.message == "good"){
+          this.app.tagsUserNoReload = response.result;
+        }
+      })
+    }
+
+
 
   }
 

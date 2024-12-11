@@ -2,26 +2,64 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-            <h3>Gérez vos tags</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-  
-  
+
+
         <div class="modal-body">
-          <p *ngIf="this.app.tagsUserNoReload.length == 0">Pas de tags</p>
-          
-            <div *ngFor="let tag of this.app.tagsUserNoReload" class="myRow">
-                <p>{{tag.name}}</p>
-                <p>{{tag.nb_use}}</p>
-                <button (click)="deleteTags(tag)">Supprimer</button>
+
+          <form id="addFormTag" #addFormTag="ngForm" (ngSubmit)="this.addTags(addFormTag)">
+            <div class="panel">
+              <div class="head-panel">
+                <h2><i class="ri-search-2-line"></i>Créez un tag</h2>
+              </div>
+              <input type="text" placeholder="Tag" name="name_tag" ngModel>
+              <button class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" type="submit">Ajoutez</button>
             </div>
+          </form>
+
+          <div class="start-form" >
+
+            <div class="panel">
+
+              <div class="head-panel">
+                <h2><i class="ri-pencil-fill"></i>Éditez</h2>
+              </div>
+
+              <div *ngIf="app.tagsUserNoReload">
+                <ng-container *ngFor="let tag of app.tagsUserNoReload; let i = index">
+                  <div *ngIf="!tag.is_public" class="buyWhereOne">
+                    <h3>
+                      <span class="badge" style="background-color: {{tag.color}}">
+                        {{ tag.name }}
+                      </span>
+                    </h3>
+                    <p>
+                      Utilisation : {{ tag.nb_use || "0" }}
+                    </p>
+                    <i class="ri-delete-bin-fill" (click)="deleteTags(tag, i)"></i>
+                  </div>
+                </ng-container>
+
+              </div>
+
+              <div *ngIf="app.tagsUserNoReload.length == 0">
+
+                <h3>Aucun tag</h3>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
         </div>
-  
+
         <div class="modal-footer" style="margin-top: 74px;">
           <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
         </div>
-  
+
       </div>
     </div>
   </div>
-  

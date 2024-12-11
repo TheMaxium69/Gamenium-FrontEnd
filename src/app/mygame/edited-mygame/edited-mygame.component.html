@@ -189,11 +189,11 @@
           <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageTags"></i>
         </div>
 
-        <ng-container *ngIf="AllTagsByUser.length > 0">
+        <ng-container *ngIf="app.tagsUserNoReload.length > 0">
           <div>
               <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
                 <p id="tags" *ngIf="tagsSelectedUser.length > 0">
-                  <ng-container *ngFor="let oneTags of AllTagsByUser">
+                  <ng-container *ngFor="let oneTags of app.tagsUserNoReload">
                     <span [class.displayNone]="!isTagInSelected(oneTags.id)" class="badge" style="background-color: {{oneTags.color}}">
                       <div>
                         {{ oneTags.name }}
@@ -206,7 +206,7 @@
                 <i class="ri-arrow-down-s-line"></i>
               </button>
               <ul class="dropdown-menu">
-                <li *ngFor="let tag of AllTagsByUser">
+                <li *ngFor="let tag of app.tagsUserNoReload">
                   <a class="dropdown-item" (click)="toggleTags(tag.id)">
                     <i [class.ri-checkbox-blank-line]="!isTagInSelected(tag.id)"
                        [class.ri-checkbox-fill]="isTagInSelected(tag.id)"

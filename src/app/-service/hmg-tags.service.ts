@@ -14,4 +14,8 @@ export class HmgTagsService {
     return this.http.get<ApicallInterface>(url + '/tagsbyuser' , options)
   }
 
+  deleteTag(id: number, url:string, options: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.delete<ApicallInterface>(url + '/deletetag/' + id, options)
+  }
+
 }

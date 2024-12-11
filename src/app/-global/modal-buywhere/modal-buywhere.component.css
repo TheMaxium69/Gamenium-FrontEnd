@@ -184,3 +184,40 @@ select{
   font-weight: 400;
   margin-bottom: 15px;
 }
+
+
+.buyWhereOne:first-child{
+  margin-top: unset!important;
+}
+.buyWhereOne{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0px;
+
+  h3{
+    width: 40%;
+    text-align: start;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+
+  p{
+    text-align: start;
+    width: 30%;
+  }
+
+  i{
+    width: 10%;
+    font-size: 20px;
+  }
+
+  i:hover{
+    color: red;
+  }
+}

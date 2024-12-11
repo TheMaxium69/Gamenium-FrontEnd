@@ -22,7 +22,6 @@
 
         <div class="start-form" >
 
-          <!-- PLATEFORM -->
           <div class="panel">
 
             <div class="head-panel">
@@ -42,43 +41,6 @@
                 </div>
               </ng-container>
 
-              <style>
-                .buyWhereOne:first-child{
-                  margin-top: unset!important;
-                }
-                .buyWhereOne{
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: space-between;
-                  align-items: center;
-                  margin: 15px 0px;
-
-                  h3{
-                    width: 40%;
-                    text-align: start;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 1;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    word-break: break-word;
-                  }
-
-                  p{
-                    text-align: start;
-                    width: 30%;
-                  }
-
-                  i{
-                    width: 10%;
-                    font-size: 20px;
-                  }
-
-                  i:hover{
-                    color: red;
-                  }
-                }
-              </style>
             </div>
 
             <div *ngIf="!app.buyWhereUserNoReload">
