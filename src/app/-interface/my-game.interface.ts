@@ -3,6 +3,7 @@ import { UserRateInterface } from "./user-rate.interface";
 import {UserInterface} from "./user.interface";
 import {GameInterface} from "./game.interface";
 import {PlateformInterface} from "./plateform.interface";
+import {HmgTagsInterface} from "./hmg-tags.interface";
 
 export interface MyGameInterface {
 
@@ -15,6 +16,7 @@ export interface MyGameInterface {
   lifetime_rating: number,
   wish_list: boolean,
   plateform:PlateformInterface,
+  hmgTags:HmgTagsInterface[],
 
 }
 

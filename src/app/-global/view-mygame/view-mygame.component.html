@@ -181,6 +181,16 @@
                 </li>
               </ng-container>
 
+
+              <li *ngIf="this.app.viewMyGame.myGame.hmgTags.length > 0">
+                <p>Tags :</p>
+                <h3 id="tags">
+                  <ng-container *ngFor="let oneTags of this.app.viewMyGame.myGame.hmgTags">
+                    <span class="badge" style="background-color: {{oneTags.color}}">{{ oneTags.name }}</span>
+                  </ng-container>
+                </h3>
+              </li>
+
               <!--<p>Wish list : {{ this.app.viewMyGame?.myGame?.wish_list || "Non" }}</p>-->
 
               <!-- SI YA UN SEUL EXEMPLAIRE -->

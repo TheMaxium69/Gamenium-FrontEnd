@@ -117,6 +117,16 @@
 
         <p><small>Nombre d'exemplaire {{ Hmg.copyGame.length || "1*" }}</small></p>
 
+        <ng-container *ngIf="Hmg.myGame.hmgTags.length > 0">
+          <p id="tags"><small>
+
+            <ng-container *ngFor="let oneTags of Hmg.myGame.hmgTags">
+              <span class="badge" style="background-color: {{oneTags.color}}">{{ oneTags.name }}</span>
+            </ng-container>
+
+          </small></p>
+        </ng-container>
+
         <!-- DATE D'AJOUT -->
         <p><small> Ajouté le : {{ Hmg.myGame.added_at | date:'dd / MM / yyyy' }} </small></p>
       </div>

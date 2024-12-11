@@ -11,7 +11,9 @@ export interface HistoryMyGameInterface {
   speedrun:HmgSpeedrunInterface[],
   screenshot:any /*Interface a créer*/
   rate:UserRateInterface,
+
   isDelete: boolean;
   tempNote:number|undefined;
+
 
 }
