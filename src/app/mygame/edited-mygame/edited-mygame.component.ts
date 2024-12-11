@@ -452,7 +452,7 @@ export class EditedMygameComponent implements OnInit {
       difficulty_rating: form.value.difficulty_rating,
       lifetime_rating: form.value.lifetime_rating,
       wish_list: form.value.wish_list,
-      tags: this.tagsSelectedUser,
+      hmgTags: this.tagsSelectedUser,
     };
 
     /* MODIFIER LA NOTE */
