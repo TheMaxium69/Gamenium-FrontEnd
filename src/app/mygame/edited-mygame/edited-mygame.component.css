@@ -301,6 +301,7 @@ input[type="text"],
 input[type="number"],
 input[type="date"],
 select,
+.inputSelect,
 textarea{
   background: #F3F3F3;
   border-top: unset;
@@ -328,16 +329,19 @@ textarea{
 
 input[type="text"]::placeholder,
 input[type="number"]::placeholder,
-textarea::placeholder{
+textarea::placeholder,
+.placeholderInput{
   color: var(--third-color);
   font-size: 14px;
   font-weight: 300;
 }
 
-select:focus-visible {
+select:focus-visible,
+.inputSelect{
   outline: none;
 }
-select{
+select,
+.inputSelect{
   background: #F3F3F3;
   border-top: unset;
   border-right: unset;
@@ -353,6 +357,38 @@ select{
   transition: border-bottom 0.3s ease;
   font-weight: 400;
   margin-bottom: 15px;
+}
+
+.inputSelect{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+
+  #tags {
+    .badge{
+      margin-right: 5px;
+
+      div{
+        padding-left: 10px;
+      }
+
+      i{
+        opacity: 0;
+      }
+    }
+
+    .badge:hover i{
+      opacity: 1;
+    }
+  }
+
+
+
+
 }
 
 /* END */

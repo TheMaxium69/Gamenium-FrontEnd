@@ -175,7 +175,7 @@ export class EditedMygameComponent implements OnInit {
   tagsSelectedUser: number[] = []
 
   /* FOR TAGS IS CHECKED */
-  isTagInHmgTags(tagId: number): boolean {
+  isTagInSelected(tagId: number): boolean {
     if(this.tagsSelectedUser.some((id: number) => id === tagId)){
       return true;
     } else {
