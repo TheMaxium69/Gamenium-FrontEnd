@@ -573,6 +573,15 @@ export class EditedMygameComponent implements OnInit {
 
         this.selectedMyGame = reponseMyGameUpdate.result;
 
+        if (this.app.myGameAll){
+          const index = this.app.myGameAll.findIndex(item => item.myGame.id === reponseMyGameUpdate.result.myGame.id);
+          if (index !== -1) {
+            this.app.myGameAll[index] = reponseMyGameUpdate.result;
+            this.app.myGameAll[index].tempNote = reponseMyGameUpdate.result.rate.rating;
+          }
+        }
+
+
         /* RE SYNCRO LES TAGS */
         if (this.selectedMyGame){
           this.selectedMyGame.myGame.hmgTags.forEach(oneTags => {
