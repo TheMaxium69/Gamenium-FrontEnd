@@ -14,6 +14,7 @@
                 <h2><i class="ri-search-2-line"></i>Créez un tag</h2>
               </div>
               <input type="text" placeholder="Tag" name="name_tag" ngModel>
+              <input type="color" name="color_tag" ngModel>
               <button class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" type="submit">Ajoutez</button>
             </div>
           </form>
