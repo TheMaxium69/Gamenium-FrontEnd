@@ -16,6 +16,7 @@ import {MyGameInterface} from "../../-interface/my-game.interface";
 import {BuyWhereInterface} from "../../-interface/buy-where.interface";
 import {BuyWhereService} from "../../-service/buy-where.service";
 import Swal from "sweetalert2";
+import { HmgTagsInterface } from 'src/app/-interface/hmg-tags.interface';
 
 @Component({
   selector: 'app-edited-mygame',
@@ -69,6 +70,9 @@ export class EditedMygameComponent implements OnInit {
   nbSpeedrun:number = 0;
   nbSpeedrunExisting:number = 0;
   nbSpeedrunGenerate:number = 10;
+
+  /*Tags*/
+  AllTagsByUser: HmgTagsInterface[] = []
 
   debug(){console.log(this.idFormValideCopy)}
 
@@ -143,6 +147,13 @@ export class EditedMygameComponent implements OnInit {
     this.hmgCopyRegionService.getAllHmgCopyRegion(this.app.setURL()).subscribe((reponseRegion: { message: string; result: HmgCopyRegionInterface[] | undefined; }) => {
       if (reponseRegion.message == "good") {
         this.hmgCopyRegionAll = reponseRegion.result;
+      }
+    })
+
+    this.historyMyGameService.getTagsAllByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((response) => {
+      if(response.message == "good"){
+        this.AllTagsByUser = response.result;
+        console.log(this.AllTagsByUser);
       }
     })
 

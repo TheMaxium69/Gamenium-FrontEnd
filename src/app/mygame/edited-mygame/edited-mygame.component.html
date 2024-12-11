@@ -38,6 +38,20 @@
 
   </section>
 
+  <ng-container *ngIf="AllTagsByUser.length > 0">
+    <div>
+        <div *ngFor="let tag of AllTagsByUser">
+          <input
+            type="checkbox"
+            value="{{tag.id}}"
+          >
+          <label>
+            {{tag.name}}
+          </label>
+        </div>
+    </div>
+  </ng-container>
+
   <ng-container *ngIf="selectedMyGame.myGame">
   <div id="startFormEditedMyGame">
 

@@ -43,4 +43,10 @@ export class HistoryMyGameService {
   deleteMyGame(myGameId: number, url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface> {
     return this.http.delete<ApicallInterface>(url + '/deleteMyGame/' + myGameId, options);
   }
+
+  //tags
+
+  getTagsAllByUser(url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface>{
+    return this.http.get<ApicallInterface>(url + '/tagsbyuser' , options)
+  }
 }
