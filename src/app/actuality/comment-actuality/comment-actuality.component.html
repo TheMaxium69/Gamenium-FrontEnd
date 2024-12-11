@@ -87,7 +87,7 @@
     <ng-container *ngIf="commentReplyAll[comment.id]">
       <div class="reply-display">
         <div class="ShowReply"
-        (click)="showCommentReply()">
+        (click)="checkShowCommentReply()">
           <i class="ri-arrow-down-s-line"></i>
           <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
         </div>
@@ -149,7 +149,7 @@
         <ng-container *ngIf="commentReplyAll[comment.id]">
           <div class="reply-display">
             <div class="ShowReply"
-            (click)="showCommentReply()">
+            (click)="checkShowCommentReply()">
               <i class="ri-arrow-down-s-line"></i>
               <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
             </div>
@@ -207,7 +207,7 @@
             <ng-container *ngIf="commentReplyAll[comment.id]">
               <div class="reply-display">
                 <div class="ShowReply"
-                (click)="showCommentReply()">
+                (click)="checkShowCommentReply()">
                   <i class="ri-arrow-down-s-line"></i>
                   <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
                 </div>
@@ -265,7 +265,7 @@
               <ng-container *ngIf="commentReplyAll[comment.id]">
                 <div class="reply-display">
                   <div class="ShowReply"
-                  (click)="showCommentReply()">
+                  (click)="checkShowCommentReply()">
                     <i class="ri-arrow-down-s-line"></i>
                     <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
                   </div>

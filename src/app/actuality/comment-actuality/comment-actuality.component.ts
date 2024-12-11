@@ -675,11 +675,25 @@ export class CommentActualityComponent implements OnInit{
     )
   }
 
-  showCommentReply() {
-    //ca l'affiche mais j'arrive pas a la cacher par la suite
+  addShowCommentReply() {
     const replyForm = document.querySelector("#all-reply") as HTMLElement;
-    replyForm.classList.remove('displayNone')
-    replyForm.classList.add('display')
-    this.showReply = true
+      replyForm.classList.remove('displayNone')
+      replyForm.classList.add('display')
+      this.showReply = true
+  }
+
+  removeShowCommentReply() {
+    const replyForm = document.querySelector("#all-reply") as HTMLElement;
+    replyForm.classList.add('displayNone')
+    replyForm.classList.remove('display')
+      this.showReply = false
+  }
+
+  checkShowCommentReply() {
+    if (this.showReply === false) {
+      this.addShowCommentReply()
+    } else {
+      this.removeShowCommentReply()
+    }
   }
 }
