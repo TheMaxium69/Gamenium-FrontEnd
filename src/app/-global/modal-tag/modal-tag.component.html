@@ -1,0 +1,27 @@
+<div class="modal fade text-center" id="manageTags" tabindex="-1" aria-labelledby="manageTagsLabel" aria-hidden="true" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h3>Gérez vos tags</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+  
+        <div class="modal-body">
+          <p *ngIf="this.app.tagsUserNoReload.length == 0">Pas de tags</p>
+          
+            <div *ngFor="let tag of this.app.tagsUserNoReload" class="myRow">
+                <p>{{tag.name}}</p>
+                <p>{{tag.nb_use}}</p>
+                <button (click)="deleteTags(tag)">Supprimer</button>
+            </div>
+        </div>
+  
+        <div class="modal-footer" style="margin-top: 74px;">
+          <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

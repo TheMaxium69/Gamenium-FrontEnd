@@ -63,6 +63,7 @@ import { BackToTopComponent } from './-global/back-to-top/back-to-top.component'
 import { ModalProviderComponent } from './-global/modal-provider/modal-provider.component';
 import { TestComponent } from './test/test.component';
 import { ModalBuywhereComponent } from './-global/modal-buywhere/modal-buywhere.component';
+import { ModalTagComponent } from './-global/modal-tag/modal-tag.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import { ModalBuywhereComponent } from './-global/modal-buywhere/modal-buywhere.
     BackToTopComponent,
     ModalProviderComponent,
     TestComponent,
-    ModalBuywhereComponent
+    ModalBuywhereComponent,
+    ModalTagComponent
 
   ],
   imports: [
