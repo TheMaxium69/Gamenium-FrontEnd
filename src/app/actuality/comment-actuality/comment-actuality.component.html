@@ -84,6 +84,23 @@
         </div>
       </div>
     </div>
+    <ng-container *ngIf="commentReplyAll[comment.id]">
+      <div class="reply-display">
+        <div class="ShowReply"
+        (click)="showCommentReply()">
+          <i class="ri-arrow-down-s-line"></i>
+          <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
+        </div>
+        <div id="all-reply" class="displayNone">
+          <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
+            <small>Comment : {{ commentReply['content'] }}</small>
+              <button (click)="deleteCommentReply(commentReply, i)">delete</button>
+            <br>
+          </ng-container>
+        </div>
+        <br><br>
+      </div>
+    </ng-container>
     <div class="comment-border mb-4"></div>
   </ng-container>
 </ng-container>
@@ -129,6 +146,23 @@
             </div>
           </div>
         </div>
+        <ng-container *ngIf="commentReplyAll[comment.id]">
+          <div class="reply-display">
+            <div class="ShowReply"
+            (click)="showCommentReply()">
+              <i class="ri-arrow-down-s-line"></i>
+              <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
+            </div>
+            <div id="all-reply" class="displayNone">
+              <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
+                <small>Comment : {{ commentReply['content'] }}</small>
+                  <button (click)="deleteCommentReply(commentReply, i)">delete</button>
+                <br>
+              </ng-container>
+            </div>
+            <br><br>
+          </div>
+        </ng-container>
         <div id="b{{comment.id}}" class="comment-border mb-4"></div>
       </ng-container>
     </ng-container>
@@ -170,18 +204,25 @@
               <span class="comment-action">{{ nbLikeByComment[comment.id] && nbLikeByComment[comment.id] >= 2 ? 'Likes' : 'Like' }}</span>
               </div>
             </div>
+            <ng-container *ngIf="commentReplyAll[comment.id]">
+              <div class="reply-display">
+                <div class="ShowReply"
+                (click)="showCommentReply()">
+                  <i class="ri-arrow-down-s-line"></i>
+                  <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
+                </div>
+                <div id="all-reply" class="displayNone">
+                  <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
+                    <small>Comment : {{ commentReply['content'] }}</small>
+                      <button (click)="deleteCommentReply(commentReply, i)">delete</button>
+                    <br>
+                  </ng-container>
+                </div>
+                <br><br>
+              </div>
+            </ng-container>
             <div class="comment-border mb-4"></div>
           </div>
-          <ng-container *ngIf="commentReplyAll[comment.id]">
-            <p>affiché un btn - nb : {{commentReplyAll[comment.id].length}}</p>
-
-            <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
-              <small>Comment : {{ commentReply['content'] }}</small>
-                <button (click)="deleteCommentReply(commentReply, i)">delete</button>
-              <br>
-            </ng-container>
-            <br><br>
-          </ng-container>
         </ng-container>
       </ng-container>
     </div>
@@ -221,6 +262,23 @@
               <span class="comment-action">{{ nbLikeByComment[comment.id] && nbLikeByComment[comment.id] >= 2 ? 'Likes' : 'Like' }}</span>
               </div>
             </div>
+              <ng-container *ngIf="commentReplyAll[comment.id]">
+                <div class="reply-display">
+                  <div class="ShowReply"
+                  (click)="showCommentReply()">
+                    <i class="ri-arrow-down-s-line"></i>
+                    <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
+                  </div>
+                  <div id="all-reply" class="displayNone">
+                    <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
+                      <small>Comment : {{ commentReply['content'] }}</small>
+                        <button (click)="deleteCommentReply(commentReply, i)">delete</button>
+                      <br>
+                    </ng-container>
+                  </div>
+                  <br><br>
+                </div>
+              </ng-container>
             <div class="comment-border mb-4"></div>
           </div>
         </ng-container>
@@ -228,7 +286,6 @@
     </div>
   </div>
 </ng-container>
-
 
 <ng-container *ngIf="!commentByActu">
 

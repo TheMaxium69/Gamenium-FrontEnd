@@ -3,7 +3,7 @@ import {PostActuInterface} from "../../-interface/post-actu.interface";
 import {ActivatedRoute} from "@angular/router";
 import {PostActuService} from "../../-service/post-actu.service";
 import {AppComponent} from "../../app.component";
-import {NgForm} from "@angular/forms";
+import {NgForm, NgModel} from "@angular/forms";
 import {CommentService} from "../../-service/comment.service";
 import {CommentInterface} from "../../-interface/comment.interface";
 import {BadgeService} from "../../-service/badge.service";
@@ -42,6 +42,7 @@ export class CommentActualityComponent implements OnInit{
   sortDateOrLike: boolean = true;
   text: string = ""
   textLenght: number = 0;
+  showReply: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -459,7 +460,9 @@ export class CommentActualityComponent implements OnInit{
   }
 
   replyToComment(commentId: number) {
-    console.log(commentId)
+    const replyForm = document.querySelector("#addReplyForm") as HTMLElement;
+    replyForm.classList.remove('displayNone')
+    replyForm.classList.add('display')
   }
 
   likeComment(commentId: number, action: string) {
@@ -672,4 +675,11 @@ export class CommentActualityComponent implements OnInit{
     )
   }
 
+  showCommentReply() {
+    //ca l'affiche mais j'arrive pas a la cacher par la suite
+    const replyForm = document.querySelector("#all-reply") as HTMLElement;
+    replyForm.classList.remove('displayNone')
+    replyForm.classList.add('display')
+    this.showReply = true
+  }
 }
