@@ -17,6 +17,7 @@ import {BuyWhereInterface} from "../../-interface/buy-where.interface";
 import {BuyWhereService} from "../../-service/buy-where.service";
 import Swal from "sweetalert2";
 import { HmgTagsInterface } from 'src/app/-interface/hmg-tags.interface';
+import {HmgTagsService} from "../../-service/hmg-tags.service";
 
 @Component({
   selector: 'app-edited-mygame',
@@ -36,6 +37,7 @@ export class EditedMygameComponent implements OnInit {
     private hmgCopyEtatService:HmgCopyEtatService,
     private hmgCopyFormatService:HmgCopyFormatService,
     private hmgCopyRegionService:HmgCopyRegionService,
+    private hmgTagsService:HmgTagsService,
   ) {}
 
   /* SELECTED */
@@ -95,6 +97,12 @@ export class EditedMygameComponent implements OnInit {
       if (reponseMyGame.message == "good") {
         this.selectedMyGame = reponseMyGame.result;
 
+        if (this.selectedMyGame){
+          this.selectedMyGame.myGame.hmgTags.forEach(oneTags => {
+            this.tagsSelectedUser.push(oneTags.id);
+          })
+        }
+
         /* GEREZ LES COPY*/
         this.calcCopy();
 
@@ -150,10 +158,9 @@ export class EditedMygameComponent implements OnInit {
       }
     })
 
-    this.historyMyGameService.getTagsAllByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((response) => {
+    this.hmgTagsService.getTagsAllByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((response) => {
       if(response.message == "good"){
         this.AllTagsByUser = response.result;
-        console.log(this.AllTagsByUser);
       }
     })
 
@@ -164,6 +171,25 @@ export class EditedMygameComponent implements OnInit {
   * AFFICHAGE
   *
   * */
+
+  tagsSelectedUser: number[] = []
+
+  /* FOR TAGS IS CHECKED */
+  isTagInHmgTags(tagId: number): boolean {
+    if(this.tagsSelectedUser.some((id: number) => id === tagId)){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  toggleTags(tagId: number){
+    if (this.tagsSelectedUser.includes(tagId)) {
+      this.tagsSelectedUser = this.tagsSelectedUser.filter(id => id !== tagId);
+    } else {
+      this.tagsSelectedUser.push(tagId);
+    }
+  };
 
 
   tabActive(tab:number){
@@ -408,7 +434,7 @@ export class EditedMygameComponent implements OnInit {
 
   updateMyGame(form: NgForm){
 
-    console.log(form.value);
+    // console.log(form.value);
 
     // console.log(`Number of copies: ${copyCount}`);
     let is_pinned: boolean | undefined = this.selectedMyGame?.myGame.is_pinned
@@ -426,6 +452,7 @@ export class EditedMygameComponent implements OnInit {
       difficulty_rating: form.value.difficulty_rating,
       lifetime_rating: form.value.lifetime_rating,
       wish_list: form.value.wish_list,
+      tags: this.tagsSelectedUser,
     };
 
     /* MODIFIER LA NOTE */
@@ -533,6 +560,7 @@ export class EditedMygameComponent implements OnInit {
       speedrun:newSpeedrun,
       screenshot:newScreenshot
     }
+
     // return console.log(updateHistoryMyGame)
     console.log(updateHistoryMyGame)
 
@@ -542,6 +570,13 @@ export class EditedMygameComponent implements OnInit {
       if (reponseMyGameUpdate.message == "updated game") {
 
         this.selectedMyGame = reponseMyGameUpdate.result;
+
+        /* RE SYNCRO LES TAGS */
+        if (this.selectedMyGame){
+          this.selectedMyGame.myGame.hmgTags.forEach(oneTags => {
+            this.tagsSelectedUser.push(oneTags.id);
+          })
+        }
 
         this.calcSpeedrun() /* CALCULER CAR QUAND UN SPEEDRUN EST VIDE IL LE SUPPRIME*/
 

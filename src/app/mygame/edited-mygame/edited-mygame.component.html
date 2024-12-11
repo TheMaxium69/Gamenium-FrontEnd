@@ -38,20 +38,6 @@
 
   </section>
 
-  <ng-container *ngIf="AllTagsByUser.length > 0">
-    <div>
-        <div *ngFor="let tag of AllTagsByUser">
-          <input
-            type="checkbox"
-            value="{{tag.id}}"
-          >
-          <label>
-            {{tag.name}}
-          </label>
-        </div>
-    </div>
-  </ng-container>
-
   <ng-container *ngIf="selectedMyGame.myGame">
   <div id="startFormEditedMyGame">
 
@@ -193,6 +179,26 @@
         </div>
 
       </div>
+
+      <div class="panel">
+
+        <div class="head-panel">
+          <h2><i class="ri-price-tag-3-fill"></i>Tags</h2>
+          <i class="ri-more-2-fill"></i> <!--data-bs-toggle="modal" data-bs-target="#manageBuyWhere"-->
+        </div>
+
+        <ng-container *ngIf="AllTagsByUser.length > 0">
+          <div>
+            <div *ngFor="let tag of AllTagsByUser">
+              <input type="checkbox" id="tag{{tag.id}}" [checked]="isTagInHmgTags(tag.id)" (click)="toggleTags(tag.id)">
+              {{ tag.name }}
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+
+
     </section>
 
     <section id="tab">
