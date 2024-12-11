@@ -18,8 +18,8 @@ export class CommentService {
     return this.http.post<ApicallInterface>(url + '/commentInActu/', body, option);
   }
 
-  deleteCommentInActu(id: number, url:string): Observable<ApicallInterface> {
-    return this.http.delete<ApicallInterface>(url+ '/comment/'+id);
+  deleteCommentInActu(id: number, url:string, option: { headers: HttpHeaders }): Observable<ApicallInterface> {
+    return this.http.delete<ApicallInterface>(url+ '/comment/'+id, option);
   }
 
   getCommentsByUser(url: string, option: { headers: HttpHeaders }): Observable<ApicallInterface> {

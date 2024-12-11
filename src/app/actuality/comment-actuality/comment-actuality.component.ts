@@ -405,7 +405,7 @@ export class CommentActualityComponent implements OnInit{
 
   onDeleteBtnClick(commentId: number) {
     // console.log(commentId);
-    this.commentService.deleteCommentInActu(commentId, this.app.setURL()).subscribe((ReponseApi) => {
+    this.commentService.deleteCommentInActu(commentId, this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
       if (ReponseApi.message == 'Comment deleted successfully') {
         const borderToDelete = document.getElementById('b'+commentId)
         const commentToDelete = document.getElementById('c'+commentId)
