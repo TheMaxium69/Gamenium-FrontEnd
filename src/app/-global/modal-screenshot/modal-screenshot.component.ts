@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {HmgScreenshotService} from "../../-service/hmg-screenshot.service";
 import {HmgScreenshotCategoryInterface} from "../../-interface/hmg-screenshot-category.interface";
 import Swal from "sweetalert2";
 import {UploadProfilePictureService} from "../../-service/upload.service";
+import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
+import {HmgScreenshotInterface} from "../../-interface/hmg-screenshot.interface";
 
 @Component({
   selector: 'modal-screenshot',
@@ -15,6 +17,13 @@ export class ModalScreenshotComponent implements OnInit {
   constructor(protected app:AppComponent,
               private hmgScreenshotService: HmgScreenshotService,
               private uploadService: UploadProfilePictureService) {}
+
+
+  @Input()
+  public myGame:HistoryMyGameInterface|undefined;
+
+  @Output()
+  public screenshotAdded: EventEmitter<HmgScreenshotInterface> = new EventEmitter();
 
   ngOnInit() {
     this.getCategory();
@@ -63,10 +72,22 @@ export class ModalScreenshotComponent implements OnInit {
     // const uploadButton = document.querySelector('#upload-button') as HTMLButtonElement
     // uploadButton.disabled = true
     // uploadButton.textContent = "Envoie du fichier en cours..."
+    if (!this.myGame){
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur inconnue',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+      })
+      return;
+    }
 
-    this.uploadService.uploadScreenshot(this.selectedFile, 1, 2, this.app.setURL(), this.app.createCorsToken(true)).subscribe(responseUploadScreenshot => {
+    this.uploadService.uploadScreenshot(this.selectedFile, 1, this.myGame?.id, this.app.setURL(), this.app.createCorsToken(true)).subscribe(responseUploadScreenshot => {
 
       if (responseUploadScreenshot.message == "good"){
+
+        this.screenshotAdded.emit(responseUploadScreenshot.result);
 
         Swal.fire({
           title: 'Succès!',
@@ -75,10 +96,11 @@ export class ModalScreenshotComponent implements OnInit {
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
+
       } else {
 
         Swal.fire({
-          title: 'Erreur!',
+          title: 'Échec!',
           text: 'Échec de l\'upload de votre screenshot ',
           icon: 'error',
           confirmButtonText: 'Ok',

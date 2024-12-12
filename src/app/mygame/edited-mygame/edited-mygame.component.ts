@@ -20,6 +20,8 @@ import { HmgTagsInterface } from 'src/app/-interface/hmg-tags.interface';
 import {HmgTagsService} from "../../-service/hmg-tags.service";
 import { HmgCopyLanguageService } from 'src/app/-service/hmg-copy-language.service';
 import { HmgCopyLanguageInterface } from 'src/app/-interface/hmg-copy-language.interface';
+import {HmgScreenshotInterface} from "../../-interface/hmg-screenshot.interface";
+import {HmgScreenshotService} from "../../-service/hmg-screenshot.service";
 
 @Component({
   selector: 'app-edited-mygame',
@@ -39,20 +41,12 @@ export class EditedMygameComponent implements OnInit {
     private hmgCopyRegionService:HmgCopyRegionService,
     private hmgTagsService:HmgTagsService,
     private hmgLanguageService:HmgCopyLanguageService,
+    private hmgScreenshotService:HmgScreenshotService
   ) {}
 
   /* SELECTED */
   idOneMyGame:number|any;
   selectedMyGame:HistoryMyGameInterface|undefined;
-
-  /* GLOBAL VARIABLE */
-  // deviseAll:DeviseInterface[]|undefined;
-  // buyWhereAll:BuyWhereInterface[]|undefined;
-  // hmgCopyEtatAll:HmgCopyEtatInterface[]|undefined;
-  // hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
-  // hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
-  // hmgCopyLanguageAll:HmgCopyLanguageInterface[]|undefined;
-
 
   /*
   *
@@ -75,6 +69,8 @@ export class EditedMygameComponent implements OnInit {
   nbSpeedrun:number = 0;
   nbSpeedrunExisting:number = 0;
   nbSpeedrunGenerate:number = 10;
+
+
 
 
   debug(){console.log(this.idFormValideCopy)}
@@ -755,6 +751,55 @@ export class EditedMygameComponent implements OnInit {
   /*
   *
   * END UPDATE MY GAME
+  *
+  * */
+
+  /*
+  *
+  * SCREENSHOT
+  *
+  * */
+
+  deleteScreenshot(screenshot: HmgScreenshotInterface, index:number) {
+
+    this.hmgScreenshotService.deleteScreenshot(screenshot.id, this.app.setURL(), this.app.createCorsToken()).subscribe((responseUploadScreenshot:{message:string}) => {
+      if (responseUploadScreenshot.message == "good"){
+       if (this.selectedMyGame){
+         this.selectedMyGame.screenshot.splice(index, 1);
+       }
+
+        Swal.fire({
+          title: 'Succès!',
+          text: 'Votre screenshot à bien été supprimé.',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
+        })
+
+      } else {
+
+        Swal.fire({
+          title: 'Échec!',
+          text: 'Échec de la suppresion de votre screenshot.',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
+        })
+      }
+    }, (error) => { this.app.erreurSubcribe() })
+
+
+
+
+  }
+
+  onChangeScreenshot(newScreenshot:HmgScreenshotInterface){
+    this.selectedMyGame?.screenshot.push(newScreenshot);
+  }
+
+  /*
+  *
+  * END SCREENSHOT
   *
   * */
 
