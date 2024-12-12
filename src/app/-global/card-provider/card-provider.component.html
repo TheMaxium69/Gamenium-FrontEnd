@@ -37,18 +37,35 @@
 
   <div class="provider_card" *ngIf="game">
     <!-- Provider Color Bar -->
-    <div
-      class="provider_color game"
-      [style.background-image]="'url(' + game.image.small_url + ')'"
-      [routerLink]="['/gameactu', game.id]"
-    ></div>
+    <ng-container *ngIf="game.image.icon_url == this.app.noBoxartImage_default">
+      <div
+        class="provider_color game"
+        [style.background-image]="'url(' + app.noBoxartImage + ')'"
+        [routerLink]="['/gameactu', game.id]"
+      ></div>
+    </ng-container>
+
+
+    <ng-container *ngIf="game.image.icon_url != this.app.noBoxartImage_default">
+      <div
+        class="provider_color game"
+        [style.background-image]="'url(' + game.image.small_url + ')'"
+        [routerLink]="['/gameactu', game.id]"
+      ></div>
+    </ng-container>
 
     <!-- Provider Profile Image -->
     <div
       class="provider_profile"
       [routerLink]="['/gameactu', game.id]"
     >
+
+      <ng-container *ngIf="game.image.icon_url == this.app.noBoxartImage_default">
+        <div class="img-pp pp-shadow" [style.background-image]="'url(' + app.noBoxartImage + ')'"></div>
+      </ng-container>
+      <ng-container *ngIf="game.image.icon_url != this.app.noBoxartImage_default">
       <div class="img-pp pp-shadow" [style.background-image]="'url(' + game.image.small_url + ')'"></div>
+      </ng-container>
     </div>
 
     <!-- Provider Card Content -->

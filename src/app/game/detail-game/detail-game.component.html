@@ -355,76 +355,27 @@
 
 
 <!-- SECTION CARROUSEL -->
-<div class="carroussel-container" >
-    <div class="carroussel" >
-      <section style="display: none">
+<div class="carroussel-container">
+    <div class="carroussel">
+      <section *ngIf="GiantBomb && GiantBomb.picture.length > 1">
 
         <div id="cCarousel">
           <div class="arrow" id="prev"><i class="ri-arrow-left-s-line"></i></div>
           <div class="arrow" id="next"><i class="ri-arrow-right-s-line"></i></div>
 
           <div id="carousel-vp">
-            <div id="cCarousel-inner">
+            <div id="cCarousel-inner" style="overflow-y: hidden !important;">
 
-              <article class="cCarousel-item">
-                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                <div class="infos">
+              <ng-container *ngFor="let picture of GiantBomb.picture; let i = index">
+                <article class="cCarousel-item">
+                  <img [src]="picture" alt="">
+                  <div class="infos">
                     <div class="carrousel-sep"></div>
-                  <p>Title 1 / 6</p>
-                </div>
-              </article>
+                    <p>Title {{ i + 1}} / {{ GiantBomb.picture.length }}</p>
+                  </div>
+                </article>
+              </ng-container>
 
-              <article class="cCarousel-item">
-                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                <div class="infos">
-                    <div class="carrousel-sep"></div>
-                  <p>Title 2 / 6</p>
-                </div>
-              </article>
-
-              <article class="cCarousel-item">
-                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                <div class="infos">
-                    <div class="carrousel-sep"></div>
-                  <p>Title 3 / 6</p>
-                </div>
-              </article>
-
-              <article class="cCarousel-item">
-                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                <div class="infos">
-                    <div class="carrousel-sep"></div>
-                  <p>Title 4 / 6</p>
-                </div>
-              </article>
-
-              <article class="cCarousel-item">
-                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                <div class="infos">
-                    <div class="carrousel-sep"></div>
-                  <p>Title 5 / 6</p>
-                </div>
-              </article>
-
-
-
-
-              <article class="cCarousel-item">
-                <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                <div class="infos">
-                    <div class="carrousel-sep"></div>
-                  <p>Title 6 / 6</p>
-                </div>
-              </article>
-
-
-              <article class="cCarousel-item" *ngIf="gameSelected?.image?.icon_url">
-                <img [src]="gameSelected?.image?.icon_url" alt="icon_url">
-                <div class="infos">
-                  <div class="carrousel-sep"></div>
-                  <p>Title 1 / 8</p>
-                </div>
-              </article>
             </div>
           </div>
         </div>
