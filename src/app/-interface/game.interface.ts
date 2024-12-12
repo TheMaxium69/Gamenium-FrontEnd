@@ -24,8 +24,11 @@ export interface GameInterface {
   originalGameRating: any[],
   platforms:PlatformsInterface[],
   siteDetailUrl: string,
+
   searchValue?: string;
-  views_count?: number
+  views_count?: number;
+  moyenRateUser?: number;
+
 
 }
 

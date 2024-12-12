@@ -5,14 +5,15 @@
       [style.background-color]="provider.color"
       [routerLink]="['/provider', provider.id]"
     ></div>
-  
+
     <!-- Provider Profile Image -->
     <div
       class="provider_profile"
       [routerLink]="['/provider', provider.id]"
-      
-    ><img class="pp-shadow"src="{{provider.picture?.url}}" alt=""></div>
-  
+
+    >
+      <div class="img-pp pp-shadow" [style.background-image]="'url(' + provider.picture?.url + ')'"></div>
+    </div>
     <!-- Provider Card Content -->
     <div class="provider-card-content">
       <p
@@ -33,4 +34,36 @@
       </a>
     </div>
   </div>
-  
+
+  <div class="provider_card" *ngIf="game">
+    <!-- Provider Color Bar -->
+    <div
+      class="provider_color game"
+      [style.background-image]="'url(' + game.image.small_url + ')'"
+      [routerLink]="['/gameactu', game.id]"
+    ></div>
+
+    <!-- Provider Profile Image -->
+    <div
+      class="provider_profile"
+      [routerLink]="['/gameactu', game.id]"
+    >
+      <div class="img-pp pp-shadow" [style.background-image]="'url(' + game.image.small_url + ')'"></div>
+    </div>
+
+    <!-- Provider Card Content -->
+    <div class="provider-card-content">
+      <p
+        class="name mt-2"
+        [routerLink]="['/gameactu', game.id]"
+      >
+        {{ game.name }}
+      </p>
+      <a
+        class="follow-btn"
+        [style.color]="this.app.userConnected?.themeColor || this.app.colorDefault"
+      >
+        Voir
+      </a>
+    </div>
+  </div>

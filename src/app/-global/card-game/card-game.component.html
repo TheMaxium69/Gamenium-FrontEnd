@@ -9,9 +9,9 @@
         <img src="{{ this.app.noBoxartImage }}" alt="...">
       </ng-container>
       <ng-container *ngIf="game.image.icon_url != this.app.noBoxartImage_default">
-        <div class="image" style="background-image: url('{{ game.image.thumb_url }}')"></div>
+        <div class="image" style="background-image: url('{{ game.image.small_url }}')"></div>
         <div class="blur"></div>
-        <img src="{{ game.image.thumb_url }}" alt="...">
+        <img src="{{ game.image.small_url }}" alt="...">
       </ng-container>
     </div>
 
@@ -61,7 +61,7 @@
       <!-- ACTION/NOTE -->
       <div class="core-right" *ngIf="!isDetailGame">
         <div class="card-note" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}};">
-           <p><span>10</span>/20</p>
+           <p><span>{{ game.moyenRateUser || "na" }}</span>/20</p>
 <!--          <p><span>{{rateAverage(fakeRates)}}</span>/20</p>-->
         </div>
       </div>
@@ -96,9 +96,9 @@
         <img src="{{ this.app.noBoxartImage }}" alt="...">
       </ng-container>
       <ng-container *ngIf="Hmg.myGame.game.image.icon_url != this.app.noBoxartImage_default">
-        <div class="image" style="background-image: url('{{ Hmg.myGame.game.image.thumb_url }}')"></div>
+        <div class="image" style="background-image: url('{{ Hmg.myGame.game.image.small_url }}')"></div>
         <div class="blur"></div>
-        <img src="{{ Hmg.myGame.game.image.thumb_url }}" alt="...">
+        <img src="{{ Hmg.myGame.game.image.small_url }}" alt="...">
       </ng-container>
     </div>
 

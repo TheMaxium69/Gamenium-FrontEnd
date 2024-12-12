@@ -17,7 +17,6 @@ import { NavbarActualityComponent } from './actuality/navbar-actuality/navbar-ac
 import { ViewActualityComponent } from "./actuality/view-actuality/view-actuality.component";
 import { LoginComponent } from './account/login/login.component';
 import { ProfileComponent } from './account/profile/profile.component';
-import { PreviewGameComponent } from './game/preview-game/preview-game.component';
 import { SearchGameComponent } from './game/search-game/search-game.component';
 import { ProviderComponent } from './actuality/provider/provider.component';
 import { GameProfileComponent } from './actuality/game-profile/game-profile.component';
@@ -66,7 +65,6 @@ import { ModalScreenshotComponent } from './-global/modal-screenshot/modal-scree
     ViewActualityComponent,
     LoginComponent,
     ProfileComponent,
-    PreviewGameComponent,
     SearchGameComponent,
     ProviderComponent,
     GameProfileComponent,

@@ -96,6 +96,7 @@ export class AppComponent {
   modalSearchLimit:number = 6 // Limit Game in modal add Game & Note
   deadlineSearch:number = 300; // Time input searchBar
   deadlineView:number = 2000; // Time added view
+  maxSearchProviderByGame:number = 4; // Max Recherche de provider dans gameOne
 
   // DEFAULT
   colorDefault = "#FF0000";

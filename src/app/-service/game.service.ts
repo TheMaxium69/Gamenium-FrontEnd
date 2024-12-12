@@ -16,10 +16,6 @@ export class GameService {
     return this.http.get<{ message: string; result: HistoryMyGameInterface[] | undefined }>(url + `/games/user/${id_user}`);
   }
 
-  getGamesWithLimit(page: number, limit: number, url: string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/games/' + page + "/" + limit);
-  }
-
   getGameById(id: number, url: string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url +'/game/' + id);
   }
@@ -27,7 +23,7 @@ export class GameService {
   searchGames(searchValue: string, limit: number, url: string): Observable<GameInterface[]> {
     return this.http.post<GameInterface[]>(url + `/games/search`, { searchValue, limit});
   }
-  
+
   getLatestGames(body: string, url: string): Observable<ApicallInterface> {
     return this.http.post<ApicallInterface>( url + `/latest-games`, body);
   }

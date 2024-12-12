@@ -3,6 +3,7 @@ import { ProviderInterface } from 'src/app/-interface/provider.interface';
 import { UserInterface } from 'src/app/-interface/user.interface';
 import { FollowService } from 'src/app/-service/follow.service';
 import { AppComponent } from 'src/app/app.component';
+import {GameInterface} from "../../-interface/game.interface";
 
 
 @Component({
@@ -15,12 +16,13 @@ export class CardProviderComponent implements OnInit {
   @Input() provider: ProviderInterface | null = null;
   @Input() isDetailView: boolean = false;
   @Input() colorProfil: string | undefined | null = null;
-  @Input() isFollowed: boolean = false; 
+  @Input() isFollowed: boolean = false;
+  @Input() game: GameInterface | undefined;
 
   @Output() followed: EventEmitter<number> = new EventEmitter<number>();
   @Output() unfollowed: EventEmitter<number> = new EventEmitter<number>();
 
-  // hover effet 
+  // hover effet
   hover: boolean = false;
   hoverText: string|null = null ;
 

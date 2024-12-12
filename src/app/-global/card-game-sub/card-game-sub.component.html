@@ -6,9 +6,9 @@
       <img src="{{ this.app.noBoxartImage }}" alt="...">
     </ng-container>
     <ng-container *ngIf="game.image.icon_url != this.app.noBoxartImage_default">
-      <div class="image" style="background-image: url('{{ game.image.thumb_url }}')"></div>
+      <div class="image" style="background-image: url('{{ game.image.small_url }}')"></div>
       <div class="blur"></div>
-      <img src="{{ game.image.thumb_url }}" alt="...">
+      <img src="{{ game.image.small_url }}" alt="...">
     </ng-container>
   </div>
   <div class="card-content">
