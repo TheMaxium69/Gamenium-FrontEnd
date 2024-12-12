@@ -10,7 +10,6 @@ import {SearchPageComponent} from "./game/search-page/search-page.component";
 import { DetailGameComponent } from './game/detail-game/detail-game.component';
 import {PlateformComponent} from "./actuality/plateform/plateform.component";
 import {PageThermeComponent} from "./-other/page-therme/page-therme.component";
-import {TestComponent} from "./test/test.component";
 
 const routes: Routes = [
   {path: '', component: PageHomeComponent},
@@ -29,8 +28,7 @@ const routes: Routes = [
   {path: 'profil/:id/:task', component: PageMygameComponent},
   {path: 'search/:type/:value', component: SearchPageComponent},
   {path: 'plateform/:id/', component: PlateformComponent},
-  {path: 'terms', component: PageThermeComponent},
-  {path: 'test', component: TestComponent},
+  {path: 'terms', component: PageThermeComponent}
 ];
 
 @NgModule({

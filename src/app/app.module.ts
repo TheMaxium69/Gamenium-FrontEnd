@@ -16,20 +16,6 @@ import { NavbarComponent } from "./-global/navbar/navbar.component";
 import { NavbarActualityComponent } from './actuality/navbar-actuality/navbar-actuality.component';
 import { ViewActualityComponent } from "./actuality/view-actuality/view-actuality.component";
 import { LoginComponent } from './account/login/login.component';
-import { BadgeInterfaceComponent } from './-components/badge.interface/badge.interface.component';
-import {PostActuInterfaceComponent} from "./-components/post-actu.interface/post-actu.interface.component";
-import {ProviderInterfaceComponent} from "./-components/provider.interface/provider.interface.component";
-import {CommentInterfaceComponent} from "./-components/comment.interface/comment.interface.component";
-import {UserRateInterfaceComponent} from "./-components/user-rate.interface/user-rate.interface.component";
-import {SocialNetworkInterfaceComponent} from "./-components/social-network.interface/social-network.interface.component";
-import {HistoryMyGameInterfaceComponent} from "./-components/history-my-game.interface/history-my-game.interface.component";
-import {GameProfileInterfaceComponent} from "./-components/game-profile.interface/game-profile.interface.component";
-import {PictureInterfaceComponent} from "./-components/picture.interface/picture.interface.component";
-import {BadgeVersUserInterfaceComponent} from "./-components/badge-vers-user.interface/badge-vers-user.interface.component";
-import {GameInterfaceComponent} from "./-components/game.interface/game.interface.component";
-import { MyAccountExterneInterfaceComponent } from './-components/my-account-externe.interface/my-account-externe.interface.component';
-import { PlatformInterfaceComponent } from './-components/platform.interface/platform.interface.component';
-import { LikeInterfaceComponent } from './-components/like.interface/like.interface.component';
 import { ProfileComponent } from './account/profile/profile.component';
 import { PreviewGameComponent } from './game/preview-game/preview-game.component';
 import { SearchGameComponent } from './game/search-game/search-game.component';
@@ -61,7 +47,6 @@ import { CardProviderComponent } from './-global/card-provider/card-provider.com
 import { CardProfilComponent } from './-global/card-profil/card-profil.component';
 import { BackToTopComponent } from './-global/back-to-top/back-to-top.component';
 import { ModalProviderComponent } from './-global/modal-provider/modal-provider.component';
-import { TestComponent } from './test/test.component';
 import { ModalBuywhereComponent } from './-global/modal-buywhere/modal-buywhere.component';
 import { ModalTagComponent } from './-global/modal-tag/modal-tag.component';
 import { ModalScreenshotComponent } from './-global/modal-screenshot/modal-screenshot.component';
@@ -80,20 +65,6 @@ import { ModalScreenshotComponent } from './-global/modal-screenshot/modal-scree
     NavbarActualityComponent,
     ViewActualityComponent,
     LoginComponent,
-    BadgeInterfaceComponent,
-    PostActuInterfaceComponent,
-    ProviderInterfaceComponent,
-    GameInterfaceComponent,
-    BadgeVersUserInterfaceComponent,
-    PictureInterfaceComponent,
-    GameProfileInterfaceComponent,
-    HistoryMyGameInterfaceComponent,
-    SocialNetworkInterfaceComponent,
-    UserRateInterfaceComponent,
-    CommentInterfaceComponent,
-    MyAccountExterneInterfaceComponent,
-    PlatformInterfaceComponent,
-    LikeInterfaceComponent,
     ProfileComponent,
     PreviewGameComponent,
     SearchGameComponent,
@@ -124,7 +95,6 @@ import { ModalScreenshotComponent } from './-global/modal-screenshot/modal-scree
     CardProfilComponent,
     BackToTopComponent,
     ModalProviderComponent,
-    TestComponent,
     ModalBuywhereComponent,
     ModalTagComponent,
     ModalScreenshotComponent
