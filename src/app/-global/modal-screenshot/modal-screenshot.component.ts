@@ -3,7 +3,7 @@ import {AppComponent} from "../../app.component";
 import {HmgScreenshotService} from "../../-service/hmg-screenshot.service";
 import {HmgScreenshotCategoryInterface} from "../../-interface/hmg-screenshot-category.interface";
 import Swal from "sweetalert2";
-import {UploadProfilePictureService} from "../../-service/upload.service";
+import {UploadService} from "../../-service/upload.service";
 import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
 import {HmgScreenshotInterface} from "../../-interface/hmg-screenshot.interface";
 
@@ -16,7 +16,7 @@ export class ModalScreenshotComponent implements OnInit {
 
   constructor(protected app:AppComponent,
               private hmgScreenshotService: HmgScreenshotService,
-              private uploadService: UploadProfilePictureService) {}
+              private uploadService: UploadService) {}
 
 
   @Input()

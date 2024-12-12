@@ -5,7 +5,7 @@ import { BadgeService } from '../../-service/badge.service';
 import { BadgeInterface } from '../../-interface/badge.interface';
 import { UserService } from '../../-service/user.service';
 import { ChangeDetectorRef } from '@angular/core';
-import { UploadProfilePictureService } from '../../-service/upload.service';
+import { UploadService } from '../../-service/upload.service';
 import {PictureInterface} from "../../-interface/picture.interface";
 import { SocialNetworkService } from 'src/app/-service/social-network.service';
 import { SocialNetworkInterface } from 'src/app/-interface/social-network.interface';
@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
     private badgeService: BadgeService,
     private userService: UserService,
     private cdRef: ChangeDetectorRef,
-    private uploadService: UploadProfilePictureService,
+    private uploadService: UploadService,
     private socialnetworkService: SocialNetworkService,
     private profileService: ProfilService,
     private renderer: Renderer2,

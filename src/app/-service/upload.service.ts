@@ -6,7 +6,7 @@ import {ApicallInterface} from "../-interface/apicall.interface";
 @Injectable({
   providedIn: 'root'
 })
-export class UploadProfilePictureService {
+export class UploadService {
 
   constructor(private http: HttpClient) { }
 
