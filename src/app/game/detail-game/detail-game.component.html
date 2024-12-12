@@ -31,7 +31,7 @@
       <h1 class="mb-0">{{ gameSelected?.name }}</h1>
     </div>
     <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="global-game-rate">
-      <div class="global-rate">10</div>
+      <div class="global-rate">{{ this.gameSelected?.moyenRateUser || "NA" }}</div>
       <div class="global-slash">/</div>
       <div class="global-20">20</div>
     </div>
@@ -48,8 +48,8 @@
       <div class="content">
         <p>Contenu</p>
         <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="information-line-container">
-          <div class="information-lines">
-            <div class="field" *ngIf="game_genres.length > 0">
+          <div class="information-lines" *ngIf="game_genres.length > 0">
+            <div class="field" >
               <p>
                 Genre
               </p>
@@ -104,8 +104,8 @@
       <div class="context">
         <p>Context</p>
         <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="information-line-container">
-          <div class="information-lines">
-            <div class="field" *ngIf="game_developpers.length > 0">
+          <div class="information-lines" *ngIf="game_developpers.length > 0">
+            <div class="field">
               <p>
                 Développeur
               </p>
@@ -118,8 +118,8 @@
               </p>
             </div>
           </div>
-          <div class="information-lines" >
-            <div class="field" *ngIf="game_publishers.length > 0">
+          <div class="information-lines" *ngIf="game_publishers.length > 0">
+            <div class="field">
               <p>
                 Editeur
               </p>
@@ -132,8 +132,8 @@
               </p>
             </div>
           </div>
-          <div class="information-lines">
-            <div class="field" *ngIf="game_franchises.length > 0">
+          <div class="information-lines" *ngIf="game_franchises.length > 0">
+            <div class="field">
               <p>
                 Franchises
               </p>
@@ -159,26 +159,29 @@
                 </p>
               </ng-container>
               <ng-container *ngIf="gameSelected">
-              <ng-container *ngIf="!gameSelected?.originalReleaseDate">
-                <p>
-                  <ng-container *ngIf="gameSelected?.expectedReleaseYear">
-                    <ng-container *ngIf="gameSelected?.expectedReleaseMonth">
-                      <ng-container *ngIf="gameSelected?.expectedReleaseDay">
-                        {{ gameSelected?.expectedReleaseDay }}
+                <ng-container *ngIf="!gameSelected?.originalReleaseDate && gameSelected?.expectedReleaseYear">
+                  <p>
+                    <ng-container *ngIf="gameSelected?.expectedReleaseYear">
+                      <ng-container *ngIf="gameSelected?.expectedReleaseMonth">
+                        <ng-container *ngIf="gameSelected?.expectedReleaseDay">
+                          {{ gameSelected?.expectedReleaseDay }}
+                          /
+                        </ng-container>
+                        <ng-container *ngIf="gameSelected.expectedReleaseMonth < 10">
+                          0{{ gameSelected?.expectedReleaseMonth }}
+                        </ng-container>
+                        <ng-container *ngIf="gameSelected.expectedReleaseMonth >= 10">
+                          {{ gameSelected?.expectedReleaseMonth }}
+                        </ng-container>
                         /
                       </ng-container>
-                      <ng-container *ngIf="gameSelected.expectedReleaseMonth < 10">
-                        0{{ gameSelected?.expectedReleaseMonth }}
-                      </ng-container>
-                      <ng-container *ngIf="gameSelected.expectedReleaseMonth >= 10">
-                        {{ gameSelected?.expectedReleaseMonth }}
-                      </ng-container>
-                      /
+                      {{ gameSelected?.expectedReleaseYear }}
                     </ng-container>
-                    {{ gameSelected?.expectedReleaseYear }}
-                  </ng-container>
-                </p>
-              </ng-container>
+                  </p>
+                </ng-container>
+                <ng-container *ngIf="!gameSelected?.originalReleaseDate && !gameSelected?.expectedReleaseYear">
+                  <p>Aucune date de sortie connue</p>
+                </ng-container>
               </ng-container>
             </div>
           </div>

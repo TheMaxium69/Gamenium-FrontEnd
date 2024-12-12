@@ -274,7 +274,9 @@ export class DetailGameComponent implements OnInit{
 
 
   obtainMoyenPress(): string {
-    console.log(this.Metacritic?.metacritic_score);
+    if (this.Metacritic?.metacritic_score == 0) {
+      return "NA";
+    }
     return this.Metacritic?.metacritic_score.toString() || "NA";
   }
   obtainMoyenUser(): string {
