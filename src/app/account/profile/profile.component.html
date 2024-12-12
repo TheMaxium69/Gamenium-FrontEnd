@@ -266,7 +266,7 @@
         <div><i class="ri-arrow-right-s-line"></i></div>
       </a>
       <div class="collapse" id="collapseBadges">
-        <div class="card card-body modern-card">
+        <div class="card card-body modern-card" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
           <!-- Contenu de la section Tous nos badges -->
           <div class="badges-card">
             <h5 class="setting-title">Vitrine de nos badges</h5>
