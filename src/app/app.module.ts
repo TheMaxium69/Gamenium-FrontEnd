@@ -64,6 +64,7 @@ import { ModalProviderComponent } from './-global/modal-provider/modal-provider.
 import { TestComponent } from './test/test.component';
 import { ModalBuywhereComponent } from './-global/modal-buywhere/modal-buywhere.component';
 import { ModalTagComponent } from './-global/modal-tag/modal-tag.component';
+import { ModalScreenshotComponent } from './-global/modal-screenshot/modal-screenshot.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { ModalTagComponent } from './-global/modal-tag/modal-tag.component';
     ModalProviderComponent,
     TestComponent,
     ModalBuywhereComponent,
-    ModalTagComponent
+    ModalTagComponent,
+    ModalScreenshotComponent
 
   ],
   imports: [

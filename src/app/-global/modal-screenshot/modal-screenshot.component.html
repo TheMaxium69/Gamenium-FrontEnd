@@ -1,0 +1,31 @@
+<div class="modal fade text-center" id="addScreenshot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p>Ajoutez un screenshot</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+
+          <input type="file" (change)="onFileChanged($event)">
+
+        <ng-container *ngFor="let oneCategory of app.hmgScreenshotCategory">
+          <p>{{ oneCategory.name }}</p>
+        </ng-container>
+
+          <input type="submit" value="envoyé" (click)="onUpload()">
+
+
+
+
+      </div>
+
+
+      <div class="modal-footer" style="margin-top: 74px;">
+        <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

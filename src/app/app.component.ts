@@ -28,6 +28,7 @@ import {HmgCopyLanguageInterface} from "./-interface/hmg-copy-language.interface
 import {HmgCopyEtatInterface} from "./-interface/hmg-copy-etat.interface";
 import {HmgCopyFormatInterface} from "./-interface/hmg-copy-format.interface";
 import {HmgCopyRegionInterface} from "./-interface/hmg-copy-region.interface";
+import {HmgScreenshotCategoryInterface} from "./-interface/hmg-screenshot-category.interface";
 
 @Component({
   selector: 'app-root',
@@ -110,6 +111,7 @@ export class AppComponent {
   hmgCopyEtatAllNoReload:HmgCopyEtatInterface[] = [];
   hmgCopyFormatAllNoReload:HmgCopyFormatInterface[] = [];
   hmgCopyRegionAllNoReload:HmgCopyRegionInterface[] = [];
+  hmgScreenshotCategory: HmgScreenshotCategoryInterface[] = [];
 
 
   // USER

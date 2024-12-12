@@ -18,6 +18,14 @@ export class UploadProfilePictureService {
     return this.http.post<ApicallInterface>(url + '/upload/pp/', formData, option);
   }
 
+  uploadScreenshot(screenshot: File, id_category:number, id_mygame:number, url:string, option: {headers: HttpHeaders}):Observable<ApicallInterface> {
+    const formData = new FormData();
+    formData.append('picture', screenshot);
+    formData.append('id_category', id_category.toString());
+    formData.append('id_mygame', id_mygame.toString());
+    return this.http.post<ApicallInterface>(url + '/upload/screenshot/', formData, option);
+  }
+
 
 
 
