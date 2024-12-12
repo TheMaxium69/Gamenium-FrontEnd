@@ -49,15 +49,17 @@
         <p>Contenu</p>
         <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="information-line-container">
           <div class="information-lines">
-            <div class="field">
+            <div class="field" *ngIf="game_genres.length > 0">
               <p>
                 Genre
               </p>
             </div>
             <div class="data">
-              <p>
-                exemple
-              </p>
+              <ng-container *ngFor="let genre of game_genres">
+                <p>
+                  {{ genre }}
+                </p>
+              </ng-container>
             </div>
           </div>
           <div class="information-lines">
@@ -67,15 +69,15 @@
               </p>
             </div>
             <div class="data" *ngIf="gameSelected?.platforms">
-              <ng-container *ngFor="let platform of gameSelected?.platforms; let last = last">
-                <ng-container *ngIf="gameSelected">
-                <ng-container *ngIf="gameSelected.platforms">
-                  <p>
-                    <span *ngIf="gameSelected.platforms.length > 1">-</span> {{ this.app.plateformeNameFormatage(platform.name) }}
-                  </p>
+              <p>
+                <ng-container *ngFor="let platform of gameSelected?.platforms; let last = last">
+                  <ng-container *ngIf="gameSelected">
+                  <ng-container *ngIf="gameSelected.platforms">
+                      {{ this.app.plateformeNameFormatage(platform.name) }}<br>
+                  </ng-container>
+                  </ng-container>
                 </ng-container>
-                </ng-container>
-              </ng-container>
+              </p>
             </div>
             <div class="data" *ngIf="!gameSelected?.platforms">
                 <p>
@@ -97,104 +99,50 @@
               </p>
             </div>
           </div>
-          <div class="information-lines" *ngIf="0 !== 0">
-            <div class="field">
-              <p>
-                Multijoueurs
-              </p>
-            </div>
-            <div class="data">
-              <p>
-                Oui
-              </p>
-            </div>
-          </div>
-          <div class="information-lines" *ngIf="0 !== 0">
-            <div class="field">
-              <p>
-                Nombre de joueurs
-              </p>
-            </div>
-            <div class="data">
-              <p>
-                1 à 2
-              </p>
-            </div>
-          </div>
         </div>
       </div>
       <div class="context">
         <p>Context</p>
         <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="information-line-container">
           <div class="information-lines">
-            <div class="field">
+            <div class="field" *ngIf="game_developpers.length > 0">
               <p>
                 Développeur
               </p>
             </div>
             <div class="data">
               <p>
-                Exemple
+                <ng-container *ngFor="let dev of game_developpers">
+                  {{ dev }}<br>
+                </ng-container>
               </p>
             </div>
           </div>
           <div class="information-lines" >
-            <div class="field">
+            <div class="field" *ngIf="game_publishers.length > 0">
               <p>
                 Editeur
               </p>
             </div>
             <div class="data">
               <p>
-                Exemple
+                <ng-container *ngFor="let publi of game_publishers">
+                  {{ publi }}<br>
+                </ng-container>
               </p>
             </div>
           </div>
-          <div class="information-lines" *ngIf="0 !== 0">
-            <div class="field">
+          <div class="information-lines">
+            <div class="field" *ngIf="game_franchises.length > 0">
               <p>
                 Franchises
               </p>
             </div>
             <div class="data">
               <p>
-                Exemple
-              </p>
-            </div>
-          </div>
-          <div class="information-lines" *ngIf="0 !== 0">
-            <div class="field">
-              <p>
-                Date de sortie FR
-              </p>
-            </div>
-            <div class="data">
-              <p>
-                01 janvier 1970
-              </p>
-            </div>
-          </div>
-          <div class="information-lines" *ngIf="0 !== 0">
-            <div class="field">
-              <p>
-                Date de sortie US
-              </p>
-            </div>
-            <div class="data">
-              <p>
-                01 janvier 1970
-              </p>
-            </div>
-          </div>
-          <div class="information-lines" *ngIf="0 !== 0">
-            <div class="field">
-              <p>
-                Date de sortie JP
-              </p>
-            </div>
-            <div class="data">
-              <p>
-                01 janvier 1970
+                <ng-container *ngFor="let franchise of game_franchises">
+                  {{ franchise }}<br>
+                </ng-container>
               </p>
             </div>
           </div>
@@ -232,18 +180,6 @@
                 </p>
               </ng-container>
               </ng-container>
-            </div>
-          </div>
-          <div class="information-lines" *ngIf="0 !== 0">
-            <div class="field">
-              <p>
-                Prix de lancement
-              </p>
-            </div>
-            <div class="data">
-              <p>
-                50 €
-              </p>
             </div>
           </div>
         </div>

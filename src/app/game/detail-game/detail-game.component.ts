@@ -191,6 +191,7 @@ export class DetailGameComponent implements OnInit{
   game_developpers:string[] = [];
   game_publishers:string[] = [];
   game_franchises:string[] = [];
+  game_releasedate:string|undefined;
 
   getOtherApi(game: GameInterface){
 
@@ -242,13 +243,6 @@ export class DetailGameComponent implements OnInit{
 
     }, (error) => this.isLoadingApiOther = false);
 
-  }
-
-  /* TEMP */
-  redirectUrl(url:string|undefined){
-    if (url) {
-      window.location.href = url;
-    }
   }
 
 
