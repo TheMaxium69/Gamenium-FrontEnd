@@ -603,7 +603,7 @@ export class EditedMygameComponent implements OnInit {
       screenshot:newScreenshot
     }
 
-    return console.log(updateHistoryMyGame)
+    // return console.log(updateHistoryMyGame)
     // console.log(updateHistoryMyGame)
 
     let body = JSON.stringify(updateHistoryMyGame);
