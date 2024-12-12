@@ -396,18 +396,18 @@
             <div class="head-panel">
               <h2><i class="ri-hand-coin-fill"></i>Etat <small>#{{i+1}}</small></h2>
             </div>
-            <ng-container *ngIf="hmgCopyEtatAll && copyGame.etat">
+            <ng-container *ngIf="app.hmgCopyEtatAllNoReload && copyGame.etat">
               <select id="etat{{i}}" [(ngModel)]="copyGame.etat.id" name="etat{{i}}">
                 <option [value]="null">Choisir un etat</option>
-                <ng-container *ngFor="let etat of hmgCopyEtatAll">
+                <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
               </select>
             </ng-container>
-            <ng-container *ngIf="hmgCopyEtatAll && !copyGame.etat">
+            <ng-container *ngIf="app.hmgCopyEtatAllNoReload && !copyGame.etat">
               <select id="etat{{i}}" name="etat{{i}}" ngModel>
                 <option value="">Choisir un etat</option>
-                <ng-container *ngFor="let etat of hmgCopyEtatAll">
+                <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
               </select>
@@ -419,18 +419,18 @@
             <div class="head-panel">
               <h2><i class="ri-instance-fill"></i>Format <small>#{{i+1}}</small></h2>
             </div>
-            <ng-container *ngIf="hmgCopyFormatAll && copyGame.format">
+            <ng-container *ngIf="app.hmgCopyFormatAllNoReload && copyGame.format">
               <select id="format{{i}}" [(ngModel)]="copyGame.format.id" name="format{{i}}">
                 <option [value]="null">Choisir un format</option>
-                <ng-container *ngFor="let format of hmgCopyFormatAll">
+                <ng-container *ngFor="let format of app.hmgCopyFormatAllNoReload">
                   <option [value]="format.id">{{ format.name }}</option>
                 </ng-container>
               </select>
             </ng-container>
-            <ng-container *ngIf="hmgCopyFormatAll && !copyGame.format">
+            <ng-container *ngIf="app.hmgCopyFormatAllNoReload && !copyGame.format">
               <select id="format{{i}}" name="format{{i}}" ngModel>
                 <option value="">Choissir un format</option>
-                <ng-container *ngFor="let format of hmgCopyFormatAll">
+                <ng-container *ngFor="let format of app.hmgCopyFormatAllNoReload">
                   <option [value]="format.id">{{ format.name }}</option>
                 </ng-container>
               </select>
@@ -442,18 +442,18 @@
             <div class="head-panel">
               <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1}}</small></h2>
             </div>
-            <ng-container *ngIf="hmgCopyRegionAll && copyGame.region">
+            <ng-container *ngIf="app.hmgCopyRegionAllNoReload && copyGame.region">
               <select id="region{{i}}" [(ngModel)]="copyGame.region.id" name="region{{i}}">
                 <option [value]="null">Choisir une Region</option>
-                <ng-container *ngFor="let region of hmgCopyRegionAll">
+                <ng-container *ngFor="let region of app.hmgCopyRegionAllNoReload">
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
               </select>
             </ng-container>
-            <ng-container *ngIf="hmgCopyRegionAll && !copyGame.region">
+            <ng-container *ngIf="app.hmgCopyRegionAllNoReload && !copyGame.region">
               <select id="region{{i}}" name="region{{i}}" ngModel>
                 <option value="">Choisir une Region</option>
-                <ng-container *ngFor="let region of hmgCopyRegionAll">
+                <ng-container *ngFor="let region of app.hmgCopyRegionAllNoReload">
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
               </select>
@@ -466,11 +466,11 @@
               <h2><i class="ri-earth-fill"></i>Langues <small>#{{i+1}}</small></h2>
             </div>
 
-            <ng-container *ngIf="hmgCopyLanguageAll && hmgCopyLanguageAll.length > 0">
+            <ng-container *ngIf="app.HmgCopyLanguageNoReload && app.HmgCopyLanguageNoReload.length > 0">
               <div *ngIf="hmgCopyLanguageSelected">
                   <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
                     <p id="languages" *ngIf="hmgCopyLanguageSelected[i].length > 0">
-                      <ng-container *ngFor="let language of hmgCopyLanguageAll">
+                      <ng-container *ngFor="let language of app.HmgCopyLanguageNoReload">
                         <span [class.displayNone]="!isInLanguageSelected(language.id, i)" class="badge" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}">
                           <div>
                             {{ language.name }}
@@ -483,7 +483,7 @@
                     <i class="ri-arrow-down-s-line"></i>
                   </button>
                   <ul class="dropdown-menu">
-                    <li *ngFor="let language of hmgCopyLanguageAll">
+                    <li *ngFor="let language of app.HmgCopyLanguageNoReload">
                       <a class="dropdown-item" (click)="toggleLanguages(language.id, i)">
                         <i [class.ri-checkbox-blank-line]="!isInLanguageSelected(language.id, i)"
                            [class.ri-checkbox-fill]="isInLanguageSelected(language.id, i)"
@@ -518,18 +518,18 @@
                 <input type="number" id="price{{i}}" [(ngModel)]="copyGame.purchase.price" name="purchase_price{{i}}" placeholder="Prix d'achat" min="0.00" max="10000.00" step="0.01">
 
                 <!-- DEVISE -->
-                <ng-container *ngIf="deviseAll && copyGame.purchase.devise">
+                <ng-container *ngIf="app.deviseNoReload && copyGame.purchase.devise">
                   <select id="devise{{i}}" [(ngModel)]="copyGame.purchase.devise.id" name="purchase_devise{{i}}">
                     <option [value]="null">Choissir une devise</option>
-                    <ng-container *ngFor="let devise of deviseAll">
+                    <ng-container *ngFor="let devise of app.deviseNoReload">
                       <option [value]="devise.id">{{ devise.symbole }}</option>
                     </ng-container>
                   </select>
                 </ng-container>
-                <ng-container *ngIf="deviseAll && !copyGame.purchase.devise">
+                <ng-container *ngIf="app.deviseNoReload && !copyGame.purchase.devise">
                   <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
                     <option value="">Choissir une devise</option>
-                    <ng-container *ngFor="let devise of deviseAll">
+                    <ng-container *ngFor="let devise of app.deviseNoReload">
                       <option [value]="devise.id">{{ devise.symbole }}</option>
                     </ng-container>
                   </select>
@@ -597,10 +597,10 @@
 
               <!-- DEVISE -->
               <label for="devise{{i}}">Devise:</label>
-              <ng-container *ngIf="deviseAll">
+              <ng-container *ngIf="app.deviseNoReload">
                 <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
                   <option [value]="null">Choissir une devise</option>
-                  <ng-container *ngFor="let devise of deviseAll">
+                  <ng-container *ngFor="let devise of app.deviseNoReload">
                     <option [value]="devise.id">{{ devise.symbole }}</option>
                   </ng-container>
                 </select>
@@ -670,10 +670,10 @@
             <div class="head-panel">
               <h2><i class="ri-hand-coin-fill"></i>Etat <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
-            <ng-container *ngIf="hmgCopyEtatAll">
+            <ng-container *ngIf="app.hmgCopyEtatAllNoReload">
               <select id="etat{{i+nbCopyExisting}}" name="etat{{i+nbCopyExisting}}" ngModel>
                 <option value="">Choissir un etat</option>
-                <ng-container *ngFor="let etat of hmgCopyEtatAll">
+                <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
               </select>
@@ -685,10 +685,10 @@
             <div class="head-panel">
               <h2><i class="ri-instance-fill"></i>Format <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
-            <ng-container *ngIf="hmgCopyFormatAll">
+            <ng-container *ngIf="app.hmgCopyFormatAllNoReload">
               <select id="format{{i+nbCopyExisting}}" name="format{{i+nbCopyExisting}}" ngModel>
                 <option value="">Choissir un format</option>
-                <ng-container *ngFor="let format of hmgCopyFormatAll">
+                <ng-container *ngFor="let format of app.hmgCopyFormatAllNoReload">
                   <option [value]="format.id">{{ format.name }}</option>
                 </ng-container>
               </select>
@@ -700,10 +700,10 @@
             <div class="head-panel">
               <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
-            <ng-container *ngIf="hmgCopyRegionAll">
+            <ng-container *ngIf="app.hmgCopyRegionAllNoReload">
               <select id="region{{i+nbCopyExisting}}" name="region{{i+nbCopyExisting}}" ngModel>
                 <option value="">Choissir une Region</option>
-                <ng-container *ngFor="let region of hmgCopyRegionAll">
+                <ng-container *ngFor="let region of app.hmgCopyRegionAllNoReload">
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
               </select>
@@ -716,11 +716,11 @@
               <h2><i class="ri-earth-fill"></i>Langues <small>#{{i+nbCopyExisting+1}}</small></h2>
             </div>
 
-            <ng-container *ngIf="hmgCopyLanguageAll && hmgCopyLanguageAll.length > 0">
+            <ng-container *ngIf="app.HmgCopyLanguageNoReload && app.HmgCopyLanguageNoReload.length > 0">
               <div *ngIf="hmgCopyLanguageSelected">
                 <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
                   <p id="languages" *ngIf="hmgCopyLanguageSelected[i+nbCopyExisting].length > 0">
-                    <ng-container *ngFor="let language of hmgCopyLanguageAll">
+                    <ng-container *ngFor="let language of app.HmgCopyLanguageNoReload">
                           <span [class.displayNone]="!isInLanguageSelected(language.id, i+nbCopyExisting)" class="badge" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}">
                             <div>
                               {{ language.name }}
@@ -733,7 +733,7 @@
                   <i class="ri-arrow-down-s-line"></i>
                 </button>
                 <ul class="dropdown-menu">
-                  <li *ngFor="let language of hmgCopyLanguageAll">
+                  <li *ngFor="let language of app.HmgCopyLanguageNoReload">
                     <a class="dropdown-item" (click)="toggleLanguages(language.id, i+nbCopyExisting)">
                       <i [class.ri-checkbox-blank-line]="!isInLanguageSelected(language.id, i+nbCopyExisting)"
                          [class.ri-checkbox-fill]="isInLanguageSelected(language.id, i+nbCopyExisting)"
@@ -765,10 +765,10 @@
               <input type="number" id="price{{i+nbCopyExisting}}" ngModel name="purchase_price{{i+nbCopyExisting}}" placeholder="Prix d'achat" min="0.00" max="10000.00" step="0.01">
 
               <!-- DEVISE -->
-              <ng-container *ngIf="deviseAll">
+              <ng-container *ngIf="app.deviseNoReload">
                 <select id="devise{{i+nbCopyExisting}}" name="purchase_devise{{i+nbCopyExisting}}" ngModel>
                   <option value="">Choissir une devise</option>
-                  <ng-container *ngFor="let devise of deviseAll">
+                  <ng-container *ngFor="let devise of app.deviseNoReload">
                     <option [value]="devise.id">{{ devise.symbole }}</option>
                   </ng-container>
                 </select>

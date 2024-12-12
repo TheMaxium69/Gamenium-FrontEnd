@@ -24,6 +24,10 @@ import {BuyWhereInterface} from "./-interface/buy-where.interface";
 import { HmgTagsInterface } from './-interface/hmg-tags.interface';
 import {DeviseInterface} from "./-interface/devise.interface";
 import {UserDefaultInterface} from "./-interface/user-default.interface";
+import {HmgCopyLanguageInterface} from "./-interface/hmg-copy-language.interface";
+import {HmgCopyEtatInterface} from "./-interface/hmg-copy-etat.interface";
+import {HmgCopyFormatInterface} from "./-interface/hmg-copy-format.interface";
+import {HmgCopyRegionInterface} from "./-interface/hmg-copy-region.interface";
 
 @Component({
   selector: 'app-root',
@@ -98,9 +102,15 @@ export class AppComponent {
   // MYGAME
   userRatingAll: UserRateInterface[] | undefined;
   myGameAll:HistoryMyGameInterface[] | undefined;
-  buyWhereUserNoReload:BuyWhereInterface[] = [];
+          /* select */
   tagsUserNoReload: HmgTagsInterface[] = [];
+  buyWhereUserNoReload:BuyWhereInterface[] = [];
   deviseNoReload:DeviseInterface[] = [];
+  HmgCopyLanguageNoReload:HmgCopyLanguageInterface[] = [];
+  hmgCopyEtatAllNoReload:HmgCopyEtatInterface[] = [];
+  hmgCopyFormatAllNoReload:HmgCopyFormatInterface[] = [];
+  hmgCopyRegionAllNoReload:HmgCopyRegionInterface[] = [];
+
 
   // USER
   userDefaultNoReload:UserDefaultInterface|undefined;

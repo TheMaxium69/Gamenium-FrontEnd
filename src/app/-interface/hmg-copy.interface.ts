@@ -2,6 +2,7 @@ import {HmgCopyFormatInterface} from "./hmg-copy-format.interface";
 import {HmgCopyEtatInterface} from "./hmg-copy-etat.interface";
 import {HmgCopyPurchaseInterface} from "./hmg-copy-purchase.interface";
 import {HmgCopyRegionInterface} from "./hmg-copy-region.interface";
+import {HmgCopyLanguageInterface} from "./hmg-copy-language.interface";
 
 export interface HmgCopyInterface {
   id:number,
@@ -11,5 +12,6 @@ export interface HmgCopyInterface {
   etat:HmgCopyEtatInterface,
   format:HmgCopyFormatInterface,
   purchase:HmgCopyPurchaseInterface,
-  region:HmgCopyRegionInterface
+  region:HmgCopyRegionInterface,
+  language:HmgCopyLanguageInterface[]
 }

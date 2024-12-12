@@ -19,12 +19,9 @@ import {NgForm} from "@angular/forms";
 export class ModalAddGameComponent implements OnInit, OnDestroy {
 
   constructor(protected app:AppComponent,
-              private deviseService:DeviseService,
               private buyWhereService:BuyWhereService,
               private gameService:GameService) {}
 
-  deviseAll:DeviseInterface[]|undefined;
-  // buyWhereAll:BuyWhereInterface[]|undefined;
   searchResults: GameInterface[] = [];
   searchValue: string = '';
   isFirstSearch: boolean = false;
@@ -80,13 +77,6 @@ export class ModalAddGameComponent implements OnInit, OnDestroy {
   }
 
   getAllInfo(){
-
-    /* RECUPERE LES DEVISE */
-    this.deviseService.getAllDevise(this.app.setURL()).subscribe((reponseDevise: { message: string; result: DeviseInterface[] | undefined; }) => {
-      if (reponseDevise.message == "good") {
-        this.deviseAll = reponseDevise.result;
-      }
-    })
 
     /* RECUPERE LES BUYWHERE*/
     if (this.app.buyWhereUserNoReload.length == 0) {

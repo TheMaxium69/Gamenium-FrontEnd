@@ -31,8 +31,6 @@ export class EditedMygameComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     protected app: AppComponent,
-
-    private router: Router,
     protected historyMyGameService:HistoryMyGameService,
     private deviseService:DeviseService,
     private buyWhereService:BuyWhereService,
@@ -48,12 +46,12 @@ export class EditedMygameComponent implements OnInit {
   selectedMyGame:HistoryMyGameInterface|undefined;
 
   /* GLOBAL VARIABLE */
-  deviseAll:DeviseInterface[]|undefined;
+  // deviseAll:DeviseInterface[]|undefined;
   // buyWhereAll:BuyWhereInterface[]|undefined;
-  hmgCopyEtatAll:HmgCopyEtatInterface[]|undefined;
-  hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
-  hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
-  hmgCopyLanguageAll:HmgCopyLanguageInterface[]|undefined;
+  // hmgCopyEtatAll:HmgCopyEtatInterface[]|undefined;
+  // hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
+  // hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
+  // hmgCopyLanguageAll:HmgCopyLanguageInterface[]|undefined;
 
 
   /*
@@ -101,8 +99,18 @@ export class EditedMygameComponent implements OnInit {
         this.selectedMyGame = reponseMyGame.result;
 
         if (this.selectedMyGame){
+          /* TAG*/
           this.selectedMyGame.myGame.hmgTags.forEach(oneTags => {
             this.tagsSelectedUser.push(oneTags.id);
+          })
+
+          /* LANG */
+          let i = 0;
+          this.selectedMyGame.copyGame.forEach(oneCopy => {
+            oneCopy.language.forEach(oneCopyLanguage => {
+              this.hmgCopyLanguageSelected[i].push(oneCopyLanguage.id);
+            })
+            i++
           })
         }
 
@@ -129,11 +137,14 @@ export class EditedMygameComponent implements OnInit {
   /* GET VARIABLE GLOBAL*/
   getAllInfo(){
 
-    this.deviseService.getAllDevise(this.app.setURL()).subscribe((reponseDevise: { message: string; result: DeviseInterface[] | undefined; }) => {
-      if (reponseDevise.message == "good") {
-        this.deviseAll = reponseDevise.result;
-      }
-    })
+    if (this.app.deviseNoReload.length == 0){
+      this.deviseService.getAllDevise(this.app.setURL()).subscribe((reponseDevise: { message: string; result: DeviseInterface[]; }) => {
+        if (reponseDevise.message == "good") {
+          this.app.deviseNoReload = reponseDevise.result;
+        }
+      })
+    }
+
 
     if (this.app.buyWhereUserNoReload.length === 0 ){
       this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[]; }) => {
@@ -143,23 +154,31 @@ export class EditedMygameComponent implements OnInit {
       })
     }
 
-    this.hmgCopyEtatService.getAllHmgCopyEtat(this.app.setURL()).subscribe((reponseEtat: { message: string; result: HmgCopyEtatInterface[] | undefined; }) => {
-      if (reponseEtat.message == "good") {
-        this.hmgCopyEtatAll = reponseEtat.result;
-      }
-    })
+    if (this.app.hmgCopyEtatAllNoReload.length === 0 ){
+      this.hmgCopyEtatService.getAllHmgCopyEtat(this.app.setURL()).subscribe((reponseEtat: { message: string; result: HmgCopyEtatInterface[]; }) => {
+        if (reponseEtat.message == "good") {
+          this.app.hmgCopyEtatAllNoReload = reponseEtat.result;
+        }
+      })
+    }
 
-    this.hmgCopyFormatService.getAllHmgCopyFormat(this.app.setURL()).subscribe((reponseFormat: { message: string; result: HmgCopyFormatInterface[] | undefined; }) => {
-      if (reponseFormat.message == "good") {
-        this.hmgCopyFormatAll = reponseFormat.result;
-      }
-    })
+    if (this.app.hmgCopyFormatAllNoReload.length === 0 ){
+      this.hmgCopyFormatService.getAllHmgCopyFormat(this.app.setURL()).subscribe((reponseFormat: { message: string; result: HmgCopyFormatInterface[]; }) => {
+        if (reponseFormat.message == "good") {
+          this.app.hmgCopyFormatAllNoReload = reponseFormat.result;
+        }
+      })
+    }
 
-    this.hmgCopyRegionService.getAllHmgCopyRegion(this.app.setURL()).subscribe((reponseRegion: { message: string; result: HmgCopyRegionInterface[] | undefined; }) => {
-      if (reponseRegion.message == "good") {
-        this.hmgCopyRegionAll = reponseRegion.result;
-      }
-    })
+
+    if (this.app.hmgCopyRegionAllNoReload.length === 0 ){
+      this.hmgCopyRegionService.getAllHmgCopyRegion(this.app.setURL()).subscribe((reponseRegion: { message: string; result: HmgCopyRegionInterface[]; }) => {
+        if (reponseRegion.message == "good") {
+          this.app.hmgCopyRegionAllNoReload = reponseRegion.result;
+        }
+      })
+    }
+
 
     if (this.app.tagsUserNoReload.length === 0){
       this.hmgTagsService.getTagsAllByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((response) => {
@@ -169,12 +188,14 @@ export class EditedMygameComponent implements OnInit {
       })
     }
 
-    this.hmgLanguageService.getAllHmgCopyLanguage(this.app.setURL()).subscribe((responseLanguage: { message: string; result:HmgCopyLanguageInterface[] | undefined; }) => {
-      if (responseLanguage.message == "good") {
-        this.hmgCopyLanguageAll = responseLanguage.result;
-        console.log(this.hmgCopyLanguageAll);
-      }
-    })
+    if (this.app.HmgCopyLanguageNoReload.length == 0){
+      this.hmgLanguageService.getAllHmgCopyLanguage(this.app.setURL()).subscribe((responseLanguage: { message: string; result:HmgCopyLanguageInterface[]; }) => {
+        if (responseLanguage.message == "good") {
+          this.app.HmgCopyLanguageNoReload = responseLanguage.result;
+        }
+      })
+    }
+
 
 
   }
@@ -612,6 +633,7 @@ export class EditedMygameComponent implements OnInit {
       if (reponseMyGameUpdate.message == "updated game") {
 
         this.selectedMyGame = reponseMyGameUpdate.result;
+        // console.log(reponseMyGameUpdate.result);
 
         if (this.app.myGameAll){
           const index = this.app.myGameAll.findIndex(item => item.myGame.id === reponseMyGameUpdate.result.myGame.id);
@@ -626,6 +648,18 @@ export class EditedMygameComponent implements OnInit {
         if (this.selectedMyGame){
           this.selectedMyGame.myGame.hmgTags.forEach(oneTags => {
             this.tagsSelectedUser.push(oneTags.id);
+          })
+        }
+
+        /* RE SYNCRO LES LANG */
+        if (this.selectedMyGame){
+          let i = 0;
+          this.selectedMyGame.copyGame.forEach(oneCopy => {
+            this.hmgCopyLanguageSelected[i] = [];
+            oneCopy.language.forEach(oneCopyLanguage => {
+              this.hmgCopyLanguageSelected[i].push(oneCopyLanguage.id);
+            })
+            i++
           })
         }
 
