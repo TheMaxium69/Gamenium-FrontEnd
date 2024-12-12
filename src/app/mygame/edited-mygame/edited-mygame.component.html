@@ -18,9 +18,9 @@
       <div class="screen-image" data-bs-toggle="modal" data-bs-target="#addScreenshot">
         <small>Image Utilisateur</small>
         <div class="screen-all">
-          <ng-container *ngFor="let oneScreen of [].constructor(10)"> <!-- this.app.viewMyGame.screenshot-->
+          <ng-container *ngFor="let oneScreen of selectedMyGame.screenshot"> <!-- this.app.viewMyGame.screenshot-->
             <div class="screen-encard">
-              <img class="screen" [src]="selectedMyGame.myGame?.game?.image?.thumb_url" alt="userImage">
+              <img class="screen" [src]="oneScreen.picture.url" alt="userImage">
             </div>
           </ng-container>
         </div>
