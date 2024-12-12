@@ -459,9 +459,7 @@
               </select>
             </ng-container>
           </div>
-          <br>
-          <hr>
-          
+
           <!-- LANGUES -->
           <div class="panel">
             <div class="head-panel">
@@ -469,38 +467,37 @@
             </div>
 
             <ng-container *ngIf="hmgCopyLanguageAll && hmgCopyLanguageAll.length > 0">
-              <div>
+              <div *ngIf="hmgCopyLanguageSelected">
                   <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
-                    <p id="languages" *ngIf="isInLanguageSelected.length > 0">
+                    <p id="languages" *ngIf="hmgCopyLanguageSelected[i].length > 0">
                       <ng-container *ngFor="let language of hmgCopyLanguageAll">
-                        <span [class.displayNone]="!isInLanguageSelected(language.id)" class="badge" style="background-color: {{this.app.colorDefault}}">
+                        <span [class.displayNone]="!isInLanguageSelected(language.id, i)" class="badge" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}">
                           <div>
                             {{ language.name }}
-                            <i class="ri-close-line" (click)="$event.stopPropagation(); toggleLanguages(language.id);"></i>
+                            <i class="ri-close-line" (click)="$event.stopPropagation(); toggleLanguages(language.id, i);"></i>
                           </div>
                         </span>
                       </ng-container>
                     </p>
-                    <p *ngIf="hmgCopyLanguageSelected.length == 0" class="placeholderInput cornflex">Ajoutez une langue</p>
+                    <p *ngIf="hmgCopyLanguageSelected[i].length == 0" class="placeholderInput cornflex">Ajoutez une langue</p>
                     <i class="ri-arrow-down-s-line"></i>
                   </button>
                   <ul class="dropdown-menu">
                     <li *ngFor="let language of hmgCopyLanguageAll">
-                      <a class="dropdown-item" (click)="toggleLanguages(language.id)">
-                        <i [class.ri-checkbox-blank-line]="!isInLanguageSelected(language.id)"
-                           [class.ri-checkbox-fill]="isInLanguageSelected(language.id)"
+                      <a class="dropdown-item" (click)="toggleLanguages(language.id, i)">
+                        <i [class.ri-checkbox-blank-line]="!isInLanguageSelected(language.id, i)"
+                           [class.ri-checkbox-fill]="isInLanguageSelected(language.id, i)"
                         ></i>
                         {{ language.name }}
                       </a>
                     </li>
-                    <li><hr class="dropdown-divider"></li>
                   </ul>
               </div>
             </ng-container>
 
           </div>
 
-            
+
           <br>
           <hr>
 
@@ -710,6 +707,42 @@
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
               </select>
+            </ng-container>
+          </div>
+
+          <!-- LANG -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-earth-fill"></i>Langues <small>#{{i+nbCopyExisting+1}}</small></h2>
+            </div>
+
+            <ng-container *ngIf="hmgCopyLanguageAll && hmgCopyLanguageAll.length > 0">
+              <div *ngIf="hmgCopyLanguageSelected">
+                <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
+                  <p id="languages" *ngIf="hmgCopyLanguageSelected[i+nbCopyExisting].length > 0">
+                    <ng-container *ngFor="let language of hmgCopyLanguageAll">
+                          <span [class.displayNone]="!isInLanguageSelected(language.id, i+nbCopyExisting)" class="badge" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}">
+                            <div>
+                              {{ language.name }}
+                              <i class="ri-close-line" (click)="$event.stopPropagation(); toggleLanguages(language.id, i+nbCopyExisting);"></i>
+                            </div>
+                          </span>
+                    </ng-container>
+                  </p>
+                  <p *ngIf="hmgCopyLanguageSelected[i+nbCopyExisting].length == 0" class="placeholderInput cornflex">Ajoutez une langue</p>
+                  <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let language of hmgCopyLanguageAll">
+                    <a class="dropdown-item" (click)="toggleLanguages(language.id, i+nbCopyExisting)">
+                      <i [class.ri-checkbox-blank-line]="!isInLanguageSelected(language.id, i+nbCopyExisting)"
+                         [class.ri-checkbox-fill]="isInLanguageSelected(language.id, i+nbCopyExisting)"
+                      ></i>
+                      {{ language.name }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </ng-container>
           </div>
 

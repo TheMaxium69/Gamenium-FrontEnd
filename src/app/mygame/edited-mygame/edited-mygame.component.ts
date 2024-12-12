@@ -54,7 +54,7 @@ export class EditedMygameComponent implements OnInit {
   hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
   hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
   hmgCopyLanguageAll:HmgCopyLanguageInterface[]|undefined;
- 
+
 
   /*
   *
@@ -172,7 +172,7 @@ export class EditedMygameComponent implements OnInit {
     this.hmgLanguageService.getAllHmgCopyLanguage(this.app.setURL()).subscribe((responseLanguage: { message: string; result:HmgCopyLanguageInterface[] | undefined; }) => {
       if (responseLanguage.message == "good") {
         this.hmgCopyLanguageAll = responseLanguage.result;
-        console.log(this.hmgCopyLanguageAll); 
+        console.log(this.hmgCopyLanguageAll);
       }
     })
 
@@ -205,22 +205,30 @@ export class EditedMygameComponent implements OnInit {
   };
 
 
-  hmgCopyLanguageSelected: number[] = [];
+  hmgCopyLanguageSelected: number[][] = Array(this.nbCopyExisting + this.nbCopyGenerate).fill([]).map(() => []);
+
+  debugLang(){console.log(this.hmgCopyLanguageSelected)}
+
   /* LANGUAGE LOGIC */
-  isInLanguageSelected(languageId: number): boolean {
-    if(this.hmgCopyLanguageSelected.some((id: number) => id === languageId)){
+  isInLanguageSelected(languageId: number, copyIndex:number): boolean {
+    if(this.hmgCopyLanguageSelected[copyIndex].some((id: number) => id === languageId)){
       return true;
     } else {
       return false;
     }
   }
 
-  toggleLanguages(languageId: number){
-    if (this.hmgCopyLanguageSelected.includes(languageId)) {
-      this.hmgCopyLanguageSelected = this.hmgCopyLanguageSelected.filter(id => id !== languageId);
+  toggleLanguages(languageId: number, copyIndex: number){
+    if (this.hmgCopyLanguageSelected[copyIndex]){
+      if (this.hmgCopyLanguageSelected[copyIndex].includes(languageId)) {
+        this.hmgCopyLanguageSelected[copyIndex] = this.hmgCopyLanguageSelected[copyIndex].filter(id => id !== languageId);
+      } else {
+        this.hmgCopyLanguageSelected[copyIndex].push(languageId);
+      }
     } else {
-      this.hmgCopyLanguageSelected.push(languageId);
+      /* Créer et ajouter la premier lang*/
     }
+
   };
 
 
@@ -529,6 +537,7 @@ export class EditedMygameComponent implements OnInit {
           etat_id: form.value['etat' + i],
           format_id: form.value['format' + i],
           region_id: form.value['region' + i],
+          hmgLanguages:this.hmgCopyLanguageSelected[i],
         }
 
         newCopyGame.push(tempMyGame);
@@ -594,8 +603,8 @@ export class EditedMygameComponent implements OnInit {
       screenshot:newScreenshot
     }
 
-    // return console.log(updateHistoryMyGame)
-    console.log(updateHistoryMyGame)
+    return console.log(updateHistoryMyGame)
+    // console.log(updateHistoryMyGame)
 
     let body = JSON.stringify(updateHistoryMyGame);
 
