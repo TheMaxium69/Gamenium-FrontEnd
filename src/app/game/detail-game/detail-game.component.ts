@@ -8,23 +8,23 @@ import {NgForm} from "@angular/forms";
 import { HistoryMyGameInterface } from 'src/app/-interface/history-my-game.interface';
 import { ViewService } from 'src/app/-service/view.service';
 import { ApicallInterface } from 'src/app/-interface/apicall.interface';
+import {GiantbombService} from "../../-service/api/giantbomb.service";
+import {MetacriticService} from "../../-service/api/metacritic.service";
+import {GiantbombInterface} from "../../-interface/api/giantbomb.interface";
+import {MetacricInterface} from "../../-interface/api/metacric.interface";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'app-detail-game',
   templateUrl: './detail-game.component.html',
   styleUrls: ['./detail-game.component.css']
 })
-export class DetailGameComponent implements OnInit, AfterViewInit{
+export class DetailGameComponent implements OnInit{
 
   myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
   hasGameInCollection : boolean = false;
 
-  isLoggedIn:boolean = false;
-  userConnectedId: number = 0;
-  displayName: string|undefined;
-  userName: string = "";
   userColor : string | undefined;
-  isHovered: boolean = false;
 
   gameId: number|any;
   gameSelected: GameInterface|undefined;
@@ -39,24 +39,19 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
     private gameService: GameService,
     private viewService: ViewService,
     protected app: AppComponent,
-    private histoireMyGameService: HistoryMyGameService
+    private histoireMyGameService: HistoryMyGameService,
+    private giantbombService: GiantbombService,
+    private metacriticService: MetacriticService,
   ) {
   }
 
   ngOnInit(): void {
 
     this.gameId = this.route.snapshot.paramMap.get('id');
-
     this.getGameById(this.gameId)
 
-    this.isLoggedIn = this.app.isLoggedIn;
-
-    if (this.isLoggedIn){
-
-      this.userConnectedId = this.app.userConnected.id;
-      this.myGameByUser(this.userConnectedId);
-      this.displayName = this.app.userConnected.displayname;
-      this.userName = this.app.userConnected.userName;
+    if (this.app.isLoggedIn){
+      this.myGameByUser(this.app.userConnected.id);
       this.userColor = this.app.userConnected.themeColor;
     }
 
@@ -69,12 +64,9 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
       if (reponseGameOne.message == "good"){
 
         this.gameSelected = reponseGameOne.result
-        if (this.gameSelected?.name){
-          this.getNotePress(this.gameSelected.name)
-        }
-
-        if(this.gameSelected){
+        if (this.gameSelected){
           this.addViewGame(this.gameSelected.id)
+          this.getOtherApi(this.gameSelected);
         }
 
       } else {
@@ -85,38 +77,6 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
 
     });
-  }
-
-  addGame(form:NgForm) {
-
-    let is_pinned = form.value['pinnedGame'];
-    if (is_pinned == ""){
-      is_pinned = false;
-    }
-
-    let bodyNoJsonMyGame: any = {
-          "id_game":this.gameSelected?.id,
-          "is_pinned":is_pinned,
-    };
-
-
-    const bodyMyGame = JSON.stringify(bodyNoJsonMyGame);
-
-    this.histoireMyGameService.postMyGame(bodyMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyGameAdd => {
-
-      if(reponseMyGameAdd.message == "add game is collection"){
-        console.log(this.gameSelected?.name, " à été ajouter");
-      } else {
-        console.log("erreur message");
-      }
-
-    })
-
-  }
-
-  get capitalizedUserName(): string {
-    if (!this.displayName) return "";
-    return this.displayName.charAt(0).toUpperCase() + this.displayName.slice(1) + ", ";
   }
 
   myGameByUser(id_user: number): void {
@@ -145,81 +105,7 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
   }
 
-  ////////////////////////////// Initialisation après l'initialisation du DOM pour que le carroussel fonctionne  /////////////////////
 
-  ngAfterViewInit() {
-    const prev = document.querySelector<HTMLDivElement>("#prev");
-    const next = document.querySelector<HTMLDivElement>("#next");
-    const carouselVp = document.querySelector<HTMLDivElement>("#carousel-vp");
-    let cCarouselInner = document.querySelector<HTMLDivElement>("#cCarousel-inner");
-    const slider = document.querySelector('.provider-card-container') as HTMLElement;
-
-    if (slider) {
-      console.log('Container Width:', slider.offsetWidth);
-      console.log('Scroll Width:', slider.scrollWidth);
-    }
-
-    if (!carouselVp || !prev || !next) {
-      console.error("Un ou plusieurs éléments du carrousel sont null.");
-      return;
-    }
-
-    let carouselInnerWidth = 0;
-    let leftValue = 0;
-
-    const totalMovementSize = parseFloat(document.querySelector<HTMLDivElement>(".cCarousel-item")?.getBoundingClientRect().width?.toString() || "0") +
-      parseFloat(window.getComputedStyle(cCarouselInner!).getPropertyValue("gap"));
-
-    const initializeCarousel = () => {
-      cCarouselInner = document.querySelector<HTMLDivElement>("#cCarousel-inner");
-
-      if (!cCarouselInner) {
-        console.error("L'élément cCarouselInner est null.");
-        return;
-      }
-
-      carouselInnerWidth = cCarouselInner.getBoundingClientRect().width;
-
-      prev?.addEventListener("click", () => {
-        if (leftValue !== 0) {
-          leftValue -= -totalMovementSize;
-          cCarouselInner!.style.left = leftValue + "px";
-        }
-      });
-
-      next?.addEventListener("click", () => {
-        const carouselVpWidth = carouselVp.getBoundingClientRect().width;
-        if (carouselInnerWidth - Math.abs(leftValue) > carouselVpWidth) {
-          leftValue -= totalMovementSize;
-          cCarouselInner!.style.left = leftValue + "px";
-        }
-      });
-    };
-
-    setTimeout(initializeCarousel, 0);
-
-    const mediaQuery510 = window.matchMedia("(max-width: 510px)");
-    const mediaQuery770 = window.matchMedia("(max-width: 770px)");
-
-    mediaQuery510.addEventListener("change", mediaManagement);
-    mediaQuery770.addEventListener("change", mediaManagement);
-
-    let oldViewportWidth = window.innerWidth;
-
-    function mediaManagement() {
-      const newViewportWidth = window.innerWidth;
-
-      if (leftValue <= -totalMovementSize && oldViewportWidth < newViewportWidth) {
-        leftValue += totalMovementSize;
-        cCarouselInner!.style.left = leftValue + "px";
-        oldViewportWidth = newViewportWidth;
-      } else if (leftValue <= -totalMovementSize && oldViewportWidth > newViewportWidth) {
-        leftValue -= totalMovementSize;
-        cCarouselInner!.style.left = leftValue + "px";
-        oldViewportWidth = newViewportWidth;
-      }
-    }
-  }
 
   // Drag carousel provider cards
   startDrag(mouse: MouseEvent): void {
@@ -293,23 +179,72 @@ export class DetailGameComponent implements OnInit, AfterViewInit{
 
   /*
   *
-  * PRESS
+  * PRESS and OTHER API
   *
   * */
 
-  metacritic: { url: string } | null = null;
+  GiantBomb:GiantbombInterface|null = null
+  Metacritic:MetacricInterface|null = null;
+  isLoadingApiOther:boolean = true;
 
-  getNotePress(name: string) {
+  game_genres:string[] = [];
+  game_developpers:string[] = [];
+  game_publishers:string[] = [];
+  game_franchises:string[] = [];
 
-    let formateName = name.toLowerCase().replace(/ /g, '-');
+  getOtherApi(game: GameInterface){
+
+    /* GIANT BOMB*/
+    const giantBomb$ = this.giantbombService.getGame(this.app.urlApiGiantbomb, game.name, game.guid);
 
     /* METACRITIC */
-    this.metacritic = {
-      url: 'https://www.metacritic.com/game/'+ formateName +'/'
-    };
+    const metacritic$ = this.metacriticService.getGame(this.app.urlApiMetacritic, game.name);
+
+    /* UNE FOIS TOUTE LES API REPONDU*/
+    forkJoin([giantBomb$, metacritic$]).subscribe(([reponseGiantbomb, reponseMetacritic]: [GiantbombInterface, MetacricInterface]) => {
+      this.isLoadingApiOther = false;
+
+      this.GiantBomb = reponseGiantbomb;
+      this.Metacritic = reponseMetacritic;
+
+      if (this.GiantBomb){
+
+        this.game_genres = this.GiantBomb.detail.genre.map(g => g.name) || [];
+        this.game_developpers = this.GiantBomb.detail.developer.map(g => g.name) || [];
+        this.game_publishers = this.GiantBomb.detail.publisher.map(g => g.name) || [];
+        this.game_franchises = this.GiantBomb.detail.franchises.map(g => g.name) || [];
+
+      }
+
+      if (this.Metacritic){
+
+        if (this.game_genres.length == 0){
+          this.game_genres = this.Metacritic.genres || [];
+        }
+        if (this.game_developpers.length == 0){
+          this.game_developpers = this.Metacritic.developers || [];
+        }
+        if (this.game_publishers.length == 0){
+          this.game_publishers.push(this.Metacritic.publishers || '');
+        }
+
+
+      }
+
+      console.log(this.game_genres);
+      console.log(this.game_developpers);
+      console.log(this.game_publishers);
+      console.log(this.game_franchises);
+
+
+
+
+
+    }, (error) => this.isLoadingApiOther = false);
 
   }
 
+  /* TEMP */
   redirectUrl(url:string|undefined){
     if (url) {
       window.location.href = url;

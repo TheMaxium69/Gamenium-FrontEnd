@@ -3,6 +3,7 @@ export interface GiantbombDetailInterface {
   first_release_date:string,
   plateform:{name:string,url:string}[],
   developer:{name:string,url:string}[],
+  publisher:{name:string,url:string}[],
   genre:{name:string,url:string}[],
   franchises:{name:string,url:string}[],
 }
