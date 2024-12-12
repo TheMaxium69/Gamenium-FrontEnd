@@ -18,6 +18,8 @@ import {BuyWhereService} from "../../-service/buy-where.service";
 import Swal from "sweetalert2";
 import { HmgTagsInterface } from 'src/app/-interface/hmg-tags.interface';
 import {HmgTagsService} from "../../-service/hmg-tags.service";
+import { HmgCopyLanguageService } from 'src/app/-service/hmg-copy-language.service';
+import { HmgCopyLanguageInterface } from 'src/app/-interface/hmg-copy-language.interface';
 
 @Component({
   selector: 'app-edited-mygame',
@@ -38,6 +40,7 @@ export class EditedMygameComponent implements OnInit {
     private hmgCopyFormatService:HmgCopyFormatService,
     private hmgCopyRegionService:HmgCopyRegionService,
     private hmgTagsService:HmgTagsService,
+    private hmgLanguageService:HmgCopyLanguageService,
   ) {}
 
   /* SELECTED */
@@ -50,6 +53,8 @@ export class EditedMygameComponent implements OnInit {
   hmgCopyEtatAll:HmgCopyEtatInterface[]|undefined;
   hmgCopyFormatAll:HmgCopyFormatInterface[]|undefined;
   hmgCopyRegionAll:HmgCopyRegionInterface[]|undefined;
+  hmgCopyLanguageAll:HmgCopyLanguageInterface[]|undefined;
+ 
 
   /*
   *
@@ -164,6 +169,12 @@ export class EditedMygameComponent implements OnInit {
       })
     }
 
+    this.hmgLanguageService.getAllHmgCopyLanguage(this.app.setURL()).subscribe((responseLanguage: { message: string; result:HmgCopyLanguageInterface[] | undefined; }) => {
+      if (responseLanguage.message == "good") {
+        this.hmgCopyLanguageAll = responseLanguage.result;
+        console.log(this.hmgCopyLanguageAll); 
+      }
+    })
 
 
   }
@@ -192,6 +203,26 @@ export class EditedMygameComponent implements OnInit {
       this.tagsSelectedUser.push(tagId);
     }
   };
+
+
+  hmgCopyLanguageSelected: number[] = [];
+  /* LANGUAGE LOGIC */
+  isInLanguageSelected(languageId: number): boolean {
+    if(this.hmgCopyLanguageSelected.some((id: number) => id === languageId)){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  toggleLanguages(languageId: number){
+    if (this.hmgCopyLanguageSelected.includes(languageId)) {
+      this.hmgCopyLanguageSelected = this.hmgCopyLanguageSelected.filter(id => id !== languageId);
+    } else {
+      this.hmgCopyLanguageSelected.push(languageId);
+    }
+  };
+
 
 
   tabActive(tab:number){

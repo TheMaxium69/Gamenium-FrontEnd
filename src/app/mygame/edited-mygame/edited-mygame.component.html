@@ -398,7 +398,7 @@
             </div>
             <ng-container *ngIf="hmgCopyEtatAll && copyGame.etat">
               <select id="etat{{i}}" [(ngModel)]="copyGame.etat.id" name="etat{{i}}">
-                <option [value]="null">Choissir un etat</option>
+                <option [value]="null">Choisir un etat</option>
                 <ng-container *ngFor="let etat of hmgCopyEtatAll">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
@@ -406,7 +406,7 @@
             </ng-container>
             <ng-container *ngIf="hmgCopyEtatAll && !copyGame.etat">
               <select id="etat{{i}}" name="etat{{i}}" ngModel>
-                <option value="">Choissir un etat</option>
+                <option value="">Choisir un etat</option>
                 <ng-container *ngFor="let etat of hmgCopyEtatAll">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
@@ -421,7 +421,7 @@
             </div>
             <ng-container *ngIf="hmgCopyFormatAll && copyGame.format">
               <select id="format{{i}}" [(ngModel)]="copyGame.format.id" name="format{{i}}">
-                <option [value]="null">Choissir un format</option>
+                <option [value]="null">Choisir un format</option>
                 <ng-container *ngFor="let format of hmgCopyFormatAll">
                   <option [value]="format.id">{{ format.name }}</option>
                 </ng-container>
@@ -444,7 +444,7 @@
             </div>
             <ng-container *ngIf="hmgCopyRegionAll && copyGame.region">
               <select id="region{{i}}" [(ngModel)]="copyGame.region.id" name="region{{i}}">
-                <option [value]="null">Choissir une Region</option>
+                <option [value]="null">Choisir une Region</option>
                 <ng-container *ngFor="let region of hmgCopyRegionAll">
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
@@ -452,14 +452,55 @@
             </ng-container>
             <ng-container *ngIf="hmgCopyRegionAll && !copyGame.region">
               <select id="region{{i}}" name="region{{i}}" ngModel>
-                <option value="">Choissir une Region</option>
+                <option value="">Choisir une Region</option>
                 <ng-container *ngFor="let region of hmgCopyRegionAll">
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
               </select>
             </ng-container>
           </div>
+          <br>
+          <hr>
+          
+          <!-- LANGUES -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-earth-fill"></i>Langues <small>#{{i+1}}</small></h2>
+            </div>
 
+            <ng-container *ngIf="hmgCopyLanguageAll && hmgCopyLanguageAll.length > 0">
+              <div>
+                  <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
+                    <p id="languages" *ngIf="isInLanguageSelected.length > 0">
+                      <ng-container *ngFor="let language of hmgCopyLanguageAll">
+                        <span [class.displayNone]="!isInLanguageSelected(language.id)" class="badge" style="background-color: {{this.app.colorDefault}}">
+                          <div>
+                            {{ language.name }}
+                            <i class="ri-close-line" (click)="$event.stopPropagation(); toggleLanguages(language.id);"></i>
+                          </div>
+                        </span>
+                      </ng-container>
+                    </p>
+                    <p *ngIf="hmgCopyLanguageSelected.length == 0" class="placeholderInput cornflex">Ajoutez une langue</p>
+                    <i class="ri-arrow-down-s-line"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let language of hmgCopyLanguageAll">
+                      <a class="dropdown-item" (click)="toggleLanguages(language.id)">
+                        <i [class.ri-checkbox-blank-line]="!isInLanguageSelected(language.id)"
+                           [class.ri-checkbox-fill]="isInLanguageSelected(language.id)"
+                        ></i>
+                        {{ language.name }}
+                      </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                  </ul>
+              </div>
+            </ng-container>
+
+          </div>
+
+            
           <br>
           <hr>
 

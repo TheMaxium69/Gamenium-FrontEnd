@@ -359,6 +359,12 @@ select,
   margin-bottom: 15px;
 }
 
+.cornflex{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .inputSelect{
   display: flex;
   width: 100%;
@@ -368,7 +374,7 @@ select,
   align-content: center;
   align-items: center;
 
-  #tags {
+  #tags, #languages {
     .badge{
       margin-right: 5px;
 
@@ -380,7 +386,7 @@ select,
         opacity: 0;
       }
     }
-
+    
     .badge:hover i{
       opacity: 1;
     }
