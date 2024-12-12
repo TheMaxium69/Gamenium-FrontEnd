@@ -62,25 +62,37 @@ export class AppComponent {
    *
    * ******************************************************************************************************************/
 
-
   AppEnv: string = "PROD"; // DEV or PROD or PRODMAX
-  urlApiDev: string = "http://127.0.0.1:8000";
-  urlApiDevMax: string = "https://127.0.0.1:8000";
-  urlApiProd: string = "http://vps216.tyrolium.fr:8000";
-  urlApiProdMax: string = "http://home.vps216.tyrolium.fr:8000";
-  urlIp:string = "https://tyrolium.fr/Contenu/Php/ip.php?api=json"
-  urlGeneratePP:string = "https://tyrolium.fr/generate-pp/"
+
+  //%     API - GAMENIUM      %//
+    urlApiDev: string = "http://127.0.0.1:8000";
+    urlApiDevMax: string = "https://127.0.0.1:8000";
+    urlApiProd: string = "http://vps216.tyrolium.fr:8000";
+    urlApiProdMax: string = "http://home.vps216.tyrolium.fr:8000";
+  //%     API - GAMENIUM      %//
+
+  //%     API - GAME      %//
+    urlApiGetGame:string = "http://vps216.tyrolium.fr/html-to-api/"
+    urlApiGiantbomb:string = this.urlApiGetGame + "giantbomb.php";
+    urlApiMetacritic:string = this.urlApiGetGame + "metacritic.php";
+  //%     API - GAME      %//
+
+  //%     API - TYROLIUM      %//
+    urlIp:string = "https://tyrolium.fr/Contenu/Php/ip.php?api=json"
+    urlGeneratePP:string = "https://tyrolium.fr/generate-pp/"
+  //%     API - TYROLIUM      %//
+
+  // SETTING
   Debug:Boolean = true; // Active la view Serv and Local
   isLoggedIn: boolean = false;
-  token: string|any;
   userConnected: UserInterface|any;
-  currentDate: Date = new Date();
+  token: string|any;
 
   // LIMIT
-  fetchLimit:number = 50;
-  deadlineSearch:number = 300;
-  deadlineView:number = 2000;
-  modalSearchLimit:number = 6
+  fetchLimit:number = 50; // Limit Game in search Game & Page
+  modalSearchLimit:number = 6 // Limit Game in modal add Game & Note
+  deadlineSearch:number = 300; // Time input searchBar
+  deadlineView:number = 2000; // Time added view
 
   // DEFAULT
   colorDefault = "#FF0000";
@@ -116,8 +128,6 @@ export class AppComponent {
 
   // USER
   userDefaultNoReload:UserDefaultInterface|undefined;
-
-
 
   /******************************************************************************************************************
    *
