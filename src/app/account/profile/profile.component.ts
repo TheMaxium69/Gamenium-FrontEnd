@@ -15,6 +15,10 @@ import {ProfilInterface} from "../../-interface/profil.interface";
 import Swal from "sweetalert2";
 import {ProfilSocialNetworkInterface} from "../../-interface/profil-social-network.interface";
 import {ApicallInterface} from "../../-interface/apicall.interface";
+import {DeviseService} from "../../-service/devise.service";
+import {DeviseInterface} from "../../-interface/devise.interface";
+import {UserdefaultService} from "../../-service/userdefault.service";
+import {UserDefaultInterface} from "../../-interface/user-default.interface";
 
 @Component({
   selector: 'app-profile',
@@ -48,6 +52,8 @@ export class ProfileComponent implements OnInit {
     private socialnetworkService: SocialNetworkService,
     private profileService: ProfilService,
     private renderer: Renderer2,
+    private deviseService: DeviseService,
+    private userDefaultService:UserdefaultService
   ) {}
 
   ngOnInit() {
@@ -67,6 +73,10 @@ export class ProfileComponent implements OnInit {
     this.getAllSocialNetwork();
 
     this.getAllBadges();
+
+    this.getAllDevise();
+
+    this.getInfoDefault();
   }
 
   populateResultDiv() {
@@ -90,16 +100,16 @@ export class ProfileComponent implements OnInit {
     const infoSection = document.querySelector('.informations-section') as HTMLElement;
     const unlog = document.querySelector('.unlog') as HTMLElement;
     const settings = document.querySelectorAll('.search-setting')
-  
+
     let settingsResultNumber = 0;
-    
+
     this.populateResultDiv()
     resultDiv.style.display = 'block';
-  
+
     settings.forEach((child) => {
       const setting = child as HTMLElement;
       const settingText = setting.innerText.toLowerCase();
-  
+
       if (search && !settingText.includes(search)) {
         setting.style.display = 'none';
 
@@ -108,7 +118,7 @@ export class ProfileComponent implements OnInit {
         settingsResultNumber++;
       }
     });
-  
+
     if (!search) {
       resultDiv.style.display = 'none';
       accountSection.style.display = 'block';
@@ -123,7 +133,7 @@ export class ProfileComponent implements OnInit {
       infoSection.style.display = 'none';
       unlog.style.display = settingsResultNumber > 0 ? 'block' : 'none';
     }
-  
+
     if (settingsResultNumber === 0) {
       this.displayNoResultMessage(resultDiv);
 
@@ -159,7 +169,7 @@ export class ProfileComponent implements OnInit {
 
   displayNoResultMessage(container: HTMLElement) {
     let noResult = document.querySelector('#no-results') as HTMLElement;
-  
+
     if (!noResult) {
       noResult = document.createElement('div');
       this.renderer.setAttribute(noResult, 'id', 'no-results')
@@ -168,10 +178,10 @@ export class ProfileComponent implements OnInit {
       this.renderer.setStyle(noResult, 'fontSize', '18px')
       this.renderer.appendChild(container, noResult);
     }
-    
+
     noResult.style.display = 'block';
   }
-  
+
   removeNoResultMessage(container: HTMLElement) {
     const noResult = document.querySelector('#no-results');
 
@@ -179,7 +189,7 @@ export class ProfileComponent implements OnInit {
       noResult.remove();
     }
   }
-    
+
   loadThemeColor() {
     const userId = this.userConnected?.id;
     if (userId) {
@@ -381,6 +391,72 @@ export class ProfileComponent implements OnInit {
     return str.charAt(0);
   }
 
+
+  getAllDevise(){
+    if (this.app.deviseNoReload.length === 0){
+      this.deviseService.getAllDevise(this.app.setURL()).subscribe((reponseDeviseAll:{message:string,result:DeviseInterface[]})=>{
+        if (reponseDeviseAll.message == "good"){
+          this.app.deviseNoReload = reponseDeviseAll.result;
+        }
+      })
+    }
+  }
+
+  getInfoDefault(){
+    if (!this.app.userDefaultNoReload){
+      this.userDefaultService.getAllDefault(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseUserDefault:{message:string,result:UserDefaultInterface})=>{
+        if (reponseUserDefault.message == "good"){
+          this.app.userDefaultNoReload = reponseUserDefault.result;
+        }
+      })
+    }
+  }
+
+
+  updateDefault(form: NgForm){
+
+    let bodyNoJson = {
+      "id_devise":form.value['devise_default']
+    }
+
+    let body = JSON.stringify(bodyNoJson)
+
+    this.userDefaultService.updateUserDefault(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseUserDefault:{message:string,result:UserDefaultInterface}) => {
+      if(reponseUserDefault.message == "good"){
+        /* set variable */
+        this.app.userDefaultNoReload = reponseUserDefault.result;
+
+        let selectDevise = document.getElementById('devise');
+        if (selectDevise instanceof HTMLSelectElement) {
+          selectDevise.value = "";
+        }
+
+        Swal.fire({
+          title: 'Succès!',
+          text: 'Vos options ont bien été mise à jour',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+        })
+      } else {
+        Swal.fire({
+          title: 'Echec!',
+          text: 'Echec de la mise à jour des options',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+        })
+      }
+    }, (error) => {
+      this.app.erreurSubcribe();
+    });
+
+
+
+  }
+
+
+
   addUrlSocial(form: NgForm){
 
     let resultForm: any = form.value;
@@ -407,10 +483,10 @@ export class ProfileComponent implements OnInit {
         if (response.message == "succefuly updated"){
           Swal.fire({
             title: 'Succès!',
-            text: 'Vos réseaux on bien été mise à jour',
+            text: 'Vos réseaux ont bien été mise à jour',
             icon: 'success',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.app.userConnected.themeColor
+            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
           })
         } else {
           Swal.fire({
@@ -418,7 +494,7 @@ export class ProfileComponent implements OnInit {
             text: 'Echec de la mise à jour des réseaux',
             icon: 'error',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.app.userConnected.themeColor
+            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
           })
         }
 

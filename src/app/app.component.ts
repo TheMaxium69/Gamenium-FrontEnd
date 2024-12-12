@@ -22,6 +22,8 @@ import {ProviderInterface} from "./-interface/provider.interface";
 import {UserRateInterface} from "./-interface/user-rate.interface";
 import {BuyWhereInterface} from "./-interface/buy-where.interface";
 import { HmgTagsInterface } from './-interface/hmg-tags.interface';
+import {DeviseInterface} from "./-interface/devise.interface";
+import {UserDefaultInterface} from "./-interface/user-default.interface";
 
 @Component({
   selector: 'app-root',
@@ -98,6 +100,10 @@ export class AppComponent {
   myGameAll:HistoryMyGameInterface[] | undefined;
   buyWhereUserNoReload:BuyWhereInterface[] = [];
   tagsUserNoReload: HmgTagsInterface[] = [];
+  deviseNoReload:DeviseInterface[] = [];
+
+  // USER
+  userDefaultNoReload:UserDefaultInterface|undefined;
 
 
 

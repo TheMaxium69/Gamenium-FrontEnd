@@ -677,3 +677,21 @@ a > div {
   margin-left: auto;
   margin-right: auto;
 }
+
+.default{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: flex-end;
+
+  .default-item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+  }
+}

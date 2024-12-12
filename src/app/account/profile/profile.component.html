@@ -1,3 +1,6 @@
+<modal-tag></modal-tag>
+<modal-buywhere></modal-buywhere>
+
 <div class="top" style="background-color: {{ color }}!important;"></div>
 
 
@@ -140,6 +143,63 @@
                 </ng-container>
                 <input style="background-color: {{ color }}" type="submit" class="main-gamenium-btn" value="Valider">
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Changement des valeur par default-->
+      <div class="para radius mb-4 search-setting para-setting">
+        <a data-bs-toggle="collapse" href="#collapseDefault" role="button" aria-expanded="false" aria-controls="collapseDefault">
+          <div>
+            <i class="ri-pencil-line"></i>
+            <h3>Options par défaut</h3>
+            <p>Devise, Achat, Tags</p>
+          </div>
+          <div><i class="ri-arrow-right-s-line"></i></div>
+        </a>
+        <div class="collapse" id="collapseDefault">
+          <div class="card card-body modern-card">
+            <!-- Content Default Option -->
+            <div class="default-card">
+              <h5 class="setting-title">Changer les options par défaut</h5>
+            </div>
+            <div class="d-flex redirect-section">
+
+              <form class="default" #addDefaultForm="ngForm" (ngSubmit)="updateDefault(addDefaultForm)">
+                <div class="default-item">
+                  <label class="socials-label" for="devise"><i class="ri-money-euro-circle-line"></i>Devise par défaut</label>
+                  <ng-container *ngIf="app.deviseNoReload">
+                    <select id="devise" name="devise_default" ngModel>
+                      <ng-container *ngIf="app.userDefaultNoReload">
+                        <option value="">{{ app.userDefaultNoReload.devise.symbole }}</option>
+                      </ng-container>
+                      <ng-container *ngIf="!app.userDefaultNoReload">
+                        <option value="">Choisir une devise</option>
+                      </ng-container>
+                      <ng-container *ngFor="let devise of app.deviseNoReload">
+                        <ng-container *ngIf="app.userDefaultNoReload">
+                          <option [value]="devise.id" *ngIf="app.userDefaultNoReload.devise.id !== devise.id">{{ devise.symbole }}</option>
+                        </ng-container>
+                        <ng-container *ngIf="!app.userDefaultNoReload">
+                          <option [value]="devise.id">{{ devise.symbole }}</option>
+                        </ng-container>
+                      </ng-container>
+                    </select>
+                  </ng-container>
+                </div>
+                <div class="default-item">
+                  <label class="socials-label" for="achat"><i class="ri-money-euro-circle-line"></i>Gerez ces lieux d'achat</label>
+                  <button id="achat" type="button" class="main-gamenium-btn" style="background-color: {{ color }}" data-bs-toggle="modal" data-bs-target="#manageBuyWhere">Gerez ces lieux</button>
+                </div>
+                <div class="default-item">
+                  <label class="socials-label" for="tags"><i class="ri-money-euro-circle-line"></i>Gerez ces tags</label>
+                  <button id="tags" type="button" class="main-gamenium-btn" style="background-color: {{ color }}" data-bs-toggle="modal" data-bs-target="#manageTags">Gerez ces tags</button>
+                </div>
+                <input style="background-color: {{ color }}" type="submit" class="main-gamenium-btn" value="Valider">
+              </form>
+
+
             </div>
           </div>
         </div>
