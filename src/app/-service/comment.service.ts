@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CommentInterface } from '../-interface/comment.interface';
 import {ApicallInterface} from "../-interface/apicall.interface";
 
 @Injectable({
@@ -26,9 +25,17 @@ export class CommentService {
     return this.http.get<ApicallInterface>(url + '/comments/me', option);
   }
 
+  /* COMMENT REPLY */
+
+  postCommentReply(body:string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.post<ApicallInterface>(url + '/comment-reply-create/', body, option);
+  }
+
   getCountByActu(id_actu: number, url:string): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url + '/countCommentByActu/'+id_actu);
   }
+
+
 
   deleteCommentReply(id: number, url: string, option: { headers: HttpHeaders }): Observable<ApicallInterface> {
     return this.http.delete<ApicallInterface>(url + '/deleteReply/'+id, option);

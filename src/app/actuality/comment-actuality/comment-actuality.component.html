@@ -93,8 +93,7 @@
         </div>
         <div id="all-reply" class="displayNone">
           <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
-            <small>Comment : {{ commentReply['content'] }}</small>
-              <button (click)="deleteCommentReply(commentReply, i)">delete</button>
+            <small>Comment : {{ commentReply.content }}</small>
             <br>
           </ng-container>
         </div>
@@ -155,8 +154,8 @@
             </div>
             <div id="all-reply" class="displayNone">
               <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
-                <small>Comment : {{ commentReply['content'] }}</small>
-                  <button (click)="deleteCommentReply(commentReply, i)">delete</button>
+                <small>Comment : {{ commentReply.content }}</small>
+                  <button (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected.id">delete</button>
                 <br>
               </ng-container>
             </div>
@@ -213,14 +212,16 @@
                 </div>
                 <div id="all-reply" class="displayNone">
                   <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
-                    <small>Comment : {{ commentReply['content'] }}</small>
-                      <button (click)="deleteCommentReply(commentReply, i)">delete</button>
+                    <small>Comment : {{ commentReply.content }}</small>
+                      <button (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected.id">delete</button>
                     <br>
                   </ng-container>
                 </div>
                 <br><br>
               </div>
             </ng-container>
+            <input name="comment{{comment.id}}" id="comment{{comment.id}}" type="text">
+            <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button">envoyé</button>
             <div class="comment-border mb-4"></div>
           </div>
         </ng-container>
@@ -271,8 +272,8 @@
                   </div>
                   <div id="all-reply" class="displayNone">
                     <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
-                      <small>Comment : {{ commentReply['content'] }}</small>
-                        <button (click)="deleteCommentReply(commentReply, i)">delete</button>
+                      <small>Comment : {{ commentReply.content }}</small>
+                        <button (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected.id">delete</button>
                       <br>
                     </ng-container>
                   </div>

@@ -67,7 +67,7 @@ export class CommentActualityComponent implements OnInit{
 
 
   @Input()
-  commentReplyAll: [][] = [];
+  commentReplyAll: CommentReplyInterface[][] = [];
 
 
   ngOnInit(): void {
@@ -650,6 +650,8 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
+
+
   deleteCommentReply(commentReply: CommentReplyInterface, index:number){
     this.commentService.deleteCommentReply(commentReply.id, this.app.setURL(), this.app.createCorsToken()).subscribe(
       response => {
@@ -696,4 +698,96 @@ export class CommentActualityComponent implements OnInit{
       this.removeShowCommentReply()
     }
   }
+
+
+
+
+
+  sendReplyComment(id_comment_main:number){
+    let input:HTMLElement | null = document.getElementById('comment'+id_comment_main)
+
+    if(input instanceof HTMLInputElement){
+      let contentComment = input.value;
+
+      if(contentComment.length <= 255) {
+        if (contentComment.trim().length !== 0){
+
+          let bodyNoJson = {
+            "id_comment": id_comment_main,
+            "content": contentComment,
+            'ip': "10.10.10.10"
+          }
+
+          const body = JSON.stringify(bodyNoJson)
+
+          this.commentService.postCommentReply(body, this.app.setURL(), this.app.createCorsToken()).subscribe((responseCommentReply: {message:string, result:CommentReplyInterface}) => {
+
+            if(responseCommentReply.message == "good"){
+
+              /* DYNAMIQUE */
+              if (this.commentReplyAll[id_comment_main]){
+                this.commentReplyAll[id_comment_main].push(responseCommentReply.result)
+              } else {
+                this.commentReplyAll[id_comment_main] = [responseCommentReply.result];
+              }
+
+              /* VIDER LE CHAMPS*/
+              let input:HTMLElement | null = document.getElementById('comment'+id_comment_main)
+              if(input instanceof HTMLInputElement){
+                input.value = "";
+              }
+
+              Swal.fire({
+                title: 'Success',
+                text: 'Votre commentaire à bien été ajouté',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+              })
+            } else {
+              Swal.fire({
+                title: 'Echec!',
+                text: 'Echec de l\'ajout du commentaire',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+              })
+            }
+
+          }, (error) => {this.app.erreurSubcribe()})
+
+        } else {
+          Swal.fire({
+            title: 'Attention!',
+            text: 'Votre commentaire doit faire au moins 1 caractère',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+          })
+        }
+      } else {
+        // Trop long
+        Swal.fire({
+          title: 'Attention!',
+          text: 'Votre commentaire doit faire 255 caractères maximum',
+          icon: 'warning',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+        })
+      }
+
+    } else {
+      // il existe pas
+      Swal.fire({
+        title: 'Echec!',
+        text: 'Echec de l\'ajout du commentaire',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+      })
+    }
+
+  }
+
+
 }

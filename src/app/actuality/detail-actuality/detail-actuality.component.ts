@@ -36,7 +36,7 @@ export class DetailActualityComponent implements OnInit{
   LikeAll: LikeInterface[]|undefined;
   nbLike:number | undefined = 0;
   nbCommentaire:number = 0;
-  commentReplyAll:[][] = [];
+  commentReplyAll:CommentReplyInterface[][] = [];
   screenWidth: number = window.innerWidth;
   nbView: number | null = null;
 
@@ -260,10 +260,11 @@ export class DetailActualityComponent implements OnInit{
 
     this.commentService.getCountByActu(id, this.app.setURL()).subscribe((reponseMyCountActu:{message:string, result: {
         total:number,
-        reply:[][],
+        reply:CommentReplyInterface[][],
       }}) => {
       if (reponseMyCountActu.message == "good") {
         this.nbCommentaire = reponseMyCountActu.result.total;
+        console.log(reponseMyCountActu.result.reply);
         this.commentReplyAll = reponseMyCountActu.result.reply;
       }
     });
