@@ -677,25 +677,25 @@ export class CommentActualityComponent implements OnInit{
     )
   }
 
-  addShowCommentReply() {
-    const replyForm = document.querySelector("#all-reply") as HTMLElement;
+  addShowCommentReply(commentId: number) {
+    const replyForm = document.querySelector(`#all-reply${commentId}`) as HTMLElement;
       replyForm.classList.remove('displayNone')
       replyForm.classList.add('display')
       this.showReply = true
   }
 
-  removeShowCommentReply() {
-    const replyForm = document.querySelector("#all-reply") as HTMLElement;
+  removeShowCommentReply(commentId: number) {
+    const replyForm = document.querySelector(`#all-reply${commentId}`) as HTMLElement;
     replyForm.classList.add('displayNone')
     replyForm.classList.remove('display')
       this.showReply = false
   }
 
-  checkShowCommentReply() {
+  checkShowCommentReply(commentId: number) {
     if (this.showReply === false) {
-      this.addShowCommentReply()
+      this.addShowCommentReply(commentId)
     } else {
-      this.removeShowCommentReply()
+      this.removeShowCommentReply(commentId)
     }
   }
 

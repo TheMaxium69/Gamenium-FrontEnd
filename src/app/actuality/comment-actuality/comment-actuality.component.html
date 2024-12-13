@@ -87,11 +87,11 @@
     <ng-container *ngIf="commentReplyAll[comment.id]">
       <div class="reply-display">
         <div class="ShowReply"
-        (click)="checkShowCommentReply()">
+        (click)="checkShowCommentReply(comment.id)">
           <i class="ri-arrow-down-s-line"></i>
           <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
         </div>
-        <div id="all-reply" class="displayNone">
+        <div id="all-reply{{comment.id}}" class="displayNone">
           <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
             <small>Comment : {{ commentReply.content }}</small>
             <br>
@@ -148,11 +148,11 @@
         <ng-container *ngIf="commentReplyAll[comment.id]">
           <div class="reply-display">
             <div class="ShowReply"
-            (click)="checkShowCommentReply()">
+            (click)="checkShowCommentReply(comment.id)">
               <i class="ri-arrow-down-s-line"></i>
               <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
             </div>
-            <div id="all-reply" class="displayNone">
+            <div id="all-reply{{comment.id}}" class="displayNone">
               <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
                 <small>Comment : {{ commentReply.content }}</small>
                   <button (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected.id">delete</button>
@@ -206,11 +206,11 @@
             <ng-container *ngIf="commentReplyAll[comment.id]">
               <div class="reply-display">
                 <div class="ShowReply"
-                (click)="checkShowCommentReply()">
+                (click)="checkShowCommentReply(comment.id)">
                   <i class="ri-arrow-down-s-line"></i>
                   <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
                 </div>
-                <div id="all-reply" class="displayNone">
+                <div id="all-reply{{comment.id}}" class="displayNone">
                   <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
                     <small>Comment : {{ commentReply.content }}</small>
                       <button (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected.id">delete</button>
@@ -266,11 +266,11 @@
               <ng-container *ngIf="commentReplyAll[comment.id]">
                 <div class="reply-display">
                   <div class="ShowReply"
-                  (click)="checkShowCommentReply()">
+                  (click)="checkShowCommentReply(comment.id)">
                     <i class="ri-arrow-down-s-line"></i>
                     <span>voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
                   </div>
-                  <div id="all-reply" class="displayNone">
+                  <div id="all-reply{{comment.id}}" class="displayNone">
                     <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
                       <small>Comment : {{ commentReply.content }}</small>
                         <button (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected.id">delete</button>
