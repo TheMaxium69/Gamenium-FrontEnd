@@ -424,8 +424,16 @@ a{
   }
 
   .gamenium-logo {
-    width: 125px;
-    height: 125px;
+    width: 111px;
+    height: 111px;
+  }
+
+  .gamenium-welcome {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
   
 }
