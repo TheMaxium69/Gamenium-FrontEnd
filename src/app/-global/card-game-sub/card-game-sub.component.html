@@ -52,3 +52,64 @@
     </p>
   </div>
 </div>
+
+
+<div id="squelette" class="card-game" *ngIf="!game">
+  <div class="card-thumb">
+    <div></div>
+  </div>
+  <div class="card-content">
+    <p class="nameofgame"><p>
+      <div class="platform-names">
+      </div>
+      <div class="final">
+      </div>
+  </div>
+</div>
+
+<style>
+  #squelette{
+
+    box-shadow: unset!important;
+
+    .card-thumb div{
+      background-color: gray;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+    }
+
+    .card-content{
+
+      .nameofgame{
+        border-radius: 7px;
+        background-color: gray;
+        height: 21px;
+        width: 210px;
+      }
+
+      div.platform-names{
+        border-radius: 5px;
+        background-color: gray;
+        height: 14px;
+        width: 100px;
+        margin: 8px 0;
+      }
+      div.final{
+        border-radius: 5px;
+        background-color: gray;
+        height: 13px;
+        width: 170px;
+      }
+
+
+    }
+
+
+
+  }
+
+
+</style>
+
+

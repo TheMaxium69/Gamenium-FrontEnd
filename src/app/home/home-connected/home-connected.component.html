@@ -115,6 +115,9 @@
             <!-- Boucle avec les cards jeux (en afficher 3)-->
         <div id="content-latest-release" class="d-flex">
           <app-card-game-sub *ngFor="let game of games | slice: 0 : 3" [game]="game" routerLink="/game/{{ game.id }}"></app-card-game-sub>
+          <ng-container *ngIf="games.length === 0">
+            <app-card-game-sub *ngFor="let i of [].constructor(3)"></app-card-game-sub>
+          </ng-container>
         </div>
 
         <div class="rowamoi justify-content-end">
