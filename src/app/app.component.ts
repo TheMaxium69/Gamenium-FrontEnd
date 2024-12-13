@@ -512,7 +512,16 @@ export class AppComponent {
       return;
     }
 
+
     myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
+
+    let message = ""
+    if (myGameHistorique.myGame.is_pinned) {
+      message = "épinglé";
+    } else {
+      message = "désépinglé"
+    }
+
 
     const body = JSON.stringify({
       id_game: myGameHistorique.myGame.game.id,
@@ -525,19 +534,19 @@ export class AppComponent {
           console.log('Statut épinglé mis à jour dans la base de données');
           Swal.fire({
             title: 'Succès!',
-            text: this.gameSelected?.name + ' a bien été épinglé',
+            text: myGameHistorique.myGame.game.name + ' a bien été '+message,
             icon: 'success',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         } else {
           myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
           Swal.fire({
             title: 'Echec!',
-            text: this.gameSelected?.name + ' n\'a pas pu être épinglé',
+            text: myGameHistorique.myGame.game.name + ' n\'a pas pu être '+message,
             icon: 'error',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         }
       }, error => {
