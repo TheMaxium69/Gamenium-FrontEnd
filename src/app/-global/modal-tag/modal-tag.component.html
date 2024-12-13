@@ -13,8 +13,11 @@
               <div class="head-panel">
                 <h2><i class="ri-search-2-line"></i>Créez un tag</h2>
               </div>
-              <input type="text" placeholder="Tag" name="name_tag" ngModel>
-              <input type="color" name="color_tag" ngModel>
+              <div style="display: flex; justify-content: space-between">
+                <input type="text" placeholder="Tag" name="name_tag" ngModel style="width: 100%">
+                <input type="color" name="color_tag" ngModel style="width: 60px; min-width: 60px;height: 55px">
+              </div>
+
               <button class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" type="submit">Ajoutez</button>
             </div>
           </form>
