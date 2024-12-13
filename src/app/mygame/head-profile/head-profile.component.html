@@ -17,13 +17,15 @@
               <div id="profilInfoLeft">
                 <ng-container *ngIf="profilSelected && profilSelected.reseau && profilSelected.reseau.length > 0">
                   <div class="articleInfoLeft">
-                    <h1>{{ profilSelected?.displaynameUseritium || profilSelected?.username }}
+                    <h1 class="username">{{ profilSelected?.displaynameUseritium || profilSelected?.username }}         
                       <ng-container *ngIf="badgeUserConnected">
                         <ng-container *ngFor="let badge of badgeUserConnected">
                           <img class="badgeIMG" src="{{ badge.picture?.url }}">
                         </ng-container>
                       </ng-container>
                     </h1>
+                      
+                    
                     <small *ngIf="profilSelected?.displaynameUseritium !== profilSelected?.username"><img class="useritiumPP" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"> {{ profilSelected?.username }}</small>
 
                     <div class="articleReseau">
