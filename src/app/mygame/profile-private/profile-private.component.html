@@ -13,7 +13,7 @@
 
     <!--  GAME PINED -->
     <div id="show-game" class="d-flex container">
-      <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" style="width: 100%"></app-card-game>
+      <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" class="app-card-game"></app-card-game>
 
       <!-- LOADING -->
       <ng-container *ngIf="isLoading">
@@ -134,7 +134,7 @@
 
     <!-- UNPINNED GAME -->
     <div id="show-game" class="d-flex container">
-      <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" style="width: 100%"></app-card-game>
+      <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="profilSelected?.themeColor" class="app-card-game"></app-card-game>
 
       <!-- LOADING -->
       <ng-container *ngIf="isLoading">

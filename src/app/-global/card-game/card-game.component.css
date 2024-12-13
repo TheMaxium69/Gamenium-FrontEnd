@@ -1,18 +1,6 @@
 
 /* GAME */
 
-#show-game.pinned{
-  margin-bottom: 35px;
-}
-
-#show-game{
-  justify-content: center;
-  gap: 35px;
-  flex-wrap: wrap;
-
-  max-width: 1287px;
-}
-
 
 .isPinned{
   position: absolute;
@@ -213,7 +201,7 @@
 }
 
 /* GAME SMALL SCREEN */
-@media (max-width: 770px) {
+@media (max-width: 990px) {
   #show-game {
     width: 400px;
 
