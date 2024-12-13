@@ -7,6 +7,10 @@ h2 {
   color: #333;
 }
 
+.connection-card .main-gamenium-btn {
+  float: inline-end;
+}
+
 .top {
   height: 183px;
   width: 100%;
@@ -177,6 +181,14 @@ hr {
 
 
 @media (max-width: 600px) {
+  h3 {
+    font-size: 16px;
+  }
+
+  .composant {
+    padding: 33px 20px;
+  }
+
   .searchbar {
     font-size: 18px;
     height: 50px;
@@ -185,7 +197,7 @@ hr {
   }
 
   .searchbar::placeholder {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .search-icon-container {
@@ -197,6 +209,20 @@ hr {
   .search-icon-container i {
     font-size: 20px;
   }
+
+  .top {
+    height: 125px;
+  }
+
+  .circle-img {
+    height: 150px;
+    width: 150px;
+  }
+
+  .container-fluid {
+    padding-top: 0;
+  }
+
 }
 
 
@@ -413,12 +439,6 @@ a > div {
   float: inline-end;
 }
 
-.main-gamenium-btn {
-  width: 30%;
-  margin: 0;
-  float: inline-end;
-}
-
 
 .btn-save:hover,
 .btn-submit:hover {
@@ -594,11 +614,19 @@ a > div {
 
   }
 
+  .colorpick {
+    margin-bottom: 10px;
+  }
+
   .btn-save,
   .btn-upload,
   .btn-submit {
     width: 100%;
     margin-top: 10px;
+  }
+
+  .social-input {
+    width: 100%;
   }
 
 }
