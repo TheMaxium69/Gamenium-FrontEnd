@@ -413,13 +413,25 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  updateDefault(form: NgForm){
+  updateDefault(){
 
-    let bodyNoJson = {
-      "id_devise":form.value['devise_default']
+
+    let selectElement = document.getElementById('devise');
+    let selectedValue: string | null = null;
+
+    if (selectElement instanceof HTMLSelectElement) {
+      selectedValue = selectElement.value;
     }
 
-    let body = JSON.stringify(bodyNoJson)
+    if ("" == selectedValue?.trim()){
+      return
+    }
+
+    let bodyNoJson = {
+      "id_devise":selectedValue
+    }
+
+    let body = JSON.stringify(bodyNoJson);
 
     this.userDefaultService.updateUserDefault(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseUserDefault:{message:string,result:UserDefaultInterface}) => {
       if(reponseUserDefault.message == "good"){

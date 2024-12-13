@@ -130,10 +130,8 @@
               <form class="reseau" #addUrlForm="ngForm" (ngSubmit)="addUrlSocial(addUrlForm)" method="post">
                 <ng-container *ngFor="let socialNetworkOne of socialNetworkAll">
                   <div class="social-item">
-                    <div>
-                      <i class="{{ socialNetworkOne.icon_class }} socials-icon"></i>
-                      <label class="socials-label" for="{{ socialNetworkOne.name }}">{{ socialNetworkOne.name | titlecase }}</label>
-                    </div>
+                    <i class="{{ socialNetworkOne.icon_class }} socials-icon"></i>
+                    <label class="socials-label" for="{{ socialNetworkOne.name }}">{{ socialNetworkOne.name | titlecase }}</label>
                     <input [value]="socialNetworkOne.url_user.replace('https://', '')" type="text" class="social-input-locked urluserSocialNetwork" disabled>
                     <ng-container *ngIf="reseauSelected">
                       <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name}}" class="social-input" name="{{ socialNetworkOne.name }}" [(ngModel)]="reseauSelected[socialNetworkOne.id].url">
@@ -151,7 +149,7 @@
       </div>
 
       <!-- Changement des valeur par default-->
-      <div class="para radius mb-4 search-setting para-setting">
+      <div class="para radius mb-4 search-setting para-setting" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
         <a data-bs-toggle="collapse" href="#collapseDefault" role="button" aria-expanded="false" aria-controls="collapseDefault">
           <div>
             <i class="ri-pencil-line"></i>
@@ -168,11 +166,14 @@
             </div>
             <div class="d-flex redirect-section">
 
-              <form class="default" #addDefaultForm="ngForm" (ngSubmit)="updateDefault(addDefaultForm)">
+              <form class="default">
                 <div class="default-item">
-                  <label class="socials-label" for="devise"><i class="ri-money-euro-circle-line"></i>Devise par défaut</label>
+                  <label class="socials-label" for="devise">
+                    <i class="ri-money-euro-circle-line"></i>
+                    <p>Devise par défaut</p>
+                  </label>
                   <ng-container *ngIf="app.deviseNoReload">
-                    <select id="devise" name="devise_default" ngModel>
+                    <select id="devise" name="devise_default" (change)="updateDefault()" style="margin-bottom: unset;">
                       <ng-container *ngIf="app.userDefaultNoReload">
                         <option value="">{{ app.userDefaultNoReload.devise.symbole }}</option>
                       </ng-container>
@@ -191,17 +192,20 @@
                   </ng-container>
                 </div>
                 <div class="default-item">
-                  <label class="socials-label" for="achat"><i class="ri-money-euro-circle-line"></i>Gerez ces lieux d'achat</label>
+                  <label class="socials-label" for="achat">
+                    <i class="ri-shopping-cart-2-line"></i>
+                    <p>Gerez ces lieux d'achat</p>
+                  </label>
                   <button id="achat" type="button" class="main-gamenium-btn" style="background-color: {{ color }}" data-bs-toggle="modal" data-bs-target="#manageBuyWhere">Gerez ces lieux</button>
                 </div>
                 <div class="default-item">
-                  <label class="socials-label" for="tags"><i class="ri-money-euro-circle-line"></i>Gerez ces tags</label>
+                  <label class="socials-label" for="tags">
+                    <i class="ri-price-tag-3-line"></i>
+                    <p>Gerez ces tags</p>
+                  </label>
                   <button id="tags" type="button" class="main-gamenium-btn" style="background-color: {{ color }}" data-bs-toggle="modal" data-bs-target="#manageTags">Gerez ces tags</button>
                 </div>
-                <input style="background-color: {{ color }}" type="submit" class="main-gamenium-btn" value="Valider">
               </form>
-
-
             </div>
           </div>
         </div>

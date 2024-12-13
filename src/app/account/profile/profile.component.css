@@ -706,6 +706,28 @@ a > div {
   margin-right: auto;
 }
 
+.default-item{
+  .main-gamenium-btn,
+  select{
+    width: 225px;
+  }
+
+  .socials-label{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-direction: row;
+    gap: 15px;
+
+    i{
+      font-size: unset !important;
+      margin-right: 5px;
+    }
+  }
+}
+
+
 .default{
   width: 100%;
   display: flex;
@@ -713,6 +735,7 @@ a > div {
   flex-wrap: nowrap;
   align-content: center;
   align-items: flex-end;
+  gap: 10px;
 
   .default-item{
     width: 100%;
