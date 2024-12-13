@@ -8,7 +8,7 @@
 
   <section id="headeEditMyGame" class="container">
 
-    <div id="head-img">
+    <div id="head-img" [class.gapUpdate]="selectedMyGame.screenshot.length <= 1">
       <div class="banner-image pp-shadow">
         <div class="banner" style="background-image: url({{ selectedMyGame.myGame?.game?.image?.small_url}});"></div>
         <div class="blur"></div>
@@ -17,12 +17,19 @@
       <div class="separe-image"></div>
       <div class="screen-image" data-bs-toggle="modal" data-bs-target="#addScreenshot">
         <small>Image Utilisateur</small>
-        <div class="screen-all">
+        <div class="screen-all" *ngIf="selectedMyGame.screenshot.length > 0">
           <ng-container *ngFor="let oneScreen of selectedMyGame.screenshot"> <!-- this.app.viewMyGame.screenshot-->
             <div class="screen-encard">
               <img class="screen" [src]="oneScreen.picture.url" alt="userImage">
             </div>
           </ng-container>
+        </div>
+
+        <div class="screen-all" *ngIf="selectedMyGame.screenshot.length == 0" style="height: 100%;">
+          <div class="card-no-picture">
+            <i class="ri-image-add-line"></i>
+            <p>Ajoutez une image</p>
+          </div>
         </div>
       </div>
     </div>

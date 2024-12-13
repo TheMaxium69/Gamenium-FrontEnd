@@ -1,3 +1,5 @@
+<modal-screenshot></modal-screenshot>
+
 <div class="modal fade text-center" id="viewGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -46,7 +48,7 @@
 
       <section id="view-mygame" *ngIf="this.app.viewMyGame">
 
-        <div id="head-img">
+        <div id="head-img" [class.gapUpdate]="this.app.viewMyGame.screenshot.length <= 1">
           <div class="banner-image pp-shadow">
             <div class="banner" style="background-image: url({{this.app.viewMyGame.myGame?.game?.image?.small_url}});"></div>
             <div class="blur"></div>
@@ -55,12 +57,24 @@
           <div class="separe-image"></div>
           <div class="screen-image" [ngStyle]="{'--color-variable': isColor}">
             <small>Image Utilisateur</small>
-            <div class="screen-all">
+            <div class="screen-all" *ngIf="this.app.viewMyGame.screenshot.length > 0">
               <ng-container *ngFor="let oneScreen of this.app.viewMyGame.screenshot"> <!-- this.app.viewMyGame.screenshot-->
                 <div class="screen-encard">
                   <img class="screen" [src]="oneScreen.picture.url" alt="userImage">
                 </div>
               </ng-container>
+            </div>
+            <div class="screen-all" *ngIf="this.app.viewMyGame?.myGame?.user?.id == this.app.userConnected?.id && this.app.viewMyGame.screenshot.length == 0" style="height: 100%;" data-bs-toggle="modal" data-bs-target="#addScreenshot">
+              <div class="card-no-picture">
+                <i class="ri-image-add-line"></i>
+                <p>Ajoutez une image</p>
+              </div>
+            </div>
+            <div class="screen-all" *ngIf="this.app.viewMyGame?.myGame?.user?.id !== this.app.userConnected?.id && this.app.viewMyGame.screenshot.length == 0" style="height: 100%;">
+              <div class="card-no-picture">
+                <i class="ri-image-line"></i>
+                <p>Aucune image</p>
+              </div>
             </div>
           </div>
         </div>

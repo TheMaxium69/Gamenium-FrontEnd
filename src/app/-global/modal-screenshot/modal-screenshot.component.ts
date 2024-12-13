@@ -124,8 +124,6 @@ export class ModalScreenshotComponent implements OnInit {
             };
           }
 
-
-
         }
 
 

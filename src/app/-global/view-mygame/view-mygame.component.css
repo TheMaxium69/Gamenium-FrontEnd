@@ -73,6 +73,7 @@
   margin: 0;
 }
 
+
 /***********
 *
 * CONTENT MODAL
@@ -184,6 +185,27 @@
   }
 
 }
+
+#head-img.gapUpdate {
+  gap: 50px!important;
+}
+
+.card-no-picture {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  opacity: 0.7;
+  padding: 0 66px;
+
+  i {
+    font-size: 70px;
+    margin: -12px;
+  }
+}
+
 #head-modal{
   display: flex;
   justify-content: space-between;
