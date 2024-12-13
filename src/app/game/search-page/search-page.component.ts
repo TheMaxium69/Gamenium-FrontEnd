@@ -133,21 +133,37 @@ export class SearchPageComponent implements OnInit{
 
   searchGame(): void {
     this.nbMoreGame = 1;
-    this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
-      this.games = results;
 
-      let element = document.getElementById("moreGameBTN");
-      if (this.games.length == this.app.fetchLimit){
-        if (element){
-          element.style.display = "block";
-        }
-      } else {
-        if (element){
-          element.style.display = "none";
-        }
+    if (this.searchValue === this.app.searchValue && this.app.gameNoReload.length > 0) {
+
+      this.games = this.app.gameNoReload;
+      this.calcBtnMore();
+
+    } else {
+      this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
+        this.games = results;
+
+        this.app.searchValue = this.searchValue;
+        this.app.gameNoReload = results;
+
+        this.calcBtnMore();
+      });
+    }
+
+
+  }
+
+  calcBtnMore(){
+    let element = document.getElementById("moreGameBTN");
+    if (this.games.length == this.app.fetchLimit){
+      if (element){
+        element.style.display = "block";
       }
-    });
-
+    } else {
+      if (element){
+        element.style.display = "none";
+      }
+    }
   }
 
   searchUser(): void {
