@@ -8,14 +8,95 @@
 
       <div class="modal-body">
 
+        <form id="newScreen" #newScreen="ngForm" (ngSubmit)="onUpload(newScreen)">
 
-          <input type="file" (change)="onFileChanged($event)">
+          <label for="preview" (change)="onFileChanged($event)">
+            <div class="ForPreview panel-shadow">
+              <ng-container *ngIf="!selectedFile">
+                <i class="ri-image-line"></i>
+                <p>Choissir une image</p>
+              </ng-container>
+              <div id="preview-image" [class.displayNone]="!selectedFile"></div>
+            </div>
+            <input type="file" id="preview" />
+          </label>
 
-        <ng-container *ngFor="let oneCategory of app.hmgScreenshotCategory">
-          <p>{{ oneCategory.name }}</p>
-        </ng-container>
+          <select id="category" name="category" ngModel>
+            <option value="">Choisir une catégorie</option>
+            <ng-container *ngFor="let oneCategory of app.hmgScreenshotCategory">
+              <option [value]="oneCategory.id">{{ oneCategory.name }}</option>
+            </ng-container>
+          </select>
 
-          <input type="submit" value="envoyé" (click)="onUpload()">
+          <label for="images" (change)="onFileChanged($event)" *ngIf="!selectedFile">
+            <div class="main-gamenium-btn btn-screen" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Téléchargé</div>
+            <input type="file" id="images" />
+          </label>
+          <button *ngIf="selectedFile" type="submit" id="upload-button" class="main-gamenium-btn btn-screen" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Envoyé</button>
+        </form>
+
+        <style>
+
+          /* GLOBAL */
+          input[type=file] {
+            display: none;
+          }
+
+          form#newScreen{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            gap: 20px;
+          }
+
+          /* PREVIEW */
+          .displayNone{
+            display: none!important;
+          }
+
+          .ForPreview{
+            background-color: #cacaca;
+            height: 215px;
+            width: 400px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: gray;
+            flex-direction: column;
+            margin-bottom: 6px;
+
+            i{
+              font-size: 20px;
+            }
+
+            p{
+              margin: 0;
+            }
+          }
+
+          #preview-image{
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+          }
+
+          /* BUTTOM */
+          .btn-screen{
+            width: 300px;
+          }
+
+
+
+
+
+        </style>
+
 
 
 

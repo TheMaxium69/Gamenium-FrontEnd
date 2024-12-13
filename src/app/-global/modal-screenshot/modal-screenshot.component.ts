@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import {UploadService} from "../../-service/upload.service";
 import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
 import {HmgScreenshotInterface} from "../../-interface/hmg-screenshot.interface";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'modal-screenshot',
@@ -47,32 +48,51 @@ export class ModalScreenshotComponent implements OnInit {
     if (input.files && input.files[0]) {
       this.selectedFile = input.files[0]
 
-      // // crée une preview de limage quand avant de l'upload
-      // const previewImage = URL.createObjectURL(this.selectedFile)
-      //
-      // const preview = document.querySelector('.profile-avatar') as HTMLElement
-      // if (preview) {
-      //   preview.style.backgroundImage = `url(${previewImage})`
-      //   preview.style.backgroundSize = 'cover'
-      //   preview.style.backgroundPosition = 'center'
-      // }
-      //
-      console.log(this.selectedFile);
-      // console.log(previewImage)
+      // crée une preview de limage quand avant de l'upload
+      const previewImage = URL.createObjectURL(this.selectedFile)
+      const preview = document.getElementById('preview-image') as HTMLElement
+      if (preview) {
+        preview.style.backgroundImage = `url(${previewImage})`
+      }
+
     }
   }
 
-  onUpload() {
+  onUpload(form: NgForm) {
+
+    const uploadButton = document.getElementById('upload-button') as HTMLButtonElement
+    uploadButton.disabled = true
+    uploadButton.textContent = "Envoie du fichier en cours..."
 
     if (!this.selectedFile) {
-      console.log('Aucun fichier sélectionné');
+      uploadButton.disabled = false
+      uploadButton.textContent = "Envoyé"
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur aucune image selectionné',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+      })
       return;
     }
 
-    // const uploadButton = document.querySelector('#upload-button') as HTMLButtonElement
-    // uploadButton.disabled = true
-    // uploadButton.textContent = "Envoie du fichier en cours..."
+    if (!form.value['category']) {
+      uploadButton.disabled = false
+      uploadButton.textContent = "Envoyé"
+      Swal.fire({
+        title: 'Attention!',
+        text: 'Veuillez choisir une catégorie',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+      })
+      return;
+    }
+
     if (!this.myGame){
+      uploadButton.disabled = false
+      uploadButton.textContent = "Envoyé"
       Swal.fire({
         title: 'Erreur!',
         text: 'Erreur inconnue',
@@ -83,11 +103,39 @@ export class ModalScreenshotComponent implements OnInit {
       return;
     }
 
-    this.uploadService.uploadScreenshot(this.selectedFile, 1, this.myGame?.id, this.app.setURL(), this.app.createCorsToken(true)).subscribe(responseUploadScreenshot => {
+    this.uploadService.uploadScreenshot(this.selectedFile, form.value['category'], this.myGame?.id, this.app.setURL(), this.app.createCorsToken(true)).subscribe((responseUploadScreenshot:{message:string,result:HmgScreenshotInterface}) => {
 
       if (responseUploadScreenshot.message == "good"){
 
         this.screenshotAdded.emit(responseUploadScreenshot.result);
+
+        if (this.myGame && this.app.myGameAll){
+
+          let myGame = this.myGame;
+
+          const foundMyGameIndex = this.app.myGameAll.findIndex(game => game.id === myGame.id);
+          if (foundMyGameIndex !== -1) {
+            this.app.myGameAll[foundMyGameIndex] = {
+              ...this.app.myGameAll[foundMyGameIndex],
+              screenshot: [
+                ...(this.app.myGameAll[foundMyGameIndex].screenshot || []),
+                responseUploadScreenshot.result
+              ]
+            };
+          }
+
+
+
+        }
+
+
+        this.selectedFile = undefined;
+        uploadButton.disabled = false
+        uploadButton.textContent = "Envoyé"
+        const categorySelect = document.getElementById('category') as HTMLButtonElement
+        if (categorySelect){
+          categorySelect.value = "";
+        }
 
         Swal.fire({
           title: 'Succès!',
@@ -99,6 +147,8 @@ export class ModalScreenshotComponent implements OnInit {
 
       } else {
 
+        uploadButton.disabled = false
+        uploadButton.textContent = "Envoyé"
         Swal.fire({
           title: 'Échec!',
           text: 'Échec de l\'upload de votre screenshot ',
@@ -108,7 +158,11 @@ export class ModalScreenshotComponent implements OnInit {
         })
       }
 
-    }, (error) => this.app.erreurSubcribe());
+    }, (error) => {
+      uploadButton.disabled = false
+      uploadButton.textContent = "Envoyé"
+      this.app.erreurSubcribe()
+    });
   }
 
 
