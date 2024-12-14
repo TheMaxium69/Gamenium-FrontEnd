@@ -13,39 +13,19 @@
 </form>
 
 
-<div id="bar-type">
+<div id="bar-type" [ngStyle]="{ '--userColor': userColor ?? this.app.colorDefault }">
   <ul class="d-flex">
     <!--  GAME  -->
-    <ng-container *ngIf="searchType == 'game'">
-      <li class="active" style="background: {{userColor}}; color: white;" (click)="changeType('game')">Jeux</li>
-    </ng-container>
-    <ng-container *ngIf="searchType !== 'game'">
-      <li (click)="changeType('game')">Jeux</li>
-    </ng-container>
+    <li [class.active]="searchType == 'game'" (click)="changeType('game')">Jeux</li>
 
     <!--  USER  -->
-    <ng-container *ngIf="searchType == 'user'">
-      <li class="active" style="background: {{userColor}}; color: white;"  (click)="changeType('user')">Profile</li>
-    </ng-container>
-    <ng-container *ngIf="searchType !== 'user'">
-      <li (click)="changeType('user')">Profile</li>
-    </ng-container>
+    <li [class.active]="searchType == 'user'" (click)="changeType('user')">Profile</li>
 
     <!--  postactu  -->
-    <ng-container *ngIf="searchType == 'postactu'">
-      <li class="active" style="background: {{userColor}}; color: white;"  (click)="changeType('postactu')">Actualité</li>
-    </ng-container>
-    <ng-container *ngIf="searchType !== 'postactu'">
-      <li (click)="changeType('postactu')">Actualité</li>
-    </ng-container>
+    <li [class.active]="searchType == 'postactu'" (click)="changeType('postactu')">Actualité</li>
 
     <!--  provider  -->
-    <ng-container *ngIf="searchType == 'provider'">
-      <li class="active" style="background: {{userColor}}; color: white;"  (click)="changeType('provider')">Provider</li> <!-- A CHANGER !! -->
-    </ng-container>
-    <ng-container *ngIf="searchType !== 'provider'">
-      <li (click)="changeType('provider')">Provider</li> <!-- A CHANGER !! -->
-    </ng-container>
+    <li [class.active]="searchType == 'provider'" (click)="changeType('provider')">Éditeur</li>
 
   </ul>
 </div>
