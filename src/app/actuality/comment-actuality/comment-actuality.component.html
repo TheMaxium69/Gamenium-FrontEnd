@@ -68,7 +68,7 @@
         <div
         (click)="replyToComment(comment.id)">
           <i class="ri-question-answer-line" id="reply-icon"></i>
-          <span class="comment-action">répondre</span>
+          <span class="comment-action">répondre1</span>
         </div>
         <div
         (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
@@ -104,7 +104,16 @@
   </ng-container>
 </ng-container>
 
+
+
+
 <ng-container *ngIf="isLoggedIn">
+
+  <!--
+
+  MY COMMENT BDD
+
+  -->
   <div id="yourComment">
     <ng-container *ngFor="let comment of commentByActu">
       <ng-container *ngIf="comment.user.id == userConnectedId">
@@ -129,7 +138,7 @@
             <div
             (click)="replyToComment(comment.id)">
               <i class="ri-question-answer-line" id="reply-icon"></i>
-              <span class="comment-action">répondre</span>
+              <span class="comment-action">répondre2</span>
             </div>
             <div
             (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
@@ -167,6 +176,12 @@
     </ng-container>
   </div>
 
+
+  <!--
+
+  OTHER COMMENT BDD -> Les more like
+
+  -->
   <div>
     <div id="OtherCommentsByDate" [class.displayNone]="isShortByDate">
       <ng-container *ngFor="let comment of commentByActu">
@@ -188,7 +203,7 @@
               <div
               (click)="replyToComment(comment.id)">
                 <i class="ri-question-answer-line" id="reply-icon"></i>
-                <span class="comment-action">répondre</span>
+                <span class="comment-action">répondre3</span>
               </div>
               <div
               (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
@@ -228,6 +243,11 @@
       </ng-container>
     </div>
 
+    <!--
+
+     OTHER COMMENT BDD -> Les plus recent
+
+     -->
     <div id="OtherCommentsByLike" [class.displayNone]="!isShortByDate">
       <ng-container *ngFor="let comment of commentByActu">
         <ng-container *ngIf="comment.user.id != userConnectedId">
@@ -248,7 +268,7 @@
               <div
               (click)="replyToComment(comment.id)">
                 <i class="ri-question-answer-line" id="reply-icon"></i>
-                <span class="comment-action">répondre</span>
+                <span class="comment-action">répondre4</span>
               </div>
               <div
               (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">

@@ -63,7 +63,7 @@ nav ul li a p {
   }
 }
 
-/* Animation ICON */ 
+/* Animation ICON */
 @keyframes jiggle {
   0% {
     transform: rotate(0deg);
@@ -86,7 +86,6 @@ nav ul li a p {
 nav ul li.search{
   display: block;
   align-items: unset;
-  background-color: red;
   border-radius: 100%;
   width: 75px;
   height: 75px;

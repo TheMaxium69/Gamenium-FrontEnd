@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   selectedColor: string = '';
   tempColor: string = '';
 
-  color: string = this.app.colorDefault;
+  color: string | undefined;
   oldColor:string = this.app.colorDefault;
 
   selectedFile: File | undefined;
@@ -66,7 +66,8 @@ export class ProfileComponent implements OnInit {
 
       this.getInfoProfile(this.userConnected.id)
 
-      this.loadThemeColor();
+      // this.loadThemeColor();
+      // this.color = this.app.userConnected?.themeColor || this.app.colorDefault;
 
     }
 
@@ -190,24 +191,24 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  loadThemeColor() {
-    const userId = this.userConnected?.id;
-    if (userId) {
-      this.userService.getThemeColor(userId, this.app.setURL()).subscribe((themeColor) => {
-        if (this.userConnected) {
-          this.userConnected.themeColor = themeColor;
-          if (this.userConnected.themeColor !== null && this.userConnected.themeColor[0] !== null){
-            this.color = this.userConnected.themeColor;
-            this.oldColor = this.userConnected.themeColor;
-          } else {
-            this.color = this.app.colorDefault;
-            this.oldColor = this.app.colorDefault;
-          }
-          this.cdRef.detectChanges();
-        }
-      });
-    }
-  }
+  // loadThemeColor() {
+  //   const userId = this.userConnected?.id;
+  //   if (userId) {
+  //     this.userService.getThemeColor(userId, this.app.setURL()).subscribe((themeColor) => {
+  //       if (this.userConnected) {
+  //         this.userConnected.themeColor = themeColor;
+  //         if (this.userConnected.themeColor !== null && this.userConnected.themeColor[0] !== null){
+  //           this.color = this.userConnected.themeColor;
+  //           this.oldColor = this.userConnected.themeColor;
+  //         } else {
+  //           this.color = this.app.colorDefault;
+  //           this.oldColor = this.app.colorDefault;
+  //         }
+  //         this.cdRef.detectChanges();
+  //       }
+  //     });
+  //   }
+  // }
 
   debug(){
     console.log(this.color)

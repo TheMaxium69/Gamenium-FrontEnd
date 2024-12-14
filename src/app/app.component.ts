@@ -96,7 +96,7 @@ export class AppComponent {
   maxSearchProviderByGame:number = 4; // Max Recherche de provider dans gameOne
 
   // DEFAULT
-  colorDefault = "#FF0000";
+  colorDefault = "#009dff";
   noBoxartImage_default:string = "https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg";
   noBoxartImage:string = "assets/noBoxart.png";
 
@@ -145,12 +145,6 @@ export class AppComponent {
     this.userConnected = undefined;
 
     this.router.navigate(['/']);
-
-    if (this.navbarComponent) {
-      this.navbarComponent.updateConnect();
-    } else {
-      console.error('Le composant navbar n\'a pas été initialisé correctement.');
-    }
   }
 
   //LOGIN
@@ -211,12 +205,6 @@ export class AppComponent {
           this.cookieService.set('tokenGamenium', this.token);
           let userJson = JSON.stringify(this.userConnected);
           this.cookieService.set('userGamenium', userJson);
-        }
-
-        if (this.navbarComponent) {
-          this.navbarComponent.updateConnect();
-        } else {
-          console.error('Le composant navbar n\'a pas été initialisé correctement.');
         }
 
         if (this.router.url == "/account"){

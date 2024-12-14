@@ -1,13 +1,13 @@
 <modal-tag></modal-tag>
 <modal-buywhere></modal-buywhere>
 
-<div class="top" style="background-color: {{ color }}!important;"></div>
+<div class="top" style="background-color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}!important;"></div>
 
 
 <!--<input type="file" (change)="onFileChanged($event)" id="profilePictureInput">-->
 
 <div class="circle">
-  <div class="circle-img" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displaynameUseritium || this.userConnected?.username, color) }}"></div>
+  <div class="circle-img" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displaynameUseritium || this.userConnected?.username, color || this.app.userConnected?.themeColor || this.app.colorDefault) }}"></div>
 </div>
 
 <div class="container-fluid first-div" style="margin-bottom: 120px;">
@@ -15,7 +15,7 @@
     <!-- Zone de recherche -->
     <div class="composant search-form-container">
       <h2>Bonjour
-        <span class="name" style="color: {{ color }}!important">{{ userConnected?.displaynameUseritium || userConnected?.username }}</span>
+        <span class="name" style="color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}!important">{{ userConnected?.displaynameUseritium || userConnected?.username }}</span>
         <ng-container *ngIf="badgeUserConnected">
           <ng-container *ngFor="let badge of badgeUserConnected">
             <img style="margin-left: 6px" width="30px" src="{{ badge.picture?.url }}">
@@ -25,8 +25,8 @@
       <hr>
       <form action="#" class="search-form">
         <div class="input-container">
-          <input  [ngStyle]="{ '--color': color ?? this.app.colorDefault }" (input)="filterSettings($event)" type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
-          <button type="submit" class="search-icon-container" aria-label="Search" style="background-color: {{ color }}!important">
+          <input  [ngStyle]="{ '--color': color ?? this.app.userConnected?.themeColor ?? this.app.colorDefault }" (input)="filterSettings($event)" type="text" class="searchbar" placeholder="Rechercher dans vos paramètres">
+          <button type="submit" class="search-icon-container" aria-label="Search" style="background-color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}!important">
             <i class="ri-search-line"></i>
           </button>
         </div>
@@ -57,8 +57,8 @@
             <!-- Content de la card profil -->
             <div class="profile-card">
               <div>
-                <div class="profile-header" [ngStyle]="{ 'background-color': color }"></div>
-                  <div class="profile-avatar" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displaynameUseritium || this.userConnected?.username, color) }}">
+                <div class="profile-header" [ngStyle]="{ 'background-color': color || this.app.userConnected?.themeColor || this.app.colorDefault }"></div>
+                  <div class="profile-avatar" style="{{ this.app.generatePPUseritium(profilSelected?.picture, this.userConnected?.displaynameUseritium || this.userConnected?.username, color || this.app.userConnected?.themeColor || this.app.colorDefault) }}">
                     <i *ngIf="profilSelected?.picture" id="delete-picture" class="ri-delete-bin-line delete-picture-icon" (click)="deletePicture()"></i>
                   </div>
                   <h3>{{ userConnected?.displaynameUseritium || userConnected?.username }}</h3>
@@ -75,11 +75,11 @@
                   <div class="colorpick">
 
                     <label  for="themeColor">Choisir la couleur du thème:</label>
-                    <input type="color" id="themeColor" value="{{color ?? 'red'}}" [(ngModel)]="color" />
+                    <input type="color" id="themeColor" value="{{color || this.app.userConnected?.themeColor || this.app.colorDefault}}" [(ngModel)]="color" />
 
                   </div>
 <!--                  <button [ngStyle]="{ '&#45;&#45;color': color ?? 'red' }" class="btn-save" (click)="saveColor()">Enregistrer la couleur</button>-->
-                  <button style="background-color: {{ color }}" class="main-gamenium-btn" (click)="saveColor()">Enregistrer la couleur</button>
+                  <button style="background-color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}" class="main-gamenium-btn" (click)="saveColor()">Enregistrer la couleur</button>
                 </div>
               </div>
               <!-- Update la photo de profil -->
@@ -87,12 +87,12 @@
                 <h5 class="setting-title">Photo de profil</h5>
                 <div>
                   <div class="file-upload">
-                    <input type="file" [ngStyle]="{ '--color': color ?? 'red' }" (change)="onFileChanged($event)" id="profilePictureInput">
+                    <input type="file" [ngStyle]="{ '--color': color || this.app.userConnected?.themeColor || this.app.colorDefault }" (change)="onFileChanged($event)" id="profilePictureInput">
 <!--                    <label for="profilePictureInput" class="file-label">-->
 <!--                      <i class="ri-upload-cloud-line"></i> Sélectionner une image-->
 <!--                    </label>-->
 <!--                    <button [ngStyle]="{ '&#45;&#45;color': color ?? 'red' }" type="button" id="upload-button" class="btn-upload" (click)="onUpload()">Télécharger</button>-->
-                    <button style="background-color: {{ color }}" type="button" id="upload-button" class="main-gamenium-btn" (click)="onUpload()">Télécharger</button>
+                    <button style="background-color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}" type="button" id="upload-button" class="main-gamenium-btn" (click)="onUpload()">Télécharger</button>
                   </div>
                 </div>
               </div>
@@ -134,14 +134,14 @@
                     <label class="socials-label" for="{{ socialNetworkOne.name }}">{{ socialNetworkOne.name | titlecase }}</label>
                     <input [value]="socialNetworkOne.url_user.replace('https://', '')" type="text" class="social-input-locked urluserSocialNetwork" disabled>
                     <ng-container *ngIf="reseauSelected">
-                      <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name}}" class="social-input" name="{{ socialNetworkOne.name }}" [(ngModel)]="reseauSelected[socialNetworkOne.id].url">
+                      <input [ngStyle]="{ '--color': color || this.app.userConnected?.themeColor || this.app.colorDefault }" type="text" id="{{ socialNetworkOne.name}}" class="social-input" name="{{ socialNetworkOne.name }}" [(ngModel)]="reseauSelected[socialNetworkOne.id].url">
                     </ng-container>
                     <ng-container *ngIf="!reseauSelected">
-                      <input [ngStyle]="{ '--color': color ?? 'red' }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" ngModel placeholder="Nom d'utilisateur">
+                      <input [ngStyle]="{ '--color': color || this.app.userConnected?.themeColor || this.app.colorDefault }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" ngModel placeholder="Nom d'utilisateur">
                     </ng-container>
                   </div>
                 </ng-container>
-                <input style="background-color: {{ color }}" type="submit" class="main-gamenium-btn" value="Valider">
+                <input style="background-color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}" type="submit" class="main-gamenium-btn" value="Valider">
               </form>
             </div>
           </div>
@@ -149,7 +149,7 @@
       </div>
 
       <!-- Changement des valeur par default-->
-      <div class="para radius mb-4 search-setting para-setting" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+      <div class="para radius mb-4 search-setting para-setting" [ngStyle]="{'--userColor': color || this.app.userConnected?.themeColor || this.app.colorDefault }">
         <a data-bs-toggle="collapse" href="#collapseDefault" role="button" aria-expanded="false" aria-controls="collapseDefault">
           <div>
             <i class="ri-pencil-line"></i>
@@ -196,14 +196,14 @@
                     <i class="ri-shopping-cart-2-line"></i>
                     <p>Gerez ces lieux d'achat</p>
                   </label>
-                  <button id="achat" type="button" class="main-gamenium-btn" style="background-color: {{ color }}" data-bs-toggle="modal" data-bs-target="#manageBuyWhere">Gerez ces lieux</button>
+                  <button id="achat" type="button" class="main-gamenium-btn" style="background-color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-toggle="modal" data-bs-target="#manageBuyWhere">Gerez ces lieux</button>
                 </div>
                 <div class="default-item">
                   <label class="socials-label" for="tags">
                     <i class="ri-price-tag-3-line"></i>
                     <p>Gerez ces tags</p>
                   </label>
-                  <button id="tags" type="button" class="main-gamenium-btn" style="background-color: {{ color }}" data-bs-toggle="modal" data-bs-target="#manageTags">Gerez ces tags</button>
+                  <button id="tags" type="button" class="main-gamenium-btn" style="background-color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-toggle="modal" data-bs-target="#manageTags">Gerez ces tags</button>
                 </div>
               </form>
             </div>
@@ -228,7 +228,7 @@
             </div>
             <div class="d-flex redirect-section">
               <p class="redirect-message">Besoin de mettre à jour vos informations ? Rendez-vous sur Useritium pour accéder et modifier votre profil.</p>
-              <a href="https://useritium.fr/" target="_blank" class="main-gamenium-btn redirect-btn" style="background-color: {{ color }}">Aller sur Useritium</a>
+              <a href="https://useritium.fr/" target="_blank" class="main-gamenium-btn redirect-btn" style="background-color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}">Aller sur Useritium</a>
             </div>
           </div>
         </div>
@@ -272,7 +272,7 @@
         <div><i class="ri-arrow-right-s-line"></i></div>
       </a>
       <div class="collapse" id="collapseBadges">
-        <div class="card card-body modern-card" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+        <div class="card card-body modern-card" [ngStyle]="{'--userColor': color || this.app.userConnected?.themeColor || this.app.colorDefault }">
           <!-- Contenu de la section Tous nos badges -->
           <div class="badges-card">
             <h5 class="setting-title">Vitrine de nos badges</h5>
@@ -281,7 +281,7 @@
           <ng-container *ngFor="let badge of allBadges">
             <div class="badge-list-container d-flex">
               <div>
-                <i class="badge-owned-icon" [ngClass]="!isBadgeInUserConnected(badge) ? 'ri-checkbox-blank-circle-line' : 'ri-checkbox-circle-fill' " style="color: {{ color }}"></i>
+                <i class="badge-owned-icon" [ngClass]="!isBadgeInUserConnected(badge) ? 'ri-checkbox-blank-circle-line' : 'ri-checkbox-circle-fill' " style="color: {{ color || this.app.userConnected?.themeColor || this.app.colorDefault }}"></i>
               </div>
               <div class="badge-header">
                 <div class="badge-list-item" style="background-image: url({{badge.picture?.url}});"></div>
