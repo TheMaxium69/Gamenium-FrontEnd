@@ -152,7 +152,6 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
             // console.log("Jeux lié a ce profil", this.myGameHistoriqueAll);
           }
 
-          this.isLoading = false;
 
           if(this.userConnected?.id != id_user){
             this.addViewProfile(this.profileId);
@@ -160,6 +159,8 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         } else {
           console.log("Pas de jeux pour l'utilisateur courrant", id_user);
         }
+
+        this.isLoading = false;
         this.findCommonGames();
 
       });
