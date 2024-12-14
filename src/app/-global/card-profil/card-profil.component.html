@@ -22,24 +22,6 @@
       {{ user?.username }}
     </small>
 
-    <!-- Badges Section -->
-    <div *ngIf="user.badges && user.badges.length > 0" class="mt-1">
-        <div class="d-flex flex-row flex-wrap align-items-center">
-          <div
-            *ngFor="let badge of user.badges"
-            [ngClass]="{'pe-1': user.badges.length > 1}"
-            class="badge-item"
-          >
-            <img
-              [src]="badge.picture?.url || 'assets/default-badge.png'"
-              alt="{{ badge.name }}"
-              class="badge-image"
-              [title]="badge.name || 'No description available'"
-            />
-          </div>
-        </div>
-      </div>
-      
   </div>
 </div>
 

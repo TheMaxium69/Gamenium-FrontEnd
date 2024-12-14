@@ -54,11 +54,17 @@
 <ng-container *ngIf="searchType == 'game'">
 
   <div id="show-game" class="d-flex container">
+    <!-- REEL -->
     <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>
 
     <!-- LOADING -->
     <ng-container *ngIf="isGameLoading">
       <app-card-game *ngFor="let game of [].constructor(50);" style="width: 100%"></app-card-game>
+    </ng-container>
+
+    <!-- RIEN TROUVER-->
+    <ng-container *ngIf="!isGameLoading && games.length == 0">
+      <p>Aucun résultat trouvé.</p>
     </ng-container>
 
     <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>
@@ -68,19 +74,39 @@
 
 <ng-container *ngIf="searchType === 'user'">
   <div id="show-user" class="container d-flex justify-content-center flex-wrap">
+    <!-- REEL-->
     <app-card-profil
       *ngFor="let user of users"
       [user]="user"
       [currentUser]="app.userConnected"
     ></app-card-profil>
+
+    <!-- LOADING -->
+    <ng-container *ngIf="isProfilLoading">
+      <app-card-profil *ngFor="let profil of [].constructor(16)"></app-card-profil>
+    </ng-container>
+
+    <!-- RIEN TROUVER-->
+    <ng-container *ngIf="!isProfilLoading && users.length == 0">
+      <p>Aucun résultat trouvé.</p>
+    </ng-container>
+
   </div>
 </ng-container>
 
 <ng-container *ngIf="searchType == 'postactu'">
   <section id="show-actu" class="container d-flex justify-content-center">
+    <!-- REEL-->
     <app-card-actu *ngFor="let actu of postactus" [actu]="actu"></app-card-actu>
-    <ng-container *ngIf="isProviderLoading">
+
+    <!-- LOADING -->
+    <ng-container *ngIf="isActuLoading">
       <app-card-actu *ngFor="let actu of [].constructor(16)"></app-card-actu>
+    </ng-container>
+
+    <!-- RIEN TROUVER-->
+    <ng-container *ngIf="!isActuLoading && postactus.length == 0">
+      <p>Aucun résultat trouvé.</p>
     </ng-container>
 
   </section>
@@ -88,13 +114,23 @@
 
 <ng-container *ngIf="searchType === 'provider'">
   <div id="show-provider" class="container d-flex justify-content-center">
-    <ng-container *ngFor="let provider of providers">
-      <app-card-provider
-        [provider]="provider"
-        [isDetailView]="false"
-        (followed)="handleFollowed($event)"
-        (unfollowed)="handleUnfollowed($event)"></app-card-provider>
+    <!-- REEL-->
+    <app-card-provider *ngFor="let provider of providers"
+      [provider]="provider"
+      [isDetailView]="false"
+      (followed)="handleFollowed($event)"
+      (unfollowed)="handleUnfollowed($event)"></app-card-provider>
+
+    <!-- LOADING -->
+    <ng-container *ngIf="isProviderLoading">
+      <app-card-provider *ngFor="let provider of [].constructor(16)"></app-card-provider>
     </ng-container>
+
+    <!-- RIEN TROUVER-->
+    <ng-container *ngIf="!isProviderLoading && providers.length == 0">
+      <p>Aucun résultat trouvé.</p>
+    </ng-container>
+
   </div>
 </ng-container>
 

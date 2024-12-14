@@ -69,6 +69,8 @@ export class SearchPageComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
 
+
+
     this.isLoggedIn = this.app.isLoggedIn;
     this.userColor = this.app.userConnected?.themeColor || this.app.colorDefault;
 
@@ -78,10 +80,7 @@ export class SearchPageComponent implements OnInit, OnDestroy{
     } else if (searchValueTemp == '-'){
       this.searchValue = '';
     }
-    // this.app.searchValue = this.searchValue;
     this.searchType = this.route.snapshot.paramMap.get('type');
-
-    this.updateAll();
 
     /* SET SEARCH GAME */
     this.searchGameSubject.pipe(
@@ -93,7 +92,7 @@ export class SearchPageComponent implements OnInit, OnDestroy{
         }
         return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
           catchError((error) => {
-            this.isGameLoading = true;
+            this.isGameLoading = false;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
             Swal.fire({
               title: 'Erreur!',
@@ -118,6 +117,102 @@ export class SearchPageComponent implements OnInit, OnDestroy{
 
       this.calcBtnMore();
     });
+
+    /* SET SEARCH PROFIL */
+    this.searchProfilSubject.pipe(
+      debounceTime(this.app.deadlineSearch),
+      // distinctUntilChanged(),
+      switchMap((searchValue) => {
+        return this.userService.searchUsers(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+          catchError((error) => {
+            this.isProfilLoading = false;
+            console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+            Swal.fire({
+              title: 'Erreur!',
+              text: 'Une erreur s\'est produite lors de la recherche',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+            });
+            return of([]);
+          })
+        );
+      }),
+      takeUntil(this.unsubscribe$)
+    ).subscribe((results: UserInterface[]) => {
+      if (this.isProfilLoading) {
+        this.users = results.filter((user) => user.id !== this.app.userConnected.id);
+      } else {
+        this.users = results;
+      }
+      this.app.searchValue = this.searchValue;
+      this.isProfilLoading = false;
+    });
+
+
+    /* SET SEARCH ACTU */
+    this.searchActuSubject.pipe(
+      debounceTime(this.app.deadlineSearch),
+      // distinctUntilChanged(),
+      switchMap((searchValue) => {
+        return this.postactuService.searchPostActus(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+          catchError((error) => {
+            this.isActuLoading = false;
+            console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+            Swal.fire({
+              title: 'Erreur!',
+              text: 'Une erreur s\'est produite lors de la recherche',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+            });
+            return of([]);
+          })
+        );
+      }),
+      takeUntil(this.unsubscribe$)
+    ).subscribe((results: PostActuInterface[]) => {
+      this.postactus = results;
+      this.app.searchValue = this.searchValue;
+      this.isActuLoading = false;
+    });
+
+
+    /* SET SEARCH PROVIDER */
+    this.searchProviderSubject.pipe(
+      debounceTime(this.app.deadlineSearch),
+      // distinctUntilChanged(),
+      switchMap((searchValue) => {
+        return this.providerService.searchProviders(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+          catchError((error) => {
+            this.isProviderLoading = false;
+            console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+            Swal.fire({
+              title: 'Erreur!',
+              text: 'Une erreur s\'est produite lors de la recherche',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+            });
+            return of([]);
+          })
+        );
+      }),
+      takeUntil(this.unsubscribe$)
+    ).subscribe((results: ProviderInterface[]) => {
+      this.providers = results;
+      this.app.searchValue = this.searchValue;
+      this.isProviderLoading = false;
+    });
+
+
+
+
+
+
+
+    this.updateAll(); /* Effectuez la recherche */
+
   }
 
   ngOnDestroy() {
@@ -245,47 +340,9 @@ export class SearchPageComponent implements OnInit, OnDestroy{
   * */
 
   searchUser(): void {
-    this.userService.searchUsers(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe(
-      (results) => {
-
-        const connectedUserId = this.app.userConnected?.id;
-        this.users = results.filter((user) => user.id !== connectedUserId);
-        console.log("Fetched Users:", this.users);
-
-        // récupère les badge pour chaque utilisateur
-        const badgeRequests = this.users.map(user =>
-          this.badgeService.getBadgeByUser(user.id, this.app.setURL()).pipe(
-            catchError(error => {
-              console.error(`Error fetching badges for user ${user.id}:`, error);
-              // retourn un observable avec les badge vide pour eviter une erreur
-              return of({ message: 'error', result: [] } as ApicallInterface);
-            })
-          )
-        );
-
-        // execute la recherche de badge
-        forkJoin(badgeRequests).subscribe(
-          (badgeResponses: ApicallInterface[]) => {
-            badgeResponses.forEach((badgeResponse, index) => {
-              if (badgeResponse && badgeResponse.result) {
-                this.users[index].badges = badgeResponse.result;
-                console.log(`User ID ${this.users[index].id} Badges:`, this.users[index].badges);
-              } else {
-                this.users[index].badges = [];
-                console.log(`User ID ${this.users[index].id} has no badges.`);
-              }
-            });
-            console.log("Users after assigning badges:", this.users);
-          },
-          (error) => {
-            console.error("Error fetching badges:", error);
-          }
-        );
-      },
-      (error) => {
-        console.error("Error fetching users:", error);
-      }
-    );
+    this.isProfilLoading = true
+    this.users = [];
+    this.searchProfilSubject.next(this.searchValue);
   }
 
   /*
@@ -294,12 +351,9 @@ export class SearchPageComponent implements OnInit, OnDestroy{
   *
   * */
   searchPostActu(): void {
-
-    this.postactuService.searchPostActus(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
-      this.postactus = results;
-      this.isProviderLoading = false;
-    });
-
+    this.isActuLoading = true;
+    this.postactus = [];
+    this.searchActuSubject.next(this.searchValue);
   }
 
   /*
@@ -309,11 +363,9 @@ export class SearchPageComponent implements OnInit, OnDestroy{
   * */
 
   searchProvider(): void {
-
-    this.providerService.searchProviders(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
-      this.providers = results;
-    });
-
+    this.isProviderLoading = true;
+    this.providers = [];
+    this.searchProviderSubject.next(this.searchValue);
   }
 
   handleFollowed(providerId: number): void {

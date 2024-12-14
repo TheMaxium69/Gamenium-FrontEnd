@@ -14,5 +14,4 @@ export interface UserInterface {
   themeColor: string;
   /* ATTENTION J'AI ENLEVER LE [] a theme j'espere que ça buggera pas */
   color: string;
-  badges?: BadgeInterface[];
 }
