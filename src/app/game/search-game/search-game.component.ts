@@ -33,6 +33,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
 
   /* searchVariable */
   isLoading: boolean = true;
+  searchValue: string = '';
 
   private searchSubject = new Subject<string>();
   private unsubscribe$ = new Subject<void>();
@@ -59,12 +60,15 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       this.gameService.searchGames(this.app.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
         this.app.gameNoReload = results;
         this.games = this.app.gameNoReload;
-        this.app.gamesSearchDefault = this.app.gameNoReload;
+        if (this.app.searchValue.trim() == ''){
+          this.app.gamesSearchDefault = this.app.gameNoReload;
+        }
         this.isLoading = false;
 
         this.calcMoreBtn(true);
       });
     } else {
+      this.searchValue = this.app.searchValue;
       this.games = this.app.gameNoReload;
       this.providers = this.app.providersNoReload;
       this.users = this.app.usersNoReload;
@@ -77,7 +81,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       debounceTime(this.app.deadlineSearch),
       // distinctUntilChanged(),
       switchMap((searchValue) => {
-        if (!searchValue.trim()) {
+        if (!searchValue.trim() && this.app.gamesSearchDefault.length !== 0) {
           return of(this.app.gamesSearchDefault);
         }
         return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
@@ -98,6 +102,11 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       takeUntil(this.unsubscribe$)
     ).subscribe((results: GameInterface[]) => {
         this.app.gameNoReload = results;
+        if (this.searchValue.trim() == ''){
+          this.app.gamesSearchDefault = this.app.gameNoReload;
+        }
+        this.app.searchValue = this.searchValue;
+
         this.games = this.app.gameNoReload;
         this.isLoading = false;
         this.calcMoreBtn();
@@ -108,7 +117,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     const inputElement = event.target as HTMLInputElement;
 
     /* VARIABLE*/
-    this.app.searchValue = inputElement.value;
+    this.searchValue = inputElement.value
     this.isLoading = true;
     this.nbMoreGame = 1;
     this.games = [];
@@ -119,7 +128,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     this.resetMoreBtn();
 
     /* LAUNCH SEARCH*/
-    this.searchSubject.next(this.app.searchValue);
+    this.searchSubject.next(this.searchValue);
   }
 
   ngOnDestroy() {
@@ -128,8 +137,8 @@ export class SearchGameComponent implements OnInit, OnDestroy{
   }
 
   onSearch(): void {
-    if (this.app.searchValue.trim() !== '') {
-      this.router.navigate(['/search/game/' + this.app.searchValue.trim()]);
+    if (this.searchValue.trim() !== '') {
+      this.router.navigate(['/search/game/' + this.searchValue.trim()]);
     } else {
       this.router.navigate(['/search/game/-']);
     }

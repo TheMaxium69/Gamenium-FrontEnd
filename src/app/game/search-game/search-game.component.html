@@ -11,7 +11,7 @@
     (keyup.enter)="onSearch()"
     class="searchTerm"
     name="searchValue"
-    [(ngModel)]="this.app.searchValue"
+    [(ngModel)]="this.searchValue"
     placeholder="Tapez votre recherche ..."
     [ngStyle]="{ '--color': userColor ?? this.app.colorDefault }"
   />

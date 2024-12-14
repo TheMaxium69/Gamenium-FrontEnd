@@ -275,7 +275,9 @@ export class SearchPageComponent implements OnInit, OnDestroy{
         this.app.gameNoReload = results;
 
         this.games = this.app.gameNoReload;
-        this.app.gamesSearchDefault = this.app.gameNoReload;
+        if (this.searchValue.trim() == ''){
+          this.app.gamesSearchDefault = this.app.gameNoReload;
+        }
         this.app.searchValue = this.searchValue
 
         this.isGameLoading = false;
