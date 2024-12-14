@@ -18,20 +18,48 @@ export class ViewMygameComponent {
 
   profilSelected: ProfilInterface | undefined;
 
-  showReview:boolean = false
-  showContent:boolean = false
-  showPurchaseContent:boolean = false
 
+
+
+  showReview:boolean = false
   toggleShowReview(){
     this.showReview = !this.showReview;
   }
-
+  showContent:boolean = false
   toggleShowContent(){
     this.showContent = !this.showContent;
   }
 
+  showPurchaseContent:boolean = false
   toggleShowPurchaseContent(){
     this.showPurchaseContent = !this.showPurchaseContent;
+  }
+
+  showCopyContent:number[] = []
+  toggleShowCopyContent(copyId:number){
+    const index = this.showCopyContent.indexOf(copyId);
+    if (index > -1) {
+      this.showCopyContent.splice(index, 1);
+    } else {
+      this.showCopyContent.push(copyId);
+    }
+  }
+  isShowCopyContent(copyId:number): boolean {
+    return this.showCopyContent.includes(copyId);
+  }
+
+
+  showCopyPurchaseContent:number[] = []
+  toggleShowCopyPurchaseContent(copyId:number){
+    const index = this.showCopyPurchaseContent.indexOf(copyId);
+    if (index > -1) {
+      this.showCopyPurchaseContent.splice(index, 1);
+    } else {
+      this.showCopyPurchaseContent.push(copyId);
+    }
+  }
+  isShowCopyPurchaseContent(copyId:number): boolean {
+    return this.showCopyPurchaseContent.includes(copyId);
   }
 
 }

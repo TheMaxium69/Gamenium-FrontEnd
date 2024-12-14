@@ -300,6 +300,52 @@
     }
   }
 
+  h5.listExemplaire{
+    margin-bottom: 18px;
+  }
+
+  .oneExemplaire{
+    /*border: 1px solid gray;*/
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    box-shadow: 1px 2px 10px 0px #A6A6A6;
+    background: white;
+
+    ul.ulInfo{
+      margin-top: 20px;
+
+      li{
+        margin-bottom: 12px;
+
+        h3{
+          font-size: 14px;
+        }
+      }
+
+      h5{
+        margin-left: 10px;
+        font-size: 14px;
+        text-align: start;
+        text-decoration: underline;
+      }
+    }
+
+    h6{
+      font-size: 17px;
+      text-align: center;
+      color: var(--profilColor)!important;
+    }
+
+    .noneExemplaire{
+      text-align: center;
+      margin-bottom: 30px;
+      margin-top: 40px;
+    }
+
+  }
+
 }
 
 #tags .badge{

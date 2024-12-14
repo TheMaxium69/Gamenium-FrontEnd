@@ -133,11 +133,6 @@
               </li>
               </ng-container>
 
-              <li>
-                <p>Nombre d'exemplaire : </p>
-                <h3>{{ this.app.viewMyGame?.copyGame?.length || '1*' }}</h3>
-              </li>
-
               <ng-container *ngIf="this.app.viewMyGame.rate">
 
                 <li>
@@ -209,6 +204,10 @@
                 </li>
               </ng-container>
 
+              <li>
+                <p>Nombre d'exemplaire : </p>
+                <h3>{{ this.app.viewMyGame?.copyGame?.length || '1*' }}</h3>
+              </li>
 
               <li *ngIf="this.app.viewMyGame.myGame.hmgTags.length > 0">
                 <p>Tags :</p>
@@ -226,7 +225,7 @@
                 <ng-container *ngFor="let copyGame of app.viewMyGame?.copyGame">
 
                   <li *ngIf="copyGame.edition">
-                    <p>Editions : </p>
+                    <p>Éditions : </p>
                     <h3>{{ copyGame.edition }}</h3>
                   </li>
 
@@ -304,10 +303,7 @@
                       <h3><small>{{ copyGame.purchase.content }}</small></h3>
                     </li>
 
-
                   </ng-container>
-
-
 
                 </ng-container>
               </ng-container>
@@ -315,58 +311,126 @@
             </ul>
 
             <div *ngIf="this.app.viewMyGame.copyGame.length > 1">
-              <h1>Exemplaire : </h1>
-              <ng-container *ngFor="let copyGame of app.viewMyGame?.copyGame">
+              <h5 class="listExemplaire">Exemplaire du jeu</h5>
+              <ng-container *ngFor="let copyGame of app.viewMyGame?.copyGame; let i = index">
 
-                <div style="border: 1px solid gray;border-radius: 10px">
+                <div class="oneExemplaire">
 
-                  <p>Editions : {{ copyGame.edition || "null" }}</p>
-                  <p>Barcode : {{ copyGame.barcode || "null" }}</p>
-                  <p>content : {{ copyGame.content || "null" }}</p>
-                  <ng-container *ngIf="copyGame.etat">
-                    <p>Etat : {{ copyGame.etat.name }}</p>
-                  </ng-container>
-                  <ng-container *ngIf="!copyGame.etat">
-                    <p>Etat : null</p>
-                  </ng-container>
-                  <ng-container *ngIf="copyGame.format">
-                    <p>format : {{ copyGame.format.name }}</p>
-                  </ng-container>
-                  <ng-container *ngIf="!copyGame.format">
-                    <p>format : null</p>
-                  </ng-container>
-                  <ng-container *ngIf="copyGame.region">
-                    <p>region : {{ copyGame.region.name }}</p>
-                  </ng-container>
-                  <ng-container *ngIf="!copyGame.region">
-                    <p>region : null</p>
-                  </ng-container>
-                  <h5>Purchase :</h5>
-                  <ng-container *ngIf="copyGame.purchase">
-                    <p>price : {{ copyGame.purchase.price || "null" }}</p>
-                    <ng-container *ngIf="copyGame.purchase.devise">
-                      <p>devise : {{ copyGame.purchase.devise.symbole }}</p>
+                  <h6>Exemplaire #{{i+1}}</h6>
+
+                  <ul class="ulInfo"
+                  *ngIf="copyGame.edition ||
+                         copyGame.barcode ||
+                         copyGame.etat ||
+                         copyGame.format ||
+                         copyGame.region ||
+                         copyGame.language.length > 0 ||
+                         copyGame.content ||
+                         copyGame.purchase && copyGame.purchase.price ||
+                         copyGame.purchase && copyGame.purchase.year_buy_at ||
+                         copyGame.purchase && copyGame.purchase.year_buy_at ||
+                         copyGame.purchase && copyGame.purchase.buy_where ||
+                         copyGame.purchase && copyGame.purchase.content
+                        ">
+
+                    <li *ngIf="copyGame.edition">
+                      <p>Éditions : </p>
+                      <h3>{{ copyGame.edition }}</h3>
+                    </li>
+
+                    <li *ngIf="copyGame.barcode">
+                      <p>Barcode : </p>
+                      <h3>{{ copyGame.barcode }}</h3>
+                    </li>
+
+                    <li *ngIf="copyGame.etat">
+                      <p>Etat du jeu : </p>
+                      <h3>{{ copyGame.etat.name }}</h3>
+                    </li>
+
+                    <li *ngIf="copyGame.format">
+                      <p>Format du jeu : </p>
+                      <h3>{{ copyGame.format.name }}</h3>
+                    </li>
+
+                    <li *ngIf="copyGame.region">
+                      <p>Region du jeu : </p>
+                      <h3>{{ copyGame.region.name }}</h3>
+                    </li>
+                    <li *ngIf="copyGame.language.length > 0">
+                      <p>Langue du jeu : </p>
+                      <h3 style="text-transform: lowercase">
+                        <ng-container *ngFor="let lang of copyGame.language; let last = last">
+                          {{ lang.name }}<span *ngIf="!last">, </span>
+                        </ng-container>
+                      </h3>
+                    </li>
+
+                    <li *ngIf="copyGame.content">
+                      <p>Plus d'information : </p>
+
+                      <h3 class="buttomShow" (click)="toggleShowCopyContent(copyGame.id)">  Voir plus d'information <i [class.ri-arrow-up-s-line]="isShowCopyContent(copyGame.id)" [class.ri-arrow-down-s-line]="!isShowCopyContent(copyGame.id)"></i></h3>
+                    </li>
+
+                    <li class="forShow" *ngIf="isShowCopyContent(copyGame.id)">
+                      <h3><small>{{ copyGame.content }}</small></h3>
+                    </li>
+
+                    <ng-container *ngIf="copyGame.purchase && copyGame.purchase.price || copyGame.purchase && copyGame.purchase.year_buy_at || copyGame.purchase && copyGame.purchase.year_buy_at || copyGame.purchase && copyGame.purchase.buy_where || copyGame.purchase && copyGame.purchase.content ">
+                      <h5>Information d'achat</h5>
+
+                      <li *ngIf="copyGame.purchase.price">
+                        <p>Prix d'achat : </p>
+                        <h3>{{ copyGame.purchase.price }} <span *ngIf="copyGame.purchase.devise">{{ copyGame.purchase.devise.symbole }}</span></h3>
+                      </li>
+
+                      <li *ngIf="copyGame.purchase.year_buy_at">
+                        <p>Date d'achat : </p>
+                        <h3>
+                          <ng-container *ngIf="copyGame.purchase.month_buy_at">
+                            <ng-container *ngIf="copyGame.purchase.day_buy_at">
+                              {{ copyGame.purchase.day_buy_at }}
+                            </ng-container>
+                            {{ app.moisView(copyGame.purchase.month_buy_at - 1) }}
+                          </ng-container>
+                          {{ copyGame.purchase.year_buy_at }}
+                        </h3>
+                      </li>
+
+                      <li *ngIf="copyGame.purchase.buy_where">
+                        <p>Lieu d'achat : </p>
+                        <h3>{{ copyGame.purchase.buy_where.name }}</h3>
+                      </li>
+
+                      <li *ngIf="copyGame.purchase.content">
+                        <p>Plus d'information d'achat : </p>
+
+                        <h3 class="buttomShow" (click)="toggleShowCopyPurchaseContent(copyGame.id)">  Voir la information plus d'achat <i [class.ri-arrow-up-s-line]="isShowCopyPurchaseContent(copyGame.id)" [class.ri-arrow-down-s-line]="!isShowCopyPurchaseContent(copyGame.id)"></i></h3>
+                      </li>
+
+                      <li class="forShow" *ngIf="isShowCopyPurchaseContent(copyGame.id)">
+                        <h3><small>{{ copyGame.purchase.content }}</small></h3>
+                      </li>
                     </ng-container>
-                    <ng-container *ngIf="!copyGame.purchase.devise">
-                      <p>devise : null</p>
-                    </ng-container>
-                    <p>year buy date : {{ copyGame.purchase.year_buy_at || "null" }}</p>
-                    <p>month buy date : {{ copyGame.purchase.month_buy_at || "null" }}</p>
-                    <p>day buy date : {{ copyGame.purchase.day_buy_at || "null" }}</p>
-                    <ng-container *ngIf="copyGame.purchase.buy_where">
-                      <p>buy where : {{ copyGame.purchase.buy_where.name }}</p>
-                    </ng-container>
-                    <ng-container *ngIf="!copyGame.purchase.buy_where">
-                      <p>buy where : null</p>
-                    </ng-container>
-                    <p>content purchase : {{ copyGame.purchase.content || "null" }}</p>
-                  </ng-container>
-                  <ng-container *ngIf="!copyGame.purchase">
-                    <p>price : null</p>
-                    <p>devise : null</p>
-                    <p>buy date : null</p>
-                    <p>buy where : null</p>
-                    <p>content purchase : null</p>
+
+                  </ul>
+
+                  <ng-container
+                    *ngIf="!copyGame.edition &&
+                         !copyGame.barcode &&
+                         !copyGame.etat &&
+                         !copyGame.format &&
+                         !copyGame.region &&
+                         copyGame.language.length === 0 &&
+                         !copyGame.content &&
+                         !(copyGame.purchase && copyGame.purchase.price) &&
+                         !(copyGame.purchase && copyGame.purchase.year_buy_at) &&
+                         !(copyGame.purchase && copyGame.purchase.buy_where) &&
+                         !(copyGame.purchase && copyGame.purchase.content)
+                        ">
+
+                    <p class="noneExemplaire"><small>Aucune information</small></p>
+
                   </ng-container>
 
                 </div>
