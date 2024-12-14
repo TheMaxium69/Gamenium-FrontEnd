@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {GameInterface} from "../../-interface/game.interface";
 import {GameService} from "../../-service/game.service";
@@ -10,37 +10,46 @@ import {ProviderInterface} from "../../-interface/provider.interface";
 import {ProviderService} from "../../-service/provider.service";
 import {AppComponent} from "../../app.component";
 import { ProfilService } from 'src/app/-service/profil.service';
-import { ProfilInterface } from 'src/app/-interface/profil.interface';
-import { catchError, forkJoin, of } from 'rxjs';
+import {catchError, forkJoin, of, Subject} from 'rxjs';
 import { BadgeService } from 'src/app/-service/badge.service';
 import { ApicallInterface } from 'src/app/-interface/apicall.interface';
+import {debounceTime, switchMap, takeUntil} from "rxjs/operators";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.css']
 })
-export class SearchPageComponent implements OnInit{
+export class SearchPageComponent implements OnInit, OnDestroy{
 
-
-
+  /* USER*/
   isLoggedIn:boolean|undefined;
+  userColor: string | undefined;
 
-  isLoading:boolean = true;
-
-
+  /*search*/
+  private unsubscribe$ = new Subject<void>();
   searchValue: string = '';
   searchType: string | null = '';
 
+  /*GAME*/
+  private searchGameSubject = new Subject<string>();
   games: GameInterface[] = [];
-  users: UserInterface[] = [];
-  postactus: PostActuInterface[] = [];
-  providers: ProviderInterface[] = [];
-  profilSelected: ProfilInterface | undefined;
-  userColor: string | undefined;
   nbMoreGame:number = 1;
+  isGameLoading:boolean = true;
+  /*PROFIL*/
+  private searchProfilSubject = new Subject<string>();
+  users: UserInterface[] = [];
+  isProfilLoading:boolean = true;
+  /*ACTU*/
+  private searchActuSubject = new Subject<string>();
+  postactus: PostActuInterface[] = [];
+  isActuLoading:boolean = true;
+  /*PROVIDER*/
+  private searchProviderSubject = new Subject<string>();
+  providers: ProviderInterface[] = [];
+  isProviderLoading:boolean = true;
 
-  fakeRates: number[] = [8, 14, 19, 13];
 
   constructor(
     private route: ActivatedRoute,
@@ -55,13 +64,13 @@ export class SearchPageComponent implements OnInit{
   ) {
   }
 
+
+
+
   ngOnInit(): void {
 
     this.isLoggedIn = this.app.isLoggedIn;
-
-    if (this.isLoggedIn) {
-      this.updateConnect()
-    }
+    this.userColor = this.app.userConnected?.themeColor || this.app.colorDefault;
 
     let searchValueTemp = this.route.snapshot.paramMap.get('value');
     if (searchValueTemp && searchValueTemp !== '-'){
@@ -69,44 +78,58 @@ export class SearchPageComponent implements OnInit{
     } else if (searchValueTemp == '-'){
       this.searchValue = '';
     }
+    // this.app.searchValue = this.searchValue;
     this.searchType = this.route.snapshot.paramMap.get('type');
 
     this.updateAll();
 
-    console.log()
-
-  }
-
-  rateAverage(tab: number[]): number{
-    if(tab.length === 0){
-      return 0;
-    }
-    const sum = tab.reduce((acc, val) => acc + val, 0);
-    const result = sum / tab.length // -> average fake rates 13.5
-
-    if (result - Math.round(result) >= 0.5) {
-      return Math.round(sum) + 1
-    } else {
-      return Math.round(result)
-    }
-  }
-
-  updateConnect(): void {
-    const userId = this.app.userConnected?.id;
-    if (userId) {
-      this.profileService.getProfilByUserId(userId, this.app.setURL()).subscribe(responseProfil => {
-        if (responseProfil.message === "good") {
-          this.profilSelected = responseProfil.result;
-          if (this.profilSelected?.themeColor) {
-            this.userColor = this.profilSelected.themeColor;
-          }
-        } else {
-          console.error("Error: User profile not found");
+    /* SET SEARCH GAME */
+    this.searchGameSubject.pipe(
+      debounceTime(this.app.deadlineSearch),
+      // distinctUntilChanged(),
+      switchMap((searchValue) => {
+        if (!searchValue.trim()) {
+          return of(this.app.gamesSearchDefault);
         }
-      });
-    }
+        return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+          catchError((error) => {
+            this.isGameLoading = true;
+            console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
+            Swal.fire({
+              title: 'Erreur!',
+              text: 'Une erreur s\'est produite lors de la recherche',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+            });
+            return of([]);
+          })
+        );
+      }),
+      takeUntil(this.unsubscribe$)
+    ).subscribe((results: GameInterface[]) => {
+
+      this.games = results;
+
+      this.app.searchValue = this.searchValue;
+      this.app.gameNoReload = results;
+
+      this.isGameLoading = false;
+
+      this.calcBtnMore();
+    });
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  /*
+  *
+  * GLOBAL
+  *
+  * */
   updateAll(){
 
     if (this.searchType == 'game'){
@@ -131,26 +154,51 @@ export class SearchPageComponent implements OnInit{
     this.updateAll()
   }
 
+  updateValue(value: string) {
+    this.searchValue = value;
+
+    this.router.navigate(['/search/'+ this.searchType +'/-']);
+
+    this.updateAll();
+  }
+
+
+  /*
+  *
+  * GAME
+  *
+  * */
+
   searchGame(): void {
     this.nbMoreGame = 1;
+    this.isGameLoading = true;
+    this.games = [];
 
-    if (this.searchValue === this.app.searchValue && this.app.gameNoReload.length > 0) {
+    if (this.app.gameNoReload.length == 0){
 
-      this.games = this.app.gameNoReload;
-      this.calcBtnMore();
-
-    } else {
       this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
-        this.games = results;
-
-        this.app.searchValue = this.searchValue;
         this.app.gameNoReload = results;
+
+        this.games = this.app.gameNoReload;
+        this.app.gamesSearchDefault = this.app.gameNoReload;
+        this.app.searchValue = this.searchValue
+
+        this.isGameLoading = false;
 
         this.calcBtnMore();
       });
+
+    } else if (this.app.gameNoReload.length > 0 && this.app.searchValue == this.searchValue) {
+
+      this.games = this.app.gameNoReload;
+      this.isGameLoading = false;
+      setTimeout(() => this.calcBtnMore(), 200);
+
+    } else {
+
+      this.searchGameSubject.next(this.searchValue);
+
     }
-
-
   }
 
   calcBtnMore(){
@@ -165,6 +213,36 @@ export class SearchPageComponent implements OnInit{
       }
     }
   }
+
+  moreGame(){
+
+    this.nbMoreGame++
+    let limit = this.nbMoreGame * this.app.fetchLimit;
+    console.log(limit)
+
+    this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
+      this.games = results;
+      console.log(this.games.length)
+
+      let element = document.getElementById("moreGameBTN");
+      if (this.games.length == limit){
+        if (element){
+          element.style.display = "block";
+        }
+      } else {
+        if (element){
+          element.style.display = "none";
+        }
+      }
+    });
+
+  }
+
+  /*
+  *
+  * USER
+  *
+  * */
 
   searchUser(): void {
     this.userService.searchUsers(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe(
@@ -210,70 +288,39 @@ export class SearchPageComponent implements OnInit{
     );
   }
 
-
+  /*
+  *
+  * ACTU
+  *
+  * */
   searchPostActu(): void {
 
     this.postactuService.searchPostActus(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.postactus = results;
-      this.isLoading = false;
-      console.log(this.postactus)
+      this.isProviderLoading = false;
     });
 
   }
+
+  /*
+  *
+  * PROVIDER
+  *
+  * */
 
   searchProvider(): void {
 
     this.providerService.searchProviders(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
       this.providers = results;
-      console.log(this.providers)
     });
 
   }
 
-  updateValue(value: string) {
-    this.searchValue = value;
-
-    this.router.navigate(['/search/'+ this.searchType +'/-']);
-
-    this.updateAll();
-  }
-
-  extractFirstLetter(str: string|any): string {
-    return str.charAt(0);
-  }
-
-  moreGame(){
-
-    this.nbMoreGame++
-    let limit = this.nbMoreGame * this.app.fetchLimit;
-    console.log(limit)
-
-    this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
-      this.games = results;
-      console.log(this.games.length)
-
-      let element = document.getElementById("moreGameBTN");
-      if (this.games.length == limit){
-        if (element){
-          element.style.display = "block";
-        }
-      } else {
-        if (element){
-          element.style.display = "none";
-        }
-      }
-    });
-
-  }
-
-  //PROVIDER
   handleFollowed(providerId: number): void {
-    console.log(`Provider followed with ID: ${providerId}`);
     const provider = this.providers.find((p) => p.id === providerId);
   }
 
   handleUnfollowed(providerId: number): void {
-    console.log(`Provider unfollowed with ID: ${providerId}`);
     const provider = this.providers.find((p) => p.id === providerId);
   }
 

@@ -69,6 +69,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
       this.providers = this.app.providersNoReload;
       this.users = this.app.usersNoReload;
       this.isLoading = false;
+      setTimeout(() => this.calcMoreBtn(), 200);
     }
 
     /* SET SEARCH*/

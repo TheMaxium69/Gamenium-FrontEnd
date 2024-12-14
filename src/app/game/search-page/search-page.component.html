@@ -55,6 +55,12 @@
 
   <div id="show-game" class="d-flex container">
     <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>
+
+    <!-- LOADING -->
+    <ng-container *ngIf="isGameLoading">
+      <app-card-game *ngFor="let game of [].constructor(50);" style="width: 100%"></app-card-game>
+    </ng-container>
+
     <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>
   </div>
 
@@ -70,16 +76,10 @@
   </div>
 </ng-container>
 
-
-
-
-
-
-
 <ng-container *ngIf="searchType == 'postactu'">
   <section id="show-actu" class="container d-flex justify-content-center">
     <app-card-actu *ngFor="let actu of postactus" [actu]="actu"></app-card-actu>
-    <ng-container *ngIf="isLoading">
+    <ng-container *ngIf="isProviderLoading">
       <app-card-actu *ngFor="let actu of [].constructor(16)"></app-card-actu>
     </ng-container>
 
