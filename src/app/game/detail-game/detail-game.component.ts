@@ -164,8 +164,7 @@ export class DetailGameComponent implements OnInit{
     setTimeout(() => {
 
       let bodyNoJson = {
-        "id": id,
-        "ip": "10.10.10.10"
+        "id": id
       }
 
       let body = JSON.stringify(bodyNoJson);

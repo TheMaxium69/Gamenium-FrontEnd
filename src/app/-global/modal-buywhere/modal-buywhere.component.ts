@@ -81,8 +81,7 @@ export class ModalBuywhereComponent implements OnInit{
     }
 
     let bodyNoJson: any = {
-      "name" : nameNewBuyWhere,
-      "ip": "10.10.10.10"
+      "name" : nameNewBuyWhere
     }
 
     let body:string = JSON.stringify(bodyNoJson);

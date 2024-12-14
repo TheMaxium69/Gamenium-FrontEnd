@@ -13,7 +13,6 @@ import { ProfilService } from 'src/app/-service/profil.service';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LikeService } from 'src/app/-service/like.service';
-import { IpService } from 'src/app/-service/ip.service';
 import { LikeInterface } from 'src/app/-interface/like.interface';
 import Swal from "sweetalert2";
 import { empty } from 'rxjs';
@@ -52,7 +51,6 @@ export class CommentActualityComponent implements OnInit{
     private badgeService:BadgeService,
     private renderer: Renderer2,
     private likeService: LikeService,
-    private ipService: IpService,
     private profileService: ProfilService,
   ) {}
 
@@ -475,54 +473,50 @@ export class CommentActualityComponent implements OnInit{
 
   addLikeComment(commentId: number) {
     console.log(commentId)
-    this.ipService.getMyIp(this.app.urlIp).subscribe((reponseTyroIp) => {
 
-      let bodyNoJson: any = {
-        "id_comment": commentId,
-        "ip": reponseTyroIp.ip,
-      }
+    let bodyNoJson: any = {
+      "id_comment": commentId
+    }
 
-      let bodyJson = JSON.stringify(bodyNoJson);
+    let bodyJson = JSON.stringify(bodyNoJson);
 
-      this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(
-        (reponseApi) => {
-          if (reponseApi.message == 'good') {
-            console.log('commentaire ' + commentId + ' liké par ' + this.userConnectedId)
+    this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
+      if (reponseApi.message == 'good') {
+        console.log('commentaire ' + commentId + ' liké par ' + this.userConnectedId)
 
-            this.commentLikedMap.set(commentId, true);
+        this.commentLikedMap.set(commentId, true);
 
-            const likeIcon = document.querySelector('#like-icon'+commentId)
-            this.renderer.removeClass(likeIcon, 'ri-heart-line')
-            this.renderer.addClass(likeIcon, 'ri-heart-fill')
-            this.renderer.setStyle(likeIcon,'color', this.providerColor)
+        const likeIcon = document.querySelector('#like-icon'+commentId)
+        this.renderer.removeClass(likeIcon, 'ri-heart-line')
+        this.renderer.addClass(likeIcon, 'ri-heart-fill')
+        this.renderer.setStyle(likeIcon,'color', this.providerColor)
 
-            this.nbLikeByComment[commentId]++;
+        this.nbLikeByComment[commentId]++;
 
-            /* SEULEMENT POUR CEUX QUI VIENNE DE CE FAIRE CREER*/
-            let idByComment = 'like-value' + commentId
-            let element = document.getElementById(idByComment)
-            if (element){
-              element.innerHTML = this.nbLikeByComment[commentId].toString()
-            }
+        /* SEULEMENT POUR CEUX QUI VIENNE DE CE FAIRE CREER*/
+        let idByComment = 'like-value' + commentId
+        let element = document.getElementById(idByComment)
+        if (element){
+          element.innerHTML = this.nbLikeByComment[commentId].toString()
+        }
 
-          } else if (reponseApi.message == "token is failed") {
-            Swal.fire({
-              title: 'Attention!',
-              text: 'Vous devez être connectez pour liké',
-              icon: 'warning',
-              confirmButtonText: 'OK',
-              confirmButtonColor: this.app.colorDefault
-            })
-          } else {
-            Swal.fire({
-              title: 'Echec!',
-              text: 'Echec du j\'aime sur le commentaire',
-              icon: 'error',
-              confirmButtonText: 'OK',
-              confirmButtonColor: this.app.colorDefault
-            })
-          }
+      } else if (reponseApi.message == "token is failed") {
+        Swal.fire({
+          title: 'Attention!',
+          text: 'Vous devez être connectez pour liké',
+          icon: 'warning',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.app.colorDefault
         })
+      } else {
+        Swal.fire({
+          title: 'Echec!',
+          text: 'Echec du j\'aime sur le commentaire',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.app.colorDefault
+        })
+      }
     }, (error) => this.app.erreurSubcribe())
 
   }
@@ -552,43 +546,39 @@ export class CommentActualityComponent implements OnInit{
 
   deleteLikeComment(commentId: number) {
     console.log(commentId)
-    this.ipService.getMyIp(this.app.urlIp).subscribe((reponseTyroIp) => {
+    let bodyNoJson: any = {
+      "id_comment": commentId,
+      "del": true
+    }
 
-      let bodyNoJson: any = {
-        "id_comment": commentId,
-        "ip": reponseTyroIp.ip,
-        "del": true
-      }
+    let bodyJson = JSON.stringify(bodyNoJson);
 
-      let bodyJson = JSON.stringify(bodyNoJson);
+    this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(
+      (reponseApi) => {
+        if (reponseApi.message == 'good') {
+          console.log('commentaire ' + commentId + ' plus liké par ' + this.userConnectedId)
 
-      this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(
-        (reponseApi) => {
-          if (reponseApi.message == 'good') {
-            console.log('commentaire ' + commentId + ' plus liké par ' + this.userConnectedId)
+          this.commentLikedMap.set(commentId, false);
 
-            this.commentLikedMap.set(commentId, false);
-
-            const likeIcon = document.querySelector('#like-icon'+commentId)
-            this.renderer.removeClass(likeIcon, 'ri-heart-fill')
-            this.renderer.addClass(likeIcon, 'ri-heart-line')
-            this.renderer.setStyle(likeIcon,'color', 'rgb(87, 87, 87)')
+          const likeIcon = document.querySelector('#like-icon'+commentId)
+          this.renderer.removeClass(likeIcon, 'ri-heart-fill')
+          this.renderer.addClass(likeIcon, 'ri-heart-line')
+          this.renderer.setStyle(likeIcon,'color', 'rgb(87, 87, 87)')
 
 
-            this.nbLikeByComment[commentId]--;
+          this.nbLikeByComment[commentId]--;
 
-            /* SEULEMENT POUR CEUX QUI VIENNE DE CE FAIRE CREER*/
-            let idByComment = 'like-value' + commentId
-            let element = document.getElementById(idByComment)
-            if (element){
-              element.innerHTML = this.nbLikeByComment[commentId].toString()
-            }
-
-          } else {
-            console.log('erreur dans la suppression du like du commentaire ' + commentId)
+          /* SEULEMENT POUR CEUX QUI VIENNE DE CE FAIRE CREER*/
+          let idByComment = 'like-value' + commentId
+          let element = document.getElementById(idByComment)
+          if (element){
+            element.innerHTML = this.nbLikeByComment[commentId].toString()
           }
-        })
-    })
+
+        } else {
+          console.log('erreur dans la suppression du like du commentaire ' + commentId)
+        }
+      }, (error) => this.app.erreurSubcribe())
 
   }
 
@@ -714,8 +704,7 @@ export class CommentActualityComponent implements OnInit{
 
           let bodyNoJson = {
             "id_comment": id_comment_main,
-            "content": contentComment,
-            'ip': "10.10.10.10"
+            "content": contentComment
           }
 
           const body = JSON.stringify(bodyNoJson)

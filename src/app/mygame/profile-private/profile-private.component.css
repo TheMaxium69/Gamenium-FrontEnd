@@ -1,6 +1,18 @@
 h2 {
   color: #575757;
 }
+.progress-bar-container {
+  max-width: 410px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progress-bar {
+  height: 10px;
+  transition: width 0.3s ease;
+}
 
 .no-task{
   width: 100%!important;

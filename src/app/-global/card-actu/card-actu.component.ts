@@ -3,7 +3,6 @@ import {AppComponent} from "../../app.component";
 import {PostActuInterface} from "../../-interface/post-actu.interface";
 import {LikeInterface} from "../../-interface/like.interface";
 import {LikeService} from "../../-service/like.service";
-import {IpService} from "../../-service/ip.service";
 import Swal from "sweetalert2";
 import {CommentInterface} from "../../-interface/comment.interface";
 import {CommentService} from "../../-service/comment.service";
@@ -20,7 +19,6 @@ export class CardActuComponent implements OnInit {
 
   constructor(protected app:AppComponent,
               private likeService:LikeService,
-              private ipService: IpService,
               private commentService: CommentService) { }
 
   nbCountCom: number = 0;
@@ -82,55 +80,28 @@ export class CardActuComponent implements OnInit {
       return console.log('Impossible de liker: User pas connecté')
     }
 
-    this.ipService.getMyIp(this.app.urlIp).subscribe(responseTyroIp => {
-        let bodyNoJson: any = {
-          id_postactu: id,
-          ip: responseTyroIp.ip,
-          del: true
-        };
+    let bodyNoJson: any = {
+      id_postactu: id,
+      del: true
+    };
 
-        let bodyJson = JSON.stringify(bodyNoJson);
+    let bodyJson = JSON.stringify(bodyNoJson);
 
-        this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(responseAddLikeByPostActu => {
-            if (responseAddLikeByPostActu.message === 'good') {
-              if (cardActuIcon) {
-                if (responseAddLikeByPostActu.result === 'like is delete') {
-                  this.liked(id, 'del');
-                  this.likedStatus[id] = false;
-                  this.likeAll--
-                } else {
-                  this.liked(id, 'add');
-                  this.likedStatus[id] = true;
-                  this.likeAll++
-                }
-              }
-            }
-          }, (error) => this.app.erreurSubcribe());
-      }, error => {
-        let bodyNoJson: any = {
-          id_postactu: id,
-          del: true
-        };
-
-        let bodyJson = JSON.stringify(bodyNoJson);
-
-        this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(responseAddLikeByPostActu => {
-          if (responseAddLikeByPostActu.message === 'good') {
-            if (cardActuIcon) {
-              if (responseAddLikeByPostActu.result === 'like is delete') {
-                this.liked(id, 'del');
-                this.likedStatus[id] = false;
-                this.likeAll--
-              } else {
-                this.liked(id, 'add');
-                this.likedStatus[id] = true;
-                this.likeAll++
-              }
-            }
+    this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(responseAddLikeByPostActu => {
+      if (responseAddLikeByPostActu.message === 'good') {
+        if (cardActuIcon) {
+          if (responseAddLikeByPostActu.result === 'like is delete') {
+            this.liked(id, 'del');
+            this.likedStatus[id] = false;
+            this.likeAll--
+          } else {
+            this.liked(id, 'add');
+            this.likedStatus[id] = true;
+            this.likeAll++
           }
-        }, (error) => this.app.erreurSubcribe());
+        }
       }
-    );
+    }, (error) => this.app.erreurSubcribe());
   }
 
   /* GEREZ LE LIKE VISUELMENT */

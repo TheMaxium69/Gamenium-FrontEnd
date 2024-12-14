@@ -19,7 +19,6 @@ export class TaskService {
     return this.http.get<ApicallInterface>(url + '/task-user-completed/view', options);
   }
 
-
   // Marquer une tache complété
   postCompleteTask(body: string, url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface> {
     return this.http.post<ApicallInterface>(url + '/task-user-completed/complete-task', body, options);

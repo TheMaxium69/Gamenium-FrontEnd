@@ -7,7 +7,6 @@ import {Router} from "@angular/router";
 import {NavbarComponent} from "./-global/navbar/navbar.component";
 import { CookieService } from 'ngx-cookie-service';
 import {PageAccountComponent} from "./account/page-account/page-account.component";
-import {IpService} from "./-service/ip.service";
 import {HistoryMyGameInterface} from "./-interface/history-my-game.interface";
 import {GameInterface} from "./-interface/game.interface";
 import {NgForm} from "@angular/forms";
@@ -43,7 +42,6 @@ export class AppComponent {
     private router: Router,
     private authService: AuthService,
     private cookieService: CookieService,
-    private ipService: IpService,
     private histoireMyGameService: HistoryMyGameService,
     private gameService: GameService
   ) {
@@ -81,7 +79,6 @@ export class AppComponent {
   //%     API - GAME      %//
 
   //%     API - TYROLIUM      %//
-    urlIp:string = "https://tyrolium.fr/Contenu/Php/ip.php?api=json"
     urlGeneratePP:string = "https://tyrolium.fr/generate-pp/"
   //%     API - TYROLIUM      %//
 
@@ -171,68 +168,29 @@ export class AppComponent {
 
     let bodyNoJson:any;
 
-    this.ipService.getMyIp(this.urlIp).subscribe(reponseTyroIp => {
+    bodyNoJson = {
+      "email_auth":email,
+      "mdp_auth":password
+    };
 
+    this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
 
-        bodyNoJson = {
-          "email_auth":email,
-          "mdp_auth":password,
-          "ip":reponseTyroIp.ip
-        };
+      msgToken = reponseToken;
 
-        this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
+      if (msgToken?.message == "Connected"){
 
-          msgToken = reponseToken;
+        this.token = msgToken.token
 
-          if (msgToken?.message == "Connected"){
+        this.getUserByToken(this.token, saveme);
 
-            this.token = msgToken.token
+      } else {
 
-            this.getUserByToken(this.token, saveme);
+        console.log(msgToken?.message)
+        // GERE LE MSG ERR
 
-          } else {
+      }
 
-            console.log(msgToken?.message)
-            // GERE LE MSG ERR
-
-          }
-
-        })
-
-      },
-      (error) => {
-
-        console.error("TyroIp : ", error);
-
-        bodyNoJson = {
-          "email_auth":email,
-          "mdp_auth":password
-        };
-
-        this.authService.postLoginUser(bodyNoJson, this.setURL()).subscribe(reponseToken => {
-
-          msgToken = reponseToken;
-
-          if (msgToken?.message == "Connected"){
-
-            this.token = msgToken.token
-
-            this.getUserByToken(this.token, saveme);
-
-          } else {
-
-            console.log(msgToken?.message)
-            // GERE LE MSG ERR
-
-          }
-
-        })
-
-
-
-      });
-
-
+    })
 
   }
 
@@ -378,16 +336,6 @@ export class AppComponent {
     } else {
       return this.isLoggedIn;
     }
-
-  }
-
-  getYourIp(){
-
-    this.ipService.getMyIp(this.urlIp).subscribe(reponseTyroIp => {
-
-      return reponseTyroIp.ip;
-
-    });
 
   }
 

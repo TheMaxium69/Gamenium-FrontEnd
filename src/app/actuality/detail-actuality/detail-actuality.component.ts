@@ -9,7 +9,6 @@ import {GameProfileInterface} from "../../-interface/game-profile.interface";
 import {FollowService} from "../../-service/follow.service";
 import {FollowInterface} from "../../-interface/follow.interface";
 import {BadgeInterface} from "../../-interface/badge.interface";
-import {IpService} from "../../-service/ip.service";
 import {LikeService} from "../../-service/like.service";
 import {LikeInterface} from "../../-interface/like.interface";
 import Swal from "sweetalert2";
@@ -60,7 +59,6 @@ export class DetailActualityComponent implements OnInit{
     protected app: AppComponent,
     private commentService:CommentService,
     private followService:FollowService,
-    private ipService: IpService,
     private likeService: LikeService,
     private renderer: Renderer2,
     private viewService:ViewService,
@@ -163,77 +161,49 @@ export class DetailActualityComponent implements OnInit{
 
     const btnActuLike = document.getElementById("actulike");
 
-    this.ipService.getMyIp(this.app.urlIp).subscribe(reponseTyroIp => {
+    let bodyNoJson: any = {
+      "id_postactu": this.actualityId,
+      "del": true
+    }
+
+    let bodyJson = JSON.stringify(bodyNoJson);
+
+    this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddLikeByPostActu => {
+
+      console.log(reponseAddLikeByPostActu);
+
+      if (reponseAddLikeByPostActu.message == "good"){
+
+        if (reponseAddLikeByPostActu.result == "like is delete"){
+
+          /*RETIRER LE LIKE*/
+          if (this.nbLike){
+            this.nbLike -= 1;
+          }
+
+          if (btnActuLike){
+            this.liked(btnActuLike, "del")
+          }
+
+        } else {
+
+          /*AJOTUER LE LIKE*/
+          if (this.nbLike){
+            this.nbLike += 1;
+          } else {
+            this.nbLike = 1;
+          }
+
+          if (btnActuLike){
+            this.liked(btnActuLike, "add")
+          }
+
+        }
 
 
-              let bodyNoJson: any = {
-                "id_postactu": this.actualityId,
-                "ip": reponseTyroIp.ip,
-                "del": true
-              }
+      }
 
-              let bodyJson = JSON.stringify(bodyNoJson);
-
-              this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddLikeByPostActu => {
-
-                console.log(reponseAddLikeByPostActu);
-
-                if (reponseAddLikeByPostActu.message == "good"){
-
-                  if (reponseAddLikeByPostActu.result == "like is delete"){
-
-                    /*RETIRER LE LIKE*/
-                    if (this.nbLike){
-                      this.nbLike -= 1;
-                    }
-
-                    if (btnActuLike){
-                      this.liked(btnActuLike, "del")
-                    }
-
-                  } else {
-
-                    /*AJOTUER LE LIKE*/
-                    if (this.nbLike){
-                      this.nbLike += 1;
-                    } else {
-                      this.nbLike = 1;
-                    }
-
-                    if (btnActuLike){
-                      this.liked(btnActuLike, "add")
-                    }
-
-                  }
-
-
-                }
-
-              });
-
-      },
-      (error) => {
-
-              let bodyNoJson: any = {
-                "id_postactu": this.actualityId,
-                "del": true
-              }
-
-              let bodyJson = JSON.stringify(bodyNoJson);
-
-              this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddLikeByPostActu => {
-
-                console.log(reponseAddLikeByPostActu);
-
-                if (reponseAddLikeByPostActu.message == "good"){
-
-
-                }
-
-              });
-
-
-      });
+    });
 
 
 
@@ -319,8 +289,7 @@ export class DetailActualityComponent implements OnInit{
     setTimeout(() => {
 
       let bodyNoJson = {
-        "id":id,
-        "ip":"10.10.10.10"
+        "id":id
       }
 
       let body = JSON.stringify(bodyNoJson);
