@@ -18,4 +18,20 @@ export class ViewMygameComponent {
 
   profilSelected: ProfilInterface | undefined;
 
+  showReview:boolean = false
+  showContent:boolean = false
+  showPurchaseContent:boolean = false
+
+  toggleShowReview(){
+    this.showReview = !this.showReview;
+  }
+
+  toggleShowContent(){
+    this.showContent = !this.showContent;
+  }
+
+  toggleShowPurchaseContent(){
+    this.showPurchaseContent = !this.showPurchaseContent;
+  }
+
 }

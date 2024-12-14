@@ -230,6 +230,7 @@
   margin-bottom: 10px;
   border-radius: 9px;
   padding: 30px;
+  padding-bottom: 55px;
 
   .margContent{
     margin-top: 30px;
@@ -240,24 +241,59 @@
     list-style-type: none;
     margin-left: -10px;
 
+    h5{
+      margin-bottom: 18px;
+    }
+
+    li.forShow{
+      margin-left: 28px;
+      text-align: center;
+      margin-right: 70px;
+      /*background: red;*/
+    }
+
     li {
       margin-bottom: 18px;
       display: flex;
       justify-content: flex-start;
       align-items: center;
 
+      .buttomShow:hover{
+        text-decoration: underline;
+      }
+      .buttomShow{
+        cursor: pointer;
+        margin-top: 2px;
+        width: unset;
+      }
+
+      h3.buttomShow{
+        font-weight: 500;
+        font-size: 14Px;
+      }
+
+      .subinfo{
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        gap: 19px;
+      }
+
       p{
         width: 50%;
       }
       h3{
         font-weight: 600;
-        color: var(--color-variable)!important;
+        /*color: var(--profilColor)!important;*/
+        color: black;
         i{
           margin-right: 3px;
         }
         small{
           font-weight: 600;
-          color: var(--color-variable)!important;
+          /*color: var(--profilColor)!important;*/
+          color: black;
         }
       }
 
