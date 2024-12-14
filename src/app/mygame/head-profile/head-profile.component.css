@@ -93,7 +93,7 @@ h1 {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    word-spacing: -5px;
+    /*word-spacing: -5px;*/
 }
 
 #profilInfoLeft {
