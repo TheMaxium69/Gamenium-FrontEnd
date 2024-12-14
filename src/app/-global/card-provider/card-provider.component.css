@@ -93,3 +93,34 @@
     font-weight: bold;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
+
+#squelette{
+  box-shadow: unset;
+
+  .provider_color{
+    background-color: gray;
+  }
+
+  .follow-btn{
+    background-color: gray;
+    border-radius: 10px;
+    width: 43px;
+    height: 25px;
+  }
+
+  .img-pp{
+    background-color: gray;
+    box-shadow: unset;
+    border: solid 2px white;
+  }
+
+  .name{
+    background-color: gray;
+    border-radius: 10px;
+    height: 25px;
+    width: 100px;
+    margin-bottom: 10px;
+    padding: unset;
+  }
+
+}

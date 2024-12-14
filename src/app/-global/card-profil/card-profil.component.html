@@ -1,28 +1,49 @@
-<div
-  [routerLink]="['/profil', user.id]"
-  *ngIf="user"
-  class="user-card-wrapper m-3"
->
+<div class="provider_card" *ngIf="user" [routerLink]="['/profil', user.id]">
+  <!-- Profile Color Bar -->
   <div
-    id="card-user"
-    class="card-user p-3"
-    [style.background]=" 'linear-gradient(180deg, ' + (user?.color ?? 'red') + ' 35%, white 35%)' "
-  >
-  <div class="circleImage" style="{{ this.app.generatePPUseritium(user?.pp?.url, user?.displayname_useritium || user.username, user?.color ) }}"></div>
-    <h2 class="card-title mt-4">{{ user?.displayname_useritium || user?.username }}</h2>
-    <small
-      *ngIf="user?.displayname_useritium && user?.displayname_useritium !== user?.username"
-      class="mt-1"
-    >
-      <img
-        width="20px"
-        src="https://tyrolium.fr/Contenu/Image/Useritium Site.png"
-        alt="Useritium Logo"
-      />
-      {{ user?.username }}
-    </small>
+    class="provider_color"
+    [style.background-color]="user.color || this.app.colorDefault"
+  ></div>
 
+  <!-- Profile Profile Image -->
+  <div class="provider_profile">
+    <div class="img-pp pp-shadow" style="{{ this.app.generatePPUseritium(user?.pp?.url, user?.displayname_useritium || user.username, user?.color ) }}"></div>
+  </div>
+  <!-- Profile Card Content -->
+  <div class="provider-card-content">
+    <p class="name mt-2">
+      {{ user?.displayname_useritium || user.username }}
+    </p>
+
+    <p class="follow-btn" *ngIf="user?.displayname_useritium && user?.displayname_useritium !== user?.username">
+      <small>
+        <img width="20px" src="https://tyrolium.fr/Contenu/Image/Useritium Site.png" alt="Useritium Logo"/>
+        {{ user.username }}
+      </small>
+    </p>
+  </div>
+
+</div>
+<div id="squelette" class="provider_card" *ngIf="!user">
+  <!-- Provider Color Bar -->
+  <div
+    class="provider_color"
+  ></div>
+
+  <!-- Provider Profile Image -->
+  <div class="provider_profile">
+    <div class="img-pp"></div>
+  </div>
+
+  <!-- Provider Card Content -->
+  <div class="provider-card-content">
+    <p class="name mt-2">
+
+    </p>
+    <a class="follow-btn">
+    </a>
   </div>
 </div>
+
 
 
