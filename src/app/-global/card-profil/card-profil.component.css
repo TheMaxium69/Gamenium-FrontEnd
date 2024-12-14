@@ -1,4 +1,5 @@
 .provider_card {
+  cursor: pointer;
   height: 180px;
   width: 205px;
   margin-bottom: 40px;

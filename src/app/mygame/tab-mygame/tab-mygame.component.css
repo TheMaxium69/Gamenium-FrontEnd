@@ -1,4 +1,5 @@
 .navigateBar ul {
+  cursor: pointer;
   color: white;
   display: flex;
   align-items: center;

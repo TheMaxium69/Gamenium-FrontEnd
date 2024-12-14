@@ -69,6 +69,7 @@ h2 {
 
 
 #profilWrapper .articleTuto .card{
+  cursor: pointer;
   text-align: center;
   height: fit-content;
   transition: all 0.1s ease 0s;
