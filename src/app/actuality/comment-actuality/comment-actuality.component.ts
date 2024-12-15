@@ -195,7 +195,14 @@ export class CommentActualityComponent implements OnInit{
           this.newComment = reponseMyCommentActuCreate.result;
           console.log("Commentaire ajouté");
 
-          this.commentByActu?.push(this.newComment);
+
+          if (this.commentByActu){
+            this.commentByActu.push(this.newComment);
+          } else {
+            this.commentByActu = [];
+            this.commentByActu.push(this.newComment);
+          }
+
           this.nbLikeByComment[reponseMyCommentActuCreate.result.id] = 0;
 
           this.commentNbChanged.emit('add');
@@ -285,7 +292,7 @@ export class CommentActualityComponent implements OnInit{
             if (noComment !== null) {
               noComment.style.display = 'block'
             } else {
-              const form = document.querySelector('#addCommentForm')
+              const form = document.querySelector('#tempNoComment')
               const commentSectionEmpty = this.renderer.createElement('h2');
               this.renderer.setAttribute(commentSectionEmpty, 'id', 'no-comment');
               commentSectionEmpty.textContent = 'Aucun commentaire';
