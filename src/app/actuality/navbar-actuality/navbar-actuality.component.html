@@ -2,9 +2,18 @@
   <div class="navbar-actuality d-flex">
     <div id="provider-nav-container">
 
-      <div *ngIf="providerFollowOrAll.length === 0" style="align-content: center; height: 100%;">
+      <div *ngIf="providerFollowOrAll.length === 0 && !isLoadingFollow" style="align-content: center; height: 100%;">
         <p style="font-size: 18px;">Abonnez vous pour suivre toutes les dernières actualités de vos éditeurs</p>
       </div>
+
+      <ul id="squelette" class="d-flex" *ngIf="isLoadingFollow"
+          (mousedown)="startDrag($event)"
+          (mousemove)="move($event)"
+          (mouseup)="stopDrag()">
+        <li *ngFor="let i of [].constructor(20)">
+          <div class="provider-img" style="background-color: gray"></div>
+        </li>
+      </ul>
 
       <ul class="d-flex"
       (mousedown)="startDrag($event)"

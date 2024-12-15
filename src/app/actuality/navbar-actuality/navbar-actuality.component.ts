@@ -24,6 +24,7 @@ export class NavbarActualityComponent implements OnInit {
   startX: number = 0;
   scrollLeft: number = 0;
 
+  isLoadingFollow = true;
 
   constructor(
     protected app:AppComponent,
@@ -69,6 +70,7 @@ export class NavbarActualityComponent implements OnInit {
 
         // let followAll:FollowInterface[] = reponseMyFollowProvider.result;
         this.followAll = reponseMyFollowProvider.result;
+        this.isLoadingFollow = false;
 
         this.followAll.forEach((followOne:FollowInterface) => {
 
@@ -80,6 +82,8 @@ export class NavbarActualityComponent implements OnInit {
 
       }
       this.providerFollowed.emit(this.providerFollowOrAll)
+    }, (error) => {
+      this.isLoadingFollow = false;
     });
 
 
@@ -108,6 +112,9 @@ export class NavbarActualityComponent implements OnInit {
       }
 
 
+      this.isLoadingFollow = false;
+    }, (error) => {
+      this.isLoadingFollow = false;
     });
 
   }
@@ -116,13 +123,13 @@ export class NavbarActualityComponent implements OnInit {
     const providerByLastPost = this.providerFollowOrAll.sort((a, b) => {
       const latestA = this.getLatestActuDate(a.id);
       const latestB = this.getLatestActuDate(b.id);
-  
+
       return new Date(latestB).getTime() - new Date(latestA).getTime();
     });
 
     return providerByLastPost;
   }
-  
+
   getLatestActuDate(providerId: number): string {
     const latestActu = this.providerFollowActuAll
     .filter(actu => actu.Provider?.id === providerId)
@@ -130,17 +137,17 @@ export class NavbarActualityComponent implements OnInit {
 
     return latestActu ? latestActu.created_at.toString() : '0';
   }
-  
+
   isPostRecent(providerId: number): boolean {
     const latestActuDate = this.getLatestActuDate(providerId);
     if (latestActuDate === '0') {
       return false;
     }
-  
+
     const twoDaysInMS = 172800000;
     const lastPostInMS = new Date(latestActuDate).getTime();
     let isRecent = Date.now() - lastPostInMS <= twoDaysInMS;
-    
+
     if (!isRecent) {
       return false
     } else {
