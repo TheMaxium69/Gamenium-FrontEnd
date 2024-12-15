@@ -91,6 +91,18 @@
                 <small>{{ task.content }}</small>
               </h6>
             </ng-container>
+
+            <!-- LOADING-->
+            <ng-container *ngIf="tasks.length === 0">
+              <h6 class="py-2" id="squelette" *ngFor="let i of [].constructor(4)">
+                <div>
+                  <i class="ri-circle-fill" style="color: gray"></i>
+                  <span class="taskName"></span><br>
+                </div>
+
+                <small class="taskContent"></small>
+              </h6>
+            </ng-container>
           </div>
 
         </div>

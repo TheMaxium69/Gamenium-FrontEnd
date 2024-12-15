@@ -309,3 +309,25 @@ h2 {
   background-color: #f0f0f0;
 }
 
+#squelette{
+  div{
+    display: flex;
+  }
+  .taskName{
+    background-color: gray;
+    height: 19px;
+    width: 240px;
+    margin-left: 5px;
+    border-radius: 7px;
+    display: block;
+  }
+  .taskContent{
+    background-color: gray;
+    height: 15px;
+    width: 350px;
+    display: block;
+    margin-top: 8px;
+    border-radius: 7px;
+  }
+}
+
