@@ -734,7 +734,7 @@ export class AppComponent {
   * */
 
 
-  deleteMyGame(myGameHistorique: HistoryMyGameInterface | undefined) {
+  deleteMyGame(myGameHistorique: HistoryMyGameInterface | undefined, redirect: Boolean = false) {
 
     if (!myGameHistorique) {
       return;
@@ -759,7 +759,9 @@ export class AppComponent {
             confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
 
-          // this.router.navigateByUrl('/mygame') /* pK ?*/
+          if (redirect){
+            this.router.navigateByUrl('/mygame')
+          }
         } else {
           myGameHistorique.isDelete = false;
           Swal.fire({
