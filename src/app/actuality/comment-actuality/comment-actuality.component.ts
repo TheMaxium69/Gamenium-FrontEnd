@@ -195,154 +195,9 @@ export class CommentActualityComponent implements OnInit{
           this.newComment = reponseMyCommentActuCreate.result;
           console.log("Commentaire ajouté");
 
+          this.commentByActu?.push(this.newComment);
           this.nbLikeByComment[reponseMyCommentActuCreate.result.id] = 0;
 
-          let noteSpanGame = document.getElementById("yourComment");
-          if (noteSpanGame && this.newComment) {
-
-            const commentCard = this.renderer.createElement('div');
-            this.renderer.setAttribute(commentCard, 'id', `c${this.newComment.id}`);
-            this.renderer.addClass(commentCard, 'card');
-            this.renderer.addClass(commentCard, 'mb-2');
-
-
-            const commentUser = this.renderer.createElement('div');
-            this.renderer.addClass(commentUser, 'comment-user');
-
-            // Si pas de photo de profile
-            if (this.newComment.user.pp?.url) {
-              const profilePicture = this.renderer.createElement('div');
-              this.renderer.addClass(profilePicture, 'img');
-              this.renderer.setStyle(profilePicture, 'background-image', `url('${this.newComment.user.pp.url}')`);
-
-              this.renderer.appendChild(commentUser, profilePicture);
-            } else {
-              const initialContainer = this.renderer.createElement('div');
-              this.renderer.addClass(initialContainer, 'align-content-center');
-              this.renderer.addClass(initialContainer, 'lettrePP-border');
-              this.renderer.setStyle(initialContainer, 'border-color', this.newComment.user.color);
-
-              const initialText = this.renderer.createElement('p');
-              this.renderer.addClass(initialText, 'lettrePP');
-              this.renderer.setStyle(initialText, 'color', this.newComment.user.color);
-              this.renderer.setProperty(initialText, 'textContent', this.newComment.user.displayname.charAt(0).toUpperCase());
-
-              this.renderer.appendChild(initialContainer, initialText);
-              this.renderer.appendChild(commentUser, initialContainer);
-            }
-
-            // Ajout de la div username
-            const userName = this.renderer.createElement('h4');
-            this.renderer.addClass(userName, 'comment-user-name');
-            const nameHTML = `<span>${this.newComment.user.displayname}</span>`;
-            this.renderer.setProperty(userName, 'innerHTML', nameHTML);
-            this.renderer.appendChild(commentUser, userName);
-
-            // Badges de l'user
-            const badges = this.badgeForAllUser[this.newComment.user.id];
-            if (badges) {
-              badges.forEach((badgeData: BadgeInterface) => {
-                const badgeImg = this.renderer.createElement('img');
-                this.renderer.addClass(badgeImg, 'badgeIMG');
-
-                if (badgeData.picture?.url) {
-                  this.renderer.setAttribute(badgeImg, 'src', badgeData.picture.url);
-                  this.renderer.setAttribute(badgeImg, 'alt', badgeData.name || 'Badge');
-                }
-
-                this.renderer.appendChild(userName, badgeImg);
-              });
-            }
-
-            // Depuis quand le commentaire est posté
-            const timeAgo = this.renderer.createElement('span');
-            const formattedDate ="" + dateHere.getDate() + " " + this.app.moisView(dateHere.getMonth()) + " " + dateHere.getFullYear() + " à " + dateHere.getHours() + ":" + (dateHere.getMinutes() < 10 ? '0' : '') + dateHere.getMinutes() ;
-            this.renderer.addClass(timeAgo, 'time-ago');
-            this.renderer.setProperty(timeAgo, 'textContent', formattedDate);
-            this.renderer.appendChild(userName, timeAgo);
-
-            // Ajout du bouton delete
-            const commentId = this.newComment.id;
-
-            const deleteButton = this.renderer.createElement('i');
-            this.renderer.setAttribute(deleteButton, 'id', 'delete-comment-icon');
-            this.renderer.addClass(deleteButton, 'ri-delete-bin-line');
-            this.renderer.setStyle(deleteButton, 'color', 'red');
-            this.renderer.listen(deleteButton, 'click', () => this.onDeleteBtnClick(commentId));
-            this.renderer.appendChild(commentUser, deleteButton);
-
-            this.renderer.appendChild(commentCard, commentUser);
-
-            // Comment text div
-            const commentText = this.renderer.createElement('p');
-            this.renderer.addClass(commentText, 'comment-text');
-            this.renderer.setProperty(commentText, 'textContent', this.newComment.content);
-            this.renderer.appendChild(commentCard, commentText);
-
-            // Ajout de la div reply
-            const replySection = this.renderer.createElement('div');
-            this.renderer.addClass(replySection, 'reply-section')
-
-            // Ajout du <i> reply
-            const replyIcon = this.renderer.createElement('i');
-            this.renderer.addClass(replyIcon, 'ri-question-answer-line');
-            this.renderer.setProperty(replyIcon, 'id', 'reply-icon');
-
-            // Ajout du texte "repondre"
-            const replyContent = this.renderer.createElement('span');
-            this.renderer.setProperty(replyContent, 'textContent', 'répondre');
-
-            /*
-          <span id="like-value" style="background-color: {{ providerColor ?? 'red' }}">{{ nbLikeByComment[comment.id] || "0" }}</span>
-          */
-            const likeCount = this.renderer.createElement('span')
-            this.renderer.setProperty(likeCount, 'id', 'like-value' + reponseMyCommentActuCreate.result.id);
-            this.renderer.addClass(likeCount, 'like-value');
-            this.renderer.setStyle(likeCount, 'margin-top', '3px')
-            this.renderer.setProperty(likeCount, 'textContent', this.nbLikeByComment[reponseMyCommentActuCreate.result.id].toString());
-
-            // Ajout de l'icon j'aime
-            const likeIcon = this.renderer.createElement('i')
-            this.renderer.addClass(likeIcon, 'ri-heart-line')
-            this.renderer.addClass(likeIcon, 'comment-action')
-            this.renderer.addClass(likeIcon, 'like')
-            this.renderer.setProperty(likeIcon, 'id', 'like-icon' + this.newComment.id)
-            this.renderer.listen(likeIcon, 'click', () => this.likeComment(commentId, !this.commentLikedMap.get(commentId) ? 'add' : 'delete'));
-
-
-            // Ajout du texte j'aime
-            const likeContent = this.renderer.createElement('span')
-            this.renderer.addClass(likeContent, 'comment-action')
-            this.renderer.setProperty(likeContent, 'textContent', 'Like')
-            this.renderer.listen(likeContent, 'click', () => this.likeComment(commentId, !this.commentLikedMap.get(commentId) ? 'add' : 'delete'));
-
-
-            // Ajout des éléments a la div Reply
-            this.renderer.appendChild(replySection, replyIcon);
-            this.renderer.appendChild(replySection, replyContent);
-            this.renderer.appendChild(replySection, likeIcon);
-            this.renderer.appendChild(replySection, likeCount);
-            this.renderer.appendChild(replySection, likeContent);
-            this.renderer.appendChild(commentCard, replySection);
-
-            // Comment border div
-            const commentBorder = this.renderer.createElement('div');
-            this.renderer.setAttribute(commentBorder, 'id', `b${this.newComment.id}`);
-            this.renderer.addClass(commentBorder, 'comment-border');
-            this.renderer.addClass(commentBorder, 'mb-4');
-
-            // Insertion des éléments dans le dom
-            if (noteSpanGame.firstChild) {
-              this.renderer.insertBefore(noteSpanGame, commentCard, noteSpanGame.firstChild);
-
-              // Ajout de la border après la carte
-              this.renderer.insertBefore(noteSpanGame, commentBorder, commentCard.nextSibling);
-            } else {
-
-              this.renderer.appendChild(noteSpanGame, commentCard);
-              this.renderer.appendChild(noteSpanGame, commentBorder);
-            }
-          }
           this.commentNbChanged.emit('add');
           const resetForm = form.resetForm();
           this.text = ''
@@ -362,7 +217,7 @@ export class CommentActualityComponent implements OnInit{
             }
           }
 
-      this.userConnectedId = this.app.userConnected.id;
+          this.userConnectedId = this.app.userConnected.id;
           console.log(reponseMyCommentActuCreate);
         }
       if (reponseMyCommentActuCreate.message === "to long content") {
