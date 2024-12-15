@@ -66,7 +66,7 @@
           <div class="comment-user ">
 
             <!-- PP -->
-            <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color) }}"></div>
+            <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color || app.colorDefault) }}"></div>
 
             <!-- WHY AND WHERE-->
             <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
@@ -88,42 +88,85 @@
           <div class="reply-section">
 
             <div (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-              <i id="like-icon{{comment.id}}" class="comment-action like" style="color: {{commentLikedMap.get(comment.id) ? providerColor : 'rgb(87,87,87)'}}"
-                [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
-                [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
+              <i id="like-icon{{comment.id}}" class="comment-action like"
+                [class.ri-thumb-up-line]="!commentLikedMap.get(comment.id)"
+                [class.ri-thumb-up-fill]="commentLikedMap.get(comment.id)">
               </i>
               <span id="like-value">{{ nbLikeByComment[comment.id] || "0" }}</span>
             </div>
 
-            <div class="reply-btn"
-              (click)="replyToComment(comment.id)">
+            <div class="reply-btn" (click)="checkShowCommentReply(comment.id)">
               <i class="ri-question-answer-line" id="reply-icon"></i>
             </div>
 
           </div>
 
         <!-- LIST COMMENT REPLY-->
-        <ng-container *ngIf="commentReplyAll[comment.id]">
+        <ng-container>
           <div class="reply-display">
 
             <!-- BUTTOM -->
-            <div class="ShowReply" (click)="checkShowCommentReply(comment.id)">
+            <div class="ShowReply" (click)="checkShowCommentReply(comment.id)" *ngIf="commentReplyAll[comment.id] && commentReplyAll[comment.id].length > 0">
               <span>Voir les réponses  : {{commentReplyAll[comment.id].length}} </span>
               <i class="ri-arrow-down-s-line"></i>
             </div>
 
             <!-- LIST -->
-            <div id="all-reply{{comment.id}}" class="displayNone">
+            <div id="all-reply{{comment.id}}" class="displayNone allReply">
               <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
-                <small>Comment : {{ commentReply.content }}</small>
-                  <button (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected.id">delete</button>
-                <br>
+
+                <!-- REPLY ONE-->
+                <div class="replyOne">
+
+                  <!-- PEOPLE -->
+                  <div class="comment-user">
+
+                    <!-- PP -->
+                    <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(commentReply?.user?.pp?.url, commentReply.user.displayname_useritium || commentReply.user.username, commentReply.user.color || app.colorDefault) }}"></div>
+
+                    <!-- WHY AND WHEN -->
+                    <h4 class="comment-user-name"><span>{{ commentReply.user?.displayname_useritium || commentReply.user.username }}</span>
+                      <span class="time-ago">{{commentReply.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{commentReply.created_at | date: 'HH:mm'}}</span>
+                    </h4>
+
+                    <!-- DELTE YOUR COM-->
+                    <i id="delete-comment-icon" class="ri-delete-bin-line" (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected?.id"></i>
+
+                  </div>
+
+                  <!-- CONTENT-->
+                  <p class="comment-text">{{ commentReply.content }}</p>
+
+                  <!-- ACTION COM -->
+                  <!--<div class="reply-section">
+
+                    <div>
+                      <i id="like-icon{{commentReply.id}}" class="comment-action like"
+                         [class.ri-thumb-up-line]="!commentLikedMap.get(commentReply.id)"
+                         [class.ri-thumb-up-fill]="commentLikedMap.get(commentReply.id)">
+                      </i>
+                      <span id="like-value">{{ "0" }}</span>
+                    </div>
+
+                  </div>-->
+
+                </div>
+
               </ng-container>
+
+              <!-- REPLY FORM-->
+              <div class="replyForm" [ngStyle]="{'--providerColor': providerColor || this.app.colorDefault }">
+                <input name="comment{{comment.id}}" id="comment{{comment.id}}" type="text" placeholder="Votre réponses">
+                <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button">envoyé</button>
+              </div>
+
             </div>
 
             <br><br>
           </div>
         </ng-container>
+
+
 
 
         <!-- BAR --> <div id="b{{comment.id}}" class="comment-border mb-4"></div>
@@ -159,7 +202,7 @@
             <div class="comment-user">
 
               <!-- PP -->
-              <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color) }}"></div>
+              <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color || app.colorDefault) }}"></div>
 
               <!-- WHY AND WHEN -->
               <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
@@ -178,45 +221,83 @@
             <div class="reply-section">
 
               <div (click)="likeComment(comment.id, !commentLikedMap.get(comment.id) ? 'add' : 'delete')">
-                <i id="like-icon{{comment.id}}" class="comment-action like" style="color: {{commentLikedMap.get(comment.id) ? providerColor : 'rgb(87,87,87)'}}"
-                  [class.ri-heart-line]="!commentLikedMap.get(comment.id)"
-                  [class.ri-heart-fill]="commentLikedMap.get(comment.id)">
+                <i id="like-icon{{comment.id}}" class="comment-action like"
+                  [class.ri-thumb-up-line]="!commentLikedMap.get(comment.id)"
+                  [class.ri-thumb-up-fill]="commentLikedMap.get(comment.id)">
                 </i>
                 <span id="like-value">{{ nbLikeByComment[comment.id] || "0" }}</span>
               </div>
 
-              <div class="reply-btn" (click)="replyToComment(comment.id)">
+              <div class="reply-btn" (click)="checkShowCommentReply(comment.id)">
                 <i class="ri-question-answer-line" id="reply-icon"></i>
               </div>
 
             </div>
 
             <!-- LIST COMMENT REPLY-->
-            <ng-container *ngIf="commentReplyAll[comment.id]">
+            <ng-container>
               <div class="reply-display">
 
                 <!-- BUTTOM -->
-                <div class="ShowReply" (click)="checkShowCommentReply(comment.id)">
+                <div class="ShowReply" (click)="checkShowCommentReply(comment.id)" *ngIf="commentReplyAll[comment.id] && commentReplyAll[comment.id].length > 0">
                   <span>Voir les réponses  : {{commentReplyAll[comment.id].length}}</span>
                   <i class="ri-arrow-down-s-line"></i>
                 </div>
 
                 <!-- LIST -->
-                <div id="all-reply{{comment.id}}" class="displayNone">
+                <div id="all-reply{{comment.id}}" class="displayNone allReply">
                   <ng-container *ngFor="let commentReply of commentReplyAll[comment.id]; let i = index">
-                    <small>Comment : {{ commentReply.content }}</small>
-                      <button (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected?.id">delete</button>
-                    <br>
+
+                    <!-- REPLY ONE-->
+                    <div class="replyOne">
+
+                      <!-- PEOPLE -->
+                      <div class="comment-user">
+
+                        <!-- PP -->
+                        <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(commentReply?.user?.pp?.url, commentReply.user.displayname_useritium || commentReply.user.username, commentReply.user.color || app.colorDefault) }}"></div>
+
+                        <!-- WHY AND WHEN -->
+                        <h4 class="comment-user-name"><span>{{ commentReply.user?.displayname_useritium || commentReply.user.username }}</span>
+                          <span class="time-ago">{{commentReply.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{commentReply.created_at | date: 'HH:mm'}}</span>
+                        </h4>
+
+                        <!-- DELTE YOUR COM-->
+                        <i id="delete-comment-icon" class="ri-delete-bin-line" (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected?.id"></i>
+
+                      </div>
+
+                      <!-- CONTENT-->
+                      <p class="comment-text">{{ commentReply.content }}</p>
+
+                      <!-- ACTION COM -->
+                      <!--<div class="reply-section">
+
+                        <div>
+                          <i id="like-icon{{commentReply.id}}" class="comment-action like"
+                             [class.ri-thumb-up-line]="!commentLikedMap.get(commentReply.id)"
+                             [class.ri-thumb-up-fill]="commentLikedMap.get(commentReply.id)">
+                          </i>
+                          <span id="like-value">{{ "0" }}</span>
+                        </div>
+
+                      </div>-->
+
+                    </div>
+
                   </ng-container>
+
+                  <!-- REPLY FORM-->
+                  <div class="replyForm" [ngStyle]="{'--providerColor': providerColor || this.app.colorDefault }">
+                    <input name="comment{{comment.id}}" id="comment{{comment.id}}" type="text" placeholder="Votre réponses">
+                    <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button">Envoyé</button>
+                  </div>
+
                 </div>
 
                 <br><br>
               </div>
             </ng-container>
-
-            <!-- TEMP REPLY FORM-->
-            <input name="comment{{comment.id}}" id="comment{{comment.id}}" type="text">
-            <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button">envoyé</button>
 
             <!-- BAR --> <div class="comment-border mb-4"></div>
           </div>
@@ -227,6 +308,18 @@
 
 </ng-container>
 
+
+
+<style>
+
+
+
+
+</style>
+
+
+
+<!-- AUCUN COMMENTAIRE -->
 <ng-container *ngIf="!commentByActu">
 
   <h2 id="no-comment" class="mb10" style="margin-bottom: 50px;text-align: center; color: {{ providerColor }}">Aucun commentaire</h2>

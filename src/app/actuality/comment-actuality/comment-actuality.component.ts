@@ -451,15 +451,11 @@ export class CommentActualityComponent implements OnInit{
 
   }
 
-  extractFirstLetter(str: string|any): string {
-    return str.charAt(0);
-  }
-
-  replyToComment(commentId: number) {
-    const replyForm = document.querySelector("#addReplyForm") as HTMLElement;
-    replyForm.classList.remove('displayNone')
-    replyForm.classList.add('display')
-  }
+  // replyToComment(commentId: number) {
+  //   const replyForm = document.querySelector("#addReplyForm") as HTMLElement;
+  //   replyForm.classList.remove('displayNone')
+  //   replyForm.classList.add('display')
+  // }
 
   likeComment(commentId: number, action: string) {
     if (action == 'add') {
@@ -483,11 +479,6 @@ export class CommentActualityComponent implements OnInit{
         console.log('commentaire ' + commentId + ' liké par ' + this.userConnectedId)
 
         this.commentLikedMap.set(commentId, true);
-
-        const likeIcon = document.querySelector('#like-icon'+commentId)
-        this.renderer.removeClass(likeIcon, 'ri-heart-line')
-        this.renderer.addClass(likeIcon, 'ri-heart-fill')
-        this.renderer.setStyle(likeIcon,'color', this.providerColor)
 
         this.nbLikeByComment[commentId]++;
 
