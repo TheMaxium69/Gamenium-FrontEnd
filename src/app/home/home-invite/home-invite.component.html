@@ -1,4 +1,4 @@
-<div class="gamenium-banner">
+<div class="gamenium-banner" style="background-color: {{ app.colorDefault }}">
     <div class="gamenium-logo"></div>
     <div class="gamenium-welcome">
         <h1>GAMENIUM</h1>
@@ -29,8 +29,8 @@
         <div class="gamenium-connect-panel">
             <h2 class="text-center">Pour profiter pleinement de toutes les fonctionnalités offertes par Gamenium</h2>
             <div class="connect-button">
-                <button class="main-gamenium-btn" routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Connectez-vous</button>
-                <button class="sub-gamenium-btn">Inscrivez-vous</button>
+                <button class="main-gamenium-btn" routerLink="/account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" style="background-color: {{ app.colorDefault }}">Connectez-vous</button>
+                <button class="sub-gamenium-btn" style="color: {{ app.colorDefault }}; border-color: {{ app.colorDefault }}">Inscrivez-vous</button>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
               <app-card-actu *ngFor="let actu of postActuFollowOrAll | slice: 0 : 6" [actu]="actu"></app-card-actu>
             </div>
             <div class="rowamoi justify-content-end">
-              <a class="main-gamenium-btn" routerLink="/actuality">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
+              <a class="main-gamenium-btn" routerLink="/actuality" style="background-color: {{ app.colorDefault }}">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="rowamoi justify-content-end">
-              <a class="main-gamenium-btn" routerLink="/game">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
+              <a class="main-gamenium-btn" routerLink="/game" style="background-color: {{ app.colorDefault }}">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
 
         </div>
