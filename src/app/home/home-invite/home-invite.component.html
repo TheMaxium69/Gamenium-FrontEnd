@@ -60,6 +60,9 @@
             <!-- Boucle avec les cards jeux (en afficher 3)-->
             <div id="content-latest-release" class="d-flex">
                 <app-card-game-sub *ngFor="let game of games " [game]="game" routerLink="/game/{{ game.id }}"></app-card-game-sub>
+                <ng-container *ngIf="games.length === 0">
+                  <app-card-game-sub *ngFor="let i of [].constructor(3)"></app-card-game-sub>
+                </ng-container>
             </div>
 
             <div class="rowamoi justify-content-end">
@@ -75,14 +78,15 @@
         <div class="gamenium-container-panel">
           <h2 class="p-b">Suggestion</h2>
           <div id="gamenium-suggestion-content"class="rowamoi justify-content-between">
-            <div *ngFor="let provider of randomProviders">
-              <app-card-provider
-              [provider]="provider"
-              [isFollowed]="isProviderFollowed(provider.id)"
-              (followed)="handleFollowed($event)"
-              (unfollowed)="handleUnfollowed($event)"
-              ></app-card-provider>
-            </div>
+            <app-card-provider *ngFor="let provider of randomProviders"
+            [provider]="provider"
+            [isFollowed]="isProviderFollowed(provider.id)"
+            (followed)="handleFollowed($event)"
+            (unfollowed)="handleUnfollowed($event)"
+            ></app-card-provider>
+            <ng-container *ngIf="randomProviders.length === 0">
+              <app-card-provider *ngFor="let provider of [].constructor(4)"></app-card-provider>
+            </ng-container>
           </div>
         </div>
     </section>

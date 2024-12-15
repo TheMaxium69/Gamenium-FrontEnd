@@ -1,6 +1,6 @@
 <article class="navigateBar">
 
-  <ul class="scrollbar" style="background-color: {{ isColor }}">
+  <ul class="scrollbar" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">
 
     <!-- HOME PAGE -->
     <ng-container *ngIf="!task">

@@ -15,7 +15,6 @@ export class TabMygameComponent implements OnInit, OnChanges {
   userConnected: UserInterface | undefined;
   plateformeId: number | any;
   task:any;
-  isColor: string = this.app.colorDefault;
   plateformsUser: PlateformInterface[] | undefined;
 
   constructor(protected app:AppComponent,
@@ -38,14 +37,8 @@ export class TabMygameComponent implements OnInit, OnChanges {
   }
 
   load(){
-    this.userConnected = this.app.userConnected;
-
-    if (this.userConnected) {
-      if (this.userConnected.themeColor !== null) {
-        this.isColor = this.userConnected.themeColor;
-      }
-
-      this.myPlateforme(this.userConnected.id);
+    if (this.app.userConnected) {
+      this.myPlateforme(this.app.userConnected.id);
     }
   }
 
