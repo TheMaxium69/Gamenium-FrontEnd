@@ -96,7 +96,7 @@ export class AppComponent {
   maxSearchProviderByGame:number = 4; // Max Recherche de provider dans gameOne
 
   // DEFAULT
-  colorDefault = "#a800ff";
+  colorDefault = "#d2001e";
   noBoxartImage_default:string = "https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg";
   noBoxartImage:string = "assets/noBoxart.png";
 
