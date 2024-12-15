@@ -43,12 +43,12 @@
   cursor: pointer;
   margin-left: auto;
   margin-right: 5%;
-  font-size: 28px;
-  display: none;
+  font-size: 18px;
 }
 
-.card:hover #delete-comment-icon {
-  display: block;
+#delete-comment-icon:hover {
+  opacity: 0.8;
+  color: red;
 }
 
 .img {

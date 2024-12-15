@@ -26,7 +26,6 @@ registerLocaleData(localeFr, 'fr');
 })
 export class CommentActualityComponent implements OnInit{
 
-  isLoggedIn:boolean = false;
   userConnectedId:number|undefined;
   userColor : string | undefined;
   actualityId: string|any;
@@ -70,11 +69,9 @@ export class CommentActualityComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.isLoggedIn = this.app.isLoggedIn;
+    if (this.app.isLoggedIn){
 
-    if (this.isLoggedIn){
-
-      this.userConnectedId = this.app.userConnected.id;
+      this.userConnectedId = this.app.userConnected?.id;
       this.userColor = this.app.userConnected.themeColor
 
     }
@@ -151,6 +148,7 @@ export class CommentActualityComponent implements OnInit{
       if (reponseMyCommentActu.message == "good") {
 
         this.commentByActu = reponseMyCommentActu.result;
+        console.log(this.commentByActu)
         this.getBadgesForAllUsers();
 
         this.commentByActu?.forEach((oneComment:CommentInterface) => {
@@ -621,7 +619,6 @@ export class CommentActualityComponent implements OnInit{
 
     /* PAR LE PLUS LIKER */
     this.commentByActu?.sort((a, b) => (this.nbLikeByComment[b.id] || 0) - (this.nbLikeByComment[a.id] || 0));
-
 
   }
 
