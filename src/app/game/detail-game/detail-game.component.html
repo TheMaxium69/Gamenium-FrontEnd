@@ -30,7 +30,7 @@
     <div class="game-name">
       <h1 class="mb-0">{{ gameSelected?.name }}</h1>
     </div>
-    <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="global-game-rate">
+    <div [ngStyle]="{ '--userColor': app.userConnected?.themeColor || app.colorDefault }" class="global-game-rate">
       <div class="global-rate">{{ this.gameSelected?.moyenRateUser || "NA" }}</div>
       <div class="global-slash">/</div>
       <div class="global-20">20</div>
@@ -47,7 +47,7 @@
     <div class="information-container">
       <div class="content">
         <p>Contenu</p>
-        <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="information-line-container">
+        <div [ngStyle]="{ '--userColor': app.userConnected?.themeColor || app.colorDefault }" class="information-line-container">
           <div class="information-lines" *ngIf="game_genres.length > 0">
             <div class="field" >
               <p>
@@ -103,7 +103,7 @@
       </div>
       <div class="context">
         <p>Context</p>
-        <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="information-line-container">
+        <div [ngStyle]="{ '--userColor': app.userConnected?.themeColor || app.colorDefault }" class="information-line-container">
           <div class="information-lines" *ngIf="game_developpers.length > 0">
             <div class="field">
               <p>
@@ -281,7 +281,7 @@
             <p class="title-circle-margin third-color">Note Presse :</p>
             <div class="d-flex justify-content">
                 <div class="width-circle">
-                    <div [ngStyle]="{ '--userColor': userColor ?? '#FF0000' }" class="shadow-btn border color-circle ratio ratio-1x1 rounded-circle">
+                    <div [ngStyle]="{ '--userColor': app.userConnected?.themeColor || app.colorDefault }" class="shadow-btn border color-circle ratio ratio-1x1 rounded-circle">
                         <p class="font-notes d-flex justify-content-center align-items-center"><span>{{ obtainMoyenPress() }}</span>/20</p>
                     </div>
                 </div>
@@ -347,7 +347,7 @@
 
       <!-- Add Note Button -->
       <div *ngIf="app.isLoggedIn && hasGameInCollection" class="add-note">
-        <button style="background-color: {{ userColor || this.app.colorDefault }}" class="main-gamenium-btn" data-bs-toggle="modal" data-bs-target="#noteGamePage" (click)="setModal()">Ajouter une note</button>
+        <button style="background-color: {{ app.userConnected?.themeColor || app.colorDefault }}" class="main-gamenium-btn" data-bs-toggle="modal" data-bs-target="#noteGamePage" (click)="setModal()">Ajouter une note</button>
       </div>
     </div>
   </div>
@@ -394,7 +394,7 @@
 <div class="container-2">
 
   <div class="title-add">
-    <h3><span style="color: {{ userColor ? userColor : this.app.colorDefault }};">{{ this.app.userConnected.displaynameUseritium || this.app.userConnected.username }}</span> Vous possedez le jeu ? Ajoutez le à votre collection :</h3>
+    <h3><span style="color: {{ app.userConnected?.themeColor || app.colorDefault }};">{{ this.app.userConnected.displaynameUseritium || this.app.userConnected.username }}</span> Vous possedez le jeu ? Ajoutez le à votre collection :</h3>
   </div>
 
   <div *ngIf="gameSelected" class="card-add-to-collection">

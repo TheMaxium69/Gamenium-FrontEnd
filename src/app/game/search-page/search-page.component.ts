@@ -23,10 +23,6 @@ import Swal from "sweetalert2";
 })
 export class SearchPageComponent implements OnInit, OnDestroy{
 
-  /* USER*/
-  isLoggedIn:boolean|undefined;
-  userColor: string | undefined;
-
   /*search*/
   private unsubscribe$ = new Subject<void>();
   searchValue: string = '';
@@ -68,11 +64,6 @@ export class SearchPageComponent implements OnInit, OnDestroy{
 
 
   ngOnInit(): void {
-
-
-
-    this.isLoggedIn = this.app.isLoggedIn;
-    this.userColor = this.app.userConnected?.themeColor || this.app.colorDefault;
 
     let searchValueTemp = this.route.snapshot.paramMap.get('value');
     if (searchValueTemp && searchValueTemp !== '-'){

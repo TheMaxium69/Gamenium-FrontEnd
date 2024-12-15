@@ -373,11 +373,11 @@ export class CommentActualityComponent implements OnInit{
         textArea.textContent = content;
 
         Swal.fire({
-          title: 'Aie !',
-          text: 'Le message ne dois pas dépasser 300 nombre de charactere.',
-          icon: 'error',
+          title: 'Attention!',
+          text: 'Le message ne dois pas dépasser 300 charactere.',
+          icon: 'warning',
           confirmButtonText: 'Ok',
-          confirmButtonColor: 'red'
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
 
       }
@@ -506,7 +506,7 @@ export class CommentActualityComponent implements OnInit{
           text: 'Vous devez être connectez pour liké',
           icon: 'warning',
           confirmButtonText: 'OK',
-          confirmButtonColor: this.app.colorDefault
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       } else {
         Swal.fire({
@@ -514,7 +514,7 @@ export class CommentActualityComponent implements OnInit{
           text: 'Echec du j\'aime sur le commentaire',
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: this.app.colorDefault
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       }
     }, (error) => this.app.erreurSubcribe())
@@ -652,7 +652,7 @@ export class CommentActualityComponent implements OnInit{
             text: 'Votre commentaire à bien été supprimé',
             icon: 'success',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.app.colorDefault
+            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
           })
         } else {
           Swal.fire({
@@ -660,7 +660,7 @@ export class CommentActualityComponent implements OnInit{
             text: 'Echec de la suppression du commentaire',
             icon: 'error',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.app.colorDefault
+            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
           })
         }
       },(error) => {this.app.erreurSubcribe()}

@@ -3,7 +3,7 @@
   class="search fixed-top"
   (ngSubmit)="onSearch()"
   #searchForm="ngForm"
-  [ngStyle]="{ '--userColor': userColor }"
+  [ngStyle]="{ '--userColor': app.userConnected?.themeColor ?? this.app.colorDefault }"
 >
   <input
     #input
@@ -13,7 +13,7 @@
     name="searchValue"
     [(ngModel)]="this.searchValue"
     placeholder="Tapez votre recherche ..."
-    [ngStyle]="{ '--color': userColor ?? this.app.colorDefault }"
+    [ngStyle]="{ '--color': app.userConnected?.themeColor ?? this.app.colorDefault }"
   />
   <input class="searchButton" type="submit" />
 </form>
@@ -60,7 +60,7 @@
 
     </div>
 
-    <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>
+    <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ app.userConnected?.themeColor || this.app.colorDefault }}">Voir plus</button>
 
     <!-- NADA -->
     <ng-container *ngIf="!isLoading && games.length === 0 && users.length === 0 && providers.length === 0">

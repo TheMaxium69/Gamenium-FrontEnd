@@ -49,7 +49,7 @@ export class ModalAddGameComponent implements OnInit, OnDestroy {
               text: 'Une erreur s\'est produite lors de la recherche',
               icon: 'error',
               confirmButtonText: 'OK',
-              confirmButtonColor: this.app.userConnected?.themeColor
+              confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
             });
             return of([]);
           })

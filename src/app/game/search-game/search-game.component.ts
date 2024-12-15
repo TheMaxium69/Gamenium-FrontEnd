@@ -19,10 +19,6 @@ import Swal from "sweetalert2";
 })
 export class SearchGameComponent implements OnInit, OnDestroy{
 
-  /* USER VARIABLE*/
-  isLoggedIn:boolean|undefined;
-  userColor: string | undefined;
-
   /* GAME & PROVIDER*/
   games: GameInterface[] = [];
 
@@ -48,12 +44,6 @@ export class SearchGameComponent implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit(): void {
-
-    /* SET GLOBAL VARIABLE*/
-    this.isLoggedIn = this.app.isLoggedIn;
-    if (this.isLoggedIn) {
-      this.userColor = this.app.userConnected.themeColor;
-    }
 
     /* FIRST REQUESTE*/
     if (this.app.gameNoReload.length == 0) {

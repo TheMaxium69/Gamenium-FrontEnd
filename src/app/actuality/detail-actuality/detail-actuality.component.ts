@@ -155,7 +155,7 @@ export class DetailActualityComponent implements OnInit{
         text: 'Vous devez être connectez pour liké',
         icon: 'warning',
         confirmButtonText: 'OK',
-        confirmButtonColor: this.app.colorDefault
+        confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
       })
     }
 

@@ -24,7 +24,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   task:any;
   HistoireMyGameByUserByPlateform: HistoryMyGameInterface[] = [];
   userRatingAll: UserRateInterface[] | undefined;
-  isColor: string = this.app.colorDefault;
 
   // Pour la recherche
   searchResults: GameInterface[] | undefined;
@@ -60,16 +59,14 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   }
 
   load(){
-    this.userConnected = this.app.userConnected;
 
-    if (this.userConnected) {
-      this.isColor = this.userConnected.themeColor;
+    if (this.app.userConnected) {
       if (this.task == "all"){
-        this.myGameByUser(this.userConnected.id);
+        this.myGameByUser(this.app.userConnected.id);
       } else {
-        this.myGameByUserWithPlateform(this.userConnected.id, this.plateformeId);
+        this.myGameByUserWithPlateform(this.app.userConnected.id, this.plateformeId);
       }
-      this.getUserRate(this.userConnected.id)
+      this.getUserRate(this.app.userConnected.id)
     }
   }
 

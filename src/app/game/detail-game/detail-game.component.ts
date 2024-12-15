@@ -26,8 +26,6 @@ export class DetailGameComponent implements OnInit{
   myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
   hasGameInCollection : boolean = false;
 
-  userColor : string | undefined;
-
   gameId: number|any;
   gameSelected: GameInterface|undefined;
   noneGame: boolean = false;
@@ -55,7 +53,6 @@ export class DetailGameComponent implements OnInit{
 
     if (this.app.isLoggedIn){
       this.myGameByUser(this.app.userConnected.id);
-      this.userColor = this.app.userConnected.themeColor;
     }
 
   }

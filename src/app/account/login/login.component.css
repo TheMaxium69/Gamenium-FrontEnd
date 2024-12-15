@@ -33,7 +33,6 @@
   font-size: 12px;
 }
 .form .message a {
-  color: red;
   text-decoration: none;
 }
 .form .register-form {
@@ -79,6 +78,6 @@
 
 @media (max-width:450px) {
   .login-page {
-    
+
   }
 }

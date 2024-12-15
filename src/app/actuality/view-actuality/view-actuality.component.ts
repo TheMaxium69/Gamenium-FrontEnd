@@ -104,7 +104,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
           text: 'Erreur de récupération des actualités',
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: this.userConnected?.themeColor
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       }
     }, error => { this.app.erreurSubcribe() });

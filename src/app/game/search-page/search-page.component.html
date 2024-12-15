@@ -1,5 +1,5 @@
 <div style="height: 113px;width: 100%"></div>
-<form class="search fixed-top" [ngStyle]="{ '--userColor': userColor ?? this.app.colorDefault }">
+<form class="search fixed-top" [ngStyle]="{ '--userColor': this.app.userConnected?.themeColor ?? this.app.colorDefault }">
   <input
     #input
     (keyup)="updateValue(input.value)"
@@ -7,13 +7,13 @@
     name="searchValue"
     [(ngModel)]="searchValue"
     placeholder="Tapez votre recherche ..."
-    [style.borderColor]="userColor"
+    [style.borderColor]="app.userConnected?.themeColor || app.colorDefault"
   />
   <input class="searchButton" type="submit" />
 </form>
 
 
-<div id="bar-type" [ngStyle]="{ '--userColor': userColor ?? this.app.colorDefault }">
+<div id="bar-type" [ngStyle]="{ '--userColor': app.userConnected?.themeColor ?? this.app.colorDefault }">
   <ul class="d-flex">
     <!--  GAME  -->
     <li [class.active]="searchType == 'game'" (click)="changeType('game')">Jeux</li>
@@ -47,7 +47,7 @@
       <p>Aucun résultat trouvé.</p>
     </ng-container>
 
-    <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ userColor }}">Voir plus</button>
+    <button id="moreGameBTN" class="container main-gamenium-btn" (click)="moreGame()" style="display: none; background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Voir plus</button>
   </div>
 
 </ng-container>

@@ -280,7 +280,7 @@ export class ProfileComponent implements OnInit {
             text: 'Votre thème à bien été mise à jour.',
             icon: 'success',
             confirmButtonText: 'Ok',
-            confirmButtonColor: this.oldColor
+            confirmButtonColor: this.color
           })
         } else {
           this.selectedColor = this.oldColor;
@@ -345,7 +345,7 @@ export class ProfileComponent implements OnInit {
           text: 'Votre photo de profil à bien été mise à jour.',
           icon: 'success',
           confirmButtonText: 'Ok',
-          confirmButtonColor: this.userConnected?.themeColor
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       } else {
         uploadButton.disabled = false
@@ -356,7 +356,7 @@ export class ProfileComponent implements OnInit {
           text: 'Échec de la mise à jour de la photo de profil',
           icon: 'error',
           confirmButtonText: 'Ok',
-          confirmButtonColor: this.app.colorDefault
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       }
 
@@ -523,7 +523,7 @@ export class ProfileComponent implements OnInit {
           text: 'Votre photo de profil à bien été supprimé.',
           icon: 'success',
           confirmButtonText: 'Ok',
-          confirmButtonColor: this.userConnected?.themeColor
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       } else {
         Swal.fire({
@@ -531,7 +531,7 @@ export class ProfileComponent implements OnInit {
           text: 'Échec de la mise à jour de la photo de profil',
           icon: 'error',
           confirmButtonText: 'Ok',
-          confirmButtonColor: this.app.colorDefault
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       }
     }, (error) => this.app.erreurSubcribe())

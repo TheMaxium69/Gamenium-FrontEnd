@@ -9,7 +9,7 @@ import { AppComponent } from "../../app.component";
 })
 export class LoginComponent {
 
-  constructor(private app: AppComponent) { }
+  constructor(protected app: AppComponent) { }
 
   login(form: NgForm){
 

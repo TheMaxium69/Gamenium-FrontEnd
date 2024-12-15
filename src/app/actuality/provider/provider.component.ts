@@ -83,7 +83,7 @@ export class ProviderComponent implements OnInit{
           text: 'Aucun profile trouver',
           icon: 'error',
           confirmButtonText: 'OK',
-          confirmButtonColor: this.app.colorDefault
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       }
     }, (error) => this.app.erreurSubcribe());

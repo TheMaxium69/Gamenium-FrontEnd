@@ -96,7 +96,7 @@ export class AppComponent {
   maxSearchProviderByGame:number = 4; // Max Recherche de provider dans gameOne
 
   // DEFAULT
-  colorDefault = "#009dff";
+  colorDefault = "#a800ff";
   noBoxartImage_default:string = "https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg";
   noBoxartImage:string = "assets/noBoxart.png";
 
@@ -140,9 +140,22 @@ export class AppComponent {
   loggout(){
     this.cookieService.delete('tokenGamenium');
     this.cookieService.delete('userGamenium');
+
     this.isLoggedIn = false;
     this.token = undefined;
     this.userConnected = undefined;
+
+    this.userRatingAll = undefined;
+    this.myGameAll = undefined;
+    this.tagsUserNoReload = [];
+    this.buyWhereUserNoReload = [];
+    this.deviseNoReload = [];
+    this.HmgCopyLanguageNoReload = [];
+    this.hmgCopyEtatAllNoReload = [];
+    this.hmgCopyFormatAllNoReload = [];
+    this.hmgCopyRegionAllNoReload = [];
+    this.hmgScreenshotCategory = [];
+    this.userDefaultNoReload = undefined;
 
     this.router.navigate(['/']);
   }
@@ -351,23 +364,13 @@ export class AppComponent {
   }
 
   erreurSubcribe(){
-    if ( this.userConnected?.themeColor){
-      Swal.fire({
-        title: 'Erreur!',
-        text: 'Erreur de notre serveur',
-        icon: 'error',
-        confirmButtonText: 'OK',
-        confirmButtonColor: this.userConnected.themeColor
-      })
-    } else {
-      Swal.fire({
-        title: 'Erreur!',
-        text: 'Erreur de notre serveur',
-        icon: 'error',
-        confirmButtonText: 'OK',
-        confirmButtonColor: this.colorDefault
-      })
-    }
+    Swal.fire({
+      title: 'Erreur!',
+      text: 'Erreur de notre serveur',
+      icon: 'error',
+      confirmButtonText: 'OK',
+      confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+    })
   }
 
   bigNombreFormatage(nombreFormatage:number): string {
@@ -561,7 +564,7 @@ export class AppComponent {
             text: 'La note de ' + this.gameSelected?.name + ' a bien été ajoutée',
             icon: 'success',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         } else if (reponseMyGameNoteAdd.message == "game not in collection"){
           Swal.fire({
@@ -569,7 +572,7 @@ export class AppComponent {
             text: 'Mettez le jeux dans votre collection pour le noté',
             icon: 'warning',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         } else if (reponseMyGameNoteAdd.message == "note no valide"){
           Swal.fire({
@@ -577,7 +580,7 @@ export class AppComponent {
             text: 'La note est invalide',
             icon: 'warning',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         } else {
           Swal.fire({
@@ -585,7 +588,7 @@ export class AppComponent {
             text: 'Échec de l\'ajoute de la note',
             icon: 'error',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         }
 
@@ -597,7 +600,7 @@ export class AppComponent {
         text: 'La note est invalide',
         icon: 'warning',
         confirmButtonText: 'OK',
-        confirmButtonColor: this.userConnected?.themeColor
+        confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
       })
     }
   }
@@ -655,7 +658,7 @@ export class AppComponent {
         text: 'Veuillez choisir une plateforme',
         icon: 'warning',
         confirmButtonText: 'OK',
-        confirmButtonColor: this.userConnected?.themeColor
+        confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
       })
 
     } else {
@@ -684,7 +687,7 @@ export class AppComponent {
               text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
               icon: 'success',
               confirmButtonText: 'OK',
-              confirmButtonColor: this.userConnected?.themeColor
+              confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
             })
           }
 
@@ -699,7 +702,7 @@ export class AppComponent {
             text: 'Le jeux est déjà dans votre collection',
             icon: 'warning',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         } else {
           console.error(reponseMyGameAdd);
@@ -708,7 +711,7 @@ export class AppComponent {
             text: 'Échec de l\'ajout d\'un jeux',
             icon: 'error',
             confirmButtonText: 'OK',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         }
       }, (error) => { this.erreurSubcribe() })
@@ -753,7 +756,7 @@ export class AppComponent {
             text: 'Le jeu a été retiré de votre collection.',
             icon: 'success',
             confirmButtonText: 'Ok',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
 
           // this.router.navigateByUrl('/mygame') /* pK ?*/
@@ -764,7 +767,7 @@ export class AppComponent {
             text: 'Une erreur s\'est produite lors de la suppression du jeu.',
             icon: 'error',
             confirmButtonText: 'Ok',
-            confirmButtonColor: this.userConnected?.themeColor
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
         }
       }, (error) => {

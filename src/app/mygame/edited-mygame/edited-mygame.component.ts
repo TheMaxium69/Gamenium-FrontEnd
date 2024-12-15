@@ -122,7 +122,7 @@ export class EditedMygameComponent implements OnInit {
           text: 'Échec de la BDD',
           icon: 'error',
           confirmButtonText: 'Ok',
-          confirmButtonColor: this.app.colorDefault
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       }
 
