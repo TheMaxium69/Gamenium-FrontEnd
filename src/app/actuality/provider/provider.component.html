@@ -49,22 +49,35 @@
                 <div id="infos_details">
                   <h3 class="firsttext" *ngIf="providerSelected?.founded_at">Création</h3>
                   <h3 class="firsttext" *ngIf="providerSelected?.country">Pays</h3>
-                  <h3 class="firsttext" *ngIf="providerNbGame">Nombre de jeux</h3>
-                  <h3 class="firsttext">Nombre d'actualités</h3>
-                  <h3 class="firsttext">Nombre d'abonnés</h3>
+                  <h3 class="firsttext" *ngIf="providerNbGame" id="nb-game">Nombre de jeux</h3>
+                  <h3 class="firsttext" id="nb-actu">Nombre d'actualités</h3>
+                  <h3 class="firsttext" id="nb-abo">Nombre d'abonnés</h3>
+
+                  <h3 class="firsttext displayNone" *ngIf="providerNbGame" id="game">Nombre de jeux</h3>
+                  <h3 class="firsttext displayNone" id="actu">Actualités</h3>
+                  <h3 class="firsttext displayNone" id="abo">Abonnés</h3>
                 </div>
 
                 <div id="infos_details_values">
                   <h2 class="secondtext" style="color: {{ providerSelected?.color }}" *ngIf="providerSelected?.founded_at">{{ providerSelected?.founded_at }}</h2>
-                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}" *ngIf="providerSelected?.country">
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}" *ngIf="providerSelected?.country" id="detail-country">
                     {{ this.app.getVariableCountryLang(providerSelected?.country) }}
                     <ng-container *ngIf="providerSelected?.country?.icon">
                       <span class="flag-shadow {{ providerSelected?.country?.icon }}"></span>
                     </ng-container>
                   </h2>
-                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}" *ngIf="providerNbGame">{{providerNbGame && providerNbGame >= 2 ? providerNbGame + ' jeux' : providerNbGame + ' jeu'}}</h2>
-                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{ providerNbActu && providerNbActu >= 2 ? providerNbActu + ' actualités' : providerNbActu + ' actualité' || "0 actualité"}}</h2>
-                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}">{{providerNbFollower && providerNbFollower >= 2 ? providerNbFollower + ' abonnés' : providerNbFollower + ' abonné' || "0 abonné"}}</h2>
+                  <h2 class="secondtext displayNone" style="color: {{ providerSelected?.color }}" *ngIf="providerSelected?.country" id="simple-country">
+                    <ng-container *ngIf="providerSelected?.country?.icon">
+                      <span class="flag-shadow {{ providerSelected?.country?.icon }}"></span>
+                    </ng-container>
+                  </h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}" *ngIf="providerNbGame" id="value-game">{{providerNbGame && providerNbGame >= 2 ? providerNbGame + ' jeux' : providerNbGame + ' jeu'}}</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}" id="value-actu">{{ providerNbActu && providerNbActu >= 2 ? providerNbActu + ' actualités' : providerNbActu + ' actualité' || "0 actualité"}}</h2>
+                  <h2 class="secondtext" style="color: {{ providerSelected?.color }}" id="value-abo">{{providerNbFollower && providerNbFollower >= 2 ? providerNbFollower + ' abonnés' : providerNbFollower + ' abonné' || "0 abonné"}}</h2>
+
+                  <h2 class="secondtext displayNone" style="color: {{ providerSelected?.color }}" *ngIf="providerNbGame" id="simple-game">{{providerNbGame && providerNbGame >= 2 ? providerNbGame : providerNbGame}}</h2>
+                  <h2 class="secondtext displayNone" style="color: {{ providerSelected?.color }}" id="simple-actu">{{ providerNbActu && providerNbActu >= 2 ? providerNbActu : providerNbActu || "0"}}</h2>
+                  <h2 class="secondtext displayNone" style="color: {{ providerSelected?.color }}" id="simple-abo">{{providerNbFollower && providerNbFollower >= 2 ? providerNbFollower : providerNbFollower || "0" }}</h2>
                 </div>
             </div>
               <div id="joinedAt" *ngIf="providerSelected?.joindeAt">

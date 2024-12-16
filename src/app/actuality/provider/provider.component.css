@@ -222,6 +222,10 @@ span.fi{
   border-radius: 5px;
 }
 
+.displayNone {
+    display: none;
+}
+
 @media (max-width: 1060px) {
     .provider-main {
         display: block;
@@ -230,6 +234,15 @@ span.fi{
 
     .logoprovider {
         margin: 30px auto;
+        width: 200px !important;
+        height: 200px !important;
+    }
+    .wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    #displayname {
+        min-width: 209px;
     }
 }
 
@@ -260,12 +273,13 @@ span.fi{
         margin: 0;
     }
 }
-
-@media (max-width: 603px) {
-    #last_actus {
-        box-shadow: none;
-        padding: 0;
+@media (max-width: 614px) {
+    #provider_infos {
+        padding: 14px;
     }
+}
+
+@media (max-width: 603px) { 
 
     .actu-titre h1 {
         margin-left: 0;
@@ -274,6 +288,7 @@ span.fi{
     #provider_infos {
         box-shadow: 1px 2px 10px #a6a6a6;
         border-radius: 15px;
+        padding: 20 px;
     }
 
     .info-container {
@@ -284,5 +299,29 @@ span.fi{
     .secondtext {
         line-height: 2.5rem;
 
+    }
+}
+
+@media (max-width: 505px) {
+
+    #provider_infos {
+        font-size: small;
+    }
+
+    #simple-game, #simple-actu, #simple-abo, #game, #actu, #abo {
+        display: block;
+    }
+
+    #value-game, #value-actu, #value-abo, #nb-actu, #nb-abo, #nb-game {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    #detail-country {
+        display: none;
+    }
+    #simple-country {
+        display: block;
     }
 }
