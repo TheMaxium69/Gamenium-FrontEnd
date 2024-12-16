@@ -415,7 +415,7 @@
 <ng-container *ngIf="GiantBomb && GiantBomb.picture.length > 1">
   <ng-container *ngFor="let picture of GiantBomb.picture; let i = index">
     <ng-container *ngIf="app.selectedGalery == i">
-      <app-gallery [imgUrl]="picture"></app-gallery>
+      <app-gallery [index]="i" [images]="GiantBomb.picture"></app-gallery>
     </ng-container>
   </ng-container>
 </ng-container>

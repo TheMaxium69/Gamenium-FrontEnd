@@ -1,6 +1,10 @@
-<article id="oneGalery" *ngIf="imgUrl">
+<article id="oneGalery" *ngIf="images && index || images && index==0">
   <i id="icone" class="ri-close-fill" (click)="app.unclickGalery()"></i>
-  <div id="img" style="background-image: url({{ imgUrl }})"></div>
+  <div id="img" style="background-image: url({{ images[(index - 1) + arrow] }})"></div>
+
+
+  <i class="ri-arrow-drop-left-line" id="icone-arrow-left" (click)="switch(false)"></i>
+  <i class="ri-arrow-drop-right-line" id="icone-arrow-right" (click)="switch(true)"></i>
 </article>
 
 <style>
@@ -27,6 +31,19 @@
       color: white;
     }
 
+    #icone-arrow-left,
+    #icone-arrow-right{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 50px;
+      color: white;
+    }
+
+    #icone-arrow-right{
+      right: 0;
+    }
+
     #img{
       width: 100%;
       height: calc(100vh - var(--downbar));
@@ -36,7 +53,7 @@
       background-repeat: no-repeat;
     }
 
-    
+
 
   }
 
