@@ -317,11 +317,23 @@ span.fi{
     }
 }
 
+    @media (max-width: 450px) {
+        #button_follow #button-follow-text   {
+            width: 240px;
+        }
+    }
+
 @media (max-width: 400px) {
     #detail-country {
         display: none;
     }
     #simple-country {
         display: block;
+    }
+    #button_follow #button-follow-text   {
+        width: 200px;
+    }
+    #displayname {
+        margin: 0;
     }
 }
