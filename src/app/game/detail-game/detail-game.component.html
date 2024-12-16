@@ -367,7 +367,7 @@
             <div id="cCarousel-inner" style="overflow-y: hidden !important;">
 
               <ng-container *ngFor="let picture of GiantBomb.picture; let i = index">
-                <article class="cCarousel-item">
+                <article class="cCarousel-item" (click)="app.clickGalery(i)">
                   <img [src]="picture" alt="">
                   <div class="infos">
                     <div class="carrousel-sep"></div>
@@ -409,4 +409,13 @@
 
 </div>
 
+</ng-container>
+
+<!--GALERY-->
+<ng-container *ngIf="GiantBomb && GiantBomb.picture.length > 1">
+  <ng-container *ngFor="let picture of GiantBomb.picture; let i = index">
+    <ng-container *ngIf="app.selectedGalery == i">
+      <app-gallery [imgUrl]="picture"></app-gallery>
+    </ng-container>
+  </ng-container>
 </ng-container>

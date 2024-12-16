@@ -83,7 +83,7 @@ export class AppComponent {
   //%     API - TYROLIUM      %//
 
   // SETTING
-  Debug:Boolean = true; // Active la view Serv and Local
+  Debug:Boolean = false; // Active la view Serv and Local
   isLoggedIn: boolean = false;
   userConnected: UserInterface|any;
   token: string|any;
@@ -498,6 +498,17 @@ export class AppComponent {
     const currentYear = new Date().getFullYear();
     const startYear = 1970;
     return Array.from({ length: currentYear - startYear + 1 }, (_, i) => startYear + i);
+  }
+
+
+
+  selectedGalery:number|undefined;
+  clickGalery(index:number){
+    this.selectedGalery = index;
+  }
+
+  unclickGalery() {
+    this.selectedGalery = undefined;
   }
 
 

@@ -1,0 +1,43 @@
+<article id="oneGalery" *ngIf="imgUrl">
+  <i id="icone" class="ri-close-fill" (click)="app.unclickGalery()"></i>
+  <div id="img" style="background-image: url({{ imgUrl }})"></div>
+</article>
+
+<style>
+
+  #oneGalery{
+
+    --downbar: 105px;
+
+
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    /*position: absolute;*/
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.71);
+    z-index: 1029;
+
+    #icone{
+      position: absolute;
+      right: 70px;
+      top: 40px;
+      font-size: 50px;
+      color: white;
+    }
+
+    #img{
+      width: 100%;
+      height: calc(100vh - var(--downbar));
+
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    
+
+  }
+
+</style>
