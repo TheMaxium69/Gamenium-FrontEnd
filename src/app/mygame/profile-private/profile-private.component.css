@@ -156,6 +156,7 @@ h2 {
     position: relative;
     padding: 0px;
     box-shadow: none;
+    margin-top: -24px;
     /* top: 280px; */
   }
 
