@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { HistoryMyGameService } from "../../-service/history-my-game.service";
 import { UserInterface } from "../../-interface/user.interface";
@@ -61,6 +61,10 @@ export class ProfilePrivateComponent implements OnInit {
 
   isLoading:boolean = true
 
+  // Pour le responsive de la tabGame
+  innerWidth: number = window.innerWidth;
+  classContainer: string = "container";
+
   constructor(protected app: AppComponent,
               private taskService: TaskService,
               private commentService: CommentService,
@@ -86,7 +90,25 @@ export class ProfilePrivateComponent implements OnInit {
       this.fetchTasks();
     }
 
+    // initialisation de la valeur classContainer pour responsive TabMyGame
+    if (this.innerWidth <= 991) {
+      this.classContainer = "container-fluid"
+    } else {
+      this.classContainer = "container"
+    }
 
+
+  }
+  
+  // responsive de tabMyGame
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerWidth = window.innerWidth;
+      if (this.innerWidth <= 991) {
+          this.classContainer = "container-fluid"
+      } else {
+          this.classContainer = "container"
+        }
   }
 
 
@@ -207,6 +229,7 @@ export class ProfilePrivateComponent implements OnInit {
   //check si un filtre autre que celui par default est appliqué
   isFilterApplied(): boolean {
     return this.sortOption !== '';
+    
   }
 
   applySorting(): void {
@@ -421,6 +444,10 @@ checkAndCompleteTasks(): void {
   unsetModal(){
     this.app.gameSelected = undefined;
   }
+
+
+
+  
 
 }
 

@@ -154,6 +154,8 @@ h2 {
 @media (max-width: 991px) {
   #profilWrapper {
     position: relative;
+    padding: 0px;
+    box-shadow: none;
     /* top: 280px; */
   }
 

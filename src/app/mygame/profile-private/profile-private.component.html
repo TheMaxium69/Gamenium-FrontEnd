@@ -4,9 +4,9 @@
 <modal-view-mygame [isColor]="isColor"></modal-view-mygame>
 
 <!-- CONTENT-->
-<section id="profilWrapper" class="container">
+<section id="profilWrapper" class="{{classContainer}}">
 
-  <app-tab-mygame></app-tab-mygame>
+  <app-tab-mygame class="container"></app-tab-mygame>
 
   <!-- PAGE HOME-->
   <ng-container *ngIf="!task">
@@ -17,11 +17,12 @@
 
       <!-- LOADING -->
       <ng-container *ngIf="isLoading">
-        <app-card-game *ngFor="let game of [].constructor(1);" style="width: 100%"></app-card-game>
+        <app-card-game *ngFor="let game of [].constructor(1);"></app-card-game>
       </ng-container>
     </div>
 
     <article class="articleTuto">
+      <div class="container">
       <div class="row ">
         <div class="col-md-12 py-4 hello">
           <h2 class="text-center">Bonjour, <span class="pseudo" style="color: {{ isColor }};">{{ userConnected?.displaynameUseritium || userConnected?.username }}</span></h2>
@@ -107,11 +108,12 @@
 
         </div>
       </div>
+    </div>
     </article>
 
     <!-- SECTION BARRE DE RECHERCHE -->
 
-    <div class="search-container" [ngStyle]="{ '--color': isColor ?? this.app.colorDefault }">
+    <div class="search-container container" [ngStyle]="{ '--color': isColor ?? this.app.colorDefault }">
       <div class="icon-container" [ngStyle]="{ 'background-color': isColor }">
         <i class="ri-search-2-line ico1"></i>
       </div>

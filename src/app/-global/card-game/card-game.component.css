@@ -207,7 +207,7 @@
 }
 
 /* GAME SMALL SCREEN */
-@media (max-width: 990px) {
+@media (max-width: 991px) {
   #show-game {
     width: 400px;
 
@@ -240,7 +240,7 @@
     margin-bottom: 0px;
     position: absolute;
     margin-top: 13px;
-    margin-left: 5px;
+    margin-left: -5px;
   }
 
 
