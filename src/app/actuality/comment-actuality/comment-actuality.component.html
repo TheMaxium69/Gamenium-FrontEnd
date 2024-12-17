@@ -157,7 +157,7 @@
               <!-- REPLY FORM-->
               <div class="replyForm" [ngStyle]="{'--providerColor': providerColor || this.app.colorDefault }">
                 <input name="comment{{comment.id}}" id="comment{{comment.id}}" type="text" placeholder="Votre réponses">
-                <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button">envoyé</button>
+                <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button" style="background-color: {{ providerColor }}">Envoyé</button>
               </div>
 
             </div>
@@ -290,7 +290,7 @@
                   <!-- REPLY FORM-->
                   <div class="replyForm" [ngStyle]="{'--providerColor': providerColor || this.app.colorDefault }">
                     <input name="comment{{comment.id}}" id="comment{{comment.id}}" type="text" placeholder="Votre réponses">
-                    <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button">Envoyé</button>
+                    <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button" style="background-color: {{ providerColor }}">Envoyé</button>
                   </div>
 
                 </div>
