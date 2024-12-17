@@ -135,8 +135,9 @@
 
 @media (max-width: 700px) {
   #head-img {
-    flex-direction: column;
-    height: auto;
+    .screen-image {
+      display: none;
+    }
 
     .banner-image {
       margin: auto;
@@ -182,6 +183,22 @@
     color: black;
   }
 
+}
+
+@media (max-width: 580px){
+  #head-modal {
+    flex-direction: column;
+    justify-content: start;
+    
+    div {
+      margin-bottom: 20px;
+    }
+    
+    .button {
+      width: 90%;
+
+    }
+  }
 }
 
 /*
@@ -297,11 +314,16 @@
     padding: 10px 10px;
   }
 
-  #editedHmgCopy .panel {
+   .panel {
     padding: 15px 10px;
   }
 
   #editedHmgCopy .head-panel {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  #editedHistoryMyGame .head-panel {
     margin-left: 0px;
     margin-right: 0px;
   }
