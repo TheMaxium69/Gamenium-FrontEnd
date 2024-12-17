@@ -20,6 +20,17 @@
   color: var(--userColor);
 }
 
+.savebtn{
+  width: 186px;
+  height: 46px;
+
+  .spinner-border{
+    --bs-spinner-width: 1rem;
+    --bs-spinner-height: 1rem;
+    --bs-spinner-border-width: 0.20em;
+  }
+}
+
 /*
 * HEAD
 */
@@ -189,11 +200,11 @@
   #head-modal {
     flex-direction: column;
     justify-content: start;
-    
+
     div {
       margin-bottom: 20px;
     }
-    
+
     .button {
       width: 90%;
 

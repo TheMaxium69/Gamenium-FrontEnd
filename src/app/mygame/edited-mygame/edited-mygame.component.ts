@@ -53,6 +53,7 @@ export class EditedMygameComponent implements OnInit {
   * FORMULAIRE GESTION
   *
   * */
+  isLoadingUpdate = false;
   tabSelected:number = 1;
   isNew:string ="new";
 
@@ -287,6 +288,11 @@ export class EditedMygameComponent implements OnInit {
         this.idFormValideCopy.push(0);
       }
 
+      console.log(this.nbCopyExisting);
+      console.log(this.nbCopyView);
+      console.log(this.nbCopyGenerate);
+      console.log(this.nbCopy);
+
     }
   }
 
@@ -491,6 +497,7 @@ export class EditedMygameComponent implements OnInit {
   * */
 
   updateMyGame(form: NgForm){
+    this.isLoadingUpdate = true;
 
     // console.log(form.value);
 
@@ -736,7 +743,9 @@ export class EditedMygameComponent implements OnInit {
         })
 
       }
-    }, (error) => (
+      this.isLoadingUpdate = false;
+    }, (error) => {
+      this.isLoadingUpdate = false;
       Swal.fire({
         title: 'Erreur!',
         text: 'Échec de la mise à jour de votre jeux',
@@ -744,7 +753,7 @@ export class EditedMygameComponent implements OnInit {
         confirmButtonText: 'Ok',
         confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
       })
-    ))
+    })
 
   }
 

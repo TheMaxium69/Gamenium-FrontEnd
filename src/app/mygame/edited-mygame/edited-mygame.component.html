@@ -42,7 +42,14 @@
       </div>
 
 
-      <button type="submit" class="main-gamenium-btn">Sauvegardé <i class="ri-save-3-fill"></i></button>
+      <button type="submit" class="main-gamenium-btn savebtn">
+        <ng-container *ngIf="!isLoadingUpdate"> Sauvegardé <i class="ri-save-3-fill"></i></ng-container>
+        <ng-container *ngIf="isLoadingUpdate">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </ng-container>
+      </button>
 
     </div>
 
@@ -866,7 +873,14 @@
   </ng-container>
 
   <div class="end-action container">
-    <button class="main-gamenium-btn" type="submit">Sauvegardé <i class="ri-save-3-fill"></i></button>
+    <button class="main-gamenium-btn savebtn" type="submit">
+      <ng-container *ngIf="!isLoadingUpdate"> Sauvegardé <i class="ri-save-3-fill"></i></ng-container>
+      <ng-container *ngIf="isLoadingUpdate">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </ng-container>
+    </button>
     <button class="sub-gamenium-btn delete-btn" (click)="this.app.deleteMyGame(selectedMyGame, true)" type="button">Supprimer le jeux de votre collection <i class="ri-delete-bin-line"></i></button>
   </div>
 </form>
