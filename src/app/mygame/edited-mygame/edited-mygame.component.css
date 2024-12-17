@@ -133,6 +133,22 @@
 
 }
 
+@media (max-width: 700px) {
+  #head-img {
+    flex-direction: column;
+    height: auto;
+
+    .banner-image {
+      margin: auto;
+    }
+  }
+
+
+    #head-img .separe-image{
+      display: none;
+    }
+}
+
 #head-img.gapUpdate {
   gap: 90px!important;
 }
@@ -274,6 +290,34 @@
   i{
     font-size: 30px;
   }
+}
+
+@media (max-width: 640px) {
+  .oneExemplaire{
+    padding: 10px 10px;
+  }
+
+  #editedHmgCopy .panel {
+    padding: 15px 10px;
+  }
+
+  #editedHmgCopy .head-panel {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  form .end-action {
+    display: flex;
+    flex-direction: column;
+  }
+
+  form .end-action button {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+
 }
 
 /* PURCHACE */
@@ -477,5 +521,11 @@ select,
     li a:hover {
       border-color: var(--colorTab-hover);
     }
+  }
+}
+
+@media (max-width: 538px){
+  #tab ul li a {
+    padding: 15px 15px;
   }
 }
