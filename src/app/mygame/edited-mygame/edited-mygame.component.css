@@ -328,6 +328,11 @@
     margin-right: 0px;
   }
 
+  #editedHmgSpeedrun .head-panel {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
   form .end-action {
     display: flex;
     flex-direction: column;
