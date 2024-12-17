@@ -288,10 +288,6 @@ h2 {
 
 /* GAME SMALL SCREEN */
 @media (max-width: 770px) {
-  #show-game {
-    width: 400px;
-
-  }
 
   .card-right {
     overflow: visible;
