@@ -403,6 +403,9 @@
     padding: 10px;
     margin-left: -10px;
     margin-bottom: -10px;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
   }
 
   .provider-card-container:active{

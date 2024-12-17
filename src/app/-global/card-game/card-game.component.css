@@ -235,6 +235,7 @@
     width: 47px;
     height: 47px;
     margin-right: 5px;
+    text-transform: uppercase;
   }
 
   .card-right .core-right .card-note p {
@@ -332,7 +333,15 @@
 }
 
 
-#tags .badge{
-  margin-right: 5px;
+#tags{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 185px;
+  .badge{
+    margin-right: 5px;
+  }
 }
 

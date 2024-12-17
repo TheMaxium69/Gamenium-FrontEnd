@@ -482,6 +482,12 @@ select,
   align-items: center;
 
   #tags, #languages {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     .badge{
       margin-right: 5px;
 

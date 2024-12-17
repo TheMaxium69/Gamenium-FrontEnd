@@ -22,4 +22,10 @@
     cursor: pointer;
 }
 
+@media (max-width: 1100px) {
+  .back-to-top{
+    display: none;
+  }
+}
+
 /* //////////////// FIN DE ZONE BACK TO TOP /////////////// */
