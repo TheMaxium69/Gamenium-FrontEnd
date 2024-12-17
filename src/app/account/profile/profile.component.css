@@ -186,7 +186,7 @@ hr {
   }
 
   .composant {
-    padding: 33px 20px;
+    padding: 10px;
   }
 
   .searchbar {
@@ -221,6 +221,10 @@ hr {
 
   .container-fluid {
     padding-top: 0;
+  }
+
+  .composant {
+    box-shadow: none;
   }
 
 }
