@@ -185,7 +185,7 @@ export class EditedMygameComponent implements OnInit {
       })
     }
 
-    if (this.app.HmgCopyLanguageNoReload.length == 0){
+    if (this.app.HmgCopyLanguageNoReload.length === 0){
       this.hmgLanguageService.getAllHmgCopyLanguage(this.app.setURL()).subscribe((responseLanguage: { message: string; result:HmgCopyLanguageInterface[]; }) => {
         if (responseLanguage.message == "good") {
           this.app.HmgCopyLanguageNoReload = responseLanguage.result;
@@ -223,7 +223,7 @@ export class EditedMygameComponent implements OnInit {
   };
 
 
-  hmgCopyLanguageSelected: number[][] = Array(this.nbCopyExisting + this.nbCopyGenerate).fill([]).map(() => []);
+  hmgCopyLanguageSelected: number[][] = Array(this.app.maxCopyGame + 10).fill([]).map(() => []);
 
   debugLang(){console.log(this.hmgCopyLanguageSelected)}
 
@@ -299,31 +299,42 @@ export class EditedMygameComponent implements OnInit {
   /* ADD EXEMPLAIRE*/
   addCopyGame() {
 
-    let formId = 0;
-    // console.log('Question ? =' + formId)
-    if (this.idFormValideCopy.includes(formId)){
-      while (this.idFormValideCopy.includes(formId)) {
-        formId++;
-        // console.log('Question ? =' + formId)
-      }
-    }
-
-    // console.log('DISPO = ' + formId)
-
-    let cardCopy = document.getElementById('copyCard' + formId.toString());
-    if (!cardCopy) {
+    if (this.nbCopyExisting >= this.app.maxCopyGame){
       Swal.fire({
-        title: 'Erreur!',
-        text: 'Veuillez sauvegardez et recommancez',
-        icon: 'error',
+        title: 'Attention!',
+        text: 'Vous avez atteint le maximum d\'exemplaires',
+        icon: 'warning',
         confirmButtonText: 'Ok',
         confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
       })
     } else {
-      this.nbCopyView++;
-      this.idFormValideCopy.push(formId);
-      cardCopy.style.display = 'flex';
+      let formId = 0;
+      // console.log('Question ? =' + formId)
+      if (this.idFormValideCopy.includes(formId)){
+        while (this.idFormValideCopy.includes(formId)) {
+          formId++;
+          // console.log('Question ? =' + formId)
+        }
+      }
+
+      // console.log('DISPO = ' + formId)
+
+      let cardCopy = document.getElementById('copyCard' + formId.toString());
+      if (!cardCopy) {
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Veuillez sauvegardez et recommancez',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+        })
+      } else {
+        this.nbCopyView++;
+        this.idFormValideCopy.push(formId);
+        cardCopy.style.display = 'flex';
+      }
     }
+
 
   }
 

@@ -94,6 +94,7 @@ export class AppComponent {
   deadlineSearch:number = 300; // Time input searchBar
   deadlineView:number = 2000; // Time added view
   maxSearchProviderByGame:number = 4; // Max Recherche de provider dans gameOne
+  maxCopyGame:number = 50;
 
   // DEFAULT
   colorDefault = "#d2001e";

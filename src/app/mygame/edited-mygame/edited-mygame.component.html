@@ -513,7 +513,7 @@
             <ng-container *ngIf="app.HmgCopyLanguageNoReload && app.HmgCopyLanguageNoReload.length > 0">
               <div *ngIf="hmgCopyLanguageSelected">
                   <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
-                    <p id="languages" *ngIf="hmgCopyLanguageSelected[i].length > 0">
+                    <p id="languages" *ngIf="hmgCopyLanguageSelected[i] && hmgCopyLanguageSelected[i].length > 0">
                       <ng-container *ngFor="let language of app.HmgCopyLanguageNoReload">
                         <span [class.displayNone]="!isInLanguageSelected(language.id, i)" class="badge" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}">
                           <div>
@@ -635,39 +635,70 @@
             </ng-container>
             <ng-container *ngIf="!copyGame.purchase">
 
-              <!-- PRICE -->
-              <label for="price{{i}}">Price:</label>
-              <input type="number" id="price{{i}}" name="purchase_price{{i}}" ngModel>
+              <input type="hidden" name="purchase{{i}}" ngModel>
 
-              <!-- DEVISE -->
-              <label for="devise{{i}}">Devise:</label>
-              <ng-container *ngIf="app.deviseNoReload">
-                <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
-                  <option [value]="null">Choissir une devise</option>
-                  <ng-container *ngFor="let devise of app.deviseNoReload">
-                    <option [value]="devise.id">{{ devise.symbole }}</option>
-                  </ng-container>
-                </select>
-              </ng-container>
 
-              <!-- BUY DATE -->
-              <label for="buy_date{{i}}">Buy date:</label>
-              <input type="date" id="buy_date{{i}}" name="purchase_buy_date{{i}}" ngModel>
+              <div class="head-purchase">
+
+                <!-- PRICE -->
+                <input type="number" id="price{{i}}" ngModel name="purchase_price{{i}}" placeholder="Prix d'achat" min="0.00" max="10000.00" step="0.01">
+
+                <!-- DEVISE -->
+                <ng-container *ngIf="app.deviseNoReload">
+                  <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
+                    <option value="">Choissir une devise</option>
+                    <ng-container *ngFor="let devise of app.deviseNoReload">
+                      <option [value]="devise.id">{{ devise.symbole }}</option>
+                    </ng-container>
+                  </select>
+                </ng-container>
+
+              </div>
+
 
               <!-- BUY WHERE -->
-              <label for="buy_where{{i}}">Buy where:</label>
               <ng-container *ngIf="app.buyWhereUserNoReload ">
                 <select id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
-                  <option [value]="null">Choissir une Buy Where</option>
+                  <option value="">Lieu d'achat</option>
                   <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload ">
                     <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                   </ng-container>
                 </select>
               </ng-container>
 
+
+              <!-- BUY DATE -->
+
+              <div class="head-buy">
+
+                <select id="day_buy_date{{i}}" ngModel name="purchase_day_buy_date{{i}}">
+                  <option value="">Jour d'achat</option>
+                  <ng-container *ngFor="let day of [].constructor(31); let d = index">
+                    <option [value]="d+1">{{ d + 1 }}</option>
+                  </ng-container>
+                </select>
+
+                <select id="month_buy_date{{i}}" ngModel name="purchase_month_buy_date{{i}}">
+                  <option value="">Mois d'achat</option>
+                  <ng-container *ngFor="let month of [].constructor(12); let m = index">
+                    <option [value]="m+1">{{ m + 1 }}</option>
+                  </ng-container>
+                </select>
+
+                <select id="year_buy_date{{i}}" ngModel name="purchase_year_buy_date{{i}}">
+                  <option value="">Année d'achat</option>
+                  <ng-container *ngFor="let year of this.app.getYears(); let y = index">
+                    <option [value]="year">{{ year }}</option>
+                  </ng-container>
+                </select>
+
+
+              </div>
+
+
               <!-- PURCHASE CONTENT -->
-              <label for="purchase_content{{i}}">Purchase content:</label>
-              <input type="text" id="purchase_content{{i}}" name="purchase_content{{i}}" ngModel>
+              <textarea type="text" id="purchase_content{{i}}" ngModel
+                        name="purchase_content{{i}}" placeholder="Plus d'inforamtions sur l'achat"></textarea>
 
             </ng-container>
           </div>
