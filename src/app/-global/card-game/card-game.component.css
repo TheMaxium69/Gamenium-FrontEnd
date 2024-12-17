@@ -234,6 +234,7 @@
     margin-top: -170px;
     width: 47px;
     height: 47px;
+    margin-right: 5px;
   }
 
   .card-right .core-right .card-note p {
@@ -262,6 +263,8 @@
 
   .card-action {
     align-items: flex-end;
+    margin-top: 75px;
+    margin-right: 12px;
   }
 
 }

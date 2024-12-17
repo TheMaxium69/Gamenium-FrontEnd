@@ -89,94 +89,6 @@ h2 {
   max-width: 1287px;
 }
 
-
-.isPinned{
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  z-index: 800;
-  border-radius: 100%;
-  margin-left: -10px;
-  margin-top: -10px;
-}
-.isPinned p{
-  text-align: center;
-  margin: 1px;
-  margin-left: 2px;
-  color:white;
-  font-size: 18px;
-}
-
-.card-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-
-.card-game{
-  height: 160px;
-  /*border: 1px solid gray;*/
-  margin: unset!important;
-  padding: unset!important;
-  border-radius: 10px;
-  box-shadow: 1px 2px 10px 0px #a6a6a6;
-
-}
-
-.card-left{
-  width: 326px;
-  height: 100%;
-  border-radius: 15px;
-}
-
-.card-left .image{
-  position: absolute;
-  width: 300px;
-  height: 160px;
-  z-index: 10;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.card-left .blur{
-  position: absolute;
-  width: 300px;
-  height: 160px;
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  z-index: 1;
-  background-color: #00000038;
-}
-.card-left img{
-  width: 300px;
-  height: 100%;
-  border-radius: 15px;
-}
-
-.card-right{
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-}
-
-.card-right .core-left{
-  width: 100%;
-
-}
-
-.card-right .core-left h2 {
-  color: #575757;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-spacing: -5px;
-
-}
-
 .platform-names {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -185,66 +97,6 @@ h2 {
   text-overflow: ellipsis;
 }
 
-
-
-.card-right .core-right{
-  width: 100px;
-}
-
-.card-right .core-right .card-note{
-  background-color: red;
-  text-align: center;
-  color: white;
-  border-radius: 100%;
-  width: 80px;
-  height: 80px;
-  margin-top: -3px;
-  margin-left: 5px;
-}
-
-.card-right .core-right .card-note p{
-  margin-bottom: 0px;
-  position: absolute;
-  margin-top: 18px;
-  margin-left: 14px;
-}
-
-.card-right .core-right .card-note p span{
-  font-size: 30px;
-}
-
-.card-action{
-  display: flex;
-  margin-top: 22px;
-  text-align: end;
-  font-size: 26px;
-}
-
-.card-action i:hover {
-  cursor: pointer;
-  font-size: 32px;
-  animation: jiggle 0.5s forwards;
-  transition: 0.3s;
-
-}
-
-.card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  transform: translateY(-5px);
-  transition: all 0.3s ease;
-}
-
-#delete-comment-icon {
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: 5%;
-  font-size: 28px;
-  display: none;
-}
-
-.card-right:hover #delete-comment-icon {
-  display: block;
-}
 
 .progress-bar-container {
   max-width: 410px;
@@ -265,82 +117,8 @@ h2 {
   }
 }
 
-@media (max-width: 900px) {
-  #profilWrapper {
-    position: relative;
-    top: 280px;
-  }
-
-  #profilWrapper .articleTuto .inUserTuto .d-flex{
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  #profilWrapper .articleTuto .inUserTuto .d-flex .card{
-    width: 65%;
-  }
-
-  #profilWrapper .articleTuto .inUserTuto .d-flex h6{
-    word-wrap: normal;
-    justify-content: space-between;
-  }
-}
-
-/* GAME SMALL SCREEN */
-@media (max-width: 770px) {
-
-  .card-right {
-    overflow: visible;
-  }
-
-  .card-right .core-left h5 {
-    font-size: clamp(16px, 4vw, 20px);
-  }
-
-  .card-right .core-right {
-    width: 0;
-    display: flex;
-    justify-content: end;
-  }
-
-  .card-right .core-right .card-note {
-    margin-left: 0;
-    position: absolute;
-    z-index: 999;
-    margin-top: -170px;
-    width: 47px;
-    height: 47px;
-  }
-
-  .card-right .core-right .card-note p {
-    margin-bottom: 0px;
-    position: absolute;
-    margin-top: 13px;
-    margin-left: 5px;
-  }
 
 
-  .card-right .core-right .card-note p span {
-    font-size: 14px;
-  }
-
-  .card-game {
-    max-width: 300px;
-    flex-direction: column;
-  }
-
-  .card-wrapper {
-    height: 300px;
-    box-shadow: 1px 2px 11px #a6a6a6;
-    width: fit-content;
-    border-radius: 15px;
-  }
-
-  .card-action {
-    align-items: flex-end;
-  }
-
-}
 
 @keyframes jiggle {
   0% {
@@ -358,15 +136,6 @@ h2 {
   100% {
     transform: rotate(0deg);
   }
-}
-
-@media (max-width: 768px) {
-
-  #profilWrapper .articleTuto .actionPossible {
-    margin-bottom: 20px;
-  }
-
-
 }
 
 
