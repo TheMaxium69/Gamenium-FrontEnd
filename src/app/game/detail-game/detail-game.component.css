@@ -403,6 +403,9 @@
     padding: 10px;
     margin-left: -10px;
     margin-bottom: -10px;
+  }
+
+  .no-provider-card-container{
     justify-content: center;
     align-items: center;
     height: 200px;
@@ -458,7 +461,10 @@
 #ratings {
   .border-section {
     width: 70%;
-    padding: 40px 40px;
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-left: 40px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 15px;
@@ -516,7 +522,8 @@
   .ratings-details-name {
     font-weight: bold;
     color: #575757;
-    width: 110px;
+    /*width: 110px;*/
+    width: 180px;
   }
 
   .ratings-details-rate {
@@ -537,16 +544,17 @@
   }
 
   .width-circle {
-    width: 85%;
+    width: 110px;
+    margin-right: 25px;
   }
 
   .width-circle2 {
-    width: 70%;
-    flex: 0 0 auto;
+    width: 110px;
+    margin-right: 25px;
   }
 
   .title-circle-margin {
-    margin-bottom: 40px;
+    margin-bottom: 25px;
   }
 
   .justify-content {
@@ -556,6 +564,7 @@
   .font-notes {
     color: white;
     font-size: 21px;
+    margin-top: 4px;
   }
 
   .font-notes span {
@@ -689,19 +698,15 @@
   }
 
 #cCarousel .arrow {
-  color: white;
+  /*color: white;*/
   position: absolute;
   top: 25%;
   display: flex;
   width: 65px;
   height: 65px;
-  /* justify-content: center;
-  align-items: center; */
   border-radius: 50%;
   z-index: 1;
   color: black;
-  /* background: #00000072; */
-  border: solid 5px;
   cursor: pointer;
   justify-content: center;
   align-items: center;
@@ -711,18 +716,15 @@
 }
 
 #cCarousel .arrow:hover {
-  color: white;
-  background-color: #0000008c;
+  color: #595959;
 }
 
 #cCarousel #prev {
   left: 20px;
-  color: white;
 }
 
 #cCarousel #next {
   right: 20px;
-  color: white;
 }
 
 #carousel-vp {

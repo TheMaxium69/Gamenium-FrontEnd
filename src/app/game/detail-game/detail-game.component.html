@@ -211,7 +211,7 @@
       <div>
         <p id="follow-provider" class="title">Suivre les actus des créateurs:</p>
       </div>
-      <div class="provider-card-container"
+      <div class="provider-card-container" [class.no-provider-card-container]="providerSelected.length === 0"
       (mousedown)="startDrag($event)"
       (mousemove)="move($event)"
       (mouseup)="stopDrag()">
@@ -235,7 +235,7 @@
       <div class="row mb-40">
         <!-- notes -->
         <div class="w-sections-notes">
-            <p class="title-notes-margin third-color">Notes de la presse:</p>
+            <p class="title-notes-margin third-color">Notes de la presse</p>
 
             <div class="one-rating mp-notes">
                 <div class="provider-picture">
@@ -278,7 +278,7 @@
 
         <!-- circle -->
         <div class="w-sections-circles">
-            <p class="title-circle-margin third-color">Note Presse :</p>
+            <p class="title-circle-margin third-color">Moyenne de la presse</p>
             <div class="d-flex justify-content">
                 <div class="width-circle">
                     <div [ngStyle]="{ '--userColor': app.userConnected?.themeColor || app.colorDefault }" class="shadow-btn border color-circle ratio ratio-1x1 rounded-circle">
@@ -293,7 +293,7 @@
       <div class="row mb-40">
         <!-- notes -->
         <div class="w-sections-notes">
-            <p class="title-notes-margin third-color">Notes des joueurs:</p>
+            <p class="title-notes-margin third-color">Notes des joueurs</p>
 
             <div class="one-rating mp-notes">
                 <div class="provider-picture">
@@ -334,7 +334,7 @@
 
         <!-- circle -->
         <div class="w-sections-circles">
-            <p class="title-circle-margin third-color">Note Joueurs :</p>
+            <p class="title-circle-margin third-color">Moyenne des joueurs</p>
             <div class="d-flex justify-content">
                 <div class="width-circle2">
                     <div class="shadow-btn third-bg border ratio ratio-1x1 rounded-circle">
@@ -360,8 +360,8 @@
       <section *ngIf="GiantBomb && GiantBomb.picture.length > 1">
 
         <div id="cCarousel">
-          <div class="arrow" id="prev"><i class="ri-arrow-left-s-line"></i></div>
-          <div class="arrow" id="next"><i class="ri-arrow-right-s-line"></i></div>
+          <div class="arrow" id="prev"><i class="ri-arrow-left-s-fill"></i></div>
+          <div class="arrow" id="next"><i class="ri-arrow-right-s-fill"></i></div>
 
           <div id="carousel-vp">
             <div id="cCarousel-inner" style="overflow-y: hidden !important;">
