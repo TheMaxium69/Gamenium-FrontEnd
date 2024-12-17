@@ -60,6 +60,7 @@ h3.titleInWrapper{
 
   .navigateBar ul {
     border-radius: 0px;
+    margin-bottom: 0px;
   }
 
   .navigateBar ul li {

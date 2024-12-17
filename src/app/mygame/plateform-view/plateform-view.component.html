@@ -1,6 +1,6 @@
     <!-- SECTION BARRE DE RECHERCHE -->
 
-    <div class="search-container" [ngStyle]="{ '--color': app.userConnected?.themeColor || app.colorDefault }">
+    <div class="search-container container" [ngStyle]="{ '--color': app.userConnected?.themeColor || app.colorDefault }">
       <div class="icon-container" [ngStyle]="{ 'background-color': app.userConnected?.themeColor || app.colorDefault }">
         <i class="ri-search-2-line ico1"></i>
       </div>
@@ -31,20 +31,20 @@
 
 <!-- SECTION POUR JEUX FILTRER OU RECHERCHER -->
 <div id="show-game" class="d-flex container" *ngIf="getAllGamesToDisplay().length > 0">
-    <app-card-game *ngFor="let myGameHistorique of getAllGamesToDisplay()" [Hmg]="myGameHistorique" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" style="width: 100%"></app-card-game>
+    <app-card-game *ngFor="let myGameHistorique of getAllGamesToDisplay()" [Hmg]="myGameHistorique" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="app-card-game"></app-card-game>
 </div>
 
 <!--  GAME PINED -->
 <div id="show-game" class="d-flex container pinned" *ngIf="!isFilterApplied() && !searchQuery.trim() && getPinnedGames().length > 0">
-  <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" style="width: 100%"></app-card-game>
+  <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="app-card-game"></app-card-game>
 </div>
 
 <!-- UNPINNED GAME -->
 <div id="show-game" class="d-flex container" *ngIf="!isFilterApplied() && !searchQuery.trim()">
-  <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" style="width: 100%"></app-card-game>
+  <app-card-game *ngFor="let myGameHistorique of getUnpinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="app-card-game"></app-card-game>
 </div>
 
 <!-- LOADING -->
 <div id="show-game" class="d-flex container" *ngIf="isLoading">
-  <app-card-game *ngFor="let game of [].constructor(30);" style="width: 100%"></app-card-game>
+  <app-card-game *ngFor="let game of [].constructor(30);" class="app-card-game"></app-card-game>
 </div>

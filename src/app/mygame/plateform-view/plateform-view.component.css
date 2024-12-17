@@ -259,6 +259,12 @@ h2 {
   transition: width 0.3s ease;
 }
 
+@media (min-width:992px){
+  .app-card-game {
+    width: 100%;
+  }
+}
+
 @media (max-width: 900px) {
   #profilWrapper {
     position: relative;
@@ -378,7 +384,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 40px auto;
+  margin: 40px auto 40px auto;
   width: 100%;
   padding: 15px;
   height: 75px;
@@ -467,5 +473,11 @@ h2 {
 
 .dropdown-menu button:hover {
   background-color: #f0f0f0;
+}
+
+@media (max-width:991px){
+  .search-container {
+    margin: 20px auto 40px auto;
+  }
 }
 
