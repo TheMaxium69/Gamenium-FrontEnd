@@ -334,7 +334,7 @@ a > div {
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   margin-bottom: 20px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .color-picker,
@@ -342,6 +342,7 @@ a > div {
 .password-input,
 .social-item {
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   gap: 15px;
   margin-bottom: 15px;
@@ -494,7 +495,18 @@ a > div {
   color: black;
   border-color: #575757;
   padding: 14px;
-  width: 360px;
+  width: 100%;
+}
+
+.social-head {
+  align-content: center;
+  width: 110px;
+}
+
+.social-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .social-input-locked {
