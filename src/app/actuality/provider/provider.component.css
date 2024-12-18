@@ -344,4 +344,7 @@ span.fi{
     #displayname {
         margin: 0;
     }
+    #last_actus {
+        box-shadow: none;
+    }
 }
