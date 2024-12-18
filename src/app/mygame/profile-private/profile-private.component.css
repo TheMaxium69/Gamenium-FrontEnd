@@ -173,7 +173,7 @@ h2 {
     word-wrap: normal;
     justify-content: space-between;
   }
-  
+
 
 }
 
@@ -181,6 +181,15 @@ h2 {
   .app-card-game {
     width: 100%;
   }
+
+}
+
+
+@media (max-width:991px){
+  .actionPossible {
+    margin-bottom: 40px;
+  }
+
 }
 
 
