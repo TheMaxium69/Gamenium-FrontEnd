@@ -132,7 +132,11 @@ export class SearchPageComponent implements OnInit, OnDestroy{
       takeUntil(this.unsubscribe$)
     ).subscribe((results: UserInterface[]) => {
       if (this.isProfilLoading) {
-        this.users = results.filter((user) => user.id !== this.app.userConnected.id);
+        if (this.app.userConnected) {
+          this.users = results.filter((user) => user.id !== this.app.userConnected.id);
+        } else {
+          this.users = results;
+        }
       } else {
         this.users = results;
       }

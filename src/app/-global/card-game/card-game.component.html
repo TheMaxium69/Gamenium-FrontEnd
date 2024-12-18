@@ -68,7 +68,7 @@
 
       <!-- FOR DETAIL GAME-->
       <div class="core-right-detail" *ngIf="isDetailGame">
-        <button style="background-color: {{ this.app.userConnected.themeColor || this.app.colorDefault }}" class="main-gamenium-btn" (click)="setModal(game)" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
+        <button style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="main-gamenium-btn" (click)="setModal(game)" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
           <i class="ri-checkbox-circle-line"></i>Ajoutez à votre collection
         </button>
       </div>
@@ -158,7 +158,7 @@
         </div>
 
         <!-- ACTION -->
-        <div class="card-action" *ngIf="this.app.userConnected.id == Hmg.myGame.user.id && isPublic == false">
+        <div class="card-action" *ngIf="this.app.userConnected && this.app.userConnected.id == Hmg.myGame.user.id && isPublic == false">
           <i (click)="this.app.togglePin(Hmg); $event.stopPropagation()"
              [class.ri-unpin-line]="Hmg.myGame.is_pinned"
              [class.ri-pushpin-line]="!Hmg.myGame.is_pinned"></i>

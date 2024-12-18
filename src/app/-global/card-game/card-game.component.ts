@@ -37,12 +37,17 @@ export class CardGameComponent implements OnInit {
               private userRateService:UserRateService) { }
 
   ngOnInit() {
-    if (this.userNote && this.userNote != this.app.userConnected.id) {
+    if (this.app.userConnected){
+      if (this.userNote && this.userNote != this.app.userConnected.id) {
+        this.getProfilRate(this.userNote)
+      } else if (this.app.isLoggedIn && this.Hmg) {
+        this.getUserRate(this.app.userConnected.id)
+      }
+    } else if (this.userNote) {
       this.getProfilRate(this.userNote)
-    } else if (this.app.isLoggedIn && this.Hmg) {
-      this.getUserRate(this.app.userConnected.id)
     }
   }
+
 
   getUserRate(id_user: number){
     if (this.app.userRatingAll){
@@ -58,7 +63,6 @@ export class CardGameComponent implements OnInit {
   }
 
   getProfilRate(id_profil:number){
-    console.log("here")
     this.userRateService.getRateByUser(id_profil, this.app.setURL()).subscribe(responseRates => {
       if (responseRates.message == "good") {
         this.userRatingAll = responseRates.result;

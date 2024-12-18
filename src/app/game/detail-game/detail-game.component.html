@@ -457,8 +457,11 @@
   <!-- SECTION AJOUT COLLECTION -->
 <div class="container-2">
 
-  <div class="title-add">
+  <div class="title-add" *ngIf="this.app.userConnected">
     <h3><span style="color: {{ app.userConnected?.themeColor || app.colorDefault }};">{{ this.app.userConnected.displaynameUseritium || this.app.userConnected.username }}</span> Vous possedez le jeu ? Ajoutez le à votre collection :</h3>
+  </div>
+  <div class="title-add" *ngIf="!this.app.userConnected">
+    <h3><span style="color: {{ app.colorDefault }};"></span> Vous possedez le jeu ? Ajoutez le à votre collection :</h3>
   </div>
 
   <div *ngIf="gameSelected" class="card-add-to-collection">
