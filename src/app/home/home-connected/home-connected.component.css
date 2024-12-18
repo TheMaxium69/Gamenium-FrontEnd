@@ -478,12 +478,23 @@ a{
     flex-wrap: wrap;
   }
 
+  #action-section {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #profilWrapper .articleTuto {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 }
 
 
 @media (max-width: 611px) {
   .gamenium-container-panel {
-    width: 416px;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -514,6 +525,14 @@ a{
 
 }
 
+@media (max-width: 500px){
+  .gamenium-container-panel {
+    box-shadow: unset;
+    width: 100%;
+    padding: 20px 10px;
+  }
+}
+
 @media(max-width: 779px){
   #gamenium-suggestion .rowamoi{
     flex-direction: column;
@@ -542,5 +561,22 @@ a{
     display: block;
     margin-top: 8px;
     border-radius: 7px;
+  }
+}
+
+@media(max-width: 991px){
+
+  .actionPossible {
+    margin-bottom: 40px;
+  }
+
+  #profilWrapper .articleTuto {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mb {
+    margin-bottom: 40px;
   }
 }
