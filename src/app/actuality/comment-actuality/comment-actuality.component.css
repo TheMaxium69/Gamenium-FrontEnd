@@ -326,3 +326,76 @@
   margin-bottom: 50px;
   text-align: center;
 }
+
+@media ( max-width: 1200px){
+  #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
+    width: 855px;
+    margin: 0 auto;
+  }
+  #division {
+    margin-bottom: 40px;
+  }
+  .containeur {
+    width: auto;
+  }
+}
+
+@media  ( max-width: 855px){ 
+  #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
+    width: 755px;
+  }
+}
+
+@media  ( max-width: 775px){ 
+  #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
+    width: 695px;
+  }
+}
+
+@media  ( max-width: 695px){ 
+  #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
+    width: 615px;
+  }
+}
+
+@media  ( max-width: 615px){ 
+  #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
+    width: 535px;
+  }
+}
+
+@media  ( max-width: 535px){ 
+  #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
+    width: 445px;
+  }
+  .replyForm {
+    width: 445px;
+    margin-left: -60px;
+  }
+  .clamp-name {
+    font-size: clamp(12px, 14px, 16px);
+  }
+  .time-ago {
+    font-size: 12px;
+  }
+}
+
+@media  ( max-width: 445px){ 
+  #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
+    width: 365px;
+  }
+  .replyForm {
+    width: 365px;
+    margin-left: -50px;
+  }
+  .clamp-name {
+    font-size: 12px;
+    width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .time-ago {
+    font-size: 12px;
+    margin-left: 4px;
+  }
+}

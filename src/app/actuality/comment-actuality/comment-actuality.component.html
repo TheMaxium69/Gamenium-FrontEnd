@@ -69,7 +69,7 @@
             <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color || app.colorDefault) }}"></div>
 
             <!-- WHY AND WHERE-->
-            <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
+            <h4 class="comment-user-name"><span class="clamp-name">{{ comment.user.displayname_useritium || comment.user.username }}</span>
               <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                 <img class="badgeIMG" src="{{ badge.picture?.url }}">
               </ng-container>
@@ -125,7 +125,7 @@
                     <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(commentReply?.user?.pp?.url, commentReply.user.displayname_useritium || commentReply.user.username, commentReply.user.color || app.colorDefault) }}"></div>
 
                     <!-- WHY AND WHEN -->
-                    <h4 class="comment-user-name"><span>{{ commentReply.user?.displayname_useritium || commentReply.user.username }}</span>
+                    <h4 class="comment-user-name"><span class="clamp-name">{{ commentReply.user?.displayname_useritium || commentReply.user.username }}</span>
                       <span class="time-ago">{{commentReply.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{commentReply.created_at | date: 'HH:mm'}}</span>
                     </h4>
 
@@ -157,7 +157,7 @@
               <!-- REPLY FORM-->
               <div class="replyForm" [ngStyle]="{'--providerColor': providerColor || this.app.colorDefault }">
                 <input name="comment{{comment.id}}" id="comment{{comment.id}}" type="text" placeholder="Votre réponses">
-                <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button" style="background-color: {{ providerColor }}">Envoyé</button>
+                <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button" style="background-color: {{ providerColor }}">Envoyer</button>
               </div>
 
             </div>
@@ -205,7 +205,7 @@
               <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color || app.colorDefault) }}"></div>
 
               <!-- WHY AND WHEN -->
-              <h4 class="comment-user-name"><span>{{ comment.user.displayname_useritium || comment.user.username }}</span>
+              <h4 class="comment-user-name"><span class="clamp-name">{{ comment.user.displayname_useritium || comment.user.username }}</span>
                 <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
                   <img class="badgeIMG" src="{{ badge.picture?.url }}">
                 </ng-container>
@@ -258,7 +258,7 @@
                         <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(commentReply?.user?.pp?.url, commentReply.user.displayname_useritium || commentReply.user.username, commentReply.user.color || app.colorDefault) }}"></div>
 
                         <!-- WHY AND WHEN -->
-                        <h4 class="comment-user-name"><span>{{ commentReply.user?.displayname_useritium || commentReply.user.username }}</span>
+                        <h4 class="comment-user-name"><span class="clamp-name">{{ commentReply.user?.displayname_useritium || commentReply.user.username }}</span>
                           <span class="time-ago">{{commentReply.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{commentReply.created_at | date: 'HH:mm'}}</span>
                         </h4>
 
@@ -290,7 +290,7 @@
                   <!-- REPLY FORM-->
                   <div class="replyForm" [ngStyle]="{'--providerColor': providerColor || this.app.colorDefault }">
                     <input name="comment{{comment.id}}" id="comment{{comment.id}}" type="text" placeholder="Votre réponses">
-                    <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button" style="background-color: {{ providerColor }}">Envoyé</button>
+                    <button (click)="sendReplyComment(comment.id)" class="main-gamenium-btn" type="button" style="background-color: {{ providerColor }}">Envoyer</button>
                   </div>
 
                 </div>

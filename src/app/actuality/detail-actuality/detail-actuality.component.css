@@ -253,24 +253,76 @@
   background: none;
 }
 
-@media  ( max-width: 1200px){ 
+@media  ( max-width: 1200px){
   .border-actu {
-    width: 100%;
+    width: 855px;
     padding-right: 0;
     border: none;
+    margin: 0 auto;
   }
-  
-  .img {
+
+  #left-section {
     width: auto;
-    height: 360px;
-    padding: 0;
+  }
+  #right-section {
+    width: unset;
+    margin-bottom: -80px;
+  }
+  .containeur {
+    width: unset;
   }
 }
 
-@media  ( max-width: 990px){ 
+@media  ( max-width: 855px){ 
+  .border-actu, .img {
+    width: 775px;
+  }
   .img {
-    width: auto;
-    height: 260px;
-    padding: 0;
+    height: 435px;
+  }
+}
+
+@media  ( max-width: 775px){ 
+  .border-actu, .img {
+    width: 695px;
+  }
+  .img {
+    height: 391px;
+  }
+}
+
+@media  ( max-width: 695px){ 
+  .border-actu, .img {
+    width: 615px;
+  }
+  .img {
+    height: 346px;
+  }
+}
+
+@media  ( max-width: 615px){ 
+  .border-actu, .img {
+    width: 535px;
+  }
+  .img {
+    height: 302px;
+  }
+}
+
+@media  ( max-width: 535px){ 
+  .border-actu, .img {
+    width: 445px;
+  }
+  .img {
+    height: 250px;
+  }
+}
+
+@media  ( max-width: 445px){ 
+  .border-actu, .img {
+    width: 365px;
+  }
+  .img {
+    height: 207px;
   }
 }
