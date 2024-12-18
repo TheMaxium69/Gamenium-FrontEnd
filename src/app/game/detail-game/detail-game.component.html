@@ -238,11 +238,11 @@
             <p class="title-notes-margin third-color">Notes de la presse</p>
 
             <div class="one-rating mp-notes">
-                <div class="provider-picture">
-                    <img src="assets/press/metacritic.png" alt="Metacritic Logo" class="media-img" width="30" height="30">
-                </div>
+              <div class="provider-picture">
+                <img src="assets/press/metacritic.png" alt="Metacritic Logo" class="media-img" width="30" height="30">
+                <div class="ratings-details-name">Metacritic</div>
+              </div>
                 <div class="rating-info">
-                    <div class="ratings-details-name">Metacritic</div>
                     <div class="ratings-details-rate">
                         <span class="big-rate">{{ this.Metacritic?.metacritic_score || "NA" }}</span>/100
                     </div>
@@ -264,9 +264,9 @@
             <div class="one-rating mp-notes">
                 <div class="provider-picture">
                   <img src="assets/logo.png"  class="media-img" alt="Gamenium Logo" width="30" height="30">
+                  <div class="ratings-details-name">Gamenium Press<br></div>
                 </div>
                 <div class="rating-info">
-                    <div class="ratings-details-name">Gamenium Press<br></div>
                     <div class="ratings-details-rate">
                         <span class="big-rate">NA</span>/20
                     </div>
@@ -298,9 +298,9 @@
             <div class="one-rating mp-notes">
                 <div class="provider-picture">
                   <img src="assets/press/metacritic.png"  class="media-img" alt="Metacritic Logo" width="30" height="30">
+                  <div class="ratings-details-name">Metacritic Avis</div>
                 </div>
                 <div class="rating-info">
-                  <div class="ratings-details-name">Metacritic Avis</div>
                   <div class="ratings-details-rate">
                     <span class="big-rate">{{ this.Metacritic?.users_score || "NA" }}</span>/10
                   </div>
@@ -310,9 +310,9 @@
             <div class="one-rating mp-notes-last">
                 <div class="provider-picture">
                   <img src="assets/press/giantbomb.png"  class="media-img" alt="GiantBomb Logo" width="30" height="30">
+                  <div class="ratings-details-name">GiantBomb</div>
                 </div>
                 <div class="rating-info">
-                  <div class="ratings-details-name">GiantBomb</div>
                   <div class="ratings-details-rate">
                     <span class="big-rate">{{ this.GiantBomb?.average_score || "NA" }}</span>/5
                   </div>
@@ -322,9 +322,9 @@
             <div class="one-rating mp-notes-last">
                 <div class="provider-picture">
                   <img src="assets/logo.png"  class="media-img" alt="Gamenium Logo" width="30" height="30">
+                  <div class="ratings-details-name">Gamenium Avis</div>
                 </div>
                 <div class="rating-info">
-                  <div class="ratings-details-name">Gamenium Avis</div>
                   <div class="ratings-details-rate">
                     <span class="big-rate">{{ this.gameSelected?.moyenRateUser || "NA" }}</span>/20
                   </div>
@@ -465,7 +465,7 @@
   </div>
 
   <div *ngIf="gameSelected" class="card-add-to-collection">
-    <app-card-game [game]="gameSelected" [isDetailGame]="true" style="width: 100%"></app-card-game>
+    <app-card-game [game]="gameSelected" [isDetailGame]="true" style="width: 100%;"></app-card-game>
   </div>
 
   <div class="show-collection">

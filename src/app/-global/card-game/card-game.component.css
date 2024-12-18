@@ -185,6 +185,10 @@
   transition: width 0.3s ease;
 }
 
+.core-right-detail-media {
+  display: none;
+}
+
 @media (max-width: 900px) {
   #profilWrapper {
     position: relative;
@@ -266,6 +270,15 @@
     align-items: flex-end;
     margin-top: 75px;
     margin-right: 12px;
+  }
+
+  .core-right-detail{
+    display: none;
+  }
+
+  .core-right-detail-media {
+    display: block;
+    margin-top: 20px;
   }
 
 }
