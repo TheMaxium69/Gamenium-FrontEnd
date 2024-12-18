@@ -190,7 +190,7 @@
 /* BASTIEN <3 */
 #show-user {
   justify-content: start;
-  gap: 35px;
+  gap: 40px;
   flex-wrap: wrap;
   max-width: 1355px;
   margin-bottom: 120px;
@@ -198,7 +198,7 @@
 
 #show-provider {
   justify-content: start;
-  gap: 35px;
+  gap: 40px;
   flex-wrap: wrap;
   max-width: 1355px;
   margin-bottom: 120px;
