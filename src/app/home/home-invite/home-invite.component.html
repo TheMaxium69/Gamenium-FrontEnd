@@ -38,14 +38,14 @@
 
     <div id="gamenium-actu-invite">
         <div class="gamenium-container-panel mb">
-            <h2 class="">Les dernières actualités</h2>
+            <h2 class="h2-position">Les dernières actualités</h2>
             <div id="content-actu-invite" class="d-flex">
               <ng-container *ngIf="postActuFollowOrAll.length === 0">
                 <app-card-actu *ngFor="let i of [0, 1, 2, 3, 4, 5]"></app-card-actu>
               </ng-container>
               <app-card-actu *ngFor="let actu of postActuFollowOrAll | slice: 0 : 6" [actu]="actu"></app-card-actu>
             </div>
-            <div class="rowamoi justify-content-end">
+            <div class="rowamoi btn-position">
               <a class="main-gamenium-btn" routerLink="/actuality" style="background-color: {{ app.colorDefault }}">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
         </div>
@@ -53,10 +53,7 @@
 
     <div id="gamenium-latest-release">
         <div class="gamenium-container-panel mb">
-            <div class="rowamoi justify-content-between align-items-center">
-                <h2>Les dernières sorties</h2>
-            </div>
-
+            <h2 class="h2-position">Les dernières sorties</h2>
             <!-- Boucle avec les cards jeux (en afficher 3)-->
             <div id="content-latest-release" class="d-flex">
                 <app-card-game-sub *ngFor="let game of games " [game]="game" routerLink="/game/{{ game.id }}"></app-card-game-sub>
@@ -65,7 +62,7 @@
                 </ng-container>
             </div>
 
-            <div class="rowamoi justify-content-end">
+            <div class="rowamoi btn-position">
               <a class="main-gamenium-btn" routerLink="/game" style="background-color: {{ app.colorDefault }}">Voir plus <i class="ri-arrow-right-circle-line"></i></a>
             </div>
 
@@ -76,7 +73,7 @@
 
     <section id="gamenium-suggestion" class="mb">
         <div class="gamenium-container-panel">
-          <h2 class="p-b">Suggestion</h2>
+          <h2 class="p-b h2-position">Suggestion</h2>
           <div id="gamenium-suggestion-content"class="rowamoi justify-content-between">
             <app-card-provider *ngFor="let provider of randomProviders"
             [provider]="provider"

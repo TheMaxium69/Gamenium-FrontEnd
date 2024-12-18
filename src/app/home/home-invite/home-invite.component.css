@@ -68,6 +68,13 @@ a{
     border-color: #FF0000;
 }
 
+.btn-position {
+  justify-content: end;
+}
+
+.h2-position {
+  text-align: start;
+}
 
 
 
@@ -400,19 +407,19 @@ a{
 
 @media (max-width: 611px) {
   .gamenium-container-panel {
-    width: 416px;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
   }
 
   #gamenium-intro-invite .gamenium-connect-panel {
-    width: 416px;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
   }
 
   #gamenium-intro-invite .gamenium-description-panel {
-    width: 416px;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -436,4 +443,28 @@ a{
     text-align: center;
   }
   
+}
+
+@media (max-width: 500px){
+  .gamenium-container-panel {
+    box-shadow: unset;
+    width: 100%;
+    padding: 20px 10px;
+  }
+
+  .btn-position {
+    justify-content: center;
+  }
+
+  .h2-position {
+    text-align: center;
+  }
+
+}
+
+@media(max-width: 991px){
+
+  .mb {
+    margin-bottom: 40px;
+  }
 }

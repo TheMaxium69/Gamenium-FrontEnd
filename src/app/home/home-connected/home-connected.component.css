@@ -72,6 +72,13 @@ a{
   border-color: var(--isColor) !important;
 }
 
+.btn-position {
+  justify-content: end;
+}
+
+.h2-position {
+  text-align: start;
+}
 /*  Bandeau principal  */
 .gamenium-banner {
   display: flex;
@@ -530,6 +537,14 @@ a{
     box-shadow: unset;
     width: 100%;
     padding: 20px 10px;
+  }
+
+  .btn-position {
+    justify-content: center;
+  }
+
+  .h2-position {
+    text-align: center;
   }
 }
 
