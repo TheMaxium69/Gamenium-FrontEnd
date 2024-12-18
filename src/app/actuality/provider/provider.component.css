@@ -300,12 +300,16 @@ span.fi{
         line-height: 2.5rem;
 
     }
+
+    #infos_details h3, #infos_details_values h2 {
+        font-size: large;
+    }
 }
 
 @media (max-width: 505px) {
 
-    #provider_infos {
-        font-size: small;
+    #infos_details h3, #infos_details_values h2 {
+        font-size: medium;
     }
 
     #simple-game, #simple-actu, #simple-abo, #game, #actu, #abo {
@@ -315,13 +319,17 @@ span.fi{
     #value-game, #value-actu, #value-abo, #nb-actu, #nb-abo, #nb-game {
         display: none;
     }
+
+    .actu-titre h1{
+        font-size: larger !important;
+    }
 }
 
-    @media (max-width: 450px) {
-        #button_follow #button-follow-text   {
-            width: 240px;
-        }
+@media (max-width: 450px) {
+    #button_follow #button-follow-text   {
+        width: 240px;
     }
+}
 
 @media (max-width: 400px) {
     #detail-country {
