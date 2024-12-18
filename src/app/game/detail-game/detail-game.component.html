@@ -355,33 +355,97 @@
 
 
 <!-- SECTION CARROUSEL -->
-<div class="carroussel-container">
-    <div class="carroussel">
-      <section *ngIf="GiantBomb && GiantBomb.picture.length > 1">
+<!--<div class="carroussel-container">-->
+<!--    <div class="carroussel">-->
+<!--      <section *ngIf="GiantBomb && GiantBomb.picture.length > 1">-->
 
-        <div id="cCarousel">
-          <div class="arrow" id="prev"><i class="ri-arrow-left-s-fill"></i></div>
-          <div class="arrow" id="next"><i class="ri-arrow-right-s-fill"></i></div>
+<!--        <div id="cCarousel">-->
+<!--          <div class="arrow" id="prev"><i class="ri-arrow-left-s-fill"></i></div>-->
+<!--          <div class="arrow" id="next"><i class="ri-arrow-right-s-fill"></i></div>-->
 
-          <div id="carousel-vp">
-            <div id="cCarousel-inner" style="overflow-y: hidden !important;">
+<!--          <div id="carousel-vp">-->
+<!--            <div id="cCarousel-inner" style="overflow-y: hidden !important;">-->
 
-              <ng-container *ngFor="let picture of GiantBomb.picture; let i = index">
-                <article class="cCarousel-item" (click)="app.clickGalery(i)">
-                  <img [src]="picture" alt="">
-                  <div class="infos">
-                    <div class="carrousel-sep"></div>
-                    <p>Title {{ i + 1}} / {{ GiantBomb.picture.length }}</p>
-                  </div>
-                </article>
-              </ng-container>
+<!--              <ng-container *ngFor="let picture of GiantBomb.picture; let i = index">-->
+<!--                <article class="cCarousel-item" (click)="app.clickGalery(i)">-->
+<!--                  <img [src]="picture" alt="">-->
+<!--                  <div class="infos">-->
+<!--                    <div class="carrousel-sep"></div>-->
+<!--                    <p>Title {{ i + 1}} / {{ GiantBomb.picture.length }}</p>-->
+<!--                  </div>-->
+<!--                </article>-->
+<!--              </ng-container>-->
 
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-</div>
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </section>-->
+<!--    </div>-->
+<!--</div>-->
+<!--  -->
+  <!-- -->
+
+
+  <div id="carroussel-all">
+      <ng-container *ngIf="GiantBomb && GiantBomb.picture.length > 1">
+        <section class="my-carroussel scrollbar">
+
+          <ng-container *ngFor="let picture of GiantBomb.picture; let i = index">
+            <article class="oneCarrousel" (click)="app.clickGalery(i)">
+              <img class="imgCarr" [src]="picture" alt="img">
+            </article>
+          </ng-container>
+
+<!--          <ng-container *ngFor="let picture of [].constructor(2); let i = index">-->
+<!--            <article class="oneCarrousel" (click)="app.clickGalery(i)">-->
+<!--              <img class="imgCarr" [src]="'https://tyrolium.fr/Contenu/Image/Tyrolium.png'" alt="img">-->
+<!--            </article>-->
+<!--          </ng-container>-->
+
+        </section>
+      </ng-container>
+  </div>
+
+  <style>
+    #carroussel-all{
+      margin-top: 100px;
+      margin-bottom: 100px;
+      display: flex;
+      justify-content: center;
+
+      .my-carroussel{
+        display: flex;
+        width: auto;
+        align-items: flex-start;
+        overflow-y: hidden !important;
+        position: relative;
+        padding: 20px 15px;
+        gap: 15px;
+        margin: auto;
+
+        .oneCarrousel{
+          height: 208px;
+          /*width: 390px;*/
+          /*max-width: 390px;*/
+
+          .imgCarr{
+            box-shadow: 1px 0px 11px -1px #a6a6a6;
+            width: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow-y: hidden !important;
+            position: relative;
+            height: 208px;
+
+          }
+        }
+      }
+    }
+
+
+
+  </style>
 
 
 <!-- SECONDE SÉPARATION -->

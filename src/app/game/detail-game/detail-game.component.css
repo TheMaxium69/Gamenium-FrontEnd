@@ -679,119 +679,119 @@
 
 /* //////////////// DEBUT DE ZONE CARROUSSEL //////////////////// */
 
-.carroussel{
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
+/*.carroussel{*/
+/*  margin-top: 100px;*/
+/*  margin-bottom: 100px;*/
+/*}*/
 
-.pictures-title{
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 30px;
-}
+/*.pictures-title{*/
+/*  width: 100%;*/
+/*  margin-left: auto;*/
+/*  margin-right: auto;*/
+/*  padding-bottom: 30px;*/
+/*}*/
 
-#cCarousel {
-  position: relative;
-  /* max-width: 1920px; */
-  /* margin: auto; */
-  }
+/*#cCarousel {*/
+/*  position: relative;*/
+/*  !* max-width: 1920px; *!*/
+/*  !* margin: auto; *!*/
+/*  }*/
 
-#cCarousel .arrow {
-  /*color: white;*/
-  position: absolute;
-  top: 25%;
-  display: flex;
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  z-index: 1;
-  color: black;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  font-size: 44px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
+/*#cCarousel .arrow {*/
+/*  !*color: white;*!*/
+/*  position: absolute;*/
+/*  top: 25%;*/
+/*  display: flex;*/
+/*  width: 65px;*/
+/*  height: 65px;*/
+/*  border-radius: 50%;*/
+/*  z-index: 1;*/
+/*  color: black;*/
+/*  cursor: pointer;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  font-size: 44px;*/
+/*  font-weight: bold;*/
+/*  transition: all 0.3s ease;*/
+/*}*/
 
-#cCarousel .arrow:hover {
-  color: #595959;
-}
+/*#cCarousel .arrow:hover {*/
+/*  color: #595959;*/
+/*}*/
 
-#cCarousel #prev {
-  left: 20px;
-}
+/*#cCarousel #prev {*/
+/*  left: 20px;*/
+/*}*/
 
-#cCarousel #next {
-  right: 20px;
-}
+/*#cCarousel #next {*/
+/*  right: 20px;*/
+/*}*/
 
-#carousel-vp {
-  max-width: 990px;
-  height: 200px;
-  display: flex;
-  /* align-items: center; */
-  position: relative;
-  overflow: hidden;
-  margin: auto;
-}
+/*#carousel-vp {*/
+/*  max-width: 990px;*/
+/*  height: 200px;*/
+/*  display: flex;*/
+/*  !* align-items: center; *!*/
+/*  position: relative;*/
+/*  overflow: hidden;*/
+/*  margin: auto;*/
+/*}*/
 
-@media (max-width: 770px) {
-  #carousel-vp {
-    width: 510px;
-  }
-}
+/*@media (max-width: 770px) {*/
+/*  #carousel-vp {*/
+/*    width: 510px;*/
+/*  }*/
+/*}*/
 
-@media (max-width: 510px) {
-  #carousel-vp {
-    width: 250px;
-  }
-}
+/*@media (max-width: 510px) {*/
+/*  #carousel-vp {*/
+/*    width: 250px;*/
+/*  }*/
+/*}*/
 
-#cCarousel #cCarousel-inner {
-  display: flex;
-  position: absolute;
-  transition: 0.3s ease-in-out;
-  gap: 50px;
-  width: 100%;
-  /* left: 0px; */
-}
+/*#cCarousel #cCarousel-inner {*/
+/*  display: flex;*/
+/*  position: absolute;*/
+/*  transition: 0.3s ease-in-out;*/
+/*  gap: 50px;*/
+/*  width: 100%;*/
+/*  !* left: 0px; *!*/
+/*}*/
 
-.cCarousel-item {
-  width: 250px;
-  height: 300px;
-  border: 2px solid white;
-  border-radius: 15px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-}
+/*.cCarousel-item {*/
+/*  width: 250px;*/
+/*  height: 300px;*/
+/*  border: 2px solid white;*/
+/*  border-radius: 15px;*/
+/*  overflow: hidden;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  flex-shrink: 0;*/
+/*}*/
 
-.cCarousel-item img {
-  width: 100%;
-  object-fit: cover;
-  height: 150px;
-  color: white;
-  border-radius: 15px;
-}
+/*.cCarousel-item img {*/
+/*  width: 100%;*/
+/*  object-fit: cover;*/
+/*  height: 150px;*/
+/*  color: white;*/
+/*  border-radius: 15px;*/
+/*}*/
 
-.cCarousel-item .infos {
-  /* height: 100%; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: space-around; */
-  background: white;
-  color: black;
-}
+/*.cCarousel-item .infos {*/
+/*  !* height: 100%; *!*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  !* justify-content: space-around; *!*/
+/*  background: white;*/
+/*  color: black;*/
+/*}*/
 
-.carrousel-sep{
-  border: solid 0.5px;
-  width: 150px;
-  margin-top: 10px;
-}
+/*.carrousel-sep{*/
+/*  border: solid 0.5px;*/
+/*  width: 150px;*/
+/*  margin-top: 10px;*/
+/*}*/
 
 /* //////////////// FIN DE ZONE CARROUSSEL /////////////// */
 
