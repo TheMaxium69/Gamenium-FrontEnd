@@ -71,3 +71,20 @@
 .sidenameofgame{
   text-align: start;
 }
+
+@media (max-width: 450px) {
+  .card-game{
+    width: 299.1px;
+  }
+  .card-thumb, .card-thumb .image, .card-thumb .blur, .card-thumb img{
+      width: 299.1px; /*Division du ration 1,07*/
+      height: 168.2px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card-thumb, .card-thumb .image, .card-thumb .blur, .card-thumb img{
+    width: 299.1px; /*Division du ration 1,07*/
+    height: 168.2px;
+  }
+}

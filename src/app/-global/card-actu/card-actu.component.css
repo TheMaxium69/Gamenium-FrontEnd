@@ -149,13 +149,13 @@
 
 @media (max-width: 450px) {
   .card {
-      width: 300px;
+    width: 299.1px;
   }
 }
 
 @media (max-width: 400px) {
   .card {
-      width: 250px;
+    width: 299.1px;
   }
 }
 
