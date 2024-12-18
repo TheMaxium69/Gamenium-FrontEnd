@@ -327,6 +327,18 @@
   text-align: center;
 }
 
+.clamp-name {
+  text-align: left;
+  width: clamp(0px, fit-content, 200px);
+  max-width: 300px;
+  height: 24px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  align-content: end;
+}
+
 @media ( max-width: 1200px){
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 855px;
@@ -350,11 +362,17 @@
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 695px;
   }
+  .clamp-name {
+    max-width: 250px;
+  }
 }
 
 @media  ( max-width: 695px){ 
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 615px;
+  }
+  .clamp-name {
+    max-width: 200px;
   }
 }
 
@@ -373,7 +391,7 @@
     margin-left: -60px;
   }
   .clamp-name {
-    font-size: clamp(12px, 14px, 16px);
+    max-width: 120px;
   }
   .time-ago {
     font-size: 12px;
@@ -390,9 +408,7 @@
   }
   .clamp-name {
     font-size: 12px;
-    width: 100px;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    max-width: 60px;
   }
   .time-ago {
     font-size: 12px;
