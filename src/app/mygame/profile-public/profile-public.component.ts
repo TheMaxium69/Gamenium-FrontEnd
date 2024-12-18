@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {UserInterface} from "../../-interface/user.interface";
 import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
 import {UserRateInterface} from "../../-interface/user-rate.interface";
@@ -42,6 +42,10 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   isLoading:boolean = true;
 
+  // Pour le responsive de la tabGame
+  innerWidth: number = window.innerWidth;
+  classContainer: string = "container";
+
   constructor(protected app:AppComponent,
               private myGameService:HistoryMyGameService,
               private userRateService:UserRateService,
@@ -73,9 +77,12 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
       }
     });
 
-
-
-
+     // initialisation de la valeur classContainer pour responsive TabMyGame
+     if (this.innerWidth <= 991) {
+      this.classContainer = "container-fluid"
+    } else {
+      this.classContainer = "container"
+    }
 
   }
 
@@ -85,12 +92,26 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
     }
   }
 
+  // responsive de tabMyGame
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerWidth = window.innerWidth;
+      if (this.innerWidth <= 991) {
+          this.classContainer = "container-fluid"
+      } else {
+          this.classContainer = "container"
+        }
+  }
+
+
   loadProfil(){
 
     this.getInfoProfile(this.profileId);
 
 
   }
+
+  
 
   load(){
     this.isCommonView = false;

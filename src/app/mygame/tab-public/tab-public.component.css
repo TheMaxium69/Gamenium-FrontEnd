@@ -54,3 +54,44 @@ h3.titleInWrapper{
 .navigateBar ul li:hover p{
   transform: scale(1.2);
 }
+
+
+@media (max-width: 991px) {
+
+  .navigateBar ul {
+    border-radius: 0px;
+    margin-top: 24px;
+  }
+
+  .navigateBar ul li {
+    min-width: none;
+    min-width: 23% !important;
+
+  }
+
+  .navigateBar ul li.active p{
+    background-color: #ffffffc4;
+    border-radius: 10px;
+    color: black;
+    padding: 10px 5px;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .navigateBar ul {
+    border-radius: 0px;
+    margin: 0;
+    gap: 20px;
+  }
+
+  .navigateBar ul li {
+    min-width: 26% !important;
+    border-right: none;
+
+
+  }
+
+
+}

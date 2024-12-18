@@ -115,9 +115,13 @@ h2 {
   transition: width 0.3s ease;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 991px) {
   #profilWrapper {
     position: relative;
+    padding: 0px;
+    box-shadow: none;
+    margin-top: -24px;
+    /* top: 280px; */
   }
 
   #profilWrapper .articleTuto .inUserTuto .d-flex{
@@ -133,6 +137,8 @@ h2 {
     word-wrap: normal;
     justify-content: space-between;
   }
+
+
 }
 
 @media (min-width:992px){
@@ -164,7 +170,6 @@ h2 {
   #profilWrapper .articleTuto .actionPossible {
     margin-bottom: 20px;
   }
-
 
 }
 
