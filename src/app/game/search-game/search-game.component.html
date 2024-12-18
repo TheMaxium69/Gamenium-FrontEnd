@@ -1,4 +1,4 @@
-<div style="height: 153px;width: 100%"></div>
+<div style="height: 135px; width: 100%"></div>
 <form
   class="search fixed-top"
   (ngSubmit)="onSearch()"
@@ -41,11 +41,11 @@
     </div>
 
     <!-- JEUX -->
-    <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>
+    <app-card-game *ngFor="let game of games" [game]="game" class="width"></app-card-game>
 
     <!-- LOADING -->
     <ng-container *ngIf="isLoading">
-      <app-card-game *ngFor="let game of [].constructor(50);" style="width: 100%"></app-card-game>
+      <app-card-game *ngFor="let game of [].constructor(50);" class="width"></app-card-game>
     </ng-container>
 
     <!-- USER -->

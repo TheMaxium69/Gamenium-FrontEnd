@@ -1,4 +1,4 @@
-<div style="height: 113px;width: 100%"></div>
+<div style="height: 135px; width: 100%"></div>
 <form class="search fixed-top" [ngStyle]="{ '--userColor': this.app.userConnected?.themeColor ?? this.app.colorDefault }">
   <input
     #input
@@ -13,13 +13,13 @@
 </form>
 
 
-<div id="bar-type" [ngStyle]="{ '--userColor': app.userConnected?.themeColor ?? this.app.colorDefault }">
+<div id="bar-type" class="scrollbar" [ngStyle]="{ '--userColor': app.userConnected?.themeColor ?? this.app.colorDefault }">
   <ul class="d-flex">
     <!--  GAME  -->
     <li [class.active]="searchType == 'game'" (click)="changeType('game')">Jeux</li>
 
     <!--  USER  -->
-    <li [class.active]="searchType == 'user'" (click)="changeType('user')">Profile</li>
+    <li [class.active]="searchType == 'user'" (click)="changeType('user')">Profil</li>
 
     <!--  postactu  -->
     <li [class.active]="searchType == 'postactu'" (click)="changeType('postactu')">Actualité</li>
@@ -35,11 +35,11 @@
 
   <div id="show-game" class="d-flex container">
     <!-- REEL -->
-    <app-card-game *ngFor="let game of games" [game]="game" style="width: 100%"></app-card-game>
+    <app-card-game *ngFor="let game of games" [game]="game" class="width"></app-card-game>
 
     <!-- LOADING -->
     <ng-container *ngIf="isGameLoading">
-      <app-card-game *ngFor="let game of [].constructor(50);" style="width: 100%"></app-card-game>
+      <app-card-game *ngFor="let game of [].constructor(50);" class="width"></app-card-game>
     </ng-container>
 
     <!-- RIEN TROUVER-->
