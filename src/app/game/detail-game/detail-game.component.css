@@ -336,7 +336,9 @@
     cursor: grab;
     overflow-x: auto;
     scrollbar-width: none;
-    width: 600px;
+    max-width: 600px;
+    min-width: 225px;
+    width: 103%;
     padding: 10px;
     margin-left: -10px;
     margin-bottom: -10px;
