@@ -186,6 +186,12 @@ select{
 }
 
 /* MEDIA QUERIES */
+@media (max-width: 720px) {
+  .start-form {
+    padding: 20px 0; 
+  }
+}
+
 @media (max-width: 580px) {
   .moreHMG .sub-gamenium-btn {
     width: 100%;
