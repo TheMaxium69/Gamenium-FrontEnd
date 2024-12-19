@@ -414,6 +414,20 @@ export class AppComponent {
 
   }
 
+  publisherNameFormatage(pubName:string):string{
+
+    if (pubName == "Xbox Game Studios"){
+      return "Xbox";
+    }
+
+    if (pubName == "Sony Interactive Entertainment America"){
+      return "Playstation"
+    }
+
+    return pubName;
+
+  }
+
   moisView(moisChiffre: number): string{
     if (moisChiffre == 0) {
       return "janvier";

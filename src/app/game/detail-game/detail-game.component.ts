@@ -248,7 +248,9 @@ export class DetailGameComponent implements OnInit{
         let i = 0;
         this.game_publishers.forEach((publisherName:string)=>{
           if (i < this.app.maxSearchProviderByGame && publisherName.length > 3){
-            this.providerService.searchProviders(publisherName, 1, this.app.setURL()).subscribe((reponse:ProviderInterface[]) => {
+            console.log(this.app.publisherNameFormatage(publisherName))
+            this.providerService.searchProviders(this.app.publisherNameFormatage(publisherName), 1, this.app.setURL()).subscribe((reponse:ProviderInterface[]) => {
+              console.log(reponse);
               if (reponse.length > 0){
                 if (!this.providerSelected.some(provider => provider.id === reponse[0].id)) {
                   this.providerSelected.push(reponse[0]);
@@ -302,7 +304,7 @@ export class DetailGameComponent implements OnInit{
     }
 
   }
-  
+
   //si une image n'est pas load
   errorImg(id:number) {
 
