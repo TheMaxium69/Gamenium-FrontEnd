@@ -184,3 +184,10 @@ select{
   font-weight: 400;
   margin-bottom: 15px;
 }
+
+/* MEDIA QUERIES */
+@media (max-width: 580px) {
+  .moreHMG .sub-gamenium-btn {
+    width: 100%;
+  }
+}
