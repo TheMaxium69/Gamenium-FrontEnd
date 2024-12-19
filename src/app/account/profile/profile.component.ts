@@ -101,17 +101,16 @@ export class ProfileComponent implements OnInit {
     const infoSection = document.querySelector('.informations-section') as HTMLElement;
     const unlog = document.querySelector('.unlog') as HTMLElement;
     const settings = document.querySelectorAll('.search-setting')
-
     let settingsResultNumber = 0;
-
+    
     this.populateResultDiv()
     resultDiv.style.display = 'block';
-
+    
     settings.forEach((child) => {
       const setting = child as HTMLElement;
-      const settingText = setting.innerText.toLowerCase();
-
-      if (search && !settingText.includes(search)) {
+      const settingText = setting.firstChild?.textContent?.toLowerCase();
+      
+      if (search && settingText && !settingText.includes(search)) {
         setting.style.display = 'none';
 
       } else {
