@@ -219,7 +219,6 @@
 
   .card-right {
     overflow: visible;
-    flex-direction: column;
   }
 
   #add-btn {
