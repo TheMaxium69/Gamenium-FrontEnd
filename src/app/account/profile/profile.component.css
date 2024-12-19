@@ -38,9 +38,8 @@ h2 {
   border-radius: 50%;
   width: 250px;
   height: 250px;
-
   background-color: white;
-  box-shadow: 3px 2px 30px -5px rgba(0, 0, 0, 0.51);
+  box-shadow: 1px 3px 12px #a6a6a6;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
