@@ -185,9 +185,9 @@
   transition: width 0.3s ease;
 }
 
-.core-right-detail-media {
+/* .core-right-detail-media {
   display: none;
-}
+} */
 
 @media (max-width: 900px) {
   #profilWrapper {
@@ -219,6 +219,12 @@
 
   .card-right {
     overflow: visible;
+    flex-direction: column;
+  }
+
+  #add-btn {
+    font-size:14px;
+    margin-top:10px;
   }
 
   .card-right .core-left h5 {
@@ -272,13 +278,9 @@
     margin-right: 12px;
   }
 
-  .core-right-detail{
-    display: none;
-  }
+  .platform-names {
+    -webkit-line-clamp: 1;
 
-  .core-right-detail-media {
-    display: block;
-    margin-top: 20px;
   }
 
 }
