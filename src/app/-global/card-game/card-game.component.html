@@ -16,12 +16,13 @@
     </div>
 
     <!-- INFO -->
-    <div class="card-right d-flex">
+    <div class="card-right d-flex" [ngStyle]="(isDetailGame && innerWidth < 991) ? {'flex-direction': 'column'} : {}">
 
       <!-- TEXT -->
       <div class="core-left">
-        <h2>{{ game.name }}</h2>
-        <p style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="platform-names">
+        <h2 [ngStyle]="(isDetailGame && innerWidth < 991) ? {'-webkit-line-clamp': 1} : {'-webkit-line-clamp': 2}">{{ game.name }}</h2>
+        <p style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="platform-names"
+        [ngStyle]="(isDetailGame && innerWidth < 991) ? {'-webkit-line-clamp': 1} : {'-webkit-line-clamp': 2}">
           <ng-container *ngFor="let platform of game.platforms; let last = last">
             {{ this.app.plateformeNameFormatage(platform.name) }}<span *ngIf="!last">, </span>
           </ng-container>
@@ -82,7 +83,10 @@
     </div> -->
 
   </div>
+  
 </div>
+
+
 
 <div class="card-wrapper" *ngIf="Hmg !== null && !Hmg.isDelete">
   <div class="card-game container d-flex">

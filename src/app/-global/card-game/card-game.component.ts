@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {GameInterface} from "../../-interface/game.interface";
 import {AppComponent} from "../../app.component";
 import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
@@ -31,6 +31,9 @@ export class CardGameComponent implements OnInit {
   @Input()
   public isPublic: boolean = false;
 
+  innerWidth: number = window.innerWidth;
+
+
   userRatingAll: UserRateInterface[] | undefined;
 
   constructor(protected app:AppComponent,
@@ -46,7 +49,16 @@ export class CardGameComponent implements OnInit {
     } else if (this.userNote) {
       this.getProfilRate(this.userNote)
     }
+
+    this.innerWidth = window.innerWidth
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerWidth = window.innerWidth;
+  }
+
+  
 
 
   getUserRate(id_user: number){
@@ -90,5 +102,6 @@ export class CardGameComponent implements OnInit {
   setModal(game: GameInterface){
     this.app.gameSelected = game;
   }
+
 
 }
