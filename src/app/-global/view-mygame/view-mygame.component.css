@@ -186,6 +186,78 @@
 
 }
 
+#view-mygame {
+  .blur{
+    position: absolute;
+    width: 300px;
+    height: 160px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    z-index: 1;
+    background-color: #00000038;
+  }
+
+  .back{
+    width: 300px;
+    height: 100%;
+    border-radius: 15px;
+  }
+
+}
+
+.screen-image::-webkit-scrollbar {
+  height: 5px;
+  border-radius: 10px!important;
+}
+
+.screen-image::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.screen-image::-webkit-scrollbar-thumb {
+  border-radius: 10px!important;
+  background-color: gray!important;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.screen-image{
+  width: auto;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: hidden !important;
+  position: relative;
+  margin-top: 8px;
+
+  small{
+    margin-bottom: 10px;
+  }
+
+  .screen-all{
+    display: flex;
+    gap: 25px;
+    margin-left:6px;
+    margin-right: 7px;
+
+    .screen-encard{
+      max-width: 300px;
+      max-height: 160px;
+      margin: auto 0;
+
+      .screen{
+        box-shadow: 1px 0px 11px -1px #a6a6a6;
+        width: auto;
+        height: 160px;
+        max-width: 300px;
+        max-height: 160px;
+      }
+    }
+
+  }
+
+}
+
 #head-img.gapUpdate {
   gap: 50px!important;
 }
@@ -358,6 +430,28 @@
 
 .game-info-test {
   width: clamp(60%, 76%, 80%);
+}
+
+
+
+/* Screenshots slider for small screens */
+@media (max-width: 810px) {
+  #head-img {
+    height: fit-content;
+  }
+
+  #head-img .banner-image {
+    margin: 0 auto;
+  }
+
+  #head-img .separe-image,
+  #head-img .screen-image {
+    display: none !important;
+  }
+
+  #view-mygame .screen-image {
+    display: block;
+  }
 }
 
 @media (max-width: 710px) {
