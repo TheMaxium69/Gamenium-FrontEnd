@@ -80,7 +80,7 @@
       <div class="panel" style="display: none">
 
         <div class="head-panel">
-          <h2><i class="ri-hand-heart-fill"></i>List de souhaite</h2>
+          <h2><i class="ri-hand-heart-fill"></i>Liste de souhait</h2>
         </div>
 
         <select id="wish_list" name="wish_list" [(ngModel)]="selectedMyGame.myGame.wish_list">
@@ -101,16 +101,16 @@
           <input max="20" min="0" type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating" placeholder="Note du jeux (/20)">
 
           <ng-container *ngIf="selectedMyGame.rate.content">
-            <textarea type="text" id="content_rating" name="content_rating" [(ngModel)]="selectedMyGame.rate.content" placeholder="Expliqué votre note"></textarea>
+            <textarea type="text" id="content_rating" name="content_rating" [(ngModel)]="selectedMyGame.rate.content" placeholder="Expliquez votre note"></textarea>
           </ng-container>
           <ng-container *ngIf="!selectedMyGame.rate.content">
-            <textarea type="text" id="content_rating" name="content_rating" ngModel placeholder="Expliqué votre note"></textarea>
+            <textarea type="text" id="content_rating" name="content_rating" ngModel placeholder="Expliquez votre note"></textarea>
           </ng-container>
 
         </ng-container>
         <ng-container *ngIf="!selectedMyGame.rate">
           <input max="20" min="0" type="number" id="rating" name="rating" ngModel placeholder="Note du jeux (/20)">
-          <textarea type="text" id="content_rating" name="content_rating" ngModel placeholder="Expliqué votre note"></textarea>
+          <textarea type="text" id="content_rating" name="content_rating" ngModel placeholder="Expliquez votre note"></textarea>
         </ng-container>
 
       </div>
@@ -332,7 +332,7 @@
           <!-- LINK -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-links-fill"></i>Lien <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-links-fill"></i>Liens <small>#{{i+1}}</small></h2>
             </div>
             <input type="text" id="link{{i}}" [(ngModel)]="speedrun.link" name="link{{i}}" placeholder="Lien (exemple : https://speedrun.com/)">
           </div>
@@ -369,7 +369,7 @@
           <!-- LINK -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-links-fill"></i>Lien <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
+              <h2><i class="ri-links-fill"></i>Liens <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
             </div>
             <input type="text" id="link{{i+nbSpeedrunExisting}}" ngModel name="link{{i+nbSpeedrunExisting}}" placeholder="Lien (exemple : https://speedrun.com/)">
           </div>
@@ -438,11 +438,11 @@
           <!-- ETAT -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-hand-coin-fill"></i>Etat <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-hand-coin-fill"></i>État <small>#{{i+1}}</small></h2>
             </div>
             <ng-container *ngIf="app.hmgCopyEtatAllNoReload && copyGame.etat">
               <select id="etat{{i}}" [(ngModel)]="copyGame.etat.id" name="etat{{i}}">
-                <option [value]="null">Choisir un etat</option>
+                <option [value]="null">Choisir un état</option>
                 <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
@@ -450,7 +450,7 @@
             </ng-container>
             <ng-container *ngIf="app.hmgCopyEtatAllNoReload && !copyGame.etat">
               <select id="etat{{i}}" name="etat{{i}}" ngModel>
-                <option value="">Choisir un etat</option>
+                <option value="">Choisir un état</option>
                 <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
@@ -564,7 +564,7 @@
                 <!-- DEVISE -->
                 <ng-container *ngIf="app.deviseNoReload && copyGame.purchase.devise">
                   <select id="devise{{i}}" [(ngModel)]="copyGame.purchase.devise.id" name="purchase_devise{{i}}">
-                    <option [value]="null">Choissir une devise</option>
+                    <option [value]="null">Choisir une devise</option>
                     <ng-container *ngFor="let devise of app.deviseNoReload">
                       <option [value]="devise.id">{{ devise.symbole }}</option>
                     </ng-container>
@@ -646,7 +646,7 @@
                 <!-- DEVISE -->
                 <ng-container *ngIf="app.deviseNoReload">
                   <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
-                    <option value="">Choissir une devise</option>
+                    <option value="">Choisir une devise</option>
                     <ng-container *ngFor="let devise of app.deviseNoReload">
                       <option [value]="devise.id">{{ devise.symbole }}</option>
                     </ng-container>
@@ -743,11 +743,11 @@
           <!-- ETAT -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-hand-coin-fill"></i>Etat <small>#{{i+1+nbCopyExisting}}</small></h2>
+              <h2><i class="ri-hand-coin-fill"></i>État <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
             <ng-container *ngIf="app.hmgCopyEtatAllNoReload">
               <select id="etat{{i+nbCopyExisting}}" name="etat{{i+nbCopyExisting}}" ngModel>
-                <option value="">Choissir un etat</option>
+                <option value="">Choissir un état</option>
                 <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
