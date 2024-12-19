@@ -352,3 +352,22 @@
   margin-right: 5px;
 }
 
+.main-gamenium-btn {
+  height: fit-content;
+}
+
+.game-info-test {
+  width: clamp(60%, 76%, 80%);
+}
+
+@media (max-width: 710px) {
+  .game-info-test {
+    width: clamp(60%, 65%, 75%);
+  }
+}
+
+@media (max-width: 585px) {
+  .game-info-test {
+    width: 60%;
+  }
+}
