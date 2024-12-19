@@ -333,7 +333,7 @@
   max-width: 300px;
   height: 24px;
   display: inline-block;
-  overflow: hidden;
+  overflow-x: clip;
   text-overflow: ellipsis;
   white-space: nowrap;
   align-content: end;
