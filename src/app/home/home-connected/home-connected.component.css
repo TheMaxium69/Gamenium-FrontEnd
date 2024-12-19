@@ -483,6 +483,7 @@ a{
 
   #gamenium-suggestion .rowamoi{
     flex-wrap: wrap;
+    gap:40px;
   }
 
   #action-section {

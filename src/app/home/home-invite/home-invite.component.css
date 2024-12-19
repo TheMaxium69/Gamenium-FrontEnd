@@ -391,6 +391,7 @@ a{
 
   #gamenium-suggestion .rowamoi{
     flex-wrap: wrap;
+    gap:40px;
   }
 
 }
@@ -467,4 +468,5 @@ a{
   .mb {
     margin-bottom: 40px;
   }
+  
 }
