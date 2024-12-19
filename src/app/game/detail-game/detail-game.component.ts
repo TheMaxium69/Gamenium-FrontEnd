@@ -248,7 +248,16 @@ export class DetailGameComponent implements OnInit{
         let i = 0;
         this.game_publishers.forEach((publisherName:string)=>{
           if (i < this.app.maxSearchProviderByGame && publisherName.length > 3){
-            console.log(this.app.publisherNameFormatage(publisherName))
+            if (this.app.publisherNameFormatage(publisherName) == "Xbox"){
+              this.providerService.searchProviders("Microsoft", 1, this.app.setURL()).subscribe((reponse:ProviderInterface[]) => {
+                console.log(reponse);
+                if (reponse.length > 0){
+                  if (!this.providerSelected.some(provider => provider.id === reponse[0].id)) {
+                    this.providerSelected.push(reponse[0]);
+                  }
+                }
+              });
+            }
             this.providerService.searchProviders(this.app.publisherNameFormatage(publisherName), 1, this.app.setURL()).subscribe((reponse:ProviderInterface[]) => {
               console.log(reponse);
               if (reponse.length > 0){
