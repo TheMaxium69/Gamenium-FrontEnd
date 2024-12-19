@@ -393,6 +393,17 @@
   }
 }
 
+@media (max-width: 608px) {
+  .provider-card-container {
+    max-width: calc(100vw - 22px) !important;
+    margin-left: 5px !important;
+  }
+
+  #follow-provider {
+    margin-left: 7px;
+  }
+}
+
 /* ////////////// FIN DE ZONE ACTUALITEES ////////// */
 
 /* ////////////// DEBUT DE ZONE RATINGS ///////////// */
@@ -614,6 +625,10 @@
 
     .border-section {
       width: 98%;
+    }
+
+    .width-circle {
+      width: 100px;
     }
   }
 }
