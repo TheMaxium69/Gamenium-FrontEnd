@@ -100,7 +100,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   word-spacing: -5px;
-
+  line-height: 1;
 }
 
 .platform-names {
