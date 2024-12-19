@@ -302,6 +302,13 @@ export class DetailGameComponent implements OnInit{
     }
 
   }
+  
+  //si une image n'est pas load
+  errorImg(id:number) {
+
+    this.GiantBomb?.picture.splice(id,1)
+
+  }
 
 
 }

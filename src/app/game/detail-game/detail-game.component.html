@@ -392,7 +392,8 @@
 
           <ng-container *ngFor="let picture of GiantBomb.picture; let i = index">
             <article class="oneCarrousel" (click)="app.clickGalery(i)">
-              <img class="imgCarr" [src]="picture" alt="img">
+              <img class="imgCarr" [src]="picture" alt="img"
+              (error)="errorImg(i)">
             </article>
           </ng-container>
 
