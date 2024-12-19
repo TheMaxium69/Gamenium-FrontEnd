@@ -485,14 +485,10 @@
   }
 
   .width-circle {
-    width: 110px;
+    width: 125px;
     margin-right: 25px;
   }
 
-  .width-circle2 {
-    width: 110px;
-    margin-right: 25px;
-  }
 
   .title-circle-margin {
     margin-bottom: 25px;
@@ -569,11 +565,8 @@
     .title-circle-margin {
       margin-top: 40px;
     }
+
     .width-circle {
-      width: 40%;
-      margin-right: unset;
-    }
-    .width-circle2 {
       width: 30%;
       margin-right: unset;
     }
@@ -602,9 +595,7 @@
     .mp-notes-last {
       padding-left: 10px;
     }
-    .width-circle2 {
-      width: 50%;
-    }
+
     .border-section {
       width: 90%;
     }
@@ -618,9 +609,7 @@
     .mp-notes-last {
       padding-left: 0px;
     }
-    .width-circle2 {
-      width: 50%;
-    }
+
     .border-section {
       width: 98%;
     }
