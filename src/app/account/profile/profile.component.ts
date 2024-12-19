@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userConnected = this.app.userConnected;
-
+    
     if (this.userConnected) {
       this.getBadgeByUser(this.userConnected.id);
 
@@ -221,7 +221,10 @@ export class ProfileComponent implements OnInit {
       if (responseProfil.message == "good"){
 
         this.profilSelected = responseProfil.result;
-        console.log(this.profilSelected)
+
+        if (this.profilSelected?.themeColor) {
+          this.color = this.profilSelected.themeColor
+        }
 
         this.profilSelected?.reseau.forEach(reseau => {
           this.reseauSelected = this.reseauSelected || [];
@@ -269,12 +272,12 @@ export class ProfileComponent implements OnInit {
 
   saveColor(): void {
     if (this.color && this.userConnected) {
-      this.selectedColor = this.color;
-      this.userConnected.themeColor = this.color;
+      // this.selectedColor = this.color;
+      // this.userConnected.themeColor = this.color;
 
       this.userService.updateThemeColor(this.userConnected.id, this.color, this.app.setURL()).subscribe((response:ApicallInterface) => {
         if (this.userConnected && response.message == "Theme color updated successfully"){
-          this.color = this.userConnected.themeColor;
+          this.app.userConnected.themeColor = this.color;
           Swal.fire({
             title: 'Succès!',
             text: 'Votre thème à bien été mise à jour.',
