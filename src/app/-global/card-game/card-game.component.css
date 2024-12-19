@@ -325,14 +325,16 @@
     /* TITRE */
     .squellette-title{
       height: 30px;
-      width: 280px;
+      width: 270px;
       background: gray;
       border-radius: 5px;
+      margin-bottom: 8px;
     }.squellette-platform{
-       height: 20px;
-       width: 210px;
-       background: gray;
-       border-radius: 5px;
+      height: 20px;
+      width: 210px;
+      background: gray;
+      border-radius: 5px;
+      margin-bottom: 8px;
      }.squellette-date{
         height: 17px;
         width: 180px;
