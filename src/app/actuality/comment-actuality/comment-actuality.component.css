@@ -150,7 +150,7 @@
 .time-ago {
   font-size: small;
   margin-left: 20px;
-  color: #575757
+  color: #575757;
 }
 
 .reply-section {
@@ -380,6 +380,9 @@
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 535px;
   }
+  .replyOne {
+    transform: unset;
+  }
 }
 
 @media  ( max-width: 535px){ 
@@ -392,9 +395,10 @@
   }
   .clamp-name {
     max-width: 120px;
+    font-size: 14px;
   }
   .time-ago {
-    font-size: 12px;
+    font-size: 10px;
   }
 }
 
@@ -411,7 +415,7 @@
     max-width: 60px;
   }
   .time-ago {
-    font-size: 12px;
+    font-size: 8px;
     margin-left: 4px;
   }
 }
