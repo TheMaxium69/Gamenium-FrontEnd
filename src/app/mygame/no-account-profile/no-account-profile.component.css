@@ -13,8 +13,8 @@
 
   background-color: white;
   box-shadow: 1px 2px 11px #a6a6a6;
-  width: 30%;
-  height: 30%;
+  width: 300px;
+  height: 300px;
   border: unset !important;
   border-radius: 14px;
   display: flex;
@@ -24,7 +24,7 @@
 }
 
 .main-gamenium-btn {
-  max-width: 50%;
+  width: fit-content;
   margin-top: 25px;
 }
 
@@ -33,13 +33,13 @@
 }
 
 @media (max-width: 991px) {
-
-  .wrapperMSG {
-    width: 300px;
-    height: 300px;
-  }
-
   .connect-btn {
     max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapperMSG {
+    box-shadow: none;
   }
 }

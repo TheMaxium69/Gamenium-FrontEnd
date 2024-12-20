@@ -69,3 +69,9 @@
 .container .info span .fa {
   color: #EF3B3A;
 }
+
+@media (max-width: 480px) {
+  .blocks-shadow {
+    box-shadow: none;
+  }
+}
