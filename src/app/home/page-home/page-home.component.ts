@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-page-home',
@@ -10,10 +11,15 @@ export class PageHomeComponent implements OnInit{
 
   isLoggedIn: boolean = false;
 
-  constructor(private app:AppComponent) { }
+  constructor(private app:AppComponent,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.app.isLoggedIn
+
+    if (!this.app.isLoggedIn){
+      this.router.navigate(['/account']);
+    }
   }
 
 }

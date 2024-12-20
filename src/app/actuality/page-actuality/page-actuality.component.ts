@@ -1,7 +1,8 @@
 import {ChangeDetectorRef, Component, OnInit, Provider} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
 import { ProviderInterface } from 'src/app/-interface/provider.interface';
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-page-actuality',
@@ -20,13 +21,19 @@ export class PageActualityComponent implements OnInit{
 
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private app:AppComponent,
   ) {}
 
   ngOnInit(): void {
 
 
     this.actualityId = this.route.snapshot.paramMap.get('id');
+
+    if (!this.app.isLoggedIn){
+      this.router.navigate(['/account']);
+    }
 
 
   }
@@ -43,7 +50,7 @@ export class PageActualityComponent implements OnInit{
       this.lastProviderSelected = providerId;
 
     }
-  
+
   }
 
   getProviderFollowed(providers: ProviderInterface[]) {

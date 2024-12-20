@@ -29,6 +29,10 @@ export class PageMygameComponent implements OnInit{
       this.noAccount = true;
     }
 
+    if (!this.app.isLoggedIn){
+      this.router.navigate(['/account']);
+    }
+
   }
 }
 

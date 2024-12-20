@@ -50,6 +50,8 @@ export class AppComponent {
 
     if (cookieToken && cookieUser){
       this.loginWithCookie(cookieToken, cookieUser);
+    } else {
+      this.router.navigate(['/account']);
     }
   }
 
@@ -158,7 +160,7 @@ export class AppComponent {
     this.hmgScreenshotCategory = [];
     this.userDefaultNoReload = undefined;
 
-    this.router.navigate(['/']);
+    this.router.navigate(['/account']);
   }
 
   //LOGIN
