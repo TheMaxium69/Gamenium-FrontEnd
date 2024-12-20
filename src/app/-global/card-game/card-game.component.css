@@ -84,7 +84,7 @@
 }
 
 .card-right .core-left{
-  max-width: clamp(200px, 50%, 500px);
+  width: 100%;
   min-width: 280px;
   display: flex;
   flex-direction: column;
@@ -277,7 +277,9 @@
     margin-right: 12px;
   }
 
-
+  #tags {
+    max-width: 185px;
+  }
 
 }
 
@@ -352,7 +354,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 185px;
+  /* max-width: 185px; */
   .badge{
     margin-right: 5px;
   }
