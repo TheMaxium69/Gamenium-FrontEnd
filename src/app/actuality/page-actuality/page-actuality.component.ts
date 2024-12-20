@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, Provider} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
 import { ProviderInterface } from 'src/app/-interface/provider.interface';
@@ -16,10 +16,12 @@ export class PageActualityComponent implements OnInit{
   providerFollowed: ProviderInterface[] = []
   providerFollowActuAll: PostActuInterface[] = []
   manageProviders: boolean = false
+  temp: ProviderInterface[] = []
+
 
   constructor(
-    private route: ActivatedRoute) {
-  }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
 

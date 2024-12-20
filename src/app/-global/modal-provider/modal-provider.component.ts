@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProviderInterface } from 'src/app/-interface/provider.interface';
 import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
 import { FollowService } from 'src/app/-service/follow.service';
@@ -26,6 +26,9 @@ export class ModalProviderComponent implements OnInit {
   @Input()
   providerFollowActuAll: PostActuInterface[] = []
 
+  @Output()
+  onProviderDelete: EventEmitter<ProviderInterface[]> = new EventEmitter<ProviderInterface[]>()
+
   ngOnInit(): void {
   }
 
@@ -44,6 +47,7 @@ export class ModalProviderComponent implements OnInit {
     this.followService.deleteFollowProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe(response => {
       if (response.message == 'follow deleted successfully') {
         this.providerFollowed = this.providerFollowed.filter(provider => provider.id !== providerId);
+        this.onProviderDelete.emit(this.providerFollowed)
       } else {
         Swal.fire({
           title: 'Echec!',
@@ -55,6 +59,5 @@ export class ModalProviderComponent implements OnInit {
       }
     }, (error) => this.app.erreurSubcribe())
   }
-
 
 }
