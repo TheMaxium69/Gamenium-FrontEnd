@@ -10,8 +10,8 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   // Récuperer toute les tâches
-  getAllTasks(url: string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/task-user/view');
+  getAllTasks(url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/task-user/view', option);
   }
 
   // recuperer les tache completé

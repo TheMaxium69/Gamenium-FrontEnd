@@ -10,25 +10,25 @@ export class FollowService {
 
   constructor(private http:HttpClient) { }
 
-  getFollowByProvider(id_provider: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/followByProvider/' + id_provider);
+  getFollowByProvider(id_provider: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/followByProvider/' + id_provider, option);
   }
 
-  getFollowByGameProfil(id_gameprofil: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/followByGameProfil/' + id_gameprofil);
-  }
+  // getFollowByGameProfil(id_gameprofil: number, url:string): Observable<ApicallInterface> {
+  //   return this.http.get<ApicallInterface>(url + '/followByGameProfil/' + id_gameprofil);
+  // }
 
-  getMyFollowByUser(id_user: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/myFollowByUser/' + id_user);
+  getMyFollowByUser(id_user: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/myFollowByUser/' + id_user, option);
   }
 
   postFollowProvider(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
     return this.http.post<ApicallInterface>(url + '/followProvider', body, option);
   }
 
-  postFollowGameProfil(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
-    return this.http.post<ApicallInterface>(url + '/followGameProfil', body, option);
-  }
+  // postFollowGameProfil(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+  //   return this.http.post<ApicallInterface>(url + '/followGameProfil', body, option);
+  // }
 
   deleteFollowProvider(id_provider: number, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
     return this.http.delete<ApicallInterface>(url + '/unfollowProvider/' + id_provider, option);

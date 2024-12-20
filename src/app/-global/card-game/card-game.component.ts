@@ -58,14 +58,14 @@ export class CardGameComponent implements OnInit {
     this.innerWidth = window.innerWidth;
   }
 
-  
+
 
 
   getUserRate(id_user: number){
     if (this.app.userRatingAll){
       this.userRatingAll = this.app.userRatingAll;
     } else {
-      this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
+      this.userRateService.getRateByUser(id_user, this.app.setURL(), this.app.createCorsToken()).subscribe(responseRates => {
         if (responseRates.message == "good") {
           this.userRatingAll = responseRates.result;
           this.app.userRatingAll = this.userRatingAll;
@@ -75,7 +75,7 @@ export class CardGameComponent implements OnInit {
   }
 
   getProfilRate(id_profil:number){
-    this.userRateService.getRateByUser(id_profil, this.app.setURL()).subscribe(responseRates => {
+    this.userRateService.getRateByUser(id_profil, this.app.setURL(), this.app.createCorsToken()).subscribe(responseRates => {
       if (responseRates.message == "good") {
         this.userRatingAll = responseRates.result;
       }

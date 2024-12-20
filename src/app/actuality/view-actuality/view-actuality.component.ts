@@ -92,7 +92,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
 
   /* RECUPERE TOUTE LES ACTU */
   getActuAll() {
-    this.postActuService.getActuAll(this.app.setURL()).subscribe(responseActu => {
+    this.postActuService.getActuAll(this.app.setURL(), this.app.createCorsToken()).subscribe(responseActu => {
       if (responseActu.message === 'good') {
         /*GET ACTU ALL*/
         this.postActuAll = responseActu.result;
@@ -112,7 +112,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
 
   /* RECUPERE LES ACTU D'UN PROVIDER */
   getActuByProvider(id: number) {
-    this.postActuService.getPostByProvider(id, this.app.setURL()).subscribe(response => {
+    this.postActuService.getPostByProvider(id, this.app.setURL(), this.app.createCorsToken()).subscribe(response => {
       if (response.message === 'good') {
         /*GET ACTU BY PROVIDER*/
         this.postActuProvider = response.result;
@@ -130,7 +130,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
     this.postActuFollow = [];
 
     this.providerFollowed.forEach(provider => {
-      this.postActuService.getPostByProvider(provider.id, this.app.setURL()).subscribe(
+      this.postActuService.getPostByProvider(provider.id, this.app.setURL(), this.app.createCorsToken()).subscribe(
         response => {
           if (response.message === 'good') {
             this.isLoading = false;

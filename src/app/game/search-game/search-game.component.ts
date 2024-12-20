@@ -47,7 +47,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
 
     /* FIRST REQUESTE*/
     if (this.app.gameNoReload.length == 0) {
-      this.gameService.searchGames(this.app.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
+      this.gameService.searchGames(this.app.searchValue, this.app.fetchLimit, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
         this.app.gameNoReload = results;
         this.games = this.app.gameNoReload;
         if (this.app.searchValue.trim() == ''){
@@ -74,7 +74,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
         if (!searchValue.trim() && this.app.gamesSearchDefault.length !== 0) {
           return of(this.app.gamesSearchDefault);
         }
-        return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+        return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL(), this.app.createCorsToken()).pipe(
           catchError((error) => {
             this.isLoading = true;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
@@ -177,14 +177,14 @@ export class SearchGameComponent implements OnInit, OnDestroy{
         }
 
         let providersFetchLimit = this.app.fetchLimit - this.games.length;
-        this.providerService.searchProviders(this.app.searchValue, providersFetchLimit, this.app.setURL()).subscribe((results) => {
+        this.providerService.searchProviders(this.app.searchValue, providersFetchLimit, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
           this.app.providersNoReload = results;
           this.providers = this.app.providersNoReload;
 
           let userFetchLimit = providersFetchLimit - this.providers.length;
 
           // affiche les users si la limite de 50 objects (games + providers) n'a pas été atteinte et va jusqu'à 50 objects en tout (games + providers + users)
-          this.userService.searchUsers(this.app.searchValue, userFetchLimit, this.app.setURL()).subscribe((results) => {
+          this.userService.searchUsers(this.app.searchValue, userFetchLimit, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
             this.app.usersNoReload = results;
             this.users = this.app.usersNoReload;
           });
@@ -204,7 +204,7 @@ export class SearchGameComponent implements OnInit, OnDestroy{
     console.log(limit)
 
     /* TODO : faire un offset*/
-    this.gameService.searchGames(this.app.searchValue, limit, this.app.setURL()).subscribe((results) => {
+    this.gameService.searchGames(this.app.searchValue, limit, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
       this.games = results;
       console.log(this.games.length)
 

@@ -36,8 +36,8 @@ export class HomeInviteComponent implements OnInit {
   }
 
   getActuAll() {
-    
-    this.postActuService.getActuAll(this.app.setURL()).subscribe(responseActu => {
+
+    this.postActuService.getActuAll(this.app.setURL(), this.app.createCorsToken()).subscribe(responseActu => {
       if (responseActu.message === 'good') {
         this.postActuFollowOrAll = responseActu.result;
         console.log('Fetching all actualities');
@@ -57,16 +57,16 @@ export class HomeInviteComponent implements OnInit {
     let body = JSON.stringify(bodyNoJson);
 
     console.log('Fetching latest games');
-    this.gameService.getLatestGames(body, this.app.setURL()).subscribe((results) => {
+    this.gameService.getLatestGames(body, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
       this.games = results.result;
       console.log(results.result)
     })
   }
 
-    // PROVIDER 
+    // PROVIDER
 
   fetchProviders(): void {
-    this.providerService.getAllProviders(this.app.setURL()).subscribe({
+    this.providerService.getAllProviders(this.app.setURL(), this.app.createCorsToken()).subscribe({
       next: (response) => {
         if (response && response.result) {
           this.providers = response.result;
@@ -83,7 +83,7 @@ export class HomeInviteComponent implements OnInit {
     console.log(`Provider with ID ${providerId} followed.`);
     this.followedStates[providerId] = true;
   }
-  
+
   handleUnfollowed(providerId: number): void {
     console.log(`Provider with ID ${providerId} unfollowed.`);
     this.followedStates[providerId] = false;
@@ -91,11 +91,11 @@ export class HomeInviteComponent implements OnInit {
 
 
   isProviderFollowed(providerId: number): boolean {
-    return this.followedStates[providerId] || false; 
+    return this.followedStates[providerId] || false;
   }
 
   selectRandomProviders(count: number): void {
-    const unfollowedProviders = this.providers.filter(provider => 
+    const unfollowedProviders = this.providers.filter(provider =>
         !this.isProviderFollowed(provider.id)
     );
     const shuffled = [...unfollowedProviders].sort(() => 0.5 - Math.random());

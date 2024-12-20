@@ -103,7 +103,7 @@ export class DetailActualityComponent implements OnInit{
 
 
   getActuById(id: number): void {
-    this.postActu.getPostActuById(id, this.app.setURL()).subscribe((response: { message: string; result: PostActuInterface }) => {
+    this.postActu.getPostActuById(id, this.app.setURL(), this.app.createCorsToken()).subscribe((response: { message: string; result: PostActuInterface }) => {
       if (response.message === "good") {
         this.actualitySelected = response.result;
 
@@ -122,7 +122,7 @@ export class DetailActualityComponent implements OnInit{
 
   getLikeByActu(idActu: number){
 
-    this.likeService.getPostActuLikes(idActu, this.app.setURL()).subscribe(reponseLikeByPostActu => {
+    this.likeService.getPostActuLikes(idActu, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseLikeByPostActu => {
 
       if (reponseLikeByPostActu.message == "good"){
 
@@ -228,7 +228,7 @@ export class DetailActualityComponent implements OnInit{
 
   getCountByActu(id:number){
 
-    this.commentService.getCountByActu(id, this.app.setURL()).subscribe((reponseMyCountActu:{message:string, result: {
+    this.commentService.getCountByActu(id, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyCountActu:{message:string, result: {
         total:number,
         reply:CommentReplyInterface[][],
       }}) => {
@@ -304,7 +304,7 @@ export class DetailActualityComponent implements OnInit{
   }
 
   getViewsByActu(idActu: number) {
-    this.viewService.getPostActuViews(idActu, this.app.setURL()).subscribe(reponseViewByPostActu => {
+    this.viewService.getPostActuViews(idActu, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseViewByPostActu => {
 
       if (reponseViewByPostActu.message == "good"){
 

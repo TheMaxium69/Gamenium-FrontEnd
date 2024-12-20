@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userConnected = this.app.userConnected;
-    
+
     if (this.userConnected) {
       this.getBadgeByUser(this.userConnected.id);
 
@@ -102,14 +102,14 @@ export class ProfileComponent implements OnInit {
     const unlog = document.querySelector('.unlog') as HTMLElement;
     const settings = document.querySelectorAll('.search-setting')
     let settingsResultNumber = 0;
-    
+
     this.populateResultDiv()
     resultDiv.style.display = 'block';
-    
+
     settings.forEach((child) => {
       const setting = child as HTMLElement;
       const settingText = setting.firstChild?.textContent?.toLowerCase();
-      
+
       if (search && settingText && !settingText.includes(search)) {
         setting.style.display = 'none';
 
@@ -215,7 +215,7 @@ export class ProfileComponent implements OnInit {
 
   getInfoProfile(id:number){
 
-    this.profileService.getProfilByUserId(id,this.app.setURL()).subscribe(responseProfil => {
+    this.profileService.getProfilByUserId(id,this.app.setURL(), this.app.createCorsToken()).subscribe(responseProfil => {
 
       if (responseProfil.message == "good"){
 
@@ -245,7 +245,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getBadgeByUser(id: number | undefined): void {
-    this.badgeService.getBadgeByUser(id, this.app.setURL()).subscribe((ReponseApi) => {
+    this.badgeService.getBadgeByUser(id, this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
       if (ReponseApi.message == 'good') {
         this.badgeUserConnected = ReponseApi.result;
       }
@@ -253,7 +253,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getAllBadges() {
-    this.badgeService.getAllBadges(this.app.setURL()).subscribe((ReponseApi) => {
+    this.badgeService.getAllBadges(this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
       if (ReponseApi.message == 'good') {
         this.allBadges = ReponseApi.result;
         console.log(this.allBadges);
@@ -274,7 +274,7 @@ export class ProfileComponent implements OnInit {
       // this.selectedColor = this.color;
       // this.userConnected.themeColor = this.color;
 
-      this.userService.updateThemeColor(this.userConnected.id, this.color, this.app.setURL()).subscribe((response:ApicallInterface) => {
+      this.userService.updateThemeColor(this.userConnected.id, this.color, this.app.setURL(), this.app.createCorsToken()).subscribe((response:ApicallInterface) => {
         if (this.userConnected && response.message == "Theme color updated successfully"){
           this.app.userConnected.themeColor = this.color;
           Swal.fire({
@@ -378,7 +378,7 @@ export class ProfileComponent implements OnInit {
 
   getAllSocialNetwork(){
 
-    this.socialnetworkService.getAllSocialNetwork(this.app.setURL()).subscribe(responseSocialNetworkAll => {
+    this.socialnetworkService.getAllSocialNetwork(this.app.setURL(), this.app.createCorsToken()).subscribe(responseSocialNetworkAll => {
 
       if(responseSocialNetworkAll.message == "good"){
 
@@ -397,7 +397,7 @@ export class ProfileComponent implements OnInit {
 
   getAllDevise(){
     if (this.app.deviseNoReload.length === 0){
-      this.deviseService.getAllDevise(this.app.setURL()).subscribe((reponseDeviseAll:{message:string,result:DeviseInterface[]})=>{
+      this.deviseService.getAllDevise(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseDeviseAll:{message:string,result:DeviseInterface[]})=>{
         if (reponseDeviseAll.message == "good"){
           this.app.deviseNoReload = reponseDeviseAll.result;
         }

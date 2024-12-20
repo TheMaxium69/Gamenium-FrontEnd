@@ -69,7 +69,7 @@ export class ProviderComponent implements OnInit{
   }
 
   getProviders(id:number): void {
-    this.providerService.getProviderById(id, this.app.setURL()).subscribe((reponseProviders) => {
+    this.providerService.getProviderById(id, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseProviders) => {
       if (reponseProviders.message == "good"){
         this.providerSelected = reponseProviders.result;
 
@@ -96,7 +96,7 @@ export class ProviderComponent implements OnInit{
   checkIfUserFollowProvider(userId: number) {
     this.providerId = this.route.snapshot.paramMap.get('id')
 
-    this.followService.getFollowByProvider(this.providerId, this.app.setURL()).subscribe((reponseApi) => {
+    this.followService.getFollowByProvider(this.providerId, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
       if (reponseApi.message == 'good') {
         this.isProviderFollowedByUser = reponseApi.result.some((result: any) => result.user.id == userId)
       } else {
@@ -106,7 +106,7 @@ export class ProviderComponent implements OnInit{
   }
 
   getNumberOfFollowers(providerId: number): void {
-    this.followService.getFollowByProvider(providerId, this.app.setURL()).subscribe(
+    this.followService.getFollowByProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe(
       (response) => {
         if (response.result) {
           this.providerNbFollower = response.result.length;
@@ -125,7 +125,7 @@ export class ProviderComponent implements OnInit{
   }
 
   getLatestPostActus(id:number): void {
-    this.postactuService.getLatestPostActus(id, this.app.setURL()).subscribe((reponsePostActus) => {
+    this.postactuService.getLatestPostActus(id, this.app.setURL(), this.app.createCorsToken()).subscribe((reponsePostActus) => {
       if (reponsePostActus.message !== "PostActus not found"){
         this.postactuSelected = reponsePostActus.result;
         console.log(reponsePostActus.result)

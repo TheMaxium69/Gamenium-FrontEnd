@@ -45,7 +45,7 @@ export class CardProviderComponent implements OnInit {
    }
 
    checkFollowState(providerId: number): void {
-    this.followService.getFollowByProvider(providerId, this.app.setURL()).subscribe({
+    this.followService.getFollowByProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe({
       next: (response) => {
         if (response.message === 'good') {
           this.isFollowed = response.result.some((item: any) => item.user.id === this.idUser);

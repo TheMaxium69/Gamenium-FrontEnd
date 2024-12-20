@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ApicallInterface} from "../-interface/apicall.interface";
 
@@ -10,12 +10,12 @@ export class HmgCopyFormatService {
 
   constructor(private http: HttpClient) {}
 
-  getAllHmgCopyFormat(url: string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url+"/hmgCopyFormatAll");
+  getAllHmgCopyFormat(url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url+"/hmgCopyFormatAll", option);
   }
 
-  getOneHmgCopyFormat(id: number, url: string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url+"/hmgCopyFormat/"+id);
-  }
+  // getOneHmgCopyFormat(id: number, url: string): Observable<ApicallInterface> {
+  //   return this.http.get<ApicallInterface>(url+"/hmgCopyFormat/"+id);
+  // }
 
 }

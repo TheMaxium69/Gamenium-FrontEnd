@@ -51,7 +51,7 @@ export class HeadProfileComponent implements OnInit{
 
   getInfoProfile(id:number){
 
-      this.profileService.getProfilByUserId(id,this.app.setURL()).subscribe(responseProfil => {
+      this.profileService.getProfilByUserId(id,this.app.setURL(), this.app.createCorsToken()).subscribe(responseProfil => {
 
         if (responseProfil.message == "good"){
 
@@ -80,7 +80,7 @@ export class HeadProfileComponent implements OnInit{
   }
 
   getBadgeByUser(id: number): void {
-    this.badgeService.getBadgeByUser(id, this.app.setURL()).subscribe((ReponseApi) => {
+    this.badgeService.getBadgeByUser(id, this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
       if (ReponseApi.message == 'good') {
         this.badgeUserConnected = ReponseApi.result;
       }

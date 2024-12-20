@@ -102,7 +102,7 @@ export class HomeConnectedComponent implements OnInit {
 
   getInfoProfile(id:number){
 
-    this.profileService.getProfilByUserId(id,this.app.setURL()).subscribe(responseProfil => {
+    this.profileService.getProfilByUserId(id,this.app.setURL(), this.app.createCorsToken()).subscribe(responseProfil => {
 
       if (responseProfil.message == "good"){
 
@@ -127,7 +127,7 @@ export class HomeConnectedComponent implements OnInit {
   }
 
   getBadgeByUser(id: number): void {
-    this.badgeService.getBadgeByUser(id, this.app.setURL()).subscribe((ReponseApi) => {
+    this.badgeService.getBadgeByUser(id, this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
       if (ReponseApi.message == 'good') {
         this.badgeUserConnected = ReponseApi.result;
       }
@@ -143,7 +143,7 @@ export class HomeConnectedComponent implements OnInit {
     const options = this.app.createCorsToken();
 
     // Récupère toutes les tâches
-    this.taskService.getAllTasks(this.app.setURL()).subscribe((allTasksResponse) => {
+    this.taskService.getAllTasks(this.app.setURL(), this.app.createCorsToken()).subscribe((allTasksResponse) => {
       if (allTasksResponse.message === 'good') {
         const allTasks: TaskUserInterface[] = allTasksResponse.result;
 
@@ -288,7 +288,7 @@ export class HomeConnectedComponent implements OnInit {
 
   getActuAll() {
     console.log('Fetching all actualities');
-    this.postActuService.getActuAll(this.app.setURL()).subscribe(responseActu => {
+    this.postActuService.getActuAll(this.app.setURL(), this.app.createCorsToken()).subscribe(responseActu => {
       if (responseActu.message === 'good') {
         this.postActuFollowOrAll = responseActu.result;
       } else {
@@ -307,7 +307,7 @@ export class HomeConnectedComponent implements OnInit {
   // PROVIDER
 
   fetchProviders(): void {
-    this.providerService.getAllProviders(this.app.setURL()).subscribe({
+    this.providerService.getAllProviders(this.app.setURL(), this.app.createCorsToken()).subscribe({
       next: (response) => {
         if (response && response.result) {
           this.providers = response.result;
@@ -350,7 +350,7 @@ export class HomeConnectedComponent implements OnInit {
     let body = JSON.stringify(bodyNoJson);
 
     console.log('Fetching latest games');
-    this.gameService.getLatestGames(body, this.app.setURL()).subscribe((results) => {
+    this.gameService.getLatestGames(body, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
       this.games = results.result;
       console.log(results.result)
     })

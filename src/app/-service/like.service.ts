@@ -11,12 +11,12 @@ export class LikeService {
 
   constructor(private http: HttpClient) {}
 
-  getPostActuLikes(idPost: number, url: string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/like/post-actu/' + idPost);
+  getPostActuLikes(idPost: number, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/like/post-actu/' + idPost, option);
   }
 
-  getCommentLikes(idComment: number, url: string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/like/comment/' + idComment);
+  getCommentLikes(idComment: number, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/like/comment/' + idComment, option);
   }
 
   addLikePostActu(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {

@@ -81,7 +81,7 @@ export class SearchPageComponent implements OnInit, OnDestroy{
         if (!searchValue.trim()) {
           return of(this.app.gamesSearchDefault);
         }
-        return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+        return this.gameService.searchGames(searchValue, this.app.fetchLimit, this.app.setURL(), this.app.createCorsToken()).pipe(
           catchError((error) => {
             this.isGameLoading = false;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
@@ -114,7 +114,7 @@ export class SearchPageComponent implements OnInit, OnDestroy{
       debounceTime(this.app.deadlineSearch),
       // distinctUntilChanged(),
       switchMap((searchValue) => {
-        return this.userService.searchUsers(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+        return this.userService.searchUsers(searchValue, this.app.fetchLimit, this.app.setURL(), this.app.createCorsToken()).pipe(
           catchError((error) => {
             this.isProfilLoading = false;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
@@ -150,7 +150,7 @@ export class SearchPageComponent implements OnInit, OnDestroy{
       debounceTime(this.app.deadlineSearch),
       // distinctUntilChanged(),
       switchMap((searchValue) => {
-        return this.postactuService.searchPostActus(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+        return this.postactuService.searchPostActus(searchValue, this.app.fetchLimit, this.app.setURL(), this.app.createCorsToken()).pipe(
           catchError((error) => {
             this.isActuLoading = false;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
@@ -178,7 +178,7 @@ export class SearchPageComponent implements OnInit, OnDestroy{
       debounceTime(this.app.deadlineSearch),
       // distinctUntilChanged(),
       switchMap((searchValue) => {
-        return this.providerService.searchProviders(searchValue, this.app.fetchLimit, this.app.setURL()).pipe(
+        return this.providerService.searchProviders(searchValue, this.app.fetchLimit, this.app.setURL(), this.app.createCorsToken()).pipe(
           catchError((error) => {
             this.isProviderLoading = false;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);
@@ -266,7 +266,7 @@ export class SearchPageComponent implements OnInit, OnDestroy{
 
     if (this.app.gameNoReload.length == 0){
 
-      this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL()).subscribe((results) => {
+      this.gameService.searchGames(this.searchValue, this.app.fetchLimit, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
         this.app.gameNoReload = results;
 
         this.games = this.app.gameNoReload;
@@ -312,7 +312,7 @@ export class SearchPageComponent implements OnInit, OnDestroy{
     let limit = this.nbMoreGame * this.app.fetchLimit;
     console.log(limit)
 
-    this.gameService.searchGames(this.searchValue, limit, this.app.setURL()).subscribe((results) => {
+    this.gameService.searchGames(this.searchValue, limit, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
       this.games = results;
       console.log(this.games.length)
 

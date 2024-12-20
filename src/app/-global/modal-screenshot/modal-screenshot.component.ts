@@ -32,7 +32,7 @@ export class ModalScreenshotComponent implements OnInit {
 
   getCategory(){
     if (this.app.hmgScreenshotCategory.length == 0){
-      this.hmgScreenshotService.getAllScreenshotCategory(this.app.setURL()).subscribe((reponseCate:{message:string,result:HmgScreenshotCategoryInterface[]}) => {
+      this.hmgScreenshotService.getAllScreenshotCategory(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseCate:{message:string,result:HmgScreenshotCategoryInterface[]}) => {
         if (reponseCate.message == "good"){
           this.app.hmgScreenshotCategory = reponseCate.result
         }

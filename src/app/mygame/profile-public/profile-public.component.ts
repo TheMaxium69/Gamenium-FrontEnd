@@ -111,7 +111,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   }
 
-  
+
 
   load(){
     this.isCommonView = false;
@@ -144,7 +144,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
 
   myGameByUserWithPlateform(id_user: number, id_plateform:number): void {
-    this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+    this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         // this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
         this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
@@ -157,7 +157,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   myGameByUser(id_user:number): void {
 
-      this.myGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+      this.myGameService.getMyGameByUser(id_user, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
         if (responseMyGame.message === "good") {
           if (id_user === this.userConnected?.id) {
             // on save les jeux de l'user connecté
@@ -203,7 +203,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   getInfoProfile(id:number){
 
-    this.profileService.getProfilByUserId(id,this.app.setURL()).subscribe(responseProfil => {
+    this.profileService.getProfilByUserId(id,this.app.setURL(), this.app.createCorsToken()).subscribe(responseProfil => {
 
       if (responseProfil.message == "good"){
 

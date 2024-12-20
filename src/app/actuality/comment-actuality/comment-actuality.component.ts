@@ -88,7 +88,7 @@ export class CommentActualityComponent implements OnInit{
 
   getActuById(id:number){
 
-    this.postActu.getPostActuById(id, this.app.setURL()).subscribe((reponsePostActu) => {
+    this.postActu.getPostActuById(id, this.app.setURL(), this.app.createCorsToken()).subscribe((reponsePostActu) => {
 
       if (reponsePostActu.message == "good"){
 
@@ -119,7 +119,7 @@ export class CommentActualityComponent implements OnInit{
 
   getLikeByComment(idComment: number) {
 
-    this.likeService.getCommentLikes(idComment, this.app.setURL()).subscribe(reponseLikeByCommentActu => {
+    this.likeService.getCommentLikes(idComment, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseLikeByCommentActu => {
 
       if (reponseLikeByCommentActu.message == 'good'){
 
@@ -141,7 +141,7 @@ export class CommentActualityComponent implements OnInit{
 
   getCommentWithActu(id:number){
 
-    this.commentService.getCommentWithActu(id, this.app.setURL()).subscribe(reponseMyCommentActu => {
+    this.commentService.getCommentWithActu(id, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyCommentActu => {
 
       // console.log(reponseMyCommentActu)
 
@@ -251,7 +251,7 @@ export class CommentActualityComponent implements OnInit{
     if (this.commentByActu){
 
       this.commentByActu.forEach(comment => {
-        this.badgeService.getBadgeByUser(comment.user.id, this.app.setURL()).subscribe((ReponseApi) => {
+        this.badgeService.getBadgeByUser(comment.user.id, this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
           if (ReponseApi.message == 'good') {
             this.badgeForAllUser[comment.user.id] = ReponseApi.result;
           }
@@ -438,7 +438,7 @@ export class CommentActualityComponent implements OnInit{
 
   getNBLikeByComment(commentId: number): void {
 
-    this.likeService.getCommentLikes(commentId, this.app.setURL()).subscribe((reponseLikeByCommentActu: {message:string, result:LikeInterface[]}) => {
+    this.likeService.getCommentLikes(commentId, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseLikeByCommentActu: {message:string, result:LikeInterface[]}) => {
 
       if (reponseLikeByCommentActu.message == 'good'){
         this.nbLikeByComment[commentId] = reponseLikeByCommentActu.result.length;

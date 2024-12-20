@@ -65,7 +65,7 @@ export class NavbarActualityComponent implements OnInit {
 
   followProviderByUser(id: number){
 
-    this.followService.getMyFollowByUser(id, this.app.setURL()).subscribe(reponseMyFollowProvider => {
+    this.followService.getMyFollowByUser(id, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseMyFollowProvider => {
       if (reponseMyFollowProvider.message == "good") {
 
         // let followAll:FollowInterface[] = reponseMyFollowProvider.result;
@@ -104,7 +104,7 @@ export class NavbarActualityComponent implements OnInit {
 
   getProviderAll(){
 
-    this.providerService.getAllProviders(this.app.setURL()).subscribe((responseProvider) => {
+    this.providerService.getAllProviders(this.app.setURL(), this.app.createCorsToken()).subscribe((responseProvider) => {
       // console.log(responseProvider);
 
       if (responseProvider.message == "good"){

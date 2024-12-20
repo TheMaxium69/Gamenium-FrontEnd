@@ -99,7 +99,7 @@ export class ProfilePrivateComponent implements OnInit {
 
 
   }
-  
+
   // responsive de tabMyGame
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -120,7 +120,7 @@ export class ProfilePrivateComponent implements OnInit {
       this.gamesLoaded = true;
       this.tryCheckAndCompleteTasks();
     } else {
-      this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+      this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
         if (responseMyGame.message == "good") {
           this.app.myGameAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
         } else {
@@ -137,7 +137,7 @@ export class ProfilePrivateComponent implements OnInit {
     if (this.app.userRatingAll){
       this.userRatingAll = this.app.userRatingAll;
     } else {
-      this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
+      this.userRateService.getRateByUser(id_user, this.app.setURL(), this.app.createCorsToken()).subscribe(responseRates => {
         if (responseRates.message == "good") {
           this.userRatingAll = responseRates.result;
           this.app.userRatingAll = this.userRatingAll;
@@ -192,7 +192,7 @@ export class ProfilePrivateComponent implements OnInit {
 
   // récupere les info du profil de l'utilisateur
   getInfoProfile(id: number) {
-    this.profileService.getProfilByUserId(id, this.app.setURL()).subscribe(responseProfil => {
+    this.profileService.getProfilByUserId(id, this.app.setURL(), this.app.createCorsToken()).subscribe(responseProfil => {
       if (responseProfil.message == "good") {
         this.profilSelected = responseProfil.result;
         if (this.profilSelected?.themeColor) {
@@ -229,7 +229,7 @@ export class ProfilePrivateComponent implements OnInit {
   //check si un filtre autre que celui par default est appliqué
   isFilterApplied(): boolean {
     return this.sortOption !== '';
-    
+
   }
 
   applySorting(): void {
@@ -292,7 +292,7 @@ export class ProfilePrivateComponent implements OnInit {
     const options = this.app.createCorsToken();
 
     // Récupère toutes les tâches
-    this.taskService.getAllTasks(this.app.setURL()).subscribe((allTasksResponse) => {
+    this.taskService.getAllTasks(this.app.setURL(), this.app.createCorsToken()).subscribe((allTasksResponse) => {
       if (allTasksResponse.message === 'good') {
         const allTasks: TaskUserInterface[] = allTasksResponse.result;
 
@@ -447,7 +447,7 @@ checkAndCompleteTasks(): void {
 
 
 
-  
+
 
 }
 

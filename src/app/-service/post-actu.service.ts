@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {ApicallInterface} from "../-interface/apicall.interface";
 import { PostActuInterface } from '../-interface/post-actu.interface';
@@ -10,23 +10,23 @@ import { PostActuInterface } from '../-interface/post-actu.interface';
 export class PostActuService {
   constructor(private http: HttpClient) {}
 
-  getActuAll(url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/postactus/');
+  getActuAll(url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/postactus/', option);
   }
-  getPostActuById(id: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/postactu/' + id);
-  }
-
-  searchPostActus(searchValue: string, limit:number, url:string): Observable<PostActuInterface[]> {
-    return this.http.post<PostActuInterface[]>(url + `/postactus/search`, { searchValue, limit});
+  getPostActuById(id: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/postactu/' + id, option);
   }
 
-  getLatestPostActus(id: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + `/latestactubyprovider/` + id );
+  searchPostActus(searchValue: string, limit:number, url:string, option: {headers: HttpHeaders}): Observable<PostActuInterface[]> {
+    return this.http.post<PostActuInterface[]>(url + `/postactus/search`, { searchValue, limit}, option);
   }
 
-  getPostByProvider(id:number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/postByProvider/' + id)
+  getLatestPostActus(id: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + `/latestactubyprovider/` + id, option);
+  }
+
+  getPostByProvider(id:number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/postByProvider/' + id, option)
   }
 
 }

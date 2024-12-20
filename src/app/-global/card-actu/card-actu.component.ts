@@ -36,7 +36,7 @@ export class CardActuComponent implements OnInit {
 
   /* RECUPERE TOUT LES LIKE ET SAVOIR SI TU A LIKE UNE ACTU */
   getLikeByActu(idActu: number) {
-    this.likeService.getPostActuLikes(idActu, this.app.setURL()).subscribe(responseLikeByPostActu => {
+    this.likeService.getPostActuLikes(idActu, this.app.setURL(), this.app.createCorsToken()).subscribe(responseLikeByPostActu => {
       if (responseLikeByPostActu.message === 'good') {
         let isLiked = false;
 
@@ -55,7 +55,7 @@ export class CardActuComponent implements OnInit {
 
   /* RECUPERE TOUT LES COM DE L'ACTU */
   getCountByActu(id:number){
-    this.commentService.getCountByActu(id, this.app.setURL()).subscribe((reponseMyCountActu:{message:string, result: {
+    this.commentService.getCountByActu(id, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyCountActu:{message:string, result: {
         total:number,
         reply:CommentInterface[],
       }}) => {

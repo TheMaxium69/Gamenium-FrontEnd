@@ -90,7 +90,7 @@ export class EditedMygameComponent implements OnInit {
   /* RECUPRE LE JEUX*/
   getMyGame(idEditedMyGame: number){
 
-    this.historyMyGameService.getOneMyGame(idEditedMyGame, this.app.setURL()).subscribe((reponseMyGame: { message: string; result: HistoryMyGameInterface | undefined; }) => {
+    this.historyMyGameService.getOneMyGame(idEditedMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGame: { message: string; result: HistoryMyGameInterface | undefined; }) => {
 
       if (reponseMyGame.message == "good") {
         this.selectedMyGame = reponseMyGame.result;
@@ -135,7 +135,7 @@ export class EditedMygameComponent implements OnInit {
   getAllInfo(){
 
     if (this.app.deviseNoReload.length == 0){
-      this.deviseService.getAllDevise(this.app.setURL()).subscribe((reponseDevise: { message: string; result: DeviseInterface[]; }) => {
+      this.deviseService.getAllDevise(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseDevise: { message: string; result: DeviseInterface[]; }) => {
         if (reponseDevise.message == "good") {
           this.app.deviseNoReload = reponseDevise.result;
         }
@@ -152,7 +152,7 @@ export class EditedMygameComponent implements OnInit {
     }
 
     if (this.app.hmgCopyEtatAllNoReload.length === 0 ){
-      this.hmgCopyEtatService.getAllHmgCopyEtat(this.app.setURL()).subscribe((reponseEtat: { message: string; result: HmgCopyEtatInterface[]; }) => {
+      this.hmgCopyEtatService.getAllHmgCopyEtat(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseEtat: { message: string; result: HmgCopyEtatInterface[]; }) => {
         if (reponseEtat.message == "good") {
           this.app.hmgCopyEtatAllNoReload = reponseEtat.result;
         }
@@ -160,7 +160,7 @@ export class EditedMygameComponent implements OnInit {
     }
 
     if (this.app.hmgCopyFormatAllNoReload.length === 0 ){
-      this.hmgCopyFormatService.getAllHmgCopyFormat(this.app.setURL()).subscribe((reponseFormat: { message: string; result: HmgCopyFormatInterface[]; }) => {
+      this.hmgCopyFormatService.getAllHmgCopyFormat(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseFormat: { message: string; result: HmgCopyFormatInterface[]; }) => {
         if (reponseFormat.message == "good") {
           this.app.hmgCopyFormatAllNoReload = reponseFormat.result;
         }
@@ -169,7 +169,7 @@ export class EditedMygameComponent implements OnInit {
 
 
     if (this.app.hmgCopyRegionAllNoReload.length === 0 ){
-      this.hmgCopyRegionService.getAllHmgCopyRegion(this.app.setURL()).subscribe((reponseRegion: { message: string; result: HmgCopyRegionInterface[]; }) => {
+      this.hmgCopyRegionService.getAllHmgCopyRegion(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseRegion: { message: string; result: HmgCopyRegionInterface[]; }) => {
         if (reponseRegion.message == "good") {
           this.app.hmgCopyRegionAllNoReload = reponseRegion.result;
         }
@@ -186,7 +186,7 @@ export class EditedMygameComponent implements OnInit {
     }
 
     if (this.app.HmgCopyLanguageNoReload.length === 0){
-      this.hmgLanguageService.getAllHmgCopyLanguage(this.app.setURL()).subscribe((responseLanguage: { message: string; result:HmgCopyLanguageInterface[]; }) => {
+      this.hmgLanguageService.getAllHmgCopyLanguage(this.app.setURL(), this.app.createCorsToken()).subscribe((responseLanguage: { message: string; result:HmgCopyLanguageInterface[]; }) => {
         if (responseLanguage.message == "good") {
           this.app.HmgCopyLanguageNoReload = responseLanguage.result;
         }

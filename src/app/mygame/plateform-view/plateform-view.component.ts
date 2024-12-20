@@ -152,7 +152,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   }
 
   myGameByUserWithPlateform(id_user: number, id_plateform:number): void {
-    this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+    this.histoireMyGameService.getMyGameByUserWithPlateform(id_user,id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         // this.HistoireMyGameByUserByPlateform = responseMyGame.result || [];
         this.HistoireMyGameByUserByPlateform = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
@@ -169,7 +169,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     if (this.app.myGameAll){
       this.HistoireMyGameByUserByPlateform = this.app.myGameAll;
     } else {
-      this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+      this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
         if (responseMyGame.message == "good") {
           this.HistoireMyGameByUserByPlateform = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
           this.app.myGameAll = this.HistoireMyGameByUserByPlateform;
@@ -188,7 +188,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     if (this.app.userRatingAll){
       this.userRatingAll = this.app.userRatingAll;
     } else {
-      this.userRateService.getRateByUser(id_user, this.app.setURL()).subscribe(responseRates => {
+      this.userRateService.getRateByUser(id_user, this.app.setURL(), this.app.createCorsToken()).subscribe(responseRates => {
         if (responseRates.message == "good") {
           this.userRatingAll = responseRates.result;
         }

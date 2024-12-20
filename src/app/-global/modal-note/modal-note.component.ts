@@ -32,7 +32,7 @@ export class ModalNoteComponent implements OnInit, OnDestroy {
         if (!searchValue.trim()) {
           return of([]);
         }
-        return this.gameService.searchGames(searchValue, this.app.modalSearchLimit, this.app.setURL()).pipe(
+        return this.gameService.searchGames(searchValue, this.app.modalSearchLimit, this.app.setURL(), this.app.createCorsToken()).pipe(
           catchError((error) => {
             this.isLoading = false;
             console.error('Une erreur s\'est produite lors de la recherche de jeux :', error);

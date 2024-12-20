@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ApicallInterface} from "../-interface/apicall.interface";
 
@@ -10,12 +10,12 @@ export class DeviseService {
 
   constructor(private http: HttpClient) {}
 
-  getAllDevise(url: string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url+"/devises");
+  getAllDevise(url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url+"/devises", option);
   }
 
-  getOneDevise(id: number, url: string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url+"/devise/"+id);
-  }
+  // getOneDevise(id: number, url: string): Observable<ApicallInterface> {
+  //   return this.http.get<ApicallInterface>(url+"/devise/"+id);
+  // }
 
 }

@@ -59,7 +59,7 @@ export class DetailGameComponent implements OnInit{
 
   getGameById(id:number){
 
-    this.gameService.getGameById(id, this.app.setURL()).subscribe((reponseGameOne) => {
+    this.gameService.getGameById(id, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseGameOne) => {
 
       if (reponseGameOne.message == "good"){
 
@@ -80,7 +80,7 @@ export class DetailGameComponent implements OnInit{
   }
 
   myGameByUser(id_user: number): void {
-    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
+    this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
       if (responseMyGame.message == "good") {
         this.myGameHistoriqueAll = responseMyGame.result;
         this.hasGameInCollection = this.checkHasGameInCollection(Number(this.gameId));
@@ -249,7 +249,7 @@ export class DetailGameComponent implements OnInit{
         this.game_publishers.forEach((publisherName:string)=>{
           if (i < this.app.maxSearchProviderByGame && publisherName.length > 3){
             if (this.app.publisherNameFormatage(publisherName) == "Xbox"){
-              this.providerService.searchProviders("Microsoft", 1, this.app.setURL()).subscribe((reponse:ProviderInterface[]) => {
+              this.providerService.searchProviders("Microsoft", 1, this.app.setURL(), this.app.createCorsToken()).subscribe((reponse:ProviderInterface[]) => {
                 console.log(reponse);
                 if (reponse.length > 0){
                   if (!this.providerSelected.some(provider => provider.id === reponse[0].id)) {
@@ -258,7 +258,7 @@ export class DetailGameComponent implements OnInit{
                 }
               });
             }
-            this.providerService.searchProviders(this.app.publisherNameFormatage(publisherName), 1, this.app.setURL()).subscribe((reponse:ProviderInterface[]) => {
+            this.providerService.searchProviders(this.app.publisherNameFormatage(publisherName), 1, this.app.setURL(), this.app.createCorsToken()).subscribe((reponse:ProviderInterface[]) => {
               console.log(reponse);
               if (reponse.length > 0){
                 if (!this.providerSelected.some(provider => provider.id === reponse[0].id)) {

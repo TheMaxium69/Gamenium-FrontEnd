@@ -12,16 +12,16 @@ export class HistoryMyGameService {
   }
   constructor(private http: HttpClient) { }
 
-  getMyGameByUser(idUser: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/MyGameByUser/' + idUser);
+  getMyGameByUser(idUser: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/MyGameByUser/' + idUser, option);
   }
 
-  getMyGameByUserWithPlateform(idUser: number, idPlateform:number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/MyGameByUserWithPlateforme/' + idUser + '/' + idPlateform);
+  getMyGameByUserWithPlateform(idUser: number, idPlateform:number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/MyGameByUserWithPlateforme/' + idUser + '/' + idPlateform, option);
   }
 
-  getOneMyGame(idMyGame: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/OneMyGame/' + idMyGame);
+  getOneMyGame(idMyGame: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/OneMyGame/' + idMyGame, option);
   }
 
   postMyGame(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {

@@ -9,8 +9,8 @@ import {ApicallInterface} from "../-interface/apicall.interface";
 export class CommentService {
   constructor(private http: HttpClient) {}
 
-  getCommentWithActu(id_actu: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/getCommentByActu/' + id_actu);
+  getCommentWithActu(id_actu: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/getCommentByActu/' + id_actu, option);
   }
 
   postCommentInActu(body: string, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
@@ -31,8 +31,8 @@ export class CommentService {
     return this.http.post<ApicallInterface>(url + '/comment-reply-create/', body, option);
   }
 
-  getCountByActu(id_actu: number, url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/countCommentByActu/'+id_actu);
+  getCountByActu(id_actu: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/countCommentByActu/'+id_actu, option);
   }
 
 

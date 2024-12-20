@@ -11,9 +11,9 @@ export class BuyWhereService {
 
   constructor(private http: HttpClient) {}
 
-  getAllBuyWheres(url:string): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/buywheres');
-  }
+  // getAllBuyWheres(url:string): Observable<ApicallInterface> {
+  //   return this.http.get<ApicallInterface>(url + '/buywheres');
+  // }
 
   getAllBuyWheresByUser(url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
     return this.http.get<ApicallInterface>(url + '/buywherebyuser/', option);
