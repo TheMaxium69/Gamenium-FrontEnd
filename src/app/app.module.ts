@@ -50,6 +50,7 @@ import { ModalBuywhereComponent } from './-global/modal-buywhere/modal-buywhere.
 import { ModalTagComponent } from './-global/modal-tag/modal-tag.component';
 import { ModalScreenshotComponent } from './-global/modal-screenshot/modal-screenshot.component';
 import { GalleryComponent } from './-global/gallery/gallery.component';
+import { WaitingComponent } from './account/waiting/waiting.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { GalleryComponent } from './-global/gallery/gallery.component';
     ModalBuywhereComponent,
     ModalTagComponent,
     ModalScreenshotComponent,
-    GalleryComponent
+    GalleryComponent,
+    WaitingComponent
 
   ],
   imports: [

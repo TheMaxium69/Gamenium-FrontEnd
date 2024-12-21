@@ -40,9 +40,9 @@ export class HomeInviteComponent implements OnInit {
     this.postActuService.getActuAll(this.app.setURL(), this.app.createCorsToken()).subscribe(responseActu => {
       if (responseActu.message === 'good') {
         this.postActuFollowOrAll = responseActu.result;
-        console.log('Fetching all actualities');
+        // console.log('Fetching all actualities');
       } else {
-        console.log("failed fetching")
+        // console.log("failed fetching")
       }
     });
   }
@@ -56,10 +56,10 @@ export class HomeInviteComponent implements OnInit {
 
     let body = JSON.stringify(bodyNoJson);
 
-    console.log('Fetching latest games');
+    // console.log('Fetching latest games');
     this.gameService.getLatestGames(body, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
       this.games = results.result;
-      console.log(results.result)
+      // console.log(results.result)
     })
   }
 
@@ -80,12 +80,12 @@ export class HomeInviteComponent implements OnInit {
   }
 
   handleFollowed(providerId: number): void {
-    console.log(`Provider with ID ${providerId} followed.`);
+    // console.log(`Provider with ID ${providerId} followed.`);
     this.followedStates[providerId] = true;
   }
 
   handleUnfollowed(providerId: number): void {
-    console.log(`Provider with ID ${providerId} unfollowed.`);
+    // console.log(`Provider with ID ${providerId} unfollowed.`);
     this.followedStates[providerId] = false;
   }
 

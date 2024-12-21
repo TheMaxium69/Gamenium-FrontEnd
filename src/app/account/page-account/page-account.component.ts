@@ -8,17 +8,8 @@ import {Router} from "@angular/router";
   templateUrl: './page-account.component.html',
   styleUrls: ['./page-account.component.css']
 })
-export class PageAccountComponent implements OnInit {
+export class PageAccountComponent {
 
-  isLoggedIn:boolean|undefined;
-
-  constructor( private app: AppComponent, private router: Router) { }
-
-  ngOnInit() {
-
-    this.isLoggedIn = this.app.isLoggedIn;
-
-  }
-
+  constructor( protected app: AppComponent, private router: Router) { }
 
 }

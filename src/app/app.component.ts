@@ -89,6 +89,7 @@ export class AppComponent {
   isLoggedIn: boolean = false;
   userConnected: UserInterface|any;
   token: string|any;
+  isAccess: boolean = false;
 
   // LIMIT
   fetchLimit:number = 50; // Limit Game in search Game & Page
@@ -223,17 +224,29 @@ export class AppComponent {
           this.cookieService.set('userGamenium', userJson);
         }
 
-        if (this.router.url == "/account"){
-          this.router.navigate(['/']);
+        // console.log(this.userConnected.userRole)
+        if (this.userConnected && this.userConnected.userRole) {
+          for (const role of this.userConnected.userRole) {
+            if (role === 'ROLE_BETA') {
+              this.isAccess = true;
+              break;
+            }
+          }
         }
 
-        // this.router.navigate(['/']);
-
+        if (this.router.url == "/account" && this.isAccess){
+          this.router.navigate(['/']);
+        } else if (!this.isAccess){
+          this.router.navigate(['/waiting']);
+        }
 
       } else {
 
         console.log(msgUser?.message)
         // GERE LE MSG ERR
+        this.cookieService.delete('tokenGamenium');
+        this.cookieService.delete('userGamenium');
+        this.erreurSubcribe()
 
       }
 
@@ -367,13 +380,18 @@ export class AppComponent {
   }
 
   erreurSubcribe(){
-    Swal.fire({
-      title: 'Erreur!',
-      text: 'Erreur de notre serveur',
-      icon: 'error',
-      confirmButtonText: 'OK',
-      confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
-    })
+    if (this.isLoggedIn && !this.isAccess){
+      console.error('ErreurSubcribe');
+    } else {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur de notre serveur',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+      })
+    }
+
   }
 
   bigNombreFormatage(nombreFormatage:number): string {

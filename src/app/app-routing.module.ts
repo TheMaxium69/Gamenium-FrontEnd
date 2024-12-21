@@ -28,7 +28,8 @@ const routes: Routes = [
   {path: 'profil/:id/:task', component: PageMygameComponent},
   {path: 'search/:type/:value', component: SearchPageComponent},
   {path: 'plateform/:id/', component: PlateformComponent},
-  {path: 'terms', component: PageThermeComponent}
+  {path: 'terms', component: PageThermeComponent},
+  {path: 'waiting', component: PageAccountComponent},
 ];
 
 @NgModule({

@@ -1,12 +1,17 @@
-<ng-container *ngIf="isLoggedIn == false">
+<ng-container *ngIf="!app.isLoggedIn">
 
   <app-login></app-login>
 
 </ng-container>
 
-<ng-container *ngIf="isLoggedIn == true">
+<ng-container *ngIf="app.isLoggedIn && app.isAccess">
 
   <app-profile></app-profile>
 
 </ng-container>
 
+<ng-container *ngIf="app.isLoggedIn && !app.isAccess">
+
+  <app-waiting></app-waiting>
+
+</ng-container>

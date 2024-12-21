@@ -1,0 +1,35 @@
+<div id="auth" class=" row h-100" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+  <div class="left-auth">
+    <div class="form-center">
+      <form>
+
+        <div id="log-div-img">
+          <img src="assets/logo-full.png" alt="logo-gamenium">
+          <h1>Bienvenue sur la beta privé de Gamenium</h1>
+        </div>
+
+        <section>
+          <div class="head-section">
+            <h2 style="color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}">Merci !! </h2>
+          </div>
+
+          <div>
+            <p>Nous sommes ravis de vous accueillir dans la bêta privée de notre plateforme. Votre demande d'accès est en cours de traitement. Vous recevrez un email dès que votre compte sera activé.
+              <br><br>
+              Merci pour votre patience et votre intérêt pour Gamenium !</p>
+          </div>
+
+          <div style="display: flex; margin-top: 20px">
+            <button (click)="app.loggout()" type="button" class="sub-gamenium-btn" style="border-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}};color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}">Déconnexion</button>
+          </div>
+        </section>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="right-auth" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}"></div>
+
+</div>
+
+

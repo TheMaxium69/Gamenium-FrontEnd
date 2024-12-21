@@ -35,6 +35,9 @@ export class PageActualityComponent implements OnInit{
       this.router.navigate(['/account']);
     }
 
+    if (!this.app.isAccess){
+      this.router.navigate(['/waiting']);
+    }
 
   }
 

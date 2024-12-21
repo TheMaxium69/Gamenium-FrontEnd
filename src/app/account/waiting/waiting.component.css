@@ -1,0 +1,172 @@
+/*
+
+GLOBAL
+
+*/
+
+.row{
+  --bs-gutter-x: unset!important;
+}
+
+
+/* RIGHT AND LEFT */
+.left-auth {
+  width: 60%;
+  background: #ffffff;
+}
+
+.right-auth {
+  width: 40%;
+  background-color: red;
+  background-image: url('https://tyrolium.fr/Contenu/Image/Background8_black.png');
+}
+
+/*
+
+  LEFT
+
+*/
+
+/* ALL SECTION*/
+.head-section{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* LOGO */
+#log-div-img{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  h1{
+    font-size: 21px;
+    margin-top: 10px;
+  }
+}
+
+#log-div-img img{
+  margin: auto;
+  width: 200px;
+  height: 200px;
+}
+
+/* FORM */
+#form-input{
+  margin-bottom: 120px;
+}
+
+.form-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form-center form{
+  width: 75%;
+  margin: auto;
+  max-width: 610px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  gap: 35px;
+}
+
+/* INPUT */
+input[type="email"]:focus,
+input[type="password"]:focus{
+  border-bottom: 2px var(--userColor) solid;
+  outline: unset;
+  transition: border-bottom 0.3s ease;
+  box-shadow: unset!important;
+}
+
+
+input[type="email"],
+input[type="password"]{
+  background: #F3F3F3;
+  border-top: unset;
+  border-right: unset;
+  border-left: unset;
+  border-bottom: 2px var(--third-color) solid;
+  border-radius: 4px 4px 0 0;
+  font-family: var(--main-police), sans-serif;
+  color: var(--first-color);
+  height: 55px;
+  padding-left: 20px;
+  font-size: 15px;
+  /*box-shadow: 0 1px 4px 0 #00000040 inset;*/
+  transition: border-bottom 0.3s ease;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder{
+  color: var(--third-color);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+input:focus-visible{
+  outline: none;
+}
+
+
+/* BTN */
+#auth button,
+#auth a{
+  text-align: center;
+  text-decoration: none;
+  width: 75%;
+  margin: auto;
+}
+
+
+/*
+
+REPONSIVE
+
+*/
+@media (max-width: 1100px) {
+  .right-auth {
+    display: none;
+  }
+
+  .left-auth{
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 500px) {
+  #log-div-img img{
+    width: 180px;
+    height: 180px;
+  }
+
+  h1{
+    font-size: calc(30px - 10px);
+  }
+  h2{
+    font-size: calc(21px - 5px);
+  }
+  h3{
+    font-size: calc(18px - 5px);
+  }
+
+  button,
+  a{
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+
+}
