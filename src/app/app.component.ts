@@ -65,7 +65,7 @@ export class AppComponent {
 
 
   //%     API - GAMENIUM      %//
-    AppEnv: string = "PROD"; // DEV or PROD or PRODMAX
+    AppEnv: string = "V1"; // DEV or PROD or PRODMAX
     urlApiDev: string = "http://127.0.0.1:8000";
     urlApiDevMax: string = "https://127.0.0.1:8000";
     urlApiProd: string = "http://vps216.tyrolium.fr:8000";
@@ -76,7 +76,7 @@ export class AppComponent {
   //%     API - GAME      %//
     AppEnvOther:string = "PROD" // DEV or PROD
     urlApiGetGameDev:string = "http://127.0.0.1/html-to-api/"
-    urlApiGetGameProd:string = "http://vps216.tyrolium.fr/html-to-api/"
+    urlApiGetGameProd:string = "https://vps216.tyrolium.fr/html-to-api/"
     urlApiGetGameV1:string = "https://vps209.tyrolium.fr/html-to-api/"
     urlApiGiantbomb:string = this.setURLApiOther() + "giantbomb.php";
     urlApiMetacritic:string = this.setURLApiOther() + "metacritic.php";
