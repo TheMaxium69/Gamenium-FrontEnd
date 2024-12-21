@@ -5,7 +5,8 @@ nav{
   margin: auto;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  box-shadow: 0px -2px 5px lightgrey;
+  /*box-shadow: 0px -2px 5px lightgrey;*/
+  box-shadow: 0px 0px 5px #5f5f5f40;
 
   max-width: 1468px;
 }
@@ -88,7 +89,7 @@ nav ul li.search{
   align-items: unset;
   border-radius: 100%;
   width: 75px;
-  min-width: 75px;
+  min-width: 75px;;
   height: 75px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px, rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;

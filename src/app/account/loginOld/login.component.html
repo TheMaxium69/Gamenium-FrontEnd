@@ -1,0 +1,15 @@
+<div id="auth" class="login-page">
+  <div class="form blocks-shadow">
+    <h1>Compte Useritium</h1><br>
+    <form class="login-form"  #addForm="ngForm" (ngSubmit)="login(addForm)">
+      <input class="champ" type="text" placeholder="Email" name="email" ngModel/>
+      <input class="champ" type="password" placeholder="Mot de passe" name="password" ngModel/>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="checkBox" name="saveme" ngModel>
+        <label class="form-check-label" for="checkBox">Se souvenir de moi</label>
+      </div>
+      <button class="main-gamenium-btn" style="background-color: {{ this.app.colorDefault }}">Se connecter</button>
+      <p class="message">Pas encore de Compte ? <a style="color: {{ this.app.colorDefault }}" target="_blank" href="https://useritium.fr/connect.php">Crée un Compte</a></p>
+    </form>
+  </div>
+</div>

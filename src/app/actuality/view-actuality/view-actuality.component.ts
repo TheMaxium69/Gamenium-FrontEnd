@@ -107,7 +107,7 @@ export class ViewActualityComponent implements OnInit, OnChanges {
           confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
         })
       }
-    }, error => { this.app.erreurSubcribe() });
+    }, error => { /*this.app.erreurSubcribe()*/ });
   }
 
   /* RECUPERE LES ACTU D'UN PROVIDER */

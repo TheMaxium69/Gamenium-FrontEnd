@@ -1,15 +1,60 @@
-<div id="auth" class="login-page">
-  <div class="form blocks-shadow">
-    <h1>Compte Useritium</h1><br>
-    <form class="login-form"  #addForm="ngForm" (ngSubmit)="login(addForm)">
-      <input class="champ" type="text" placeholder="Email" name="email" ngModel/>
-      <input class="champ" type="password" placeholder="Mot de passe" name="password" ngModel/>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="checkBox" name="saveme" ngModel>
-        <label class="form-check-label" for="checkBox">Se souvenir de moi</label>
-      </div>
-      <button class="main-gamenium-btn" style="background-color: {{ this.app.colorDefault }}">Se connecter</button>
-      <p class="message">Pas encore de Compte ? <a style="color: {{ this.app.colorDefault }}" target="_blank" href="https://useritium.fr/connect.php">Crée un Compte</a></p>
-    </form>
+<div id="auth" class=" row h-100" [ngStyle]="{'--userColor': this.app.colorDefault }">
+  <div class="left-auth">
+    <div class="form-center">
+      <form #addForm="ngForm" (ngSubmit)="login(addForm)">
+
+        <div id="log-div-img">
+          <img src="assets/logo-full.png" alt="logo-gamenium">
+          <h1>Bienvenue sur la beta privé de Gamenium</h1>
+        </div>
+
+        <section>
+          <div class="head-section">
+            <h3>Etape 1 : </h3>
+            <h2 style="color: {{this.app.colorDefault}}">Incription </h2>
+          </div>
+
+          <div style="display: flex">
+            <a target="_blank" href="https://useritium.fr/connect.php?gamenium=true" type="button" class="sub-gamenium-btn" style="border-color: {{this.app.colorDefault}};color: {{this.app.colorDefault}}">Créer un compte</a>
+          </div>
+        </section>
+
+        <section>
+          <div class="head-section">
+            <h3>Etape 2 : </h3>
+            <h2 style="color: {{this.app.colorDefault}}">Connexion Useritium</h2>
+          </div>
+
+          <div id="form-input">
+
+            <div class="mb-3">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" ngModel>
+            </div>
+
+            <div class="mb-3">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" ngModel>
+            </div>
+
+<!--            <div class="mb-3 form-check">-->
+<!--              <input type="checkbox" class="form-check-input" id="checkbox" name="saveme" ngModel>-->
+<!--              <label class="form-check-label" for="checkbox">Se souvenir de moi</label>-->
+<!--            </div>-->
+
+            <div style="display: flex">
+              <button type="submit" class="main-gamenium-btn" style="background-color: {{this.app.colorDefault}}">Se connecter</button>
+            </div>
+
+          </div>
+        </section>
+
+
+
+      </form>
+    </div>
   </div>
+
+  <div class="right-auth" style="background-color: {{this.app.colorDefault}}"></div>
+
 </div>
+
+
