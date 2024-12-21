@@ -11,7 +11,7 @@ export class HmgCopyEtatService {
   constructor(private http: HttpClient) {}
 
   getAllHmgCopyEtat(url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url+"/hmgCopyEtatAll");
+    return this.http.get<ApicallInterface>(url+"/hmgCopyEtatAll", option);
   }
 
   // getOneHmgCopyEtat(id: number, url: string): Observable<ApicallInterface> {
