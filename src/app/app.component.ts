@@ -63,9 +63,8 @@ export class AppComponent {
    * ******************************************************************************************************************/
 
 
-
   //%     API - GAMENIUM      %//
-    AppEnv: string = "V1"; // DEV or PROD or PRODMAX
+    AppEnv: string = "PROD"; // DEV or PROD or PRODMAX
     urlApiDev: string = "http://127.0.0.1:8000";
     urlApiDevMax: string = "https://127.0.0.1:8000";
     urlApiProd: string = "http://vps216.tyrolium.fr:8000";
@@ -87,7 +86,7 @@ export class AppComponent {
   //%     API - TYROLIUM      %//
 
   // SETTING
-  Debug:Boolean = false; // Active la view Serv and Local
+  Debug:Boolean = true; // Active la view Serv and Local
   isLoggedIn: boolean = false;
   userConnected: UserInterface|any;
   token: string|any;
