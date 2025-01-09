@@ -197,12 +197,40 @@ export class AppComponent {
 
       } else {
 
-        console.log(msgToken?.message)
+        // console.log(msgToken?.message)
         // GERE LE MSG ERR
+
+        if (msgToken?.message == "bad email"){
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Aucun compte n\'est associé à cet email',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+          })
+        } else if (msgToken?.message == "bad passwd") {
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Mots de passe incorrect',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+          })
+        } else {
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Erreur lors de la connexion',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+          })
+        }
 
       }
 
-    })
+    }, (error) => {
+      this.erreurSubcribe()
+    });
 
   }
 
