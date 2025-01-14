@@ -86,7 +86,7 @@ export class AppComponent {
   //%     API - TYROLIUM      %//
 
   // SETTING
-  Debug:Boolean = true; // Active la view Serv and Local
+  Debug:Boolean = false; // Active la view Serv and Local
   isLoggedIn: boolean = false;
   userConnected: UserInterface|any;
   token: string|any;

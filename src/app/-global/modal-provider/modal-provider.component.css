@@ -47,6 +47,10 @@
       justify-content: center;
       margin-bottom: 20px;
     }
+
+    .head-provider{
+      flex-direction: column;
+    }
   }
 
 }
