@@ -23,6 +23,7 @@ export class PageMygameComponent implements OnInit{
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.task = this.route.snapshot.paramMap.get('task');
     this.currentUrl = this.router.url;
+    this.app.currentUrl = this.currentUrl;
 
 
     if (!this.profileId && !this.app.isLoggedIn){

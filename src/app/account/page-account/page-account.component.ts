@@ -8,8 +8,11 @@ import {Router} from "@angular/router";
   templateUrl: './page-account.component.html',
   styleUrls: ['./page-account.component.css']
 })
-export class PageAccountComponent {
+export class PageAccountComponent implements OnInit {
 
   constructor( protected app: AppComponent, private router: Router) { }
 
+  ngOnInit(): void {
+    // this.app.currentUrl = this.router.url;
+  }
 }

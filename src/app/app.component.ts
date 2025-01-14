@@ -91,6 +91,7 @@ export class AppComponent {
   userConnected: UserInterface|any;
   token: string|any;
   isAccess: boolean = false;
+  currentUrl: string = "/";
 
   // LIMIT
   fetchLimit:number = 50; // Limit Game in search Game & Page
@@ -263,8 +264,8 @@ export class AppComponent {
           }
         }
 
-        if (this.router.url == "/account" && this.isAccess){
-          this.router.navigate(['/']);
+        if (/*this.router.url == "/account" && */this.isAccess){
+          this.router.navigate([this.currentUrl]);
         } else if (!this.isAccess){
           this.router.navigate(['/waiting']);
         }

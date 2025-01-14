@@ -20,6 +20,7 @@ export class PageGameComponent implements OnInit {
   ngOnInit(): void {
 
     this.gameId = this.route.snapshot.paramMap.get('id');
+    this.app.currentUrl = this.router.url;
 
     if (!this.app.isLoggedIn){
       this.router.navigate(['/account']);
