@@ -33,6 +33,24 @@
   flex-wrap: nowrap;
 }
 
+@media (max-width: 710px) {
+  .oneProvider{
+    flex-direction: column;
+    border-bottom: 1px solid gray;
+
+    .head-provider,
+    .middle-provider,
+    .end-provider{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  }
+
+}
+
 .provider-img {
   width: 50px;
   height: 50px;
