@@ -272,7 +272,7 @@
 
                     <li *ngIf="copyGame.purchase.price">
                       <p>Prix d'achat : </p>
-                      <h3>{{ copyGame.purchase.price }} <span *ngIf="copyGame.purchase.devise">{{ copyGame.purchase.devise.symbole }}</span></h3>
+                      <h3>{{ (copyGame.purchase.price / 100) | number:'1.2-2' }} <span *ngIf="copyGame.purchase.devise">{{ copyGame.purchase.devise.symbole }}</span></h3>
                     </li>
 
                     <li *ngIf="copyGame.purchase.year_buy_at">

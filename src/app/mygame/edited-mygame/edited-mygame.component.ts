@@ -104,11 +104,16 @@ export class EditedMygameComponent implements OnInit {
           /* LANG */
           let i = 0;
           this.selectedMyGame.copyGame.forEach(oneCopy => {
+
             oneCopy.language.forEach(oneCopyLanguage => {
               this.hmgCopyLanguageSelected[i].push(oneCopyLanguage.id);
             })
+
+            oneCopy.purchase.price = oneCopy.purchase.price / 100;
             i++
+
           })
+
         }
 
         /* GEREZ LES COPY*/
@@ -288,10 +293,10 @@ export class EditedMygameComponent implements OnInit {
         this.idFormValideCopy.push(0);
       }
 
-      console.log(this.nbCopyExisting);
-      console.log(this.nbCopyView);
-      console.log(this.nbCopyGenerate);
-      console.log(this.nbCopy);
+      // console.log(this.nbCopyExisting);
+      // console.log(this.nbCopyView);
+      // console.log(this.nbCopyGenerate);
+      // console.log(this.nbCopy);
 
     }
   }
@@ -552,9 +557,11 @@ export class EditedMygameComponent implements OnInit {
     for (let i = 0; i < copyCount; i++) {
 
       if (this.idFormValideCopy.includes(i)) {
+        // console.log(form.value['purchase_price' + i] * 100)
+
         let tempPurchase = {
           id: form.value['purchase' + i] || null,
-          price: form.value['purchase_price' + i],
+          price: form.value['purchase_price' + i] * 100,
           content: form.value['purchase_content' + i],
           devise_id: form.value['purchase_devise' + i],
           buy_where_id: form.value['purchase_buy_where' + i],
@@ -673,6 +680,9 @@ export class EditedMygameComponent implements OnInit {
             oneCopy.language.forEach(oneCopyLanguage => {
               this.hmgCopyLanguageSelected[i].push(oneCopyLanguage.id);
             })
+
+            oneCopy.purchase.price = oneCopy.purchase.price / 100;
+
             i++
           })
         }
