@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {ActivatedRoute} from "@angular/router";
 import {UserInterface} from "../../-interface/user.interface";
@@ -11,6 +11,8 @@ import {UserRateService} from "../../-service/user-rate.service";
 import {GameInterface} from "../../-interface/game.interface";
 import { NgForm } from '@angular/forms';
 import { GameService } from 'src/app/-service/game.service';
+import { HistoryMyPlateformService } from 'src/app/-service/history-my-plateform.service';
+import { HistoryMyPlatformInterface } from 'src/app/-interface/history-my-platform.interface';
 
 @Component({
   selector: 'app-plateform-view',
@@ -41,7 +43,8 @@ export class PlateformViewComponent implements OnInit, OnChanges {
               private histoireMyGameService: HistoryMyGameService,
               private plateformService: PlateformService,
               private myGameService: GameService,
-              private userRateService: UserRateService) {}
+              private userRateService: UserRateService,
+              private historyMyPlatformService: HistoryMyPlateformService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -63,8 +66,10 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     if (this.app.userConnected) {
       if (this.task == "all"){
         this.myGameByUser(this.app.userConnected.id);
+        this.btnPlatform = null;
       } else {
         this.myGameByUserWithPlateform(this.app.userConnected.id, this.plateformeId);
+        this.oneMyHmpByUserWithPlatform(this.app.userConnected.id, this.convertStringToNumber(this.plateformeId));
       }
       this.getUserRate(this.app.userConnected.id)
     }
@@ -225,6 +230,32 @@ export class PlateformViewComponent implements OnInit, OnChanges {
       return this.searchQuery.trim() !== '' ? this.filteredGames : this.HistoireMyGameByUserByPlateform;
     }
     return [];
+  }
+
+btnPlatform: string|null = null;
+
+  oneMyHmpByUserWithPlatform(id_user: number, id_plateform:number): void {
+    this.historyMyPlatformService.getOneMyHmpByUser(id_user,id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlatform: { message: string; result: HistoryMyPlatformInterface[] | undefined; }) => {
+      if (responseMyPlatform.message == "good") {
+        this.btnPlatform = 'edit';
+        console.log(this.btnPlatform);
+      } else if (responseMyPlatform.message == "hmp not found") {
+        this.btnPlatform = 'add';
+        console.log(this.btnPlatform);
+      } else {
+        console.log("plateforme")
+      }
+    });
+  }
+
+  convertStringToNumber(chain: string|undefined): number{
+    let result = Number(chain);
+    if(isNaN(result) || result === 0){
+      console.log("Conversion echoué");
+      result = 0;
+      return result;
+    }
+    return result;
   }
 
 }

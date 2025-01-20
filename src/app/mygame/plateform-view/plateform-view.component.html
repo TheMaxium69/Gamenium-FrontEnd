@@ -1,4 +1,7 @@
     <!-- SECTION BARRE DE RECHERCHE -->
+    <button *ngIf="btnPlatform == 'add'">Ajouter une console</button>
+    <button *ngIf="btnPlatform == 'edit'">editer vos consoles</button>
+
 
     <div class="search-container container" [ngStyle]="{ '--color': app.userConnected?.themeColor || app.colorDefault }">
       <div class="icon-container" [ngStyle]="{ 'background-color': app.userConnected?.themeColor || app.colorDefault }">
