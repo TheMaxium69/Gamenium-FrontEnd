@@ -1,0 +1,91 @@
+<modal-buywhere></modal-buywhere>
+<div class="modal fade text-center" id="addPlatform" tabindex="-1" aria-labelledby="addPlatformModalLabel" aria-hidden="true" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajoutez une Plateforme</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="addPlatformForm" #addPlatformForm="ngForm" (ngSubmit)="this.addPlatform(addPlatformForm)" class="modal-body" style="padding-top: 40px;">
+        <!-- BARRE DE RECHERCHE (C'EST CELLE DE ADD MODAL GAME) -->
+        <div class="start-form" *ngIf="this.app.platformSelected">
+
+          <!-- PLATEFORM -->
+          <div class="panel">
+
+            <div class="head-panel">
+              <h2><i class="ri-gamepad-fill"></i>Plateforme<span style="color: red">*</span></h2>
+            </div>
+              <input type="hidden" [value]="this.app.platformSelected.id" name="plateform_id" ngModel>
+              <input type="text" value="{{ this.app.plateformeNameFormatage(this.app.platformSelected.name) }}" class="disable" disabled>
+          </div>
+
+          <!-- GESTION DU BUYWHERE -->
+          <div class="panel">
+
+            <div class="head-panel">
+              <h2><i class="ri-shopping-cart-2-fill"></i>Achat</h2>
+              <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageBuyWhere"></i>
+            </div>
+
+            <div class="head-buy">
+
+              <select id="day_buy_date" ngModel name="day_buy_date">
+                <option value="">Jour d'achat</option>
+                <ng-container *ngFor="let day of [].constructor(31); let d = index">
+                  <option [value]="d+1">{{ d + 1 }}</option>
+                </ng-container>
+              </select>
+
+              <select id="month_buy_date" ngModel name="month_buy_date">
+                <option value="">Mois d'achat</option>
+                <ng-container *ngFor="let month of [].constructor(12); let m = index">
+                  <option [value]="m+1">{{ m + 1 }}</option>
+                </ng-container>
+              </select>
+
+              <select id="year_buy_date" ngModel name="year_buy_date">
+                <option value="">Année d'achat</option>
+                <ng-container *ngFor="let year of this.app.getYears(); let y = index">
+                  <option [value]="year">{{ year }}</option>
+                </ng-container>
+              </select>
+
+            </div>
+
+            <ng-container *ngIf="app.buyWhereUserNoReload">
+              <select id="buy_where" name="buyWhere" ngModel>
+                <option value="">Lieux d'achat</option>
+                <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload">
+                  <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+
+          </div>
+
+          <!-- BOUTON REDIRECTION POUR PLUS DE DETAILS -->
+          <div class="moreHMG">
+            <button *ngIf="!isLoadingMore" type="button" class="sub-gamenium-btn"
+                    (click)="moreCompletion(); addPlatformForm.ngSubmit.emit()" data-bs-dismiss="modal">Compléter de manière plus détaillée.
+            </button>
+            <button *ngIf="isLoadingMore" type="button" class="sub-gamenium-btn" style="padding-top: 12px;">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
+          </div>
+
+
+        </div>
+
+        <!-- SOUMISSION DU FORMULAIRE -->
+        <div class="modal-footer" style="margin-top: 74px;">
+          <button *ngIf="this.app.platformSelected" type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-dismiss="modal">Sauvegardé <i class="ri-save-3-fill"></i></button>
+          <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

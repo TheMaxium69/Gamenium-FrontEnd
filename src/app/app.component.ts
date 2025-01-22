@@ -28,6 +28,8 @@ import {HmgCopyEtatInterface} from "./-interface/hmg-copy-etat.interface";
 import {HmgCopyFormatInterface} from "./-interface/hmg-copy-format.interface";
 import {HmgCopyRegionInterface} from "./-interface/hmg-copy-region.interface";
 import {HmgScreenshotCategoryInterface} from "./-interface/hmg-screenshot-category.interface";
+import { HistoryMyPlatformInterface } from './-interface/history-my-platform.interface';
+import { HistoryMyPlateformService } from './-service/history-my-plateform.service';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +45,8 @@ export class AppComponent {
     private authService: AuthService,
     private cookieService: CookieService,
     private histoireMyGameService: HistoryMyGameService,
-    private gameService: GameService
+    private gameService: GameService,
+    private historyMyPlatformService: HistoryMyPlateformService
   ) {
     const cookieToken:string = this.cookieService.get('tokenGamenium');
     const cookieUser:string = this.cookieService.get('userGamenium');
@@ -64,7 +67,7 @@ export class AppComponent {
 
 
   //%     API - GAMENIUM      %//
-    AppEnv: string = "PROD"; // DEV or PROD or PRODMAX
+    AppEnv: string = "DEV"; // DEV or PROD or PRODMAX
     urlApiDev: string = "http://127.0.0.1:8000";
     urlApiDevMax: string = "https://127.0.0.1:8000";
     urlApiProd: string = "http://vps216.tyrolium.fr:8000";
@@ -73,7 +76,7 @@ export class AppComponent {
   //%     API - GAMENIUM      %//
 
   //%     API - GAME      %//
-    AppEnvOther:string = "PROD" // DEV or PROD
+    AppEnvOther:string = "DEV" // DEV or PROD
     urlApiGetGameDev:string = "http://127.0.0.1/html-to-api/"
     urlApiGetGameProd:string = "https://vps216.tyrolium.fr/html-to-api/"
     urlApiGetGameV1:string = "https://vps209.tyrolium.fr/html-to-api/"
@@ -135,6 +138,10 @@ export class AppComponent {
 
   // USER
   userDefaultNoReload:UserDefaultInterface|undefined;
+
+  // PLATFORMS
+  userPlatformAll:PlateformInterface[] = [];
+  myPlatformAll:HistoryMyPlatformInterface[] | undefined;
 
   /******************************************************************************************************************
    *
@@ -592,8 +599,90 @@ export class AppComponent {
   noPlateform: { name: string; id: number } = {
     id: 99999,
     name: "Other"
-  }
+  };
+  platformSelected: PlateformInterface|undefined;
 
+    // id, nom
+
+  addPlatform(form: NgForm, isMore: boolean = false){
+
+    let buywhere_id = form.value['buyWhere'];
+    if (buywhere_id == "") {
+      buywhere_id = null;
+    }
+
+    let day_buy_date = form.value['day_buy_date']
+    if (day_buy_date == "") {
+      day_buy_date = null;
+    }
+    let month_buy_date = form.value['month_buy_date']
+    if (month_buy_date == "") {
+      month_buy_date = null;
+    }
+    let year_buy_date = form.value['year_buy_date']
+    if (year_buy_date == "") {
+      year_buy_date = null;
+    }
+
+    if(!this.platformSelected?.id){
+      Swal.fire({
+        title: 'Attention!',
+        text: 'Veuillez choisir une plateforme',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+        confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+      })
+    } else {
+      let bodyNoJsonMyPlatform: any = {
+        "id_plateform": this.platformSelected?.id,
+        "day_buy_at":day_buy_date,
+        "month_buy_at":month_buy_date,
+        "year_buy_at":year_buy_date,
+        "buywhere_id": buywhere_id
+      };
+      const bodyMyPlatform = JSON.stringify(bodyNoJsonMyPlatform);
+
+      this.historyMyPlatformService.postMyPlatform(bodyMyPlatform, this.setURL(), this.createCorsToken()).subscribe((responseMyPlatformAdd:{message:string,result:HistoryMyPlatformInterface}) =>{
+        if(responseMyPlatformAdd.message = "add plateform is collection"){
+          if (isMore){
+            this.router.navigate(['/myplatform/edit/' + responseMyPlatformAdd.result.id]);
+          } else {
+            Swal.fire({
+              title: 'Succès!',
+              text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
+              icon: 'success',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+            })
+
+            // Actualiser la liste des jeux après l'ajout
+            if (this.userConnected && this.myPlatformAll) {
+              this.myPlatformAll = [responseMyPlatformAdd.result, ...(this.myPlatformAll || [])];
+            }
+          }
+        } else if (responseMyPlatformAdd.message == "has already been added") {
+          Swal.fire({
+            title: 'Attention!',
+            text: 'Le jeux est déjà dans votre collection',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+          })
+        } else {
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Échec de l\'ajout d\'un jeux',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+          })
+          console.log('erreur lors de l\'ajout de la plateforme');
+        }
+
+      });
+    }
+
+  }
 
   addNote(form:NgForm) {
 
@@ -805,6 +894,14 @@ export class AppComponent {
 
   unselectGame() {
     this.gameSelected = undefined;
+  }
+
+  selectPlatform(plateform: PlateformInterface){
+    this.platformSelected = plateform;
+  }
+
+  unselectPlatform(){
+    this.platformSelected = undefined;
   }
 
   /*

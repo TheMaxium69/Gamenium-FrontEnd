@@ -10,8 +10,16 @@ export class HistoryMyPlateformService {
 
   constructor(private http: HttpClient) { }
 
-  getOneMyHmpByUser(idUser:number, idPlatform: number, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface>
+  getOneMyHmpByUserByPlatform(idUser:number, idPlatform: number, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface>
   {
     return this.http.get<ApicallInterface>(url + '/OneMyPlateform/' + idUser + '/' + idPlatform, option);
+  }
+
+  postMyPlatform(body: string, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.post<ApicallInterface>(url + '/addHmp', body, option);
+  }
+
+  getAllMyHmpByUser(url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface>{
+    return this.http.get<ApicallInterface>(url + '/allMyPlatform/', option);
   }
 }

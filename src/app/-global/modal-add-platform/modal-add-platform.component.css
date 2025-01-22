@@ -1,0 +1,199 @@
+.row-search-game{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0px;
+  }
+  
+  .start-form{
+    padding: 20px 60px;
+  }
+  
+  .none-game,
+  .laoding-search{
+    margin: 65px 0 30px;
+  }
+  
+  .moreHMG{
+    margin-top: 20px;
+  
+    .sub-gamenium-btn{
+      border-color: var(--userColor);
+      color: var(--userColor);
+      font-size: 12px;
+      padding: 8px 38px;
+      text-align: center;
+      width: 350px;
+      height: 42px;
+    }
+  
+    .spinner-border{
+      --bs-spinner-width: 1rem;
+      --bs-spinner-height: 1rem;
+      --bs-spinner-border-width: 0.10em;
+    }
+  
+  }
+  
+  
+  /* PURCHACE */
+  
+  .head-purchase{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+  }
+  
+  .head-purchase > :first-child {
+    width: calc(60% - 5px);
+    margin-right: 10px;
+  }
+  
+  .head-purchase > :last-child {
+    width: calc(40% - 5px);
+  }
+  
+  .head-buy{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+  }
+  
+  .head-buy select {
+    width: calc(33.33% - 10px);
+    margin-right: 5px;
+  }
+  
+  /*
+  * PANEL
+  */
+  .panel {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px 0px #A6A6A6;
+    padding: 15px 50px;
+    margin: 7px 0;
+    background: white;
+  
+    .head-panel{
+      margin-left: -20px;
+      margin-right: -20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+  
+      h2{
+        color: var(--userColor);
+  
+        i{
+          font-size: 20px;
+          margin-right: 8px;
+          position: relative;
+          top: -1px;
+        }
+      }
+      i{
+        font-size: 25px;
+      }
+  
+    }
+  
+  }
+  
+  /*
+  * INPUT
+  */
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  select:focus,
+  textarea:focus{
+    border-bottom: 2px var(--userColor) solid;
+    outline: unset;
+    transition: border-bottom 0.3s ease;
+  }
+  
+  input[type="text"].disable{
+    opacity: 0.7;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea{
+    background: #F3F3F3;
+    border-top: unset;
+    border-right: unset;
+    border-left: unset;
+    border-bottom: 2px var(--third-color) solid;
+    border-radius: 4px 4px 0 0;
+    font-family: var(--main-police), sans-serif;
+    color: var(--first-color);
+    height: 55px;
+    padding-left: 20px;
+    font-size: 15px;
+    /*box-shadow: 0 1px 4px 0 #00000040 inset;*/
+    transition: border-bottom 0.3s ease;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+  
+  textarea{
+    padding-top: 16px;
+    height: 100px;
+    resize: none;
+  }
+  
+  
+  input[type="text"]::placeholder,
+  input[type="number"]::placeholder,
+  textarea::placeholder{
+    color: var(--third-color);
+    font-size: 14px;
+    font-weight: 300;
+  }
+  
+  select:focus-visible {
+    outline: none;
+  }
+  select{
+    background: #F3F3F3;
+    border-top: unset;
+    border-right: unset;
+    border-left: unset;
+    border-bottom: 2px var(--third-color) solid;
+    border-radius: 4px 4px 0 0;
+    font-family: var(--main-police), sans-serif;
+    color: var(--first-color);
+    height: 55px;
+    padding-left: 20px;
+    font-size: 15px;
+    /*box-shadow: 0 1px 4px 0 #00000040 inset;*/
+    transition: border-bottom 0.3s ease;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+  
+  /* MEDIA QUERIES */
+  @media (max-width: 720px) {
+    .start-form {
+      padding: 20px 0; 
+    }
+  }
+  
+  @media (max-width: 580px) {
+    .moreHMG .sub-gamenium-btn {
+      width: 100%;
+    }
+  }

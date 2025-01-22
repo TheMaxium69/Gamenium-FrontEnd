@@ -51,6 +51,8 @@ import { ModalTagComponent } from './-global/modal-tag/modal-tag.component';
 import { ModalScreenshotComponent } from './-global/modal-screenshot/modal-screenshot.component';
 import { GalleryComponent } from './-global/gallery/gallery.component';
 import { WaitingComponent } from './account/waiting/waiting.component';
+import { ModalAddPlatformComponent } from './-global/modal-add-platform/modal-add-platform.component';
+import { EditedMyplatformComponent } from './mygame/edited-myplatform/edited-myplatform.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { WaitingComponent } from './account/waiting/waiting.component';
     ModalTagComponent,
     ModalScreenshotComponent,
     GalleryComponent,
-    WaitingComponent
+    WaitingComponent,
+    ModalAddPlatformComponent,
+    EditedMyplatformComponent
 
   ],
   imports: [
