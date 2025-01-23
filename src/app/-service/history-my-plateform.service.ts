@@ -12,7 +12,11 @@ export class HistoryMyPlateformService {
 
   getOneMyHmpByUserByPlatform(idUser:number, idPlatform: number, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface>
   {
-    return this.http.get<ApicallInterface>(url + '/OneMyPlateform/' + idUser + '/' + idPlatform, option);
+    return this.http.get<ApicallInterface>(url + '/OneMyPlateformByUserWithPlatform/' + idUser + '/' + idPlatform, option);
+  }
+
+  getOneMyHmpById(idMyPlatform: number, url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
+    return this.http.get<ApicallInterface>(url + '/OneMyPlatform/' + idMyPlatform, option);
   }
 
   postMyPlatform(body: string, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
@@ -21,5 +25,9 @@ export class HistoryMyPlateformService {
 
   getAllMyHmpByUser(url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface>{
     return this.http.get<ApicallInterface>(url + '/allMyPlatform/', option);
+  }
+
+  updateMyPlatform(body: string, url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface>{
+    return this.http.put<ApicallInterface>(url + '/updateMyPlateform', body, options);
   }
 }

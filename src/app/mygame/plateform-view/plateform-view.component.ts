@@ -39,6 +39,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
 
   foundPlatform: PlateformInterface | undefined;
+  foundHmp: HistoryMyPlatformInterface | undefined;
 
   constructor(protected app:AppComponent,
               private route: ActivatedRoute,
@@ -56,7 +57,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         this.task = this.plateformeId;
         this.allMyHmpByUser();
         this.load();
-        this.foundPlatform = this.searchCurrentPlatform(this.app.userPlatformAll, this.convertStringToNumber(this.plateformeId));
+        console.log(this.btnPlatform);
         if (this.task == 'recent'){
           console.log("RECENT")
         }
@@ -73,7 +74,11 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         this.btnPlatform = null;
       } else {
         this.myGameByUserWithPlateform(this.app.userConnected.id, this.plateformeId);
-        this.checkIfPlatformIsHmp(this.convertStringToNumber(this.plateformeId));
+        this.foundPlatform = this.searchCurrentPlatform(this.app.userPlatformAll, this.convertStringToNumber(this.plateformeId));
+        if(this.foundPlatform){
+          this.checkIfPlatformIsHmpForBtn(this.foundPlatform.id);
+        }
+        
         
       }
       this.getUserRate(this.app.userConnected.id)
@@ -239,13 +244,23 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
 btnPlatform: string|null = null;
 
-  checkIfPlatformIsHmp(id_plateform: number){
+
+  getOneMyHmpByUserByPlatform(id_user: number, id_plateform: number){
+    	this.historyMyPlatformService.getOneMyHmpByUserByPlatform(id_user, id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlateform: {message: string, result: HistoryMyPlatformInterface}) => {
+        if(responseMyPlateform.message == "good"){
+          this.foundHmp = responseMyPlateform.result;
+        }
+      })
+  }
+
+  checkIfPlatformIsHmpForBtn(id_plateform: number){
     // vérifie si le user a un jeu avec cette console
     if(this.app.userPlatformAll.find(item => item.id === id_plateform) !== undefined){
 
       // vérifie si le user a une hmp avec cette console
       if(this.app.myPlatformAll?.find(item => item.myPlateform.plateform.id === id_plateform) !== undefined){
         this.btnPlatform = 'edit';
+        this.getOneMyHmpByUserByPlatform(this.app.userConnected.id, id_plateform)
       } else {
         this.btnPlatform = 'add';
       }
@@ -263,6 +278,7 @@ btnPlatform: string|null = null;
     })
   }
 
+  //convertie une string en nb
   convertStringToNumber(chain: string|undefined): number{
     let result = Number(chain);
     if(isNaN(result) || result === 0){
@@ -273,6 +289,7 @@ btnPlatform: string|null = null;
     return result;
   }
 
+  //Savoir si la platform est contenu dans ce tableau
   searchCurrentPlatform(UserPlatforms: PlateformInterface[], id: number): PlateformInterface | undefined {
     return UserPlatforms.find(item => item.id === id);
   }

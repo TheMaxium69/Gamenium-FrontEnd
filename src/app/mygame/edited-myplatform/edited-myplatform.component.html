@@ -1,1 +1,755 @@
-<p>edited-myplatform works!</p>
+<modal-buywhere></modal-buywhere>
+<modal-tag></modal-tag>
+<!-- <modal-screenshot [myGame]="selectedMyGame" (screenshotAdded)="onChangeScreenshot($event)"></modal-screenshot> -->
+
+<section id="editedmygame" *ngIf="selectedMyPlatform" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
+
+<form #editedMyPlatform="ngForm" (ngSubmit)="updateMyPlatform(editedMyPlatform)">
+
+  <section id="headeEditMyGame" class="container">
+
+    <!-- <div id="head-img" [class.gapUpdate]="selectedMyGame.screenshot.length <= 1">
+      <div class="banner-image pp-shadow">
+        <div class="banner" style="background-image: url({{ selectedMyGame.myGame?.game?.image?.small_url}});"></div>
+        <div class="blur"></div>
+        <img class="back" src="{{ selectedMyGame.myGame?.game?.image?.small_url }}" alt="blur">
+      </div>
+      <div class="separe-image"></div>
+      <div class="screen-image" data-bs-toggle="modal" data-bs-target="#addScreenshot">
+        <small>Image Utilisateur</small>
+        <div class="screen-all" *ngIf="selectedMyGame.screenshot.length > 0">
+          <ng-container *ngFor="let oneScreen of selectedMyGame.screenshot"> 
+            <div class="screen-encard">
+              <img class="screen" [src]="oneScreen.picture.url" alt="userImage">
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="screen-all" *ngIf="selectedMyGame.screenshot.length == 0" style="height: 100%;">
+          <div class="card-no-picture">
+            <i class="ri-image-add-line"></i>
+            <p>Ajoutez une image</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div id="head-modal">
+
+      <div>
+        <h2 class="titleGame">{{ selectedMyPlatform.myPlateform.plateform.name }}</h2>
+        <small>Ajouté le {{ selectedMyPlatform.myPlateform.added_at | date:'dd / MM / yyyy' }}</small>
+      </div>
+
+
+      <button type="submit" class="main-gamenium-btn savebtn">
+        <ng-container *ngIf="!isLoadingUpdate"> Save <i class="ri-save-3-fill"></i></ng-container>
+        <ng-container *ngIf="isLoadingUpdate">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </ng-container>
+      </button>
+
+    </div>
+
+  </section>
+
+  <ng-container *ngIf="selectedMyPlatform.myPlateform">
+  <div id="startFormEditedMyGame">
+
+    <!-- <section id="editedHistoryMyGame" class="container">
+
+      <input type="hidden" [(ngModel)]="selectedMyGame.myGame.id" name="myGameId">
+
+      EPINGLER
+      <div class="panel">
+
+        <div class="head-panel">
+          <h2><i class="ri-pushpin-fill"></i>Épinglé</h2>
+        </div>
+
+        <select id="is_pinned" name="is_pinned" [(ngModel)]="selectedMyGame.myGame.is_pinned">
+          <option [value]="true">Épinglé</option>
+          <option [value]="false">Non épinglé</option>
+        </select>
+
+      </div>
+
+      LISTE DE SOUHAIT
+      <div class="panel" style="display: none">
+
+        <div class="head-panel">
+          <h2><i class="ri-hand-heart-fill"></i>Liste de souhait</h2>
+        </div>
+
+        <select id="wish_list" name="wish_list" [(ngModel)]="selectedMyGame.myGame.wish_list">
+          <option [value]="true">Oui</option>
+          <option [value]="false">Non</option>
+        </select>
+
+      </div>
+
+      <div class="panel">
+
+        <div class="head-panel">
+          <h2><i class="ri-medal-fill"></i>Evaluation</h2>
+        </div>
+
+        <ng-container *ngIf="selectedMyGame.rate">
+          <input type="hidden" [(ngModel)]="selectedMyGame.rate.id" name="rateId">
+          <input max="20" min="0" type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating" placeholder="Note du jeux (/20)">
+
+          <ng-container *ngIf="selectedMyGame.rate.content">
+            <textarea type="text" id="content_rating" name="content_rating" [(ngModel)]="selectedMyGame.rate.content" placeholder="Expliquez votre note"></textarea>
+          </ng-container>
+          <ng-container *ngIf="!selectedMyGame.rate.content">
+            <textarea type="text" id="content_rating" name="content_rating" ngModel placeholder="Expliquez votre note"></textarea>
+          </ng-container>
+
+        </ng-container>
+        <ng-container *ngIf="!selectedMyGame.rate">
+          <input max="20" min="0" type="number" id="rating" name="rating" ngModel placeholder="Note du jeux (/20)">
+          <textarea type="text" id="content_rating" name="content_rating" ngModel placeholder="Expliquez votre note"></textarea>
+        </ng-container>
+
+      </div>
+
+      <div class="panel">
+
+        <div class="head-panel">
+          <h2><i class="ri-user-star-fill"></i>Avis</h2>
+        </div>
+
+        DIFICULTER
+        <label>Votre avis sur la Difficulté</label>
+        <div class="star-rating">
+          <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+             [class.ri-star-line]="star > selectedMyGame.myGame.difficulty_rating"
+             [class.ri-star-fill]="star <= selectedMyGame.myGame.difficulty_rating"
+             (click)="selectedMyGame.myGame.difficulty_rating = i + 1"></i>
+        </div>
+
+        <div style="display: none">
+          <label for="difficulty_rating_1">
+            <input type="radio" id="difficulty_rating_1" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="1">
+            1
+          </label>
+          <label for="difficulty_rating_2">
+            <input type="radio" id="difficulty_rating_2" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="2">
+            2
+          </label>
+          <label for="difficulty_rating_3">
+            <input type="radio" id="difficulty_rating_3" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="3">
+            3
+          </label>
+          <label for="difficulty_rating_4">
+            <input type="radio" id="difficulty_rating_4" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="4">
+            4
+          </label>
+          <label for="difficulty_rating_5">
+            <input type="radio" id="difficulty_rating_5" [(ngModel)]="selectedMyGame.myGame.difficulty_rating"
+                   name="difficulty_rating" [value]="5">
+            5
+          </label>
+        </div>
+
+        TEMPS DE JEUX
+        <label>Votre avis sur le Temps de jeux</label>
+        <div class="star-rating">
+          <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+             [class.ri-star-line]="star > selectedMyGame.myGame.lifetime_rating"
+             [class.ri-star-fill]="star <= selectedMyGame.myGame.lifetime_rating"
+             (click)="selectedMyGame.myGame.lifetime_rating = i + 1"></i>
+        </div>
+
+        <div style="display: none">
+          <label for="lifetime_rating_1">
+            <input type="radio" id="lifetime_rating_1" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="1">
+            1
+          </label>
+          <label for="lifetime_rating_2">
+            <input type="radio" id="lifetime_rating_2" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="2">
+            2
+          </label>
+          <label for="lifetime_rating_3">
+            <input type="radio" id="lifetime_rating_3" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="3">
+            3
+          </label>
+          <label for="lifetime_rating_4">
+            <input type="radio" id="lifetime_rating_4" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="4">
+            4
+          </label>
+          <label for="lifetime_rating_5">
+            <input type="radio" id="lifetime_rating_5" [(ngModel)]="selectedMyGame.myGame.lifetime_rating"
+                   name="lifetime_rating" [value]="5">
+            5
+          </label>
+        </div>
+
+      </div>
+
+      <div class="panel">
+
+        <div class="head-panel">
+          <h2><i class="ri-price-tag-3-fill"></i>Tags</h2>
+          <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageTags"></i>
+        </div>
+
+        <ng-container *ngIf="app.tagsUserNoReload.length > 0">
+          <div>
+              <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
+                <p id="tags" *ngIf="tagsSelectedUser.length > 0">
+                  <ng-container *ngFor="let oneTags of app.tagsUserNoReload">
+                    <span [class.displayNone]="!isTagInSelected(oneTags.id)" class="badge" style="background-color: {{oneTags.color}}">
+                      <div>
+                        {{ oneTags.name }}
+                        <i class="ri-close-line" (click)="$event.stopPropagation(); toggleTags(oneTags.id);"></i>
+                      </div>
+                    </span>
+                  </ng-container>
+                </p>
+                <p *ngIf="tagsSelectedUser.length == 0" class="placeholderInput">Ajoutez un tags</p>
+                <i class="ri-arrow-down-s-line"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li *ngFor="let tag of app.tagsUserNoReload">
+                  <a class="dropdown-item" (click)="toggleTags(tag.id)">
+                    <i [class.ri-checkbox-blank-line]="!isTagInSelected(tag.id)"
+                       [class.ri-checkbox-fill]="isTagInSelected(tag.id)"
+                    ></i>
+                    {{ tag.name }}
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#manageTags">Créer un tag</a></li>
+              </ul>
+
+
+
+
+          </div>
+        </ng-container>
+
+      </div>
+
+
+    </section> -->
+
+    <section id="tab">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="tabSelected == 1" (click)="tabActive(1)">Exemplaire</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="tabSelected == 3"  (click)="tabActive(2)">Image</a>
+        </li>
+        <!--<li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>-->
+      </ul>
+    </section>
+
+
+    <!-- SCREENSHOT -->
+    <!-- <section id="editedHmgScreenshot" class="container" [class.displayNone]="tabSelected !== 2">
+
+      <div class="head-all-exemplaire">
+        <h1>Image<span *ngIf="selectedMyGame.screenshot.length > 1">s</span> <small>(Total <span>{{ selectedMyGame.screenshot.length }}</span>)</small></h1>
+        <button class="sub-gamenium-btn" type="button" data-bs-toggle="modal" data-bs-target="#addScreenshot"><i class="ri-add-large-fill"></i></button>
+      </div>
+
+      <ng-container *ngFor="let oneScreen of selectedMyGame.screenshot; let i = index;"> 
+        <div class="oneExemplaire screenshotCard{{i}}" id="screenshotCard{{i}}">
+
+          <div class="head-one-exemplaire">
+            <h3>Image #{{i+1}}</h3>
+            <i class="ri-delete-bin-fill" (click)="deleteScreenshot(oneScreen, i)"></i>
+          </div>
+
+          <img class="screen" [src]="oneScreen.picture.url" alt="userImage">
+
+        </div>
+      </ng-container>
+
+
+    </section> -->
+
+
+    <!-- EXEMPLAIRE -->
+    <section id="editedHmgCopy" class="container" [class.displayNone]="tabSelected !== 1">
+
+      <div class="head-all-exemplaire">
+        <h1>Exemplaire <small>(Total <span>{{ nbCopyView }}{{ noRealCopy() }}</span>)</small></h1>
+        <button class="sub-gamenium-btn" type="button" (click)="addCopyPlatform()"><i class="ri-add-large-fill"></i></button>
+<!--        <i class="ri-sticky-note-add-fill" (click)="addCopyGame()"></i>-->
+      </div>
+
+      <!-- UN EXEMPLAIRE -->
+      <ng-container *ngFor="let copyPlateform of selectedMyPlatform.copyPlateform; let i = index">
+
+        <div class="oneExemplaire copyCard{{i}}" id="copyCard{{i}}">
+          <div class="head-one-exemplaire">
+            <h3>Exemplaire #{{i+1}}</h3>
+            <i class="ri-delete-bin-fill" (click)="deleteCopyPlatform(i)"></i>
+          </div>
+
+          <input type="hidden" [(ngModel)]="copyPlateform.id" name="copy{{i}}">
+
+          <!-- EDITIONS-->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-id-card-fill"></i>Editions <small>#{{i+1}}</small></h2>
+            </div>
+            <input type="text" id="edition{{i}}" [(ngModel)]="copyPlateform.edition" name="edition{{i}}" placeholder="Editions">
+          </div>
+
+          <!-- BARCODE -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-barcode-fill"></i>Barcode <small>#{{i+1}}</small></h2>
+            </div>
+            <input type="text" id="barcode{{i}}" [(ngModel)]="copyPlateform.barcode" name="barcode{{i}}" placeholder="Barcode">
+          </div>
+
+          <!-- CONTENT -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-message-2-fill"></i>Description de l'exemplaire <small>#{{i+1}}</small></h2>
+            </div>
+            <textarea type="text" id="content{{i}}" [(ngModel)]="copyPlateform.content" name="content{{i}}" placeholder="Description de l'exemplaire"></textarea>
+          </div>
+
+          <!-- IS BOX -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-message-2-fill"></i>is Box <small>#{{i+1}}</small></h2>
+            </div>
+            <input type="checkbox" id="isBox{{i}}" [(ngModel)]="copyPlateform.isBox" name="isBox{{i}}" placeholder="as tu la boite">
+          </div>
+
+          <!-- ETAT -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-hand-coin-fill"></i>État <small>#{{i+1}}</small></h2>
+            </div>
+            <ng-container *ngIf="app.hmgCopyEtatAllNoReload && copyPlateform.etat">
+              <select id="etat{{i}}" [(ngModel)]="copyPlateform.etat.id" name="etat{{i}}">
+                <option [value]="null">Choisir un état</option>
+                <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
+                  <option [value]="etat.id">{{ etat.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="app.hmgCopyEtatAllNoReload && !copyPlateform.etat">
+              <select id="etat{{i}}" name="etat{{i}}" ngModel>
+                <option value="">Choisir un état</option>
+                <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
+                  <option [value]="etat.id">{{ etat.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+          </div>
+
+          <!-- REGION -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1}}</small></h2>
+            </div>
+            <ng-container *ngIf="app.hmgCopyRegionAllNoReload && copyPlateform.region">
+              <select id="region{{i}}" [(ngModel)]="copyPlateform.region.id" name="region{{i}}">
+                <option [value]="null">Choisir une Region</option>
+                <ng-container *ngFor="let region of app.hmgCopyRegionAllNoReload">
+                  <option [value]="region.id">{{ region.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="app.hmgCopyRegionAllNoReload && !copyPlateform.region">
+              <select id="region{{i}}" name="region{{i}}" ngModel>
+                <option value="">Choisir une Region</option>
+                <ng-container *ngFor="let region of app.hmgCopyRegionAllNoReload">
+                  <option [value]="region.id">{{ region.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+          </div>
+
+          <br>
+          <hr>
+
+          <!-- PURCHASE -->
+          <div class="panel">
+
+            <div class="head-panel">
+              <h2><i class="ri-shopping-cart-2-fill"></i>Achat <small>#{{i+1}}</small></h2>
+              <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageBuyWhere"></i>
+            </div>
+            <ng-container *ngIf="copyPlateform.purchase">
+
+              <input type="hidden" [(ngModel)]="copyPlateform.purchase.id" name="purchase{{i}}">
+
+              <div class="head-purchase">
+
+                <!-- PRICE -->
+                <input type="number" id="price{{i}}" [(ngModel)]="copyPlateform.purchase.price" name="purchase_price{{i}}" placeholder="Prix d'achat" min="0.00" max="10000.00" step="0.01">
+
+                <!-- DEVISE -->
+                <ng-container *ngIf="app.deviseNoReload && copyPlateform.purchase.devise">
+                  <select id="devise{{i}}" [(ngModel)]="copyPlateform.purchase.devise.id" name="purchase_devise{{i}}">
+                    <option [value]="null">Choisir une devise</option>
+                    <ng-container *ngFor="let devise of app.deviseNoReload">
+                      <option [value]="devise.id">{{ devise.symbole }}</option>
+                    </ng-container>
+                  </select>
+                </ng-container>
+                <ng-container *ngIf="app.deviseNoReload && !copyPlateform.purchase.devise">
+                  <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
+                    <option value="">Choissir une devise</option>
+                    <ng-container *ngFor="let devise of app.deviseNoReload">
+                      <option [value]="devise.id">{{ devise.symbole }}</option>
+                    </ng-container>
+                  </select>
+                </ng-container>
+
+              </div>
+
+              <!-- BUY WHERE -->
+              <ng-container *ngIf="app.buyWhereUserNoReload && copyPlateform.purchase.buy_where">
+                <select id="buy_where{{i}}" [(ngModel)]="copyPlateform.purchase.buy_where.id" name="purchase_buy_where{{i}}">
+                  <option [value]="null">Lieux d'achat</option>
+                  <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload">
+                    <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
+              <ng-container *ngIf="app.buyWhereUserNoReload && !copyPlateform.purchase.buy_where">
+                <select id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
+                  <option value="">Lieu d'achat</option>
+                  <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload ">
+                    <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
+
+              <!-- BUY DATE -->
+              <div class="head-buy">
+
+                <select id="day_buy_date{{i}}" [(ngModel)]="copyPlateform.purchase.day_buy_at"
+                        name="purchase_day_buy_date{{i}}">
+                  <option [value]="null">Jour d'achat</option>
+                  <ng-container *ngFor="let day of [].constructor(31); let d = index">
+                    <option [value]="d+1">{{ d + 1 }}</option>
+                  </ng-container>
+                </select>
+
+                <select id="month_buy_date{{i}}" [(ngModel)]="copyPlateform.purchase.month_buy_at"
+                        name="purchase_month_buy_date{{i}}">
+                  <option [value]="null">Mois d'achat</option>
+                  <ng-container *ngFor="let month of [].constructor(12); let m = index">
+                    <option [value]="m+1">{{ m + 1 }}</option>
+                  </ng-container>
+                </select>
+
+                <select id="year_buy_date{{i}}" [(ngModel)]="copyPlateform.purchase.year_buy_at"
+                        name="purchase_year_buy_date{{i}}">
+                  <option [value]="null">Année d'achat</option>
+                  <ng-container *ngFor="let year of this.app.getYears(); let y = index">
+                    <option [value]="year">{{ year }}</option>
+                  </ng-container>
+                </select>
+
+              </div>
+
+
+              <!-- PURCHASE CONTENT -->
+              <textarea type="text" id="purchase_content{{i}}" [(ngModel)]="copyPlateform.purchase.content" name="purchase_content{{i}}" placeholder="Plus d'inforamtions sur l'achat"></textarea>
+
+            </ng-container>
+            <ng-container *ngIf="!copyPlateform.purchase">
+
+              <input type="hidden" name="purchase{{i}}" ngModel>
+
+
+              <div class="head-purchase">
+
+                <!-- PRICE -->
+                <input type="number" id="price{{i}}" ngModel name="purchase_price{{i}}" placeholder="Prix d'achat" min="0.00" max="10000.00" step="0.01">
+
+                <!-- DEVISE -->
+                <ng-container *ngIf="app.deviseNoReload">
+                  <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
+                    <option value="">Choisir une devise</option>
+                    <ng-container *ngFor="let devise of app.deviseNoReload">
+                      <option [value]="devise.id">{{ devise.symbole }}</option>
+                    </ng-container>
+                  </select>
+                </ng-container>
+
+              </div>
+
+
+              <!-- BUY WHERE -->
+              <ng-container *ngIf="app.buyWhereUserNoReload ">
+                <select id="buy_where{{i}}" name="purchase_buy_where{{i}}" ngModel>
+                  <option value="">Lieu d'achat</option>
+                  <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload ">
+                    <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
+
+
+              <!-- BUY DATE -->
+
+              <div class="head-buy">
+
+                <select id="day_buy_date{{i}}" ngModel name="purchase_day_buy_date{{i}}">
+                  <option value="">Jour d'achat</option>
+                  <ng-container *ngFor="let day of [].constructor(31); let d = index">
+                    <option [value]="d+1">{{ d + 1 }}</option>
+                  </ng-container>
+                </select>
+
+                <select id="month_buy_date{{i}}" ngModel name="purchase_month_buy_date{{i}}">
+                  <option value="">Mois d'achat</option>
+                  <ng-container *ngFor="let month of [].constructor(12); let m = index">
+                    <option [value]="m+1">{{ m + 1 }}</option>
+                  </ng-container>
+                </select>
+
+                <select id="year_buy_date{{i}}" ngModel name="purchase_year_buy_date{{i}}">
+                  <option value="">Année d'achat</option>
+                  <ng-container *ngFor="let year of this.app.getYears(); let y = index">
+                    <option [value]="year">{{ year }}</option>
+                  </ng-container>
+                </select>
+
+
+              </div>
+
+
+              <!-- PURCHASE CONTENT -->
+              <textarea type="text" id="purchase_content{{i}}" ngModel
+                        name="purchase_content{{i}}" placeholder="Plus d'inforamtions sur l'achat"></textarea>
+
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let n of [].constructor(nbCopy); let i = index">
+  
+        <div class="oneExemplaire copyCard{{i}}" id="copyCard{{i+nbCopyExisting}}" style="display: {{ displayDefault(i+nbCopyExisting) }}">
+          <div class="head-one-exemplaire">
+            <h3>Exemplaire #{{i + 1 + nbCopyExisting}}</h3>
+            <i class="ri-delete-bin-fill" (click)="deleteCopyPlatform(i+nbCopyExisting)"></i>
+          </div>
+
+          <input type="hidden" [(ngModel)]="isNew" name="copy{{i+nbCopyExisting}}">
+
+          <!-- RESTE DU CODE -->
+          <!-- EDITIONS-->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-id-card-fill"></i>Editions <small>#{{i+1+nbCopyExisting}}</small></h2>
+            </div>
+            <input type="text" id="edition{{i+nbCopyExisting}}" name="edition{{i+nbCopyExisting}}" ngModel placeholder="Editions">
+          </div>
+
+
+          <!-- BARCODE -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-barcode-fill"></i>Barcode <small>#{{i+1+nbCopyExisting}}</small></h2>
+            </div>
+            <input type="text" id="barcode{{i+nbCopyExisting}}" name="barcode{{i+nbCopyExisting}}" ngModel placeholder="Barcode">
+          </div>
+
+          <!-- CONTENT -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-message-2-fill"></i>Description de l'exemplaire <small>#{{i+1+nbCopyExisting}}</small></h2>
+            </div>
+            <textarea type="text" id="content{{i+nbCopyExisting}}" name="content{{i+nbCopyExisting}}" ngModel placeholder="Description de l'exemplaire"></textarea>
+          </div>
+
+          <!-- IS BOX -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-message-2-fill"></i>is Box<small>#{{i+1+i+nbCopyExisting}}</small></h2>
+            </div>
+            <input type="checkbox" id="isBox{{i+nbCopyExisting}}"  name="isBox{{i+nbCopyExisting}}" ngModel placeholder="as tu la boite">
+          </div>
+
+          <!-- ETAT -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-hand-coin-fill"></i>État <small>#{{i+1+nbCopyExisting}}</small></h2>
+            </div>
+            <ng-container *ngIf="app.hmgCopyEtatAllNoReload">
+              <select id="etat{{i+nbCopyExisting}}" name="etat{{i+nbCopyExisting}}" ngModel>
+                <option value="">Choissir un état</option>
+                <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
+                  <option [value]="etat.id">{{ etat.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+          </div>
+
+          <!-- REGION -->
+          <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1+nbCopyExisting}}</small></h2>
+            </div>
+            <ng-container *ngIf="app.hmgCopyRegionAllNoReload">
+              <select id="region{{i+nbCopyExisting}}" name="region{{i+nbCopyExisting}}" ngModel>
+                <option value="">Choissir une Region</option>
+                <ng-container *ngFor="let region of app.hmgCopyRegionAllNoReload">
+                  <option [value]="region.id">{{ region.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+          </div>
+
+          <!-- LANG -->
+          <!-- <div class="panel">
+            <div class="head-panel">
+              <h2><i class="ri-earth-fill"></i>Langues <small>#{{i+nbCopyExisting+1}}</small></h2>
+            </div>
+
+            <ng-container *ngIf="app.HmgCopyLanguageNoReload && app.HmgCopyLanguageNoReload.length > 0">
+              <div *ngIf="hmgCopyLanguageSelected">
+                <button type="button" class="inputSelect" data-bs-toggle="dropdown" aria-expanded="false">
+                  <p id="languages" *ngIf="hmgCopyLanguageSelected[i+nbCopyExisting].length > 0">
+                    <ng-container *ngFor="let language of app.HmgCopyLanguageNoReload">
+                          <span [class.displayNone]="!isInLanguageSelected(language.id, i+nbCopyExisting)" class="badge" style="background-color: {{this.app.userConnected?.themeColor || this.app.colorDefault}}">
+                            <div>
+                              {{ language.name }}
+                              <i class="ri-close-line" (click)="$event.stopPropagation(); toggleLanguages(language.id, i+nbCopyExisting);"></i>
+                            </div>
+                          </span>
+                    </ng-container>
+                  </p>
+                  <p *ngIf="hmgCopyLanguageSelected[i+nbCopyExisting].length == 0" class="placeholderInput cornflex">Ajoutez une langue</p>
+                  <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let language of app.HmgCopyLanguageNoReload">
+                    <a class="dropdown-item" (click)="toggleLanguages(language.id, i+nbCopyExisting)">
+                      <i [class.ri-checkbox-blank-line]="!isInLanguageSelected(language.id, i+nbCopyExisting)"
+                         [class.ri-checkbox-fill]="isInLanguageSelected(language.id, i+nbCopyExisting)"
+                      ></i>
+                      {{ language.name }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </ng-container>
+          </div> -->
+
+          <br>
+          <hr>
+
+          <div class="panel">
+
+            <div class="head-panel">
+              <h2><i class="ri-shopping-cart-2-fill"></i>Achat <small>#{{i+1+nbCopyExisting}}</small></h2>
+              <i class="ri-more-2-fill" data-bs-toggle="modal" data-bs-target="#manageBuyWhere"></i>
+            </div>
+
+            <input type="hidden" name="purchase{{i+nbCopyExisting}}" ngModel>
+
+
+            <div class="head-purchase">
+
+              <!-- PRICE -->
+              <input type="number" id="price{{i+nbCopyExisting}}" ngModel name="purchase_price{{i+nbCopyExisting}}" placeholder="Prix d'achat" min="0.00" max="10000.00" step="0.01">
+
+              <!-- DEVISE -->
+              <ng-container *ngIf="app.deviseNoReload">
+                <select id="devise{{i+nbCopyExisting}}" name="purchase_devise{{i+nbCopyExisting}}" ngModel>
+                  <option value="">Choissir une devise</option>
+                  <ng-container *ngFor="let devise of app.deviseNoReload">
+                    <option [value]="devise.id">{{ devise.symbole }}</option>
+                  </ng-container>
+                </select>
+              </ng-container>
+
+            </div>
+
+
+            <!-- BUY WHERE -->
+            <ng-container *ngIf="app.buyWhereUserNoReload ">
+              <select id="buy_where{{i+nbCopyExisting}}" name="purchase_buy_where{{i+nbCopyExisting}}" ngModel>
+                <option value="">Lieu d'achat</option>
+                <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload ">
+                  <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
+                </ng-container>
+              </select>
+            </ng-container>
+
+
+            <!-- BUY DATE -->
+
+            <div class="head-buy">
+
+              <select id="day_buy_date{{i+nbCopyExisting}}" ngModel name="purchase_day_buy_date{{i+nbCopyExisting}}">
+                <option value="">Jour d'achat</option>
+                <ng-container *ngFor="let day of [].constructor(31); let d = index">
+                  <option [value]="d+1">{{ d + 1 }}</option>
+                </ng-container>
+              </select>
+
+              <select id="month_buy_date{{i+nbCopyExisting}}" ngModel name="purchase_month_buy_date{{i+nbCopyExisting}}">
+                <option value="">Mois d'achat</option>
+                <ng-container *ngFor="let month of [].constructor(12); let m = index">
+                  <option [value]="m+1">{{ m + 1 }}</option>
+                </ng-container>
+              </select>
+
+              <select id="year_buy_date{{i+nbCopyExisting}}" ngModel name="purchase_year_buy_date{{i+nbCopyExisting}}">
+                <option value="">Année d'achat</option>
+                <ng-container *ngFor="let year of this.app.getYears(); let y = index">
+                  <option [value]="year">{{ year }}</option>
+                </ng-container>
+              </select>
+
+
+            </div>
+
+
+            <!-- PURCHASE CONTENT -->
+            <textarea type="text" id="purchase_content{{i+nbCopyExisting}}" ngModel
+                   name="purchase_content{{i+nbCopyExisting}}" placeholder="Plus d'inforamtions sur l'achat"></textarea>
+
+          </div>
+        </div>
+      </ng-container>
+    </section>
+  </div>
+  </ng-container>
+
+  <div class="end-action container">
+    <button class="main-gamenium-btn savebtn" type="submit">
+      <ng-container *ngIf="!isLoadingUpdate"> Save <i class="ri-save-3-fill"></i></ng-container>
+      <ng-container *ngIf="isLoadingUpdate">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </ng-container>
+    </button>
+    <button class="sub-gamenium-btn delete-btn" type="button">Supprimer la plateforme de votre collection <i class="ri-delete-bin-line"></i></button>   <!-- (click)="this.app.deleteMyGame(selectedMyPlatform, true)"-->
+  </div>
+</form>
+
+</section>
+
+
+
