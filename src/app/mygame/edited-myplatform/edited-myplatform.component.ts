@@ -70,7 +70,7 @@ export class EditedMyplatformComponent implements OnInit {
 
   ngOnInit() {
 
-    this.idOneMyPlatform = this.route.snapshot.paramMap.get('id');
+    this.idOneMyPlatform = this.route.snapshot.paramMap.get('editid');
 
     if (this.idOneMyPlatform) {
       this.getAllInfo(); /* GET VARIABLE GLOBAL */
@@ -88,8 +88,6 @@ export class EditedMyplatformComponent implements OnInit {
       if (reponseMyGame.message == "good") {
         this.selectedMyPlatform = reponseMyGame.result;
 
-        console.log(this.selectedMyPlatform);
-
         let i = 0;
         this.selectedMyPlatform.copyPlateform.forEach(oneCopy => {
 
@@ -97,10 +95,6 @@ export class EditedMyplatformComponent implements OnInit {
           i++
 
         })
-
-
-        console.log(this.selectedMyPlatform);
-
 
         /* GEREZ LES COPY*/
         this.calcCopy();

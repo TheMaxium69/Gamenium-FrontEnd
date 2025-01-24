@@ -31,7 +31,6 @@ const routes: Routes = [
   {path: 'plateform/:id/', component: PlateformComponent},
   {path: 'terms', component: PageThermeComponent},
   {path: 'waiting', component: PageAccountComponent},
-  {path: 'myplatform/edit/:id', component: EditedMyplatformComponent}
 ];
 
 @NgModule({

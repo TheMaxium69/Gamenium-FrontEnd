@@ -6,7 +6,13 @@
 
   </ng-container>
 
-  <ng-container *ngIf="task !== 'edit'">
+  <ng-container *ngIf="task == 'edit-platform'">
+
+    <app-edited-myplatform></app-edited-myplatform>
+
+  </ng-container>
+
+  <ng-container *ngIf="task !== 'edit' && task !== 'edit-platform'">
 
     <app-head-profile class="head-profile"></app-head-profile>
 
