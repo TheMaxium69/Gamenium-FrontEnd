@@ -83,10 +83,24 @@ export class EditedMyplatformComponent implements OnInit {
 
 
 
-    this.historyMyPlatformService.getOneMyHmpById(idEditedMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGame: { message: string; result: HistoryMyPlatformInterface | undefined; }) => {
+    this.historyMyPlatformService.getOneMyHmpById(idEditedMyGame, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGame: { message: string; result: HistoryMyPlatformInterface; }) => {
 
       if (reponseMyGame.message == "good") {
         this.selectedMyPlatform = reponseMyGame.result;
+
+        console.log(this.selectedMyPlatform);
+
+        let i = 0;
+        this.selectedMyPlatform.copyPlateform.forEach(oneCopy => {
+
+          oneCopy.purchase.price = oneCopy.purchase.price / 100;
+          i++
+
+        })
+
+
+        console.log(this.selectedMyPlatform);
+
 
         /* GEREZ LES COPY*/
         this.calcCopy();
@@ -387,6 +401,17 @@ export class EditedMyplatformComponent implements OnInit {
           }
         }
 
+        /* RE SYNCRO LES LANG */
+        if (this.selectedMyPlatform){
+          let i = 0;
+          this.selectedMyPlatform.copyPlateform.forEach(oneCopy => {
+
+            oneCopy.purchase.price = oneCopy.purchase.price / 100;
+
+            i++
+          })
+        }
+
         /* BUF FIX SUR LES NOUVEAU EXEMPLAIRE QUI CE DUPLIQUE*/
         this.idFormValideCopy.forEach((idForm: number) => {
           let id:any = '.copyCard' + idForm
@@ -420,7 +445,7 @@ export class EditedMyplatformComponent implements OnInit {
         })
 
       } else {
-        
+
         Swal.fire({
           title: 'Erreur!',
           text: 'Échec de la mise à jour de votre jeux',

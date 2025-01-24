@@ -1,7 +1,6 @@
     <!-- SECTION BARRE DE RECHERCHE -->
-    <app-modal-add-platform></app-modal-add-platform>
     <button *ngIf="btnPlatform == 'add'" (click)="setModal(foundPlatform)" data-bs-toggle="modal" data-bs-target="#addPlatform">Ajouter une console</button>
-    <button *ngIf="btnPlatform == 'edit'" routerLink="/myplatform/edit/{{foundHmp?.id}}">editer vos consoles</button>
+    <button *ngIf="btnPlatform == 'edit'" routerLink="/myplatform/edit/{{foundHmp?.id}}">editer votre console</button>
 
 
     <div class="search-container container" [ngStyle]="{ '--color': app.userConnected?.themeColor || app.colorDefault }">
