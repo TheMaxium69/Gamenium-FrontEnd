@@ -55,9 +55,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
       if (newTask !== this.plateformeId) {
         this.plateformeId = newTask;
         this.task = this.plateformeId;
-        this.allMyHmpByUser();
         this.load();
-        console.log(this.btnPlatform);
         if (this.task == 'recent'){
           console.log("RECENT")
         }
@@ -74,12 +72,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         this.btnPlatform = null;
       } else {
         this.myGameByUserWithPlateform(this.app.userConnected.id, this.plateformeId);
-        this.foundPlatform = this.searchCurrentPlatform(this.app.userPlatformAll, this.convertStringToNumber(this.plateformeId));
-        if(this.foundPlatform){
-          this.checkIfPlatformIsHmpForBtn(this.foundPlatform.id);
-        }
-        
-        
+        this.getOneMyHmpByUserByPlatform(this.app.userConnected.id, this.plateformeId);
       }
       this.getUserRate(this.app.userConnected.id)
     }
@@ -242,58 +235,27 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     return [];
   }
 
-btnPlatform: string|null = null;
 
 
+
+  /* GESTION DU HMP */
+  btnPlatform: string|null = null;
   getOneMyHmpByUserByPlatform(id_user: number, id_plateform: number){
     	this.historyMyPlatformService.getOneMyHmpByUserByPlatform(id_user, id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlateform: {message: string, result: HistoryMyPlatformInterface}) => {
+
+        console.log(responseMyPlateform);
+
         if(responseMyPlateform.message == "good"){
           this.foundHmp = responseMyPlateform.result;
+          this.foundPlatform = this.foundHmp.myPlateform.plateform;
+          this.btnPlatform = 'edit';
+        } else if (responseMyPlateform.message == "hmp not found") {
+          this.btnPlatform = 'add';
         }
       })
   }
 
-  checkIfPlatformIsHmpForBtn(id_plateform: number){
-    // vérifie si le user a un jeu avec cette console
-    if(this.app.userPlatformAll.find(item => item.id === id_plateform) !== undefined){
-
-      // vérifie si le user a une hmp avec cette console
-      if(this.app.myPlatformAll?.find(item => item.myPlateform.plateform.id === id_plateform) !== undefined){
-        this.btnPlatform = 'edit';
-        this.getOneMyHmpByUserByPlatform(this.app.userConnected.id, id_plateform)
-      } else {
-        this.btnPlatform = 'add';
-      }
-
-    } else {
-      console.log("squid platforme");
-    }
-  }
-
-  allMyHmpByUser(): void {
-    this.historyMyPlatformService.getAllMyHmpByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlatform: {message: string; result: HistoryMyPlatformInterface[] | undefined}) => {
-      if(responseMyPlatform.message == "good"){
-        this.app.myPlatformAll = responseMyPlatform.result;
-      }
-    })
-  }
-
-  //convertie une string en nb
-  convertStringToNumber(chain: string|undefined): number{
-    let result = Number(chain);
-    if(isNaN(result) || result === 0){
-      console.log("Conversion echoué");
-      result = 0;
-      return result;
-    }
-    return result;
-  }
-
-  //Savoir si la platform est contenu dans ce tableau
-  searchCurrentPlatform(UserPlatforms: PlateformInterface[], id: number): PlateformInterface | undefined {
-    return UserPlatforms.find(item => item.id === id);
-  }
-
+  /* GESTION DE LA MODAL PLATEFORM */
   setModal(platform: PlateformInterface | undefined){
     this.app.platformSelected = platform;
   }

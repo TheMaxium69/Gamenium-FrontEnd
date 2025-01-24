@@ -393,14 +393,6 @@ export class EditedMyplatformComponent implements OnInit {
         this.selectedMyPlatform = reponseMyPlatformUpdate.result;
         // console.log(reponseMyPlatformUpdate.result);
 
-        if (this.app.myPlatformAll){
-          const index = this.app.myPlatformAll.findIndex(item => item.myPlateform.id === reponseMyPlatformUpdate.result.myPlateform.id);
-          if (index !== -1) {
-            this.app.myPlatformAll[index] = reponseMyPlatformUpdate.result;
-            // this.app.myPlatformAll[index].tempNote = reponseMyPlatformUpdate.result.rate.rating;
-          }
-        }
-
         /* RE SYNCRO LES LANG */
         if (this.selectedMyPlatform){
           let i = 0;

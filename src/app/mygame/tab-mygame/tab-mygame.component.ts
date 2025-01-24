@@ -53,7 +53,7 @@ export class TabMygameComponent implements OnInit, OnChanges {
     this.plateformService.getPlateformWithUser(id, this.app.setURL(), this.app.createCorsToken()).subscribe((reponsePlateformUser: {message:string, result:PlateformInterface[]}) => {
       if (reponsePlateformUser.message == "good") {
         this.plateformsUser = reponsePlateformUser.result;
-        this.app.userPlatformAll = this.plateformsUser;
+        // this.app.userPlatformAll = this.plateformsUser;
       }
     })
   }
