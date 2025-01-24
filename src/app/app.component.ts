@@ -139,10 +139,6 @@ export class AppComponent {
   // USER
   userDefaultNoReload:UserDefaultInterface|undefined;
 
-  // PLATFORMS
-  userPlatformAll:PlateformInterface[] = [];
-  myPlatformAll:HistoryMyPlatformInterface[] | undefined;
-
   /******************************************************************************************************************
    *
    * CONNEXION
@@ -359,6 +355,8 @@ export class AppComponent {
       return this.urlApiProd;
     } else if (this.AppEnv == "PRODMAX") {
       return this.urlApiProdMax;
+    } else if (this.AppEnv == "DEVMAX") {
+      return this.urlApiDevMax;
     } else if (this.AppEnv == "V1") {
       return this.urlApiV1;
     } else {
@@ -655,10 +653,6 @@ export class AppComponent {
               confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
             })
 
-            // Actualiser la liste des jeux après l'ajout
-            if (this.userConnected && this.myPlatformAll) {
-              this.myPlatformAll = [responseMyPlatformAdd.result, ...(this.myPlatformAll || [])];
-            }
           }
         } else if (responseMyPlatformAdd.message == "has already been added") {
           Swal.fire({
