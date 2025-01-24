@@ -23,10 +23,6 @@ export class HistoryMyPlateformService {
     return this.http.post<ApicallInterface>(url + '/addHmp', body, option);
   }
 
-  getAllMyHmpByUser(url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface>{
-    return this.http.get<ApicallInterface>(url + '/allMyPlatform/', option);
-  }
-
   updateMyPlatform(body: string, url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface>{
     return this.http.put<ApicallInterface>(url + '/updateMyPlateform', body, options);
   }
