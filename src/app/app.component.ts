@@ -67,7 +67,7 @@ export class AppComponent {
 
 
   //%     API - GAMENIUM      %//
-    AppEnv: string = "PROD"; // DEV or PROD or PRODMAX
+    AppEnv: string = "DEV"; // DEV or PROD or PRODMAX
     urlApiDev: string = "http://127.0.0.1:8000";
     urlApiDevMax: string = "https://127.0.0.1:8000";
     urlApiProd: string = "http://vps216.tyrolium.fr:8000";
@@ -599,7 +599,7 @@ export class AppComponent {
     name: "Other"
   };
   platformSelected: PlateformInterface|undefined;
-
+  myPlatform: HistoryMyPlatformInterface|undefined;
     // id, nom
 
   addPlatform(form: NgForm, isMore: boolean = false){
@@ -647,7 +647,7 @@ export class AppComponent {
           } else {
             Swal.fire({
               title: 'Succès!',
-              text: this.gameSelected?.name + ' à bien été ajouter à votre profil.',
+              text: this.platformSelected?.name + ' à bien été ajouter à votre profil.',
               icon: 'success',
               confirmButtonText: 'OK',
               confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
@@ -904,6 +904,48 @@ export class AppComponent {
   *
   * */
 
+  deleteMyPlateform(myPlatform: HistoryMyPlatformInterface|undefined, redirect: Boolean = false){
+    if(!myPlatform){
+      console.log('pas de hmp');
+      return;
+    }
+
+    // myPlateform.isDelete = true;
+    let idOneMyPlatform = myPlatform.id;
+
+    if(idOneMyPlatform){
+      this.historyMyPlatformService.deleteMyPlatform(idOneMyPlatform, this.setURL(), this.createCorsToken()).subscribe(responseDeleteMyPlatform => {
+        if(responseDeleteMyPlatform.message == 'delete success'){
+
+
+          Swal.fire({
+            title: 'Succès!',
+            text: 'La plateforme a été retiré de votre collection.',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+          })
+
+          if (redirect){
+            this.router.navigateByUrl('/mygame')
+          }
+
+        } else {
+          // myPlatform.isDelete = false;
+          Swal.fire({
+            title: 'Erreur!',
+            text: 'Une erreur s\'est produite lors de la suppression du jeu.',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+          })
+        }
+      }, (error) => {
+        // myPlatform.isDelete = false;
+        this.erreurSubcribe()
+      })
+    }
+  }
 
   deleteMyGame(myGameHistorique: HistoryMyGameInterface | undefined, redirect: Boolean = false) {
 

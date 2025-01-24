@@ -26,4 +26,8 @@ export class HistoryMyPlateformService {
   updateMyPlatform(body: string, url: string, options: { headers: HttpHeaders }): Observable<ApicallInterface>{
     return this.http.put<ApicallInterface>(url + '/updateMyPlateform', body, options);
   }
+
+  deleteMyPlatform(idMyPlatform: number, url: string, option: {headers: HttpHeaders}): Observable<ApicallInterface>{
+    return this.http.delete<ApicallInterface>(url + '/deleteHmp/' + idMyPlatform, option);
+  }
 }

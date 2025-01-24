@@ -53,6 +53,7 @@ import { GalleryComponent } from './-global/gallery/gallery.component';
 import { WaitingComponent } from './account/waiting/waiting.component';
 import { ModalAddPlatformComponent } from './-global/modal-add-platform/modal-add-platform.component';
 import { EditedMyplatformComponent } from './mygame/edited-myplatform/edited-myplatform.component';
+import { CardPlatformComponent } from './-global/card-platform/card-platform.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { EditedMyplatformComponent } from './mygame/edited-myplatform/edited-myp
     GalleryComponent,
     WaitingComponent,
     ModalAddPlatformComponent,
-    EditedMyplatformComponent
+    EditedMyplatformComponent,
+    CardPlatformComponent
 
   ],
   imports: [
