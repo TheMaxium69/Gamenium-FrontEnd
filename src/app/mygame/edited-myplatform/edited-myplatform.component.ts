@@ -89,12 +89,17 @@ export class EditedMyplatformComponent implements OnInit {
         this.selectedMyPlatform = reponseMyGame.result;
 
         let i = 0;
-        this.selectedMyPlatform.copyPlateform.forEach(oneCopy => {
+          this.selectedMyPlatform.copyPlateform.forEach(oneCopy => {
 
-          oneCopy.purchase.price = oneCopy.purchase.price / 100;
-          i++
+            if (oneCopy.purchase){
+              if (oneCopy.purchase.price != null) {
+                oneCopy.purchase.price = oneCopy.purchase.price / 100;
+              }
+            }
+            i++
 
-        })
+          })
+
 
         /* GEREZ LES COPY*/
         this.calcCopy();

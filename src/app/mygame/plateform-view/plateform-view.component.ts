@@ -241,7 +241,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   /* GESTION DU HMP */
   btnPlatform: string|null = null;
   getOneMyHmpByUserByPlatform(id_user: number, id_plateform: number){
-    	this.historyMyPlatformService.getOneMyHmpByUserByPlatform(id_user, id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlateform: {message: string, result: HistoryMyPlatformInterface}) => {
+    	this.historyMyPlatformService.getOneMyHmpByUserByPlatform(id_user, id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlateform: {message: string, result: HistoryMyPlatformInterface, result2: PlateformInterface}) => {
 
         console.log(responseMyPlateform);
 
@@ -251,6 +251,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
           this.btnPlatform = 'edit';
         } else if (responseMyPlateform.message == "hmp not found") {
           this.btnPlatform = 'add';
+          this.foundPlatform = responseMyPlateform.result2;
         }
       })
   }
