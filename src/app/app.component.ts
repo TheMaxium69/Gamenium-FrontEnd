@@ -273,6 +273,22 @@ export class AppComponent {
           this.router.navigate(['/waiting']);
         }
 
+      } else if (msgUser?.message == "user ban") {
+
+        console.log(msgUser?.message)
+        // GERE LE MSG ERR
+        this.cookieService.delete('tokenGamenium');
+        this.cookieService.delete('userGamenium');
+
+        Swal.fire({
+          title: 'Ban!',
+          text: 'Votre compte à été bannie',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
+        })
+
+
       } else {
 
         console.log(msgUser?.message)
