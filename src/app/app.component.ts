@@ -105,7 +105,8 @@ export class AppComponent {
   maxCopyGame:number = 50;
 
   // DEFAULT
-  colorDefault = "#d2001e";
+  colorDefault:string = "#d2001e";
+  lang:string = "fr";
   noBoxartImage_default:string = "https://www.giantbomb.com/a/uploads/square_avatar/11/110673/3026329-gb_default-16_9.jpg";
   noBoxartImage:string = "assets/noBoxart.png";
 
@@ -1009,7 +1010,6 @@ export class AppComponent {
     }
   }
 
-  lang:string = "fr";
 
   getVariableCountryLang(country:CountryInterface|undefined):string {
 
