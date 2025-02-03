@@ -1,29 +1,39 @@
-<app-modal-provider 
+<app-modal-provider
   (onProviderDelete)="getProviderFollowed($event)"
   [providerFollowed]="providerFollowed"
   [providerFollowActuAll]="providerFollowActuAll">
 </app-modal-provider>
 
 <ng-container *ngIf="!actualityId">
-  <app-navbar-actuality 
-    [providerFollowActuAll]="providerFollowActuAll"
-    (providerSelected)="onProviderSelected($event)" 
-    (providerFollowed)="getProviderFollowed($event)"
-    (isProviderModalOpen)="openModal($event)"> 
-  </app-navbar-actuality>
+  <ng-container *ngIf="providerId">
 
-  
-  <div style="margin-bottom: 120px;">
+    <app-provider></app-provider>
 
-    <app-view-actuality 
-      (providerFollowActuAll)="providerActu($event)"
-      [providerIdSelected]="providerSelected ?? null" 
-      [providerFollowed]="providerFollowed">
-    </app-view-actuality>
-  </div>
+  </ng-container>
 
-  <!-- FLECHE POUR REMONTER EN HAUT DE LA PAGE -->
-  <app-back-to-top></app-back-to-top>
+  <ng-container *ngIf="!providerId">
+    <app-navbar-actuality
+      [providerFollowActuAll]="providerFollowActuAll"
+      (providerSelected)="onProviderSelected($event)"
+      (providerFollowed)="getProviderFollowed($event)"
+      (isProviderModalOpen)="openModal($event)">
+    </app-navbar-actuality>
+
+
+    <div style="margin-bottom: 120px;">
+
+      <app-view-actuality
+        (providerFollowActuAll)="providerActu($event)"
+        [providerIdSelected]="providerSelected ?? null"
+        [providerFollowed]="providerFollowed">
+      </app-view-actuality>
+    </div>
+
+    <!-- FLECHE POUR REMONTER EN HAUT DE LA PAGE -->
+    <app-back-to-top></app-back-to-top>
+
+
+  </ng-container>
 </ng-container>
 
 <ng-container *ngIf="actualityId">

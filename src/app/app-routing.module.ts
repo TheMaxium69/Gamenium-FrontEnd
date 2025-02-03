@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'mygame/:task/:editid', component: PageMygameComponent},
   {path: 'account', component: PageAccountComponent},
   {path: 'profil', component: PageAccountComponent},
-  {path: 'provider/:id', component: ProviderComponent},
+  {path: 'provider/:idprovider', component: PageActualityComponent},
   {path: 'gameprofile/:id', component: DetailGameComponent},
   {path: 'profil/:id', component: PageMygameComponent},
   {path: 'profil/:id/:task', component: PageMygameComponent},

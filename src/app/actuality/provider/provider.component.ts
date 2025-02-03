@@ -61,7 +61,7 @@ export class ProviderComponent implements OnInit{
       console.log(this.isProviderFollowedByUser)
     }
 
-    this.providerId = this.route.snapshot.paramMap.get('id');
+    this.providerId = this.route.snapshot.paramMap.get('idprovider');
     console.log("Provider Id", this.providerId)
 
     this.getProviders(this.providerId);
@@ -94,7 +94,7 @@ export class ProviderComponent implements OnInit{
   }
 
   checkIfUserFollowProvider(userId: number) {
-    this.providerId = this.route.snapshot.paramMap.get('id')
+    this.providerId = this.route.snapshot.paramMap.get('idprovider')
 
     this.followService.getFollowByProvider(this.providerId, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
       if (reponseApi.message == 'good') {

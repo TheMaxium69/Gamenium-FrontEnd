@@ -12,6 +12,7 @@ import {AppComponent} from "../../app.component";
 export class PageActualityComponent implements OnInit{
 
   actualityId: number|any
+  providerId: number|any
   providerSelected: number | undefined;
   lastProviderSelected: number | undefined;
   providerFollowed: ProviderInterface[] = []
@@ -30,6 +31,7 @@ export class PageActualityComponent implements OnInit{
 
 
     this.actualityId = this.route.snapshot.paramMap.get('id');
+    this.providerId = this.route.snapshot.paramMap.get('idprovider');
     this.app.currentUrl = this.router.url;
 
     if (!this.app.isLoggedIn){
