@@ -15,6 +15,7 @@ import {MetacricInterface} from "../../-interface/api/metacric.interface";
 import {forkJoin} from "rxjs";
 import {ProviderInterface} from "../../-interface/provider.interface";
 import {ProviderService} from "../../-service/provider.service";
+import {TestInterface} from "../../-interface/test.interface";
 
 @Component({
   selector: 'app-detail-game',
@@ -29,6 +30,10 @@ export class DetailGameComponent implements OnInit{
   gameId: number|any;
   gameSelected: GameInterface|undefined;
   noneGame: boolean = false;
+
+  testGame: TestInterface[] = [];
+  moyenGameniumPress: number|undefined = undefined;
+  moyenRatePress: string = "NA";
 
   mouseDown: boolean = false;
   startX: number = 0;
@@ -67,6 +72,16 @@ export class DetailGameComponent implements OnInit{
         if (this.gameSelected){
           this.addViewGame(this.gameSelected.id)
           this.getOtherApi(this.gameSelected);
+        }
+
+        this.testGame = reponseGameOne.result2
+        if (this.testGame){
+          let AllNoteGamenium: number[] = [];
+          this.testGame.forEach((test: TestInterface) => {
+            AllNoteGamenium.push(test.rating);
+          });
+          this.moyenGameniumPress = this.obtainMoyenPressGamenium(AllNoteGamenium);
+          this.moyenRatePress = this.obtainMoyenPress();
         }
 
       } else {
@@ -208,6 +223,7 @@ export class DetailGameComponent implements OnInit{
 
       this.GiantBomb = reponseGiantbomb;
       this.Metacritic = reponseMetacritic;
+      this.moyenRatePress = this.obtainMoyenPress();
 
       /*
       *
@@ -279,32 +295,59 @@ export class DetailGameComponent implements OnInit{
 
   }
 
+  obtainMoyenPressGamenium(AllNoteGamenium: number[]): number|undefined {
 
+    const totalScores = AllNoteGamenium.reduce((sum, score) => sum + score, 0);
+    const numberOfScores = AllNoteGamenium.length;
+
+    let result = numberOfScores > 0 ? totalScores / numberOfScores : 0;
+    const formattedResult = Number(result.toFixed(1));
+
+    if (formattedResult == 0) {
+      return undefined;
+    } else {
+      return formattedResult;
+    }
+
+  }
   obtainMoyenPress(): string {
-    if (this.Metacritic?.metacritic_score == 0) {
+    let metacriticScore:number = 0;
+    let GameniumPress:number = 0;
+
+    if (this.Metacritic?.metacritic_score !== 0 && this.Metacritic?.metacritic_score) {
+      metacriticScore = Number(this.Metacritic.metacritic_score ?? 0) / 5; // sur 100, convertir sur 20
+    }
+    if (this.moyenGameniumPress) {
+      GameniumPress = this.moyenGameniumPress;
+    }
+
+    if (metacriticScore == 0 && GameniumPress == 0){
       return "NA";
     }
-    return this.Metacritic?.metacritic_score.toString() || "NA";
+
+    const totalScores = metacriticScore + GameniumPress;
+    const numberOfScores = [metacriticScore, GameniumPress].filter(score => score > 0).length;
+
+    let result = numberOfScores > 0 ? totalScores / numberOfScores : 0
+    const formattedResult = Number(result.toFixed(1));
+
+    if (formattedResult == 0){
+      return "NA";
+    } else {
+      return formattedResult.toString();
+    }
   }
+
   obtainMoyenUser(): string {
     const metacriticScore = Number(this.Metacritic?.users_score ?? 0) * 2; // sur 10, convertir sur 20
     const giantBombScore = Number(this.GiantBomb?.average_score ?? 0) * 4; // sur 5, convertir sur 20
     const gameSelectedScore = Number(this.gameSelected?.moyenRateUser ?? 0); // sur 20
 
-    // console.log('metacriticScore:', metacriticScore);
-    // console.log('giantBombScore:', giantBombScore);
-    // console.log('gameSelectedScore:', gameSelectedScore);
-
     const totalScores = metacriticScore + giantBombScore + gameSelectedScore;
     const numberOfScores = [metacriticScore, giantBombScore, gameSelectedScore].filter(score => score > 0).length;
 
-    // console.log('totalScores:', totalScores);
-    // console.log('numberOfScores:', numberOfScores);
-
     let result = numberOfScores > 0 ? totalScores / numberOfScores : 0
     const formattedResult = Number(result.toFixed(1));
-
-    // console.log('final result:', formattedResult);
 
     if (formattedResult == 0){
       return "NA";
@@ -313,6 +356,8 @@ export class DetailGameComponent implements OnInit{
     }
 
   }
+
+
 
   //si une image n'est pas load
   errorImg(id:number) {

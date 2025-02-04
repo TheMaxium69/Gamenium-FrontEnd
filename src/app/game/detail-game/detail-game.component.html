@@ -268,7 +268,7 @@
                 </div>
                 <div class="rating-info">
                     <div class="ratings-details-rate">
-                        <span class="big-rate">NA</span>/20
+                        <span class="big-rate">{{ moyenGameniumPress || "NA" }}</span>/20
                     </div>
                 </div>
             </div>
@@ -282,7 +282,7 @@
             <div class="d-flex justify-content">
                 <div class="width-circle">
                     <div [ngStyle]="{ '--userColor': app.userConnected?.themeColor || app.colorDefault }" class="shadow-btn border color-circle ratio ratio-1x1 rounded-circle">
-                        <p class="font-notes d-flex justify-content-center align-items-center"><span>{{ obtainMoyenPress() }}</span>/20</p>
+                        <p class="font-notes d-flex justify-content-center align-items-center"><span>{{ moyenRatePress }}</span>/20</p>
                     </div>
                 </div>
             </div>
