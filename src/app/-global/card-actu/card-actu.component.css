@@ -9,7 +9,9 @@
 .card .card-img-top{
   object-fit: cover;
   max-width: 336px;
-  max-height: 234px;
+  max-height: 189px;
+  min-width: 336px;
+  min-height: 189px;
   border-radius: 14px;
   transition: transform 0.4s ease-out;
   will-change: transform;
