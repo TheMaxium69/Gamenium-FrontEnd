@@ -9,7 +9,7 @@
       </li>
     </ng-container>
     <ng-container *ngIf="task">
-      <li routerLink="/profil/{{ profileId }}">
+      <li routerLink="/profil/{{ profileId }}" [class.active]="task === 'hmg' || task === 'hmp'">
         <p>Tous</p>
       </li>
     </ng-container>

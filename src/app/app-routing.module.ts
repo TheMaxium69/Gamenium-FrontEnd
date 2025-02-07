@@ -27,6 +27,7 @@ const routes: Routes = [
   {path: 'gameprofile/:id', component: DetailGameComponent},
   {path: 'profil/:id', component: PageMygameComponent},
   {path: 'profil/:id/:task', component: PageMygameComponent},
+  {path: 'profil/:id/:task/:idhistory', component: PageMygameComponent},
   {path: 'search/:type/:value', component: SearchPageComponent},
   {path: 'plateform/:id/', component: PlateformComponent},
   {path: 'terms', component: PageThermeComponent},

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {ProfilService} from "../../-service/profil.service";
 import {ProfilInterface} from "../../-interface/profil.interface";
+import {HistoryMyGameInterface} from "../../-interface/history-my-game.interface";
 
 @Component({
   selector: 'modal-view-mygame',
@@ -60,6 +61,36 @@ export class ViewMygameComponent {
   }
   isShowCopyPurchaseContent(copyId:number): boolean {
     return this.showCopyPurchaseContent.includes(copyId);
+  }
+
+  deleteMyGame(myGameHistorique: HistoryMyGameInterface | undefined){
+
+    this.app.deleteMyGame(myGameHistorique);
+    this.closeModal();
+
+  }
+
+  closeModal(){
+
+    const body = document.body;
+    const shadow = document.getElementById('shadow');
+
+    if (shadow) {
+
+
+      shadow.remove(); // Remove the shadow div element from the DOM
+
+      body.style.overflow = ''; // Re-enable scrolling by clearing the overflow style
+      body.style.paddingRight = ''; // Clear paddingRight style
+      body.classList.remove('modal-open'); // Remove 'modal-open' class
+
+      const viewGameDiv = document.getElementById('viewGame');
+      if (viewGameDiv) {
+        viewGameDiv.classList.remove('show');
+      }
+
+    }
+
   }
 
 }

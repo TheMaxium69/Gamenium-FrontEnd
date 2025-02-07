@@ -20,6 +20,7 @@ import { ApicallInterface } from 'src/app/-interface/apicall.interface';
 export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   profileId: number|any;
+  idhistory:number|any;
   plateformeId: number | any;
   task:any;
   profilSelected: ProfilInterface | undefined;
@@ -58,7 +59,10 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   ngOnInit(): void {
 
+    console.log("Je suis dans le profile public")
+
     this.profileId = this.route.snapshot.paramMap.get('id');
+    this.idhistory = this.route.snapshot.paramMap.get('idhistory');
     this.userConnected = this.app.userConnected;
 
 
@@ -132,15 +136,60 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         // console.log(this.filteredGames);
         //
         // console.log(this.originalGameHistoriqueAll)
+      } else if (this.task === "hmg" || this.task === "hmp"){
+
+        if (this.task === "hmg" && this.idhistory){
+          // console.log("Je suis dans le hmg " + this.idhistory)
+          this.selectViewMyGame(this.idhistory);
+        }
+        if (this.task === "hmp" && this.idhistory){
+          // console.log("Je suis dans le hmp " + this.idhistory)
+        }
+
       }
       // Set la recher
       else if (this.task){
         this.myGameByUserWithPlateform(this.profilSelected.id, this.plateformeId);
-
       }
 
     }
   }
+
+
+  selectViewMyGame(id:number) {
+
+    this.histoireMyGameService.getOneMyGame(id, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface; }) => {
+      if (responseMyGame.message == "good") {
+        this.app.viewMyGame = responseMyGame.result;
+
+        const body = document.body;
+
+        if (!document.getElementById('shadow')) {
+          const newDiv = document.createElement('div');
+
+          newDiv.id = 'shadow';
+          newDiv.className = 'modal-backdrop fade show';
+
+          body.appendChild(newDiv);
+          body.style.overflow = 'hidden';
+          body.style.paddingRight = '0px';
+          body.className = 'modal-open';
+
+
+          const viewGameDiv = document.getElementById('viewGame');
+          if (viewGameDiv) {
+            viewGameDiv.classList.add('show');
+          }
+
+        }
+
+
+      }
+    });
+
+  }
+
+
 
 
   myGameByUserWithPlateform(id_user: number, id_plateform:number): void {
@@ -221,12 +270,6 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   }
 
-  selectViewMyGame(historyMyGameInterface: HistoryMyGameInterface) {
-    this.app.viewMyGame = historyMyGameInterface;
-    if (this.profilSelected?.themeColor){
-      document.documentElement.style.setProperty('--color-variable', this.profilSelected.themeColor);
-    }
-  }
 
 
   // recup les jeux pin
