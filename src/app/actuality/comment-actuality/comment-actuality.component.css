@@ -39,14 +39,16 @@
   justify-content: end;
 }
 
-#delete-comment-icon {
+#delete-comment-icon,
+.warn-ico{
   cursor: pointer;
   margin-left: auto;
   margin-right: 5%;
   font-size: 18px;
 }
 
-#delete-comment-icon:hover {
+#delete-comment-icon:hover,
+.warn-ico:hover {
   opacity: 0.8;
   color: red;
 }
@@ -352,13 +354,13 @@
   }
 }
 
-@media  ( max-width: 855px){ 
+@media  ( max-width: 855px){
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 755px;
   }
 }
 
-@media  ( max-width: 775px){ 
+@media  ( max-width: 775px){
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 695px;
   }
@@ -367,7 +369,7 @@
   }
 }
 
-@media  ( max-width: 695px){ 
+@media  ( max-width: 695px){
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 615px;
   }
@@ -376,7 +378,7 @@
   }
 }
 
-@media  ( max-width: 615px){ 
+@media  ( max-width: 615px){
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 535px;
   }
@@ -385,7 +387,7 @@
   }
 }
 
-@media  ( max-width: 535px){ 
+@media  ( max-width: 535px){
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 445px;
   }
@@ -402,7 +404,7 @@
   }
 }
 
-@media  ( max-width: 445px){ 
+@media  ( max-width: 445px){
   #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
     width: 365px;
   }

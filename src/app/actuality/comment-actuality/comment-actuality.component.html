@@ -131,6 +131,8 @@
 
                     <!-- DELTE YOUR COM-->
                     <i id="delete-comment-icon" class="ri-delete-bin-line" (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected?.id"></i>
+                    <!-- WARN COM-->
+                    <i class="warn-ico ri-spam-2-line" *ngIf="commentReply.user.id !== app.userConnected?.id"></i>
 
                   </div>
 
@@ -212,6 +214,9 @@
                 <span class="time-ago">{{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
               </h4>
 
+              <!-- WARN COM-->
+              <i class="warn-ico ri-spam-2-line"></i>
+
             </div>
 
             <!-- CONTENT -->
@@ -264,6 +269,8 @@
 
                         <!-- DELTE YOUR COM-->
                         <i id="delete-comment-icon" class="ri-delete-bin-line" (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected?.id"></i>
+                        <!-- WARN COM-->
+                        <i class="warn-ico ri-alert-line" *ngIf="commentReply.user.id !== app.userConnected?.id"></i>
 
                       </div>
 
