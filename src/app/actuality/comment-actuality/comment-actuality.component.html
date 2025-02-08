@@ -1,4 +1,5 @@
 <!--<h1 class="mb4">Section Commentaires</h1>-->
+<modal-warn></modal-warn>
 
 <ng-container *ngIf="this.app.isLoggedIn">
 <form id="addCommentForm" #addForm="ngForm" (ngSubmit)="addComment(addForm)">
@@ -132,7 +133,7 @@
                     <!-- DELTE YOUR COM-->
                     <i id="delete-comment-icon" class="ri-delete-bin-line" (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected?.id"></i>
                     <!-- WARN COM-->
-                    <i class="warn-ico ri-spam-2-line" *ngIf="commentReply.user.id !== app.userConnected?.id"></i>
+                    <i class="warn-ico ri-alert-line" *ngIf="commentReply.user.id !== app.userConnected?.id" data-bs-toggle="modal" data-bs-target="#warnModal" (click)="app.setWarn('comment-reply', commentReply.id)"></i>
 
                   </div>
 
@@ -215,7 +216,7 @@
               </h4>
 
               <!-- WARN COM-->
-              <i class="warn-ico ri-spam-2-line"></i>
+              <i class="warn-ico ri-alert-line" data-bs-toggle="modal" data-bs-target="#warnModal" (click)="app.setWarn('comment', comment.id)"></i>
 
             </div>
 
@@ -270,7 +271,7 @@
                         <!-- DELTE YOUR COM-->
                         <i id="delete-comment-icon" class="ri-delete-bin-line" (click)="deleteCommentReply(commentReply, i)" *ngIf="commentReply.user.id == app.userConnected?.id"></i>
                         <!-- WARN COM-->
-                        <i class="warn-ico ri-alert-line" *ngIf="commentReply.user.id !== app.userConnected?.id"></i>
+                        <i class="warn-ico ri-alert-line" *ngIf="commentReply.user.id !== app.userConnected?.id" data-bs-toggle="modal" data-bs-target="#warnModal" (click)="app.setWarn('comment-reply', commentReply.id)"></i>
 
                       </div>
 

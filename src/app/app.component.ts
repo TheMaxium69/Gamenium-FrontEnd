@@ -30,6 +30,7 @@ import {HmgCopyRegionInterface} from "./-interface/hmg-copy-region.interface";
 import {HmgScreenshotCategoryInterface} from "./-interface/hmg-screenshot-category.interface";
 import { HistoryMyPlatformInterface } from './-interface/history-my-platform.interface';
 import { HistoryMyPlateformService } from './-service/history-my-plateform.service';
+import {WarnTypeInterface} from "./-interface/warn-type.interface";
 
 @Component({
   selector: 'app-root',
@@ -67,7 +68,7 @@ export class AppComponent {
 
 
   //%     API - GAMENIUM      %//
-    AppEnv: string = "DEV"; // DEV or PROD or PRODMAX
+    AppEnv: string = "PROD"; // DEV or PROD or PRODMAX
     urlApiDev: string = "http://127.0.0.1:8000";
     urlApiDevMax: string = "https://127.0.0.1:8000";
     urlApiProd: string = "http://vps216.tyrolium.fr:8000";
@@ -135,6 +136,9 @@ export class AppComponent {
   hmgCopyFormatAllNoReload:HmgCopyFormatInterface[] = [];
   hmgCopyRegionAllNoReload:HmgCopyRegionInterface[] = [];
   hmgScreenshotCategory: HmgScreenshotCategoryInterface[] = [];
+
+  // WARN
+  warnTypeNoReload: WarnTypeInterface[] = [];
 
 
   // USER
@@ -608,6 +612,21 @@ export class AppComponent {
   * FOR MODAL
   *
   * */
+
+  warnTemp: { type:string, id:number }|undefined;
+
+
+  setWarn(type:string, id:number){
+    this.warnTemp = {
+      type: type,
+      id: id
+    }
+  }
+
+
+
+
+
 
   gameSelected: GameInterface|undefined;
   viewMyGame:HistoryMyGameInterface|undefined;

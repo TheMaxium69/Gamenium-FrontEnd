@@ -1,4 +1,5 @@
 <modal-screenshot></modal-screenshot>
+<modal-warn></modal-warn>
 
 <div class="modal fade text-center" id="viewGame" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -39,6 +40,9 @@
                 <i class="ri-pushpin-fill btn-action"></i>
               </button>
             </ng-container>
+            <button type="button" *ngIf="this.app.viewMyGame" class="no-btn" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#warnModal" (click)="app.setWarn('hmg', this.app.viewMyGame.id)">
+              <i class="warn-ico ri-alert-line btn-action"></i>
+            </button>
           </ng-container>
         </div>
         <div class="modal-header-end">
