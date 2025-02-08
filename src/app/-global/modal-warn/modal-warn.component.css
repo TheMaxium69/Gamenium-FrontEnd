@@ -74,6 +74,25 @@
 /*
 * PANEL
 */
+.panel-head{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  h1{
+    color: var(--userColor);
+    text-align: center;
+
+    i{
+      margin-right: 8px;
+      position: relative;
+      top: -1px;
+    }
+  }
+}
+
+
 .panel {
   display: flex;
   flex-direction: column;
@@ -91,6 +110,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+
+
+
 
     h2{
       color: var(--userColor);

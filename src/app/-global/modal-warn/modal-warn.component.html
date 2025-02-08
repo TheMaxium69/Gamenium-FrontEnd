@@ -5,18 +5,55 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-
       <div class="modal-body">
 
-        <h2>Warn</h2>
+<!--        <p>{{ this.app.warnTemp?.type }}</p>-->
+<!--        <p>{{ this.app.warnTemp?.id }}</p>-->
+
+        <div class="start-form">
+
+          <div class="panel panel-head">
+            <div class="head-panel" style="margin-left: 0px; margin-bottom: 0px">
+              <h1><i class="ri-alert-line"></i>Signalement</h1>
+            </div>
+          </div>
+
+          <!-- TYPE-->
+          <div class="panel">
+            <div class="head-panel">
+              <h2>Raison</h2>
+            </div>
+            <div *ngIf="app.warnTypeNoReload">
+              <ng-container *ngFor="let warn of app.warnTypeNoReload; let i = index">
+                <div class="buyWhereOne">
+                  <h3>
+                      <span class="badge">
+                        <input type="radio" id="warn_{{ i }}" name="warn_reason" [value]="warn.name">
+                        <label for="warn_{{ i }}" style="color: black; margin-left: 10px;">{{ warn.name }}</label>
+                      </span>
+                  </h3>
+                </div>
+              </ng-container>
+            </div>
+            <div *ngIf="app.warnTypeNoReload.length == 0">
+              <h3>Erreur</h3>
+            </div>
+          </div>
 
 
-        <p>{{ this.app.warnTemp?.type }}</p>
-        <p>{{ this.app.warnTemp?.id }}</p>
+          <div class="panel">
+            <div class="head-panel">
+              <h2>Autre</h2>
+            </div>
+            <textarea id="warn_description" name="warn_description" rows="5" cols="50" placeholder="Plus d'information"></textarea>
+          </div>
+
+        </div>
 
       </div>
 
       <div class="modal-footer" style="margin-top: 74px;">
+        <button type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-dismiss="modal">Envoyé <i class="ri-save-3-fill"></i></button>
         <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
       </div>
 
