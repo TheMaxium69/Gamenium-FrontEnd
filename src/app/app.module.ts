@@ -55,6 +55,7 @@ import { ModalAddPlatformComponent } from './-global/modal-add-platform/modal-ad
 import { EditedMyplatformComponent } from './mygame/edited-myplatform/edited-myplatform.component';
 import { CardPlatformComponent } from './-global/card-platform/card-platform.component';
 import { ModalWarnComponent } from './-global/modal-warn/modal-warn.component';
+import { ViewMyplatformComponent } from './-global/view-myplatform/view-myplatform.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { ModalWarnComponent } from './-global/modal-warn/modal-warn.component';
     ModalAddPlatformComponent,
     EditedMyplatformComponent,
     CardPlatformComponent,
-    ModalWarnComponent
+    ModalWarnComponent,
+    ViewMyplatformComponent
 
   ],
   imports: [
