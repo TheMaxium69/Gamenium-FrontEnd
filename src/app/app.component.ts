@@ -54,7 +54,7 @@ export class AppComponent {
     if (cookieToken && cookieUser){
       this.loginWithCookie(cookieToken, cookieUser);
     } else {
-      this.router.navigate(['/account']);
+      // this.router.navigate(['/account']);
     }
   }
 
