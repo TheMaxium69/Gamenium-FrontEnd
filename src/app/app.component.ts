@@ -93,7 +93,7 @@ export class AppComponent {
   isLoggedIn: boolean = false;
   userConnected: UserInterface|any;
   token: string|any;
-  isAccess: boolean = false;
+  isAccess: boolean = true; /* ETAT PAR DEFAULT */
   currentUrl: string = "/";
 
   // LIMIT
@@ -260,12 +260,17 @@ export class AppComponent {
 
         // console.log(this.userConnected.userRole)
         if (this.userConnected && this.userConnected.userRole) {
-          for (const role of this.userConnected.userRole) {
-            if (role === 'ROLE_BETA') {
-              this.isAccess = true;
-              break;
-            }
-          }
+
+          this.isAccess = true;
+
+          /* VERIFICATION D'UN ROLE */
+
+          // for (const role of this.userConnected.userRole) {
+          //   if (role === 'ROLE_BETA') {
+          //     this.isAccess = true;
+          //     break;
+          //   }
+          // }
         }
 
         if (/*this.router.url == "/account" && */this.isAccess){
@@ -340,26 +345,56 @@ export class AppComponent {
   //CORS With TOKEN
   createCorsToken(isFormData: boolean = false): {headers: HttpHeaders} {
 
-    let headers: HttpHeaders;
 
-    if (!isFormData){
-      headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer '+this.token,
-      });
+    /* CORS ANONYME */
+    if (!this.isLoggedIn){
+
+      let headers: HttpHeaders;
+
+      if (!isFormData){
+        headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+        });
+      } else {
+        headers = new HttpHeaders({
+        });
+
+
+        headers.append('Content-Type', 'multipart/form-data');
+
+
+      }
+      const options: {headers: HttpHeaders}  = { headers: headers };
+
+      return options;
+
+
+
     } else {
-      headers = new HttpHeaders({
-        'Authorization': 'Bearer '+this.token,
-      });
+      /* CORS LOG*/
+
+      let headers: HttpHeaders;
+
+      if (!isFormData){
+        headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+this.token,
+        });
+      } else {
+        headers = new HttpHeaders({
+          'Authorization': 'Bearer '+this.token,
+        });
 
 
-      headers.append('Content-Type', 'multipart/form-data');
+        headers.append('Content-Type', 'multipart/form-data');
 
+
+      }
+      const options: {headers: HttpHeaders}  = { headers: headers };
+
+      return options;
 
     }
-    const options: {headers: HttpHeaders}  = { headers: headers };
-
-    return options;
 
   }
 
