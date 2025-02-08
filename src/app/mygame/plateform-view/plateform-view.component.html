@@ -1,8 +1,8 @@
+    <!-- GESTION PLATEFORM-->
+    <app-card-platform [platform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform"></app-card-platform>
+
+
     <!-- SECTION BARRE DE RECHERCHE -->
-    <button *ngIf="btnPlatform == 'add'" (click)="setModal(foundPlatform)" data-bs-toggle="modal" data-bs-target="#addPlatform">Ajouter une console</button>
-    <button *ngIf="btnPlatform == 'edit'" routerLink="/mygame/edit-platform/{{foundHmp?.id}}">editer votre console</button>
-
-
     <div class="search-container container" [ngStyle]="{ '--color': app.userConnected?.themeColor || app.colorDefault }">
       <div class="icon-container" [ngStyle]="{ 'background-color': app.userConnected?.themeColor || app.colorDefault }">
         <i class="ri-search-2-line ico1"></i>

@@ -69,7 +69,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     if (this.app.userConnected) {
       if (this.task == "all"){
         this.myGameByUser(this.app.userConnected.id);
-        this.btnPlatform = null;
+        this.btnPlatform = 'all';
       } else {
         this.myGameByUserWithPlateform(this.app.userConnected.id, this.plateformeId);
         this.getOneMyHmpByUserByPlatform(this.app.userConnected.id, this.plateformeId);
@@ -254,11 +254,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
           this.foundPlatform = responseMyPlateform.result2;
         }
       })
-  }
-
-  /* GESTION DE LA MODAL PLATEFORM */
-  setModal(platform: PlateformInterface | undefined){
-    this.app.platformSelected = platform;
   }
 
 }
