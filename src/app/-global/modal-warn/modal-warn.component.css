@@ -220,14 +220,14 @@ select{
   margin: 15px 0px;
 
   h3{
-    width: 40%;
+    /*width: 40%;*/
     text-align: start;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-word;
+    /*display: -webkit-box;*/
+    /*-webkit-line-clamp: 1;*/
+    /*-webkit-box-orient: vertical;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*word-break: break-word;*/
   }
 
   p{

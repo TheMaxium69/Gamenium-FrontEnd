@@ -1,14 +1,11 @@
 <div class="modal fade text-center" id="warnModal" tabindex="-1" aria-labelledby="warnLabel" aria-hidden="true" [ngStyle]="{'--userColor': this.app.userConnected?.themeColor || this.app.colorDefault }">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <form class="modal-content" id="addWarnForm" #warnForm="ngForm" (ngSubmit)="this.addWarn(warnForm)">
       <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body">
-
-<!--        <p>{{ this.app.warnTemp?.type }}</p>-->
-<!--        <p>{{ this.app.warnTemp?.id }}</p>-->
 
         <div class="start-form">
 
@@ -28,7 +25,7 @@
                 <div class="buyWhereOne">
                   <h3>
                       <span class="badge">
-                        <input type="radio" id="warn_{{ i }}" name="warn_reason" [value]="warn.name">
+                        <input type="radio" id="warn_{{ i }}" name="warn_reason" [value]="warn.id" ngModel required>
                         <label for="warn_{{ i }}" style="color: black; margin-left: 10px;">{{ warn.name }}</label>
                       </span>
                   </h3>
@@ -45,7 +42,7 @@
             <div class="head-panel">
               <h2>Autre</h2>
             </div>
-            <textarea id="warn_description" name="warn_description" rows="5" cols="50" placeholder="Plus d'information"></textarea>
+            <textarea id="warn_description" name="warn_description" rows="5" cols="50" placeholder="Plus d'information" ngModel></textarea>
           </div>
 
         </div>
@@ -57,6 +54,6 @@
         <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
       </div>
 
-    </div>
+    </form>
   </div>
 </div>
