@@ -8,7 +8,7 @@
   <app-tab-public [commonGame]="commonGame"></app-tab-public>
 
   <!-- GESTION PLATEFORM-->
-  <app-card-platform [isPublic]="true" [nbGame]="myGameHistoriqueAll.length" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault"></app-card-platform>
+  <app-card-platform [isPublic]="true" [nbGame]="myGameHistoriqueAll.length" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
 
   <!-- SECTION BARRE DE RECHERCHE -->
    <div class="search-container container" [ngStyle]="{ '--color': isColor ?? this.app.colorDefault }">

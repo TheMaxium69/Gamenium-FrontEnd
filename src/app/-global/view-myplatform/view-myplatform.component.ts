@@ -8,7 +8,6 @@ import {AppComponent} from "../../app.component";
 })
 export class ViewMyplatformComponent {
 
-
   @Input()
   isColor: string = this.app.colorDefault;
 

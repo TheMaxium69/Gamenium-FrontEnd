@@ -1,3 +1,12 @@
+
+@media (max-width: 991px) {
+  .card-platform{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
 h2 {
   color: #575757;
 }
