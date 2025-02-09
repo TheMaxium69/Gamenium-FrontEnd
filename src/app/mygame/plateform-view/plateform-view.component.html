@@ -1,5 +1,5 @@
     <!-- GESTION PLATEFORM-->
-    <app-card-platform [platform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform"></app-card-platform>
+    <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault"></app-card-platform>
 
 
     <!-- SECTION BARRE DE RECHERCHE -->

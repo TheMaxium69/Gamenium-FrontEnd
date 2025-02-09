@@ -1,102 +1,109 @@
-<div class="card-wrapper" *ngIf="platform && state !== 'all'">
+<div class="card-wrapper" *ngIf="hmp && state !== 'all'">
   <div class="card-game container d-flex">
 
+    <!-- PICTURE -->
+    <div class="card-left" (click)="selectViewMyPlatform(hmp); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewPlatform" *ngIf="hmp.myPlateform.plateform.id !== app.noPlateform.id">
+      <ng-container *ngIf="hmp.myPlateform.plateform.image?.icon_url == this.app.noBoxartImage_default">
+        <div class="image" style="background-image: url({{ this.app.noBoxartImage }})"></div>
+        <div class="blur"></div>
+        <img src="{{ this.app.noBoxartImage }}" alt="...">
+      </ng-container>
+      <ng-container *ngIf="hmp.myPlateform.plateform.image?.icon_url != this.app.noBoxartImage_default">
+        <div class="image" style="background-image: url({{ hmp.myPlateform.plateform.image?.original_url }})"></div>
+        <div class="blur"></div>
+        <img src="{{ hmp.myPlateform.plateform.image?.original_url }}" alt="...">
+      </ng-container>
+    </div>
 
-    <button *ngIf="state == 'add'" (click)="setModal(platform)" data-bs-toggle="modal" data-bs-target="#addPlatform">Ajouter une console</button>
-    <button *ngIf="state == 'edit'" routerLink="/mygame/edit-platform/{{hmp?.id}}">editer votre console</button>
+    <!-- INFO -->
+    <div class="card-right d-flex">
 
-<!--    &lt;!&ndash; PINNED &ndash;&gt;-->
-<!--    <div class="isPinned" style="background-color: {{ this.colorProfil || this.app.colorDefault }}" *ngIf="Hmg.myGame.is_pinned">-->
-<!--      <p><i class="ri-pushpin-fill"></i></p>-->
-<!--    </div>-->
+      <!-- TEXT -->
+      <div class="core-left" (click)="selectViewMyPlatform(hmp); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewPlatform">
+        <!-- NAME-->
+        <h2>{{ this.app.plateformeNameFormatage(hmp.myPlateform.plateform.name) }}</h2>
 
-<!--    &lt;!&ndash; PICTURE &ndash;&gt;-->
-<!--    <div class="card-left" (click)="selectViewMyGame(Hmg); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">-->
-<!--      <ng-container *ngIf="Hmg.myGame.game.image.icon_url == this.app.noBoxartImage_default">-->
-<!--        <div class="image" style="background-image: url({{ this.app.noBoxartImage }})"></div>-->
-<!--        <div class="blur"></div>-->
-<!--        <img src="{{ this.app.noBoxartImage }}" alt="...">-->
-<!--      </ng-container>-->
-<!--      <ng-container *ngIf="Hmg.myGame.game.image.icon_url != this.app.noBoxartImage_default">-->
-<!--        <div class="image" style="background-image: url('{{ Hmg.myGame.game.image.small_url }}')"></div>-->
-<!--        <div class="blur"></div>-->
-<!--        <img src="{{ Hmg.myGame.game.image.small_url }}" alt="...">-->
-<!--      </ng-container>-->
-<!--    </div>-->
+        <!-- PLATEFORME -->
+        <p style="color: {{ this.colorProfil || this.app.colorDefault }}" class="platform-names">
+          {{ hmp.myPlateform.plateform.release_date | date:'yyyy' }}
+        </p>
 
-<!--    &lt;!&ndash; INFO &ndash;&gt;-->
-<!--    <div class="card-right d-flex">-->
+        <p *ngIf="hmp.myPlateform.plateform.id !== app.noPlateform.id"><small>Exemplaire de la console {{ hmp.copyPlateform.length }}</small></p>
 
-<!--      &lt;!&ndash; TEXT &ndash;&gt;-->
-<!--      <div class="core-left" (click)="selectViewMyGame(Hmg); $event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#viewGame">-->
-<!--        &lt;!&ndash; NAME&ndash;&gt;-->
-<!--        <h2>{{ Hmg.myGame.game.name }}</h2>-->
+        <p><small>Nombre de jeux {{ nbGame }}</small></p>
 
-<!--        &lt;!&ndash; PLATEFORME &ndash;&gt;-->
-<!--        <p style="color: {{ this.colorProfil || this.app.colorDefault }}" class="platform-names">-->
-<!--          {{ this.app.plateformeNameFormatage(Hmg.myGame.plateform.name) }}-->
-<!--        </p>-->
+        <!-- DATE D'AJOUT -->
+<!--        <p *ngIf="hmp.myPlateform.plateform.id !== app.noPlateform.id"><small> Ajouté le : {{ hmp.myPlateform.added_at | date:'dd / MM / yyyy' }} </small></p>-->
+      </div>
 
-<!--        <p><small>Nombre d'exemplaire {{ Hmg.copyGame.length || "1*" }}</small></p>-->
+      <!-- ACTION -->
+      <div class="core-right" *ngIf="hmp.myPlateform.plateform.id !== app.noPlateform.id">
 
-<!--        <ng-container *ngIf="Hmg.myGame.hmgTags.length > 0">-->
-<!--          <p id="tags"><small>-->
 
-<!--            <ng-container *ngFor="let oneTags of Hmg.myGame.hmgTags">-->
-<!--              <span class="badge" style="background-color: {{oneTags.color}}">{{ oneTags.name }}</span>-->
-<!--            </ng-container>-->
+        <!-- ACTION -->
+        <div class="card-action" *ngIf="this.app.userConnected && this.app.userConnected.id == hmp.myPlateform.user.id  && isPublic == false">
+          <i  routerLink="/mygame/edit-platform/{{hmp?.id}}" class="ri-pencil-line"></i>
+        </div>
+      </div>
 
-<!--          </small></p>-->
-<!--        </ng-container>-->
+    </div>
 
-<!--        &lt;!&ndash; DATE D'AJOUT &ndash;&gt;-->
-<!--        <p><small> Ajouté le : {{ Hmg.myGame.added_at | date:'dd / MM / yyyy' }} </small></p>-->
-<!--      </div>-->
+  </div>
+</div>
 
-<!--      &lt;!&ndash; ACTION/NOTE &ndash;&gt;-->
-<!--      <div class="core-right">-->
+<div class="card-wrapper" *ngIf="plateform && !hmp && state !== 'all'">
+  <div class="card-game container d-flex">
 
-<!--        &lt;!&ndash; NOTE &ndash;&gt;-->
-<!--        <div class="card-note" style="background-color: {{this.colorProfil|| this.app.colorDefault}};">-->
-<!--          <p><span id="noteGame{{ Hmg.myGame.game.id }}">-->
-<!--            &lt;!&ndash; AUCUNE NOTE&ndash;&gt;-->
-<!--            <ng-container *ngIf="!userRatingAll && !Hmg.tempNote">na</ng-container>-->
+    <!-- PICTURE -->
+    <div class="card-left" (click)="setModal(plateform)" data-bs-toggle="modal" data-bs-target="#addPlatform" *ngIf="plateform.id !== app.noPlateform.id">
+      <ng-container *ngIf="plateform.image?.icon_url == this.app.noBoxartImage_default">
+        <div class="image" style="background-image: url({{ this.app.noBoxartImage }})"></div>
+        <div class="blur"></div>
+        <img src="{{ this.app.noBoxartImage }}" alt="...">
+      </ng-container>
+      <ng-container *ngIf="plateform.image?.icon_url != this.app.noBoxartImage_default">
+        <div class="image" style="background-image: url({{ plateform.image?.original_url }})"></div>
+        <div class="blur"></div>
+        <img src="{{ plateform.image?.original_url }}" alt="...">
+      </ng-container>
+    </div>
 
-<!--            &lt;!&ndash; IL Y A DES NOTE&ndash;&gt;-->
-<!--            <ng-container *ngIf="userRatingAll && !Hmg.tempNote">-->
+    <!-- INFO -->
+    <div class="card-right d-flex">
 
-<!--              <ng-container *ngIf="hasUserRatings(Hmg.myGame.game.id)"> &lt;!&ndash; VERIFIER SI IL EST NOTE&ndash;&gt;-->
-<!--                <ng-container *ngFor="let userRating of userRatingAll"> &lt;!&ndash; REGARDER TOUTE LES NOTE &ndash;&gt;-->
-<!--                  <ng-container *ngIf="userRating.game.id == Hmg.myGame.game.id">{{ userRating.rating }}</ng-container> &lt;!&ndash; AFFICHER LA NOTE CORRESPONDANTE&ndash;&gt;-->
-<!--                </ng-container>-->
-<!--              </ng-container>-->
+      <!-- TEXT -->
+      <div class="core-left" (click)="setModal(plateform)" data-bs-toggle="modal" data-bs-target="#addPlatform">
+        <!-- NAME-->
+        <h2>{{ this.app.plateformeNameFormatage(plateform.name) }}</h2>
 
-<!--              <ng-container *ngIf="!hasUserRatings(Hmg.myGame.game.id)">na</ng-container> &lt;!&ndash; NA PAS TROUVER DE NOTE A CE JEUX&ndash;&gt;-->
+        <!-- PLATEFORME -->
+        <p style="color: {{ this.colorProfil || this.app.colorDefault }}" class="platform-names">
+          {{ plateform.release_date | date:'yyyy' }}
+        </p>
 
-<!--            </ng-container>-->
+        <p *ngIf="plateform.id !== app.noPlateform.id"><small>Exemplaire de la console 0</small></p>
 
-<!--            <ng-container *ngIf="Hmg.tempNote">{{ Hmg.tempNote }}</ng-container>-->
-<!--          </span>/20</p>-->
-<!--        </div>-->
+        <p><small>Nombre de jeux {{ nbGame }}</small></p>
 
-<!--        &lt;!&ndash; ACTION &ndash;&gt;-->
-<!--        <div class="card-action" *ngIf="this.app.userConnected && this.app.userConnected.id == Hmg.myGame.user.id && isPublic == false">-->
-<!--          <i (click)="this.app.togglePin(Hmg); $event.stopPropagation()"-->
-<!--             [class.ri-unpin-line]="Hmg.myGame.is_pinned"-->
-<!--             [class.ri-pushpin-line]="!Hmg.myGame.is_pinned"></i>-->
-<!--          <i (click)="setModal(Hmg.myGame.game); $event.stopPropagation(); " data-bs-toggle="modal" data-bs-target="#noteGamePage" class="ri-star-line"></i>-->
-<!--          <i routerLink="/mygame/edit/{{ Hmg.id }}" class="ri-pencil-line"></i>-->
-<!--        </div>-->
-<!--      </div>-->
+      </div>
 
-<!--    </div>-->
+      <!-- ACTION -->
+      <div class="core-right" *ngIf="plateform.id !== app.noPlateform.id">
+
+        <!-- ACTION -->
+        <div class="card-action" *ngIf="isPublic == false">
+          <i (click)="setModal(plateform)" data-bs-toggle="modal" data-bs-target="#addPlatform" class="ri-add-circle-line"></i>
+        </div>
+      </div>
+
+    </div>
 
   </div>
 </div>
 
 
 <!-- LOADING -->
-<div id="squelette" class="card-wrapper" *ngIf="!platform && state !== 'all'">
+<div id="squelette" class="card-wrapper" *ngIf="!plateform && state !== 'all'">
   <div class="card-game container d-flex">
 
     <!-- PICTURE -->
@@ -114,11 +121,8 @@
         <div class="squellette-date"></div>
       </div>
 
-      <!-- ACTION/NOTE -->
+      <!-- ACTION -->
       <div class="core-right">
-        <div class="card-note">
-          <p><span></span></p>
-        </div>
       </div>
 
     </div>
@@ -126,4 +130,4 @@
   </div>
 </div>
 
-<div style="margin-bottom: 45px"></div>
+<div style="margin-bottom: 45px" *ngIf="!isPublic"></div>

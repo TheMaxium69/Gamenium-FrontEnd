@@ -1,3 +1,5 @@
+import {GameImageInterface} from "./game-image.interface";
+
 export interface PlateformInterface {
 
   id:number,
@@ -12,7 +14,7 @@ export interface PlateformInterface {
   date_last_updated:Date|undefined,
   deck:string|undefined,
   description:string|undefined,
-  image:JSON|undefined,
+  image:GameImageInterface|undefined,
   image_tags:JSON|undefined,
   install_base:string|undefined,
   online_support:string|undefined,

@@ -630,6 +630,7 @@ export class AppComponent {
 
   gameSelected: GameInterface|undefined;
   viewMyGame:HistoryMyGameInterface|undefined;
+  viewMyPlatform:HistoryMyPlatformInterface|undefined;
   noPlateform: { name: string; id: number } = {
     id: 99999,
     name: "Other"

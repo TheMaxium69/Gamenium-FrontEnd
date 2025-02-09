@@ -12,7 +12,7 @@ export class CardPlatformComponent {
 
 
   @Input()
-  public platform: PlateformInterface|undefined;
+  public plateform: PlateformInterface|undefined;
 
   @Input()
   public hmp: HistoryMyPlatformInterface | undefined;
@@ -20,6 +20,14 @@ export class CardPlatformComponent {
   @Input()
   public state: string | null = null;
 
+  @Input()
+  public nbGame: number | null = null;
+
+  @Input()
+  public colorProfil: string | undefined | null = null;
+
+  @Input()
+  public isPublic: boolean = false;
 
   constructor(
     protected app:AppComponent
@@ -28,6 +36,9 @@ export class CardPlatformComponent {
   /* GESTION DE LA MODAL PLATEFORM */
   setModal(platform: PlateformInterface | undefined){
     this.app.platformSelected = platform;
+  }
+  selectViewMyPlatform(hmp: HistoryMyPlatformInterface) {
+    this.app.viewMyPlatform = hmp;
   }
 
 }

@@ -11,6 +11,9 @@ import {ProfilInterface} from "../../-interface/profil.interface";
 import {PlateformService} from "../../-service/plateform.service";
 import { ViewService } from 'src/app/-service/view.service';
 import { ApicallInterface } from 'src/app/-interface/apicall.interface';
+import {PlateformInterface} from "../../-interface/plateform.interface";
+import {HistoryMyPlatformInterface} from "../../-interface/history-my-platform.interface";
+import {HistoryMyPlateformService} from "../../-service/history-my-plateform.service";
 
 @Component({
   selector: 'app-profile-public',
@@ -24,7 +27,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
   plateformeId: number | any;
   task:any;
   profilSelected: ProfilInterface | undefined;
-  myGameHistoriqueAll: HistoryMyGameInterface[] | undefined;
+  myGameHistoriqueAll: HistoryMyGameInterface[] = [];
   userRatingAll:UserRateInterface[]|undefined;
   isColor: string = this.app.colorDefault;
 
@@ -53,7 +56,8 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
               private route: ActivatedRoute,
               private viewService: ViewService,
               private profileService:ProfilService,
-              private histoireMyGameService:HistoryMyGameService
+              private histoireMyGameService:HistoryMyGameService,
+              private historyMyPlatformService:HistoryMyPlateformService
   ) {
   }
 
@@ -110,14 +114,16 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   loadProfil(){
 
+    this.btnPlatform = "all";
     this.getInfoProfile(this.profileId);
 
 
   }
 
 
-
   load(){
+    this.btnPlatform = "all";
+
     this.isCommonView = false;
     if (this.profilSelected) {
 
@@ -127,8 +133,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
       }
       if (this.task === "common-games") {
         this.isCommonView = true;
-
-
+        this.btnPlatform = "all";
 
         //
         // this.filteredGames = this.commonGame || [];
@@ -137,6 +142,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         //
         // console.log(this.originalGameHistoriqueAll)
       } else if (this.task === "hmg" || this.task === "hmp"){
+        this.btnPlatform = "all";
 
         if (this.task === "hmg" && this.idhistory){
           // console.log("Je suis dans le hmg " + this.idhistory)
@@ -150,6 +156,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
       // Set la recher
       else if (this.task){
         this.myGameByUserWithPlateform(this.profilSelected.id, this.plateformeId);
+        this.getOneMyHmpByUserByPlatform(this.profilSelected.id, this.plateformeId);
       }
 
     }
@@ -462,6 +469,25 @@ filterGames(): void {
       })
 
     }, this.app.deadlineView)
+  }
+
+  /* GESTION DU HMP */
+  foundPlatform: PlateformInterface | undefined;
+  foundHmp: HistoryMyPlatformInterface | undefined;
+  btnPlatform: string|null = null;
+  getOneMyHmpByUserByPlatform(id_user: number, id_plateform: number){
+    this.historyMyPlatformService.getOneMyHmpByUserByPlatform(id_user, id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlateform: {message: string, result: HistoryMyPlatformInterface, result2: PlateformInterface}) => {
+
+      if(responseMyPlateform.message == "good"){
+        this.foundHmp = responseMyPlateform.result;
+        this.foundPlatform = this.foundHmp.myPlateform.plateform;
+        this.btnPlatform = 'edit';
+      } else if (responseMyPlateform.message == "hmp not found") {
+        this.btnPlatform = 'add';
+        this.foundHmp = undefined;
+        this.foundPlatform = responseMyPlateform.result2;
+      }
+    })
   }
 
 

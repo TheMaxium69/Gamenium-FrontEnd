@@ -243,14 +243,13 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   getOneMyHmpByUserByPlatform(id_user: number, id_plateform: number){
     	this.historyMyPlatformService.getOneMyHmpByUserByPlatform(id_user, id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlateform: {message: string, result: HistoryMyPlatformInterface, result2: PlateformInterface}) => {
 
-        console.log(responseMyPlateform);
-
         if(responseMyPlateform.message == "good"){
           this.foundHmp = responseMyPlateform.result;
           this.foundPlatform = this.foundHmp.myPlateform.plateform;
           this.btnPlatform = 'edit';
         } else if (responseMyPlateform.message == "hmp not found") {
           this.btnPlatform = 'add';
+          this.foundHmp = undefined;
           this.foundPlatform = responseMyPlateform.result2;
         }
       })

@@ -5,8 +5,11 @@
 <section id="profilWrapper" class="{{classContainer}}">
 
   <app-tab-public [commonGame]="commonGame"></app-tab-public>
-   <!-- SECTION BARRE DE RECHERCHE -->
 
+  <!-- GESTION PLATEFORM-->
+  <app-card-platform [isPublic]="true" [nbGame]="myGameHistoriqueAll.length" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault"></app-card-platform>
+
+  <!-- SECTION BARRE DE RECHERCHE -->
    <div class="search-container container" [ngStyle]="{ '--color': isColor ?? this.app.colorDefault }">
     <div class="icon-container" [ngStyle]="{ 'background-color': isColor }">
       <i class="ri-search-2-line ico1"></i>

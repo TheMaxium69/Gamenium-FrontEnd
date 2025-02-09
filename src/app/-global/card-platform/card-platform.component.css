@@ -114,6 +114,8 @@
 
 .card-right .core-right{
   width: 100px;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .card-right .core-right .card-note{
@@ -148,6 +150,8 @@
   margin-top: 22px;
   text-align: end;
   font-size: 26px;
+  margin-right: 10px;
+  flex-direction: row-reverse;
 }
 
 .card-action i:hover {
