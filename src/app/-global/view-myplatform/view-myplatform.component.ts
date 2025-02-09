@@ -13,6 +13,46 @@ export class ViewMyplatformComponent {
 
   constructor(protected app:AppComponent) { }
 
+
+
+
+  showContent:boolean = false
+  toggleShowContent(){
+    this.showContent = !this.showContent;
+  }
+
+  showPurchaseContent:boolean = false
+  toggleShowPurchaseContent(){
+    this.showPurchaseContent = !this.showPurchaseContent;
+  }
+
+  showCopyContent:number[] = []
+  toggleShowCopyContent(copyId:number){
+    const index = this.showCopyContent.indexOf(copyId);
+    if (index > -1) {
+      this.showCopyContent.splice(index, 1);
+    } else {
+      this.showCopyContent.push(copyId);
+    }
+  }
+  isShowCopyContent(copyId:number): boolean {
+    return this.showCopyContent.includes(copyId);
+  }
+
+
+  showCopyPurchaseContent:number[] = []
+  toggleShowCopyPurchaseContent(copyId:number){
+    const index = this.showCopyPurchaseContent.indexOf(copyId);
+    if (index > -1) {
+      this.showCopyPurchaseContent.splice(index, 1);
+    } else {
+      this.showCopyPurchaseContent.push(copyId);
+    }
+  }
+  isShowCopyPurchaseContent(copyId:number): boolean {
+    return this.showCopyPurchaseContent.includes(copyId);
+  }
+
   closeModal(){
 
     const body = document.body;
