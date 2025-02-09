@@ -28,9 +28,9 @@ export class ViewMyplatformComponent {
       body.style.paddingRight = ''; // Clear paddingRight style
       body.classList.remove('modal-open'); // Remove 'modal-open' class
 
-      const viewGameDiv = document.getElementById('viewGame');
-      if (viewGameDiv) {
-        viewGameDiv.classList.remove('show');
+      const viewPlatformDiv = document.getElementById('viewPlatform');
+      if (viewPlatformDiv) {
+        viewPlatformDiv.classList.remove('show');
       }
 
     }

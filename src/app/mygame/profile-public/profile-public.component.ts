@@ -149,7 +149,8 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
           this.selectViewMyGame(this.idhistory);
         }
         if (this.task === "hmp" && this.idhistory){
-          // console.log("Je suis dans le hmp " + this.idhistory)
+          console.log("Je suis dans le hmp " + this.idhistory)
+          this.selectViewMyPlatform(this.idhistory);
         }
 
       }
@@ -162,6 +163,39 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
     }
   }
 
+
+  selectViewMyPlatform(id:number) {
+
+    this.historyMyPlatformService.getOneMyHmpById(id, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyPlatformInterface; }) => {
+      if (responseMyGame.message == "good") {
+        this.app.viewMyPlatform = responseMyGame.result;
+
+        const body = document.body;
+
+        if (!document.getElementById('shadow')) {
+          const newDiv = document.createElement('div');
+
+          newDiv.id = 'shadow';
+          newDiv.className = 'modal-backdrop fade show';
+
+          body.appendChild(newDiv);
+          body.style.overflow = 'hidden';
+          body.style.paddingRight = '0px';
+          body.className = 'modal-open';
+
+
+          const viewPlatformDiv = document.getElementById('viewPlatform');
+          if (viewPlatformDiv) {
+            viewPlatformDiv.classList.add('show');
+          }
+
+        }
+
+
+      }
+    });
+
+  }
 
   selectViewMyGame(id:number) {
 
