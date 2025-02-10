@@ -153,11 +153,21 @@
   .card {
     width: 299.1px;
   }
+  .card .card-img-top{
+    max-width: 299.1px;
+    min-width: 299.1px;
+  }
+  
 }
 
 @media (max-width: 400px) {
   .card {
     width: 299.1px;
+  }
+
+  .card .card-img-top{
+    max-width: 299.1px;
+    min-width: 299.1px;
   }
 }
 
