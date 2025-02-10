@@ -306,7 +306,7 @@ h2 {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  z-index: 11;
+  z-index: 4000;
 }
 
 .dropdown-menu button {
