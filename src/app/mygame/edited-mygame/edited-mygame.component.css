@@ -573,3 +573,35 @@ select,
     padding: 15px 15px;
   }
 }
+
+
+@media (max-width: 480px) {
+  #head-modal h2.titleGame{
+    text-align: center;
+  }
+  
+  .date-added {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .savebtn {
+    margin: 0 auto;
+  }
+
+  #tab .nav-link {
+    font-size: 16px;
+  } 
+
+}
+
+@media (max-width: 310px) {
+  #head-img .banner,
+  #head-img .banner-image,
+  #head-img .back,
+  #head-img .blur {
+    width: 280px;
+    min-width: 280px;
+  }
+
+}
