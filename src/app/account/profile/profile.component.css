@@ -648,6 +648,10 @@ a > div {
   padding: 0 50px;
 }
 
+.badge-info {
+  display: flex;
+}
+
 .badge-list-container {
   padding-bottom: 20px;
   align-items: center;
