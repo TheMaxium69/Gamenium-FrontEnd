@@ -151,3 +151,14 @@
     width: 100%;
   }
 }
+
+::ng-deep app-card-game.added-gap .core-left { 
+  gap: 15px; 
+}
+::ng-deep app-card-game.added-gap .core-left p { 
+  font-weight: bold; 
+  font-size: 16px;
+}
+::ng-deep app-card-game.added-gap .core-left small { 
+  font-size: 16px;
+}

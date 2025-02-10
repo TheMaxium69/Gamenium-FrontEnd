@@ -35,7 +35,7 @@
 
   <div id="show-game" class="d-flex container">
     <!-- REEL -->
-    <app-card-game *ngFor="let game of games" [game]="game" class="width"></app-card-game>
+    <app-card-game *ngFor="let game of games" [game]="game" class="width added-gap"></app-card-game>
 
     <!-- LOADING -->
     <ng-container *ngIf="isGameLoading">

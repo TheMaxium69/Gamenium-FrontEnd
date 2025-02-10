@@ -203,3 +203,16 @@
   max-width: 1355px;
   margin-bottom: 120px;
 }
+
+
+/* appelle de la card avec added-gap donne ces style */
+::ng-deep app-card-game.added-gap .core-left { 
+  gap: 15px; 
+}
+::ng-deep app-card-game.added-gap .core-left p { 
+  font-weight: bold; 
+  font-size: 16px;
+}
+::ng-deep app-card-game.added-gap .core-left small { 
+  font-size: 16px;
+}
