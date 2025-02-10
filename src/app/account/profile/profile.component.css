@@ -308,6 +308,10 @@ hr {
   .social-head .socials-label {
     flex: none;
   }
+
+  .redirect-section .redirect-message {
+    max-width: none;
+  }
 }
 
 
