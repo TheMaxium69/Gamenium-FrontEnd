@@ -348,3 +348,24 @@ span.fi{
         box-shadow: none;
     }
 }
+
+@media (max-width: 370px) {
+    .follower-container {
+        margin: 0px;
+    }
+
+    #displayname {
+        min-width: none;
+        max-width: none;
+    }
+
+    #infos {
+        padding: 25px 0px;
+    }
+
+    .actu-titre h1 {
+        text-align: center;
+    }
+
+    
+}

@@ -283,3 +283,17 @@ h2 {
 .dropdown-menu button:hover {
   background-color: #f0f0f0;
 }
+
+@media (max-width: 330px) {
+
+  .icon-container {
+    width: 40px;
+    height: 35px;
+  }
+
+  .ico1 {
+    font-size: 20px;
+  }
+
+
+}
