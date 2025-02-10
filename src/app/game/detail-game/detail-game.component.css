@@ -205,7 +205,7 @@
   .content,
   .context {
     flex: 1;
-    min-width: 300px;
+    /*min-width: 300px;*/
     position: relative;
   }
 
@@ -829,12 +829,20 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
   .information-lines {
     display: flex!important;
     gap: 10px!important;
     align-items: flex-start!important;
     flex-direction: column!important;
+  }
+  .global-game-rate {
+    display: none!important;
+  }
+  .one-rating {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 }
 
