@@ -345,3 +345,17 @@ h2 {
   }
 }
 
+@media (max-width: 330px) {
+
+  .icon-container {
+    width: 40px;
+    height: 35px;
+  }
+
+  .ico1 {
+    font-size: 20px;
+  }
+
+
+}
+
