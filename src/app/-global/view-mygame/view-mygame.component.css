@@ -464,4 +464,8 @@
   .game-info-test {
     width: 60%;
   }
+  .main-gamenium-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
 }
