@@ -248,6 +248,15 @@ hr {
 }
 
 @media (max-width: 480px) {
+  #profilePictureInput,
+  #upload-button {
+    width: 100%;
+  }
+
+  .profile-header {
+    height: 80px !important;
+  }
+
   .para-setting a > div {
     gap: 10px;
   }
@@ -256,8 +265,8 @@ hr {
     text-align: end;
   }
 
-  .para-setting a > div > i {
-    font-size: 20px;
+  i {
+    font-size: 20px !important;
   }
 
   .para-setting a > div > h3 {
@@ -284,6 +293,20 @@ hr {
   .badge-header .badge-list-item {
     width: 30px;
     height: 30px;
+  }
+
+  .social-info {
+    flex-direction: column;
+  }
+
+  .social-head {
+    display: flex;
+    justify-content: start;
+    gap: 5px;
+  }
+
+  .social-head .socials-label {
+    flex: none;
   }
 }
 
@@ -471,6 +494,11 @@ a > div {
 .colorpick {
   display: flex;
   align-items: center;
+}
+
+.colorpick label {
+  text-align: start;
+  max-width: 160px;
 }
 
 .btn-save,
