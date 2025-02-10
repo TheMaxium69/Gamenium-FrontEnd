@@ -247,6 +247,46 @@ hr {
   }
 }
 
+@media (max-width: 480px) {
+  .para-setting a > div {
+    gap: 10px;
+  }
+
+  .para-setting a > div > p {
+    text-align: end;
+  }
+
+  .para-setting a > div > i {
+    font-size: 20px;
+  }
+
+  .para-setting a > div > h3 {
+    min-width: 80px;
+  }
+
+  .badge-list-container {
+    flex-direction: column;
+  }
+
+  .badge-info {
+    display: flex;
+    margin-right: auto;
+  }
+
+  .badge-info i {
+    margin-left: 0;
+  }
+
+  .badge-header {
+    align-items: center;
+  }
+
+  .badge-header .badge-list-item {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 
 
 .para {
