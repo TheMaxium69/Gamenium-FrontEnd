@@ -59,7 +59,7 @@ export class ModalWarnComponent implements OnInit{
         body.actu_id = this.app.warnTemp.id;
       }
 
-      if (this.app.warnTemp?.type == "comment_reply") {
+      if (this.app.warnTemp?.type == "comment_reply" || this.app.warnTemp?.type == "comment-reply") {
         body.comment_reply_id = this.app.warnTemp.id;
       }
 

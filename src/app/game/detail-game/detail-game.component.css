@@ -829,6 +829,15 @@
   }
 }
 
+@media (max-width: 400px) {
+  .information-lines {
+    display: flex!important;
+    gap: 10px!important;
+    align-items: flex-start!important;
+    flex-direction: column!important;
+  }
+}
+
 /* //////////////// FIN DE ZONE AJOUT COLLECTION /////////////// */
 
 /* //////////////// DEBUT DE ZONE SHOW COLLECTION /////////////// */
