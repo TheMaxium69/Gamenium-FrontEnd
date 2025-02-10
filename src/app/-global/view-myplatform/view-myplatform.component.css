@@ -463,4 +463,34 @@
   .game-info-test {
     width: 60%;
   }
+  .main-gamenium-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+  .margContent{
+    margin-left: 0!important;
+  }
+  .ulInfo{
+    padding-left: 0!important;
+    margin-left: 0!important;
+  }
+  li {
+    margin-bottom: 18px!important;
+    display: flex!important;
+    justify-content: center!important;
+    align-items: flex-start!important;
+    flex-direction: column!important;
+  }
+  #content-view{
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+    padding: 19px;
+  }
+  li.forShow {
+    margin-left: 28px!important;
+    margin-right: 28px!important;
+  }
+  #content-view li p {
+    width: 100%;
+  }
 }
