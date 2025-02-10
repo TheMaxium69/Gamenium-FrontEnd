@@ -344,6 +344,15 @@ h2 {
     border-radius: 7px;
   }
 }
+@media (max-width: 400px) {
+
+  
+  .cotainerbtn .card h6 {
+    display: none;
+  }
+
+
+}
 
 @media (max-width: 330px) {
 
@@ -358,4 +367,25 @@ h2 {
 
 
 }
+
+@media (max-width: 310px) {
+  
+  .cotainerbtn {
+    max-width: 100%;
+    padding: 0 5px;
+  }
+  
+  .cotainerbtn .card {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .cotainerbtn .card i {
+    font-size: 24px;
+  }
+}
+
+  
+
 
