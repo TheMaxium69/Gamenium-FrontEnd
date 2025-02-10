@@ -12,6 +12,7 @@
 
 .comment-user-name {
   margin-top: 0.5rem;
+  display: grid;
 }
 
 .comment-input {
@@ -151,8 +152,8 @@
 
 .time-ago {
   font-size: small;
-  margin-left: 20px;
   color: #575757;
+  justify-self: flex-start;
 }
 
 .reply-section {
@@ -339,6 +340,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   align-content: end;
+  margin-bottom: 4px;
+}
+
+.username-badge {
+  justify-self: flex-start;
 }
 
 @media ( max-width: 1200px){
@@ -385,6 +391,13 @@
   .replyOne {
     transform: unset;
   }
+  .time-ago {
+    font-size: 8px;
+  }
+
+  .main-gamenium-btn {
+    padding: 5px 15px;
+  }
 }
 
 @media  ( max-width: 535px){
@@ -414,10 +427,31 @@
   }
   .clamp-name {
     font-size: 12px;
-    max-width: 60px;
+    max-width: 100px;
   }
   .time-ago {
     font-size: 8px;
-    margin-left: 4px;
   }
+
+  .main-gamenium-btn {
+    padding: 5px 12px;
+    font-size: 12px
+  }
+  .comment-input {
+    height: 180px;
+  }
+}
+
+@media ( max-width: 365px) {
+  #addCommentForm, #division, #coment-header, #yourComment, #OtherCommentsByDate, #OtherCommentsByLike {
+    width: 295px;
+  }
+  #sort-name, #comment {
+    font-size: 14px;
+  }
+  .replyForm {
+    width: 295px;
+    margin-left: -50px;
+  }
+
 }

@@ -70,10 +70,13 @@
             <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color || app.colorDefault) }}"></div>
 
             <!-- WHY AND WHERE-->
-            <h4 class="comment-user-name"><span class="clamp-name">{{ comment.user.displayname_useritium || comment.user.username }}</span>
-              <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
-                <img class="badgeIMG" src="{{ badge.picture?.url }}">
-              </ng-container>
+            <h4 class="comment-user-name">
+              <div class="username-badge">
+                <span class="clamp-name">{{ comment.user.displayname_useritium || comment.user.username }}</span>
+                <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
+                  <img class="badgeIMG" src="{{ badge.picture?.url }}">
+                </ng-container>
+              </div>
               <span class="time-ago">{{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
             </h4>
 
@@ -208,10 +211,13 @@
               <div class="img pp-shadow" style="{{ this.app.generatePPUseritium(comment?.user?.pp?.url, comment.user.displayname_useritium || comment.user.username, comment.user.color || app.colorDefault) }}"></div>
 
               <!-- WHY AND WHEN -->
-              <h4 class="comment-user-name"><span class="clamp-name">{{ comment.user.displayname_useritium || comment.user.username }}</span>
-                <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
-                  <img class="badgeIMG" src="{{ badge.picture?.url }}">
-                </ng-container>
+              <h4 class="comment-user-name">
+                <div class="username-badge">
+                  <span class="clamp-name">{{ comment.user.displayname_useritium || comment.user.username }}</span>
+                  <ng-container *ngFor="let badge of badgeForAllUser[comment.user.id]">
+                    <img class="badgeIMG" src="{{ badge.picture?.url }}">
+                  </ng-container>
+                </div>
                 <span class="time-ago">{{comment.created_at | date: 'd MMMM y': undefined : 'fr'}} à {{comment.created_at | date: 'HH:mm'}}</span>
               </h4>
 

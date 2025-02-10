@@ -306,6 +306,7 @@
   }
   .img {
     height: 302px;
+    margin-top: -26px;
   }
 }
 
@@ -324,5 +325,17 @@
   }
   .img {
     height: 207px;
+  }
+  h1 {
+    font-size: larger;
+  }
+}
+
+@media ( max-width: 365px){
+  .border-actu, .img {
+    width: 285px;
+  }
+  .img {
+    height: 160px;
   }
 }
