@@ -9,7 +9,7 @@ import {AppComponent} from "../../app.component";
   templateUrl: './page-actuality.component.html',
   styleUrls: ['./page-actuality.component.css']
 })
-export class PageActualityComponent implements OnInit {
+export class PageActualityComponent implements OnInit, OnChanges {
 
   actualityId: number|any
   providerId: number|any
@@ -42,6 +42,12 @@ export class PageActualityComponent implements OnInit {
       this.router.navigate(['/waiting']);
     }
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['providerFollowed']) {
+      this.providerActu(this.providerFollowActuAll)
+    }
   }
 
   onProviderSelected(providerId: number) {

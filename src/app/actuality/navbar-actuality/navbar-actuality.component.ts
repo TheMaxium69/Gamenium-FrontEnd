@@ -69,7 +69,10 @@ export class NavbarActualityComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['providersFollowedRefreshed']) {
       console.log('refresh')
-      this.providerFollowOrAll = this.providersFollowedRefreshed
+      if (this.userConnected) {
+        this.providerFollowOrAll = this.providersFollowedRefreshed
+        this.providerFollowed.emit(this.providersFollowedRefreshed)
+      }
     }
   }
 
