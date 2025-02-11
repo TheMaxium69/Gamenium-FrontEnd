@@ -114,6 +114,7 @@ export class ProfilePrivateComponent implements OnInit {
 
   // récup des jeux par utilisateur
   myGameByUser(id_user: number): void {
+    console.log(this.app.myGameAll)
     if (this.app.myGameAll){
       this.app.myGameAll = this.app.myGameAll?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
       this.isLoading = false;

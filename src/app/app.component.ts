@@ -548,6 +548,11 @@ export class AppComponent {
 
 
     myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
+    this.myGameAll = this.myGameAll?.map(game =>
+      game.myGame.game.id === myGameHistorique.myGame.game.id
+        ? {...game, myGame: {...game.myGame, is_pinned: myGameHistorique.myGame.is_pinned}}
+        : game
+    );
 
     let message = ""
     if (myGameHistorique.myGame.is_pinned) {
@@ -585,6 +590,11 @@ export class AppComponent {
         }
       }, error => {
         myGameHistorique.myGame.is_pinned = !myGameHistorique.myGame.is_pinned;
+        this.myGameAll = this.myGameAll?.map(game =>
+          game.myGame.game.id === myGameHistorique.myGame.game.id
+            ? {...game, myGame: {...game.myGame, is_pinned: myGameHistorique.myGame.is_pinned}}
+            : game
+        );
         this.erreurSubcribe()
       });
   }

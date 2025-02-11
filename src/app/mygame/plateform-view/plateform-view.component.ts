@@ -176,6 +176,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
 
     if (this.app.myGameAll){
       this.HistoireMyGameByUserByPlateform = this.app.myGameAll;
+      this.isLoading = false;
     } else {
       this.histoireMyGameService.getMyGameByUser(id_user, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyGame: { message: string; result: HistoryMyGameInterface[] | undefined; }) => {
         if (responseMyGame.message == "good") {
@@ -216,6 +217,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
       return [];
     }
+
     return this.HistoireMyGameByUserByPlateform?.filter(game => game.myGame.is_pinned) ?? [];
   }
 
@@ -225,6 +227,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
     if (this.searchQuery.trim() !== '' || this.isFilterApplied()) {
       return [];
     }
+
     return this.HistoireMyGameByUserByPlateform?.filter(game => !game.myGame.is_pinned) ?? [];
   }
 
