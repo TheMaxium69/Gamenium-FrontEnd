@@ -4,8 +4,8 @@
 <ng-container *ngIf="!noneGame">
 
 <!--- MODAL --->
-<modal-note></modal-note>
-<modal-add-game></modal-add-game>
+<modal-note *ngIf="app.userConnected"></modal-note>
+<modal-add-game *ngIf="app.userConnected"></modal-add-game>
 
 
 <div id="banniere-container" class="banniere-container">
@@ -469,8 +469,8 @@
     <app-card-game [game]="gameSelected" [isDetailGame]="true" style="width: 100%; display:flex; justify-content: center;"></app-card-game>
   </div>
 
-  <div class="show-collection">
-    <button style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }};border-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="sub-gamenium-btn"  routerLink="/mygame">
+  <div class="show-collection" >
+    <button *ngIf="this.app.userConnected" style="color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }};border-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="sub-gamenium-btn"  routerLink="/mygame">
       Votre collection
     </button>
   </div>

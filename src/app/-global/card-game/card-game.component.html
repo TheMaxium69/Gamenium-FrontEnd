@@ -68,9 +68,14 @@
       </div>
 
       <!-- FOR DETAIL GAME-->
-      <div class="core-right-detail" *ngIf="isDetailGame">
+      <div class="core-right-detail" *ngIf="isDetailGame && app.userConnected">
         <button id ="add-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" class="main-gamenium-btn" (click)="setModal(game)" data-bs-toggle="modal" data-bs-target="#ajouteGamePage">
-          <i class="ri-checkbox-circle-line"></i>Ajouter à votre collection
+          <i class="ri-checkbox-circle-line"></i> Ajouter à votre collection
+        </button>
+      </div>
+      <div class="core-right-detail" *ngIf="isDetailGame && !app.userConnected">
+        <button id ="add-btn" style="background-color: {{ this.app.colorDefault }}" class="main-gamenium-btn" routerLink="/account">
+          <i class="ri-checkbox-circle-line"></i> Connectez-vous pour l'ajouter
         </button>
       </div>
 
