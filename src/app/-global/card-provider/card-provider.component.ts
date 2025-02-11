@@ -4,6 +4,7 @@ import { UserInterface } from 'src/app/-interface/user.interface';
 import { FollowService } from 'src/app/-service/follow.service';
 import { AppComponent } from 'src/app/app.component';
 import {GameInterface} from "../../-interface/game.interface";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -61,6 +62,17 @@ export class CardProviderComponent implements OnInit {
   }
 
   onFollow(): void {
+    if (!this.userConnected) {
+      Swal.fire({
+        title: "Connexion requise",
+        text: "Vous devez être connecté pour suivre un provider.",
+        icon: "info",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#3085d6",
+      });
+      return;
+    }
+  
     if (this.provider) {
       if (!this.isFollowed) {
         this.addFollow(this.provider.id);
@@ -69,6 +81,8 @@ export class CardProviderComponent implements OnInit {
       }
     }
   }
+  
+  
 
   addFollow(providerId: number): void {
     const body = { id_provider: providerId };
