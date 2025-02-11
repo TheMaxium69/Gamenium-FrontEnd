@@ -84,7 +84,7 @@
                     <h3>{{ copyPlateform.etat.name }}</h3>
                   </li>
 
-                  <li *ngIf="copyPlateform.isBox">
+                  <li *ngIf="copyPlateform.isBox !== null && copyPlateform.isBox !== undefined">
                     <p>Avec la boite : </p>
                     <h3>{{ copyPlateform.isBox ? 'Oui' : 'Non' }}</h3>
                   </li>

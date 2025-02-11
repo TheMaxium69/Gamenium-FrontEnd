@@ -4,57 +4,57 @@
 #editedmygame{
     margin-bottom: 120px;
   }
-  
+
   .container{
     max-width: 925px;
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .main-gamenium-btn{
     background-color: var(--userColor);
   }
-  
+
   .sub-gamenium-btn{
     border-color: var(--userColor);
     color: var(--userColor);
   }
-  
+
   .savebtn{
-    width: 186px;
+    width: 200px;
     height: 46px;
-  
+
     .spinner-border{
       --bs-spinner-width: 1rem;
       --bs-spinner-height: 1rem;
       --bs-spinner-border-width: 0.20em;
     }
   }
-  
+
   /*
   * HEAD
   */
   #headeEditMyGame {
     margin-top: 20px;
     margin-bottom: 20px;
-  
+
     h1 {
       margin: unset;
     }
   }
-  
+
   #head-img{
     display: flex;
     gap: 25px;
     height: 242px;
     padding-bottom: 30px;
-  
+
     .banner-image{
       min-width: 300px;
       height: 160px;
       margin: auto 0;
       border-radius: 10px;
-  
+
       .banner{
         position: absolute;
         width: 300px;
@@ -64,7 +64,7 @@
         background-position: center;
         background-repeat: no-repeat;
       }
-  
+
       .blur{
         position: absolute;
         width: 300px;
@@ -75,36 +75,36 @@
         z-index: 1;
         background-color: #00000038;
       }
-  
+
       .back{
         width: 300px;
         height: 100%;
         border-radius: 15px;
       }
-  
+
     }
-  
+
     .separe-image{
       height: 100%;
       background-color: black;
       width: 2px;
     }
-  
+
     .screen-image::-webkit-scrollbar {
       height: 5px;
       border-radius: 10px!important;
     }
-  
+
     .screen-image::-webkit-scrollbar-track {
       border-radius: 10px;
     }
-  
+
     .screen-image::-webkit-scrollbar-thumb {
       border-radius: 10px!important;
       background-color: gray!important;
       -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
     }
-  
+
     .screen-image{
       width: auto;
       display: flex;
@@ -113,22 +113,22 @@
       overflow-y: hidden !important;
       position: relative;
       margin-top: 8px;
-  
+
       small{
         margin-bottom: 10px;
       }
-  
+
       .screen-all{
         display: flex;
         gap: 25px;
         margin-left:6px;
         margin-right: 7px;
-  
+
         .screen-encard{
           max-width: 300px;
           max-height: 160px;
           margin: auto 0;
-  
+
           .screen{
             box-shadow: 1px 0px 11px -1px #a6a6a6;
             width: auto;
@@ -137,34 +137,34 @@
             max-height: 160px;
           }
         }
-  
+
       }
-  
+
     }
-  
+
   }
-  
+
   @media (max-width: 700px) {
     #head-img {
       .screen-image {
         display: none;
       }
-  
+
       .banner-image {
         margin: auto;
       }
     }
-  
-  
+
+
       #head-img .separe-image{
         display: none;
       }
   }
-  
+
   #head-img.gapUpdate {
     gap: 90px!important;
   }
-  
+
   .card-no-picture {
     display: flex;
     flex-direction: column;
@@ -174,54 +174,54 @@
     color: gray;
     opacity: 0.7;
     padding: 0 66px;
-  
+
     i {
       font-size: 70px;
       margin: -12px;
     }
   }
-  
+
   .card-no-picture:hover {
     opacity: 1;
   }
-  
+
   #head-modal{
     display: flex;
     justify-content: space-between;
-  
+
     h2.titleGame{
       text-align: start;
       color: black;
     }
-  
+
   }
-  
+
   @media (max-width: 580px){
     #head-modal {
       flex-direction: column;
       justify-content: start;
-  
+
       div {
         margin-bottom: 20px;
       }
-  
+
       .button {
         width: 90%;
-  
+
       }
     }
   }
-  
+
   /*
   * FORMULAIRE GLOBAL
   */
-  
+
   #startFormEditedMyGame{
     display: flex;
     flex-direction: column;
-  
+
   }
-  
+
   /*
   * PANEL
   */
@@ -233,7 +233,7 @@
     padding: 15px 50px;
     margin: 7px 0;
     background: white;
-  
+
     .head-panel{
       margin-left: -20px;
       margin-right: -20px;
@@ -242,10 +242,10 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-  
+
       h2{
         color: var(--userColor);
-  
+
         i{
           font-size: 20px;
           margin-right: 8px;
@@ -256,11 +256,11 @@
       i{
         font-size: 25px;
       }
-  
+
     }
-  
+
   }
-  
+
   .star-rating{
     display: flex;
     justify-content: space-between;
@@ -268,22 +268,22 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 25px;
-  
+
     i{
       width: 100%;
       font-size: 25px;
     }
-  
+
     i.ri-star-fill{
       color: var(--userColor);
     }
   }
-  
-  
+
+
   /*
   * EXEMPLAIRE
   */
-  
+
   .head-all-exemplaire{
     display: flex;
     flex-direction: row;
@@ -292,12 +292,12 @@
     padding-top: 10px;
     padding-bottom: 20px;
     border-bottom: 1px solid gray;
-  
+
     i{
       font-size: 25px;
     }
   }
-  
+
   .oneExemplaire{
     display: flex;
     flex-direction: column;
@@ -307,59 +307,59 @@
     margin: 20px 0;
     background: #fbfbfb;
   }
-  
+
   .head-one-exemplaire{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20px;
-  
+
     i{
       font-size: 30px;
     }
   }
-  
+
   @media (max-width: 640px) {
     .oneExemplaire{
       padding: 10px 10px;
     }
-  
+
      .panel {
       padding: 15px 10px;
     }
-  
+
     #editedHmgCopy .head-panel {
       margin-left: 0px;
       margin-right: 0px;
     }
-  
+
     #editedHistoryMyGame .head-panel {
       margin-left: 0px;
       margin-right: 0px;
     }
-  
+
     #editedHmgSpeedrun .head-panel {
       margin-left: 0px;
       margin-right: 0px;
     }
-  
+
     form .end-action {
       display: flex;
       flex-direction: column;
     }
-  
+
     form .end-action button {
       width: 90%;
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 20px;
     }
-  
+
   }
-  
+
   /* PURCHACE */
-  
+
   .head-purchase{
     display: flex;
     flex-direction: row;
@@ -367,16 +367,16 @@
     align-content: center;
     justify-content: space-between;
   }
-  
+
   .head-purchase > :first-child {
     width: calc(60% - 5px);
     margin-right: 10px;
   }
-  
+
   .head-purchase > :last-child {
     width: calc(40% - 5px);
   }
-  
+
   .head-buy{
     display: flex;
     flex-direction: row;
@@ -384,13 +384,13 @@
     align-content: center;
     justify-content: space-between;
   }
-  
+
   .head-buy select {
     width: calc(33.33% - 10px);
     margin-right: 5px;
   }
-  
-  
+
+
   /*
   * INPUT
   */
@@ -403,7 +403,7 @@
     outline: unset;
     transition: border-bottom 0.3s ease;
   }
-  
+
   input[type="text"],
   input[type="number"],
   input[type="date"],
@@ -426,14 +426,14 @@
     font-weight: 400;
     margin-bottom: 15px;
   }
-  
+
   textarea{
     padding-top: 16px;
     height: 100px;
     resize: none;
   }
-  
-  
+
+
   input[type="text"]::placeholder,
   input[type="number"]::placeholder,
   textarea::placeholder,
@@ -442,7 +442,7 @@
     font-size: 14px;
     font-weight: 300;
   }
-  
+
   select:focus-visible,
   .inputSelect{
     outline: none;
@@ -465,13 +465,13 @@
     font-weight: 400;
     margin-bottom: 15px;
   }
-  
+
   .cornflex{
     display: flex;
     width: 100%;
     justify-content: space-between;
   }
-  
+
   .inputSelect{
     display: flex;
     width: 100%;
@@ -480,36 +480,36 @@
     flex-wrap: nowrap;
     align-content: center;
     align-items: center;
-  
+
     #tags, #languages {
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
-  
+
       .badge{
         margin-right: 5px;
-  
+
         div{
           padding-left: 10px;
         }
-  
+
         i{
           opacity: 0;
         }
       }
-  
+
       .badge:hover i{
         opacity: 1;
       }
     }
-  
-  
-  
-  
+
+
+
+
   }
-  
+
   /* END */
   .end-action{
     display: flex;
@@ -518,19 +518,19 @@
     align-items: center;
     padding-top: 30px;
     border-top: 1px solid gray;
-  
+
     .delete-btn{
       border-color: red!important;
       color: red!important;
     }
   }
-  
+
   /* TAB */
-  
+
   .displayNone{
     display: none!important;
   }
-  
+
   #tab {
     margin: 20px 0;
     --colorTab:#8a8a8a;
@@ -539,7 +539,7 @@
       display: flex;
       justify-content: center;
       border-color: var(--colorTab);
-  
+
       li a.active{
         border-top-color: var(--colorTab);
         border-left-color: var(--colorTab);
@@ -554,23 +554,22 @@
         border-bottom-color: transparent;
         color: black;
       }
-  
+
       li a {
         font-size: 18px;
         color: #444444;
         padding: 15px 50px;
         font-weight: 400;
       }
-  
+
       li a:hover {
         border-color: var(--colorTab-hover);
       }
     }
   }
-  
+
   @media (max-width: 538px){
     #tab ul li a {
       padding: 15px 15px;
     }
   }
-  

@@ -357,12 +357,13 @@ export class EditedMyplatformComponent implements OnInit {
           day_buy_date: form.value['purchase_day_buy_date' + i],
         }
 
+        console.log(form.value['isBox' + i]);
         let tempMyPlatform = {
           id: form.value['copy' + i],
           edition: form.value['edition' + i],
           barcode: form.value['barcode' + i],
           content: form.value['content' + i],
-          isBox: form.value['isBox' + i],
+          isBox: form.value['isBox' + i] === "true" ? true : form.value['isBox' + i] === "false" ? false : form.value['isBox' + i] === "null" ? null : form.value['isBox' + i],
           purchase: tempPurchase,
           etat_id: form.value['etat' + i],
           region_id: form.value['region' + i],
@@ -382,8 +383,7 @@ export class EditedMyplatformComponent implements OnInit {
       copyPlateform: newCopyPlatform,
     }
 
-    // return console.log(updateHistoryMyGame)
-    // console.log(updateHistoryMyGame)
+    // return console.log(updateHistoryMyPlatform)
 
     let body = JSON.stringify(updateHistoryMyPlatform);
 

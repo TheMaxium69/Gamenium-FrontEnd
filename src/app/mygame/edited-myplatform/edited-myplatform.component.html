@@ -18,7 +18,7 @@
       <div class="screen-image" data-bs-toggle="modal" data-bs-target="#addScreenshot">
         <small>Image Utilisateur</small>
         <div class="screen-all" *ngIf="selectedMyGame.screenshot.length > 0">
-          <ng-container *ngFor="let oneScreen of selectedMyGame.screenshot"> 
+          <ng-container *ngFor="let oneScreen of selectedMyGame.screenshot">
             <div class="screen-encard">
               <img class="screen" [src]="oneScreen.picture.url" alt="userImage">
             </div>
@@ -43,7 +43,7 @@
 
 
       <button type="submit" class="main-gamenium-btn savebtn">
-        <ng-container *ngIf="!isLoadingUpdate"> Save <i class="ri-save-3-fill"></i></ng-container>
+        <ng-container *ngIf="!isLoadingUpdate"> Sauvegarder <i class="ri-save-3-fill"></i></ng-container>
         <ng-container *ngIf="isLoadingUpdate">
           <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -244,19 +244,19 @@
 
     </section> -->
 
-    <section id="tab">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="tabSelected == 1" (click)="tabActive(1)">Exemplaire</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="tabSelected == 3"  (click)="tabActive(2)">Image</a>
-        </li>
-        <!--<li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>-->
-      </ul>
-    </section>
+<!--    <section id="tab">-->
+<!--      <ul class="nav nav-tabs">-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" [class.active]="tabSelected == 1" (click)="tabActive(1)">Exemplaire</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" [class.active]="tabSelected == 3"  (click)="tabActive(2)">Image</a>-->
+<!--        </li>-->
+<!--        &lt;!&ndash;<li class="nav-item">-->
+<!--          <a class="nav-link disabled" aria-disabled="true">Disabled</a>-->
+<!--        </li>&ndash;&gt;-->
+<!--      </ul>-->
+<!--    </section>-->
 
 
     <!-- SCREENSHOT -->
@@ -267,7 +267,7 @@
         <button class="sub-gamenium-btn" type="button" data-bs-toggle="modal" data-bs-target="#addScreenshot"><i class="ri-add-large-fill"></i></button>
       </div>
 
-      <ng-container *ngFor="let oneScreen of selectedMyGame.screenshot; let i = index;"> 
+      <ng-container *ngFor="let oneScreen of selectedMyGame.screenshot; let i = index;">
         <div class="oneExemplaire screenshotCard{{i}}" id="screenshotCard{{i}}">
 
           <div class="head-one-exemplaire">
@@ -307,9 +307,9 @@
           <!-- EDITIONS-->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-id-card-fill"></i>Editions <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-id-card-fill"></i>Édition <small>#{{i+1}}</small></h2>
             </div>
-            <input type="text" id="edition{{i}}" [(ngModel)]="copyPlateform.edition" name="edition{{i}}" placeholder="Editions">
+            <input type="text" id="edition{{i}}" [(ngModel)]="copyPlateform.edition" name="edition{{i}}" placeholder="Édition">
           </div>
 
           <!-- BARCODE -->
@@ -331,9 +331,14 @@
           <!-- IS BOX -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-message-2-fill"></i>is Box <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-instance-fill"></i>Avec la boîte <small>#{{i+1}}</small></h2>
             </div>
-            <input type="checkbox" id="isBox{{i}}" [(ngModel)]="copyPlateform.isBox" name="isBox{{i}}" placeholder="as tu la boite">
+
+            <select id="isBox{{i}}" name="isBox{{i}}" [(ngModel)]="copyPlateform.isBox">
+              <option [value]="null">Choisir le format</option>
+              <option [value]="true">Avec</option>
+              <option [value]="false">Sans</option>
+            </select>
           </div>
 
           <!-- ETAT -->
@@ -362,7 +367,7 @@
           <!-- REGION -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-earth-fill"></i>Région <small>#{{i+1}}</small></h2>
             </div>
             <ng-container *ngIf="app.hmgCopyRegionAllNoReload && copyPlateform.region">
               <select id="region{{i}}" [(ngModel)]="copyPlateform.region.id" name="region{{i}}">
@@ -412,7 +417,7 @@
                 </ng-container>
                 <ng-container *ngIf="app.deviseNoReload && !copyPlateform.purchase.devise">
                   <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
-                    <option value="">Choissir une devise</option>
+                    <option value="">Choisir une devise</option>
                     <ng-container *ngFor="let devise of app.deviseNoReload">
                       <option [value]="devise.id">{{ devise.symbole }}</option>
                     </ng-container>
@@ -424,7 +429,7 @@
               <!-- BUY WHERE -->
               <ng-container *ngIf="app.buyWhereUserNoReload && copyPlateform.purchase.buy_where">
                 <select id="buy_where{{i}}" [(ngModel)]="copyPlateform.purchase.buy_where.id" name="purchase_buy_where{{i}}">
-                  <option [value]="null">Lieux d'achat</option>
+                  <option [value]="null">Lieu d'achat</option>
                   <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload">
                     <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                   </ng-container>
@@ -545,7 +550,7 @@
         </div>
       </ng-container>
       <ng-container *ngFor="let n of [].constructor(nbCopy); let i = index">
-  
+
         <div class="oneExemplaire copyCard{{i}}" id="copyCard{{i+nbCopyExisting}}" style="display: {{ displayDefault(i+nbCopyExisting) }}">
           <div class="head-one-exemplaire">
             <h3>Exemplaire #{{i + 1 + nbCopyExisting}}</h3>
@@ -558,9 +563,9 @@
           <!-- EDITIONS-->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-id-card-fill"></i>Editions <small>#{{i+1+nbCopyExisting}}</small></h2>
+              <h2><i class="ri-id-card-fill"></i>Édition <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
-            <input type="text" id="edition{{i+nbCopyExisting}}" name="edition{{i+nbCopyExisting}}" ngModel placeholder="Editions">
+            <input type="text" id="edition{{i+nbCopyExisting}}" name="edition{{i+nbCopyExisting}}" ngModel placeholder="Édition">
           </div>
 
 
@@ -583,9 +588,14 @@
           <!-- IS BOX -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-message-2-fill"></i>is Box<small>#{{i+1+i+nbCopyExisting}}</small></h2>
+              <h2><i class="ri-instance-fill"></i>Avec la boîte <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
-            <input type="checkbox" id="isBox{{i+nbCopyExisting}}"  name="isBox{{i+nbCopyExisting}}" ngModel placeholder="as tu la boite">
+
+            <select id="isBox{{i+nbCopyExisting}}" name="isBox{{i+nbCopyExisting}}" ngModel>
+              <option value="">Choisir le format</option>
+              <option value="true">Avec</option>
+              <option value="false">Sans</option>
+            </select>
           </div>
 
           <!-- ETAT -->
@@ -595,7 +605,7 @@
             </div>
             <ng-container *ngIf="app.hmgCopyEtatAllNoReload">
               <select id="etat{{i+nbCopyExisting}}" name="etat{{i+nbCopyExisting}}" ngModel>
-                <option value="">Choissir un état</option>
+                <option value="">Choisir un état</option>
                 <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
@@ -606,11 +616,11 @@
           <!-- REGION -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1+nbCopyExisting}}</small></h2>
+              <h2><i class="ri-earth-fill"></i>Région <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
             <ng-container *ngIf="app.hmgCopyRegionAllNoReload">
               <select id="region{{i+nbCopyExisting}}" name="region{{i+nbCopyExisting}}" ngModel>
-                <option value="">Choissir une Region</option>
+                <option value="">Choisir une Region</option>
                 <ng-container *ngFor="let region of app.hmgCopyRegionAllNoReload">
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
@@ -675,7 +685,7 @@
               <!-- DEVISE -->
               <ng-container *ngIf="app.deviseNoReload">
                 <select id="devise{{i+nbCopyExisting}}" name="purchase_devise{{i+nbCopyExisting}}" ngModel>
-                  <option value="">Choissir une devise</option>
+                  <option value="">Choisir une devise</option>
                   <ng-container *ngFor="let devise of app.deviseNoReload">
                     <option [value]="devise.id">{{ devise.symbole }}</option>
                   </ng-container>
@@ -738,14 +748,14 @@
 
   <div class="end-action container">
     <button class="main-gamenium-btn savebtn" type="submit">
-      <ng-container *ngIf="!isLoadingUpdate"> Save <i class="ri-save-3-fill"></i></ng-container>
+      <ng-container *ngIf="!isLoadingUpdate"> Sauvegarder <i class="ri-save-3-fill"></i></ng-container>
       <ng-container *ngIf="isLoadingUpdate">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </ng-container>
     </button>
-    <button class="sub-gamenium-btn delete-btn" type="button" (click)="this.app.deleteMyPlateform(selectedMyPlatform, true)">Supprimer la plateforme de votre collection <i class="ri-delete-bin-line"></i></button>   
+    <button class="sub-gamenium-btn delete-btn" type="button" (click)="this.app.deleteMyPlateform(selectedMyPlatform, true)">Supprimer la plateforme de votre collection <i class="ri-delete-bin-line"></i></button>
   </div>
 </form>
 
