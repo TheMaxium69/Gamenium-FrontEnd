@@ -12,12 +12,13 @@ import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
   templateUrl: './navbar-actuality.component.html',
   styleUrls: ['./navbar-actuality.component.css']
 })
-export class NavbarActualityComponent implements OnInit {
+export class NavbarActualityComponent implements OnInit, OnChanges {
 
   isLogIn:boolean|undefined;
   userConnected:UserInterface|undefined;
   isUserManagingProvider: boolean = false
   followAll:FollowInterface[] = [];
+  providerFollowOrAll:ProviderInterface[] = [];
 
   mouseDown: boolean = false;
   startX: number = 0;
@@ -45,8 +46,7 @@ export class NavbarActualityComponent implements OnInit {
   providerFollowActuAll: PostActuInterface[] = []
   
   @Input()
-  providerFollowOrAll:ProviderInterface[] = [];
-
+  providersFollowedRefreshed: ProviderInterface[] = []
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;
@@ -64,6 +64,13 @@ export class NavbarActualityComponent implements OnInit {
       this.getProviderAll()
     }
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['providersFollowedRefreshed']) {
+      console.log('refresh')
+      this.providerFollowOrAll = this.providersFollowedRefreshed
+    }
   }
 
   followProviderByUser(id: number){

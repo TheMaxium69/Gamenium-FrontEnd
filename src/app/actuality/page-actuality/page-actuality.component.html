@@ -14,7 +14,7 @@
   <ng-container *ngIf="!providerId">
     <app-navbar-actuality
       [providerFollowActuAll]="providerFollowActuAll"
-      [providerFollowOrAll]="providerFollowed"
+      [providersFollowedRefreshed]="providerFollowed"
       (providerSelected)="onProviderSelected($event)"
       (providerFollowed)="getProviderFollowed($event)"
       (isProviderModalOpen)="openModal($event)">

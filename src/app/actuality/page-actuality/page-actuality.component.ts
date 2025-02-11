@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, Provider} from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnInit, Provider, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { PostActuInterface } from 'src/app/-interface/post-actu.interface';
 import { ProviderInterface } from 'src/app/-interface/provider.interface';
