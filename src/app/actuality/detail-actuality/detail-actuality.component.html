@@ -32,7 +32,7 @@
             <div class="btn" id="ri-eye-line">
               <i class="ri-eye-line"></i>
             </div>
-            <h2 class="btn_text">{{ this.app.bigNombreFormatage(this.nbView) }}</h2>
+            <h2 class="btn_text">{{ this.app.bigNombreFormatage(this.nbView || 0) }}</h2>
           </ng-container>
           <div class="btn">
             <i class="ri-alert-line" *ngIf="actualitySelected"  data-bs-toggle="modal" data-bs-target="#warnModal" (click)="app.setWarn('actu', actualitySelected.id)"></i>
