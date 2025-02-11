@@ -445,7 +445,38 @@
                 </div>
 
               </ng-container>
+
             </div>
+
+            <div *ngIf="this.app.viewMyGame.speedrun.length >= 1">
+              <h5 class="listExemplaire">Speedrun du jeu</h5>
+              <ng-container *ngFor="let speedrunOne of app.viewMyGame?.speedrun; let i = index">
+
+                <div class="oneExemplaire">
+
+                  <h6>Speedrun #{{i+1}}</h6>
+
+                  <ul class="ulInfo">
+                    <li *ngIf="speedrunOne.chrono">
+                      <p>Chrono : </p>
+                      <h3>{{ speedrunOne.chrono }}</h3>
+                    </li>
+
+                    <li *ngIf="speedrunOne.category">
+                      <p>Catégorie : </p>
+                      <h3>{{ speedrunOne.category }}</h3>
+                    </li>
+
+                    <li *ngIf="speedrunOne.link">
+                      <p>Lien : </p>
+                      <h3><a class="chronoLink" href="{{ speedrunOne.link }}" target="_blank">Lien</a></h3>
+                    </li>
+                  </ul>
+
+                </div>
+              </ng-container>
+            </div>
+
 
           </div>
         </div>
