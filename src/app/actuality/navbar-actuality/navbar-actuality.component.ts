@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, Renderer2} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {ProviderService} from "../../-service/provider.service";
 import {UserInterface} from "../../-interface/user.interface";
@@ -16,9 +16,8 @@ export class NavbarActualityComponent implements OnInit {
 
   isLogIn:boolean|undefined;
   userConnected:UserInterface|undefined;
-  providerFollowOrAll:ProviderInterface[] = [];
-  followAll:FollowInterface[] = [];
   isUserManagingProvider: boolean = false
+  followAll:FollowInterface[] = [];
 
   mouseDown: boolean = false;
   startX: number = 0;
@@ -44,6 +43,10 @@ export class NavbarActualityComponent implements OnInit {
 
   @Input()
   providerFollowActuAll: PostActuInterface[] = []
+  
+  @Input()
+  providerFollowOrAll:ProviderInterface[] = [];
+
 
   ngOnInit(): void {
     this.isLogIn = this.app.isLoggedIn;

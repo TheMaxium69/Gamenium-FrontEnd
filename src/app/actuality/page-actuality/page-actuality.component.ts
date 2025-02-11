@@ -9,7 +9,7 @@ import {AppComponent} from "../../app.component";
   templateUrl: './page-actuality.component.html',
   styleUrls: ['./page-actuality.component.css']
 })
-export class PageActualityComponent implements OnInit{
+export class PageActualityComponent implements OnInit {
 
   actualityId: number|any
   providerId: number|any
