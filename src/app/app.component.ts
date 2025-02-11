@@ -758,7 +758,11 @@ export class AppComponent {
         if (reponseMyGameNoteAdd.message == "add note is game"){
 
           if (this.userConnected && this.userRatingAll) {
-            this.userRatingAll = [reponseMyGameNoteAdd.result, ...(this.userRatingAll || [])];
+            this.userRatingAll = this.userRatingAll?.map(rating =>
+              rating.id === reponseMyGameNoteAdd.result.id
+                ? reponseMyGameNoteAdd.result
+                : rating
+            ) || [reponseMyGameNoteAdd.result];
           }
 
           if (this.userConnected && this.myGameAll && this.gameSelected){
