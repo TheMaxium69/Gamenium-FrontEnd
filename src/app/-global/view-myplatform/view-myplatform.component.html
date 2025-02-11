@@ -46,7 +46,7 @@
 
         <div id="content-view" class="blocks-shadow" [ngStyle]="{'--profilColor': isColor }">
 
-          <h3>Détail</h3>
+          <h3>Détails</h3>
 
           <div class="margContent">
 
@@ -70,7 +70,7 @@
                 <ng-container *ngFor="let copyPlateform of app.viewMyPlatform?.copyPlateform">
 
                   <li *ngIf="copyPlateform.edition">
-                    <p>Éditions : </p>
+                    <p>Édition : </p>
                     <h3>{{ copyPlateform.edition }}</h3>
                   </li>
 
@@ -80,24 +80,24 @@
                   </li>
 
                   <li *ngIf="copyPlateform.etat">
-                    <p>Etat du jeu : </p>
+                    <p>État du jeu : </p>
                     <h3>{{ copyPlateform.etat.name }}</h3>
                   </li>
 
                   <li *ngIf="copyPlateform.isBox">
                     <p>Avec la boite : </p>
-                    <h3>{{ copyPlateform.isBox ? 'oui' : 'non' }}</h3>
+                    <h3>{{ copyPlateform.isBox ? 'Oui' : 'Non' }}</h3>
                   </li>
 
                   <li *ngIf="copyPlateform.region">
-                    <p>Region du jeu : </p>
+                    <p>Région du jeu : </p>
                     <h3>{{ copyPlateform.region.name }}</h3>
                   </li>
 
                   <li *ngIf="copyPlateform.content">
-                    <p>Plus d'information : </p>
+                    <p>Plus d'informations : </p>
 
-                    <h3 class="buttomShow" (click)="toggleShowContent()">  Voir plus d'information <i [class.ri-arrow-up-s-line]="showContent" [class.ri-arrow-down-s-line]="!showContent"></i></h3>
+                    <h3 class="buttomShow" (click)="toggleShowContent()">  Voir plus d'informations <i [class.ri-arrow-up-s-line]="showContent" [class.ri-arrow-down-s-line]="!showContent"></i></h3>
                   </li>
 
                   <li class="forShow" *ngIf="showContent">
@@ -105,7 +105,7 @@
                   </li>
 
                   <ng-container *ngIf="copyPlateform.purchase && copyPlateform.purchase.price || copyPlateform.purchase && copyPlateform.purchase.year_buy_at || copyPlateform.purchase && copyPlateform.purchase.year_buy_at || copyPlateform.purchase && copyPlateform.purchase.buy_where || copyPlateform.purchase && copyPlateform.purchase.content ">
-                    <h5>Information d'achat</h5>
+                    <h5>Informations d'achat</h5>
 
                     <li *ngIf="copyPlateform.purchase.price">
                       <p>Prix d'achat : </p>
@@ -131,9 +131,9 @@
                     </li>
 
                     <li *ngIf="copyPlateform.purchase.content">
-                      <p>Plus d'information d'achat : </p>
+                      <p>Plus d'informations d'achat : </p>
 
-                      <h3 class="buttomShow" (click)="toggleShowPurchaseContent()">  Voir la information plus d'achat <i [class.ri-arrow-up-s-line]="showPurchaseContent" [class.ri-arrow-down-s-line]="!showPurchaseContent"></i></h3>
+                      <h3 class="buttomShow" (click)="toggleShowPurchaseContent()">  Voir plus informations sur l'achat <i [class.ri-arrow-up-s-line]="showPurchaseContent" [class.ri-arrow-down-s-line]="!showPurchaseContent"></i></h3>
                     </li>
 
                     <li class="forShow" *ngIf="showPurchaseContent">
@@ -170,7 +170,7 @@
                         ">
 
                     <li *ngIf="copyPlateform.edition">
-                      <p>Éditions : </p>
+                      <p>Édition : </p>
                       <h3>{{ copyPlateform.edition }}</h3>
                     </li>
 
@@ -180,24 +180,24 @@
                     </li>
 
                     <li *ngIf="copyPlateform.etat">
-                      <p>Etat du jeu : </p>
+                      <p>État du jeu : </p>
                       <h3>{{ copyPlateform.etat.name }}</h3>
                     </li>
 
                     <li *ngIf="copyPlateform.isBox">
                       <p>Avec la boite : </p>
-                      <h3>{{ copyPlateform.isBox ? 'oui' : 'non' }}</h3>
+                      <h3>{{ copyPlateform.isBox ? 'Oui' : 'Non' }}</h3>
                     </li>
 
                     <li *ngIf="copyPlateform.region">
-                      <p>Region du jeu : </p>
+                      <p>Région du jeu : </p>
                       <h3>{{ copyPlateform.region.name }}</h3>
                     </li>
 
                     <li *ngIf="copyPlateform.content">
-                      <p>Plus d'information : </p>
+                      <p>Plus d'informations : </p>
 
-                      <h3 class="buttomShow" (click)="toggleShowCopyContent(copyPlateform.id)">  Voir plus d'information <i [class.ri-arrow-up-s-line]="isShowCopyContent(copyPlateform.id)" [class.ri-arrow-down-s-line]="!isShowCopyContent(copyPlateform.id)"></i></h3>
+                      <h3 class="buttomShow" (click)="toggleShowCopyContent(copyPlateform.id)">  Voir plus d'informations <i [class.ri-arrow-up-s-line]="isShowCopyContent(copyPlateform.id)" [class.ri-arrow-down-s-line]="!isShowCopyContent(copyPlateform.id)"></i></h3>
                     </li>
 
                     <li class="forShow" *ngIf="isShowCopyContent(copyPlateform.id)">
@@ -205,7 +205,7 @@
                     </li>
 
                     <ng-container *ngIf="copyPlateform.purchase && copyPlateform.purchase.price || copyPlateform.purchase && copyPlateform.purchase.year_buy_at || copyPlateform.purchase && copyPlateform.purchase.year_buy_at || copyPlateform.purchase && copyPlateform.purchase.buy_where || copyPlateform.purchase && copyPlateform.purchase.content ">
-                      <h5>Information d'achat</h5>
+                      <h5>Informations d'achat</h5>
 
                       <li *ngIf="copyPlateform.purchase.price">
                         <p>Prix d'achat : </p>
@@ -231,9 +231,9 @@
                       </li>
 
                       <li *ngIf="copyPlateform.purchase.content">
-                        <p>Plus d'information d'achat : </p>
+                        <p>Plus d'informations d'achat : </p>
 
-                        <h3 class="buttomShow" (click)="toggleShowCopyPurchaseContent(copyPlateform.id)">  Voir la information plus d'achat <i [class.ri-arrow-up-s-line]="isShowCopyPurchaseContent(copyPlateform.id)" [class.ri-arrow-down-s-line]="!isShowCopyPurchaseContent(copyPlateform.id)"></i></h3>
+                        <h3 class="buttomShow" (click)="toggleShowCopyPurchaseContent(copyPlateform.id)">  Voir plus informations sur l'achat <i [class.ri-arrow-up-s-line]="isShowCopyPurchaseContent(copyPlateform.id)" [class.ri-arrow-down-s-line]="!isShowCopyPurchaseContent(copyPlateform.id)"></i></h3>
                       </li>
 
                       <li class="forShow" *ngIf="isShowCopyPurchaseContent(copyPlateform.id)">

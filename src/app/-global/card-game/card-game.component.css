@@ -264,6 +264,10 @@
     flex-direction: column;
   }
 
+  #squelette.card-wrapper {
+    box-shadow: unset!important;
+  }
+
   .card-wrapper {
     height: 300px;
     box-shadow: 1px 2px 11px #a6a6a6;
@@ -311,6 +315,9 @@
 }
 
 /* loading */
+#squelette.card-wrapper{
+  box-shadow: unset!important;
+}
 #squelette .card-game {
   box-shadow: none;
 
@@ -377,7 +384,7 @@
     width: 100%;
   }
 
-  
+
 
 
 }

@@ -36,6 +36,10 @@
     <app-card-game *ngFor="let myGameHistorique of getAllGamesToDisplay()" [Hmg]="myGameHistorique" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="app-card-game"></app-card-game>
 </div>
 
+<div *ngIf="!HistoireMyGameByUserByPlateform.length && !isLoading">
+  <h3 style="text-align: center; width: 100%">La collection de jeux est vide</h3>
+</div>
+
 <!--  GAME PINED -->
 <div id="show-game" class="d-flex container pinned" *ngIf="!isFilterApplied() && !searchQuery.trim() && getPinnedGames().length > 0">
   <app-card-game *ngFor="let myGameHistorique of getPinnedGames()" [Hmg]="myGameHistorique" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="app-card-game"></app-card-game>
