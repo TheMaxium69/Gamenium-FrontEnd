@@ -180,7 +180,8 @@ export class CommentActualityComponent implements OnInit{
       let content = form.value['content'];
       //Verification que le message n'est pas vide ou plein d'espace
       if (content.trim() == "") {
-        return console.log("Message invalide")
+        return
+        // console.log("Message invalide")
       }
       let bodyNoJsonMyCommentActu: any = {
         "id_post": this.actualitySelected?.id,
@@ -188,12 +189,12 @@ export class CommentActualityComponent implements OnInit{
       };
 
       const bodyMyCommentActu = JSON.stringify(bodyNoJsonMyCommentActu);
-      console.log(bodyMyCommentActu)
+      // console.log(bodyMyCommentActu)
 
       this.commentService.postCommentInActu(bodyMyCommentActu, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyCommentActuCreate:{message:string, result:CommentInterface }) => {
         if (reponseMyCommentActuCreate.message === "good") {
           this.newComment = reponseMyCommentActuCreate.result;
-          console.log("Commentaire ajouté");
+          // console.log("Commentaire ajouté");
 
 
           if (this.commentByActu){
@@ -225,7 +226,7 @@ export class CommentActualityComponent implements OnInit{
           }
 
           this.userConnectedId = this.app.userConnected.id;
-          console.log(reponseMyCommentActuCreate);
+          // console.log(reponseMyCommentActuCreate);
         }
       if (reponseMyCommentActuCreate.message === "to long content") {
 
@@ -290,9 +291,9 @@ export class CommentActualityComponent implements OnInit{
             }
 
             if (typeof this.nbComment == 'number' && this.nbComment > 0) {
-              console.log(this.nbComment)
+              // console.log(this.nbComment)
               this.nbComment--
-              console.log(this.nbComment)
+              // console.log(this.nbComment)
 
               const commentHTML = document.querySelector('#comment-value')
               if (commentHTML) {
@@ -311,14 +312,14 @@ export class CommentActualityComponent implements OnInit{
 
                   this.renderer.appendChild(form, commentSectionEmpty)
                 }
-                console.log(noComment)
+                // console.log(noComment)
               }
             }
 
             this.commentNbChanged.emit('delete');
-            console.log('message supprimé')
+            // console.log('message supprimé')
           } else {
-            console.log('erreur ou pas de commentaire')
+            // console.log('erreur ou pas de commentaire')
 
             Swal.fire({
               title: 'Echec!',
@@ -349,7 +350,7 @@ export class CommentActualityComponent implements OnInit{
   }
 
   addLikeComment(commentId: number) {
-    console.log(commentId)
+    // console.log(commentId)
 
     let bodyNoJson: any = {
       "id_comment": commentId
@@ -359,7 +360,7 @@ export class CommentActualityComponent implements OnInit{
 
     this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
       if (reponseApi.message == 'good') {
-        console.log('commentaire ' + commentId + ' liké par ' + this.userConnectedId)
+        // console.log('commentaire ' + commentId + ' liké par ' + this.userConnectedId)
 
         this.commentLikedMap.set(commentId, true);
 
@@ -417,7 +418,7 @@ export class CommentActualityComponent implements OnInit{
   }
 
   deleteLikeComment(commentId: number) {
-    console.log(commentId)
+    // console.log(commentId)
     let bodyNoJson: any = {
       "id_comment": commentId,
       "del": true
@@ -428,7 +429,7 @@ export class CommentActualityComponent implements OnInit{
     this.likeService.addLikeComment(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(
       (reponseApi) => {
         if (reponseApi.message == 'good') {
-          console.log('commentaire ' + commentId + ' plus liké par ' + this.userConnectedId)
+          // console.log('commentaire ' + commentId + ' plus liké par ' + this.userConnectedId)
 
           this.commentLikedMap.set(commentId, false);
 
@@ -448,7 +449,7 @@ export class CommentActualityComponent implements OnInit{
           }
 
         } else {
-          console.log('erreur dans la suppression du like du commentaire ' + commentId)
+          // console.log('erreur dans la suppression du like du commentaire ' + commentId)
         }
       }, (error) => this.app.erreurSubcribe())
 

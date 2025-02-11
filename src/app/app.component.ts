@@ -592,7 +592,7 @@ export class AppComponent {
     this.histoireMyGameService.updatePinMyGame(body, this.setURL(), this.createCorsToken())
       .subscribe(response => {
         if (response.message === 'game is pinned') {
-          console.log('Statut épinglé mis à jour dans la base de données');
+          // console.log('Statut épinglé mis à jour dans la base de données');
           Swal.fire({
             title: 'Succès!',
             text: myGameHistorique.myGame.game.name + ' a bien été '+message,
@@ -743,7 +743,7 @@ export class AppComponent {
             confirmButtonText: 'OK',
             confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
           })
-          console.log('erreur lors de l\'ajout de la plateforme');
+          // console.log('erreur lors de l\'ajout de la plateforme');
         }
 
       });
@@ -984,7 +984,7 @@ export class AppComponent {
 
   deleteMyPlateform(myPlatform: HistoryMyPlatformInterface|undefined, redirect: Boolean = false){
     if(!myPlatform){
-      console.log('pas de hmp');
+      // console.log('pas de hmp');
       return;
     }
 

@@ -156,7 +156,7 @@ export class ProfileComponent implements OnInit {
   }
 
   resetInfoContainer() {
-    console.log('reset info')
+    // console.log('reset info')
     const infoContainer = document.querySelector('.informations-section') as HTMLElement
     const settings = document.querySelectorAll('.information-setting')
 
@@ -232,7 +232,7 @@ export class ProfileComponent implements OnInit {
 
       } else {
 
-        console.log("err user not existing");
+        // console.log("err user not existing");
 
       }
 
@@ -256,7 +256,7 @@ export class ProfileComponent implements OnInit {
     this.badgeService.getAllBadges(this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
       if (ReponseApi.message == 'good') {
         this.allBadges = ReponseApi.result;
-        console.log(this.allBadges);
+        // console.log(this.allBadges);
       }
     });
   }
@@ -320,15 +320,15 @@ export class ProfileComponent implements OnInit {
         preview.style.backgroundPosition = 'center'
       }
 
-      console.log(this.selectedFile);
-      console.log(previewImage)
+      // console.log(this.selectedFile);
+      // console.log(previewImage)
     }
   }
 
   onUpload() {
 
     if (!this.selectedFile) {
-      console.log('Aucun fichier sélectionné');
+      // console.log('Aucun fichier sélectionné');
       return;
     }
 
@@ -383,7 +383,7 @@ export class ProfileComponent implements OnInit {
       if(responseSocialNetworkAll.message == "good"){
 
         this.socialNetworkAll = responseSocialNetworkAll.result;
-        console.log(this.socialNetworkAll);
+        // console.log(this.socialNetworkAll);
       }
 
     });

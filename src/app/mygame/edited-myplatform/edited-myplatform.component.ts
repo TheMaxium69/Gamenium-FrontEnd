@@ -357,7 +357,7 @@ export class EditedMyplatformComponent implements OnInit {
           day_buy_date: form.value['purchase_day_buy_date' + i],
         }
 
-        console.log(form.value['isBox' + i]);
+        // console.log(form.value['isBox' + i]);
         let tempMyPlatform = {
           id: form.value['copy' + i],
           edition: form.value['edition' + i],
@@ -448,7 +448,7 @@ export class EditedMyplatformComponent implements OnInit {
       }
       this.isLoadingUpdate = false;
     }, (error) => {
-      console.log('entré');
+      // console.log('entré');
       this.isLoadingUpdate = false;
       Swal.fire({
         title: 'Erreur!',

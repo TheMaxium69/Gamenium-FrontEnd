@@ -186,7 +186,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
           this.isLoading = false;
         } else {
           this.isLoading = false;
-          console.log("pas de jeux trouvé pour l'utilisateur")
+          // console.log("pas de jeux trouvé pour l'utilisateur")
         }
       });
     }
