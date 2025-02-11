@@ -234,7 +234,7 @@ export class CommentActualityComponent implements OnInit{
 
         Swal.fire({
           title: 'Attention!',
-          text: 'Le message ne dois pas dépasser 300 charactere.',
+          text: 'Le message ne doit pas dépasser 255 caractères.',
           icon: 'warning',
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
@@ -264,52 +264,73 @@ export class CommentActualityComponent implements OnInit{
 
   onDeleteBtnClick(commentId: number) {
     // console.log(commentId);
-    this.commentService.deleteCommentInActu(commentId, this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
-      if (ReponseApi.message == 'Comment deleted successfully') {
-        const borderToDelete = document.getElementById('b'+commentId)
-        const commentToDelete = document.getElementById('c'+commentId)
 
-        if (commentToDelete) {
-          commentToDelete.style.display = 'none'
-        }
+    Swal.fire({
+      icon: "question",
+      title: "Êtes-vous sûr?",
+      text: "Souhaitez-vous vraiment supprimer ce commentaire ?",
+      // icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, supprimer',
+      cancelButtonText: 'Annuler',
+      confirmButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.commentService.deleteCommentInActu(commentId, this.app.setURL(), this.app.createCorsToken()).subscribe((ReponseApi) => {
+          if (ReponseApi.message == 'Comment deleted successfully') {
+            const borderToDelete = document.getElementById('b' + commentId)
+            const commentToDelete = document.getElementById('c' + commentId)
 
-        if (borderToDelete) {
-          borderToDelete.style.display = 'none'
-        }
-
-        if (typeof this.nbComment == 'number' && this.nbComment > 0 ) {
-          console.log(this.nbComment)
-          this.nbComment--
-          console.log(this.nbComment)
-
-          const commentHTML = document.querySelector('#comment-value')
-          if (commentHTML) {
-            commentHTML.textContent =  this.nbComment.toString()
-          }
-
-          const noComment = document.querySelector('#no-comment') as HTMLElement
-          if (typeof this.nbComment == 'number' && this.nbComment == 0 ) {
-            if (noComment !== null) {
-              noComment.style.display = 'block'
-            } else {
-              const form = document.querySelector('#tempNoComment')
-              const commentSectionEmpty = this.renderer.createElement('h2');
-              this.renderer.setAttribute(commentSectionEmpty, 'id', 'no-comment');
-              commentSectionEmpty.textContent = 'Aucun commentaire';
-
-              this.renderer.appendChild(form, commentSectionEmpty)
+            if (commentToDelete) {
+              commentToDelete.style.display = 'none'
             }
-            console.log(noComment)
-          }
-        }
 
-        this.commentNbChanged.emit('delete');
-        console.log('message supprimé')
-      } else {
-        console.log('erreur ou pas de commentaire') // TODO: Ajouter les gestions d'erreurs
+            if (borderToDelete) {
+              borderToDelete.style.display = 'none'
+            }
+
+            if (typeof this.nbComment == 'number' && this.nbComment > 0) {
+              console.log(this.nbComment)
+              this.nbComment--
+              console.log(this.nbComment)
+
+              const commentHTML = document.querySelector('#comment-value')
+              if (commentHTML) {
+                commentHTML.textContent = this.nbComment.toString()
+              }
+
+              const noComment = document.querySelector('#no-comment') as HTMLElement
+              if (typeof this.nbComment == 'number' && this.nbComment == 0) {
+                if (noComment !== null) {
+                  noComment.style.display = 'block'
+                } else {
+                  const form = document.querySelector('#tempNoComment')
+                  const commentSectionEmpty = this.renderer.createElement('h2');
+                  this.renderer.setAttribute(commentSectionEmpty, 'id', 'no-comment');
+                  commentSectionEmpty.textContent = 'Aucun commentaire';
+
+                  this.renderer.appendChild(form, commentSectionEmpty)
+                }
+                console.log(noComment)
+              }
+            }
+
+            this.commentNbChanged.emit('delete');
+            console.log('message supprimé')
+          } else {
+            console.log('erreur ou pas de commentaire')
+
+            Swal.fire({
+              title: 'Echec!',
+              text: 'Echec de la suppression du commentaire',
+              icon: 'error',
+              confirmButtonText: 'OK',
+              confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+            })
+          }
+        });
       }
     });
-
 
   }
 
@@ -493,28 +514,48 @@ export class CommentActualityComponent implements OnInit{
 
 
   deleteCommentReply(commentReply: CommentReplyInterface, index:number){
-    this.commentService.deleteCommentReply(commentReply.id, this.app.setURL(), this.app.createCorsToken()).subscribe(
-      response => {
-        if(response.message == "good"){
-          this.commentReplyAll[commentReply.comment.id].splice(index, 1);
-          Swal.fire({
-            title: 'Success',
-            text: 'Votre commentaire à bien été supprimé',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
-          })
-        } else {
-          Swal.fire({
-            title: 'Echec!',
-            text: 'Echec de la suppression du commentaire',
-            icon: 'error',
-            confirmButtonText: 'OK',
-            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
-          })
-        }
-      },(error) => {this.app.erreurSubcribe()}
-    )
+
+
+    Swal.fire({
+      icon: "question",
+      title: "Êtes-vous sûr?",
+      text: "Souhaitez-vous vraiment supprimer ce commentaire ?",
+      // icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, supprimer',
+      cancelButtonText: 'Annuler',
+      confirmButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.commentService.deleteCommentReply(commentReply.id, this.app.setURL(), this.app.createCorsToken()).subscribe(
+          response => {
+            if(response.message == "good"){
+              this.commentReplyAll[commentReply.comment.id].splice(index, 1);
+              // Swal.fire({
+              //   title: 'Succès',
+              //   text: 'Votre commentaire à bien été supprimé',
+              //   icon: 'success',
+              //   confirmButtonText: 'OK',
+              //   confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+              // })
+            } else {
+              Swal.fire({
+                title: 'Echec!',
+                text: 'Echec de la suppression du commentaire',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+              })
+            }
+          },(error) => {this.app.erreurSubcribe()}
+        )
+      }
+    });
+
+
+
+
+
   }
 
   addShowCommentReply(commentId: number) {
@@ -576,13 +617,13 @@ export class CommentActualityComponent implements OnInit{
                 input.value = "";
               }
 
-              Swal.fire({
-                title: 'Success',
-                text: 'Votre commentaire à bien été ajouté',
-                icon: 'success',
-                confirmButtonText: 'OK',
-                confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
-              })
+              // Swal.fire({
+              //   title: 'Success',
+              //   text: 'Votre commentaire à bien été ajouté',
+              //   icon: 'success',
+              //   confirmButtonText: 'OK',
+              //   confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+              // })
             } else {
               Swal.fire({
                 title: 'Echec!',
