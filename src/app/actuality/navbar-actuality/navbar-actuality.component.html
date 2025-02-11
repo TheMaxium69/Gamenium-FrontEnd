@@ -3,7 +3,7 @@
     <div id="provider-nav-container">
 
       <div *ngIf="providerFollowOrAll.length === 0 && !isLoadingFollow" style="align-content: center; height: 100%;">
-        <p style="font-size: 18px;">Abonnez vous pour suivre toutes les dernières actualités de vos éditeurs</p>
+        <p style="font-size: 18px;">Suivre des éditeurs pour voir les dernières actualités </p>
       </div>
 
       <ul id="squelette" class="d-flex" *ngIf="isLoadingFollow"
@@ -40,13 +40,13 @@
 
     </div>
 
-    <div class="open-final" data-bs-toggle="modal" data-bs-target="#providerModal" *ngIf="this.app.isLoggedIn">
+    <div class="open-final" data-bs-toggle="modal" data-bs-target="#providerModal" *ngIf="this.app.isLoggedIn && providerFollowOrAll.length !== 0 && !isLoadingFollow">
       <p (click)="toggleProviderModal()">
         <i class="ri-settings-3-fill nav-icon"></i>
       </p>
     </div>
 
-    <div class="open-final" routerLink="/search/provider/-" *ngIf="!this.app.isLoggedIn">
+    <div class="open-final" routerLink="/search/provider/-" *ngIf="!this.app.isLoggedIn || providerFollowOrAll.length === 0 && !isLoadingFollow">
       <p>
         <i class="ri-apps-2-add-fill nav-icon"></i>
       </p>
