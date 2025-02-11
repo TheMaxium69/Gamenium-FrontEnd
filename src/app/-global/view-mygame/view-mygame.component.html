@@ -213,6 +213,11 @@
                 <h3>{{ this.app.viewMyGame?.copyGame?.length || '1*' }}</h3>
               </li>
 
+              <li *ngIf="this.app.viewMyGame.speedrun.length > 0">
+                <p>Nombre de speedrun : </p>
+                <h3>{{ this.app.viewMyGame.speedrun.length }}</h3>
+              </li>
+
               <li *ngIf="this.app.viewMyGame.myGame.hmgTags.length > 0">
                 <p>Tags :</p>
                 <h3 id="tags">
