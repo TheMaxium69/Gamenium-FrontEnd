@@ -152,7 +152,7 @@ export class DetailActualityComponent implements OnInit{
     if (!this.isLoggedIn) {
       Swal.fire({
         title: 'Attention!',
-        text: 'Vous devez être connecté pour le j\'aime',
+        text: 'Vous devez être connecté pour aimer',
         icon: 'warning',
         confirmButtonText: 'OK',
         confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
