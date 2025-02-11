@@ -68,11 +68,11 @@ export class CardProviderComponent implements OnInit {
         text: "Vous devez être connecté pour suivre un provider.",
         icon: "info",
         confirmButtonText: "Ok",
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: this.app.colorDefault,
       });
       return;
     }
-  
+
     if (this.provider) {
       if (!this.isFollowed) {
         this.addFollow(this.provider.id);
@@ -81,8 +81,8 @@ export class CardProviderComponent implements OnInit {
       }
     }
   }
-  
-  
+
+
 
   addFollow(providerId: number): void {
     const body = { id_provider: providerId };
