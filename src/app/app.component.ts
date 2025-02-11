@@ -220,7 +220,7 @@ export class AppComponent {
         } else if (msgToken?.message == "bad passwd") {
           Swal.fire({
             title: 'Erreur!',
-            text: 'Mots de passe incorrect',
+            text: 'Mot de passe incorrect',
             icon: 'error',
             confirmButtonText: 'OK',
             confirmButtonColor: this.userConnected?.themeColor || this.colorDefault
