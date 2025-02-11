@@ -5,7 +5,7 @@
 
       <!-- BAR -->
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Gérer mes abonnements</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Gérer mes suivis</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
@@ -19,7 +19,7 @@
             </div>
 
             <div class="middle-provider">
-              <p>{{getNbOfActu(provider.id)}} actualités</p>
+              <p>{{getNbOfActu(provider.id)}} actualité<ng-container *ngIf="getNbOfActu(provider.id) > 1">s</ng-container></p>
               <small>Dernier post le {{(lastPostDate(provider.id) | date:'dd / MM / yyyy') ?? 'Pas actu'}}</small>
             </div>
 
