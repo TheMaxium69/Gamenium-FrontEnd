@@ -89,7 +89,7 @@ export class TabPublicComponent implements OnInit, OnChanges {
 
       } else {
 
-        console.log("err user not existing");
+        // console.log("err user not existing");
 
       }
 

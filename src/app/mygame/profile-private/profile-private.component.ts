@@ -114,7 +114,7 @@ export class ProfilePrivateComponent implements OnInit {
 
   // récup des jeux par utilisateur
   myGameByUser(id_user: number): void {
-    console.log(this.app.myGameAll)
+    // console.log(this.app.myGameAll)
     if (this.app.myGameAll){
       this.app.myGameAll = this.app.myGameAll?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
       this.isLoading = false;
@@ -125,7 +125,7 @@ export class ProfilePrivateComponent implements OnInit {
         if (responseMyGame.message == "good") {
           this.app.myGameAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime());
         } else {
-          console.log("pas de jeux trouvé pour l'utilisateur")
+          // console.log("pas de jeux trouvé pour l'utilisateur")
         }
         this.isLoading = false;
         this.gamesLoaded = true;
@@ -203,13 +203,13 @@ export class ProfilePrivateComponent implements OnInit {
           this.isPp = this.profilSelected.picture;
         }
       } else {
-        console.log("Erreur : utilisateur non existant");
+        // console.log("Erreur : utilisateur non existant");
       }
       // On passe le profilLoaded à true et on appelle la méthode qui vérifie les tâches complétées
       this.profileLoaded = true;
       this.tryCheckAndCompleteTasks();
     }, error => {
-      console.error('Erreur lors de la récupération du profil :', error);
+      // console.error('Erreur lors de la récupération du profil :', error);
       // Même en cas d'erreur, on passe le profilLoaded à true pour éviter de bloquer
       this.profileLoaded = true;
       this.tryCheckAndCompleteTasks();

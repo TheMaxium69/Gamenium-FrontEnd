@@ -310,11 +310,11 @@ export class SearchPageComponent implements OnInit, OnDestroy{
 
     this.nbMoreGame++
     let limit = this.nbMoreGame * this.app.fetchLimit;
-    console.log(limit)
+    // console.log(limit)
 
     this.gameService.searchGames(this.searchValue, limit, this.app.setURL(), this.app.createCorsToken()).subscribe((results) => {
       this.games = results;
-      console.log(this.games.length)
+      // console.log(this.games.length)
 
       let element = document.getElementById("moreGameBTN");
       if (this.games.length == limit){

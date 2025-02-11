@@ -57,7 +57,7 @@ export class ModalAddGameComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe((results: GameInterface[]) => {
-      console.log('results valide');
+      // console.log('results valide');
       this.isLoading = false;
       this.searchResults = results;
     });

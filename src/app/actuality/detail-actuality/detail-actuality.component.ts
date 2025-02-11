@@ -107,7 +107,7 @@ export class DetailActualityComponent implements OnInit{
       if (response.message === "good") {
         this.actualitySelected = response.result;
 
-        console.log('Fetched Actuality:', this.actualitySelected);
+        // console.log('Fetched Actuality:', this.actualitySelected);
 
         if (this.actualitySelected) {
           this.addViewActu(this.actualitySelected.id);
@@ -170,7 +170,7 @@ export class DetailActualityComponent implements OnInit{
 
     this.likeService.addLikePostActu(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(reponseAddLikeByPostActu => {
 
-      console.log(reponseAddLikeByPostActu);
+      // console.log(reponseAddLikeByPostActu);
 
       if (reponseAddLikeByPostActu.message == "good"){
 
@@ -213,11 +213,11 @@ export class DetailActualityComponent implements OnInit{
   // provider
 
   handleFollowed(providerId: number): void {
-    console.log(`Provider followed with ID: ${providerId}`);
+    // console.log(`Provider followed with ID: ${providerId}`);
   }
 
   handleUnfollowed(providerId: number): void {
-    console.log(`Provider unfollowed with ID: ${providerId}`);
+    // console.log(`Provider unfollowed with ID: ${providerId}`);
   }
 
 
@@ -234,7 +234,7 @@ export class DetailActualityComponent implements OnInit{
       }}) => {
       if (reponseMyCountActu.message == "good") {
         this.nbCommentaire = reponseMyCountActu.result.total;
-        console.log(reponseMyCountActu.result.reply);
+        //console.log(reponseMyCountActu.result.reply);
         this.commentReplyAll = reponseMyCountActu.result.reply;
       }
     });
@@ -296,7 +296,7 @@ export class DetailActualityComponent implements OnInit{
 
       this.viewService.addActuView(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseAddViewActu:ApicallInterface) => {
         if (reponseAddViewActu.message == "good"){
-          console.log("+1 vue");
+          // console.log("+1 vue");
         }
       })
 

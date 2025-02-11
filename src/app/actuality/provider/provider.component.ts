@@ -54,15 +54,15 @@ export class ProviderComponent implements OnInit{
     this.userConnected = this.app.userConnected;
     this.idUser = this.userConnected?.id;
 
-    console.log(this.providerNbActu);
+    // console.log(this.providerNbActu);
 
     if (this.idUser) {
       this.checkIfUserFollowProvider(this.idUser)
-      console.log(this.isProviderFollowedByUser)
+      // console.log(this.isProviderFollowedByUser)
     }
 
     this.providerId = this.route.snapshot.paramMap.get('idprovider');
-    console.log("Provider Id", this.providerId)
+    // console.log("Provider Id", this.providerId)
 
     this.getProviders(this.providerId);
     this.getNumberOfFollowers(this.providerId);
@@ -128,7 +128,7 @@ export class ProviderComponent implements OnInit{
     this.postactuService.getLatestPostActus(id, this.app.setURL(), this.app.createCorsToken()).subscribe((reponsePostActus) => {
       if (reponsePostActus.message !== "PostActus not found"){
         this.postactuSelected = reponsePostActus.result;
-        console.log(reponsePostActus.result)
+        // console.log(reponsePostActus.result)
       } else {
         this.nonePostActu = true;
       }
@@ -147,7 +147,7 @@ export class ProviderComponent implements OnInit{
       });
       return;
     }
-    
+
     if (!this.isProviderFollowedByUser) {
       this.addFollow(providerId)
 
@@ -184,7 +184,7 @@ export class ProviderComponent implements OnInit{
     this.followService.postFollowProvider(JSONbody, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseProvider) => {
       if (reponseProvider.message == 'good') {
         this.isProviderFollowedByUser = true
-        console.log('succès du follow')
+        // console.log('succès du follow')
       }
     })
 
@@ -192,11 +192,11 @@ export class ProviderComponent implements OnInit{
   }
 
   deleteFollow(providerId: number) {
-    console.log('btn clicked')
+    //console.log('btn clicked')
     this.followService.deleteFollowProvider(providerId, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseApi) => {
       if (reponseApi.message == 'follow deleted successfully') {
         this.isProviderFollowedByUser = false
-        console.log('follow supprimé avec succès')
+        // console.log('follow supprimé avec succès')
       }
     })
 
@@ -215,7 +215,7 @@ export class ProviderComponent implements OnInit{
 
       this.viewService.addProviderView(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseAddViewActu:ApicallInterface) => {
         if (reponseAddViewActu.message == "good"){
-          console.log("+1 vue");
+          // console.log("+1 vue");
         }
       })
 

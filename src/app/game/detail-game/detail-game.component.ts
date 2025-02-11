@@ -100,7 +100,7 @@ export class DetailGameComponent implements OnInit{
         this.myGameHistoriqueAll = responseMyGame.result;
         this.hasGameInCollection = this.checkHasGameInCollection(Number(this.gameId));
       } else {
-        console.log("pas de jeux trouvé pour l'utilisateur")
+        // console.log("pas de jeux trouvé pour l'utilisateur")
       }
     });
   }
@@ -124,7 +124,7 @@ export class DetailGameComponent implements OnInit{
 
   // Drag carousel provider cards
   startDrag(mouse: MouseEvent): void {
-    console.log('drag start') // A SUPPRIMER
+    // console.log('drag start') // A SUPPRIMER
     const slider = document.querySelector('.provider-card-container') as HTMLElement;
 
     if (slider) {
@@ -138,7 +138,7 @@ export class DetailGameComponent implements OnInit{
   }
 
   stopDrag(): void {
-    console.log('drag stop') // A SUPPRIMER
+    // console.log('drag stop') // A SUPPRIMER
     const slider = document.querySelector('.provider-card-container') as HTMLElement;
     this.mouseDown = false;
 
@@ -155,7 +155,7 @@ export class DetailGameComponent implements OnInit{
       return;
     }
 
-    console.log('drag en cours') // A SUPPRIMER
+    // console.log('drag en cours') // A SUPPRIMER
     const slider = document.querySelector('.provider-card-container') as HTMLElement;
 
     mouse.stopPropagation();
@@ -183,7 +183,7 @@ export class DetailGameComponent implements OnInit{
 
       this.viewService.addGameView(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseAddViewActu:ApicallInterface) => {
         if (reponseAddViewActu.message == "good"){
-          console.log("+1 vue");
+          // console.log("+1 vue");
         }
       })
 
@@ -266,7 +266,7 @@ export class DetailGameComponent implements OnInit{
           if (i < this.app.maxSearchProviderByGame && publisherName.length > 3){
             if (this.app.publisherNameFormatage(publisherName) == "Xbox"){
               this.providerService.searchProviders("Microsoft", 1, this.app.setURL(), this.app.createCorsToken()).subscribe((reponse:ProviderInterface[]) => {
-                console.log(reponse);
+                // console.log(reponse);
                 if (reponse.length > 0){
                   if (!this.providerSelected.some(provider => provider.id === reponse[0].id)) {
                     this.providerSelected.push(reponse[0]);
@@ -275,7 +275,7 @@ export class DetailGameComponent implements OnInit{
               });
             }
             this.providerService.searchProviders(this.app.publisherNameFormatage(publisherName), 1, this.app.setURL(), this.app.createCorsToken()).subscribe((reponse:ProviderInterface[]) => {
-              console.log(reponse);
+              // console.log(reponse);
               if (reponse.length > 0){
                 if (!this.providerSelected.some(provider => provider.id === reponse[0].id)) {
                   this.providerSelected.push(reponse[0]);

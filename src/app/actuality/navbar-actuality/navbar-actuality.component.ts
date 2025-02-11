@@ -44,7 +44,7 @@ export class NavbarActualityComponent implements OnInit, OnChanges {
 
   @Input()
   providerFollowActuAll: PostActuInterface[] = []
-  
+
   @Input()
   providersFollowedRefreshed: ProviderInterface[] = []
 
@@ -68,7 +68,7 @@ export class NavbarActualityComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['providersFollowedRefreshed']) {
-      console.log('refresh')
+      // console.log('refresh')
       if (this.userConnected) {
         this.providerFollowOrAll = this.providersFollowedRefreshed
         this.providerFollowed.emit(this.providersFollowedRefreshed)
@@ -107,7 +107,7 @@ export class NavbarActualityComponent implements OnInit, OnChanges {
     this.followAll.forEach((followOne:FollowInterface) => {
 
       if (followOne?.provider?.id == providerId) {
-        console.log(followOne.provider.id)
+        // console.log(followOne.provider.id)
         return this.providerSelected.emit(followOne.provider.id)
       }
 
@@ -206,12 +206,12 @@ export class NavbarActualityComponent implements OnInit, OnChanges {
     if (!this.isUserManagingProvider) {
       this.isUserManagingProvider = true
       this.isProviderModalOpen.emit(this.isUserManagingProvider)
-      console.log('data sent:' + this.isUserManagingProvider)
+      // console.log('data sent:' + this.isUserManagingProvider)
 
     } else {
       this.isUserManagingProvider = false
       this.isProviderModalOpen.emit(this.isUserManagingProvider)
-      console.log('data sent:' + this.isUserManagingProvider)
+      // console.log('data sent:' + this.isUserManagingProvider)
     }
   }
 

@@ -280,7 +280,7 @@ export class AppComponent {
 
       } else if (msgUser?.message == "user ban") {
 
-        console.log(msgUser?.message)
+        // console.log(msgUser?.message)
         // GERE LE MSG ERR
         this.cookieService.delete('tokenGamenium');
         this.cookieService.delete('userGamenium');
@@ -296,7 +296,7 @@ export class AppComponent {
 
       } else {
 
-        console.log(msgUser?.message)
+        // console.log(msgUser?.message)
         // GERE LE MSG ERR
         this.cookieService.delete('tokenGamenium');
         this.cookieService.delete('userGamenium');

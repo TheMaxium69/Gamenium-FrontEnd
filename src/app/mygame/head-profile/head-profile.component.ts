@@ -71,7 +71,7 @@ export class HeadProfileComponent implements OnInit{
 
         } else {
 
-          console.log("err user not existing");
+          // console.log("err user not existing");
 
         }
 

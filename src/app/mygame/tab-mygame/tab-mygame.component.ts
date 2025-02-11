@@ -29,7 +29,7 @@ export class TabMygameComponent implements OnInit, OnChanges {
         this.task = this.plateformeId;
         this.load();
         if (this.task == 'recent'){
-          console.log("RECENT")
+          // console.log("RECENT")
         }
       }
     });

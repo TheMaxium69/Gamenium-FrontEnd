@@ -63,7 +63,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
   ngOnInit(): void {
 
-    console.log("Je suis dans le profile public")
+    // console.log("Je suis dans le profile public")
 
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.idhistory = this.route.snapshot.paramMap.get('idhistory');
@@ -149,7 +149,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
           this.selectViewMyGame(this.idhistory);
         }
         if (this.task === "hmp" && this.idhistory){
-          console.log("Je suis dans le hmp " + this.idhistory)
+          // console.log("Je suis dans le hmp " + this.idhistory)
           this.selectViewMyPlatform(this.idhistory);
         }
 
@@ -240,7 +240,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
         this.myGameHistoriqueAll = responseMyGame.result?.sort((a, b) => new Date(b.myGame?.added_at).getTime() - new Date(a.myGame?.added_at).getTime()) || [];
         this.filterGames();
       } else {
-        console.log("pas de jeux trouvé pour l'utilisateur")
+        // console.log("pas de jeux trouvé pour l'utilisateur")
       }
     });
   }
@@ -268,7 +268,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
             this.addViewProfile(this.profileId);
           }
         } else {
-          console.log("Pas de jeux pour l'utilisateur courrant", id_user);
+          // console.log("Pas de jeux pour l'utilisateur courrant", id_user);
         }
 
         this.isLoading = false;
@@ -303,7 +303,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
 
       } else {
 
-        console.log("err user not existing");
+        // console.log("err user not existing");
 
       }
 
@@ -498,7 +498,7 @@ filterGames(): void {
 
       this.viewService.addProfileView(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseAddViewActu:ApicallInterface) => {
         if (reponseAddViewActu.message == "good"){
-          console.log("+1 vue");
+          // console.log("+1 vue");
         }
       })
 

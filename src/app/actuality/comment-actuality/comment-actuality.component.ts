@@ -148,7 +148,7 @@ export class CommentActualityComponent implements OnInit{
       if (reponseMyCommentActu.message == "good") {
 
         this.commentByActu = reponseMyCommentActu.result;
-        console.log(this.commentByActu)
+        // console.log(this.commentByActu)
         this.getBadgesForAllUsers();
 
         this.commentByActu?.forEach((oneComment:CommentInterface) => {
@@ -157,7 +157,7 @@ export class CommentActualityComponent implements OnInit{
 
       } else {
 
-        console.log(reponseMyCommentActu);
+        // console.log(reponseMyCommentActu);
 
       }
 

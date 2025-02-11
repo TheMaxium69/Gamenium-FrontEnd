@@ -57,7 +57,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         this.task = this.plateformeId;
         this.load();
         if (this.task == 'recent'){
-          console.log("RECENT")
+          // console.log("RECENT")
         }
       }
     });
@@ -167,7 +167,7 @@ export class PlateformViewComponent implements OnInit, OnChanges {
         this.filterGames();
         this.isLoading = false;
       } else {
-        console.log("pas de jeux trouvé pour l'utilisateur")
+        // console.log("pas de jeux trouvé pour l'utilisateur")
       }
     });
   }

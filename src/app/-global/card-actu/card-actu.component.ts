@@ -77,7 +77,8 @@ export class CardActuComponent implements OnInit {
         confirmButtonText: 'OK',
         confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
       })
-      return console.log('Impossible de liker: User pas connecté')
+      return
+      //console.log('Impossible de liker: User pas connecté')
     }
 
     let bodyNoJson: any = {

@@ -52,12 +52,12 @@ export class PageActualityComponent implements OnInit, OnChanges {
 
   onProviderSelected(providerId: number) {
     if (this.lastProviderSelected === providerId) {
-      console.log('Same provider clicked, resetting to all');
+      // console.log('Same provider clicked, resetting to all');
       this.providerSelected = undefined;
       this.lastProviderSelected = undefined;
 
     } else {
-      console.log('Provider selected:', providerId);
+      // console.log('Provider selected:', providerId);
       this.providerSelected = providerId;
       this.lastProviderSelected = providerId;
 
@@ -67,12 +67,12 @@ export class PageActualityComponent implements OnInit, OnChanges {
 
   getProviderFollowed(providers: ProviderInterface[]) {
     this.providerFollowed = providers
-    console.log(this.providerFollowed)
+    // console.log(this.providerFollowed)
   }
 
   openModal(event: any) {
     this.manageProviders = event;
-    console.log('open modal called with parameter:' + event);
+    // console.log('open modal called with parameter:' + event);
   }
 
   providerActu(event: PostActuInterface[]) {

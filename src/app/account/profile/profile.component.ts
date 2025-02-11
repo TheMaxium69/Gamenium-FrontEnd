@@ -143,7 +143,7 @@ export class ProfileComponent implements OnInit {
   }
 
   resetParaContainer() {
-    console.log('reset para')
+    // console.log('reset para')
     const paraContainer = document.querySelector('.para-container') as HTMLElement
     const settings = document.querySelectorAll('.para-setting')
     const unlogBtn = document.querySelector('.unlog')
