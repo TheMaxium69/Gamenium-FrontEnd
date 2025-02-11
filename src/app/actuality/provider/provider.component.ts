@@ -137,6 +137,17 @@ export class ProviderComponent implements OnInit{
 
   followBtnClick(providerId: number) {
     // Ajoute du follow
+    if (!this.userConnected) {
+      Swal.fire({
+        title: "Connexion requise",
+        text: "Vous devez être connecté pour suivre un Éditeur.",
+        icon: "info",
+        confirmButtonText: "Ok",
+        confirmButtonColor: this.app.colorDefault,
+      });
+      return;
+    }
+    
     if (!this.isProviderFollowedByUser) {
       this.addFollow(providerId)
 
