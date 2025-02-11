@@ -765,6 +765,7 @@ export class AppComponent {
             const selectedGame = this.myGameAll.find(game => game.myGame.game.id === this.gameSelected?.id);
             if (selectedGame) {
               selectedGame.tempNote = noteGame;
+              selectedGame.rate = reponseMyGameNoteAdd.result;
             }
           }
 
