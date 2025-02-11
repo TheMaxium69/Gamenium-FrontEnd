@@ -55,7 +55,7 @@ export class AppComponent {
     if (cookieToken && cookieUser){
       this.loginWithCookie(cookieToken, cookieUser);
     } else {
-      this.router.navigate(['/account']);
+      // this.router.navigate(['/account']);
     }
   }
 
@@ -94,7 +94,7 @@ export class AppComponent {
   isLoggedIn: boolean = false;
   userConnected: UserInterface|any;
   token: string|any;
-  isAccess: boolean = false;
+  isAccess: boolean = true;
   currentUrl: string = "/";
 
   // LIMIT
@@ -344,26 +344,48 @@ export class AppComponent {
   //CORS With TOKEN
   createCorsToken(isFormData: boolean = false): {headers: HttpHeaders} {
 
-    let headers: HttpHeaders;
+    if (this.token == undefined){
+      let headers: HttpHeaders;
 
-    if (!isFormData){
-      headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer '+this.token,
-      });
+      if (!isFormData){
+        headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+        });
+      } else {
+        headers = new HttpHeaders({
+        });
+
+
+        headers.append('Content-Type', 'multipart/form-data');
+
+
+      }
+      const options: {headers: HttpHeaders}  = { headers: headers };
+
+      return options;
     } else {
-      headers = new HttpHeaders({
-        'Authorization': 'Bearer '+this.token,
-      });
+      let headers: HttpHeaders;
+
+      if (!isFormData){
+        headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+this.token,
+        });
+      } else {
+        headers = new HttpHeaders({
+          'Authorization': 'Bearer '+this.token,
+        });
 
 
-      headers.append('Content-Type', 'multipart/form-data');
+        headers.append('Content-Type', 'multipart/form-data');
 
 
+      }
+      const options: {headers: HttpHeaders}  = { headers: headers };
+
+      return options;
     }
-    const options: {headers: HttpHeaders}  = { headers: headers };
 
-    return options;
 
   }
 

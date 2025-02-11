@@ -375,7 +375,7 @@ export class CommentActualityComponent implements OnInit{
       } else if (reponseApi.message == "token is failed") {
         Swal.fire({
           title: 'Attention!',
-          text: 'Vous devez être connectez pour liké',
+          text: 'Vous devez être connecté pour le j\'aime',
           icon: 'warning',
           confirmButtonText: 'OK',
           confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault

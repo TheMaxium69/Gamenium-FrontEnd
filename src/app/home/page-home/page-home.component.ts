@@ -18,13 +18,13 @@ export class PageHomeComponent implements OnInit{
     this.isLoggedIn = this.app.isLoggedIn
     this.app.currentUrl = this.router.url;
 
-    if (!this.app.isLoggedIn){
-      this.router.navigate(['/account']);
-    }
-
-    if (!this.app.isAccess){
-      this.router.navigate(['/waiting']);
-    }
+    // if (!this.app.isLoggedIn){
+    //   this.router.navigate(['/account']);
+    // }
+    //
+    // if (!this.app.isAccess){
+    //   this.router.navigate(['/waiting']);
+    // }
   }
 
 }
