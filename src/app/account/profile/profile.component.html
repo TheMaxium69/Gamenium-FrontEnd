@@ -135,10 +135,10 @@
                       </div>
                       <input [value]="socialNetworkOne.url_user.replace('https://', '')" type="text" class="social-input-locked urluserSocialNetwork" disabled>
                     </div>
-                    <ng-container *ngIf="reseauSelected">
+                    <ng-container *ngIf="reseauSelected && reseauSelected[socialNetworkOne.id]">
                       <input [ngStyle]="{ '--color': color || this.app.userConnected?.themeColor || this.app.colorDefault }" type="text" id="{{ socialNetworkOne.name}}" class="social-input" name="{{ socialNetworkOne.name }}" [(ngModel)]="reseauSelected[socialNetworkOne.id].url">
                     </ng-container>
-                    <ng-container *ngIf="!reseauSelected">
+                    <ng-container *ngIf="!reseauSelected || !reseauSelected[socialNetworkOne.id]">
                       <input [ngStyle]="{ '--color': color || this.app.userConnected?.themeColor || this.app.colorDefault }" type="text" id="{{ socialNetworkOne.name }}" class="social-input" name="{{ socialNetworkOne.name }}" ngModel placeholder="Nom d'utilisateur">
                     </ng-container>
                   </div>

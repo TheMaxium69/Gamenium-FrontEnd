@@ -20,6 +20,7 @@ export class ModalBuywhereComponent implements OnInit{
     this.getBuyWhere();
   }
 
+  haveBuywhere: number = 0;
 
   getBuyWhere() {
 
@@ -28,6 +29,13 @@ export class ModalBuywhereComponent implements OnInit{
       this.buyWhereService.getAllBuyWheresByUser(this.app.setURL(), this.app.createCorsToken()).subscribe((reponseBuyWhere: { message: string; result: BuyWhereInterface[]; }) => {
         if (reponseBuyWhere.message == "good") {
           this.app.buyWhereUserNoReload = reponseBuyWhere.result;
+
+          this.app.buyWhereUserNoReload.forEach(buyWhere => {
+            if (!buyWhere.is_public) {
+              this.haveBuywhere++;
+            }
+          });
+
         }
       }, (error) => this.app.erreurSubcribe())
 
@@ -43,6 +51,7 @@ export class ModalBuywhereComponent implements OnInit{
         if (index !== -1) {
           this.app.buyWhereUserNoReload.splice(index, 1);
         }
+        this.haveBuywhere--;
         Swal.fire({
           title: 'Succès!',
           text: buyWhere.name + ' a bien été supprimé',
@@ -92,6 +101,7 @@ export class ModalBuywhereComponent implements OnInit{
         this.app.buyWhereUserNoReload.push(reponseCreateBuyWhere.result);
 
         form.resetForm();
+        this.haveBuywhere++;
 
         Swal.fire({
           title: 'Succès!',

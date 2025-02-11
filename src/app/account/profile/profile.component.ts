@@ -495,7 +495,15 @@ export class ProfileComponent implements OnInit {
     // console.log(bodyJson);
 
       this.socialnetworkService.postSocialNetworkByUser(bodyJson, this.app.setURL(), this.app.createCorsToken()).subscribe(response => {
-        if (response.message == "succefuly updated"){
+        if (response.message == "succefuly created"){
+          Swal.fire({
+            title: 'Succès!',
+            text: 'Vos réseaux ont bien été mise à jour',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+          })
+        } else if (response.message == "succefuly updated"){
           Swal.fire({
             title: 'Succès!',
             text: 'Vos réseaux ont bien été mise à jour',
