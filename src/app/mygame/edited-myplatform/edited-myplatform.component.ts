@@ -429,7 +429,7 @@ export class EditedMyplatformComponent implements OnInit {
 
         Swal.fire({
           title: 'Succès!',
-          text: 'Votre jeux à bien été mise à jour.',
+          text: 'Votre plateforme a bien été mise à jour.',
           icon: 'success',
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
@@ -439,7 +439,7 @@ export class EditedMyplatformComponent implements OnInit {
 
         Swal.fire({
           title: 'Erreur!',
-          text: 'Échec de la mise à jour de votre jeux',
+          text: 'Échec de la mise à jour de votre plateforme',
           icon: 'error',
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
@@ -452,7 +452,7 @@ export class EditedMyplatformComponent implements OnInit {
       this.isLoadingUpdate = false;
       Swal.fire({
         title: 'Erreur!',
-        text: 'Échec de la mise à jour de votre jeux',
+        text: 'Échec de la mise à jour de votre plateforme',
         icon: 'error',
         confirmButtonText: 'Ok',
         confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault

@@ -748,7 +748,7 @@ export class EditedMygameComponent implements OnInit {
 
         Swal.fire({
           title: 'Succès!',
-          text: 'Votre jeu à bien été mise à jour.',
+          text: 'Votre jeu a bien été mise à jour.',
           icon: 'success',
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
