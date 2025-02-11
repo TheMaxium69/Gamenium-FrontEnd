@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Ajoutez un jeu</h5>
+        <h5 class="modal-title">Ajouter un jeu</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form id="addGameForm" #addForm="ngForm" (ngSubmit)="this.addGame(addForm)" class="modal-body" style="padding-top: 40px;">
@@ -139,7 +139,7 @@
         </div>
 
         <div class="modal-footer" style="margin-top: 74px;">
-          <button *ngIf="this.app.gameSelected" type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-dismiss="modal">Ajouté <i class="ri-save-3-fill"></i></button>
+          <button *ngIf="this.app.gameSelected" type="submit" class="main-gamenium-btn" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}" data-bs-dismiss="modal">Ajouter <i class="ri-save-3-fill"></i></button>
           <button type="button" class="main-gamenium-btn" style="background-color: gray" data-bs-dismiss="modal">Fermer</button>
         </div>
 

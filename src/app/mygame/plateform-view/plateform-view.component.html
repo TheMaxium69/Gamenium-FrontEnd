@@ -1,5 +1,10 @@
     <!-- GESTION PLATEFORM-->
-    <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
+    <ng-container *ngIf="app.tempHmpAdd && foundPlatform && app.tempHmpAdd.myPlateform.plateform.id == foundPlatform.id">
+      <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length" [plateform]="foundPlatform" [hmp]="app.tempHmpAdd" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
+    </ng-container>
+    <ng-container *ngIf="!app.tempHmpAdd || app.tempHmpAdd && foundPlatform && app.tempHmpAdd.myPlateform.plateform.id != foundPlatform.id">
+      <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
+    </ng-container>
 
     <!-- SECTION BARRE DE RECHERCHE -->
     <div class="search-container container" [ngStyle]="{ '--color': app.userConnected?.themeColor || app.colorDefault }">

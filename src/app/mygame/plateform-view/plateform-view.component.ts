@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {ActivatedRoute} from "@angular/router";
 import {UserInterface} from "../../-interface/user.interface";
@@ -246,7 +246,6 @@ export class PlateformViewComponent implements OnInit, OnChanges {
   btnPlatform: string|null = null;
   getOneMyHmpByUserByPlatform(id_user: number, id_plateform: number){
     	this.historyMyPlatformService.getOneMyHmpByUserByPlatform(id_user, id_plateform, this.app.setURL(), this.app.createCorsToken()).subscribe((responseMyPlateform: {message: string, result: HistoryMyPlatformInterface, result2: PlateformInterface}) => {
-
         if(responseMyPlateform.message == "good"){
           this.foundHmp = responseMyPlateform.result;
           this.foundPlatform = this.foundHmp.myPlateform.plateform;

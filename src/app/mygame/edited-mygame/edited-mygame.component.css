@@ -21,7 +21,7 @@
 }
 
 .savebtn{
-  width: 186px;
+  width: 200px;
   height: 46px;
 
   .spinner-border{
@@ -579,19 +579,19 @@ select,
   #head-modal h2.titleGame{
     text-align: center;
   }
-  
+
   .date-added {
     display: flex;
     justify-content: center;
   }
-  
+
   .savebtn {
     margin: 0 auto;
   }
 
   #tab .nav-link {
     font-size: 16px;
-  } 
+  }
 
 }
 

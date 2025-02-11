@@ -651,6 +651,7 @@ export class EditedMygameComponent implements OnInit {
     let body = JSON.stringify(updateHistoryMyGame);
 
     this.historyMyGameService.updateMyGame(body, this.app.setURL(), this.app.createCorsToken()).subscribe((reponseMyGameUpdate:{ message:string, result:HistoryMyGameInterface}) => {
+      this.isLoadingUpdate = false;
       if (reponseMyGameUpdate.message == "updated game") {
 
         this.selectedMyGame = reponseMyGameUpdate.result;
@@ -747,7 +748,7 @@ export class EditedMygameComponent implements OnInit {
 
         Swal.fire({
           title: 'Succès!',
-          text: 'Votre jeux à bien été mise à jour.',
+          text: 'Votre jeu à bien été mise à jour.',
           icon: 'success',
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
@@ -757,19 +758,18 @@ export class EditedMygameComponent implements OnInit {
 
         Swal.fire({
           title: 'Erreur!',
-          text: 'Échec de la mise à jour de votre jeux',
+          text: 'Échec de la mise à jour de votre jeu',
           icon: 'error',
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault
         })
 
       }
-      this.isLoadingUpdate = false;
     }, (error) => {
       this.isLoadingUpdate = false;
       Swal.fire({
         title: 'Erreur!',
-        text: 'Échec de la mise à jour de votre jeux',
+        text: 'Échec de la mise à jour de votre jeu',
         icon: 'error',
         confirmButtonText: 'Ok',
         confirmButtonColor: this.app.userConnected?.themeColor ||this.app.colorDefault

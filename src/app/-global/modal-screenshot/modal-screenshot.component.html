@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <p>Ajoutez un screenshot</p>
+        <p>Ajouter une image</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
@@ -14,7 +14,7 @@
             <div class="ForPreview panel-shadow">
               <ng-container *ngIf="!selectedFile">
                 <i class="ri-image-line"></i>
-                <p>Choissir une image</p>
+                <p>Choisir une image</p>
               </ng-container>
               <div id="preview-image" [class.displayNone]="!selectedFile"></div>
             </div>
@@ -29,10 +29,10 @@
           </select>
 
           <label for="images" (change)="onFileChanged($event)" *ngIf="!selectedFile">
-            <div class="main-gamenium-btn btn-screen" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Téléchargé</div>
+            <div class="main-gamenium-btn btn-screen" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Télécharger</div>
             <input type="file" id="images" />
           </label>
-          <button *ngIf="selectedFile" type="submit" id="upload-button" class="main-gamenium-btn btn-screen" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Envoyé</button>
+          <button *ngIf="selectedFile" type="submit" id="upload-button" class="main-gamenium-btn btn-screen" style="background-color: {{ this.app.userConnected?.themeColor || this.app.colorDefault }}">Envoyer</button>
         </form>
 
         <style>

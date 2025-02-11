@@ -43,7 +43,7 @@
 
 
       <button type="submit" class="main-gamenium-btn savebtn">
-        <ng-container *ngIf="!isLoadingUpdate"> Save <i class="ri-save-3-fill"></i></ng-container>
+        <ng-container *ngIf="!isLoadingUpdate"> Sauvegarder <i class="ri-save-3-fill"></i></ng-container>
         <ng-container *ngIf="isLoadingUpdate">
           <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -93,7 +93,7 @@
       <div class="panel">
 
         <div class="head-panel">
-          <h2><i class="ri-medal-fill"></i>Evaluation</h2>
+          <h2><i class="ri-medal-fill"></i>Évaluation</h2>
         </div>
 
         <ng-container *ngIf="selectedMyGame.rate">
@@ -238,6 +238,11 @@
 
           </div>
         </ng-container>
+        <ng-container *ngIf="app.tagsUserNoReload.length == 0">
+          <p class="placeholderInput" style="text-align: center">
+            Veuillez d'abord créer un tag
+          </p>
+        </ng-container>
 
       </div>
 
@@ -266,7 +271,7 @@
     <section id="editedHmgScreenshot" class="container" [class.displayNone]="tabSelected !== 3">
 
       <div class="head-all-exemplaire">
-        <h1>Image<span *ngIf="selectedMyGame.screenshot.length > 1">s</span> <small>(Total <span>{{ selectedMyGame.screenshot.length }}</span>)</small></h1>
+        <h1>Image <small>(Total <span>{{ selectedMyGame.screenshot.length }}</span>)</small></h1>
         <button class="sub-gamenium-btn" type="button" data-bs-toggle="modal" data-bs-target="#addScreenshot"><i class="ri-add-large-fill"></i></button>
       </div>
 
@@ -316,15 +321,15 @@
           <!-- category -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-booklet-fill"></i>Category <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-booklet-fill"></i>Catégorie<span style="color: red">*</span> <small>#{{i+1}}</small></h2>
             </div>
-            <input type="text" id="category{{i}}" [(ngModel)]="speedrun.category" name="category{{i}}" placeholder="Category (exemple : any%)">
+            <input type="text" id="category{{i}}" [(ngModel)]="speedrun.category" name="category{{i}}" placeholder="Catégorie (exemple : any%)">
           </div>
 
           <!-- chrono -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-timer-fill"></i>Chrono <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-timer-fill"></i>Chrono<span style="color: red">*</span> <small>#{{i+1}}</small></h2>
             </div>
             <input type="text" id="chrono{{i}}" [(ngModel)]="speedrun.chrono" name="chrono{{i}}" placeholder="Chrono (exemple : 1H30)">
           </div>
@@ -332,7 +337,7 @@
           <!-- LINK -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-links-fill"></i>Liens <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-links-fill"></i>Lien <small>#{{i+1}}</small></h2>
             </div>
             <input type="text" id="link{{i}}" [(ngModel)]="speedrun.link" name="link{{i}}" placeholder="Lien (exemple : https://speedrun.com/)">
           </div>
@@ -353,15 +358,15 @@
           <!-- category -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-booklet-fill"></i>Category <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
+              <h2><i class="ri-booklet-fill"></i>Catégorie<span style="color: red">*</span> <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
             </div>
-            <input type="text" id="category{{i+nbSpeedrunExisting}}" ngModel name="category{{i+nbSpeedrunExisting}}" placeholder="Category (exemple : any%)">
+            <input type="text" id="category{{i+nbSpeedrunExisting}}" ngModel name="category{{i+nbSpeedrunExisting}}" placeholder="Catégorie (exemple : any%)">
           </div>
 
           <!-- chrono -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-timer-fill"></i>Chrono <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
+              <h2><i class="ri-timer-fill"></i>Chrono<span style="color: red">*</span> <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
             </div>
             <input type="text" id="chrono{{i+nbSpeedrunExisting}}" ngModel name="chrono{{i+nbSpeedrunExisting}}" placeholder="Chrono (exemple : 1H30)">
           </div>
@@ -369,7 +374,7 @@
           <!-- LINK -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-links-fill"></i>Liens <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
+              <h2><i class="ri-links-fill"></i>Lien <small>#{{i+1+nbSpeedrunExisting}}</small></h2>
             </div>
             <input type="text" id="link{{i+nbSpeedrunExisting}}" ngModel name="link{{i+nbSpeedrunExisting}}" placeholder="Lien (exemple : https://speedrun.com/)">
           </div>
@@ -414,9 +419,9 @@
           <!-- EDITIONS-->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-id-card-fill"></i>Editions <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-id-card-fill"></i>Édition <small>#{{i+1}}</small></h2>
             </div>
-            <input type="text" id="edition{{i}}" [(ngModel)]="copyGame.edition" name="edition{{i}}" placeholder="Editions">
+            <input type="text" id="edition{{i}}" [(ngModel)]="copyGame.edition" name="edition{{i}}" placeholder="Édition">
           </div>
 
           <!-- BARCODE -->
@@ -473,7 +478,7 @@
             </ng-container>
             <ng-container *ngIf="app.hmgCopyFormatAllNoReload && !copyGame.format">
               <select id="format{{i}}" name="format{{i}}" ngModel>
-                <option value="">Choissir un format</option>
+                <option value="">Choisir un format</option>
                 <ng-container *ngFor="let format of app.hmgCopyFormatAllNoReload">
                   <option [value]="format.id">{{ format.name }}</option>
                 </ng-container>
@@ -484,7 +489,7 @@
           <!-- REGION -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1}}</small></h2>
+              <h2><i class="ri-earth-fill"></i>Région <small>#{{i+1}}</small></h2>
             </div>
             <ng-container *ngIf="app.hmgCopyRegionAllNoReload && copyGame.region">
               <select id="region{{i}}" [(ngModel)]="copyGame.region.id" name="region{{i}}">
@@ -572,7 +577,7 @@
                 </ng-container>
                 <ng-container *ngIf="app.deviseNoReload && !copyGame.purchase.devise">
                   <select id="devise{{i}}" name="purchase_devise{{i}}" ngModel>
-                    <option value="">Choissir une devise</option>
+                    <option value="">Choisir une devise</option>
                     <ng-container *ngFor="let devise of app.deviseNoReload">
                       <option [value]="devise.id">{{ devise.symbole }}</option>
                     </ng-container>
@@ -584,7 +589,7 @@
               <!-- BUY WHERE -->
               <ng-container *ngIf="app.buyWhereUserNoReload && copyGame.purchase.buy_where">
                 <select id="buy_where{{i}}" [(ngModel)]="copyGame.purchase.buy_where.id" name="purchase_buy_where{{i}}">
-                  <option [value]="null">Lieux d'achat</option>
+                  <option [value]="null">Lieu d'achat</option>
                   <ng-container *ngFor="let buyWhereOne of app.buyWhereUserNoReload">
                     <option [value]="buyWhereOne.id">{{ buyWhereOne.name }}</option>
                   </ng-container>
@@ -718,9 +723,9 @@
           <!-- EDITIONS-->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-id-card-fill"></i>Editions <small>#{{i+1+nbCopyExisting}}</small></h2>
+              <h2><i class="ri-id-card-fill"></i>Édition <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
-            <input type="text" id="edition{{i+nbCopyExisting}}" name="edition{{i+nbCopyExisting}}" ngModel placeholder="Editions">
+            <input type="text" id="edition{{i+nbCopyExisting}}" name="edition{{i+nbCopyExisting}}" ngModel placeholder="Édition">
           </div>
 
 
@@ -747,7 +752,7 @@
             </div>
             <ng-container *ngIf="app.hmgCopyEtatAllNoReload">
               <select id="etat{{i+nbCopyExisting}}" name="etat{{i+nbCopyExisting}}" ngModel>
-                <option value="">Choissir un état</option>
+                <option value="">Choisir un état</option>
                 <ng-container *ngFor="let etat of app.hmgCopyEtatAllNoReload">
                   <option [value]="etat.id">{{ etat.name }}</option>
                 </ng-container>
@@ -762,7 +767,7 @@
             </div>
             <ng-container *ngIf="app.hmgCopyFormatAllNoReload">
               <select id="format{{i+nbCopyExisting}}" name="format{{i+nbCopyExisting}}" ngModel>
-                <option value="">Choissir un format</option>
+                <option value="">Choisir un format</option>
                 <ng-container *ngFor="let format of app.hmgCopyFormatAllNoReload">
                   <option [value]="format.id">{{ format.name }}</option>
                 </ng-container>
@@ -773,11 +778,11 @@
           <!-- REGION -->
           <div class="panel">
             <div class="head-panel">
-              <h2><i class="ri-earth-fill"></i>Region <small>#{{i+1+nbCopyExisting}}</small></h2>
+              <h2><i class="ri-earth-fill"></i>Région <small>#{{i+1+nbCopyExisting}}</small></h2>
             </div>
             <ng-container *ngIf="app.hmgCopyRegionAllNoReload">
               <select id="region{{i+nbCopyExisting}}" name="region{{i+nbCopyExisting}}" ngModel>
-                <option value="">Choissir une Region</option>
+                <option value="">Choisir une Region</option>
                 <ng-container *ngFor="let region of app.hmgCopyRegionAllNoReload">
                   <option [value]="region.id">{{ region.name }}</option>
                 </ng-container>
@@ -842,7 +847,7 @@
               <!-- DEVISE -->
               <ng-container *ngIf="app.deviseNoReload">
                 <select id="devise{{i+nbCopyExisting}}" name="purchase_devise{{i+nbCopyExisting}}" ngModel>
-                  <option value="">Choissir une devise</option>
+                  <option value="">Choisir une devise</option>
                   <ng-container *ngFor="let devise of app.deviseNoReload">
                     <option [value]="devise.id">{{ devise.symbole }}</option>
                   </ng-container>
@@ -905,7 +910,7 @@
 
   <div class="end-action container">
     <button class="main-gamenium-btn savebtn" type="submit">
-      <ng-container *ngIf="!isLoadingUpdate"> Save <i class="ri-save-3-fill"></i></ng-container>
+      <ng-container *ngIf="!isLoadingUpdate"> Sauvegarder <i class="ri-save-3-fill"></i></ng-container>
       <ng-container *ngIf="isLoadingUpdate">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>

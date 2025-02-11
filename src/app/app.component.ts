@@ -649,6 +649,7 @@ export class AppComponent {
   myPlatform: HistoryMyPlatformInterface|undefined;
     // id, nom
 
+  tempHmpAdd:HistoryMyPlatformInterface|undefined = undefined;
   addPlatform(form: NgForm, isMore: boolean = false){
 
     let buywhere_id = form.value['buyWhere'];
@@ -689,6 +690,9 @@ export class AppComponent {
 
       this.historyMyPlatformService.postMyPlatform(bodyMyPlatform, this.setURL(), this.createCorsToken()).subscribe((responseMyPlatformAdd:{message:string,result:HistoryMyPlatformInterface}) =>{
         if(responseMyPlatformAdd.message = "add plateform is collection"){
+
+          this.tempHmpAdd = responseMyPlatformAdd.result;
+
           if (isMore){
             this.router.navigate(['/mygame/edit-platform/' + responseMyPlatformAdd.result.id]);
           } else {

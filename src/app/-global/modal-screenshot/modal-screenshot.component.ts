@@ -137,7 +137,7 @@ export class ModalScreenshotComponent implements OnInit {
 
         Swal.fire({
           title: 'Succès!',
-          text: 'Votre screenshot à bien été upload.',
+          text: 'Votre image a bien été enregistré.',
           icon: 'success',
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
@@ -149,7 +149,7 @@ export class ModalScreenshotComponent implements OnInit {
         uploadButton.textContent = "Envoyé"
         Swal.fire({
           title: 'Échec!',
-          text: 'Échec de l\'upload de votre screenshot ',
+          text: 'Échec de lors de l\'envoie de votre image.',
           icon: 'error',
           confirmButtonText: 'Ok',
           confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
