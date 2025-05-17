@@ -96,6 +96,7 @@ export class AppComponent {
   token: string|any;
   isAccess: boolean = true;
   currentUrl: string = "/";
+  disableActuality: boolean = true;
 
   // LIMIT
   fetchLimit:number = 50; // Limit Game in search Game & Page

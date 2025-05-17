@@ -5,13 +5,14 @@
 </app-modal-provider>
 
 <ng-container *ngIf="!actualityId">
+
   <ng-container *ngIf="providerId">
 
     <app-provider></app-provider>
 
   </ng-container>
 
-  <ng-container *ngIf="!providerId">
+  <ng-container *ngIf="!providerId && !app.disableActuality">
     <app-navbar-actuality
       [providerFollowActuAll]="providerFollowActuAll"
       [providersFollowedRefreshed]="providerFollowed"
@@ -37,6 +38,12 @@
   </ng-container>
 </ng-container>
 
-<ng-container *ngIf="actualityId">
+<ng-container *ngIf="actualityId && !app.disableActuality">
     <app-detail-actuality></app-detail-actuality>
+</ng-container>
+
+<ng-container *ngIf="actualityId && app.disableActuality || !actualityId && !providerId && app.disableActuality">
+
+disable actu
+
 </ng-container>

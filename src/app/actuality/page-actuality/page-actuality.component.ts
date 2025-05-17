@@ -24,7 +24,7 @@ export class PageActualityComponent implements OnInit, OnChanges {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private app:AppComponent,
+    protected app:AppComponent,
   ) {}
 
   ngOnInit(): void {
