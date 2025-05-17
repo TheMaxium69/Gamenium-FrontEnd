@@ -44,6 +44,11 @@
 
 <ng-container *ngIf="actualityId && app.disableActuality || !actualityId && !providerId && app.disableActuality">
 
-disable actu
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0;">
+    <div style="text-align: center; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+      <h1 style="color: #333; font-size: 2em;margin-bottom: 10px">Actualités bientôt disponibles</h1>
+      <p style="color: #666; font-size: 1.2em;">Nous travaillons dur pour vous apporter les dernières actualités. Revenez bientôt !</p>
+    </div>
+  </div>
 
 </ng-container>
