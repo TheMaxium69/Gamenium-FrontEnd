@@ -77,7 +77,7 @@ export class AppComponent {
   //%     API - GAMENIUM      %//
 
   //%     API - GAME      %//
-    AppEnvOther:string = "DEV" // DEV or PROD
+    AppEnvOther:string = "PROD" // DEV or PROD
     urlApiGetGameDev:string = "http://127.0.0.1/html-to-api/"
     urlApiGetGameProd:string = "https://vps216.tyrolium.fr/html-to-api/"
     urlApiGetGameV1:string = "https://vps209.tyrolium.fr/html-to-api/"
