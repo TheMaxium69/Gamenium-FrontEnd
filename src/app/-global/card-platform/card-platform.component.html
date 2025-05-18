@@ -101,7 +101,7 @@
   </div>
 </div>
 
-<div class="card-wrapper card-wrapper-all" *ngIf="!hmp && !plateform && state == 'all' && nbGame !== null">
+<div class="card-wrapper card-wrapper-all" *ngIf="!hmp && !plateform && state == 'all' && nbGame !== null || !hmp && !plateform && state == 'common' && nbGame !== null" >
   <div class="card-game container d-flex">
     <!-- INFO -->
     <div class="card-right d-flex">
@@ -115,7 +115,7 @@
 
 
 <!-- LOADING -->
-<div id="squelette" class="card-wrapper" *ngIf="!plateform && state !== 'all' || nbGame == null && state == 'all' ">
+<div id="squelette" class="card-wrapper" *ngIf="!plateform && state !== 'all' && state !== 'common' || nbGame == null && state == 'all' || nbGame == null && state == 'common'">
   <div class="card-game container d-flex">
 
     <!-- PICTURE -->

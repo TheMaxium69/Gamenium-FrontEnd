@@ -8,7 +8,23 @@
   <app-tab-public [commonGame]="commonGame"></app-tab-public>
 
   <!-- GESTION PLATEFORM-->
-  <app-card-platform [isPublic]="true" [nbGame]="myGameHistoriqueAll.length" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform card-platform-all"></app-card-platform>
+  <ng-container *ngIf="btnPlatform !== 'all' && btnPlatform !== 'common'">
+    <app-card-platform [isPublic]="true" [nbGame]="myGameHistoriqueAll.length || null" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
+  </ng-container>
+  <ng-container *ngIf="btnPlatform == 'all'">
+    <app-card-platform [isPublic]="true" [nbGame]="myGameHistoriqueAll.length || null" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform card-platform-all"></app-card-platform>
+  </ng-container>
+  <ng-container *ngIf="btnPlatform == 'common'">
+    <app-card-platform [isPublic]="true" [nbGame]="commonGame?.length || null" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform card-platform-all"></app-card-platform>
+
+  </ng-container>
+
+<!--  <small> debug : </small><br>-->
+<!--  <small>{{btnPlatform}}</small><br>-->
+<!--  <small>{{myGameHistoriqueAll.length}}</small><br>-->
+<!--  <small>{{commonGame?.length}}</small>-->
+
+
 
   <!-- SECTION BARRE DE RECHERCHE -->
    <div class="search-container container" [ngStyle]="{ '--color': isColor ?? this.app.colorDefault }">

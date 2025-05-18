@@ -133,7 +133,7 @@ export class ProfilePublicComponent  implements OnInit, OnChanges {
       }
       if (this.task === "common-games") {
         this.isCommonView = true;
-        this.btnPlatform = "all";
+        this.btnPlatform = "common";
 
         //
         // this.filteredGames = this.commonGame || [];
