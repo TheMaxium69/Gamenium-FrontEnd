@@ -266,9 +266,9 @@ h2 {
     font-size: 20px;
   }
 
-  .card-platform {
-    display: none;
-  }
+  /*.card-platform {*/
+  /*  display: none;*/
+  /*}*/
 
 
 }

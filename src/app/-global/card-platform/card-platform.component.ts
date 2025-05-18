@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { PlateformInterface } from 'src/app/-interface/plateform.interface';
 import { AppComponent } from 'src/app/app.component';
 import {HistoryMyPlatformInterface} from "../../-interface/history-my-platform.interface";
@@ -8,7 +8,7 @@ import {HistoryMyPlatformInterface} from "../../-interface/history-my-platform.i
   templateUrl: './card-platform.component.html',
   styleUrls: ['./card-platform.component.css']
 })
-export class CardPlatformComponent {
+export class CardPlatformComponent{
 
 
   @Input()

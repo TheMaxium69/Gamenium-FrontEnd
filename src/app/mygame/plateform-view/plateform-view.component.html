@@ -1,10 +1,17 @@
     <!-- GESTION PLATEFORM-->
-    <ng-container *ngIf="app.tempHmpAdd && foundPlatform && app.tempHmpAdd.myPlateform.plateform.id == foundPlatform.id">
+    <ng-container *ngIf="app.tempHmpAdd && foundPlatform && app.tempHmpAdd.myPlateform.plateform.id == foundPlatform.id && btnPlatform !== 'all'">
       <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length" [plateform]="foundPlatform" [hmp]="app.tempHmpAdd" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
     </ng-container>
-    <ng-container *ngIf="!app.tempHmpAdd || app.tempHmpAdd && foundPlatform && app.tempHmpAdd.myPlateform.plateform.id != foundPlatform.id">
-      <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
+    <ng-container *ngIf="!app.tempHmpAdd || app.tempHmpAdd && foundPlatform && app.tempHmpAdd.myPlateform.plateform.id != foundPlatform.id && btnPlatform !== 'all'">
+      <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length || null" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
     </ng-container>
+    <ng-container *ngIf="btnPlatform == 'all'">
+      <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length || null" [state]="'all'" class="card-platform"></app-card-platform>
+    </ng-container>
+
+    <small> debug : </small><br>
+    <small>{{btnPlatform}}</small><br>
+    <small>{{HistoireMyGameByUserByPlateform.length}}</small>
 
     <!-- SECTION BARRE DE RECHERCHE -->
     <div class="search-container container" [ngStyle]="{ '--color': app.userConnected?.themeColor || app.colorDefault }">

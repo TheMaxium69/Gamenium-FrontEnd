@@ -101,9 +101,21 @@
   </div>
 </div>
 
+<div class="card-wrapper card-wrapper-all" *ngIf="!hmp && !plateform && state == 'all' && nbGame !== null">
+  <div class="card-game container d-flex">
+    <!-- INFO -->
+    <div class="card-right d-flex">
+      <!-- TEXT -->
+      <div class="core-left">
+        <p><small>Nombre de jeux total {{ nbGame }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- LOADING -->
-<div id="squelette" class="card-wrapper" *ngIf="!plateform && state !== 'all'">
+<div id="squelette" class="card-wrapper" *ngIf="!plateform && state !== 'all' || nbGame == null && state == 'all' ">
   <div class="card-game container d-flex">
 
     <!-- PICTURE -->

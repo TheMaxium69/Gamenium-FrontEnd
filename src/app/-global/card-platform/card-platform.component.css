@@ -275,6 +275,18 @@
     border-radius: 15px;
   }
 
+  .card-wrapper-all{
+
+    height: unset!important;
+
+    .card-game{
+      height: 75px;
+    }
+    .core-left{
+      margin-top: unset!important;
+    }
+  }
+
   .card-action {
     align-items: flex-end;
     margin-top: 75px;
