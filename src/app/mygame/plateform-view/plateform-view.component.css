@@ -249,10 +249,19 @@ h2 {
   background-color: #f0f0f0;
 }
 
+.card-platform-all{
+  display: none;
+}
+
 @media (max-width:991px){
   .search-container {
     margin: 20px auto 20px auto;
   }
+
+  .card-platform-all{
+    display: flex;
+  }
+
 }
 
 @media (max-width: 330px) {

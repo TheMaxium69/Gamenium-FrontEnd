@@ -124,7 +124,16 @@ h2 {
   transition: width 0.3s ease;
 }
 
+.card-platform-all{
+  display: none;
+}
+
+
 @media (max-width: 991px) {
+  .card-platform-all{
+    display: flex;
+  }
+
   #profilWrapper {
     position: relative;
     padding: 0px;
