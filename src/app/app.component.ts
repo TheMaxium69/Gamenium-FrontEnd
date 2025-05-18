@@ -68,19 +68,21 @@ export class AppComponent {
 
 
   //%     API - GAMENIUM      %//
-    AppEnv: string = "PROD"; // DEV or DEVMAX or PROD or PRODMAX
+    AppEnv: string = "V2"; // DEV or DEVMAX or PROD or PRODMAX
     urlApiDev: string = "http://127.0.0.1:8000";
     urlApiDevMax: string = "https://127.0.0.1:8000";
     urlApiProd: string = "https://vps216.tyrolium.fr:8000";
     urlApiProdMax: string = "http://home.vps216.tyrolium.fr:8000";
     urlApiV1: string = "https://vps209.tyrolium.fr";
+    urlApiV2: string = "https://vps216.tyrolium.fr";
   //%     API - GAMENIUM      %//
 
   //%     API - GAME      %//
-    AppEnvOther:string = "PROD" // DEV or PROD
+    AppEnvOther:string = "V2" // DEV or PROD
     urlApiGetGameDev:string = "http://127.0.0.1/html-to-api/"
     urlApiGetGameProd:string = "https://vps216.tyrolium.fr/html-to-api/"
     urlApiGetGameV1:string = "https://vps209.tyrolium.fr/html-to-api/"
+    urlApiGetGameV2:string = "https://gamenium.fr/html-to-api/"
     urlApiGiantbomb:string = this.setURLApiOther() + "giantbomb.php";
     urlApiMetacritic:string = this.setURLApiOther() + "metacritic.php";
   //%     API - GAME      %//
@@ -403,8 +405,10 @@ export class AppComponent {
       return this.urlApiDevMax;
     } else if (this.AppEnv == "V1") {
       return this.urlApiV1;
+    } else if (this.AppEnv == "V2") {
+      return this.urlApiV2;
     } else {
-      return this.urlApiV1;
+      return this.urlApiV2;
     }
 
   }
@@ -417,8 +421,10 @@ export class AppComponent {
       return this.urlApiGetGameProd;
     } else if (this.AppEnvOther == "V1") {
       return this.urlApiGetGameV1;
+    } else if (this.AppEnvOther == "V2") {
+      return this.urlApiGetGameV2;
     } else {
-      return this.urlApiGetGameV1;
+      return this.urlApiGetGameV2;
     }
 
   }
