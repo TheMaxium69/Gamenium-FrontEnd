@@ -82,7 +82,7 @@ export class AppComponent {
     urlApiGetGameDev:string = "http://127.0.0.1/html-to-api/"
     urlApiGetGameProd:string = "https://vps216.tyrolium.fr/html-to-api/"
     urlApiGetGameV1:string = "https://vps209.tyrolium.fr/html-to-api/"
-    urlApiGetGameV2:string = "https://gamenium.fr/html-to-api/"
+    urlApiGetGameV2:string = "https://useritium.fr/gamenium-getgame/"
     urlApiGiantbomb:string = this.setURLApiOther() + "giantbomb.php";
     urlApiMetacritic:string = this.setURLApiOther() + "metacritic.php";
   //%     API - GAME      %//
