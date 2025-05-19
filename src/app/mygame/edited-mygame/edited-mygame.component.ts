@@ -655,13 +655,17 @@ export class EditedMygameComponent implements OnInit {
       if (reponseMyGameUpdate.message == "updated game") {
 
         this.selectedMyGame = reponseMyGameUpdate.result;
-        // console.log(reponseMyGameUpdate.result);
+        console.log(reponseMyGameUpdate.result);
 
         if (this.app.myGameAll){
           const index = this.app.myGameAll.findIndex(item => item.myGame.id === reponseMyGameUpdate.result.myGame.id);
           if (index !== -1) {
             this.app.myGameAll[index] = reponseMyGameUpdate.result;
-            this.app.myGameAll[index].tempNote = reponseMyGameUpdate.result.rate.rating;
+            if (reponseMyGameUpdate.result !== null){
+              if (reponseMyGameUpdate.result.rate !== null){
+                this.app.myGameAll[index].tempNote = reponseMyGameUpdate.result.rate.rating;
+              }
+            }
           }
         }
 
