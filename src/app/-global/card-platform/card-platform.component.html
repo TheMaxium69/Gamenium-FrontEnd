@@ -107,6 +107,7 @@
     <div class="card-right d-flex">
       <!-- TEXT -->
       <div class="core-left">
+        <p *ngIf="nbPlatform !== null"><small>Nombre d'exemplaire de console {{ nbPlatform }}</small></p>
         <p><small>Nombre de jeux total {{ nbGame }}</small></p>
       </div>
     </div>

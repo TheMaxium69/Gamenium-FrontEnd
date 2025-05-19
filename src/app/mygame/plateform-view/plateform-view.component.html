@@ -6,7 +6,12 @@
       <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length || null" [plateform]="foundPlatform" [hmp]="foundHmp" [state]="btnPlatform" [colorProfil]="app.userConnected?.themeColor || app.colorDefault" class="card-platform"></app-card-platform>
     </ng-container>
     <ng-container *ngIf="btnPlatform == 'all'">
-      <app-card-platform [nbGame]="HistoireMyGameByUserByPlateform.length || null" [state]="'all'" class="card-platform card-platform-all"></app-card-platform>
+      <ng-container *ngIf="app.userPlatformAll">
+        <app-card-platform [nbPlatform]="app.userPlatformAll.length || null" [nbGame]="HistoireMyGameByUserByPlateform.length || null" [state]="'all'" class="card-platform card-platform-all"></app-card-platform>
+      </ng-container>
+      <ng-container *ngIf="app.userPlatformAll == undefined">
+        <app-card-platform [nbPlatform]="null" [nbGame]="HistoireMyGameByUserByPlateform.length || null" [state]="'all'" class="card-platform card-platform-all"></app-card-platform>
+      </ng-container>
     </ng-container>
 
 <!--    <small> debug : </small><br>-->

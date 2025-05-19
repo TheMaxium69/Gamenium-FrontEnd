@@ -249,9 +249,9 @@ h2 {
   background-color: #f0f0f0;
 }
 
-.card-platform-all{
-  display: none;
-}
+/*.card-platform-all{*/
+/*  display: none;*/
+/*}*/
 
 @media (max-width:991px){
   .search-container {

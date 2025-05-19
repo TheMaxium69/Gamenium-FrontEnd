@@ -24,6 +24,9 @@ export class CardPlatformComponent{
   public nbGame: number | null = null;
 
   @Input()
+  public nbPlatform: number | null = null;
+
+  @Input()
   public colorProfil: string | undefined | null = null;
 
   @Input()

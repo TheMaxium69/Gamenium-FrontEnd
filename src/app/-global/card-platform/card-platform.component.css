@@ -193,6 +193,18 @@
   display: none;
 } */
 
+.card-wrapper-all{
+
+  height: unset!important;
+
+  .card-game{
+    height: 120px;
+  }
+  .core-left{
+    margin-top: unset!important;
+  }
+}
+
 @media (max-width: 900px) {
   #profilWrapper {
     position: relative;
@@ -216,6 +228,18 @@
 
 /* GAME SMALL SCREEN */
 @media (max-width: 991px) {
+  .card-wrapper-all{
+
+    height: unset!important;
+
+    .card-game{
+      height: 75px;
+    }
+    .core-left{
+      margin-top: unset!important;
+    }
+  }
+
   #show-game {
     width: 400px;
 
@@ -275,17 +299,7 @@
     border-radius: 15px;
   }
 
-  .card-wrapper-all{
 
-    height: unset!important;
-
-    .card-game{
-      height: 75px;
-    }
-    .core-left{
-      margin-top: unset!important;
-    }
-  }
 
   .card-action {
     align-items: flex-end;

@@ -130,6 +130,7 @@ export class AppComponent {
   // MYGAME
   userRatingAll: UserRateInterface[] | undefined;
   myGameAll:HistoryMyGameInterface[] | undefined;
+  userPlatformAll:PlateformInterface[] | undefined;
           /* select */
   tagsUserNoReload: HmgTagsInterface[] = [];
   buyWhereUserNoReload:BuyWhereInterface[] = [];
