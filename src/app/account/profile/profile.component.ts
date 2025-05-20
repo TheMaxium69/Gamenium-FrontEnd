@@ -340,7 +340,7 @@ export class ProfileComponent implements OnInit {
 
       if (responseUploadPhoto.message == "good"){
         uploadButton.disabled = false
-        uploadButton.textContent = "Télécharger"
+        uploadButton.textContent = "Appliqué"
 
         Swal.fire({
           title: 'Succès!',
@@ -351,7 +351,7 @@ export class ProfileComponent implements OnInit {
         })
       } else {
         uploadButton.disabled = false
-        uploadButton.textContent = "Télécharger"
+        uploadButton.textContent = "Appliqué"
 
         Swal.fire({
           title: 'Erreur!',
