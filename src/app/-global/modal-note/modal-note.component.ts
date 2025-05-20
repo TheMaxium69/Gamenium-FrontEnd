@@ -5,6 +5,7 @@ import {of, Subject} from "rxjs";
 import Swal from "sweetalert2";
 import {GameInterface} from "../../-interface/game.interface";
 import {GameService} from "../../-service/game.service";
+import {UserRateInterface} from "../../-interface/user-rate.interface";
 
 @Component({
   selector: 'modal-note',
@@ -67,5 +68,9 @@ export class ModalNoteComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
+  getNote(gameSelected: GameInterface): UserRateInterface | undefined {
+    return this.app.userRatingAll?.find(
+      (userRateOne: UserRateInterface) => userRateOne.game.id === gameSelected.id
+    );
+  }
 }
-

@@ -49,6 +49,8 @@
             <!--            </ng-container>-->
             <!--            <ng-container *ngIf="!selectedMyGame.rate">-->
             <input max="20" min="0" type="number" id="rating" name="noteGame" ngModel placeholder="Note du jeux (/20)">
+
+            <p>{{this.getNote(this.app.gameSelected)?.rating}}</p>
             <!--            </ng-container>-->
 
             <textarea type="text" id="content" name="content" ngModel placeholder="Expliqué votre note"></textarea>
