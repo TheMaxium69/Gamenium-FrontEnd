@@ -43,17 +43,14 @@
               <h2><i class="ri-medal-fill"></i>Evaluation</h2>
             </div>
 
-            <!--            <ng-container *ngIf="selectedMyGame.rate">-->
-            <!--              <input type="hidden" [(ngModel)]="selectedMyGame.rate.id" name="rateId">-->
-            <!--              <input max="20" min="0" type="number" id="rating" [(ngModel)]="selectedMyGame.rate.rating" name="rating" placeholder="Note du jeux (/20)">-->
-            <!--            </ng-container>-->
-            <!--            <ng-container *ngIf="!selectedMyGame.rate">-->
-            <input max="20" min="0" type="number" id="rating" name="noteGame" ngModel placeholder="Note du jeux (/20)">
-
-            <p>{{this.getNote(this.app.gameSelected)?.rating}}</p>
-            <!--            </ng-container>-->
-
-            <textarea type="text" id="content" name="content" ngModel placeholder="Expliqué votre note"></textarea>
+            <ng-container *ngIf="this.getNote(this.app.gameSelected); else noNote">
+              <input max="20" min="0" type="number" id="rating" [(ngModel)]="this.getNote(this.app.gameSelected)!.rating" name="noteGame" placeholder="Note du jeux (/20)">
+              <textarea type="text" id="content" name="content" [(ngModel)]="this.getNote(this.app.gameSelected)!.content" placeholder="Expliqué votre note"></textarea>
+            </ng-container>
+            <ng-template #noNote>
+              <input max="20" min="0" type="number" id="rating" name="noteGame" ngModel placeholder="Note du jeux (/20)">
+              <textarea type="text" id="content" name="content" ngModel placeholder="Expliqué votre note"></textarea>
+            </ng-template>
 
 
           </div>
