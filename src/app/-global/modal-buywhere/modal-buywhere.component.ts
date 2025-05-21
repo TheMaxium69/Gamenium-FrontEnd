@@ -23,6 +23,7 @@ export class ModalBuywhereComponent implements OnInit{
   haveBuywhere: number = 0;
 
   getBuyWhere() {
+    // console.log(this.app.buyWhereUserNoReload)
 
     if (this.app.buyWhereUserNoReload.length == 0){
 
@@ -39,6 +40,12 @@ export class ModalBuywhereComponent implements OnInit{
         }
       }, (error) => this.app.erreurSubcribe())
 
+    } else {
+      this.app.buyWhereUserNoReload.forEach(buyWhere => {
+        if (!buyWhere.is_public) {
+          this.haveBuywhere++;
+        }
+      });
     }
 
   }
