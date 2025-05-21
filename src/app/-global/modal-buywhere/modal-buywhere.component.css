@@ -221,3 +221,12 @@ select{
     color: red;
   }
 }
+
+
+@media (max-width: 800px) {
+
+  .start-form{
+    padding: 0px;
+  }
+
+}
