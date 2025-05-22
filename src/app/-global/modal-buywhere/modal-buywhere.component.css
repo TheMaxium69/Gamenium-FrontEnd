@@ -229,4 +229,21 @@ select{
     padding: 0px;
   }
 
+  .panel{
+    padding: 15px 10px;
+    .head-panel{
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+
+  .buyWhereOne {
+    h3 {
+      font-size: 15px;
+    }
+    p{
+      font-size: 8px;
+    }
+  }
+
 }
