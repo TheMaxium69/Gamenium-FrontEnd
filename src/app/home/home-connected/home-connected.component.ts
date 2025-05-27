@@ -237,16 +237,16 @@ export class HomeConnectedComponent implements OnInit {
   checkAndCompleteTasks(): void {
     this.tasks.forEach(task => {
       if (!task.completed) {
-        if (task.id === 3 && this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
+        if (task.id === this.app.taskIdGlobal.game && this.myGameHistoriqueAll && this.myGameHistoriqueAll.length > 0) {
           this.completeTask(task.id);
         }
-        if (task.id === 2 && this.isPp) {
+        if (task.id === this.app.taskIdGlobal.pp && this.isPp) {
           this.completeTask(task.id);
         }
-        if (task.id === 4 && this.userLikes && this.userLikes.length > 0) {
+        if (task.id === this.app.taskIdGlobal.like && this.userLikes && this.userLikes.length > 0) {
           this.completeTask(task.id);
         }
-        if (task.id === 5 && this.userComments && this.userComments.length > 0) {
+        if (task.id === this.app.taskIdGlobal.com && this.userComments && this.userComments.length > 0) {
           this.completeTask(task.id);
         }
         // Si nouvelle task ajouter la verif ici

@@ -329,6 +329,21 @@ export class ProfilePrivateComponent implements OnInit {
             this.loadUserLikesAndComments();
           }
 
+          // Verifier la pp
+          // if (!this.tasks[0].completed){
+          //
+          //   console.log(this.userConnected?.pp)
+          //   if (this.userConnected?.pp){
+          //     // this.completeTask(this.tasks[0].id);
+          //     console.log("add pp task")
+          //
+          //   }
+          //
+          //
+          //
+          // }
+
+
         }, (error) => {
           console.error('Erreur lors de la récupération des tâches complétées:', error);
         });
@@ -392,16 +407,16 @@ export class ProfilePrivateComponent implements OnInit {
 checkAndCompleteTasks(): void {
   this.tasks.forEach(task => {
     if (!task.completed) {
-      if (task.id === 3 && this.app.myGameAll && this.app.myGameAll.length > 0) {
+      if (task.id === this.app.taskIdGlobal.game && this.app.myGameAll && this.app.myGameAll.length > 0) {
         this.completeTask(task.id);
       }
-      if (task.id === 2 && this.isPp) {
+      if (task.id === this.app.taskIdGlobal.pp && this.isPp) {
         this.completeTask(task.id);
       }
-      if (task.id === 4 && this.userLikes && this.userLikes.length > 0) {
+      if (task.id === this.app.taskIdGlobal.like && this.userLikes && this.userLikes.length > 0) {
         this.completeTask(task.id);
       }
-      if (task.id === 5 && this.userComments && this.userComments.length > 0) {
+      if (task.id === this.app.taskIdGlobal.com && this.userComments && this.userComments.length > 0) {
         this.completeTask(task.id);
       }
       // Si nouvelle task ajouter la verif ici
