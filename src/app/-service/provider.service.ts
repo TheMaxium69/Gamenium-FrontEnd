@@ -16,7 +16,7 @@ export class ProviderService {
   }
 
   getAllProviders(url:string, option: {headers: HttpHeaders}): Observable<ApicallInterface> {
-    return this.http.get<ApicallInterface>(url + '/providers', option);
+    return this.http.get<ApicallInterface>(url + '/providerall', option);
   }
 
   searchProviders(searchValue: string, limit:number, url:string, option: {headers: HttpHeaders}): Observable<ProviderInterface[]> {
