@@ -503,6 +503,14 @@ export class ProfileComponent implements OnInit {
             confirmButtonText: 'OK',
             confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
           })
+        } else if (response.message == "succefuly created and updated"){
+          Swal.fire({
+            title: 'Succès!',
+            text: 'Vos réseaux ont bien été mise à jour',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: this.app.userConnected?.themeColor || this.app.colorDefault
+          })
         } else if (response.message == "succefuly updated"){
           Swal.fire({
             title: 'Succès!',
