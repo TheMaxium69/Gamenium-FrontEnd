@@ -478,7 +478,7 @@ export class ProfileComponent implements OnInit {
     let bodyNoJson: any[] = [];
 
     this.socialNetworkAll?.forEach(socialNetworkOne =>{
-      console.log(socialNetworkOne)
+      // console.log(socialNetworkOne)
 
       // if(resultForm[socialNetworkOne.name]){
 
