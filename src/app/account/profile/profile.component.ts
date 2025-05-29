@@ -342,6 +342,12 @@ export class ProfileComponent implements OnInit {
         uploadButton.disabled = false
         uploadButton.textContent = "Appliqué"
 
+
+        const imgTop = document.querySelector('.circle-img') as HTMLElement
+        if (this.selectedFile){
+          imgTop.style.backgroundImage = `url(${URL.createObjectURL(this.selectedFile)})`
+        }
+
         Swal.fire({
           title: 'Succès!',
           text: 'Votre photo de profil à bien été mise à jour.',
@@ -534,9 +540,24 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  removeHash(hex: string): string {
+    return hex.replace('#', '');
+  }
+
+
   deletePicture() {
     this.userService.deleleProfilPicture(this.app.setURL(), this.app.createCorsToken()).subscribe(ReponseApi => {
       if (ReponseApi.message == 'photo supprimée') {
+
+        const imgTop = document.querySelector('.circle-img') as HTMLElement
+        const preview = document.querySelector('.profile-avatar') as HTMLElement
+
+        let url = `https://tyrolium.fr/generate-pp/?l=${ this.extractFirstLetter(this.userConnected?.displaynameUseritium || this.userConnected?.username) }&c=${ this.removeHash(this.userConnected?.color || this.app.userConnected?.themeColor || this.app.colorDefault) }`
+
+        preview.style.backgroundImage = `url(${url})`
+        imgTop.style.backgroundImage = `url(${url})`
+
+
         Swal.fire({
           title: 'Succès!',
           text: 'Votre photo de profil à bien été supprimé.',
@@ -559,5 +580,3 @@ export class ProfileComponent implements OnInit {
 
   protected readonly ProfilService = ProfilService;
 }
-
-
