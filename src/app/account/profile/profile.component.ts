@@ -552,7 +552,7 @@ export class ProfileComponent implements OnInit {
         const imgTop = document.querySelector('.circle-img') as HTMLElement
         const preview = document.querySelector('.profile-avatar') as HTMLElement
 
-        let url = `https://tyrolium.fr/generate-pp/?l=${ this.extractFirstLetter(this.userConnected?.displaynameUseritium || this.userConnected?.username) }&c=${ this.removeHash(this.userConnected?.color || this.app.userConnected?.themeColor || this.app.colorDefault) }`
+        let url = `${this.app.urlGeneratePP}?l=${ this.extractFirstLetter(this.userConnected?.displaynameUseritium || this.userConnected?.username) }&c=${ this.removeHash(this.userConnected?.color || this.app.userConnected?.themeColor || this.app.colorDefault) }`
 
         preview.style.backgroundImage = `url(${url})`
         imgTop.style.backgroundImage = `url(${url})`
