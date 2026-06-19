@@ -78,11 +78,12 @@ export class AppComponent {
   //%     API - GAMENIUM      %//
 
   //%     API - GAME      %//
-    AppEnvOther:string = "V2" // DEV or PROD
+    AppEnvOther:string = "V3" // DEV or PROD
     urlApiGetGameDev:string = "http://127.0.0.1/html-to-api/"
     urlApiGetGameProd:string = "https://vps216.tyrolium.fr/html-to-api/"
     urlApiGetGameV1:string = "https://vps209.tyrolium.fr/html-to-api/"
     urlApiGetGameV2:string = "https://useritium.fr/gamenium-getgame/"
+    urlApiGetGameV3:string = "https://app.gamenium.fr/getgame/"
     urlApiGiantbomb:string = this.setURLApiOther() + "giantbomb.php";
     urlApiMetacritic:string = this.setURLApiOther() + "metacritic.php";
   //%     API - GAME      %//
@@ -430,8 +431,10 @@ export class AppComponent {
       return this.urlApiGetGameV1;
     } else if (this.AppEnvOther == "V2") {
       return this.urlApiGetGameV2;
+    } else if (this.AppEnvOther == "V3") {
+      return this.urlApiGetGameV3;
     } else {
-      return this.urlApiGetGameV2;
+      return this.urlApiGetGameV3;
     }
 
   }

@@ -38,7 +38,6 @@ import { ModalAddGameComponent } from './-global/modal-add-game/modal-add-game.c
 import { PlateformViewComponent } from './mygame/plateform-view/plateform-view.component';
 import { TabMygameComponent } from './mygame/tab-mygame/tab-mygame.component';
 import { TabPublicComponent } from './mygame/tab-public/tab-public.component';
-import { PageThermeComponent } from './-other/page-therme/page-therme.component';
 import { CardGameComponent } from './-global/card-game/card-game.component';
 import { CardActuComponent } from './-global/card-actu/card-actu.component';
 import { CardGameSubComponent } from './-global/card-game-sub/card-game-sub.component';
@@ -92,7 +91,6 @@ import { ViewMyplatformComponent } from './-global/view-myplatform/view-myplatfo
     PlateformViewComponent,
     TabMygameComponent,
     TabPublicComponent,
-    PageThermeComponent,
     CardGameComponent,
     CardActuComponent,
     CardGameSubComponent,

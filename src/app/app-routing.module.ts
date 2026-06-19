@@ -5,12 +5,9 @@ import {PageGameComponent} from "./game/page-game/page-game.component";
 import {PageMygameComponent} from "./mygame/page-mygame/page-mygame.component";
 import {PageActualityComponent} from "./actuality/page-actuality/page-actuality.component";
 import {PageAccountComponent} from "./account/page-account/page-account.component";
-import {ProviderComponent} from "./actuality/provider/provider.component";
 import {SearchPageComponent} from "./game/search-page/search-page.component";
 import { DetailGameComponent } from './game/detail-game/detail-game.component';
 import {PlateformComponent} from "./actuality/plateform/plateform.component";
-import {PageThermeComponent} from "./-other/page-therme/page-therme.component";
-import { EditedMyplatformComponent } from './mygame/edited-myplatform/edited-myplatform.component';
 
 const routes: Routes = [
   {path: '', component: PageHomeComponent},
@@ -30,7 +27,6 @@ const routes: Routes = [
   {path: 'profil/:id/:task/:idhistory', component: PageMygameComponent},
   {path: 'search/:type/:value', component: SearchPageComponent},
   {path: 'plateform/:id/', component: PlateformComponent},
-  {path: 'terms', component: PageThermeComponent},
   {path: 'waiting', component: PageAccountComponent},
 ];
 
