@@ -93,13 +93,14 @@ a{
   }
 
   .gamenium-logo {
-    /*background-color: gray;*/
     border-radius: 100%;
     width: 200px;
     height: 200px;
+    background-color: #393939;
+    border: 20px solid #333333;
     background-image: url('https://gamenium.fr/assets/tyrolium-ui/projects/Gamenium.png');
     background-position: center;
-    background-size: cover;
+    background-size: 65%;
     background-repeat: no-repeat;
   }
 
